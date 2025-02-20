@@ -1,0 +1,55 @@
+.req-sec{
+    width: 50%;
+    border-left: 1px solid #ddd;
+    margin-left: 10px;
+    padding: 0 0 0 15px;
+    line-height: 1;
+}
+.kt-inbox__item .kt-media.kt-media--sm.kt-media-cus img{
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 2px;
+}
+.req-user {
+    margin-left: 5px;
+    display: block;
+}
+.ml-2rem{
+    margin-left: 2rem;
+}
+.req-btns{
+    z-index: 1;
+}
+.svg-spn {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+.svg-spn span {
+    display: block;
+    line-height: 1;
+}
+@media (max-width: 1400px) {
+    .req-user {        
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 250px;
+    }
+}
+
+.btn.btn-outline-admin {
+    color: #8950FC;
+    background-color: transparent;
+    border-color: #8950FC;
+}
+.kt-inbox .kt-inbox__list .kt-inbox__items .kt-inbox__item.kt-inbox__item--unread .kt-inbox__details .kt_inde_memo_msg {
+    white-space: nowrap;
+    width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+::ng-deep .kt-inbox .kt-inbox__list .kt-inbox__items .kt-inbox__item .kt-inbox__details {
+    overflow: hidden!important;
+}

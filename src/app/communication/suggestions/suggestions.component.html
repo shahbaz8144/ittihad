@@ -1,0 +1,467 @@
+<div class="kt-portlet__head px-4 banner-head">
+    <div class="d-flex-cen gap-3 ban-headmain">
+        <div class="">
+            <div class="sugs-mega">
+                <i class="fas fa-poll i-poll"></i>
+            </div>
+        </div>
+        <div class="flex-1">
+            <h3>{{ "Communication.Polls" | translate }}</h3>
+            <div class="sugs-search">
+                <input type="text" [placeholder]="SearchPolls" [(ngModel)]="SearchSuggesstions" class="search form-search form-control" />
+                <a *ngIf="SearchSuggesstions" class="close close-icn"><i (click)="ReBindData()" class="material-icons">close<i></i></i></a>
+
+            </div>
+        </div>
+    </div>
+    <div class="rings-bg"></div>
+</div>
+<div class="kt-portlet__body sugs-body scroll-y">
+    <div class="pt-5">
+        <ng-container *ngIf="(_LstToSuggestion | filter : SearchSuggesstions) as _LstToSuggestion">
+            <ng-container *ngFor="let item of _LstToSuggestion | filter:SearchSuggesstions;  let i = index">
+                <div class="m-auto w-50">
+                    <div [ngClass]="item.RemainingDays == 'closed' || item.IsPoll == true ? 'card-main closed' : 'card-main'">
+                        <h1 class="poll-idfy">{{i+1}}</h1>
+                        <div class="card-head">
+                            <!-- <div class="card-tool">
+                                <span (click)="ShareSuggestion(item.SuggestionId)" class="share-icn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="none" d="M0 0h24v24H0z" />
+                                <path
+                                    d="M13.12 17.023l-4.199-2.29a4 4 0 1 1 0-5.465l4.2-2.29a4 4 0 1 1 .959 1.755l-4.2 2.29a4.008 4.008 0 0 1 0 1.954l4.199 2.29a4 4 0 1 1-.959 1.755zM6 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm11-6a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+                            </svg>
+                        </span>
+                            </div> -->
+                        </div>
+                        <div id="sharediv_{{item.SuggestionId}}">
+                            <div class="card-one">
+                                <div class="d-flex align-items-center pt-2">
+                                    <i class="fas fa-poll i-poll mr-1"></i>
+                                    <span class="d-none svg-icon svg-icon-warning fs-4">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <polygon points="0 0 24 0 24 24 0 24" />
+                                                    <path d="M12,18 L7.91561963,20.1472858 C7.42677504,20.4042866 6.82214789,20.2163401 6.56514708,19.7274955 C6.46280801,19.5328351 6.42749334,19.309867 6.46467018,19.0931094 L7.24471742,14.545085 L3.94038429,11.3241562 C3.54490071,10.938655 3.5368084,10.3055417 3.92230962,9.91005817 C4.07581822,9.75257453 4.27696063,9.65008735 4.49459766,9.61846284 L9.06107374,8.95491503 L11.1032639,4.81698575 C11.3476862,4.32173209 11.9473121,4.11839309 12.4425657,4.36281539 C12.6397783,4.46014562 12.7994058,4.61977315 12.8967361,4.81698575 L14.9389263,8.95491503 L19.5054023,9.61846284 C20.0519472,9.69788046 20.4306287,10.2053233 20.351211,10.7518682 C20.3195865,10.9695052 20.2170993,11.1706476 20.0596157,11.3241562 L16.7552826,14.545085 L17.5353298,19.0931094 C17.6286908,19.6374458 17.263103,20.1544017 16.7187666,20.2477627 C16.5020089,20.2849396 16.2790408,20.2496249 16.0843804,20.1472858 L12,18 Z" fill="#000000" />
+                                                </g>
+                                            </svg>
+                                    </span>
+                                    <h5 class="mb-1 mt-1 ml-1">{{item.Question}}</h5>
+                                </div>
+                                <div class="container ">
+                                    <div [ngClass]="_CurrentUserId!=item.CreatedBy? 'pt-2 poll-area':'pt-2 poll-area poll-admin'">
+                                        <!-- <input type="checkbox" name="poll" id="opt-1">
+                                        <input type="checkbox" name="poll" id="opt-2">
+                                        <input type="checkbox" name="poll" id="opt-3">
+                                        <input type="checkbox" name="poll" id="opt-4"> -->
+                                        <!--
+                                            [ngClass]="item.AddedOptionId == src.OptionId ? 'opt-1 selected selectall' : 'opt-1'"
+                                             AddedOptionId
+                                        selected
+                                        selectall -->
+                                        <ng-container *ngIf="_CurrentUserId!=item.CreatedBy">
+                                            <label *ngFor="let src of item.OptionJson" (click)="AddSuggestionOption(src.SuggestionId,src.OptionId)"
+                                             [ngClass]="item.IsPoll ? (item.AddedOptionId == src.OptionId ? 'opt-1 selected selectall' : 'opt-1 selectall') : 'opt-1'">
+                                                <div  class="row" style="flex-wrap: initial;">
+                                                  <div class="column">
+                                                    <span class="circle"></span>
+                                                    <span class="text">{{src.OptionValue}}</span>
+                                                  </div>
+                                                  <!-- <span class="percent" >{{src.PollPercentage}}%</span> -->
+                                                </div>
+                                                  <!-- <div  class="progress" style='--w:{{src.PollPercentage}};'>
+                                                  </div> -->
+                                              </label>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="_CurrentUserId ==item.CreatedBy">
+                                            <label *ngFor="let src of item.OptionJson"  
+                                          
+                                            class="opt-1 selectall selected"
+                                            >
+                                                <div  class="row" style="flex-wrap: initial;">
+                                                  <div class="column">
+                                                    <span class="circle"></span>
+                                                    <span class="text">{{src.OptionValue}}</span>
+                                                  </div>
+                                                  <span class="percent" >{{src.PollPercentage}}%</span>
+                                                </div>
+                                                  <div  class="progress" style='--w:{{src.PollPercentage}};'>
+                                                  </div>
+                                              </label>
+                                        </ng-container>
+                                       <!-- After poll selected class for option selected & selectall for all options -->
+                                        <!-- <label for="opt-2" class="opt-2 selectall">
+                                          <div class="row">
+                                            <div class="column">
+                                              <span class="circle"></span>
+                                              <span class="text">business inputs and outputs</span>
+                                            </div>
+                                            <span class="percent">20%</span>
+                                          </div>
+                                          <div class="progress" style='--w:20;'></div>
+                                        </label>
+                                        <label for="opt-3" class="opt-3  selectall">
+                                          <div class="row">
+                                            <div class="column">
+                                              <span class="circle"></span>
+                                              <span class="text">strategy formulation and implementation</span>
+                                            </div>
+                                            <span class="percent">40%</span>
+                                          </div>
+                                          <div class="progress" style='--w:40;'></div>
+                                        </label>
+                                        <label for="opt-4" class="opt-4 selectall">
+                                          <div class="row">
+                                            <div class="column">
+                                              <span class="circle"></span>
+                                              <span class="text">environmental and internal analysis</span>
+                                            </div>
+                                            <span class="percent">10%</span>
+                                          </div>
+                                          <div class="progress" style='--w:10;'></div>
+                                        </label> -->
+                                    </div>
+                                </div>
+
+                                <!-- <div class="d-none container" *ngFor="let src of item.OptionJson">
+                                    <ng-container>
+                                        <div class="topLabels">
+                                            <label>{{src.OptionValue}}</label>
+                                            <label *ngIf="CurrentRoleId == 502" class="perc">%{{src.PollPercentage}}</label>
+                                        </div>
+                                        <div *ngIf="CurrentRoleId == 502" class="progress">
+                                            <div class="bar one" style='--w:{{src.PollPercentage}};'></div>
+                                        </div>
+                                        <label *ngIf="CurrentRoleId == 502">{{src.PollCount}} votes</label>
+                                    </ng-container>
+                                </div> -->
+                            </div>
+                            <div class="card-foot">
+                                <div class="card-bottom-one">
+                                    <span class="">{{item.EndDate |date: 'MMM d y'}}</span>
+                                    <span>&#183;</span>
+                                    <span class="" *ngIf="item.RemainingDays>0">{{item.RemainingDays}} Days Left</span>
+                                    <span class="" *ngIf="item.RemainingDays == 'closed'">Closed</span>
+                                </div>
+                                <div class="card-bottom-two" *ngIf="CurrentRoleId == 502">
+                                    <div class="d-flex align-items-center gap-1 mr-2 user-icns">
+                                        <a (click)="TotalUser(item.SuggestionId,item.Question)" class="flex-1" href="javascript:void(0)"  id="merge-btn" data-target="#users_modal" data-toggle="modal" aria-haspopup="true" aria-expanded="false">
+                                            <span class="svg-icns">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                                    <path d="M2 22C2 17.5817 5.58172 14 10 14C14.4183 14 18 17.5817 18 22H16C16 18.6863 13.3137 16 10 16C6.68629 16 4 18.6863 4 22H2ZM10 13C6.685 13 4 10.315 4 7C4 3.685 6.685 1 10 1C13.315 1 16 3.685 16 7C16 10.315 13.315 13 10 13ZM10 11C12.21 11 14 9.21 14 7C14 4.79 12.21 3 10 3C7.79 3 6 4.79 6 7C6 9.21 7.79 11 10 11ZM18.2837 14.7028C21.0644 15.9561 23 18.752 23 22H21C21 19.564 19.5483 17.4671 17.4628 16.5271L18.2837 14.7028ZM17.5962 3.41321C19.5944 4.23703 21 6.20361 21 8.5C21 11.3702 18.8042 13.7252 16 13.9776V11.9646C17.6967 11.7222 19 10.264 19 8.5C19 7.11935 18.2016 5.92603 17.041 5.35635L17.5962 3.41321Z"></path>
+                                                </svg>
+                                                {{item.TotalUserJson.length}}
+                                            </span>
+                                        </a>
+                                        <a (click)="Readusers(item.SuggestionId,item.Question)" class="flex-1" href="javascript:void(0)" data-target="#voted_modal" data-toggle="modal" aria-haspopup="true" aria-expanded="false">
+                                            <span class="svg-icns">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px" fill="currentColor">
+                                                    <path d="M21 3C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.455L2 22.5V4C2 3.44772 2.44772 3 3 3H21ZM20 5H4V18.385L5.76333 17H20V5ZM13 7V15H11V7H13ZM17 9V15H15V9H17ZM9 11V15H7V11H9Z"></path>
+                                                </svg>
+                                                {{item.UserPollJson.length}}
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <span class="">{{ "Communication.TotalVotes" | translate }}: {{item.TotalPoll}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="main-over" id="main-overlay"></div>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="_LstToSuggestion.length==0">
+                <div class="m-auto text-center">
+                    <div class="m-auto">
+                        <div class="">
+                            <img src="assets/media/Img/No-Suggestion.png" height="400px">
+                        
+                        </div>
+                        <h3 class="kt-blank-ttl" >{{ "Communication.NoPollsAvailable" | translate }}</h3>
+                        <p class="kt-blank-msg"> {{ "Communication.NoPollsMessage" | translate }} </p>
+
+                        <!-- <div class="bnk-txt">
+                            <h3 class="blank-txt">No Suggestion Found</h3>
+
+                        </div> -->
+                    </div>
+                    
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>
+<div class="kt-aside-share-overlay" (click)="closeshre()"></div>
+
+<div id="Kt_share" class="kt-quick-panel kt-quick-panel2">
+    <a (click)="closeshre()" class="kt-quick-panel__close" id="kt_quick_panel_close_btn"><i
+          class="flaticon2-delete"></i></a>
+    <div class="kt-grid__item kt-grid__item--fluid kt-app__content" id="kt_chat_content">
+        <div class="kt-chat">
+            <div class="kt-portlet kt-portlet--head-lg kt-portlet--last">
+                <div class="kt-portlet__head">
+                    <div class="kt-chat__head">
+                        <div class="">
+                            <div class="kt-chat__label">
+                                <a href="#" class="kt-chat__title">
+                                  Share Suggesstions
+                              </a>
+                            </div>
+                        </div>
+                        <div class="kt-chat__right"></div>
+                    </div>
+                </div>
+                <div class="kt-portlet__body scroll-auto">
+                    <div class="kt-inbox__reply kt-inbox__reply--on">
+                        <div class="kt-inbox__form" id="kt_inbox_reply_form">
+                            <div class="kt-inbox__body card shadow-sm">
+                                <div class="">
+                                    <div class="kt-inbox__wrapper">
+
+                                        <div class="d-flex align-items-center border-bottom px-3 pt-2 min-h-50px">
+                                            <div class="text-dark-50 w-75px">
+                                                Subject:
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <input name="Subject" type="text" class="form-control border-0" placeholder="Enter Subject here..." required>
+                                            </div>
+                                        </div>
+
+                                        <div class="p-3 border-bottom">
+                                            <angular-editor id="casbkug" [(ngModel)]="src"></angular-editor>
+                                        </div>
+
+                                        <div class="d-flex align-items-center px-3 min-h-50px">
+                                            <div class="text-dark-50 w-75px">
+                                                File Upload
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <div class="custom-file pl-2 pt-2">
+                                                    <input type="file" id="fileUpload" multiple>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__foot">
+                    <div class="kt-chat__input">
+                        <div class="kt-chat__toolbar">
+                            <div class="kt_chat__actions">
+                                <a class="btn btn-info btn-sm">Send Suggestions</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="users_modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content border-0">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{SelectedSubject}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <div class="kt-inbox__search mb-3">
+                        <div id="search-grp" class="input-group group-active">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text px-2 py-0">
+                              <button type="button" role="button" id="srch-btn" data-tooltip="Search" aria-label="Search" class="srch-btns p-0">
+                                <svg focusable="false" height="24px" viewBox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M20.49,19l-5.73-5.73C15.53,12.2,16,10.91,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.41,0,2.7-0.47,3.77-1.24L19,20.49L20.49,19z M5,9.5C5,7.01,7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14S5,11.99,5,9.5z"></path>
+                                  <path d="M0,0h24v24H0V0z" fill="none"></path>
+                                </svg>
+                              </button>
+                            </span>
+                          </div>
+                          <input id="txtSearch" type="text"  autocomplete="off" [(ngModel)]="Totalusersearch" [placeholder]="PollUserSearch" class="form-control">
+                          <div class="input-group-append" *ngIf="Totalusersearch">
+                            <span class="input-group-text p-0 py-0">
+                              <button type="button" (click)="ClearText()" role="button" id="clrr-btn" data-tooltip="Clear Search" aria-label="Clear Search" class="srch-btns ml-1">
+                                <svg focusable="false" height="24px" viewBox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                                  <path d="M0 0h24v24H0z" fill="none"></path>
+                                </svg>
+                              </button>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                    <div class="card">
+                      
+                        <div class="card-body crd-list scroll-y p-0">
+                            <div class="px-3 pb-2">
+                                <div class="users-list">
+                                    <div class="usr-item" *ngFor="let item of _TotaluserList | filter:Totalusersearch">
+                                        <div class="img-container">
+                                            <img src="assets/media/icons/user3.png" alt="user Image" class="usr-img">
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="" *ngIf="item.DesignationName">
+                                                <span class="user-name">{{item.DisplayName}} ({{item.DesignationName}}/{{item.CompanyName}})</span>
+                                            </div>
+                                            <div class="" *ngIf="!item.DesignationName">
+                                                <span class="user-name">{{item.DisplayName}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="" *ngIf="item.OptionId!==0">
+                                            <span class="svg-icns text-info">                                                
+                                                <i class="fas fa-poll i-poll fs-5"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+
+                </div>
+            </div>
+            <div class="modal-footer d-none">
+                <div class="dropdown-actions">
+                    <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="voted_modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content border-0">
+            <div class="modal-header align-items-center">
+                <h5 class="modal-title flex-1" id="exampleModalLabel">{{SelectedSubject}}</h5>
+                <div class="d-flex align-items-center">
+                    <button (click)="ClearFilters()" class="btn btn-hvr p-2" data-toggle="kt-tooltip" data-skin="dark" title="Clear Filters">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                            role="img" font-size="1.5rem" class="iconify iconify--mdi" width="1em" height="1em"
+                            viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M2 12a9 9 0 0 0 9 9c2.39 0 4.68-.94 6.4-2.6l-1.5-1.5A6.706 6.706 0 0 1 11 19c-6.24 0-9.36-7.54-4.95-11.95C10.46 2.64 18 5.77 18 12h-3l4 4h.1l3.9-4h-3a9 9 0 0 0-18 0Z">
+                            </path>
+                        </svg>
+                        <span class="label-hidden">Reload</span>
+                    </button>
+                    <div class="dropdown">
+                        <!-- <a class="" data-toggle="dropdown" onclick="document.getElementById('dropd').classList.add('show1');document.getElementById('fade1').style.display='block'"> -->
+                        <a [ngClass]="(FiltersSelected==true)?'btn-act btn btn-hvr p-2 filter-dot1':'btn btn-hvr p-2 btn-act'" data-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" role="img" width="20" height="20" viewBox="0 -1 17 17">
+                                <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z"></path>
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl dropdown-filter"
+                            id="votes">
+                            <ul class="drop-ul">
+                                <!-- (click)="$event.stopPropagation();" -->
+                                <li class="dropdown-header">Filter By</li>
+                                <li *ngFor="let src of _OptionList">
+                                    <button id="btn1" (click)="FilterRaedUser(src.OptionId)"
+                                    [ngClass]="FilterId==src.OptionId? 'btn btn-filtr active1':'btn btn-filtr'" >
+                                        <div class="d-flex align-items-center" >
+                                            <i class="fas fa-poll i-poll mr-1"></i>
+                                            <div class="fil-lbl">{{src.OptionValue}}</div>
+                                            <span class="chck-icn">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    width="16" height="16"
+                                                    fill="currentColor" class="bi bi-check2"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z">
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </button>
+                                </li>
+                                
+                                
+                                <li role="separator" class="divider"></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <button type="button" class="close p-0 mr-1" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <div class="kt-inbox__search mb-3">
+                        <div id="search-grp" class="input-group group-active">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text px-2 py-0">
+                              <button type="button" role="button" id="srch-btn" data-tooltip="Search" aria-label="Search" class="srch-btns p-0">
+                                <svg focusable="false" height="24px" viewBox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M20.49,19l-5.73-5.73C15.53,12.2,16,10.91,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.41,0,2.7-0.47,3.77-1.24L19,20.49L20.49,19z M5,9.5C5,7.01,7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14S5,11.99,5,9.5z"></path>
+                                  <path d="M0,0h24v24H0V0z" fill="none"></path>
+                                </svg>
+                              </button>
+                            </span>
+                          </div>
+                          <input id="txtSearch" type="text" autocomplete="off" [(ngModel)]="Readuserserach" [placeholder]="VoteUserSearch" class="form-control">
+                          <div class="input-group-append" *ngIf="Readuserserach">
+                            <span class="input-group-text p-0 py-0">
+                              <button type="button" (click)="ClearText()" role="button" id="clrr-btn" data-tooltip="Clear Search" aria-label="Clear Search" class="srch-btns ml-1">
+                                <svg focusable="false" height="24px" viewBox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                                  <path d="M0 0h24v24H0z" fill="none"></path>
+                                </svg>
+                              </button>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                    <div class="card">
+                        <div class="card-header bg-white d-flex-center ">
+                            <h5 class="crd-txt text-info flex-1">{{ "Communication.VotedBy" | translate }}</h5>
+                        </div>
+                        <div class="card-body crd-list scroll-y p-0">
+                            <div class="px-3 pb-2">
+                                <div class="users-list">
+                                    <div class="usr-item" *ngFor="let data of _ReaduserLists|filter:Readuserserach">
+                                        <div class="img-container">
+                                            <img src="assets/media/icons/user3.png" alt="user Image" class="usr-img">
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="" *ngIf="data.DesignationName">
+                                                <span class="user-name">{{data.DisplayName}} ({{data.DesignationName}}/{{data.CompanyName}})</span>
+                                            </div>
+                                            <div class="" *ngIf="!data.DesignationName">
+                                                <span class="user-name">{{data.DisplayName}}</span>
+                                            </div>
+                                            <div class="">
+                                                <span class="read-time">{{data.PollDate}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="" *ngIf="data.OptionValue!==0">
+                                            <span class="svg-icns text-info">                                                
+                                                <i class="fas fa-poll i-poll fs-5"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+            <div class="modal-footer d-none">
+                <div class="dropdown-actions">
+                    <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1323 @@
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid" id="scrd">
+    <div class="col-lg-12">
+        <h4 class="mb-3 pro-nm">{{ "Masterform.RegisteredUsers" | translate }}</h4>
+
+
+
+        <div class="card card-company-table">
+            <div class="card-header align-items-center d-flex py-3">
+                <div class="flex-1">
+                    <div class="search-bar">
+                        <input type="search" id="txtMainSearch" [(ngModel)]="Usersearch" (keyup.enter)="Search()" class="form-control search_clear" (keyup)="handleKeyUp($event)" [placeholder]="UserSearch" aria-controls="example" autocomplete="off">
+                        <a *ngIf="Usersearch" class="close close-icn"><i (click)="ReBindData()" class="material-icons">close<i></i></i></a>
+                    </div>
+                </div>
+                <div class="flex-shrink-0">
+                    <button (click)="ClearFilters()" class="btn btn-hvr" data-toggle="kt-tooltip" data-skin="dark" title="Clear Filters">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                            role="img" font-size="1.5rem" class="iconify iconify--mdi" width="1em" height="1em"
+                            viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M2 12a9 9 0 0 0 9 9c2.39 0 4.68-.94 6.4-2.6l-1.5-1.5A6.706 6.706 0 0 1 11 19c-6.24 0-9.36-7.54-4.95-11.95C10.46 2.64 18 5.77 18 12h-3l4 4h.1l3.9-4h-3a9 9 0 0 0-18 0Z">
+                            </path>
+                        </svg>
+                        <span class="label-hidden">Reload</span>
+                    </button>
+                    <div class="btn-group">
+                        <button [ngClass]="(FiltersSelected==true)?'btn-act btn btn-hvr filter-dot1':'btn btn-hvr btn-act'" class="" data-toggle="dropdown">
+                            <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" font-size="1.5rem" class="iconify iconify--mdi" width="1em" height="1em" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M12 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2m0-6a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2m0-6a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2Z"></path>
+                            </svg> -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" role="img"
+                                font-size="1.5rem" class="iconify iconify--mdi" width="1em" height="1em"
+                                viewBox="0 -1 17 17">
+                                <path
+                                    d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z" />
+                            </svg>
+                            <span class="label-hidden">Filters</span>
+                        </button>
+                        <!-- <button type="button" [ngClass]="(FiltersSelected==true)?'kt-inbox__icon filter-dot':'kt-inbox__icon'" class="" data-toggle="dropdown">
+                            <i class="flaticon-more"></i>
+                        </button> -->
+                        <div id="div_filters" class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-width-700">
+                            <ul class="kt-nav">
+                                <li class="kt-nav__head d-flex justify-content-between">
+                                    <div>{{ "Masterform.UserFilters" | translate }}</div>
+                                </li>
+                                <li class="kt-nav__separator"></li>
+                                <li class="kt-nav__item px-3 mb-2">
+                                    <input autoFocus type="search" [(ngModel)]="txtSearch" [ngModelOptions]="{standalone: true}" autocomplete="off" name="Search" class="form-control" [placeholder]="FilterSearch">
+                                </li>
+                                <li (click)="$event.stopPropagation();" class="kt-nav__item px-4 pt-2">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <h6 class="mb-0">{{ "Masterform.Company" | translate }}</h6>
+
+                                            <div class="kt-nav__separator"></div>
+                                            <div class="height-scroll">
+                                                <label *ngFor="let ss of CompanyDropdownList|filter:txtSearch" class="kt-checkbox kt-checkbox--info">
+                                                    <input type="checkbox" name="companychk" value="{{ss.CompanyId}}"
+                                                        [checked]="ss.isChecked" (change)="oncompanycheck($event)">
+                                                    {{ss.CompanyName}}
+                                                    <span></span>
+                                                </label>
+                                            </div>
+
+
+                                            <div class="opts-flx">
+                                                <ng-container *ngFor="let ss of CompanyDropdownList">
+                                                    <div class="selectd-opts" *ngIf="(ss.isChecked == true)">
+                                                        <div class="slt-div">
+                                                            <div class="opt-txt">
+                                                                {{ss.CompanyName}}
+                                                            </div>
+                                                        </div>
+                                                        <div (click)="removeCompany(ss.CompanyId)" class="removeButton" aria-hidden="true">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="rmv-icn w-6 h-6">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M6 18L18 6M6 6l12 12">
+                                                                </path>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-4">
+                                            <h6 class="mb-0">{{ "Masterform.Department" | translate }}</h6>
+
+                                            <div class="kt-nav__separator"></div>
+                                            <div class="height-scroll">
+                                                <label *ngFor="let ss of DepartmentDropdownList|filter:txtSearch" class="kt-checkbox kt-checkbox--info">
+                                                    <input type="checkbox" name="userschk" value="{{ss.DepartmentId}}"
+                                                        [checked]="ss.isChecked" (change)="onDepartmentcheck($event)">
+                                                    {{ss.DepartmentName}}
+                                                    <span></span>
+                                                </label>
+                                            </div>
+
+
+                                            <div class="opts-flx">
+                                                <ng-container *ngFor="let ss of DepartmentDropdownList">
+                                                    <div class="selectd-opts" *ngIf="(ss.isChecked == true)">
+                                                        <div class="slt-div">
+                                                            <div class="opt-txt">
+                                                                {{ss.DepartmentName}}
+                                                            </div>
+                                                        </div>
+                                                        <div (click)="removeDepartment(ss.DepartmentId)" class="removeButton" aria-hidden="true">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="rmv-icn w-6 h-6">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M6 18L18 6M6 6l12 12">
+                                                                </path>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <h6 class="mb-0">{{ "Masterform.Designation" | translate }} </h6>
+                                            <div class="kt-nav__separator"></div>
+                                            <div class="height-scroll">
+                                                <label *ngFor="let ss of DesignationDropdownList|filter:txtSearch" class="kt-checkbox kt-checkbox--info">
+                                                    <input type="checkbox" name="userschk" value="{{ss.DesignationId}}"
+                                                        [checked]="ss.isChecked" (change)="onDesignation($event)">
+                                                    {{ss.DesignationName}}
+                                                    <span></span>
+                                                </label>
+                                            </div>
+
+
+                                            <div class="opts-flx">
+                                                <ng-container *ngFor="let ss of DesignationDropdownList">
+                                                    <div class="selectd-opts" *ngIf="(ss.isChecked == true)">
+                                                        <div class="slt-div">
+                                                            <div class="opt-txt">
+                                                                {{ss.DesignationName}}
+                                                            </div>
+                                                        </div>
+                                                        <div (click)="RemoveDesignation(ss.DesignationId)" class="removeButton" aria-hidden="true">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="rmv-icn w-6 h-6">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M6 18L18 6M6 6l12 12">
+                                                                </path>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="kt-nav__separator"></li>
+                                <li class="px-4">
+                                    <a class="btn btn-info mr-2 text-white btn-xs" (click)="GetUserList()">{{ "Masterform.Filter" | translate }}</a>
+                                    <a class="btn btn-outline-info btn-xs text-dark-75" (click)="OnRest()">{{ "Masterform.Close" | translate }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ng-container *ngIf="_OrderBy==2">
+                        <button (click)="SortUsers('1')" data-toggle="kt-tooltip" data-skin="dark" title="asc" class="btn btn-hvr"><i class="fa fa-sort-alpha-down clr"></i></button>
+                    </ng-container>
+                    <ng-container *ngIf="_OrderBy==1">
+                        <button (click)="SortUsers('2')" data-toggle="kt-tooltip" data-skin="dark" title="desc" class="btn btn-hvr"><i class="fa fa-sort-alpha-up clr"></i></button>
+                    </ng-container>
+
+                    <button type="button" class="btn btn-info btn-sm" routerLink="/backend/masterforms/UserRegistration">
+                        <i class="material-icons fs-4">add</i> {{ "Masterform.NewUserRegistration" | translate }}
+                    </button>
+                </div>
+            </div>
+            <div class="mb-0 table-responsive">
+                <table role="table" aria-busy="false" aria-colcount="5" class="table b-table">
+                    <thead role="rowgroup" class="">
+                        <tr role="row" class="">
+                            <th role="columnheader" class="">
+                                <div>{{ "Masterform.EmpID" | translate }}</div>
+                            </th>
+                            <th role="columnheader" class="">
+                                <div>{{ "Masterform.LoginID" | translate }}</div>
+                            </th>
+                            <th role="columnheader" class="">
+                                <div>{{ "Masterform.FullName" | translate }}</div>
+                            </th>
+                            <th role="columnheader" class="">
+                                <div>{{ "Masterform.DisplayName" | translate }}</div>
+                            </th>
+                            <!-- <th role="columnheader" class="">
+                <div>Email</div>
+            </th> -->
+                            <th role="columnheader" class="">
+                                <div>{{ "Masterform.Company" | translate }}</div>
+                            </th>
+                            <th role="columnheader" class="">
+                                <div>{{ "Masterform.Department" | translate }}</div>
+                            </th>
+                            <th role="columnheader" class="">
+                                <div> {{ "Masterform.PhoneNumber" | translate }}</div>
+                            </th>
+                            <!-- <th role="columnheader"  class="">
+                <div>Status</div>
+            </th>
+            <th role="columnheader" class="">
+                <div>Action</div>
+            </th> -->
+
+                        </tr>
+                    </thead>
+                    <tbody role="rowgroup">
+                        <div class="inf-div" id="hideDiv">
+                            <div class="d-flex blink inf-txt">
+                                <div class="dotter"></div>{{ "Masterform.UserMessagealert" | translate }}
+                            </div>
+                        </div>
+                        <tr *ngFor="let Usr of UserList" (click)="sidev(Usr.UserId)" role="row" class="curser-pointer">
+                            <td role="cell" class="">{{Usr.EmployeeId}}
+                            </td>
+                            <td role="cell" class=""> {{Usr.UserName}}</td>
+                            <td role="cell" class="">
+                                <div class="d-flex align-items-center">
+                                    <span class="b-avatar mr-3 badge-light-primary rounded-circle">
+                                        <span class="b-avatar-custom">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-user icon">
+                                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                <circle cx="12" cy="7" r="4"></circle>
+                                            </svg>
+                                        </span>
+                                    </span>
+                                    <!-- <span class="b-avatar badge-light-danger rounded-circle" style="width: 32px; height: 32px;">
+                    <span class="b-avatar-img"><img src="../../../assets/media/icons/user1.png" alt="avatar">
+                    </span>
+                </span> -->
+                                    <div>
+                                        <div class="font-weight-bolder"> {{Usr.Name}} </div>
+                                        <div class="font-small-2 text-muted mt-1"> {{Usr.UserEmail}} </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td role="cell" class="">{{Usr.DisplayName}}</td>
+                            <!-- <td role="cell" class=""></td> -->
+                            <td role="cell" class="">
+                                <div class="d-flex align-items-center">
+                                    <span class="b-avatar badge-light-company rounded" style="width: 32px; height: 32px;">
+                                        <span class="b-avatar-custom">
+                                            <img src="assets/media/icons/briefcase.svg" alt="avatar img"
+                                                class="">
+                                        </span>
+                                    </span>
+                                    <div>
+                                        <div class="font-weight-bolder"> {{Usr.CompanyName}}</div>
+                                        <div class="font-small-2 text-muted mt-1">{{Usr.CompanyEmail}}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td role="cell" class="">
+                                <div class="d-flex align-items-center">
+                                    <span class="b-avatar mr-3 badge-light-primary rounded-circle">
+                                        <span class="b-avatar-custom">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-monitor">
+                                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                                            </svg>
+                                        </span>
+                                    <!---->
+                                    </span>
+                                    <span>{{Usr.DepartmentName}}</span>
+                                </div>
+                            </td>
+                            <td role="cell" class="">
+                                <div class="d-flex flex-column">
+                                    <span class="font-weight-bolder mb-25">({{Usr.CountryCode}})
+                                        {{Usr.UserPhone}}</span>
+                                </div>
+                            </td>
+                            <!-- <td role="cell" class="" [ngStyle]="{'color':Usr.UserIsActive=== true ? '#1dc9b7' : '#dc3545'}" (click)="UpdateStatus(Usr)">
+                <div *ngIf="Usr.UserIsActive" class="kt-badge kt-badge--inline px-3 fs-8 kt-badge--pill curser-pointer kt-badge--unified-success"> Active </div>
+                <div *ngIf="!Usr.UserIsActive" class="kt-badge kt-badge--inline px-3 fs-8 kt-badge--pill curser-pointer kt-badge--unified-danger w-max">
+                In-Active
+            </div>
+            </td> -->
+                            <!-- <td aria-colindex="7" role="cell" class="">
+                <div class="text-nowrap">
+                <a (click)="sidev(Usr.UserId)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="invoice-row-5036-preview-icon" class="mx-3 feather feather-eye">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </a>
+                <a (click)="sidev(Usr.UserId)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-50 feather feather-settings">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </a>
+                </div>
+            </td> -->
+
+                        </tr>
+
+                    </tbody>
+                </table>
+                <ng-container *ngIf="UserList.length==0">
+                    <div class="m-auto text-center">
+                        <div class="svgs-1">
+                            <img src="assets/media/Img/registerred Users.png">
+                        </div>
+                        <h3 class="kt-blank-ttl">Data Not Available.</h3>
+                        <p class="kt-blank-msg">No data found in User list.</p>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div class="card-footer">
+                <div class="page-div p-1 d-flex-center">
+                    <div class="card-footer-left">
+                        <span class="text-muted">
+                            <span class="pagination__desc">
+                                <ng-container *ngIf="activePage==1">
+                                    {{activePage}} - {{_CurrentpageRecords}}
+                                </ng-container>
+                                <ng-container *ngIf="activePage!=1 && activePage!=LastPage">
+                                    {{_CurrentpageRecords * (activePage-1) + 1}} - {{_CurrentpageRecords * activePage}}
+                                </ng-container>
+                                <ng-container *ngIf="activePage==LastPage && activePage!=1">
+                                    {{lastPagerecords * (activePage-1) + 1}} - {{lastPagerecords * (activePage-1) +
+                                    _CurrentpageRecords}}
+                                </ng-container>
+                                <span class="en-of"> of {{TotalRecords}}</span>
+                        <span class="ar-main-of" style="display: none;"><span class="of"> - </span> {{TotalRecords}}</span>
+                        </span>
+                        </span>
+                    </div>
+                    <!-- pagenation start Showing 1 to 10 of 11 customers -->
+                    <div class="card-footer-right d-flex">
+                        <nav aria-label="items">
+                            <ul class="pagination m-0">
+                                <li class="page-item" [ngClass]="(NextPage == false)?'page-item ar-first-page  paginationdisable':'page-item ar-first-page '">
+                                    <span [ngClass]="(NextPage == false)?'paginationpointerdisable':''" role="button" class="page-link" aria-label="null page" tabindex="-1" aria-disabled="true" (click)="onClickPage(1)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24"
+                                            width="1em" class="svg-icon--material svg-icon"
+                                            data-name="Material--FirstPage">
+                                            <path d="M24 0v24H0V0h24z" fill="none" opacity="0.87"></path>
+                                            <path
+                                                d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6 1.41-1.41zM6 6h2v12H6V6z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                </li>
+                                <!-- [disabled]="activePage==1" -->
+                                <li class="page-item" [ngClass]="(activePage == 1)?'page-item ar-first-page  paginationdisable':'page-item ar-first-page '">
+                                    <span [ngClass]="(activePage == 1)?'paginationpointerdisable':''" role="button" class="page-link" aria-label="First Page" tabindex="-1" aria-disabled="true" (click)="onClickPage(activePage - 1)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24"
+                                            width="1em" class="svg-icon--material svg-icon"
+                                            data-name="Material--ChevronLeft">
+                                            <path d="M0 0h24v24H0V0z" fill="none"></path>
+                                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12l4.58-4.59z"></path>
+                                        </svg>
+                                    </span>
+                                </li>
+                                <li class="page-item active">
+                                    <span role="button" class="page-link" aria-label="1 page">{{activePage}}</span>
+                                </li>
+                                <!-- <li class="page-item" *ngFor="let iteam of data">
+                    <span role="button" class="page-link" aria-label="2 page">{{activePage+1}}</span>
+                </li> -->
+                                <li [ngClass]="(_CurrentpageRecords < 9)?'page-item ar-last-page paginationdisable':'page-item ar-last-page'">
+                                    <!-- [disabled]="_CurrentpageRecords < 10" -->
+                                    <span [ngClass]="(_CurrentpageRecords < 9)?'paginationpointerdisable':''" role="button" class="page-link" aria-label="Last Page" (click)="onClickPage(activePage + 1)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24"
+                                            width="1em" class="svg-icon--material svg-icon"
+                                            data-name="Material--ChevronRight">
+                                            <path d="M0 0h24v24H0V0z" fill="none"></path>
+                                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z"></path>
+                                        </svg>
+                                    </span>
+                                </li>
+                                <li [ngClass]="(_CurrentpageRecords < 9)?'page-item ar-last-page paginationdisable':'page-item ar-last-page'">
+                                    <span [ngClass]="(_CurrentpageRecords < 9)?'paginationpointerdisable':''" role="button" class="page-link" aria-label="null page" (click)="onClickPage(LastPage)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24"
+                                            width="1em" class="svg-icon--material svg-icon"
+                                            data-name="Material--LastPage">
+                                            <path d="M0 0h24v24H0V0z" fill="none" opacity="0.87"></path>
+                                            <path
+                                                d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6-1.41 1.41zM16 6h2v12h-2V6z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <!--pagenation start-->
+            </div>
+
+        </div>
+
+        <!-- <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                        <thead>
+                            <tr>
+                                <th>Emp ID</th>
+                                <th>Login</th>
+                                <th>Name</th>
+                                <th>DisplayName</th>
+                                <th>Email</th>
+                                <th>Company</th>
+                                <th>Department</th>
+                                
+                                <th>Phone Number</th>
+                                <th>Status</th>
+                                <th>Info</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let Usr of UserList">
+
+                                <td>{{Usr.EmployeeId}}</td>
+                                <td>{{Usr.UserName}}</td>
+                                <td>{{Usr.Name}}</td>
+                                <td>{{Usr.DisplayName}}</td>
+                                <td>{{Usr.UserEmail}}</td>
+                                <td>{{Usr.CompanyName}}</td>
+                                <td>{{Usr.DepartmentName}}</td>
+                                
+                                <td> ({{Usr.CountryCode}}) {{Usr.UserPhone}}</td>
+                                <td [ngStyle]="{'color':Usr.UserIsActive=== true ? '#1dc9b7' : '#dc3545'}" (click)="UpdateStatus(Usr)">
+
+                                    <div *ngIf="Usr.UserIsActive" class="kt-badge kt-badge--inline text-white px-3 fs-8 kt-badge--pill bg-suc curser-pointer">
+                                        Active
+                                    </div>
+                                    <div *ngIf="!Usr.UserIsActive" class="kt-badge kt-badge--inline text-white px-3 fs-8 kt-badge--pill bg-dan curser-pointer">
+                                        In-Active
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="status0">
+                                        <a>
+                                        
+                                            <i (click)="sidev(Usr.UserId)" class="material-icons kt-menu__link-icon">settings_suggest</i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table> -->
+
+    </div>
+</div>
+<div class="kt-aside-menu-overlay" (click)="closeInfo()"></div>
+<!-- <router-outlet></router-outlet> -->
+
+<div id="proview" class="wc-75 kt-quick-panel kt-quick-panel1">
+    <a (click)="closeInfo()" class="kt-quick-panel__close" id="kt_quick_panel_close_btn"><i
+            class="flaticon2-delete"></i></a>
+
+    <div class="kt-grid__item kt-grid__item--fluid kt-app__content" id="kt_chat_content">
+        <div class="kt-chat">
+            <div class="kt-portlet kt-portlet--head-lg kt-portlet--last">
+                <div class="kt-portlet__head">
+                    <div class="kt-chat__head">
+                        <div class="">
+                            <div class="kt-chat__label">
+                                <span class="h4">
+                                    {{Display}}
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <main id="main">
+
+                    <!-- Profile Top -->
+                    <div class="profile-top">
+
+                        <!-- Profile Info -->
+                        <div class="profile-info flexbox">
+                            <!-- Profile Info Inner -->
+                            <div class="profile-info-inner view-width flexbox-space-bet-start">
+                                <!-- Profile Left -->
+                                <div class="profile-left flexbox-start">
+                                    <div class="profile-picture-wrapper profile-picture-large flexbox">
+                                        <div class="profile-picture-inner flexbox">
+                                            <img class="profile-picture" src="assets/media/svg/user.svg" alt="">
+                                        </div>
+                                        <div class="profile-picture-background"></div>
+                                    </div>
+
+                                    <div *ngFor="let item of UserDetailsarray" class="profile-username-wrapper flexbox-col-start">
+                                        <h3 class="profile-username flexbox">
+                                            <span class="name">{{item.lastName}}</span>
+                                            <span class="material-icons d-none">verified</span>
+                                        </h3>
+                                        <div class="profile-inf profile-inf-desk flexbox">
+                                            <p><span class="posit">{{item.DesignationName}}</span></p>
+                                        </div>
+                                        <div class="profile-inf profile-inf-desk flexbox">
+                                            <p><span class="mail_id">{{item.Email}}</span></p>
+                                        </div>
+                                        <div class=" mt-3">
+                                            <div class="d-flex-center">
+                                                <ng-container *ngIf="item.RoleId != 502">
+                                                    <div [ngClass]="(item.IsActive == true) ? 'capacity_txt' : 'capacity_txt fase'" id="toglesta">
+                                                        <span *ngIf="item.IsActive == true">Active</span>
+                                                        <span *ngIf="item.IsActive == false">InActive</span>
+                                                        <div class="menu_toggle  ml-3 m-0">
+                                                            <label class="menu_checkbox">
+                                                                <input type="checkbox" *ngIf="item.IsActive == true"
+                                                                    checked (click)="UpdateStatus(item)">
+                                                                <input type="checkbox" *ngIf="item.IsActive == false"
+                                                                    (click)="UpdateStatus(item)">
+                                                                <span class="onoff-toggle onoff-toggle--on" title="Yes">
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                            <!-- <form>
+                                                <div class="radio-group">
+                                                    <input type="radio" id="option-one" class="swinp" name="selector" checked   (click)="UpdateStatus(Usr)">
+                                                    <label  class="lbls" for="option-one" class="lbel">Active</label>
+                                                    <input type="radio" id="option-two" class="swinp" name="selector">
+                                                    <label class="lbls1" for="option-two" class="lbel">Inactive</label>
+                                                </div>
+                                            </form> -->
+                                        </div>
+
+                                        <div class="profile-inf profile-inf-desk flexbox mt-3">
+                                            <button class="btn btn-xs btn-info" id="editpro" (click)="editprof()">Edit
+                                                Profile</button>
+                                            <button class="btn btn-xs btn-info d-none" id="vewpro" (click)="editprof()">View Profile</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Profile Right 
+                                <div class="profile-right flexbox-start">
+                                </div>-->
+                            </div>
+                        </div>
+
+                        <!-- Profile Stories -->
+
+                    </div>
+
+                    <!-- Profile Grid -->
+
+
+                </main>
+                <div class="position-relative">
+
+                    <div class="kt-portlet__body py-1 prodet pronew" id="prodetails">
+                        <div class="accordion accordion-solid accordion-toggle-plus accor" id="up-shardoc">
+                            <div class="card-title" data-toggle="collapse" data-target="#up-shardoc-div" aria-expanded="true" aria-controls="up-shardoc-div">
+                                <i class="fas fa-user mr-2"></i> {{ "Masterform.ProfileDetails" | translate }}
+                            </div>
+                            <div class=" collapse show" id="up-user-div" aria-labelledby="headingOne6" data-parent="#up-user">
+                                <div *ngFor="let item of UserDetailsarray" class="d-flex flex-column justify-content-center d-md-flex">
+                                    <div class="card card1 w-100 bg-info1 bg-infr ribbon-box">
+                                        <div class="card-body">
+                                            <div class="ribbon ribbon-info float-left"><i class="mdi mdi-access-point me-1"></i> {{ "Masterform.CompanyDetails" | translate }} </div>
+                                            <div class="ribbon-content">
+                                                <label class="kt-badge kt-badge--inline cus-btn text-white px-3 py-1 mt-3 ml--1 kt-badge--pill bg-suc d-none">CompanyDetails</label>
+                                                <div class="row mb-2 mt-3">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus"> {{ "Masterform.DisplayName" | translate }} </label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{item.DisplayName}} </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus">{{ "Masterform.Position" | translate }}</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div *ngIf="item.PositionId==1">
+                                                            Team Member
+                                                        </div>
+                                                        <div *ngIf="item.PositionId==2">
+                                                            Department Head
+                                                        </div>
+                                                        <div *ngIf="item.PositionId==3">
+                                                            Company Head
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus">{{ "Masterform.CompanyName" | translate }} </label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{item.CompanyName}} </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus">{{ "Masterform.Department" | translate }}</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{item.departmentname}} </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus">{{ "Masterform.Role" | translate }}</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{item.RoleName}} </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus">{{ "Masterform.LoginID" | translate }}</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{item.UserName}} </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus">{{ "Masterform.ReportingUser" | translate  }}</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{item.ReportingUserName}} </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus"> {{ "Masterform.IsGlobal" | translate }}</label>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-lg-7" *ngIf="item.IsGlobalUser">
+                                                        Yes
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7" *ngIf="!item.IsGlobalUser">
+                                                        No
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus"> {{ "Masterform.IsInterCompany" | translate }} </label>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-lg-7" *ngIf="item.IsInterCompany">
+                                                        Yes
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7" *ngIf="!item.IsInterCompany">
+                                                        No
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus"> {{ "Masterform.IsArchiveApproved" | translate }} </label>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-lg-7" *ngIf="item.IsArchiveApproval">
+                                                        Yes
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7" *ngIf="!item.IsArchiveApproval">
+                                                        No
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus"> {{ "Masterform.IsCommunicationDownload" | translate }}</label>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-lg-7" *ngIf="item.IsCommunicationDownload">
+                                                        Yes
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7" *ngIf="!item.IsCommunicationDownload">
+                                                        No
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus"> {{ "Masterform.IsArchiveDownload" | translate }}</label>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-lg-7" *ngIf="item.IsArchiveDownload">
+                                                        Yes
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7" *ngIf="!item.IsArchiveDownload">
+                                                        No
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus">{{ "Masterform.IsStreamPlannerDownload" | translate }}</label>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-lg-7" *ngIf="item.IsStreamPlannerDownload">
+                                                        Yes
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7" *ngIf="!item.IsStreamPlannerDownload">
+                                                        No
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card card2 w-100 bg-info1 bg-blur ribbon-box">
+                                        <div class="card-body">
+                                            <div class="ribbon ribbon-blue float-left"><i class="mdi mdi-access-point me-1"></i> {{ "Masterform.PersonalDetails" | translate }} </div>
+                                            <div class="ribbon-content">
+                                                <label class="kt-badge kt-badge--inline cus-btn text-white px-3 py-1 mt-3 ml--1 kt-badge--pill bg-inf d-none">Personal
+                                                    Details</label>
+                                                <div class="row mb-2 mt-3 ">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus">{{ "Masterform.Name" | translate }}</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{item.FirstName}} {{item.LastName}} </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus"> {{ "Masterform.PhoneNo" | translate }}</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class="">({{item.CountryCode}}) {{item.Phone}} </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus">{{ "Masterform.Address" | translate }}</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class="">{{item.Address}} </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus">{{ "Masterform.Pincode" | translate }}</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{item.PinCode}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus">{{ "Masterform.City" | translate }}</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{item.City}} </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus"> {{ "Masterform.Country" | translate }}</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{item.Country}} </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus"> {{ "Masterform.Telephone1" | translate }}</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{item.Telephone1}} </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus"> {{ "Masterform.Telephone2" | translate }}</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{item.Telephone2}} </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="kt-portlet__body py-1 proset" id="proset">
+
+                        <div class="card card1 ribbon-box bg-purple-top">
+                            <div class="card-body">
+                                <div class="ribbon ribbon-purple float-left"> {{ "Masterform.AccountSettings" | translate }} </div>
+                                <div class="ribbon-content">
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <div class="add_rck" id="addrck">
+                                                <div class="px-3 edit_options">
+
+                                                    <ul class="nav nav-pills align-items-center">
+                                                        <li class="tabs_li" id="ver0">
+                                                            <a href="#homeee" data-toggle="tab" class="tab_link p-3 active">{{ "Masterform.PersonalInfo" | translate }}</a>
+                                                        </li>
+                                                        <li *ngIf="role != 502" class="tabs_li" id="ver1">
+
+                                                            <a href="#veee" data-toggle="tab" class="tab_link p-3">{{ "Masterform.CompanyDetails" | translate }}</a>
+                                                        </li>
+
+                                                        <li class="tab_three tabs_li" id="ver2">
+                                                            <a href="#User_access" data-toggle="tab" class="tab_link p-3">{{ "Masterform.UserAccessControls" |  translate }}</a>
+                                                        </li>
+
+                                                    </ul>
+                                                    <div class="tab-content">
+                                                        <div class="tab-pane show active" aria-expanded="true" id="homeee">
+                                                            <div class="d-flex flex-wrap justify-content-start align-items-baseline form-m">
+                                                                <div class="form-cus">
+                                                                    <label class="form-label">{{ "Masterform.FirstName" | translate }}</label>
+                                                                    <span class="text-danger ml-1">*</span>
+                                                                    <input class="form-control" id="txtcompanyname" name="CompanyName" placeholder="Enter First Name" type="text" [(ngModel)]="Fname" value="" minlength="1" maxlength="50" (keyup)="TriggerLengthValidation()">
+                                                                    <!-- <span style="color:red"
+                                                                        [hidden]="MinFirstNameLength"> Min Length
+                                                                        1</span> -->
+                                                                </div>
+                                                                <div class="form-cus">
+                                                                    <label class="form-label">{{ "Masterform.MiddleName" | translate }}</label>
+                                                                    <span class="text-danger ml-1">*</span>
+                                                                    <input class="form-control" id="txtNumeric" name="Code" placeholder="Enter " type="text" [(ngModel)]="mname" value="">
+                                                                </div>
+                                                                <div class="form-cus">
+                                                                    <label class="form-label">{{ "Masterform.LastName" | translate }}</label>
+                                                                    <span class="text-danger ml-1">*</span>
+                                                                    <input class="form-control" id="txtcompanyemail" name="LastName" placeholder="Enter Last Name" type="text" [(ngModel)]="lname" value="" minlength="3" maxlength="50" (keyup)="LastLengthValidation()">
+                                                                    <!-- <span style="color:red"
+                                                                        [hidden]="MinLastNameLength"> Min Length
+                                                                        3</span> -->
+                                                                </div>
+                                                                <div class="form-cus">
+                                                                    <label class="form-label">{{ "Masterform.DisplayName" | translate }}</label>
+                                                                    <span class="text-danger ml-1">*</span>
+                                                                    <input class="form-control" name="Email" placeholder="Enter Last Name" type="text" [(ngModel)]="Display" value="" minlength="3" maxlength="50" (keyup)="LastLengthValidation11()">
+                                                                    <!-- <span style="color:red"
+                                                                        [hidden]="MinLastNameLength"> Min Length
+                                                                        3</span> -->
+                                                                </div>
+                                                                <div class="form-cus">
+                                                                    <label class="form-label">{{ "Masterform.Email" | translate }}</label>
+                                                                    <span class="text-danger ml-1">*</span>
+                                                                    <input class="form-control" id="txtemail" (change)="CheckEmailExist()" name="Email" placeholder="Enter Company Email" type="email" [(ngModel)]="email" value="">
+                                                                </div>
+                                                                <div class="form-cus">
+                                                                    <label class="col-form-label ">{{ "Masterform.PhoneNumber" | translate }}
+                                                                    </label><span class="text-danger ml-1">*</span>
+                                                                    <div class="">
+                                                                        <div class="input-group">
+                                                                            <!-- (intlTelInputObject)="telInputObject($event)" -->
+                                                                            <input type="text" ng2TelInput (countryChange)="onCountryChange($event)" class="form-control inputgrp-first" style="width: 90px;" [(ngModel)]="countrycode" required maxlength="50" />
+                                                                            <input (keypress)="keyPress($event)" type="text" class="form-control" id="" name="Address" maxlength="12" minlength="8" placeholder="Enter Phone Number" [(ngModel)]="phonenum" (keyup)="PhoneLengthValidation()" />
+                                                                            <div>
+                                                                                <span style="color:red"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- <div class="form-cus">
+                                                                    <label class="form-label">Mobile Number</label>
+                                                                    <input (keypress)="keyPress($event)"
+                                                                        class="form-control" id="txtaddress"
+                                                                        name="Address"
+                                                                        placeholder="Please Enter Mobile Number"
+                                                                        [(ngModel)]="phonenum" minlength="8"
+                                                                        maxlength="14" type="text"
+                                                                        (keyup)="PhoneLengthValidation()">
+                                                                    <span style="color:red" [hidden]="MinPhoneLength">
+                                                                        Min Length 8</span>
+                                                                </div> -->
+                                                                <div class="form-cus">
+                                                                    <label class="form-label">{{ "Masterform.Address" | translate }}</label>
+                                                                    <span class="text-danger ml-1">*</span>
+                                                                    <input class="form-control" id="txtlatitude" name="latitude" placeholder="Enter Address" type="text" [(ngModel)]="address" value="" minlength="3" maxlength="50" type="text" (keyup)="AddressLengthValidation()">
+                                                                    <span style="color:red" [hidden]="MinAddressLength">
+                                                                        MinAddressLength 3</span>
+                                                                </div>
+                                                                <div class="form-cus">
+                                                                    <label class="form-label">{{ "Masterform.Country" | translate }}</label>
+                                                                    <span class="text-danger ml-1">*</span>
+                                                                    <ng-select (change)="getcities($event)" [(ngModel)]="cunname" placeholder="select">
+                                                                        <ng-option *ngFor="let obj of ObjgetcountryList" [value]="obj.CountryId">
+                                                                            {{obj.Country}}
+                                                                        </ng-option>
+                                                                    </ng-select>
+                                                                </div>
+
+                                                                <div class="form-cus">
+                                                                    <label class="form-label">{{ "Masterform.City" | translate }}</label>
+                                                                    <span class="text-danger ml-1">*</span>
+                                                                    <ng-select [(ngModel)]="cty" placeholder="select">
+                                                                        <!-- <div *ngIf="submitted && f.town.errors" class="invalid-feedback">
+                                                                            <div *ngIf="f.town.errors.required">City is Required
+                                                                            </div>
+                                                                        </div> -->
+                                                                        <ng-option [value]="cc.CityId" *ngFor="let cc of lstCities">
+                                                                            {{cc.City}}
+                                                                        </ng-option>
+                                                                    </ng-select>
+                                                                </div>
+
+                                                                <div class="form-cus">
+                                                                    <label class="form-label">{{ "Masterform.PinCode" | translate }}</label>
+                                                                    <input class="form-control" id="mask_phone2" name="Phone" placeholder="Enter pincode" type="text" [(ngModel)]="code" value="">
+                                                                </div>
+                                                                <div class="form-cus">
+                                                                    <label class="form-label">{{ "Masterform.Telephone1" | translate  }}</label>
+                                                                    <input class="form-control" id="mask_phone2" name="Phone" placeholder="Enter pincode" type="text" [(ngModel)]="tele1" value="">
+                                                                </div>
+                                                                <div class="form-cus">
+                                                                    <label class="form-label">{{ "Masterform.Telephone2" | translate }}</label>
+                                                                    <input class="form-control" id="mask_phone2" name="Phone" placeholder="Enter pincode" type="text" [(ngModel)]="tele2" value="">
+                                                                </div>
+                                                                <div class="form-cus">
+                                                                    <label>{{ "Masterform.Status" | translate }}</label><br>
+                                                                    <mat-slide-toggle color="primary" [(ngModel)]="status" id="status">
+                                                                    </mat-slide-toggle>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="form-cus task_act text-right">
+                                                                <button [disabled]=" !Fname || !lname || !Display|| !email ||!phonenum || !address || !cunname || !cty ||!MinPhoneLength" (click)="OnUpdate(1)" class="btn btn-sm btn-primary px-3 mt-2">
+                                                                    {{ "Masterform.UpdatePersonalDetails" | translate }}
+                                                                </button>
+                                                                <button class="btn btn-sm btn-secondary px-3 ml-2 mt-2" (click)="closeInfo()">
+                                                                    {{ "Masterform.Cancel" | translate }}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div *ngIf="role != 502" class="tab-pane" id="veee" aria-expanded="false">
+                                                            <div class="d-flex flex-wrap justify-content-start align-items-baseline form-m">
+                                                                <div class="form-cus">
+                                                                    <label class="form-label">{{ "Masterform.Positions" | translate }}</label><span class="text-danger">*</span>
+                                                                    <!-- [ngClass]=" toggle ? 'filtr fltr-btn fil-selected align-items-center' : 'filtr fltr-btn align-items-center'" -->
+                                                                    <ng-select [(ngModel)]="Positionid" placeholder="select" [ngClass]="Positionid==0? 'ng-mandty':''">
+                                                                        <ng-option [value]="1">Team Member</ng-option>
+                                                                        <ng-option [value]="2">Department Head
+                                                                        </ng-option>
+                                                                        <ng-option [value]="3">Company Head</ng-option>
+                                                                    </ng-select>
+                                                                    <!-- <span class="text-danger pt-2">This field is Mandatory</span> -->
+                                                                </div>
+                                                                <div class="form-cus">
+                                                                    <label class="form-label">{{ "Masterform.Company" | translate }}</label><span class="text-danger">*</span>
+                                                                    <ng-select (change)="getReportingDropDown($event)" [(ngModel)]="companyid" placeholder="select">
+                                                                        <!-- <div *ngIf="submitted && f.town.errors" class="invalid-feedback">
+                                                                            <div *ngIf="f.town.errors.required">
+                                                                                CompanyName is Required</div>
+                                                                        </div> -->
+                                                                        <ng-option [value]="obj.CompanyId" *ngFor="let obj of ObjgetCompanyList">
+                                                                            {{obj.CompanyName}}
+                                                                        </ng-option>
+                                                                    </ng-select>
+                                                                </div>
+
+                                                                <div class="form-cus">
+                                                                    <label class="form-label">{{ "Masterform.Department" | translate }}</label><span class="text-danger">*</span>
+                                                                    <ng-select placeholder="select" [(ngModel)]="dept">
+                                                                        <!-- <div *ngIf="submitted && f.town.errors" class="invalid-feedback">
+                                                                            <div *ngIf="f.town.errors.required">
+                                                                                Department is Required</div>
+                                                                        </div> -->
+                                                                        <ng-option [value]="obj.DepartmentId" *ngFor="let obj of ObjgetDepartmentList">
+                                                                            {{obj.DepartmentName}}
+                                                                        </ng-option>
+                                                                    </ng-select>
+
+
+                                                                </div>
+                                                                <div class="form-cus">
+                                                                    <label class="form-label">{{ "Masterform.Role" | translate }}</label><span class="text-danger">*</span>
+                                                                    <ng-select placeholder="select" [(ngModel)]="role">
+                                                                        <!-- <div *ngIf="submitted && f.town.errors" class="invalid-feedback">
+                                                                            <div *ngIf="f.town.errors.required">Role is Required
+                                                                            </div>
+                                                                        </div> -->
+                                                                        <ng-option [value]="obj.RoleId" *ngFor="let obj of ObjgetRoleList">
+                                                                            {{obj.RoleName}}
+                                                                        </ng-option>
+                                                                    </ng-select>
+                                                                </div>
+                                                                <div class="form-cus">
+                                                                    <label class="form-label">{{ "Masterform.Designation" | translate }}</label><span class="text-danger">*</span>
+                                                                    <ng-select placeholder="select" [(ngModel)]="desig">
+                                                                        <!-- <div *ngIf="submitted && f.town.errors" class="invalid-feedback">
+                                                                            <div *ngIf="f.town.errors.required">
+                                                                                Designation is Required</div>
+                                                                        </div> -->
+                                                                        <ng-option [value]="obj.DesignationId" *ngFor="let obj of ObjgetDesignationList">
+                                                                            {{obj.DesignationName}}
+                                                                        </ng-option>
+                                                                    </ng-select>
+                                                                </div>
+                                                                <div class="form-cus">
+                                                                    <label class="form-label">{{ "Masterform.LoginID" | translate }}</label><span class="text-danger">*</span>
+                                                                    <input class="form-control" [disabled]="true" name="login" placeholder="Enter" type="text" [(ngModel)]="login">
+                                                                </div>
+                                                                <div class="form-cus">
+                                                                    <label class="form-label">{{ "Masterform.EmployeeId" | translate }}</label><span class="text-danger">*</span>
+                                                                    <input class="form-control" [disabled]="true" [(ngModel)]="Empid" name="Empid" placeholder="Enter" type="text">
+                                                                </div>
+                                                                <div class="form-cus">
+                                                                    <label class="form-label">{{ "Masterform.ReportingUser" | translate }}</label><span class="text-danger">*</span>
+                                                                    <ng-select placeholder="select" [(ngModel)]="Repuser">
+                                                                        <!-- <div *ngIf="submitted && f.town.errors" class="invalid-feedback">
+                                                                            <div *ngIf="f.town.errors.required">
+                                                                                ReportingUser is Required</div>
+                                                                        </div> -->
+                                                                        <ng-option [value]="obj.UserId" *ngFor="let obj of ObjgetReportingUser">
+                                                                            {{obj.ContactName}}
+                                                                        </ng-option>
+                                                                    </ng-select>
+                                                                </div>
+                                                                <div class="d-flex-center w-100 d-none">
+
+                                                                    <div class="form-cus">
+                                                                        <label class="form-label tips" data-tippy-content="Is Global User">Is
+                                                                            Global User</label>
+                                                                        <div class="">
+                                                                            <mat-checkbox id="chkisglobal" type="checkbox" [(ngModel)]="global" class="mr-2 check" value="true" name="name">
+                                                                            </mat-checkbox>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-cus">
+                                                                        <label class="form-label tips" data-tippy-content="Is Inter Company">Is
+                                                                            Inter Company</label>
+                                                                        <div class="">
+                                                                            <mat-checkbox id="chkisinter" [(ngModel)]="iner" type="checkbox" class="mr-2 check" value="true" name="name">
+                                                                            </mat-checkbox>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-cus">
+                                                                        <label class="form-label tips" data-tippy-content="Is Archive Approved">Is
+                                                                            Archive Approved</label>
+                                                                        <div class="">
+                                                                            <mat-checkbox id="chkIsArchiveApproval" [(ngModel)]="IsArchiveApproval" type="checkbox" class="mr-2 check" value="true" name="name">
+                                                                            </mat-checkbox>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-cus">
+                                                                        <label class="form-label tips" data-tippy-content="Is Communication Download">Is
+                                                                            Communication Download</label>
+                                                                        <div class="">
+                                                                            <mat-checkbox type="checkbox" class="mr-2 check" [(ngModel)]="IsCommunication" value="true" name="name">
+                                                                            </mat-checkbox>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-cus task_act text-right">
+                                                                <button [disabled]="!Repuser || !desig || !role || !dept || !companyid || !Positionid" (click)="OnUpdate(2)" class="btn btn-sm btn-primary px-3 mt-2">
+                                                                    {{ "Masterform.UpdateCompanyDetails" | translate }}
+                                                                </button>
+                                                                <button class="btn btn-sm btn-secondary px-3 ml-2 mt-2" (click)="closeInfo()">
+                                                                    {{ "Masterform.Cancel" | translate }}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane" aria-expanded="false" id="User_access">
+                                                            <div class="p-0">
+                                                                <div class="kt-user-rd-card mt-0">
+                                                                    <h3 class="Kt-user-title"> <span class="user-acc-svg-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24">
+                        
+                                                                    <defs>
+                                                                    
+                                                                    <style>.cls-1{fill:#4285f4;}.cls-2{fill:#669df6;}.cls-3{fill:#aecbfa;}</style>
+                                                                    
+                                                                    </defs>
+                                                                    
+                                                                    <g data-name="Product Icons">
+                                                                    
+                                                                    <path class="cls-1" d="M11.85,7a5.1,5.1,0,1,0,5.1,5.1h0A5.1,5.1,0,0,0,11.85,7Zm0,9.08a4,4,0,1,1,4-4h0A4,4,0,0,1,11.85,16.09Z"/>
+                                                                    
+                                                                    <path class="cls-2" d="M13.77,12.71a2.09,2.09,0,0,0-.28-.22,3.11,3.11,0,0,0-2.61-.28,2.31,2.31,0,0,0-.89.47.86.86,0,0,0-.37.65v1h4.47v-.82A1,1,0,0,0,13.77,12.71Z"/>
+                                                                    
+                                                                    <path class="cls-2" d="M11.85,11.53a1.16,1.16,0,1,0-1.17-1.15h0A1.17,1.17,0,0,0,11.85,11.53Z"/>
+                                                                    
+                                                                    <polygon class="cls-3" points="20.78 10.72 19.74 10.72 20.51 11.49 18.3 11.49 18.3 12.39 20.51 12.39 19.74 13.17 20.78 13.17 22 11.94 20.78 10.72"/>
+                                                                    
+                                                                    <polygon class="cls-2" points="17.54 8.5 18.18 9.14 19.16 8.17 19.16 9.26 19.89 8.52 19.89 6.79 18.16 6.79 17.43 7.53 18.52 7.53 17.54 8.5"/>
+                                                                    
+                                                                    <polygon class="cls-2" points="19.16 15.83 18.18 14.86 17.54 15.49 18.52 16.47 17.43 16.47 18.16 17.2 19.89 17.2 19.89 15.47 19.16 14.74 19.16 15.83"/>
+                                                                    
+                                                                    <path class="cls-2" d="M3.35,10.65A1.35,1.35,0,1,0,4.71,12a1.35,1.35,0,0,0-1.36-1.35Zm0,2.1A.76.76,0,1,1,4.11,12h0a.76.76,0,0,1-.76.75Z"/>
+                                                                    
+                                                                    </g>
+                                                                    
+                                                                    </svg></span>{{ "Masterform.Useraccesscontrols" | translate }}</h3>
+
+                                                                    <div class="kt-crd-acc-v">
+                                                                        <div class="d-flex align-items-center justify-content-between">
+                                                                            <div class="kt-rc-us-ic">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#4285f4" version="1.1" id="Capa_1" width="64px" height="64px" viewBox="0 0 96.891 96.891" xml:space="preserve" stroke="#4285f4">
+                            
+                                                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                                                                    
+                                                                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                    
+                                                                                    <g id="SVGRepo_iconCarrier"> <g> <path d="M94.425,22.283C94.425,9.996,84.429,0,72.142,0c-8.865,0-16.535,5.205-20.121,12.718c-2.33-0.398-4.719-0.617-7.16-0.617 c-23.376,0-42.395,19.018-42.395,42.395s19.019,42.395,42.395,42.395c23.376,0,42.395-19.019,42.395-42.395 c0-4.896-0.845-9.599-2.379-13.979C90.769,36.386,94.425,29.575,94.425,22.283z M71.802,4.108c9.807,0,17.783,7.978,17.783,17.783 c0,4.145-1.488,8.095-4.042,11.219l-0.328-1.412c-0.325-0.334-0.708-0.613-1.153-0.841c-2.222-1.14-4.521-2.085-6.848-2.978 c-0.173-0.065-0.381-0.199-0.453-0.35c-0.189-0.42-0.32-0.866-0.458-1.304c-0.084-0.283-0.159-0.547-0.467-0.684 c-0.084-0.037-0.159-0.198-0.159-0.303c0.018-1.021-0.22-2.093,0.539-2.985c0.023-0.027,0.033-0.067,0.048-0.1 c0.41-0.894,0.479-1.917,1.052-2.75c0.014-0.019,0.018-0.046,0.021-0.07c0.066-0.638,0.134-1.27,0.189-1.904 c0.004-0.078-0.063-0.219-0.131-0.243c-0.314-0.11-0.299-0.364-0.297-0.617c0-1.241,0-1.421-0.002-2.662 c0-0.722-0.212-1.362-0.757-1.853c-0.622-0.558-1.259-1.098-1.897-1.636c-0.307-0.261-0.334-0.461-0.045-0.748 c0.129-0.126,0.289-0.218,0.438-0.324c-0.034-0.049-0.065-0.097-0.099-0.146c-0.191,0-0.387-0.025-0.572,0.003 c-0.707,0.114-1.416,0.214-2.107,0.376c-1.324,0.313-2.607,0.726-3.681,1.612c-0.733,0.604-1.32,1.31-1.396,2.307 c-0.035,0.523-0.031,1.049-0.035,1.57c-0.006,0.854,0.008,0.646-0.012,1.497c-0.004,0.139-0.08,0.367-0.179,0.397 c-0.345,0.113-0.354,0.333-0.308,0.62c0.035,0.197,0.009,0.404,0.052,0.597c0.118,0.532,0.245,1.066,0.399,1.59 c0.113,0.391,0.334,0.76,0.397,1.157c0.121,0.793,0.417,1.483,0.954,2.083c0.087,0.1,0.154,0.265,0.145,0.397 c-0.043,0.609-0.105,1.22-0.188,1.827c-0.017,0.118-0.142,0.294-0.242,0.317c-0.405,0.083-0.468,0.395-0.565,0.713 c-0.125,0.417-0.263,0.833-0.424,1.236c-0.05,0.126-0.177,0.256-0.301,0.313c-0.72,0.313-1.456,0.603-2.184,0.907 c-0.772,0.325-1.553,0.636-2.31,0.994c-0.778,0.374-1.534,0.792-2.296,1.201c-0.449,0.24-0.869,0.506-1.218,0.836l-0.379,1.616 c-2.683-3.159-4.271-7.211-4.271-11.479C54.019,12.085,61.995,4.108,71.802,4.108z M84.007,44.522 c-0.553-0.813-1.178-1.603-1.857-2.372c0.334-0.169,0.67-0.337,0.994-0.522C83.464,42.579,83.757,43.542,84.007,44.522z M53.622,47.793c5.693,0.229,10.73,0.671,15.014,1.246c0.145,1.786,0.225,3.605,0.225,5.457s-0.08,3.671-0.225,5.457 c-4.283,0.575-9.32,1.018-15.014,1.246c0.076-2.32,0.113-4.576,0.113-6.703S53.698,50.113,53.622,47.793z M67.78,39.808 c0.938,0.319,1.941,0.564,3.066,0.661l-1.98-2.734l3.072-8.403l-0.951-2.041h1.903l-0.952,2.041l3.071,8.403l-1.929,2.667 c1.431-0.239,3.175-0.857,4.959-1.542c-1.998,1.52-4.268,3.726-5.967,6.752C70.935,43.144,69.42,41.118,67.78,39.808z M64.075,43.033c0.062,0.024,0.125,0.046,0.188,0.066c0.903,0.285,2.35,1.641,3.576,3.865c-4.592-0.571-9.529-0.95-14.292-1.152 c-0.185-4.339-0.521-8.815-1.009-13.052C55.01,37.349,59.049,41.072,64.075,43.033z M53.546,63.182 c4.97-0.211,10.139-0.609,14.896-1.223c-0.526,4.727-1.541,9.167-2.957,13.162c-3.996,1.416-8.436,2.432-13.162,2.958 C52.937,73.32,53.335,68.151,53.546,63.182z M51.735,54.496c0,2.344-0.035,4.604-0.101,6.773c-2.17,0.066-4.43,0.102-6.774,0.102 s-4.604-0.035-6.774-0.102c-0.066-2.17-0.101-4.43-0.101-6.773s0.035-4.604,0.101-6.774c2.17-0.066,4.43-0.101,6.774-0.101 s4.604,0.035,6.774,0.101C51.7,49.893,51.735,52.152,51.735,54.496z M51.563,63.257c-0.229,5.693-0.67,10.73-1.246,15.015 c-1.786,0.144-3.604,0.225-5.457,0.225s-3.671-0.081-5.457-0.225c-0.575-4.284-1.018-9.32-1.246-15.015 c2.32,0.077,4.576,0.114,6.703,0.114S49.244,63.334,51.563,63.257z M44.861,45.621c-2.127,0-4.383,0.037-6.703,0.114 c0.229-5.693,0.671-10.73,1.246-15.014c1.786-0.144,3.605-0.225,5.457-0.225s3.671,0.081,5.457,0.225 c0.576,4.284,1.019,9.32,1.246,15.014C49.244,45.658,46.988,45.621,44.861,45.621z M50.938,15.438 c-0.408,1.261-0.703,2.57-0.882,3.917c-0.592-1.979-1.259-3.66-2.017-4.889C49.028,14.688,49.993,15.021,50.938,15.438z M44.861,14.101c1.676,0,3.738,5.249,5.166,14.594c-1.695-0.126-3.416-0.199-5.166-0.199s-3.47,0.073-5.165,0.2 C41.123,19.35,43.185,14.101,44.861,14.101z M37.677,28.877c-4.449,0.468-8.663,1.36-12.526,2.61 c3.765-9.109,9.697-15.491,16.531-17.021C39.894,17.365,38.586,22.665,37.677,28.877z M36.1,61.199 c-5.693-0.229-10.73-0.671-15.014-1.246c-0.144-1.786-0.225-3.605-0.225-5.457s0.081-3.671,0.225-5.457 c4.284-0.575,9.32-1.018,15.014-1.246c-0.077,2.32-0.114,4.576-0.114,6.703S36.023,58.879,36.1,61.199z M36.176,63.182 c0.211,4.97,0.609,10.139,1.222,14.896c-4.727-0.527-9.167-1.542-13.162-2.958c-1.416-3.996-2.431-8.435-2.958-13.162 C26.037,62.572,31.206,62.971,36.176,63.182z M36.176,45.811c-4.97,0.211-10.139,0.609-14.897,1.222 c0.527-4.727,1.542-9.167,2.958-13.162c3.996-1.416,8.435-2.431,13.162-2.958C36.785,35.672,36.387,40.841,36.176,45.811z M34.887,15.35c-5.07,3.447-9.331,9.437-12.182,16.99c-7.553,2.851-13.543,7.112-16.99,12.182 C9.354,30.248,20.613,18.989,34.887,15.35z M21.852,34.786c-1.25,3.864-2.143,8.077-2.61,12.526 c-6.212,0.909-11.512,2.216-14.41,4.004C6.361,44.483,12.743,38.551,21.852,34.786z M19.061,49.331 c-0.127,1.695-0.2,3.415-0.2,5.165s0.073,3.47,0.2,5.165c-9.346-1.427-14.595-3.489-14.595-5.165S9.715,50.758,19.061,49.331z M19.242,61.68c0.468,4.449,1.36,8.664,2.61,12.526c-9.109-3.765-15.491-9.696-17.021-16.53C7.73,59.463,13.03,60.771,19.242,61.68 z M5.715,64.471c3.447,5.069,9.437,9.33,16.99,12.182c2.851,7.553,7.112,13.543,12.182,16.99 C20.613,90.003,9.354,78.744,5.715,64.471z M25.151,77.505c3.864,1.25,8.077,2.144,12.526,2.61 c0.908,6.212,2.216,11.512,4.004,14.41C34.848,92.996,28.916,86.614,25.151,77.505z M44.861,94.891 c-1.676,0-3.738-5.248-5.165-14.594c1.695,0.126,3.415,0.199,5.165,0.199s3.47-0.073,5.166-0.2 C48.599,89.643,46.537,94.891,44.861,94.891z M52.045,80.115c4.448-0.469,8.663-1.36,12.526-2.61 c-3.766,9.109-9.697,15.491-16.531,17.021C49.827,91.627,51.136,86.327,52.045,80.115z M54.835,93.643 c5.07-3.447,9.331-9.438,12.182-16.99c7.553-2.852,13.543-7.112,16.99-12.182C80.368,78.744,69.108,90.003,54.835,93.643z M67.87,74.206c1.25-3.864,2.143-8.077,2.609-12.526c6.213-0.908,11.512-2.216,14.41-4.004C83.36,64.51,76.979,70.441,67.87,74.206 z M85.256,54.496c0,1.676-5.249,3.738-14.595,5.165c0.127-1.695,0.199-3.415,0.199-5.165c0-0.621-0.02-1.232-0.037-1.848 c0.414,0.229,0.885,0.365,1.379,0.378c0.027,0,0.054,0.001,0.08,0.001c1.295,0,2.449-0.833,2.852-2.071 c0.087-0.269,0.201-0.515,0.301-0.771C81.774,51.512,85.256,53.131,85.256,54.496z M84.89,51.316 c-1.938-1.194-4.964-2.172-8.604-2.961c1.246-2.251,2.883-3.932,4.262-5.067C82.741,45.744,84.248,48.449,84.89,51.316z"/> </g> </g>
+                                                                                    
+                                                                                    </svg>
+                                                                            </div>
+                                                                            <div class="kt-rc-us-ic-name">
+                                                                                <h5> {{ "Masterform.IsGlobalUser" | translate }}</h5>
+                                                                                <span> {{ "Masterform.GlobalUserMessage" | translate }} </span>
+                                                                            </div>
+                                                                            <div class="kt-rc-acc-btn">
+                                                                                <span class="switch switch-outline switch-icon switch-primary">
+                                                                                    <label>
+                                                                                        <input type="checkbox" [(ngModel)]="global" name="select">
+                                                                                        <span></span>
+                                                                                </label>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div *ngIf="global" class="kt-glb-user-list">
+                                                                            <div class="kt-dropdw-user">
+                                                                                <ng-select [(ngModel)]="_globalsers" [placeholder]="SelectGlobalUsers" appendTo="body" multiple="true" [closeOnSelect]="false" class="TEST-CLASS">
+                                                                                    <ng-option *ngFor="let _user of GlobalUsers" [value]="_user.UserId"> {{_user.ContactName}}</ng-option>
+                                                                                </ng-select>
+                                                                                <!-- <ng-select placeholder="select" [(ngModel)]="desig">
+                                                                                    <ng-option [value]="obj.DesignationId"
+                                                                                        *ngFor="let obj of ObjgetDesignationList">
+                                                                                        {{obj.DesignationName}}
+                                                                                    </ng-option>
+                                                                                </ng-select> -->
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div class="kt-crd-acc-v">
+                                                                        <div class="d-flex align-items-center justify-content-between">
+                                                                            <div class="kt-rc-us-ic">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 128 160" x="0px" y="0px"><path d="M64,18a46,46,0,1,0,46,46A46.05,46.05,0,0,0,64,18Zm39.92,33a6.87,6.87,0,0,0-3,5.11v.1a3.83,3.83,0,0,1-.2.81l-.24-.49c-.14-.29-.26-.55-.37-.74a10.55,10.55,0,0,0-5.31-4.61c-1.43-.56-3.84-1.51-5.83-.6-.75.35-3,1.4-2.72,3.53.22,1.42,1.52,2.38,3.87,2.84a5.5,5.5,0,0,1-.6,1.15c-.14.21-.27.43-.41.66-.28.47-.76,1.27-1,1.35s-.59-.2-1-.71c-.21-.25-.4-.52-.6-.79a7.51,7.51,0,0,0-3.39-3,3.19,3.19,0,0,0-3.13.27c-1.45,1.05-1.37,3-1.35,3.66A11.94,11.94,0,0,0,83,68.2,10.26,10.26,0,0,0,86.66,70l.16.05-.38.64c-.31.53-.62,1.05-1,1.55s-.87,1.2-1.37,1.82a18,18,0,0,0-3.08,5,18.54,18.54,0,0,0-.88,5,19.81,19.81,0,0,1-.43,3.2,7.07,7.07,0,0,1-1.54,2.55,23.6,23.6,0,0,1-4.51,4c-.92.67-2.18,1.31-2.91.55a10,10,0,0,1-2.31-4.91,16.25,16.25,0,0,1-.24-2.78,15.57,15.57,0,0,0-.58-4.42,10.43,10.43,0,0,0-.69-1.55,3,3,0,0,1-.5-1.37c.33-3.36-.92-5.26-2-6.27-2.76-2.5-7.1-1.89-8-1.73-1.54.1-2.83-.5-4.59-1.33l-.45-.21c-2.64-1.23-3.61-3.38-3.23-7.19a10,10,0,0,1,7.15-8.29c3.52-.9,7,0,11.16,1.26.68.21,2.1.48,7.14.72h.15A7.08,7.08,0,0,0,79,54.79a4.34,4.34,0,0,0,1.46-2.84A6,6,0,0,0,78.73,47c-3.48-3.4-11.21-2.68-17.41-2.1-.86.08-1.85.17-2.77.24.68-.49,1.56-1.1,2.71-1.85l.63-.39a9.77,9.77,0,0,0,2.42-1.79A8.78,8.78,0,0,0,66,36v0c.1-.84,3.35-1.47,6.3-1.23h.22c3.74,0,7-3.43,7.63-6.55l.12-.64a10.85,10.85,0,0,1,.54-2.08A42.2,42.2,0,0,1,103.92,51ZM69.1,22.32c-1.88,3.45-4.24,3.72-4.57,3.74-3.26-.18-7,2-7.45,2.2l-.13.08a25.35,25.35,0,0,1-3.3,2c-1.42.69-2.42.87-2.82.52a.52.52,0,0,1-.19-.38.63.63,0,0,1,.2-.47,6.62,6.62,0,0,1,2.64-1.21c1.84-.57,4.12-1.27,5.29-3.66l.3-.22a6.74,6.74,0,0,0,2.46-2.83C62.35,22,63.17,22,64,22A42.24,42.24,0,0,1,69.1,22.32Zm-30,7.91a5.21,5.21,0,0,1-.08,1c-.46,2.37-2.37,5.18-4,5.9-1.17.51-3.29,1.67-5.48,3A42.34,42.34,0,0,1,39.06,30.23ZM22,64a42.16,42.16,0,0,1,.25-4.54c.94,0,3.5.52,3.65,1.59A34.5,34.5,0,0,0,26,67.67c.39,3.34,2.75,5.34,4.83,7.11,1.75,1.48,3.25,2.75,3.39,4.52a7.78,7.78,0,0,1-.72,3.08,18.27,18.27,0,0,0-.77,2.48,64.75,64.75,0,0,0-.49,6.56A41.81,41.81,0,0,1,22,64Zm30.2,40.3c3.44-1.28,8.68-2.1,13.48,1.66-.56,0-1.12,0-1.68,0A41.86,41.86,0,0,1,52.2,104.3Zm18.69,1.12c-8-9.16-18.63-6.29-23.93-3a42.09,42.09,0,0,1-10.49-6.69v0c-.48-1.49-.11-8.65.17-10a14.73,14.73,0,0,1,.62-1.93,11.13,11.13,0,0,0,1-4.77c-.26-3.44-2.67-5.47-4.79-7.27C31.67,70.25,30.17,69,30,67.21a30.62,30.62,0,0,1-.06-6,2.2,2.2,0,0,0,0-.23c-.12-3.91-4.27-5.27-7-5.5a41.66,41.66,0,0,1,2.48-7.91,81.22,81.22,0,0,1,11.23-6.78c3.17-1.4,5.71-5.58,6.34-8.81a9.76,9.76,0,0,0-.15-4.21,41.73,41.73,0,0,1,12.67-4.91,2.35,2.35,0,0,0-.2.37c-.35.84-1.16,1.17-2.93,1.71A9.66,9.66,0,0,0,48,27.19a4.67,4.67,0,0,0-1.34,3.42,4.5,4.5,0,0,0,1.55,3.24A4.65,4.65,0,0,0,51.37,35a9.43,9.43,0,0,0,4-1.09,28.9,28.9,0,0,0,3.77-2.24c.87-.5,3.46-1.74,5.27-1.62.22,0,5.58.06,8.75-7v0q2,.44,3.84,1.06a15,15,0,0,0-.72,2.77l-.12.61a4.54,4.54,0,0,1-3.68,3.33c-1.83-.14-9.87-.47-10.52,4.72h0a3,3,0,0,0,0,.31,4.61,4.61,0,0,1-.7,2.7,8.52,8.52,0,0,1-1.44,1c-.29.17-.56.33-.78.48-5.1,3.31-7.24,5.16-6.47,7.37s3.75,2.07,9.09,1.57c4.52-.42,12.09-1.13,14.24,1a2,2,0,0,1,.55,1.72c-.1.33-.86.78-2.58.68h-.16a36.1,36.1,0,0,1-6.17-.55c-3.75-1.14-8.42-2.56-13.31-1.31A13.93,13.93,0,0,0,44.12,62.19c-.54,5.48,1.32,9.25,5.53,11.21l.44.2c2,.93,4,1.89,6.7,1.69l.23,0c.84-.16,3.5-.37,4.72.75.23.21.93.85.73,2.91a6.28,6.28,0,0,0,.92,3.59,7.2,7.2,0,0,1,.44,1,12.43,12.43,0,0,1,.39,3.31,19.6,19.6,0,0,0,.33,3.48,13.83,13.83,0,0,0,3.34,6.85,5,5,0,0,0,3.65,1.58A7.8,7.8,0,0,0,76,97a27.19,27.19,0,0,0,5.28-4.73,10.69,10.69,0,0,0,2.3-4.08,23.3,23.3,0,0,0,.54-3.86,15.33,15.33,0,0,1,.65-3.93,14.79,14.79,0,0,1,2.47-3.89c.51-.65,1-1.32,1.52-2,.38-.56.74-1.16,1.09-1.76l.5-.84a3.94,3.94,0,0,0,.76-3.36,3.05,3.05,0,0,0-1.91-1.87c-.45-.18-.9-.32-1.33-.47a6.68,6.68,0,0,1-2.31-1.08,8.25,8.25,0,0,1-2.91-4.9c.18.22.37.48.56.74s.49.67.75,1c1.52,1.83,3.45,2.55,5.29,2a6.16,6.16,0,0,0,3.27-3.11c.11-.19.22-.37.33-.54,1.14-1.76,1.54-3.27,1.23-4.6a3.59,3.59,0,0,0-.17-.52,6.55,6.55,0,0,1,2.71,2.59c.07.12.15.29.24.48.64,1.35,1.84,3.85,4.24,3.56,2.9-.35,3.71-4.3,3.79-5.36a4.07,4.07,0,0,1,.23-.87,42,42,0,0,1-34.26,49.87Z"/><path d="M97.8,77.64a3.56,3.56,0,0,0-2.17-.7c-2.66,0-5.55,2.46-7.37,4.76-2.13,2.7-3.24,5.57-3,7.67a3.47,3.47,0,0,0,3.54,3.19c2.66,0,5.55-2.46,7.36-4.76,2.13-2.7,3.24-5.56,3-7.67A3.58,3.58,0,0,0,97.8,77.64Zm-4.74,7.69a9.81,9.81,0,0,1-3.79,3.14,9.49,9.49,0,0,1,2.14-4.29A9.81,9.81,0,0,1,95.19,81,9.49,9.49,0,0,1,93.05,85.33Z"/><path d="M3,22H25a3.09,3.09,0,0,0,3-3.14V3.14A3.09,3.09,0,0,0,25,0H3A3.09,3.09,0,0,0,0,3.14V18.86A3.09,3.09,0,0,0,3,22ZM4,4H24V18H4Z"/><path d="M22,26a2,2,0,0,0-2-2H8a2,2,0,0,0,0,4H20A2,2,0,0,0,22,26Z"/><path d="M125,0H103a3.09,3.09,0,0,0-3,3.14V18.86A3.09,3.09,0,0,0,103,22H125a3.09,3.09,0,0,0,3-3.14V3.14A3.09,3.09,0,0,0,125,0Zm-1,18H104V4h20Z"/><path d="M120,24H108a2,2,0,0,0,0,4h12a2,2,0,0,0,0-4Z"/><path d="M25,100H3a3.09,3.09,0,0,0-3,3.14v15.71A3.09,3.09,0,0,0,3,122H25a3.09,3.09,0,0,0,3-3.14V103.14A3.09,3.09,0,0,0,25,100Zm-1,18H4V104H24Z"/><path d="M20,124H8a2,2,0,0,0,0,4H20a2,2,0,0,0,0-4Z"/><path d="M125,100H103a3.09,3.09,0,0,0-3,3.14v15.71a3.09,3.09,0,0,0,3,3.14H125a3.09,3.09,0,0,0,3-3.14V103.14A3.09,3.09,0,0,0,125,100Zm-1,18H104V104h20Z"/><path d="M120,124H108a2,2,0,0,0,0,4h12a2,2,0,0,0,0-4Z"/><path d="M34,10H58v2a2,2,0,0,0,4,0V8a2,2,0,0,0-2-2H34a2,2,0,0,0,0,4Z"/><path d="M10,59H8V44a2,2,0,0,0-4,0V61a2,2,0,0,0,2,2h4a2,2,0,0,0,0-4Z"/><path d="M10,67H6a2,2,0,0,0-2,2V84a2,2,0,0,0,4,0V71h2a2,2,0,0,0,0-4Z"/><path d="M124,44a2,2,0,0,0-4,0V59h-2a2,2,0,0,0,0,4h4a2,2,0,0,0,2-2Z"/><path d="M122,86a2,2,0,0,0,2-2V69a2,2,0,0,0-2-2h-4a2,2,0,0,0,0,4h2V84A2,2,0,0,0,122,86Z"/><path d="M68,14a2,2,0,0,0,2-2V10H94a2,2,0,0,0,0-4H68a2,2,0,0,0-2,2v4A2,2,0,0,0,68,14Z"/><path d="M60,114a2,2,0,0,0-2,2v2H34a2,2,0,0,0,0,4H60a2,2,0,0,0,2-2v-4A2,2,0,0,0,60,114Z"/><path d="M94,118H70v-2a2,2,0,0,0-4,0v4a2,2,0,0,0,2,2H94a2,2,0,0,0,0-4Z"/></svg>
+                                                                            </div>
+                                                                            <div class="kt-rc-us-ic-name">
+                                                                                <h5> {{ "Masterform.IsInterCompany" | translate }}</h5>
+                                                                                <span> {{ "Masterform.InterCompanyMessage" | translate }} </span>
+                                                                            </div>
+                                                                            <div class="kt-rc-acc-btn">
+                                                                                <span class="switch switch-outline switch-icon switch-primary">
+                                                                                    <label>
+                                                                                        <input type="checkbox" [(ngModel)]="iner" name="select">
+                                                                                        <span></span>
+                                                                                </label>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="kt-crd-acc-v">
+                                                                        <div class="d-flex align-items-center justify-content-between">
+                                                                            <div class="kt-rc-us-ic kt-archvie-ic">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" viewBox="0 0 24 24" fill="none" stroke="#4587f3">
+                        
+                                                                                        <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                                                                        
+                                                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                        
+                                                                                        <g id="SVGRepo_iconCarrier"> <path d="M16.8199 2H7.17995C5.04995 2 3.31995 3.74 3.31995 5.86V19.95C3.31995 21.75 4.60995 22.51 6.18995 21.64L11.0699 18.93C11.5899 18.64 12.4299 18.64 12.9399 18.93L17.8199 21.64C19.3999 22.52 20.6899 21.76 20.6899 19.95V5.86C20.6799 3.74 18.9499 2 16.8199 2Z" stroke="#4587f3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M9.58997 11L11.09 12.5L15.09 8.5" stroke="#4587f3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
+                                                                                        
+                                                                                        </svg>
+                                                                            </div>
+                                                                            <div class="kt-rc-us-ic-name">
+                                                                                <h5> {{ "Masterform.IsArchiveApproved" | translate }}</h5>
+                                                                                <span> {{ "Masterform.IsArchiveApprovedMessage" | translate}} </span>
+                                                                            </div>
+                                                                            <div class="kt-rc-acc-btn">
+                                                                                <span class="switch switch-outline switch-icon switch-primary">
+                                                                                        <label>
+                                                                                            <input type="checkbox" [(ngModel)]="IsArchiveApproval" name="select">
+                                                                                            <span></span>
+                                                                                </label>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="kt-crd-acc-v">
+                                                                        <div class="d-flex align-items-center justify-content-between">
+                                                                            <div class="kt-rc-us-ic kt-archvie-ic">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" viewBox="0 0 24 24" fill="none">
+                        
+                                                                                        <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                                                                        
+                                                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                        
+                                                                                        <g id="SVGRepo_iconCarrier"> <path d="M12.5 2H15.2C16.8802 2 17.7202 2 18.362 2.32698C18.9265 2.6146 19.3854 3.07354 19.673 3.63803C20 4.27976 20 5.11984 20 6.8V17.2C20 18.8802 20 19.7202 19.673 20.362C19.3854 20.9265 18.9265 21.3854 18.362 21.673C17.7202 22 16.8802 22 15.2 22H8.8C7.11984 22 6.27976 22 5.63803 21.673C5.07354 21.3854 4.6146 20.9265 4.32698 20.362C4 19.7202 4 18.8802 4 17.2V16.5M16 13H11.5M16 9H12.5M16 17H8M6 10V4.5C6 3.67157 6.67157 3 7.5 3C8.32843 3 9 3.67157 9 4.5V10C9 11.6569 7.65685 13 6 13C4.34315 13 3 11.6569 3 10V6" stroke="#4587f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </g>
+                                                                                        
+                                                                                        </svg>
+                                                                            </div>
+                                                                            <div class="kt-rc-us-ic-name">
+                                                                                <h5> {{ "Masterform.IsCommunicationDownload" | translate }}</h5>
+                                                                                <span> {{ "Masterform.IsCommunicationDownloadMessage" | translate }} </span>
+                                                                            </div>
+                                                                            <div class="kt-rc-acc-btn">
+                                                                                <span class="switch switch-outline switch-icon switch-primary">
+                                                                                        <label>
+                                                                                            <input type="checkbox" [(ngModel)]="IsCommunication" name="select">
+                                                                                            <span></span>
+                                                                                </label>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="kt-crd-acc-v">
+                                                                        <div class="d-flex align-items-center justify-content-between">
+                                                                            <div class="kt-rc-us-ic kt-archvie-ic">
+                                                                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="64px"
+                                                                                        height="64px" viewBox="0 0 24 24" fill="none">
+                            
+                                                                                        <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                            
+                                                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                                            stroke-linejoin="round" />
+                            
+                                                                                        <g id="SVGRepo_iconCarrier">
+                                                                                            <path
+                                                                                                d="M12.5 2H15.2C16.8802 2 17.7202 2 18.362 2.32698C18.9265 2.6146 19.3854 3.07354 19.673 3.63803C20 4.27976 20 5.11984 20 6.8V17.2C20 18.8802 20 19.7202 19.673 20.362C19.3854 20.9265 18.9265 21.3854 18.362 21.673C17.7202 22 16.8802 22 15.2 22H8.8C7.11984 22 6.27976 22 5.63803 21.673C5.07354 21.3854 4.6146 20.9265 4.32698 20.362C4 19.7202 4 18.8802 4 17.2V16.5M16 13H11.5M16 9H12.5M16 17H8M6 10V4.5C6 3.67157 6.67157 3 7.5 3C8.32843 3 9 3.67157 9 4.5V10C9 11.6569 7.65685 13 6 13C4.34315 13 3 11.6569 3 10V6"
+                                                                                                stroke="#4587f3" stroke-width="2"
+                                                                                                stroke-linecap="round" stroke-linejoin="round" />
+                                                                                        </g>
+                                                                                    </svg> -->
+                                                                                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
+                                                         <path d="M16 8C15.4477 8 15 8.44772 15 9C15 9.55228 15.4477 10 16 10V8ZM8 10C8.55228 10 9 9.55228 9 9C9 8.44772 8.55228 8 8 8V10ZM5.07805 19.7748L4.61708 20.6622L4.61708 20.6622L5.07805 19.7748ZM4.22517 18.9219L5.11259 18.461L5.11259 18.461L4.22517 18.9219ZM19.7748 18.9219L20.6622 19.3829L19.7748 18.9219ZM18.9219 19.7748L19.3829 20.6622L18.9219 19.7748ZM19.7748 10.0781L20.6622 9.61708L20.6622 9.61708L19.7748 10.0781ZM18.9219 9.22517L18.461 10.1126H18.461L18.9219 9.22517ZM4.22517 10.0781L3.33776 9.61708L4.22517 10.0781ZM5.07805 9.22517L4.61708 8.33776L5.07805 9.22517ZM13 4C13 3.44772 12.5523 3 12 3C11.4477 3 11 3.44772 11 4H13ZM12 14L11.2929 14.7071C11.6834 15.0976 12.3166 15.0976 12.7071 14.7071L12 14ZM10.2071 10.7929C9.81658 10.4024 9.18342 10.4024 8.79289 10.7929C8.40237 11.1834 8.40237 11.8166 8.79289 12.2071L10.2071 10.7929ZM15.2071 12.2071C15.5976 11.8166 15.5976 11.1834 15.2071 10.7929C14.8166 10.4024 14.1834 10.4024 13.7929 10.7929L15.2071 12.2071ZM19 12.22V16.78H21V12.22H19ZM16.78 19H7.22V21H16.78V19ZM5 16.78V12.22H3V16.78H5ZM16 10H16.78V8H16V10ZM7.22 10H8V8H7.22V10ZM7.22 19C6.63372 19 6.25517 18.9992 5.96722 18.9753C5.69125 18.9524 5.58924 18.9135 5.53903 18.8874L4.61708 20.6622C5.00034 20.8613 5.39982 20.935 5.8017 20.9684C6.19162 21.0008 6.66729 21 7.22 21V19ZM3 16.78C3 17.3327 2.9992 17.8084 3.03158 18.1983C3.06495 18.6002 3.13867 18.9997 3.33776 19.3829L5.11259 18.461C5.0865 18.4108 5.04763 18.3088 5.02472 18.0328C5.0008 17.7448 5 17.3663 5 16.78H3ZM5.53903 18.8874C5.35638 18.7925 5.20746 18.6436 5.11259 18.461L3.33776 19.3829C3.62239 19.9309 4.06915 20.3776 4.61708 20.6622L5.53903 18.8874ZM19 16.78C19 17.3663 18.9992 17.7448 18.9753 18.0328C18.9524 18.3088 18.9135 18.4108 18.8874 18.461L20.6622 19.3829C20.8613 18.9997 20.935 18.6002 20.9684 18.1983C21.0008 17.8084 21 17.3327 21 16.78H19ZM16.78 21C17.3327 21 17.8084 21.0008 18.1983 20.9684C18.6002 20.935 18.9997 20.8613 19.3829 20.6622L18.461 18.8874C18.4108 18.9135 18.3088 18.9524 18.0328 18.9753C17.7448 18.9992 17.3663 19 16.78 19V21ZM18.8874 18.461C18.7925 18.6436 18.6436 18.7925 18.461 18.8874L19.3829 20.6622C19.9309 20.3776 20.3776 19.9309 20.6622 19.3829L18.8874 18.461ZM21 12.22C21 11.6673 21.0008 11.1916 20.9684 10.8017C20.935 10.3998 20.8613 10.0003 20.6622 9.61708L18.8874 10.539C18.9135 10.5892 18.9524 10.6912 18.9753 10.9672C18.9992 11.2552 19 11.6337 19 12.22H21ZM16.78 10C17.3663 10 17.7448 10.0008 18.0328 10.0247C18.3088 10.0476 18.4108 10.0865 18.461 10.1126L19.3829 8.33776C18.9997 8.13867 18.6002 8.06495 18.1983 8.03158C17.8084 7.9992 17.3327 8 16.78 8V10ZM20.6622 9.61708C20.3776 9.06915 19.9309 8.62239 19.3829 8.33776L18.461 10.1126C18.6436 10.2075 18.7925 10.3564 18.8874 10.539L20.6622 9.61708ZM5 12.22C5 11.6337 5.0008 11.2552 5.02472 10.9672C5.04763 10.6912 5.0865 10.5892 5.11259 10.539L3.33776 9.61708C3.13867 10.0003 3.06495 10.3998 3.03158 10.8017C2.9992 11.1916 3 11.6673 3 12.22H5ZM7.22 8C6.66729 8 6.19162 7.9992 5.8017 8.03158C5.39982 8.06495 5.00034 8.13867 4.61708 8.33776L5.53903 10.1126C5.58924 10.0865 5.69125 10.0476 5.96722 10.0247C6.25517 10.0008 6.63372 10 7.22 10V8ZM5.11259 10.539C5.20746 10.3564 5.35638 10.2075 5.53903 10.1126L4.61708 8.33776C4.06915 8.62239 3.62239 9.06915 3.33776 9.61708L5.11259 10.539ZM11 4V14H13V4H11ZM12.7071 13.2929L10.2071 10.7929L8.79289 12.2071L11.2929 14.7071L12.7071 13.2929ZM12.7071 14.7071L15.2071 12.2071L13.7929 10.7929L11.2929 13.2929L12.7071 14.7071Z" fill="#4587f3">
+                                                            
+                                                         </path> </g></svg>
+
+                                                                            </div>
+                                                                            <div class="kt-rc-us-ic-name">
+                                                                                <h5> {{ "Masterform.IsArchiveDownload" | translate }}</h5>
+                                                                                <span> {{ "Masterform.IsArchiveDownloadMessage" | translate }} </span>
+                                                                            </div>
+                                                                            <div class="kt-rc-acc-btn">
+                                                                                <span class="switch switch-outline switch-icon switch-primary">
+                                                                                        <label>
+                                                                                            <input type="checkbox" [(ngModel)]="IsArchiveDownload"
+                                                                                                name="select">
+                                                                                            <span></span>
+                                                                                </label>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="kt-crd-acc-v">
+                                                                        <div class="d-flex align-items-center justify-content-between">
+                                                                            <div class="kt-rc-us-ic kt-archvie-ic p-0">
+                                                                                <img class="ep-ic-dw" src="assets/icons/Ep_Logo.png">
+                                                                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="64px"
+                                                                                        height="64px" viewBox="0 0 24 24" fill="none">
+                            
+                                                                                        <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                            
+                                                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                                            stroke-linejoin="round" />
+                            
+                                                                                        <g id="SVGRepo_iconCarrier">
+                                                                                            <path
+                                                                                                d="M12.5 2H15.2C16.8802 2 17.7202 2 18.362 2.32698C18.9265 2.6146 19.3854 3.07354 19.673 3.63803C20 4.27976 20 5.11984 20 6.8V17.2C20 18.8802 20 19.7202 19.673 20.362C19.3854 20.9265 18.9265 21.3854 18.362 21.673C17.7202 22 16.8802 22 15.2 22H8.8C7.11984 22 6.27976 22 5.63803 21.673C5.07354 21.3854 4.6146 20.9265 4.32698 20.362C4 19.7202 4 18.8802 4 17.2V16.5M16 13H11.5M16 9H12.5M16 17H8M6 10V4.5C6 3.67157 6.67157 3 7.5 3C8.32843 3 9 3.67157 9 4.5V10C9 11.6569 7.65685 13 6 13C4.34315 13 3 11.6569 3 10V6"
+                                                                                                stroke="#4587f3" stroke-width="2"
+                                                                                                stroke-linecap="round" stroke-linejoin="round" />
+                                                                                        </g>
+                                                                                    </svg> -->
+                                                                            </div>
+                                                                            <div class="kt-rc-us-ic-name">
+                                                                                <h5> {{ "Masterform.IsStreamPlannerDownload" | translate }}</h5>
+                                                                                <span> {{ "Masterform.IsStreamPlannerDownloadMessage" | translate }} </span>
+                                                                            </div>
+                                                                            <div class="kt-rc-acc-btn">
+                                                                                <span class="switch switch-outline switch-icon switch-primary">
+                                                                                        <label>
+                                                                                            <input type="checkbox" [(ngModel)]="IsStreamPlannerDownload" 
+                                                                                                name="select">
+                                                                                            <span></span>
+                                                                                </label>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-cus task_act text-right mt-2">
+                                                                    <button class="btn btn-sm btn-secondary px-3 mr-2 mt-2" (click)="closeInfo()">
+                                                                {{ "Masterform.Cancel" | translate }}
+                                                            </button>
+                                                                    <button (click)="OnUpdate(2)" class="btn btn-sm btn-primary px-3 mt-2">
+                                                                    {{ "Masterform.UpdateCompanyDetails" | translate }}
+                                                                </button>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

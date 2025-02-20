@@ -1,0 +1,9 @@
+<div>
+    <div class="toast-cus-close" (click)="PinClose(1)"><i class="fa fa-times"></i></div>
+    <div [innerHtml]="data"></div>
+    <div class="dismiss d-none">
+        <button class="btn btn-info btn-sm" (click)="sbRef.dismiss()">
+          Dismiss
+        </button>
+    </div>
+</div>

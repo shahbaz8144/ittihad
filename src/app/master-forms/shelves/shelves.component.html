@@ -1,0 +1,108 @@
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+  <div class="col-lg-12">
+    <h4 class="mb-3 pro-nm">{{ "Masterform.Shelves" | translate }}</h4>
+    <div class="card">
+      <div class="card-body">
+       
+          
+          <div class="row">
+            <!-- <Warehousedrp> -->
+            <div class="col-md-3">
+              <label class="form-label">{{ "Masterform.Warehouse" | translate }}</label><span class="text-danger ml-1">*</span>
+              <ng-select (change)="Onwarehousechange($event)" [placeholder]="WarehouseSelect" [(ngModel)]="warehouse" [ngModelOptions]="{standalone: true}">
+                <ng-option *ngFor="let obj of service.Objwarehousedrp" [value]="obj.WareHouseId" >
+                  {{obj.WareHouseName}}
+                </ng-option>
+              </ng-select>
+            </div>
+            <!-- <Warehousedrp> -->
+
+            <!-- <Block> -->
+            <div class="col-md-3">
+              <label class="form-label">{{ "Masterform.Block" | translate }}</label><span class="text-danger ml-1">*</span>
+              <ng-select (change)="OnBlockschange($event)" [placeholder]="BlockSelect" [(ngModel)]="Blocks" [ngModelOptions]="{standalone: true}">
+                <ng-option *ngFor="let obj of ObjBlocksdrp" [value]="obj.BlockId" >
+                  {{obj.BlockName}}
+                </ng-option>
+              </ng-select>
+            </div>
+            <!-- <Block> -->
+
+            <!-- <Racks> -->
+            <div class="col-md-3">
+              <label class="form-label">{{ "Masterform.Rack" | translate }}</label><span class="text-danger ml-1">*</span>
+              <ng-select (change)="OnRackchange($event)" [placeholder]="RackSelect"  [(ngModel)]="Racks" [ngModelOptions]="{standalone: true}">
+                <ng-option *ngFor="let obj of ObjRacksdrp" [value]="obj.RackId">
+                  {{obj.RackName}}
+                </ng-option>
+              </ng-select>
+            </div>
+            <!-- <Racks> -->
+          </div>
+         <div class="my-1">
+          <h6 class="txtm-cus mb-1 pt-1"><span>{{ "Masterform.Note" | translate }}: </span> {{"Masterform.ShelvesNote" | translate }} </h6>
+         </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div id="shelvesdiv">
+                <div id="shelvesdiv">
+                  <div class="m-checkbox-inline my-2">
+                    <label class="m-checkbox m-checkbox--air m-checkbox--solid m-checkbox--state-success">
+                      <mat-checkbox id="namechk" type="checkbox" class="mr-2 check" [(ngModel)]="checked"  (change)="oncheckbox($event)" value="true"   name="name">
+                        {{ "Masterform.AutoGenerateName" | translate }}</mat-checkbox>
+                      <span></span>
+                    </label>
+                    <span class="detail_r">
+                      <a class="m-nav__link">
+                        <i class="m-nav__link-icon fa fa-arrows-h"></i>
+                        <span class="m-nav__link-text">{{"Masterform.Rows" | translate }}-{{_rows}}</span>
+                      </a> &nbsp; <a class="m-nav__link">
+                        <i class="m-nav__link-icon fa fa-arrows-v"></i>
+                        <span class="m-nav__link-text">{{ "Masterform.Columns" | translate }}-{{_columns}}</span>
+                      </a>
+                    </span>
+                  </div>
+                  <div class="ware-table">
+                    <table class="table table-bordered m-table m-table--border-success" id="MyTable">
+                      <tbody>
+                        <tr *ngFor='let _inrow of counter(_rows) ;let i = index'>
+                          <!-- <p>{{i+1}}</p> -->
+                          <td *ngFor='let incolumn of counter(_columns) ;let j = index'>
+                            <div class="rack-in">
+                              <img src="dmsweb/assets/media/bg/package.png">
+                              <input value="Shelve {{ (i * _columns) + j +1}}" id="shelve_{{i+1}}*{{j+1}}" class="form-control borderr" type="text" placeholder="Name"
+                                data-toggle="tooltip" data-placement="top">
+                            </div>
+                          </td>
+                        </tr>
+                        <ng-container *ngIf="counter.length==0">  
+                          <div class="d-flex-center kt-tb-error-box">
+                              <div class="m-auto text-center">
+                                  <div class="svgs-1 kt-error-img ">
+                                  <img src="assets/media/Img/No Shelves.png">
+                                   </div>
+                                    <h3 class="kt-blank-ttl"> {{ "Masterform.NoShelves" | translate }} </h3>
+                         <p class="kt-blank-msg"> {{"Masterform.NoFoundShelves" | translate }} </p>
+                                  <!-- <div class="bnk-txt">
+                                      <h3 class="blank-txt">No Results Found</h3>
+  
+                                  </div> -->
+                              </div>
+                          </div>
+                      </ng-container>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="text-right my-2">
+                    <a class="btn btn-info btn-sm mr-2 text-white" value="Create" (click)="jsondatatoarray()" name="Submit">{{ "Masterform.Create" |  translate }}</a>
+                    <a class="btn btn-secondary btn-sm" value="Cancel" (click)="Reset()" name="Cancel">{{ "Masterform.Cancel" | translate }}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- </form> -->
+      </div>
+    </div>
+  </div>
+</div>

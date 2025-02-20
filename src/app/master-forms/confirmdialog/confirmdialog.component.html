@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>
+    {{data.title}}</h2>
+
+<div mat-dialog-content style="text-align: center;">
+    <h4> {{ "Masterform.alertmessage" | translate }} </h4>
+    <h3 [ngStyle]="{'color':data.message=='Active' ? '#3f51b5' : 'crimson'}"><b>{{data.message}}</b></h3>
+</div>
+<div style="float:right;margin:20px;">
+    <button mat-raised-button color="primary" style="margin:0px 10px;" [mat-dialog-close]="true">{{ "Masterform.AlertConfirm" | translate }}</button>
+    <button mat-raised-button color="basic" [mat-dialog-close]="false" class="btn-danger">{{ "Masterform.Cancel" | translate }}</button>
+</div>

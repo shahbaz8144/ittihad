@@ -1,0 +1,529 @@
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+    <div class="col-lg-12">
+        <h4 class="mb-3 pro-nm">{{ "Masterform.ManageDocumentsShuffling" | translate }}</h4>
+
+        <div class="card mb-3">
+            <div class="card-body">
+
+
+                <div class="row">
+                    <!-- <Warehousedrp> -->
+                    <div class="col-md-3">
+                        <label class="form-label">{{ "Masterform.Warehouse" | translate }}</label><span class="text-danger ml-1">*</span>
+                        <ng-select (change)="OnBlocks($event)" [placeholder]="WarehouseSelect">
+                            <ng-option *ngFor="let obj of Objwarehousedrp" [value]="obj.WareHouseId">
+                                {{obj.WareHouseName}}
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                    <!-- <Warehousedrp> -->
+
+                    <!-- <Block> -->
+                    <div class="col-md-3">
+                        <label class="form-label">{{ "Masterform.Block" | translate }}</label><span class="text-danger ml-1">*</span>
+                        <ng-select (change)="OnRacks($event)" [placeholder]="BlockSelect">
+                            <ng-option *ngFor="let obj of ObjBlocksdrp" [value]="obj.BlockId">
+                                {{obj.BlockName}}
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                    <!-- <Block> -->
+
+                    <!-- <Racks> -->
+                    <div class="col-md-3">
+                        <label class="form-label">{{ "Masterform.Rack" | translate }}</label><span class="text-danger ml-1">*</span>
+                        <ng-select (change)="Onshelves($event)" [placeholder]="RackSelect">
+                            <ng-option *ngFor="let obj of ObjRacksdrp" [value]="obj.RackId">
+                                {{obj.RackName}}
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                    <!-- <Racks> -->
+                    <div class="col-md-3">
+                        <label class="form-label">{{ "Masterform.Shelve" | translate }}</label><span class="text-danger ml-1">*</span>
+                        <ng-select [placeholder]="ShelveSelect" (change)="shelveslist($event)">
+                            <ng-option *ngFor="let obj of Objshelvedrp" [value]="obj.ShelveId">
+                                {{obj.ShelveName}}
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header d-flex-center" id="faqhead1">
+                <!-- <h4>Note:-</h4>Proper Shelve Below The Dropdown -->
+                <div class="">
+                    <a class="btn btn-header-link p-0">{{ShelveName}}<span class="sub_text mx-1">({{ "Masterform.SelectedShelve" | translate }})</span></a>
+                </div>
+
+            </div>
+            <div class="card-body">
+                <h6 class="txtm-cus ml-2 mb-0 pt-1"><span>{{ "Masterform.Note" | translate }}: </span> {{ "Masterform.shuffeldocumentsNote" | translate }} </h6>
+                <div class=" d-flex flex-wrap ">
+                    <div class="col-md-4">
+                        <div class="treeview js-treeview">
+                            <ul>
+
+                                <li *ngFor="let obj of Objwarehouse">
+                                    <div class="treeview__level" (click)="bindblock(obj.WareHouseId)" data-level="A">
+                                        <span class="level-title">{{obj.WareHouseName}}</span>
+                                        <input type="hidden" id="warehousehdn_{{obj.WareHouseId}}" value="0">
+                                    </div>
+                                    <ul id="blockdiv_{{obj.WareHouseId}}" class="blocksdiv" style="display: none;">
+                                        <ng-container *ngFor="let _block of block">
+                                            <ng-container *ngIf="obj.WareHouseId == _block.WareHouseId">
+                                                <li>
+                                                    <div class="treeview__level" data-level="B"
+                                                        (click)="bindRacks(_block.BlockId)">
+                                                        <span class="level-title">{{_block.BlockName}}</span>
+                                                        <input type="hidden" id="blockshdn_{{_block.BlockId}}"
+                                                            value="0">
+                                                    </div>
+
+                                                    <ul id="rackdiv_{{_block.BlockId}}" class="racksdiv"
+                                                        style="display: none;">
+                                                        <ng-container *ngFor="let _Rack of racks">
+                                                            <ng-container *ngIf="_block.BlockId == _Rack.BlockId">
+                                                                <li>
+                                                                    <div class="treeview__level" data-level="C"
+                                                                        (click)="bindshelves(_Rack.RackId)">
+                                                                        <span
+                                                                            class="level-title">{{_Rack.RackName}}</span>
+                                                                        <input type="hidden"
+                                                                            id="rackshdn_{{_Rack.RackId}}" value="0">
+                                                                    </div>
+                                                                    <ul id="shelvesdiv_{{_Rack.RackId}}"
+                                                                        class="shelvediv" style="display: none;">
+                                                                        <ng-container *ngFor="let _shelves of shelves">
+                                                                            <ng-container
+                                                                                *ngIf="_Rack.RackId == _shelves.RackId ">
+                                                                                <li>
+                                                                                    <div id="shelve_div_{{_shelves.ShelveId}}{{_Rack.RackId}}"
+                                                                                        class="treeview__level"
+                                                                                        data-level="D"
+                                                                                        (click)="GetShelveId(_shelves.ShelveId,_Rack.RackId,_shelves.ShelveName)">
+                                                                                        <span
+                                                                                            class="level-title">{{_shelves.ShelveName}}</span>
+                                                                                    </div>
+                                                                                </li>
+                                                                            </ng-container>
+                                                                        </ng-container>
+                                                                    </ul>
+                                                                </li>
+                                                            </ng-container>
+                                                        </ng-container>
+                                                    </ul>
+                                                </li>
+                                            </ng-container>
+                                        </ng-container>
+                                    </ul>
+
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="col-md-8" id="list">
+                        <div class="menu_cards">
+                            <div class="card cards mb-3">
+                                <div class="card-header">
+                                    <div class="d-flex-center">
+                                        <div>{{ "Masterform.Documents" | translate }}:<span class="sub_text mx-1">{{selectedItemList.length}}</span>
+                                        </div>
+                                        <button class="btn btn-sm btn-info"
+                                            [disabled]="!ShelveName || selectedItemList.length == 0"
+                                            (click)="Movetowarehouse()">{{ "Masterform.Submit" | translate }}</button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="view_filter docs-white">
+                                        <div class="search-div">
+                                            <div class="search-div-inner">
+                                                <input type="text" class="search-input" [placeholder]="Filterbyname"
+                                                    [(ngModel)]="searchText">
+                                                <div class="search-icon">
+                                                    <i class="material-icons sch_icon">search</i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="">
+                                            <div class="d-flex-center mr-2">
+                                                <div class="mr-2">
+                                                    <input type="checkbox" class="" [(ngModel)]="check"
+                                                        (change)="checkbox()">
+                                                </div>
+                                                {{ "Masterform.Select All" | translate }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="scroll-body mt-2">
+                                        <div class="bg-gray d-flex flex-wrap">
+                                            <ng-container *ngIf="(objshelvesview|filter: searchText) as objshelvesview">
+                                                <div class="card card-item"
+                                                    *ngFor="let item  of objshelvesview | filter: searchText">
+                                                    <div class="crd-hed">
+                                                        <div class="crd-ck"><input type="checkbox"
+                                                                [(ngModel)]="item.checked" (change)="oncheckbox()"
+                                                                class="mr-2"><span>{{ "Masterform.Select" | translate }}</span></div>
+                                                    </div>
+                                                    <div class="crd-body">
+                                                        <div class="shel_div">
+                                                            <div class="shel_name">
+                                                                <!-- Historical Shelve -->
+                                                                {{item.DocumentName}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="pb-1">
+                                                            <div class="d-flex align-items-baseline">
+                                                                <div class="text_elip" data-toggle="tooltip"
+                                                                    data-placement="top" title="ASM Enterprises">
+                                                                    {{item.CompanyName}} </div> <span
+                                                                    class="sub_text mx-1">({{ "Masterform.Company" | translate }})</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="py-1">
+                                                            <div class="d-flex align-items-baseline">
+                                                                <div class="text_elip">{{item.DepartmentName}}</div>
+                                                                <span class="sub_text mx-1">({{ "Masterform.Type" | translate }})</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="pt-1">
+                                                            <div class="d-flex align-items-baseline">
+                                                                <div class="text_elip">{{item.DocumentTypeName}}
+                                                                </div> <span class="sub_text mx-1">({{ "Masterform.Dept" | translate }})</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="pt-1">
+                                                            <div class="d-flex align-items-baseline">
+                                                                <div class="text_elip">{{item.CategoryName}}</div>
+                                                                <span class="sub_text mx-1">({{ "Masterform.Category" | translate }})</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="crd-fot">
+                                                        <div class="d-flex-center">
+                                                            <div class="capacity_txt">{{item.DocumentStatus}}</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <ng-container *ngIf="objshelvesview.length==0">
+                                                    <div class="d-flex-center kt-tb-error-box p-relative">
+                                                        <div class="m-auto text-center">
+                                                            <div class="svgs-1 kt-error-img ">
+                                                                <img src="assets/media/Img/Shuffling.png">
+                                                             </div>
+                                                              <h3 class="kt-blank-ttl"> {{ "Masterform.NoBlockData" | translate }} </h3>
+                                                   <p class="kt-blank-msg"> {{ "Masterform.NOdatawarehouse" | translate }} </p>                                     
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                                </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_wrapper">
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+        <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+            <div class="col-lg-12">
+                <h4 class="mb-3 pro-nm">Manage Documents Shuffling</h4>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <form class="">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Warehouse</label><span class="text-danger ml-1">*</span>
+                                        <select class="form-control"> 
+                                            <option>Select</option>
+                                            <option></option>
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Block</label><span class="text-danger ml-1">*</span>
+                                        <select class="form-control"> 
+                                            <option>Select</option>
+                                            <option></option>
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Rack</label><span class="text-danger ml-1">*</span>
+                                        <select class="form-control"> 
+                                            <option>Select</option>
+                                            <option></option>
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Shelve</label><span class="text-danger ml-1">*</span>
+                                        <select class="form-control"> 
+                                            <option>Select</option>
+                                            <option></option>
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="d-flex">
+                            <div class="col-md-4">
+                                <div class="treeview js-treeview">
+                                    <ul class="treeviewul">
+                                        <li>
+                                            <div class="treeview__level" data-level="A">
+                                                <span class="level-title">Chinnayagudem</span>
+                                            </div>
+                                            <ul>
+                                    
+                                            <li>
+                                                <div class="treeview__level" data-level="B">
+                                                <span class="level-title">Block A</span>
+                                                </div>
+                                                <ul>
+                                    
+                                                <li>
+                                                    <div class="treeview__level" data-level="C">
+                                                    <span class="level-title">Rack A<i class="material-icons kt-menu__link-icon">settings_suggest</i></span>
+                                                    </div>
+                                                </li>
+                                    
+                                                <li>
+                                                    <div class="treeview__level" data-level="C">
+                                                    <span class="level-title">Rack B<i class="material-icons kt-menu__link-icon">settings_suggest</i></span>
+                                                    </div>
+                                                    <ul>
+                                                    </ul>
+                                                </li>
+                                    
+                                                <li>
+                                                    <div class="treeview__level" data-level="C">
+                                                    <span class="level-title">Rack C<i class="material-icons kt-menu__link-icon">settings_suggest</i></span>
+                                                    </div>
+                                                    <ul>
+                                                    </ul>
+                                                </li>
+                                                </ul>
+                                            </li>
+                                    
+                                            <li>
+                                                <div class="treeview__level" data-level="B">
+                                                <span class="level-title">Block B</span>
+                                                </div>
+                                                <ul>
+                                                </ul>
+                                            </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div class="treeview__level" data-level="A">
+                                                <span class="level-title">I-Ball</span>
+                                            </div>
+                                            <ul>
+                                    
+                                                <li>
+                                                    <div class="treeview__level" data-level="B">
+                                                    <span class="level-title">Block A</span>
+                                                    </div>
+                                                    <ul>
+                                        
+                                                    <li>
+                                                        <div class="treeview__level" data-level="C">
+                                                        <span class="level-title">Rack A<i class="material-icons kt-menu__link-icon">settings_suggest</i></span>
+                                                        </div>
+                                                    </li>
+                                        
+                                                    <li>
+                                                        <div class="treeview__level" data-level="C">
+                                                        <span class="level-title">Rack B<i class="material-icons kt-menu__link-icon">settings_suggest</i></span>
+                                                        </div>
+                                                        <ul>
+                                                        </ul>
+                                                    </li>
+                                        
+                                                    <li>
+                                                        <div class="treeview__level" data-level="C">
+                                                        <span class="level-title">Rack C<i class="material-icons kt-menu__link-icon">settings_suggest</i></span>
+                                                        </div>
+                                                        <ul>
+                                                        </ul>
+                                                    </li>
+                                                    </ul>
+                                                </li>
+                                        
+                                                <li>
+                                                    <div class="treeview__level" data-level="B">
+                                                    <span class="level-title">Block B</span>
+                                                    </div>
+                                                    <ul>
+                                                        <li>
+                                                            <div class="treeview__level" data-level="C">
+                                                            <span class="level-title">Rack C</span>
+                                                            </div>
+                                                            <ul>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="pt-5 sh_data">
+                                    <h4><i class="material-icons kt-menu__link-icon">description</i>Shelves Data</h4>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered">
+                                            <thead class="thead-sticky">
+                                                <tr>
+                                                    <th><span><input type="checkbox" name="docs"></span></th>
+                                                    <th>Documents Count</th>
+                                                    <th>Row/Column</th>
+                                                    <th>Shelve Name</th>
+                                                    <th>Capacity</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th><span><input type="checkbox" name="docs"></span></th>
+                                                    <td>0</td>
+                                                    <td>1/1</td>
+                                                    <td>Historical</td>
+                                                    <td>false</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><span><input type="checkbox" name="docs"></span></th>
+                                                    <td>0</td>
+                                                    <td>1/2</td>
+                                                    <td>Mythology</td>
+                                                    <td>false</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><span><input type="checkbox" name="docs"></span></th>
+                                                    <td>0</td>
+                                                    <td>1/3</td>
+                                                    <td>Historical</td>
+                                                    <td>false</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><span><input type="checkbox" name="docs"></span></th>
+                                                    <td>0</td>
+                                                    <td>1/3</td>
+                                                    <td>Historical</td>
+                                                    <td>false</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><span><input type="checkbox" name="docs"></span></th>
+                                                    <td>0</td>
+                                                    <td>1/3</td>
+                                                    <td>Historical</td>
+                                                    <td>false</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><span><input type="checkbox" name="docs"></span></th>
+                                                    <td>0</td>
+                                                    <td>1/3</td>
+                                                    <td>Historical</td>
+                                                    <td>false</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><span><input type="checkbox" name="docs"></span></th>
+                                                    <td>0</td>
+                                                    <td>1/3</td>
+                                                    <td>Historical</td>
+                                                    <td>false</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><span><input type="checkbox" name="docs"></span></th>
+                                                    <td>0</td>
+                                                    <td>1/3</td>
+                                                    <td>Historical</td>
+                                                    <td>false</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><span><input type="checkbox" name="docs"></span></th>
+                                                    <td>0</td>
+                                                    <td>1/3</td>
+                                                    <td>Historical</td>
+                                                    <td>false</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><span><input type="checkbox" name="docs"></span></th>
+                                                    <td>0</td>
+                                                    <td>1/3</td>
+                                                    <td>Historical</td>
+                                                    <td>false</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><span><input type="checkbox" name="docs"></span></th>
+                                                    <td>0</td>
+                                                    <td>1/3</td>
+                                                    <td>Historical</td>
+                                                    <td>false</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><span><input type="checkbox" name="docs"></span></th>
+                                                    <td>0</td>
+                                                    <td>1/3</td>
+                                                    <td>Historical</td>
+                                                    <td>false</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><span><input type="checkbox" name="docs"></span></th>
+                                                    <td>0</td>
+                                                    <td>1/3</td>
+                                                    <td>Historical</td>
+                                                    <td>false</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><span><input type="checkbox" name="docs"></span></th>
+                                                    <td>0</td>
+                                                    <td>1/3</td>
+                                                    <td>Historical</td>
+                                                    <td>false</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><span><input type="checkbox" name="docs"></span></th>
+                                                    <td>0</td>
+                                                    <td>1/3</td>
+                                                    <td>Historical</td>
+                                                    <td>false</td>
+                                                </tr>
+                                                <tr>
+                                                    <th><span><input type="checkbox" name="docs"></span></th>
+                                                    <td>0</td>
+                                                    <td>1/3</td>
+                                                    <td>Historical</td>
+                                                    <td>false</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="">
+                                        <button class="btn-info btn-sm btn mr-2">Submit</button>
+                                        <button class="btn-secondary btn-sm btn">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

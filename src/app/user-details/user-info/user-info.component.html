@@ -1,0 +1,396 @@
+<div class="wc-75 kt-quick-panel kt-quick-panel1 kt-quick-panel--on">
+    <a (click)="closeInfo()" class="kt-quick-panel__close" id="kt_quick_panel_close_btn">
+        <i class="flaticon2-delete"></i></a>
+    <!-- <div class="kt-grid__item kt-grid__item--fluid kt-app__content" id="kt_chat_content">
+        <div class="kt-chat">
+            <div class="kt-portlet kt-portlet--head-lg kt-portlet--last">
+                <div class="kt-portlet__head">
+                    <div class="kt-chat__head">
+                        <div class="">
+                            <div class="kt-chat__label">
+                                <span class="h4">
+                                    Overview
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <main id="main">
+                    <div class="profile-top">
+                        <div class="profile-info flexbox">
+                            <div class="profile-info-inner view-width flexbox-space-bet-start">
+                                <div class="profile-left flexbox-start">
+                                    <div class="profile-picture-wrapper profile-picture-large flexbox">
+                                        <div class="profile-picture-inner flexbox">
+                                            <img class="profile-picture" src="assets/media/svg/user.svg" alt="">
+                                        </div>
+                                        <div class="profile-picture-background"></div>
+                                    </div>
+                                    <div class="profile-username-wrapper flexbox-col-start">
+                                        <h3 class="profile-username flexbox">
+                                            <span class="name">Name</span>
+                                            <span class="material-icons d-none">verified</span>
+                                        </h3>
+                                        <div class="profile-inf profile-inf-desk flexbox">
+                                            <p><span class="posit">{{Usf.Developer}}</span></p>
+                                        </div>
+                                        <div class="profile-inf profile-inf-desk flexbox">
+                                            <p><span class="mail_id">{{Usf.UserEmail}}</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile-right flexbox-start">
+                                    <button class="btn btn-sm btn-info" id="editpro" (click)="editprof()">Edit
+                                        Profile</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <div class="position-relative">
+                    <div class="kt-portlet__body py-1 prodet pronew" id="prodetails">
+                        <div class="accordion accordion-solid accordion-toggle-plus accor" id="up-shardoc">
+                            <div class="card-title" data-toggle="collapse" data-target="#up-shardoc-div"
+                                aria-expanded="true" aria-controls="up-shardoc-div">
+                                <i class="fas fa-user mr-2"></i> Profile Details
+                            </div>
+                            <div class=" collapse show" id="up-user-div" aria-labelledby="headingOne6"
+                                data-parent="#up-user">
+                                <div class="d-flex flex-column justify-content-center d-md-flex">
+                                    <div class="card card1 w-100 bg-info1 bg-sucr ribbon-box">
+                                        <div class="card-body">
+                                            <div class="ribbon ribbon-success float-left"><i
+                                                    class="mdi mdi-access-point me-1"></i> Company Details </div>
+                                            <div class="ribbon-content">
+                                                <label
+                                                    class="kt-badge kt-badge--inline cus-btn text-white px-3 py-1 mt-3 ml--1 kt-badge--pill bg-suc d-none">Company
+                                                    Details</label>
+                                                <div class="row mb-2 mt-3 ">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus">Position</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{Usf.PositionName}} </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus"> Name</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{Usf.CompanyName}} </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus">Department</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{Usf.DepartmentName}} </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus">Role</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{Usf.RoleName}} </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus">Login Id</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{Usf.UserName}} </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus"> Is Global</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> <i class="material-icons fs-3">check</i> </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus"> Is Inter Company </label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> <i class="material-icons fs-3">check</i> </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card card2 w-100 bg-info1 bg-infr ribbon-box">
+                                        <div class="card-body">
+                                            <div class="ribbon ribbon-info float-left"><i
+                                                    class="mdi mdi-access-point me-1"></i> Personal Details </div>
+                                            <div class="ribbon-content">
+                                                <label
+                                                    class="kt-badge kt-badge--inline cus-btn text-white px-3 py-1 mt-3 ml--1 kt-badge--pill bg-inf d-none">Personal
+                                                    Details</label>
+                                                <div class="row mb-2 mt-3 ">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus">Name</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{Usf.Name}} </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus"> Phone No</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{Usf.UserPhone}} </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus">Address</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class="">{{Usf.UserAddress}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus">Pincode</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{Usf.UserPincode}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus">City</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{Usf.UserCity}} </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 col-lg-5">
+                                                        <label class="txtm-cus"> Country</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-7">
+                                                        <div class=""> {{Usf.Country}} </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="kt-portlet__body py-1 proset" id="proset">
+
+                        <div class="card card1">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button class="btn btn-sm btn-primary my-2" id="company_add"
+                                            onclick="company_add()">
+                                            <i class="material-icons fs-4">add</i>
+                                            Add Company
+                                        </button>
+                                        <div class="add_rck" id="addrck">
+                                            <h5 class="my-2 px-2" id="editrck"> Account Settings </h5>
+                                            <div class="px-3 edit_options">
+                                                <ul class="nav nav-pills">
+                                                    <li class="tab_one tabs_li">
+                                                        <a href="#homeee" data-toggle="tab"
+                                                            class="tab_link px-3 active">Personal Info</a>
+                                                    </li>
+                                                    <li class=" tabs_li">
+                                                        <a href="#veee" data-toggle="tab" class="tab_link px-3">Company
+                                                            Details</a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    <div class="tab-pane show active" aria-expanded="true" id="homeee">
+                                                        <div
+                                                            class="d-flex flex-wrap justify-content-start align-items-baseline form-m">
+                                                            <div class="form-cus">
+                                                                <label class="form-label">Company</label>
+                                                                <input class="form-control" id="txtcompanyname"
+                                                                    name="CompanyName" placeholder="Enter Company Name"
+                                                                    type="text" value="">
+                                                            </div>
+                                                            <div class="form-cus">
+                                                                <label class="form-label">Code</label>
+                                                                <input class="form-control" id="txtNumeric" name="Code"
+                                                                    placeholder="Enter Company Code" type="text"
+                                                                    value="">
+                                                            </div>
+                                                            <div class="form-cus">
+                                                                <label class="form-label">Email</label>
+                                                                <input class="form-control" id="txtcompanyemail"
+                                                                    name="Email" placeholder="Enter Company Email"
+                                                                    type="email" value="">
+                                                            </div>
+                                                            <div class="form-cus">
+                                                                <label class="form-label">Fax</label>
+                                                                <input class="form-control" id="Fax" name="Fax"
+                                                                    placeholder="Enter Fax" type="text" value="">
+                                                            </div>
+                                                            <div class="form-cus">
+                                                                <label class="form-label">Address</label>
+                                                                <input class="form-control" id="txtaddress"
+                                                                    name="Address" placeholder="Enter Full Address"
+                                                                    type="text" value="">
+                                                            </div>
+                                                            <div class="form-cus">
+                                                                <label class="form-label">Latitude</label>
+                                                                <input class="form-control" id="txtlatitude"
+                                                                    name="latitude"
+                                                                    placeholder="Enter latitude Ex:15.000000"
+                                                                    type="text" value="">
+                                                            </div>
+                                                            <div class="form-cus">
+                                                                <label class="form-label">Longitude</label>
+                                                                <input class="form-control" id="txtlongitude"
+                                                                    name="longitude"
+                                                                    placeholder="Enter Longitude Ex:15.000000"
+                                                                    type="text" value="">
+                                                            </div>
+                                                            <div class="form-cus">
+                                                                <label class="form-label">Country</label>
+                                                                <select class="form-control">
+                                                                    <option>select</option>
+                                                                    <option>Australia</option>
+                                                                    <option>India</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-cus">
+                                                                <label class="form-label">City</label>
+                                                                <select class="form-control">
+                                                                    <option>select</option>
+                                                                    <option>Hyderabad</option>
+                                                                    <option>Delhi</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-cus">
+                                                                <label class="form-label">Phone Number</label>
+                                                                <input class="form-control" id="mask_phone2"
+                                                                    name="Phone" placeholder="Enter Phone Number"
+                                                                    type="text" value="">
+                                                            </div>
+                                                            <div class="form-cus">
+                                                                <label class="form-label">Status</label>
+                                                                <select class="form-control">
+                                                                    <option>select</option>
+                                                                    <option>No</option>
+                                                                    <option>Yes</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane" id="veee" aria-expanded="false">
+                                                        <div
+                                                            class="d-flex flex-wrap justify-content-start align-items-baseline form-m">
+                                                            <div class="form-cus">
+                                                                <label class="form-label">Positions</label>
+                                                                <input class="form-control" id="txtcompanyname"
+                                                                    name="CompanyName" placeholder="Enter Company Name"
+                                                                    type="text" value="">
+                                                            </div>
+                                                            <div class="form-cus">
+                                                                <label class="form-label">Departments</label>
+                                                                <input class="form-control" id="txtNumeric" name="Code"
+                                                                    placeholder="Enter Company Code" type="text"
+                                                                    value="">
+                                                            </div>
+                                                            <div class="form-cus">
+                                                                <label class="form-label">Email</label>
+                                                                <input class="form-control" id="txtcompanyemail"
+                                                                    name="Email" placeholder="Enter Company Email"
+                                                                    type="email" value="">
+                                                            </div>
+                                                            <div class="form-cus">
+                                                                <label class="form-label">Fax</label>
+                                                                <input class="form-control" id="Fax" name="Fax"
+                                                                    placeholder="Enter Fax" type="text" value="">
+                                                            </div>
+                                                            <div class="form-cus">
+                                                                <label class="form-label">Address</label>
+                                                                <input class="form-control" id="txtaddress"
+                                                                    name="Address" placeholder="Enter Full Address"
+                                                                    type="text" value="">
+                                                            </div>
+                                                            <div class="form-cus">
+                                                                <label class="form-label">Latitude</label>
+                                                                <input class="form-control" id="txtlatitude"
+                                                                    name="latitude"
+                                                                    placeholder="Enter latitude Ex:15.000000"
+                                                                    type="text" value="">
+                                                            </div>
+                                                            <div class="form-cus">
+                                                                <label class="form-label">Longitude</label>
+                                                                <input class="form-control" id="txtlongitude"
+                                                                    name="longitude"
+                                                                    placeholder="Enter Longitude Ex:15.000000"
+                                                                    type="text" value="">
+                                                            </div>
+                                                            <div class="form-cus">
+                                                                <label class="form-label">Country</label>
+                                                                <select class="form-control">
+                                                                    <option>select</option>
+                                                                    <option>Australia</option>
+                                                                    <option>India</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-cus">
+                                                                <label class="form-label">City</label>
+                                                                <select class="form-control">
+                                                                    <option>select</option>
+                                                                    <option>Hyderabad</option>
+                                                                    <option>Delhi</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-cus">
+                                                                <label class="form-label">Phone Number</label>
+                                                                <input class="form-control" id="mask_phone2"
+                                                                    name="Phone" placeholder="Enter Phone Number"
+                                                                    type="text" value="">
+                                                            </div>
+                                                            <div class="form-cus">
+                                                                <label class="form-label">Status</label>
+                                                                <select class="form-control">
+                                                                    <option>select</option>
+                                                                    <option>No</option>
+                                                                    <option>Yes</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="task_act">
+                                                    <button class="btn btn-sm btn-primary px-3 mt-2">
+                                                        Save
+                                                    </button>
+                                                    <button class="btn btn-sm btn-secondary px-3 ml-2 mt-2"
+                                                        onclick="company_cl()">
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>

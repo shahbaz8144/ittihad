@@ -1,0 +1,339 @@
+<div class="side_view w-100">
+    <div class="detls">
+        <div class="detls-card" *ngFor="let item of _LstToAnnouncement">
+            <div class="detls-card-header">
+                <div class="d-flex-cen py-2">
+                    <div class="anounc">
+                        <span class="anounc-icn mr">
+                            <svg width="19" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" _ngcontent-osd-c392="" class="ani" style="fill: #2786fb;"><path _ngcontent-smg-c421="" _ngcontent-osd-c392="" d="M9 17C9 17 16 18 19 21H20C20.5523 21 21 20.5523 21 20V13.937C21.8626 13.715 22.5 12.9319 22.5 12C22.5 11.0681 21.8626 10.285 21 10.063V4C21 3.44772 20.5523 3 20 3H19C16 6 9 7 9 7H5C3.89543 7 3 7.89543 3 9V15C3 16.1046 3.89543 17 5 17H6L7 22H9V17ZM11 8.6612C11.6833 8.5146 12.5275 8.31193 13.4393 8.04373C15.1175 7.55014 17.25 6.77262 19 5.57458V18.4254C17.25 17.2274 15.1175 16.4499 13.4393 15.9563C12.5275 15.6881 11.6833 15.4854 11 15.3388V8.6612ZM5 9H9V15H5V9Z"></path></svg>
+                        </span>
+                    </div>
+                    <div class="flex-1 ml-1">
+                        <h4 class="mb-1">{{item.Subject}}</h4>
+                        <div class="user-d d-none">
+                            <span class="kt-media kt-media--sm kt-media--dark">
+                                <img class="rounded-circle" src="assets/media/icons/user2.png">
+                            </span> {{item.AnnouncementCreatedBy}}
+                        </div>
+                        <!-- <h5 class="mb-0">{{item.AnnouncementCreatedBy}}</h5> -->
+                    </div>
+                    <div class="ml-3" style="display: none;">
+                        <button class="btn btn-sm btn-info btn-edt" (click)="EditAnounmnt()">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                </svg>
+                            </span>
+                            Edit
+                        </button>
+                    </div>
+                    <!-- {{item.SStartDate}} {{item.SEndDate}} IsActive -->
+                    <div (click)="GoToAnnouncementStatus(item.AnnouncementId,item.Status)" *ngIf="CreatedByOption==item.CreatedBy">
+                        <ng-container [ngStyle]="{'color':item.Status=== true ? '#3f51b5' : 'red'}">
+                            <div *ngIf="item.Status" class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-success curser-pointer w-min-70">
+                                Active
+                            </div>
+                            <div *ngIf="!item.Status" class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-danger curser-pointer w-min-70">
+                                In-Active
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body px-5 py-4 bhrs">
+                <div class="desp">
+                    <!-- <h5>Dear {{LoginUserName}}, </h5> -->
+                    <p [innerHTML]="item.Description| sanitizeHtml">
+                    </p>
+                </div>
+                <div class="text-center pt-3">
+                    <h5 style="color: #646c9a;">{{item.Quotes}}</h5>
+                </div>
+
+                <div>
+                    <!-- <div class="form-group mb-0 pb-2">
+                        <label style="text-align: left;font-size: 13px;font-style: italic;font-family: inherit;" class="col-md-12 control-label">Best Regards,</label>
+
+                        <div class="col-md-12">
+                            <img style="max-height: 100px;max-width: 150px;" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{item.Signature}}">
+                        </div>
+                        <label style="text-align: left;font-size: 15px;font-style: italic;font-family: inherit;" class="col-md-12 control-label">
+                            <label
+                                id="lblFromUserBottom_subMemo">{{item.AnnouncementCreatedBy}}</label>
+                        </label>
+                    </div> -->
+                </div>
+
+
+                <div class="just-end btm-sec">
+                    <div class="user-d d-none">
+                        <span class="kt-media kt-media--sm kt-media--dark">
+                            <img class="rounded-circle" src="assets/media/icons/user2.png">
+                        </span> {{item.AnnouncementCreatedBy}}
+                    </div>
+
+                    <div class="d-flex align-items-center gap-1 mr-2" *ngIf="CreatedByOption==item.CreatedBy">
+                        <a (click)="Totalusers(item.Subject)" class="flex-1" href="javascript:void(0)" id="merge-btn" data-target="#users_modal" data-toggle="modal" aria-haspopup="true" aria-expanded="false">
+                            <span class="svg-icns">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                    <path d="M2 22C2 17.5817 5.58172 14 10 14C14.4183 14 18 17.5817 18 22H16C16 18.6863 13.3137 16 10 16C6.68629 16 4 18.6863 4 22H2ZM10 13C6.685 13 4 10.315 4 7C4 3.685 6.685 1 10 1C13.315 1 16 3.685 16 7C16 10.315 13.315 13 10 13ZM10 11C12.21 11 14 9.21 14 7C14 4.79 12.21 3 10 3C7.79 3 6 4.79 6 7C6 9.21 7.79 11 10 11ZM18.2837 14.7028C21.0644 15.9561 23 18.752 23 22H21C21 19.564 19.5483 17.4671 17.4628 16.5271L18.2837 14.7028ZM17.5962 3.41321C19.5944 4.23703 21 6.20361 21 8.5C21 11.3702 18.8042 13.7252 16 13.9776V11.9646C17.6967 11.7222 19 10.264 19 8.5C19 7.11935 18.2016 5.92603 17.041 5.35635L17.5962 3.41321Z"></path>
+                                </svg>
+                                {{item.TotalUserCount}}
+                            </span>
+                        </a>
+                        <a (click)="Readusers(item.Subject)" class="flex-1" href="javascript:void(0)" data-target="#read_modal" data-toggle="modal" aria-haspopup="true" aria-expanded="false">
+                            <span class="svg-icns">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 0 22 22" width="16" height="16" fill="currentColor">
+                                    <path d="M2.328 6.868l7.017 6.253a1 1 0 0 0 1.33 0l7.009-6.246-7.137-4.665a1 1 0 0 0-1.094 0L2.328 6.868zM18 7.082v2.19l-5.994 5.342a3 3 0 0 1-3.992 0L2 9.254V7.083 18h16V7.082zM.906 5.408L8.359.536a3 3 0 0 1 3.282 0l7.453 4.872A2 2 0 0 1 20 7.082V18a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V7.082a2 2 0 0 1 .906-1.674z"></path>
+                                </svg>
+                                {{item.ReadUserCount}}
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="date-d">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="dat-icn">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                        </svg>
+                        <span class="date-anc">{{item.AnnouncementDate}}</span>
+                    </div>
+                </div>
+                <hr *ngIf="item.IsAttachment">
+                <!--Attachments design 2 start-->
+                <!-- <div class="d-flex align-items-center flex-wrap mt-2" style="color: #646c9a;">
+                    <a class="mr-3 mb-2"><i class="fas fa-paperclip mr-1"></i> austin-neill-ZahNAl_Ic3o-unsplash (1).jpg </a>
+                    <a class="mr-3 mb-2"><i class="fas fa-paperclip mr-1"></i>Planner-Details.jpg</a>
+                    <a class="mr-3 mb-2"><i class="fas fa-paperclip mr-1"></i>store-tickets.jpg</a>
+                </div> -->
+                <!--Attachments design 2 end-->
+
+                <div class="mt-3 attch-lst" *ngIf="item.IsAttachment">
+                    <div class="attch-crd" *ngFor="let sr of item.AttachmentJson">
+                        <div class="crd-body">
+                            <div class="d-flex-cen">
+                                <span class="svg-dc">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-16 h-16">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
+                                    </svg>
+                                </span>
+                                <div class="ml-3 flex-1 clamp-1">
+                                    <h6 class="doc-txt">{{sr.FileName}}</h6>
+                                </div>
+                                <div class="ml-3">
+                                    <button class="btn btn-sm btn-inf-cus btn-viw" (click)="LoadDocument(sr.AnnouncementUrl,sr.FileName,sr.AnnouncementDocId)">View</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="mb-3"class="">Preview</h5>
+                <img class="img-prv" src="../../../assets/media/bg/300.jpg" alt="" />
+            </div>
+        </div> -->
+
+    </div>
+</div>
+
+<div class="modal fade" id="users_modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content border-0">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{SelectedSubject}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <div class="kt-inbox__search mb-3">
+                        <div id="search-grp" class="input-group group-active">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text px-2 py-0">
+                              <button type="button" role="button" id="srch-btn" data-tooltip="Search" aria-label="Search" class="srch-btns p-0">
+                                <svg focusable="false" height="24px" viewBox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M20.49,19l-5.73-5.73C15.53,12.2,16,10.91,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.41,0,2.7-0.47,3.77-1.24L19,20.49L20.49,19z M5,9.5C5,7.01,7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14S5,11.99,5,9.5z"></path>
+                                  <path d="M0,0h24v24H0V0z" fill="none"></path>
+                                </svg>
+                              </button>
+                            </span>
+                            </div>
+                            <input id="txtSearch" type="text" name="search" autocomplete="off" [(ngModel)]="Totalusersearch" [placeholder]="UserSearch" class="form-control">
+                            <div class="input-group-append" *ngIf="Totalusersearch">
+                                <span class="input-group-text p-0 py-0">
+                              <button (click)="cleartext()" type="button" role="button" id="clrr-btn" data-tooltip="Clear Search" aria-label="Clear Search" class="srch-btns ml-1">
+                                <svg focusable="false" height="24px" viewBox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                                  <path d="M0 0h24v24H0z" fill="none"></path>
+                                </svg>
+                              </button>
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+
+                        <div class="card-body crd-list scroll-y p-0">
+                            <div class="px-3">
+                                <div class="users-list">
+                                    <div class="usr-item" *ngFor="let item of _TotaluserList | filter:Totalusersearch">
+                                        <div class="img-container">
+                                            <img src="assets/media/icons/user3.png" alt="user Image" class="usr-img">
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="" *ngIf="item.DesignationName">
+                                                <span class="user-name">{{item.DisplayName}} ({{item.DesignationName}}/{{item.CompanyName}})</span>
+                                            </div>
+                                            <div class="" *ngIf="!item.DesignationName">
+                                                <span class="user-name">{{item.DisplayName}}</span>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="" *ngIf="item.IsRead==true">
+                                            <span class="svg-icns text-info">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                                    <path d="M11.602 13.7599L13.014 15.1719L21.4795 6.7063L22.8938 8.12051L13.014 18.0003L6.65 11.6363L8.06421 10.2221L10.189 12.3469L11.6025 13.7594L11.602 13.7599ZM11.6037 10.9322L16.5563 5.97949L17.9666 7.38977L13.014 12.3424L11.6037 10.9322ZM8.77698 16.5873L7.36396 18.0003L1 11.6363L2.41421 10.2221L3.82723 11.6352L3.82604 11.6363L8.77698 16.5873Z"></path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="usr-item d-none">
+                                        <div class="img-container">
+                                            <img src="assets/media/icons/user2.png" alt="user Image" class="usr-img">
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="">
+                                                <span class="user-name">Creative Solutions Ramesh Kumar </span>
+                                            </div>
+
+                                            <div class="">
+                                                <span class="read-time"> May 10 2023  1:39PM </span>
+                                            </div>
+
+                                        </div>
+                                        <div class="">
+                                            <span class="svg-icns text-info">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                                    <path d="M11.602 13.7599L13.014 15.1719L21.4795 6.7063L22.8938 8.12051L13.014 18.0003L6.65 11.6363L8.06421 10.2221L10.189 12.3469L11.6025 13.7594L11.602 13.7599ZM11.6037 10.9322L16.5563 5.97949L17.9666 7.38977L13.014 12.3424L11.6037 10.9322ZM8.77698 16.5873L7.36396 18.0003L1 11.6363L2.41421 10.2221L3.82723 11.6352L3.82604 11.6363L8.77698 16.5873Z"></path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="dropdown-actions">
+                    <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">{{ "Memodeatils.Close" | translate }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="read_modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content border-0">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{SelectedSubject}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <div class="kt-inbox__search mb-3">
+                        <div id="search-grp" class="input-group group-active">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text px-2 py-0">
+                              <button type="button" role="button" id="srch-btn" data-tooltip="Search" aria-label="Search" class="srch-btns p-0">
+                                <svg focusable="false" height="24px" viewBox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M20.49,19l-5.73-5.73C15.53,12.2,16,10.91,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.41,0,2.7-0.47,3.77-1.24L19,20.49L20.49,19z M5,9.5C5,7.01,7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14S5,11.99,5,9.5z"></path>
+                                  <path d="M0,0h24v24H0V0z" fill="none"></path>
+                                </svg>
+                              </button>
+                            </span>
+                            </div>
+                            <input id="txtSearch" type="text" [placeholder]="ReadUserSearch" autocomplete="off" [(ngModel)]="Readuserserach" [ngModelOptions]="{standalone: true}" class="form-control">
+                            <div class="input-group-append" *ngIf="Readuserserach">
+                                <span class="input-group-text p-0 py-0">
+                              <button (click)="cleartext()" type="button" role="button" id="clrr-btn" data-tooltip="Clear Search" aria-label="Clear Search" class="srch-btns ml-1">
+                                <svg focusable="false" height="24px" viewBox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                                  <path d="M0 0h24v24H0z" fill="none"></path>
+                                </svg>
+                              </button>
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header bg-white d-flex-center d-none">
+                            <h5 class="crd-txt text-info flex-1">Read By</h5>
+                            <div class="">
+
+                                <span class="svg-icns">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 0 22 22" width="16" height="16" fill="currentColor">
+                                        <path d="M2.328 6.868l7.017 6.253a1 1 0 0 0 1.33 0l7.009-6.246-7.137-4.665a1 1 0 0 0-1.094 0L2.328 6.868zM18 7.082v2.19l-5.994 5.342a3 3 0 0 1-3.992 0L2 9.254V7.083 18h16V7.082zM.906 5.408L8.359.536a3 3 0 0 1 3.282 0l7.453 4.872A2 2 0 0 1 20 7.082V18a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V7.082a2 2 0 0 1 .906-1.674z"></path>
+                                    </svg>
+                                    10
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-body crd-list scroll-y p-0">
+                            <div class="px-3">
+                                <div class="users-list">
+                                    <div class="usr-item" *ngFor="let data of _ReaduserLists|filter:Readuserserach">
+                                        <div class="img-container">
+                                            <img src="assets/media/icons/user3.png" alt="user Image" class="usr-img">
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="" *ngIf="data.DesignationName">
+                                                <span class="user-name">{{data.DisplayName}} ({{data.DesignationName}}/{{data.CompanyName}})</span>
+                                            </div>
+                                            <div class="" *ngIf="!data.DesignationName">
+                                                <span class="user-name">{{data.DisplayName}}</span>
+                                            </div>
+
+                                            <div class="">
+                                                <span class="read-time">{{data.ReadDate}}</span>
+                                            </div>
+
+                                        </div>
+                                        <div class="">
+                                            <span class="svg-icns text-info">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                                    <path d="M11.602 13.7599L13.014 15.1719L21.4795 6.7063L22.8938 8.12051L13.014 18.0003L6.65 11.6363L8.06421 10.2221L10.189 12.3469L11.6025 13.7594L11.602 13.7599ZM11.6037 10.9322L16.5563 5.97949L17.9666 7.38977L13.014 12.3424L11.6037 10.9322ZM8.77698 16.5873L7.36396 18.0003L1 11.6363L2.41421 10.2221L3.82723 11.6352L3.82604 11.6363L8.77698 16.5873Z"></path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="dropdown-actions">
+                    <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">{{ "Memodeatils.Close" | translate }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,168 @@
+<div class="kt-portlet__head">
+    <div class="kt-inbox__toolbar kt-inbox__toolbar--extended">
+        <div class="kt-inbox__actions kt-inbox__actions--expanded">
+            <!-- <div class="kt-inbox__search">
+                <div class="input-group">
+                    <input id="txtSearch" type="text" [(ngModel)]="requestsearch" autocomplete="off" class="form-control" placeholder="Search">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <a>
+                                <i class="fa fa-search"></i>
+                                </a>
+                        </span>
+                    </div>
+                </div>
+            </div> -->
+            <div id="search-grp" class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text pr-0">
+                        <button  type="button" role="button" id="srch-btn" data-tooltip="Search" aria-label="Search" class="srch-btns pr-0">
+                            <svg focusable="false" height="24px" viewBox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
+                                <path 
+                                    d="M20.49,19l-5.73-5.73C15.53,12.2,16,10.91,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.41,0,2.7-0.47,3.77-1.24L19,20.49L20.49,19z M5,9.5C5,7.01,7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14S5,11.99,5,9.5z">
+                                </path>
+                                <path  d="M0,0h24v24H0V0z" fill="none"></path>
+                            </svg>
+                        </button>
+                    </span>
+                </div>
+                <input id="txtSearch" [(ngModel)]="requestsearch" type="text" (click)="Searchighlight()" (keyup)="clearshow()" autocomplete="off" class="form-control" [placeholder]="dmsSearch">
+                <button class="clear-icon kt-search-clr-ic" *ngIf="requestsearch" (click)="clearSearch()"> <i class="fa fa-times"></i> </button>
+                <div class="input-group-append d-none">
+                    <span class="input-group-text">
+                        <button  type="button" role="button"   id="clrr-btn" data-tooltip="Clear Search" aria-label="Clear Search"   class="srch-btns mr-2">
+                            <svg  focusable="false" height="24px" viewBox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
+                                <path 
+                                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                                </path>
+                                <path  d="M0 0h24v24H0z" fill="none"></path>
+                            </svg>
+                        </button>
+                        <button  type="button" role="button" id="filtr-btn" data-tooltip="Search options" aria-label="Advanced search options"
+                            class="srch-btns">
+                            <svg  xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" viewBox="0 0 24 24">
+                                <path 
+                                    d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z">
+                                </path>
+                            </svg>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="kt-portlet__body kt-portlet__body--fit-x py-0 scroll-y">
+    <div class="kt-inbox__items" data-type="inbox">
+        <ng-container *ngIf="(Requestjosn | filter : requestsearch) as Requestjosn">
+            <div *ngFor="let data of Requestjosn | filter:requestsearch">
+                <div class="pln-br">
+                    <div class="plain_border_left_true">
+                        <div data-type="inbox" class="kt-inbox__item py-2 kt-inbox__item--unread py-2">
+                            <div class="d-flex-cen flex-1 w-50">
+                                <div class="kt-inbox__info">
+                                    <div class="kt-inbox__sender">
+                                        <span class="kt-media kt-media--sm kt-media--dark">
+                                        <img *ngIf="data.UserInboxThumbnail==''" class="rounded-circle" src="assets/media/icons/user2.png">
+                                        <img *ngIf="data.UserInboxThumbnail!=''" class="rounded-circle" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{data.UserInboxThumbnail}}">
+                                    </span>
+                                    </div>
+                                </div>
+                                <div (click)="gotoMemoDetailsV2('Memo/Details',data.MailId,data.LastReplyId)" class="kt-inbox__details d-flex-center">
+                                    <div class="">
+                                        <div class="kt-inbox__message flex-wrap">
+                                            <span class="kt-inbox__user_name">{{data.FromUser}}</span>
+                                            <span class="kt-inbox__subject w-100"> {{data.Subject}} </span>
+                                            <!-- <span style="margin-left: 5px;">
+                                            <i class="fa fa-paperclip"></i>
+                                        </span> -->
+                                        </div>
+                                        <div class="kt_inde_memo_msg" style="width: 400px;" [innerHTML]="data.Matter">
+
+                                        </div>
+                                        <div class="kt-inbox__labels d-none">
+                                            <span class="kt-inbox__label kt-badge kt-badge--unified-info kt-badge--bold kt-badge--inline"> {{data.MemoType}} </span>
+                                            <span class="kt-inbox__label kt-badge kt-badge--unified-primary kt-badge.kt-badge-light-bold kt-badge--inline"> {{data.FromUser}} </span>
+                                        </div>
+
+                                    </div>
+                                    <!-- <div class="kt-inbox__datetime">
+                                {{data.MemoDateTime}}
+                                </div> -->
+                                </div>
+                            </div>
+
+                            <div class="req-sec d-flex-cen">
+                                <div class="flex-1" (click)="gotoMemoDetailsV2('Memo/Details',data.MailId,data.LastReplyId)">
+                                    <div class="d-flex-cen">
+                                        <div class="d-flex-cen">
+                                            <div class="kt-inbox__sender">
+                                                <span class="kt-media kt-media--sm kt-media--dark kt-media-cus mt-1">
+                                      <img *ngIf="data.RequestUserInboxThumbnail==''" src="assets/media/icons/user2.png" class="rounded-circle">
+                                      <img *ngIf="data.RequestUserInboxThumbnail!=''" alt="img"
+                                                src="https://yrglobaldocuments.blob.core.windows.net/documents/{{data.RequestUserInboxThumbnail}}"
+                                                class="rounded-circle">
+                                    </span>
+                                            </div>
+                                            <div class="req-det">
+                                                <span class="req-user">{{data.RequestUser}}</span>
+                                            </div>
+                                        </div>
+                                        <!-- <div>
+                                  <span class="req-user text-muted">requested access for memo</span>
+                                </div> -->
+                                    </div>
+                                    <div class="d-flex-cen ml-2rem">
+                                        <!-- <span class="kt-inbox__datetime m-0 pr-2 text-muted br-1">ASM Enterprises</span> -->
+                                        <span class="kt-inbox__datetime m-0 text-muted">{{data.RequestDateTime}}</span>
+                                    </div>
+                                </div>
+                                <div *ngIf="data.PermissionType=='Accessable'" class="d-flex-cen ml-2rem req-btns">
+                                    <ng-container *ngIf="data.Status=='Pending'">
+                                        <button class="btn btn-xs btn-outline-info mr-2" (click)="DMSRequestMemoStatus(data.FromUserId,data.MailId,1,data.LastReplyId)">Approved</button>
+                                        <button class="btn btn-xs btn-outline-danger" (click)="DMSRequestMemoStatus(data.FromUserId,data.MailId,2,data.LastReplyId)">Rejected</button>
+                                    </ng-container>
+                                    <!-- && _LoginUserId != data.FromUserId -->
+                                    <!-- || _LoginUserId == data.FromUserId -->
+                                    <ng-container *ngIf="data.Status!='Pending' ">
+                                        {{data.Status}}
+                                    </ng-container>
+                                </div>
+                                <div *ngIf="data.PermissionType=='Not Accessable'" class="d-flex-cen ml-2rem req-btns">
+                                    <ng-container>
+                                        {{data.Status}}
+                                    </ng-container>
+                                    <!-- <button class="btn btn-xs btn-outline-admin mr-o">Contact Admin</button> -->
+                                </div>
+                                <div *ngIf="data.PermissionType=='Contact Admin'" class="d-flex-cen ml-2rem req-btns">
+                                    <button class="btn btn-xs btn-outline-admin mr-o">Contact Admin</button>
+                                </div>
+                            </div>
+                            <div class="memohover memohover-sm d-none">
+                                <div class="memohover_icon svg-icn">
+                                    <span title="Delete">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                                        role="img" font-size="1.5rem" class="iconify iconify--mdi" width="1em" height="1em"
+                                        viewBox="0 0 24 24">
+                                        <path fill="currentColor"
+                                            d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12M8 9h8v10H8V9m7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5Z">
+                                        </path>
+                                    </svg>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="Requestjosn.length==0" class="text-center py-4" style="color: lightgrey">
+                <img src="assets/media/Img/No Memo Request.png">
+                <h3 class="kt-blank-ttl"> {{ "Communication.Nodmsrequestmessage" | translate }}  </h3>
+                <p class="kt-erorr-msg"> {{ "Communication.Nodmsrequestmemos" | translate  }} </p>
+            </div>
+        </ng-container>
+    </div>
+</div>

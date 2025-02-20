@@ -1,0 +1,37 @@
+<!-- The Modal -->
+<div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header" style="background-color: #e6e6f8">
+                <h2 class="modal-title mb-0">{{this.PolicyHeader}}</h2>
+                <img src="assets/media/logos/dms-logo.png">
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div [innerHTML]="this.PolicyContent">
+                    <!-- {{this.PolicyContent}} -->
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer" style="background-color: #e6e6f8;">
+                <!-- <a class="btn btn-danger" (click)="Agreement(2)">Disagree</a>
+                <a class="btn btn-success" (click)="Agreement(1)">Agree</a> -->
+                <div class="row">
+                    <div class="col-md-10">
+                        <p>I acknowledge that I have read, understand, committed, and agree to abide by The "{{this.PolicyHeader}}" stated above and hence any violation of this policy is unethical and may constitute a criminal offense and may grounds for
+                            disciplinary action up to termination.</p>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger" (click)="Agreement(2)" style="color: white;">I Disagree</button> &nbsp;
+                        <button type="button" class="btn btn-success" (click)="Agreement(1)" style="color: white;">I Agree</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- <div>
+    test from mubeen machine
+</div> -->

@@ -1,0 +1,243 @@
+<div class="kt-portlet__head bg-white">
+    <div class="kt-inbox__toolbar kt-inbox__toolbar--extended">
+        <div class="kt-inbox__actions kt-inbox__actions--expanded mr-0">
+            <div class="kt-inbox__search serch-cus d-flex-center">
+                <div class="input-group" id="search-grp">
+                    <div class="input-group-append">
+                        <a class="input-group-text">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </div>
+                    <input id="txtMainSearch" [(ngModel)]="SharedByMeSearch" type="text" [placeholder]="SharedByMeSearchPlaceholder"
+                        class="form-control" autocomplete="off" />
+                    <button *ngIf="SharedByMeSearch" class="clear-icon kt-search-clr-ic">
+                        <i (click)="OnClear()" class="fa fa-times"></i></button>
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <button class="srch-btns mr-2" type="button" role="button" id="clrr-btn" (click)="OnClear()"
+                                data-tooltip="Clear Search" aria-label="Clear Search">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    aria-hidden="true" role="img" font-size="1.5rem" width="22" height="22"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M2 12a9 9 0 0 0 9 9c2.39 0 4.68-.94 6.4-2.6l-1.5-1.5A6.706 6.706 0 0 1 11 19c-6.24 0-9.36-7.54-4.95-11.95C10.46 2.64 18 5.77 18 12h-3l4 4h.1l3.9-4h-3a9 9 0 0 0-18 0Z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="kt-portlet__head px-4 filter-head">
+    <div class="kt-inbox__toolbar kt-inbox__toolbar--extended">
+        <div class="kt-inbox__actions kt-inbox__actions--expanded main-bx m-0">
+        </div>
+    </div>
+    <div class="kt-inbox__controls m-0">
+        <div class="br-line"></div>
+        <div class="kt-inbox__pages" data-toggle="kt-tooltip" data-skin="dark" >
+            <div class="kt-inbox__perpage w-max">
+                <ng-container >
+                    1 - {{_SharedByMeList.length}} 
+                </ng-container>
+                <span class="en-of"> of {{_SharedByMeList.length}}</span> 
+                <span class="ar-main-of" style="display: none;"><span class="of"> - </span> {{_SharedByMeList.length}}
+            </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="kt-portlet__body kt-portlet__body--fit-x pb-0 grid-scroll">
+    <div id="doc-view" class="doc-list">
+        <ng-container *ngIf="(_SharedByMeList |filter:SharedByMeSearch) as _SharedByMeList">
+            <div class="doc-detls" *ngFor="let item of _SharedByMeList |filter:SharedByMeSearch">
+                <div (click)="sideviw('Gac/DocumentDetails',item.DocumentId,item.ReferenceId,item.ShareId)"
+                 [ngClass]="item.IsRead ? 'docs-list' : 'docs-list doc-detls-unread'">
+                    <div class="d-flex-center-start">
+                        <div class="kt-inbox__info">
+                            <div (click)="FavoriteDocuments(item.DocumentId,item.ShareId,item.IsFavorite)" [className]="item.IsFavorite ? 'kt-inbox__icon kt-inbox__icon--on kt-inbox__icon--light'
+                        : 'kt-inbox__icon kt-inbox__icon--off kt-inbox__icon--light'" data-toggle="kt-tooltip"
+                                data-skin="dark" data-placement="right">
+                                <i class="flaticon-star"></i>
+                            </div>
+                            <span *ngIf="item.IsPin" (click)="DocumentPin(item.DocumentId, item.ShareId, false)" class="kt-pin-v pinnedv">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-pin-angle-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146z" />
+                                </svg>
+                            </span>
+                        <span *ngIf="!item.IsPin" (click)="DocumentPin(item.DocumentId, item.ShareId, true)" class="kt-pin-v">
+                                <svg  xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path 
+                                        d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146zm.122 2.112v-.002.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a4.507 4.507 0 0 0-.288-.076 4.922 4.922 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a4.924 4.924 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034.114 0 .23-.011.343-.04L9.927 2.028c-.029.113-.04.23-.04.343a1.779 1.779 0 0 0 .062.46z">
+                                    </path>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="leftdiv">
+                            <div class="img-divv">
+                                <!-- <img *ngIf="item.ThumbnailUrl==''" src="assets/media/Img/filethumb.png" class="" alt=""> -->
+                                <!-- <img  alt="img"
+                                    [src]="item.Url"
+                                    class=""> -->
+                                    <!-- <img [src]="getImageSource(item)" class=""> -->                                 
+  <img [src]="getImageSource(item)" class="">
+                            </div>
+                        </div>
+                        <div class="w-100"
+                            (click)="sideviw('Gac/DocumentDetails',item.DocumentId,item.ReferenceId,item.ShareId)">
+                            <div class="main-doc-name">
+                                <span class="doc-username">{{item.DocumentName}}</span>
+                                <span class="physical-badge" *ngIf="item.Physical == true">Is Physical</span>
+                                <span *ngIf="item.DocumentWith == 'Warehouse'"
+                                    class="physical-badge ware ng-star-inserted">Warehouse</span>
+                                <span *ngIf="item.DocumentWith == 'Self'"
+                                    class="physical-badge self ng-star-inserted">With Me</span>
+                                <span *ngIf="item.DocumentWith == 'HandoverUser'"
+                                    class="physical-badge hand ng-star-inserted">Hand over to user</span>
+                                <!-- <span *ngIf="item.ShareId != 0" class="bg-pend">
+                                </span> -->
+                                <span *ngIf="item.DocumentStatus == 'P'" class="bg-pend">
+                                </span>
+                                <span *ngIf="item.DocumentStatus == 'R'" class="bg-exp">
+                                </span>
+                            </div>
+                            <div class="shel_div pb-0">
+                                <div class="shel_name curser-pointer"
+                                    (click)="sideviw('Gac/DocumentDetails',item.DocumentId,item.ReferenceId,item.ShareId)">
+                                    <svg class="shel_icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+                                        <path
+                                            d="M0 6a6 6 0 0 1 6-6h11.84a7 7 0 0 1 4.48 1.622l7.161 5.967A7 7 0 0 1 32 12.967V26a6 6 0 0 1-6 6H6a6 6 0 0 1-6-6V6zm14.688 3.613c0 .435-.153.726-.305 1.306-.305-1.306-.305-2.322 0-3.193.152 0 .152-.145.152-.145l.153.145v.145c.152.145.152.726 0 1.452v.29zM9.048 21.37c.153-.145.458-.29.762-.436-.914 1.742-1.829 2.613-2.743 2.759.152-.436.914-1.452 1.981-2.323zm14.785-2.613c0 .145.152.145.152.145v.145h-.457c-.762 0-1.829-.29-2.896-.725v-.146h.305c2.134 0 2.744.436 2.896.581zm.61 1.161c.305-.29.457-.725.61-.87 0-.29 0-.581-.153-.872-.457-.725-1.677-1.016-3.506-1.016-.61 0-1.219.145-1.981.145-.61-.29-.915-.58-1.372-.87-.914-.871-1.829-2.178-2.439-3.775v-.145c.61-1.887 1.067-4.21 0-5.226-.304-.145-.61-.29-.914-.29h-.305c-.61 0-1.067.58-1.22 1.161-.609 2.033-.304 3.049.306 4.79-.458 1.307-.915 2.759-1.677 4.21-.61 1.016-1.067 1.887-1.524 2.613-.61.29-1.067.58-1.372.726-1.83 1.016-2.744 2.323-2.896 3.048 0 .29 0 .436.152.726v.145l.763.436c.152.145.304.145.61.145 1.219 0 2.743-1.452 4.572-4.5.152-.145.152-.145.305-.145 1.524-.58 3.505-.871 6.096-1.161 1.525.725 3.354 1.016 4.573 1.016a3.17 3.17 0 0 0 1.372-.29zm-9.908-5.66c.61 1.306 1.525 2.467 2.287 3.338.152.145.305.29.61.435-1.22.145-3.049.58-5.03 1.307h-.305c.305-.58.61-1.016.914-1.597.61-1.307 1.22-2.468 1.524-3.484z">
+                                        </path>
+                                    </svg> {{item.UserName}}
+                                </div>
+                                <span data-toggle="modal" data-target="#exampleModal"
+                                    class="material-icons sub_text fs-4 mt-1 ver-m curser-pointer d-none">
+                                    more_vert
+                                </span>
+                            </div>
+                            <div *ngFor="let doclo of item.DocumentLocationJson"
+                                style="display:flex; align-items:center; gap: 6px">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 26 23"
+                                    fill="none">
+                                    <path
+                                        d="M13 0.905762L0.625 6.06276L0 6.34276V22.9998H26V6.34376L25.375 6.06276L13 0.905762ZM13 3.09376L24 7.68676V20.9998H22V9.99976H4V20.9998H2V7.68676L13 3.09376ZM6 11.9998H20V20.9998H6V11.9998Z"
+                                        fill="#717171"></path>
+                                </svg>
+                                <h6 class="mb-0 txtm-cus">
+                                    <span>{{doclo.WareHouseName}}</span>
+                                    <svg fill="#2035cf" height="8px" width="8px" version="1.1" id="Layer_1"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        viewBox="0 0 330 330" xml:space="preserve">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                                        </g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path id="XMLID_222_"
+                                                d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001 c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213 C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606 C255,161.018,253.42,157.202,250.606,154.389z">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                    <span>{{doclo.BlockName}}</span>
+                                    <svg fill="#2035cf" height="8px" width="8px" version="1.1" id="Layer_1"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        viewBox="0 0 330 330" xml:space="preserve">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                                        </g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path id="XMLID_222_"
+                                                d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001 c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213 C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606 C255,161.018,253.42,157.202,250.606,154.389z">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                    <span>{{doclo.RackName}}</span>
+                                    <svg fill="#2035cf" height="8px" width="8px" version="1.1" id="Layer_1"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        viewBox="0 0 330 330" xml:space="preserve">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                                        </g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path id="XMLID_222_"
+                                                d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001 c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213 C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606 C255,161.018,253.42,157.202,250.606,154.389z">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                    <span>{{doclo.ShelveName}}</span>
+                                </h6>
+                            </div>
+                            <div *ngIf="item.HandOverUserName" style="display:flex; align-items:center; gap: 6px">
+                                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path
+                                            d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
+                                            stroke="#717171" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round"></path>
+                                    </g>
+                                </svg>
+                                <h6 class="mb-0 txtm-cus">
+                                    {{item.HandOverUserName}}
+                                </h6>
+                            </div>
+                            <div *ngIf="item.Description">
+                                <h6 class="mb-0 txtm-cus txtm-note text-ellipsis">{{item.Description}}</h6>
+                            </div>
+                            <div class="doc-details">
+                                <div class="pb-1">
+                                    <h6 class="mb-0 txtm-cus">{{item.SourceName}}</h6>
+                                </div>
+                                <div class="pb-1" >
+                                    <h6 class="mb-0 txtm-cus">{{item.Manufacture}}</h6>
+                                </div>
+                                <div class="d-flex flex-wrap item-b pb-1">
+                                    <h6 class="mb-0 txtm-cus" *ngFor="let _cat of item.CategoryList">
+                                        {{_cat.CategoryName}},</h6>
+                                </div>
+                                <div class="pb-1">
+                                    <h6 class="mb-0 txtm-cus">{{item.DocumentTypeName}}</h6>
+                                </div>
+                                <div class="pb-1">
+                                    <h6 class="mb-0 txtm-cus txtm-note text-ellipsis">{{item.Description}}</h6>
+                                </div>
+                            </div>
+                            <div class="doc-details d-flex">
+                            </div>
+                            <div class="item-b">
+                                <ng-container *ngFor="let ref of item.ReferenceList">
+                                    <div class="shel_div py-1 ml-1">
+                                        <span class="material-icons-outlined fs-5 mr-1 mt-1 ver-m ref">file_copy</span>
+                                        <div class="shel_name ref curser-pointer fs-6"
+                                            (click)="sideviw( 'Gac/DocumentDetails',item.DocumentId,ref.ReferenceId,item.ShareId)">
+                                            {{ref.DocumentName}}
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="doc-date">{{item.CreatedDate | date: 'MMM d, y, h:mm a' }}</span>
+                    </div>
+                </div>
+                <li class="separator"></li>
+            </div>
+            <div *ngIf="_SharedByMeList.length==0" class="d-flex-center mt-5 pt-5">
+                <div class="m-auto text-center kt-error-img">
+                    <img src="assets/media/Img/Shared by me 02.png">
+                    <div class="bnk-txt">
+                        <p class="kt-blank-msg fs-4">Sorry, we could't find any Shared documents.</p>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

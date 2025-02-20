@@ -1,0 +1,519 @@
+<div class="bg-drop">
+    <div class="kt-cus-head">
+        <!-- <div class="kt-left d-flex align-items-center">
+            <div class="kt-logo">
+                <img src="../../../assets/media/logos/dms-logo.png">
+            </div>
+            <div class="kt-memo-sb-dtl">
+                <h3>TEAM LUNCH OF DEVBOX SOFTWARE</h3>
+                <p class="kt-own-dtl">Gulam Imtiyaz Ali</p>
+            </div>
+        </div> -->
+
+        <div class="d-flex-cen flex-1">
+            <div class="kt-inbox__info">
+                <div class="kt-inbox__sender" *ngIf="DocumentSource == 1">
+                    <span class="kt-media kt-media--sm kt-media--dark">
+                        <img src="assets/media/logos/dms-logo.png" class="rounded-circle" alt="">
+                    </span>
+                </div>
+                <div class="kt-inbox__sender" *ngIf="DocumentSource == 2">
+                    <span class="kt-media kt-media--sm kt-media--dark">
+                        <img src="assets/media/logos/ico.ico" class="rounded-circle" alt="">
+                    </span>
+                </div>
+            </div>
+            <div class="kt-inbox__details d-flex-center w-100 justify-content-between">
+                <ng-container *ngIf="this.MailDocId != 0">
+                    <div class="kt-memo-dt-fl" *ngFor="let item of _attachmentLst">
+                        <a (click)="Redirectiontomemodetails('Memo/Details',this._mailid,this._ReplyId)" class="kt-inbox__message">
+                            <span class="kt-file__subject"> {{item.Subject}}</span> <span class="kt-flv-def"> </span>
+                            <span class="kt-inbox__flv-user"> {{item.FromUser}}</span>
+                        </a>
+                        <div class="kt-inbox__labels">
+                            <span class="kt-fils-v-uname">{{item.FileName}}</span>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="this.MailDocId == 0">
+                    <div class="kt-memo-dt-fl">
+                        <span class="kt-fils-v-uname">{{filename}}</span>
+                    </div>
+                </ng-container>
+                <div class="file-view-toolbar">
+                    <div class="file-view-btn">
+                        <div class="d-flex align-items-center">
+                            <div class="file-view-btn-item Tipply_History" (click)="DownloadHistory()" *ngIf="DocumentSource==1 && IsCommunicarionMemoDownload==true && _NoIsCommunicarionMemoDownloadUser == false" data-target="#open_modal" data-toggle="modal" aria-haspopup="true"
+                                aria-expanded="false">
+                                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M5.07868 5.06891C8.87402 1.27893 15.0437 1.31923 18.8622 5.13778C22.6824 8.95797 22.7211 15.1313 18.9262 18.9262C15.1312 22.7211 8.95793 22.6824 5.13774 18.8622C2.87389 16.5984 1.93904 13.5099 2.34047 10.5812C2.39672 10.1708 2.775 9.88377 3.18537 9.94002C3.59575 9.99627 3.88282 10.3745 3.82658 10.7849C3.4866 13.2652 4.27782 15.881 6.1984 17.8016C9.44288 21.0461 14.6664 21.0646 17.8655 17.8655C21.0646 14.6664 21.046 9.44292 17.8015 6.19844C14.5587 2.95561 9.33889 2.93539 6.13935 6.12957L6.88705 6.13333C7.30126 6.13541 7.63535 6.47288 7.63327 6.88709C7.63119 7.3013 7.29372 7.63539 6.87951 7.63331L4.33396 7.62052C3.92269 7.61845 3.58981 7.28556 3.58774 6.8743L3.57495 4.32874C3.57286 3.91454 3.90696 3.57707 4.32117 3.57498C4.73538 3.5729 5.07285 3.907 5.07493 4.32121L5.07868 5.06891ZM11.9999 7.24992C12.4141 7.24992 12.7499 7.58571 12.7499 7.99992V11.6893L15.0302 13.9696C15.3231 14.2625 15.3231 14.7374 15.0302 15.0302C14.7373 15.3231 14.2624 15.3231 13.9696 15.0302L11.2499 12.3106V7.99992C11.2499 7.58571 11.5857 7.24992 11.9999 7.24992Z" fill="currentColor"></path> </g></svg>
+                            </div>
+                            <div class="file-view-btn-item Tipply_Download" (click)="download(src,filename)" *ngIf="DocumentSource==1 && IsCommunicarionMemoDownload==true  && viewer!='' && _NoIsCommunicarionMemoDownloadUser == false">
+                                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12.5535 16.5061C12.4114 16.6615 12.2106 16.75 12 16.75C11.7894 16.75 11.5886 16.6615 11.4465 16.5061L7.44648 12.1311C7.16698 11.8254 7.18822 11.351 7.49392 11.0715C7.79963 10.792 8.27402 10.8132 8.55352 11.1189L11.25 14.0682V3C11.25 2.58579 11.5858 2.25 12 2.25C12.4142 2.25 12.75 2.58579 12.75 3V14.0682L15.4465 11.1189C15.726 10.8132 16.2004 10.792 16.5061 11.0715C16.8118 11.351 16.833 11.8254 16.5535 12.1311L12.5535 16.5061Z" fill="currentColor"></path> <path d="M3.75 15C3.75 14.5858 3.41422 14.25 3 14.25C2.58579 14.25 2.25 14.5858 2.25 15V15.0549C2.24998 16.4225 2.24996 17.5248 2.36652 18.3918C2.48754 19.2919 2.74643 20.0497 3.34835 20.6516C3.95027 21.2536 4.70814 21.5125 5.60825 21.6335C6.47522 21.75 7.57754 21.75 8.94513 21.75H15.0549C16.4225 21.75 17.5248 21.75 18.3918 21.6335C19.2919 21.5125 20.0497 21.2536 20.6517 20.6516C21.2536 20.0497 21.5125 19.2919 21.6335 18.3918C21.75 17.5248 21.75 16.4225 21.75 15.0549V15C21.75 14.5858 21.4142 14.25 21 14.25C20.5858 14.25 20.25 14.5858 20.25 15C20.25 16.4354 20.2484 17.4365 20.1469 18.1919C20.0482 18.9257 19.8678 19.3142 19.591 19.591C19.3142 19.8678 18.9257 20.0482 18.1919 20.1469C17.4365 20.2484 16.4354 20.25 15 20.25H9C7.56459 20.25 6.56347 20.2484 5.80812 20.1469C5.07435 20.0482 4.68577 19.8678 4.40901 19.591C4.13225 19.3142 3.9518 18.9257 3.85315 18.1919C3.75159 17.4365 3.75 16.4354 3.75 15Z" fill="currentColor"></path> </g></svg>
+                            </div>
+                        </div>
+
+                        <!-- <div class="d-flex align-items-center">
+                            <div class="file-view-btn-item">
+                                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M15.2071 6.29289C15.5976 6.68342 15.5976 7.31658 15.2071 7.70711L10.9142 12L15.2071 16.2929C15.5976 16.6834 15.5976 17.3166 15.2071 17.7071C14.8166 18.0976 14.1834 18.0976 13.7929 17.7071L8.79289 12.7071C8.40237 12.3166 8.40237 11.6834 8.79289 11.2929L13.7929 6.29289C14.1834 5.90237 14.8166 5.90237 15.2071 6.29289Z" fill="currentColor"></path> </g></svg>
+                            </div>
+                            <div class="file-view-btn-item">
+                                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M8.79289 6.29289C9.18342 5.90237 9.81658 5.90237 10.2071 6.29289L15.2071 11.2929C15.5976 11.6834 15.5976 12.3166 15.2071 12.7071L10.2071 17.7071C9.81658 18.0976 9.18342 18.0976 8.79289 17.7071C8.40237 17.3166 8.40237 16.6834 8.79289 16.2929L13.0858 12L8.79289 7.70711C8.40237 7.31658 8.40237 6.68342 8.79289 6.29289Z" fill="currentColor"></path> </g></svg>
+                            </div>
+                        </div> -->
+                        <!-- <div class="files-count">2 of 5 Files</div>
+                        <ng-container >
+                            <a (click)="gotoMemoDetailsV2( '/Memo/Details',PreviousMemoId,PreviousReplyId)"
+                                class="kt-inbox__icon kt-pn-prv" title="Previose">
+                                <i class="flaticon2-left-arrow"></i>
+                            </a>
+                        </ng-container>
+                        <ng-container >
+                            <a (click)="gotoMemoDetailsV2( '/Memo/Details',NextMemoId,NextReplyId)"
+                                class="kt-inbox__icon kt-pn-next" title="Next">
+                                <i class="flaticon2-right-arrow"></i>
+                            </a>
+                        </ng-container> -->
+                        <!-- <span class="kt-inbox__pages" data-toggle="kt-tooltip" title="Records per page">
+                            <span class="en-of kt-inbox__perpage"
+                                data-toggle="dropdown">{{_CurrentpageNo}} of
+                                {{_TotalRecords}} {{ "Memodeatils.pagess" | translate }}</span>
+                            <span class="ar-main-of"
+                                style="display: none;"><span>{{_CurrentpageNo}}</span> <span
+                                    class="of-memo"> - </span> {{_TotalRecords}} 
+                                    <span>{{ "Memodeatils.pagess" | translate }}</span></span>
+                        </span>
+                        <ng-container *ngIf="_CurrentpageNo!=1">
+                            <a (click)="gotoMemoDetailsV2( '/Memo/ArchiveView',PreviousMemoId,PreviousReplyId)"
+                                class="kt-inbox__icon kt-pn-prv" title="Previose">
+                                <i class="flaticon2-left-arrow"></i>
+                            </a>
+                        </ng-container>
+                        <ng-container *ngIf="_CurrentpageNo<_TotalRecords">
+                            <a (click)="gotoMemoDetailsV2( '/Memo/ArchiveView',NextMemoId,NextReplyId)"
+                                class="kt-inbox__icon kt-pn-next" title="Next">
+                                <i class="flaticon2-right-arrow"></i>
+                            </a>
+                        </ng-container> -->
+                        <ng-container *ngIf="DocumentSource==1 && IsCommunicarionMemoDownload==true && _NoIsCommunicarionMemoDownloadUser == false">
+
+
+                            <span class="kt-inbox__pages Records_per_page" data-toggle="kt-tooltip">
+                            <span class="en-of kt-inbox__perpage"
+                              data-toggle="dropdown">{{_CurrentpageNo}} of {{_TotalRecords}}</span>
+                            <!-- <span class="ar-main-of" style="display: none;">
+                              <span>{{_CurrentpageNo}}</span>
+                        <span class="of-memo"> - </span> {{_TotalRecords}}
+                        <span>pages</span>
+                        </span> -->
+                            </span>
+
+                            <ng-container *ngIf="_CurrentpageNo != 1">
+                                <a (click)="LoadDocument(PreviousUrl, PreviousUrlfn, PreviousMailDocId)" class="kt-inbox__icon kt-pn-prv Tipply_Previous">
+                                    <i class="flaticon2-left-arrow"></i>
+                                </a>
+                            </ng-container>
+                            <ng-container *ngIf="_CurrentpageNo < _TotalRecords">
+                                <a (click)="LoadDocument(NextUrl, NextUrlfn, NextMailDocId)" class="kt-inbox__icon kt-pn-next Tipply_Next">
+                                    <i class="flaticon2-right-arrow"></i>
+                                </a>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="d-flex-center d-none">
+                    <div>
+                        <a (click)="DownloadHistory()" *ngIf="DocumentSource==1 && IsCommunicarionMemoDownload==true && _NoIsCommunicarionMemoDownloadUser == false" class="btn btn-dull float-left mx-1" href="javascript:void(0)" data-target="#open_modal" data-toggle="modal" aria-haspopup="true"
+                            aria-expanded="false">
+                            <span class="svg-icns">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M19.6873 14.2222C19.8909 13.5167 20 12.7711 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C14.3413 20 16.4476 18.9943 17.9106 17.3912M19.6873 14.2222L19 13M19.6873 14.2222L20.75 13.25M9 12L11 14L15 10"
+                                    stroke="#464455" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg> 
+                            <!-- {{ "Memodeatils.History" | translate }} -->
+                        </span>
+                        </a>
+                    </div>
+                    <div *ngIf="DocumentSource==1 && IsCommunicarionMemoDownload==true  && viewer!='' && _NoIsCommunicarionMemoDownloadUser == false" class="">
+                        <a class="btn btn-info float-left mx-1" (click)="download(src,filename)">
+                            <span class="svg-icns">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-download" viewBox="0 0 16 16">
+                                    <path
+                                        d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                    <path
+                                        d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                </svg>
+                                <!-- {{ "Memodeatils.Download" | translate }} -->
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div *ngIf="DocumentSource==1 &&_IsConfidential === 'true' && (IsCommunicarionMemoDownload === false || _NoIsCommunicarionMemoDownloadUser === false)" class="kt-Confidential-msg">
+                    <small class="kt-confidential"><span
+                            class="svg-icon svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Communication/Mail-locked.svg-->
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="15" height="15" />
+                                    <path
+                                        d="M12.9835977,18 C12.7263047,14.0909841 9.47412135,11 5.5,11 C4.98630124,11 4.48466491,11.0516454 4,11.1500272 L4,7 C4,5.8954305 4.8954305,5 6,5 L20,5 C21.1045695,5 22,5.8954305 22,7 L22,16 C22,17.1045695 21.1045695,18 20,18 L12.9835977,18 Z M19.1444251,6.83964668 L13,10.1481833 L6.85557487,6.83964668 C6.4908718,6.6432681 6.03602525,6.77972206 5.83964668,7.14442513 C5.6432681,7.5091282 5.77972206,7.96397475 6.14442513,8.16035332 L12.6444251,11.6603533 C12.8664074,11.7798822 13.1335926,11.7798822 13.3555749,11.6603533 L19.8555749,8.16035332 C20.2202779,7.96397475 20.3567319,7.5091282 20.1603533,7.14442513 C19.9639747,6.77972206 19.5091282,6.6432681 19.1444251,6.83964668 Z"
+                                        fill="#000000" />
+                                    <path
+                                        d="M8,17 C8.55228475,17 9,17.4477153 9,18 L9,21 C9,21.5522847 8.55228475,22 8,22 L3,22 C2.44771525,22 2,21.5522847 2,21 L2,18 C2,17.4477153 2.44771525,17 3,17 L3,16.5 C3,15.1192881 4.11928813,14 5.5,14 C6.88071187,14 8,15.1192881 8,16.5 L8,17 Z M5.5,15 C4.67157288,15 4,15.6715729 4,16.5 L4,17 L7,17 L7,16.5 C7,15.6715729 6.32842712,15 5.5,15 Z"
+                                        fill="#000000" opacity="0.9" />
+                                </g>
+                            </svg><!--end::Svg Icon--></span> {{ "Memodeatils.confidentialMemo" | translate }}</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="attach-view-div">
+
+
+        <!-- <ng-container >
+    <h4>Note:</h4>
+    <h5>This Attachment Relation To Confidential Memo</h5>
+   
+    <h5>(Download Option in unavailable)</h5>
+</ng-container> -->
+        <ng-container *ngIf="viewer=='pdf'">
+            <div class="col-md-12 progress_container mt-mc-20" *ngIf="ShowProgress">
+                <div class="progress form-group" *ngIf="progress > 0">
+                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress">
+                        {{progress}}%
+                    </div>
+                </div>
+            </div>
+            <div class="px-3 pdf-main">
+                <div class="pdf-div">
+                    <pdf-viewer [src]="src" [(page)]="page" [rotation]="rotation" [original-size]="originalSize" [show-all]="showAll" [fit-to-page]="fitToPage" (after-load-complete)="afterLoadComplete($event)" [zoom]="zoom" [zoom-scale]="zoomScale" [stick-to-page]="stickToPage"
+                        [render-text]="renderText" [external-link-target]="'blank'" [autoresize]="autoresize" (on-progress)="onProgress($event)" (page-rendered)="pageRendered($event)" (pages-initialized)="pageInitialized($event)" [show-borders]="false">
+                    </pdf-viewer>
+                    <div class="">
+                        <div class="zoom-act d-flex justify-content-center">
+                            <div class="mb">
+                                <button (click)="incrementZoom(-0.1)" mat-button type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                                    </svg>
+                                </button>
+
+                                <mat-form-field class="page-number">
+                                    <input matInput type="number" placeholder="Zoom" [(ngModel)]="zoom" pattern="-?[0-9]*(\.[0-9]+)?">
+                                    <mat-error>Input is not a number!</mat-error>
+                                </mat-form-field>
+
+                                <button (click)="incrementZoom(0.1)" mat-button type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="vr-line"></div>
+                            <!-- <div *ngIf="showAll" class="mb"><mat-slide-toggle [(ngModel)]="stickToPage">Stick to page</mat-slide-toggle></div> -->
+                            <!-- *ngIf="stickToPage && showAll || !showAll" -->
+                            <div class="mb">
+                                <button (click)="incrementPage(-1)" mat-button type="button">Previous</button>
+
+                                <mat-form-field class="page-number">
+                                    <input matInput type="number" placeholder="Page" [(ngModel)]="page" pattern="-?[0-9]*(\.[0-9]+)?">
+                                    <mat-error>Input is not a number!</mat-error>
+                                </mat-form-field>
+
+                                <span *ngIf="pdf">of {{ pdf.numPages }}</span>
+                                <button (click)="incrementPage(1)" mat-button type="button">Next</button>
+                            </div>
+                            <!-- <pdf-viewer [show-all]="showAll" 
+                    [stick-to-page]="stickToPage" 
+                    (after-load-complete)="afterLoadComplete($event)" 
+                    [zoom]="zoom" [src]="src" [rotation]="0" [autoresize]="true" [original-size]='true' [fit-to-page]='true' [render-text]='false' style="width:100%;height:100vh;"></pdf-viewer>
+                    -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </ng-container>
+        <ng-container *ngIf="viewer=='office' || viewer=='google'">
+            <div class="px-3">
+                <div class="">
+                    <ngx-doc-viewer [url]="src" [viewer]="viewer" style="width:100%;height:calc(100vh - 110px)"></ngx-doc-viewer>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="viewer=='image'">
+            <div class="px-3">
+                <div class="">
+                    <div class="ion-img-viewer">
+                        <img [src]="src" />
+                    </div>
+                </div>
+            </div>
+            <div class="d-none">
+                <div class="zoom-act d-flex justify-content-center">
+                    <div class="mb">
+                        <button mat-button type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                <line x1="8" y1="11" x2="14" y2="11"></line>
+                            </svg>
+                        </button>
+
+                        <mat-form-field class="page-number">
+                            <input matInput type="number" placeholder="Zoom" pattern="-?[0-9]*(\.[0-9]+)?">
+                            <mat-error>Input is not a number!</mat-error>
+                        </mat-form-field>
+
+                        <button mat-button type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                <line x1="11" y1="8" x2="11" y2="14"></line>
+                                <line x1="8" y1="11" x2="14" y2="11"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="vr-line"></div>
+
+                    <div class="mb">
+                        <button mat-button type="button">Previous</button>
+
+                        <mat-form-field class="page-number">
+                            <input matInput type="number" placeholder="Page" [(ngModel)]="page" pattern="-?[0-9]*(\.[0-9]+)?">
+                            <mat-error>Input is not a number!</mat-error>
+                        </mat-form-field>
+
+                        <span>of 100</span>
+                        <button mat-button type="button">Next</button>
+                    </div>
+
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="viewer==''">
+            <div class="pt-3 px-3 no-prevw d-flex">
+                <div class="d-flex align-items-center flex-column m-auto">
+                    <div class="shake2">
+                        <img src="assets/media/files/doc-brek.png" />
+                    </div>
+                    <div class="text-center">
+                        <h2>Preview Not Available</h2>
+                        <h5>
+                            The File is not available for preview currently. Please download the file to view.
+                        </h5>
+                        <span *ngIf="DocumentSource==1 || DocumentSource==2 && IsCommunicarionMemoDownload==true" class="btn btn-info mt-3" (click)="download(src,filename)">
+                            <i class="material-icons p-0 mr-1 fs-4">download</i>Download File
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+
+    <div class="modal fade" id="open_modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content border-0">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Attachment Name</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="">
+                        <div class="kt-inbox__search mb-3">
+                            <div id="search-grp" class="input-group group-active">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text px-2 py-0">
+                                        <button type="button" role="button" id="srch-btn" data-tooltip="Search"
+                                            aria-label="Search" class="srch-btns p-0">
+                                            <svg focusable="false" height="24px" viewBox="0 0 24 24" width="24px"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M20.49,19l-5.73-5.73C15.53,12.2,16,10.91,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.41,0,2.7-0.47,3.77-1.24L19,20.49L20.49,19z M5,9.5C5,7.01,7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14S5,11.99,5,9.5z">
+                                                </path>
+                                                <path d="M0,0h24v24H0V0z" fill="none"></path>
+                                            </svg>
+                                        </button>
+                                    </span>
+                                </div>
+                                <input type="text" placeholder="Search" [(ngModel)]="HistorySearch" autocomplete="off" class="form-control">
+                                <div class="input-group-append">
+                                    <span class="input-group-text p-0 py-0">
+                                        <button (click)="searchhistory()" type="button" role="button" id="clrr-btn"
+                                            data-tooltip="Clear Search" aria-label="Clear Search"
+                                            class="srch-btns ml-1">
+                                            <svg focusable="false" height="24px" viewBox="0 0 24 24" width="24px"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                                                </path>
+                                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                            </svg>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header d-none bg-white d-flex-center">
+                                <h5 class="crd-txt text-info flex-1">Read By</h5>
+                                <div class="">
+                                    <span class="svg-icns">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 0 22 22" width="16"
+                                            height="16" fill="currentColor">
+                                            <path
+                                                d="M2.328 6.868l7.017 6.253a1 1 0 0 0 1.33 0l7.009-6.246-7.137-4.665a1 1 0 0 0-1.094 0L2.328 6.868zM18 7.082v2.19l-5.994 5.342a3 3 0 0 1-3.992 0L2 9.254V7.083 18h16V7.082zM.906 5.408L8.359.536a3 3 0 0 1 3.282 0l7.453 4.872A2 2 0 0 1 20 7.082V18a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V7.082a2 2 0 0 1 .906-1.674z">
+                                            </path>
+                                        </svg>
+                                        10
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="card-body crd-list scroll-y p-0">
+                                <div class="">
+                                    <ng-container *ngIf="(HistoryList | filter:HistorySearch) as HistoryList">
+                                        <ng-container *ngFor="let data of HistoryList | filter:HistorySearch; let R= index">
+                                            <div class="users-list">
+                                                <div class="usr-item" data-toggle="collapse" [attr.data-target]="'#collapseExample'+R" aria-expanded="false" aria-controls="collapseExample">
+                                                    <div class="img-container">
+                                                        <img *ngIf="data.DownloadUserInboxThumbnail==''" src="assets/media/icons/user2.png" alt="user Image" class="usr-img">
+                                                        <img *ngIf="data.DownloadUserInboxThumbnail!=''" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{data.DownloadUserInboxThumbnail}}" class="">
+                                                    </div>
+                                                    <div class="flex-1">
+                                                        <div class="">
+                                                            <span class="user-name">{{data.DownloadUser}}</span>
+                                                        </div>
+                                                        <div class="">
+                                                            <span class="read-time">{{data.DownloadDate|date: 'MMM dy'}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="">
+                                                        <a class="dwn-cnt btn">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="cate-icns" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                                            <path
+                                                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                                        </svg> {{data.TotalDownloads}}
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="collapse mb-2" id="collapseExample{{R}}">
+                                                    <div class="card mx-4">
+                                                        <ng-container *ngFor="let src of data.DatesJson">
+                                                            <div class="usr-item">
+                                                                <span class="clp-dwn">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor" class=""
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                                                    <path
+                                                                        d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                                                </svg>
+                                                            </span>
+                                                                <div class="flex-1">
+
+                                                                    <div class="">
+                                                                        <span class="read-time">Downloaded on
+                                                                        {{src.DownloadDate|date: 'MMM d y'}}</span>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+                                                        </ng-container>
+                                                        <!-- <div class="usr-item">
+                                                <span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="" viewBox="0 0 16 16">
+                                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                                      </svg>
+                                                </span>
+                                                <div class="flex-1">
+                                                    
+                                                    <div class="">
+                                                        <span class="read-time">Downloaded on May 10 2023  1:39PM </span>
+                                                    </div>
+        
+                                                </div>
+                                            </div> -->
+                                                        <!-- <div class="usr-item">
+                                                <span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="" viewBox="0 0 16 16">
+                                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                                      </svg>
+                                                </span>
+                                                <div class="flex-1">                                               
+                                                    <div class="">
+                                                        <span class="read-time">Downloaded on May 10 2023  1:39PM </span>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="usr-item">
+                                        <div class="img-container">
+                                            <img src="assets/media/icons/user2.png" alt="user Image" class="usr-img">
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="">
+                                                <span class="user-name">Creative Solutions Ramesh Kumar </span>
+                                            </div>
+                                            
+                                            <div class="">
+                                                <span class="read-time"> May 10 2023  1:39PM </span>
+                                            </div>
+
+                                        </div>
+                                        <div class="">
+                                            <a class="dwn-cnt btn">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="cate-icns" viewBox="0 0 16 16">
+                                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                                  </svg>
+                                                12
+                                            </a>
+                                        </div>
+                                    </div> -->
+                                            </div>
+                                        </ng-container>
+                                        <ng-container *ngIf="HistoryList.length==0">
+                                            <div class="no_record">
+                                                <span>No one as download this file</span>
+                                            </div>
+                                        </ng-container>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="dropdown-actions">
+                        <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

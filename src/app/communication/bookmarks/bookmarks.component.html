@@ -1,0 +1,199 @@
+<div class="kt-portlet__head">
+    <div class="kt-inbox__toolbar kt-inbox__toolbar--extended">
+        <div class="kt-inbox__actions kt-inbox__actions--expanded">
+            <div class="kt-inbox__search">
+                <div id="search-grp" class="input-group">
+                    <div  class="input-group-prepend">
+                        <span  class="input-group-text pr-0">
+                            <button  type="button" role="button" id="srch-btn" (click)="IconSearch()" data-tooltip="Search" aria-label="Search" class="srch-btns pr-0">
+                                <svg focusable="false" height="24px" viewBox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
+                                    <path 
+                                        d="M20.49,19l-5.73-5.73C15.53,12.2,16,10.91,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.41,0,2.7-0.47,3.77-1.24L19,20.49L20.49,19z M5,9.5C5,7.01,7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14S5,11.99,5,9.5z">
+                                    </path>
+                                    <path  d="M0,0h24v24H0V0z" fill="none"></path>
+                                </svg>
+                            </button>
+                        </span>
+                    </div>
+                            <input id="txtSearch"  [(ngModel)]="_Search"  (click)="Searchighlight()"
+                        (keyup)="clearshow()" autocomplete="off" class="form-control" [placeholder]="FavoriteSearch">
+                        <button class="clear-icon kt-search-clr-ic" *ngIf="_Search"  (click)="clearSearch()"> <i class="fa fa-times"></i> </button>
+                    <div  class="input-group-append d-none">
+                        <span  class="input-group-text">
+                            <button  type="button" role="button"   id="clrr-btn" data-tooltip="Clear Search" aria-label="Clear Search"   class="srch-btns mr-2">
+                                <svg  focusable="false" height="24px" viewBox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg">
+                                    <path 
+                                        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                                    </path>
+                                    <path  d="M0 0h24v24H0z" fill="none"></path>
+                                </svg>
+                            </button>
+                            <button  type="button" role="button" id="filtr-btn" data-tooltip="Search options" aria-label="Advanced search options"
+                                class="srch-btns">
+                                <svg  xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24" viewBox="0 0 24 24">
+                                    <path 
+                                        d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="kt-portlet__body p-0 kt-portlet__body--fit-x scroll-y">
+    <div class="kt-inbox__items" data-type="inbox">
+        <ng-container *ngIf="(_LstToMemos | filter : _Search) as _LstToMemos">
+        <div *ngFor="let ss of _LstToMemos | filter:_Search " class="mb_1" id="mailid_{{ss.MailId}}">
+            <div>
+                <div class="plain_border_left_true">
+                    <div data-id="MemoId_{{ss.MailId}}" data-type="inbox"
+                        [className]="ss.MailView == true ? 'kt-inbox__item py-2' : 'kt-inbox__item kt-inbox__item--unread py-2'">
+                        <div class="kt-inbox__info">
+                            <div class="kt-inbox__sender">
+                                <span class="kt-media kt-media--sm kt-media--dark">
+                                    <img class="rounded-circle" *ngIf="ss.UserProfile =='NA'"
+                                        src="assets/media/icons/user2.png">
+                                    <img class="rounded-circle" *ngIf="ss.UserProfile !='NA'"
+                                        src="https://yrglobaldocuments.blob.core.windows.net/documents/{{ss.UserProfile}}">
+                                </span>
+                            </div>
+                        </div>
+                        <div (click)="gotoMemoDetailsV2('Memo/Details',ss.MailId,ss.ReplyId)" class="kt-inbox__details">
+                            <div class="kt-inbox__message flex-wrap">
+                                <span class="kt-inbox__user_name">{{ ss.FromUser }}
+                                    <small *ngIf="(ss.Attachment)" class="attchmt">
+                                        <i class="fa fa-paperclip"></i>
+                                    </small>
+                                    <small *ngIf="(ss.IsConfidential)" class="kt-confidential"><span class="svg-icon svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Communication/Mail-locked.svg-->
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="15" height="15"/>
+                                            <path d="M12.9835977,18 C12.7263047,14.0909841 9.47412135,11 5.5,11 C4.98630124,11 4.48466491,11.0516454 4,11.1500272 L4,7 C4,5.8954305 4.8954305,5 6,5 L20,5 C21.1045695,5 22,5.8954305 22,7 L22,16 C22,17.1045695 21.1045695,18 20,18 L12.9835977,18 Z M19.1444251,6.83964668 L13,10.1481833 L6.85557487,6.83964668 C6.4908718,6.6432681 6.03602525,6.77972206 5.83964668,7.14442513 C5.6432681,7.5091282 5.77972206,7.96397475 6.14442513,8.16035332 L12.6444251,11.6603533 C12.8664074,11.7798822 13.1335926,11.7798822 13.3555749,11.6603533 L19.8555749,8.16035332 C20.2202779,7.96397475 20.3567319,7.5091282 20.1603533,7.14442513 C19.9639747,6.77972206 19.5091282,6.6432681 19.1444251,6.83964668 Z" fill="#000000"/>
+                                            <path d="M8,17 C8.55228475,17 9,17.4477153 9,18 L9,21 C9,21.5522847 8.55228475,22 8,22 L3,22 C2.44771525,22 2,21.5522847 2,21 L2,18 C2,17.4477153 2.44771525,17 3,17 L3,16.5 C3,15.1192881 4.11928813,14 5.5,14 C6.88071187,14 8,15.1192881 8,16.5 L8,17 Z M5.5,15 C4.67157288,15 4,15.6715729 4,16.5 L4,17 L7,17 L7,16.5 C7,15.6715729 6.32842712,15 5.5,15 Z" fill="#000000" opacity="0.9"/>
+                                        </g>
+                                    </svg><!--end::Svg Icon--></span> confidential </small>
+                                </span>
+                                <span class="kt-inbox__subject w-100">{{ ss.Subject }} </span>
+                                <span class="kt-inbox__subject w-100" *ngIf="ss.Subject!=ss.Title">
+                                    <small class="sub-replay-svg">
+                                        <svg xmlns:dc="http://purl.org/dc/elements/1.1/"
+                                         xmlns:cc="http://creativecommons.org/ns#"
+                                          xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+                                          xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" 
+                                          xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                                           xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" 
+                                           version="1.1" x="0px" y="0px" viewBox="0 0 100 100">
+                                           <g transform="translate(0,-952.36218)"><path 
+                                            style="text-indent:0;text-transform:none;direction:ltr;block-progression:
+                                            tb;baseline-shift:baseline;color:#000000;enable-background:accumulate;" 
+                                            d="m 43.8125,977.2284 a 2.1493567,1.8722565 0 0 0 -1.9375,1.85451 l 0,6.03501 -18.875,0
+                                             c -9.383406,0 -17,7.66101 -17,17.09918 0,9.4382 7.616594,17.0992 17,17.0992 l 7,0 a 2.0002,2.0118724
+                                              0 1 0 0,-4.0233 l -7,0 c -7.236594,0 -13,-5.797 -13,-13.0759 0,-7.27884 5.763406,-13.07584 13,-13.07584 l 18.875,0
+                                               0,6.03502 a 2.1493567,1.8722565 0 0 0 0,0.18859 2.1493567,1.8722565 0 0 0 3.1875,1.44589 l 16,-8.04668 a 2.1493567,1.8722565
+                                                0 0 0 0,-3.26897 l -16,-8.04668 a 2.1493567,1.8722565 0 0 0 -1.25,-0.22003 z m 2.3125,5.09204 9.5625,4.80915 -9.5625,4.80915 
+                                                0,-9.6183 z m 23.6875,2.79748 A 2.0021961,2.0138801 0 1 0 70,989.14126 l 7,0 c 7.236594,0 13,5.79705 13,13.07584 0,7.2789
+                                                 -5.763406,13.0759 -13,13.0759 l -18.875,0 0,-6.035 a 2.1493567,1.8722565 0 0 0 0,-0.1886 2.1493567,1.8722565 0 0 0 -3.1875,
+                                                 -1.4459 l -16,8.0467 a 2.1493567,1.8722565 0 0 0 0,3.2689 l 16,8.0467 a 2.1493567,1.8722565 0 0 0 3.1875,-1.6345 
+                                                 l 0,-6.035 18.875,0 c 9.383406,0 17,-7.661 17,-17.0992 0,-9.43814 -7.616594,-17.09918 -17,-17.09918 
+                                                 l -7,0 a 2.0002,2.0118724 0 0 0 -0.1875,0 z m -15.9375,27.37758 0,9.6183 -9.5625,-4.8091 9.5625,
+                                                 -4.8092 z" fill="#000000" fill-opacity="1" stroke="none" marker="none" visibility="visible"
+                                                  display="inline" overflow="visible"/></g></svg></small>
+                                                    {{ ss.Title }}</span>
+                                <!-- <span *ngIf="(ss.Attachment)" style="margin-right: 12px;">
+                                    <i class="fa fa-paperclip"></i>
+                                </span> -->
+                            </div>
+                            <div class="kt_inde_memo_msg" [innerHTML]="ss.Note">
+                            </div>
+                            <div class="kt-inbox__labels d-none">
+                                <ng-container *ngIf="ss.MemoType=='General'">
+                                    <span
+                                        class="kt-inbox__label kt-badge kt-badge--unified-info kt-badge--bold kt-badge--inline">
+                                        {{ ss.MemoType }}
+                                    </span>
+                                </ng-container>
+                                <ng-container *ngIf="ss.MemoType=='Approval'">
+                                    <span
+                                        class="kt-inbox__label kt-badge kt-badge--unified-success kt-badge--bold kt-badge--inline">
+                                        {{ ss.MemoType }}
+                                    </span>
+                                </ng-container>
+                                <span *ngIf="ss.Status=='Reply Required'"
+                                    class="kt-inbox__label kt-badge kt-badge--unified-brand kt-badge.kt-badge-light-bold kt-badge--inline">
+                                    {{ss.ActualStatus}}
+                                </span>
+                                <span *ngIf="ss.Status=='Approval Pending'"
+                                    class="kt-inbox__label kt-badge kt-badge--unified-brand kt-badge.kt-badge-light-bold kt-badge--inline">
+                                    {{ss.ActualStatus}}
+                                </span>
+                                <span *ngIf="ss.Status=='Expired'"
+                                    class="kt-inbox__label kt-badge kt-badge--unified-brand kt-badge.kt-badge-light-bold kt-badge--inline">
+                                    {{ss.ActualStatus}}
+                                </span>
+                                <span *ngIf="ss.Status=='Request Pending'"
+                                    class="kt-inbox__label kt-badge kt-badge--unified-brand kt-badge.kt-badge-light-bold kt-badge--inline">
+                                    {{ss.ActualStatus}}
+                                </span>
+                                <span *ngIf="ss.Status=='UnderProcess'"
+                                    class="kt-inbox__label kt-badge kt-badge--unified-brand kt-badge.kt-badge-light-bold kt-badge--inline">
+                                    {{ss.ActualStatus}}
+                                </span>
+                                <span
+                                    class="kt-inbox__label kt-badge kt-badge--unified-primary kt-badge.kt-badge-light-bold kt-badge--inline">
+                                    {{ ss.FromUser }}
+                                </span>
+                                <span id="i_{{ss.MailId}}"
+                                    [ngClass]="(ss.IsTag==true)?'kt-inbox__label kt-badge kt-badge--unified-hideskin kt-badge.kt-badge-light-bold kt-badge--inline':'kt-inbox__label kt-badge kt-badge--unified-hideskin kt-badge.kt-badge-light-bold kt-badge--inline d-none'">
+                                    <i class="fa fa-tag"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="kt-widget__details">
+                            <div class="kt-section__content kt-section__content--solid">
+                                <div class="kt-media-group">
+                                    <ng-container *ngFor="let _icons of ss.UserIcons ; let i = index">
+                                        <ng-container *ngIf="i<3">
+                                            <a class="kt-media kt-media--sm kt-media--circle" data-toggle="kt-tooltip"
+                                                data-skin="brand" data-placement="top" title=""
+                                                data-original-title="John Myer">
+                                                <ng-container *ngIf="_icons.UserHeaderThumbnail=='NA'">
+                                                    <img src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/user2.png"
+                                                        alt="image">
+                                                </ng-container>
+                                                <ng-container *ngIf="_icons.UserHeaderThumbnail!='NA'">
+                                                    <img src="https://yrglobaldocuments.blob.core.windows.net/documents/{{_icons.UserHeaderThumbnail}}"
+                                                        alt="image">
+                                                </ng-container>
+                                            </a>
+                                        </ng-container>
+                                    </ng-container>
+                                    <a *ngIf="ss.UserIcons.length > 3" class="kt-media kt-media--sm kt-media--circle"
+                                        data-toggle="kt-tooltip" data-skin="brand" data-placement="top" title=""
+                                        data-original-title="Micheal York">
+                                        <span>{{ss.UserIcons.length - 3}}+</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div> 
+                        <div (click)="gotoMemoDetailsV2('Memo/Details',ss.MailId,ss.LastReplyId)" class="kt-inbox__datetime">
+                            {{ss.MemoDate}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="_LstToMemos.length==0" class="text-center py-4" style="color: lightgrey">
+            <img src="assets/media/Img/No Bookmark.png">
+            <h3 class="kt-blank-ttl"> {{"Communication.NoBookmarkDateMessage" | translate }} </h3>
+            <p class="kt-erorr-msg"> {{"Communication.createdNoBookmarkDateMessage" | translate }} </p>
+        </div>
+        </ng-container>
+    </div>
+</div>

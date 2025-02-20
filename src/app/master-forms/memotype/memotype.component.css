@@ -1,0 +1,29 @@
+.last1{
+    position: relative;
+   }
+   ul.stepper.horizontal::before {
+       box-shadow: none; 
+   }
+   ul.stepper.horizontal{
+    min-height: 500px;
+    padding-left: 0px;
+   }
+   ul.stepper.horizontal .step .step-content{
+    height: max-content;
+   }
+   .step.active .step-title{
+       border-bottom: 3px solid #2196f3;
+   }
+   ul.stepper.horizontal .step .step-title{
+    padding: 0 65px 0 65px;
+   }
+   ul.stepper.horizontal .step:last-of-type {
+    width: auto !important;
+    /* min-width: 253px; */
+   }
+   ul.stepper.horizontal .step .step-content{
+    padding: 20px 0px 76px 0px;
+   }
+   .pl-30px{
+    padding-left: 30px !important;
+   }

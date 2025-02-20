@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+        "target": "http://cswebapps.com/dmsapi",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

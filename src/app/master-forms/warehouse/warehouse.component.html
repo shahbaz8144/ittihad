@@ -1,0 +1,390 @@
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid side_view">
+    <div class="col-lg-12">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+            <h4 class="mb-2 pro-nm">{{ "Masterform.Warehouse" | translate }}</h4>
+        </div>
+
+        <div class="card ribbon-box">
+            <div class="card-header align-items-center d-flex py-3">
+                <div class="flex-1">
+                    <div class="search-bar">
+                        <input type="search" [(ngModel)]="warehousesearch" class="form-control search_clear"
+                            [placeholder]="warehouseSearch" aria-controls="">
+                        <a class="close close-icn"><i class="material-icons" *ngIf="warehousesearch"
+                                (click)="clearSearch()">close<i></i></i></a>
+                    </div>
+                </div>
+                <div class="flex-shrink-0">
+                    <button class="btn btn-sm btn-info" id="warehouse_add" (click)="ware_add()">
+                        <i class="material-icons fs-4">add</i>
+                        {{ "Masterform.AddWarehouse" | translate }}
+                    </button>
+                </div>
+            </div>
+            <div class="">
+                <div class="mb-0 table-responsive">
+                    <table class="table b-table">
+                        <thead>
+
+                            <tr style="color:#3f51b5;">
+                                <th>{{ "Masterform.Company" |  translate }}</th>
+                                <th>{{ "Masterform.Name"| translate }}</th>
+                                <th style="width: 250px;">{{ "Masterform.Address" | translate }}</th>
+                                <th>{{ "Masterform.Email" | translate  }}</th>
+                                <th>{{ "Masterform.Country" | translate }}</th>
+                                <th>{{ "Masterform.City" |  translate }}</th>
+                                <th>{{ "Masterform.PhoneNumber" | translate }}</th>
+                                <th>{{ "Masterform.Status" | translate }}</th>
+                                <th>{{ "Masterform.Action" | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngIf="(Objwarehouse_data|filter:warehousesearch) as Objwarehouse_data">
+                                <tr *ngFor="let f1 of Objwarehouse_data|filter:warehousesearch">
+                                    <td>
+                                        {{f1.CompanyNames}}
+                                    </td>
+                                    <td>
+                                        {{f1.WareHouseName}}
+                                    </td>
+
+                                    <td>
+                                        {{f1.Address}}
+                                    </td>
+                                    <td>
+                                        {{f1.Email}}
+                                    </td>
+                                    <td>
+                                        {{f1.Country}}
+                                    </td>
+                                    <td>
+                                        {{f1.City}}
+                                    </td>
+                                    <td>
+                                        ({{f1.CountryCode}}) {{f1.Phone}}
+                                    </td>
+
+                                    <td [ngStyle]="{'color':f1.IsActive=== true ? '#3f51b5' : 'red'}"
+                                        (click)="UpdateStatus(f1)">
+
+                                        <div *ngIf="f1.IsActive"
+                                            class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-success curser-pointer w-min-70">
+                                            Active
+                                        </div>
+                                        <div *ngIf="!f1.IsActive"
+                                            class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-danger curser-pointer w-min-70">
+                                            In-Active
+
+                                        </div>
+                                    </td>
+                                    <td (click)="populateForm(f1)">
+                                        <a class="btn btn-outline btn-circle fs-5 btn-sm text-info px-0">
+                                            <span class="mr-2">
+                                                <svg data-v-9a6e255c="" xmlns="http://www.w3.org/2000/svg" width="14px"
+                                                    height="14px" viewBox="0 0 24 24" fill="none" stroke="#2786fb"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="feather feather-edit">
+                                                    <path data-v-9a6e255c=""
+                                                        d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
+                                                    </path>
+                                                    <path data-v-9a6e255c=""
+                                                        d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
+                                                    </path>
+                                                </svg>
+                                            </span><span class="align-middle">Edit</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <ng-container *ngIf="Objwarehouse_data==0">
+                                    <div class="d-flex-center kt-tb-error-box">
+                                        <div class="m-auto text-center">
+                                            <div class="svgs-1 kt-error-img ">
+                                                <img src="assets/media/Img/No Warehouse.png">
+
+                                            </div>
+                                            <h3 class="kt-blank-ttl"> {{ "Masterform.WarehouseNoData" | translate }} </h3>
+                                            <p class="kt-blank-msg"> {{ "Masterform.Warehousenotfound" | translate  }} </p>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                    <!-- <p class="noDatafound" *ngIf="Objwarehouse_data===0">
+                        No data found !!
+                    </p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="kt-aside-menu-overlay" (click)="closeInfo()"></div>
+
+<div id="addwarehouse_div" class="wc-75 kt-quick-panel kt-quick-panel1 scroll-div">
+    <a id="kt_quick_panel_close_btn" class="kt-quick-panel__close" (click)="closeInfo()">
+        <i class="flaticon2-delete"></i>
+    </a>
+    <div id="kt_chat_content" class="kt-grid__item kt-grid__item--fluid kt-app__content">
+        <div class="kt-chat">
+            <div class="kt-portlet kt-portlet--head-lg kt-portlet--last">
+                <div class="kt-portlet__head">
+                    <div class="kt-chat__head">
+                        <div>
+                            <div class="kt-chat__label">
+                                <h4 class="mb-0" id="editrck"> Add </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__body py-1">
+                    <!-- <form [formGroup]="warehouseFrmGroup" (ngSubmit)="OnCreate()"> -->
+                    <div class="tab-content">
+                        <div class="tab-pane d-flex flex-wrap justify-content-start align-items-baseline form-m">
+                            <div class="form-cus">
+                                <label class="form-label">{{ "Masterform.Company" | translate }}</label><span class="text-danger">*</span>
+                                <ng-select [multiple]="true" [(ngModel)]="CompanyDrp" [placeholder]="selectCompany">
+                                    <ng-option [value]="obj.CompanyId" *ngFor="let obj of ObjgetCompanyList">
+                                        {{obj.CompanyName}}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                            <div class="form-cus">
+                                <label class="form-label">{{ "Masterform.Warehouse" | translate }}</label><span class="text-danger ml-1">*</span>
+                                <span id="EnterWarehouse" class="material-icons fs-4 float-right">
+                                    info_outline
+                                </span>
+                                <!-- <div class="more_text1"><div><i class="fas fa-info-circle mr-1"></i>New Create Your Warehouse Name</div></div> -->
+                                <input type="text" class="form-control" [placeholder]="EnterWarehouseName"
+                                    [(ngModel)]="Warehouse" />
+                                <!-- <div *ngIf="submitted && f.Warehouse.errors" class="invalid-feedback">
+                                        <div *ngIf="f.Warehouse.errors.required">Warehouse is Required
+                                        </div>
+                                    </div> -->
+                            </div>
+
+                            <div class="form-cus">
+                                <label class="form-label">{{ "Masterform.Address" | translate }}</label><span class="text-danger ml-1">*</span>
+                                <!-- <div class="more_text1"><div><i class="fas fa-info-circle mr-1"></i>Mention warehouse Address</div></div> -->
+                                <input type="text" class="form-control" [placeholder]="EnterAddress"
+                                    [(ngModel)]="Address" />
+                                <!-- <div *ngIf="submitted && f.Address.errors" class="invalid-feedback">
+                                        <div *ngIf="f.Address.errors.required">Address is Required
+                                        </div>
+                                    </div> -->
+                            </div>
+                            <div class="form-cus">
+                                <label class="form-label">{{ "Masterform.Email" | translate }}</label><span class="text-danger ml-1">*</span>
+                                <!-- <div class="more_text1"><div><i class="fas fa-info-circle mr-1"></i>Mention E-mail here</div></div> -->
+                                <input type="email" class="form-control" (change)="CheckEmailExist()" id="txtemail"
+                                    [placeholder]="EnterEmailAddress" [(ngModel)]="mail" />
+                                <!-- <div *ngIf="submitted && f.mail.errors" class="invalid-feedback">
+                                            <div *ngIf="f.mail.errors.required">Email is Required</div>
+                                            <div *ngIf="f.mail.errors.mail">Email must be a valid email address</div>
+                                        </div> -->
+                            </div>
+                            <div class="form-cus w-50">
+                                <label class="form-label">{{ "Masterform.Country" | translate }}</label><span class="text-danger ml-1">*</span>
+                                <ng-select (change)="getcities($event)" [placeholder]="SelectCountry"
+                                    [(ngModel)]="Count">
+                                    <!-- <div *ngIf="submitted && f.Count.errors" class="invalid-feedback">
+                                            <div *ngIf="f.Count.errors.required">Country is Required
+                                            </div>
+                                        </div> -->
+
+                                    <ng-option [value]="pd.CountryId" *ngFor="let pd of lstPrdcts">
+                                        {{pd.Country}}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                            <div class="form-cus w-50">
+                                <label class="form-label">{{ "Masterform.City" | translate }}</label><span class="text-danger ml-1">*</span>
+                                <ng-select [placeholder]="SelectCity" [(ngModel)]="town">
+                                    <!-- <div *ngIf="submitted && f.town.errors" class="invalid-feedback">
+                                            <div *ngIf="f.town.errors.required">City is Required
+                                            </div>
+                                        </div> -->
+                                    <ng-option [value]="cc.CityId" *ngFor="let cc of lstCities">
+                                        {{cc.City}}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                            <!-- <div class="form-cus">
+                                    <label class="form-label">Phone</label><span
+                                        class="text-danger ml-1">*</span>
+                                    <input type="text" class="form-control" (keypress)="keyPress($event)"
+                                    (keyup)="PhoneLengthValidation()" minlength="8" maxlength="12"
+                                        placeholder="Enter Phone Number"  [(ngModel)]="phone" />
+                                        <span style="color:red" [hidden]="MinPhoneLength"></span>
+                                </div> -->
+                            <div class="form-cus">
+                                <label class="form-label">{{ "Masterform.Phone" | translate }}</label><span class="text-danger">*</span>
+                                <div class="input-group">
+                                    <input type="text" ng2TelInput (countryChange)="onCountryChange($event)"
+                                        class="form-control inputgrp-first" style="width: 90px;"
+                                        [(ngModel)]="countrycode" required maxlength="50" />
+                                    <input (keypress)="keyPress($event)" class="form-control" id="" name="Fax"
+                                        [(ngModel)]="phone" [placeholder]="EnterPhoneNumber" minlength="8" type="text"
+                                        (keyup)="PhoneLengthValidation()" />
+                                </div>
+                                <!-- <span style="color:red" [hidden]="MinPhoneLength">
+                                            Required Atleast 9 Characters</span> -->
+                            </div>
+                            <div class="form-cus">
+                                <!-- <div class="more_text1"><div><i class="fas fa-info-circle mr-1"></i>Ramesh</div></div> -->
+                                <label class="form-label">{{ "Masterform.Status" | translate }}</label>
+                                <div class="">
+                                    <mat-slide-toggle color="primary" id="status" [(ngModel)]="status">
+                                    </mat-slide-toggle>
+                                </div>
+                            </div>
+                            <div class="form-cus">
+                                <label class="form-label">{{ "Masterform.Note" | translate  }}</label>
+                                <!-- <div class="more_text1"><div><i class="fas fa-info-circle mr-1"></i>Describe warehouse</div></div> -->
+                                <textarea type="text" class="form-control" [placeholder]="EnterNote"
+                                    [(ngModel)]="note"></textarea>
+                                <!-- <div *ngIf="submitted && f.Note.errors" class="invalid-feedback">
+                                        <div *ngIf="f.Note.errors.required">Note is Required</div>
+                                    </div> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="task_act form-m">
+                        <div class="form-cus">
+                            <button
+                                [disabled]="!mail || !phone || !Warehouse || !Address || !Count || !town ||!CompanyDrp"
+                                (click)="OnCreate()" *ngIf='!isShow'
+                                class="btn btn-sm btn-info px-3 mt-2 mr-2">{{ "Masterform.Submit" | translate }}</button>
+                            <button type="submit" *ngIf='isShow' class="btn btn-sm btn-info px-3 mt-2 mr-2"
+                                (click)="OnCreate()">{{ "Masterform.Update" | translate }}</button>
+                            <button class="btn btn-sm btn-secondary px-3 ml-2 mt-2" (click)="Reset()" id="button">
+                                {{ "Masterform.Cancel" | translate }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- </form> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- view table -->
+<!--  <div class="col-lg-12"> -->
+
+<!-- <mat-accordion> -->
+<!-- <mat-expansion-panel [expanded]='S_SecondPanel'> -->
+<!-- <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <span style="color:#3f51b5;">View</span>
+                    </mat-panel-title>
+                    <mat-panel-description>
+
+                    </mat-panel-description>
+                </mat-expansion-panel-header> -->
+<!-- <div class="example-header"> -->
+<!-- <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                    </mat-form-field> -->
+<!-- </div> -->
+<!-- <mat-table [dataSource]="tabledata" matSort>
+                    <ng-container matColumnDef="WareHouseName">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.WareHouseName}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="Description">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Descriprion </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.Description}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="Email">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.Email}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="Phone">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Phone Name </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.Phone}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="Address">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Address</mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.Address}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="Country">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> country</mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.Country}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="City">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> city</mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.City}} </mat-cell>
+                    </ng-container> -->
+<!-- <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef
+                            [ngStyle]="{'color':f2.IsActive=== true ? '#3f51b5' : 'red'}"
+                            (click)="UpdateStatus(f2,i)">
+
+                            <div *ngIf="f2.IsActive">
+                                Active
+                                <button mat-mini-fab color="primary" class="btnActive">
+                                </button>
+                            </div>
+                            <div *ngIf="!f2.IsActive">
+                                <button mat-mini-fab color="warn" class="btnActive">
+                                </button> In-Active
+
+                            </div>
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row; let i=index;" (click)="populateForm(f2,i)">
+                            <a class="table-row-action edit-action" mat-stroked-button color="primary">
+                                <mat-icon>edit</mat-icon>
+                            </a>
+                        </mat-cell>
+                    </ng-container> -->
+<!-- <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+
+                        <mat-cell *matCellDef="let row; let i=index;">
+
+
+
+                            <div *ngIf="row.IsActive">
+                                Active
+                                <button mat-mini-fab color="primary" (click)="UpdateStatus(row)" class="btnActive">
+                            </button>
+                            </div>
+                            <div *ngIf="!row.IsActive">
+                                <button mat-mini-fab color="warn" (click)="UpdateStatus(row)" class="btnActive">
+                            </button> In-Active
+
+                            </div>
+
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                        <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+                        <mat-cell *matCellDef="let row; let i=index;" (click)="populateForm(row,i)">
+                            <a class="table-row-action edit-action" mat-stroked-button color="primary">
+                                <mat-icon>edit</mat-icon>
+                            </a>
+                        </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;">
+                    </mat-row>
+                </mat-table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator> -->
+<!-- <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
+                </mat-paginator> -->
+<!-- <span class="totalItems">Total items :<b> </b></span> -->
+<!--  <span style="float: right;">
+                    <h4 class="kt-portlet__head-title">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </h4>
+                </span>
+             </mat-expansion-panel> -->
+<!-- </mat-accordion> -->
+<!-- </div> -->
+<!-- view table -->

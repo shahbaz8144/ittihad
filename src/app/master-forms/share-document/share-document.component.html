@@ -1,0 +1,246 @@
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid" id="scrd">
+    <div class="col-lg-12">
+        <h4 class="mb-3 pro-nm"> Share Document </h4>
+
+
+        <div class="view_filter docs-white mx--2">
+
+            <div class="scroll-body mt-2">
+                <div class="d-flex flex-wrap">
+                    <div class="card card-item ribbon-box" *ngFor="let item of GACDocumentList">
+                        <div class="crd-hed">
+                            <div class="crd-ck">
+                                <span>{{item.CreatedDateString}}</span>
+                            </div>
+                            <div>
+                                <div *ngIf="item.WareHouseStatus== 'In'">
+                                    <p><span class="kt-badge kt-badge--inline cus-btn text-white kt-badge--pill bg-success">In</span>
+                                    </p>
+                                </div>
+                                <!-- {{item.WareHouseStatus}} -->
+                                <!-- <span class="kt-badge kt-badge--inline cus-btn text-white kt-badge--pill bg-success">In</span> -->
+                            </div>
+
+                        </div>
+                        <div class="crd-body">
+                            <div class="shel_div">
+                                <div class="shel_name"> {{item.DocumentName}} </div>
+                            </div>
+                            <div class="py-1">
+                                <div class="d-flex align-items-baseline">
+
+                                    <div class="text_elip"> {{item.SourceName}} </div>
+                                    <span class="sub_text mx-1">(Source)</span>
+                                </div>
+                            </div>
+
+                            <div class="py-1">
+                                <div class="d-flex align-items-baseline">
+                                    <div class="d-flex flex-wrap mb-2 item-b">
+                                        <a class="btn btn-xs btn-circle default mr-2 mt-2 curser-default">jason@siastudio.com</a>
+                                        <a class="btn btn-xs btn-circle default mr-2 mt-2 curser-default">PR Manager</a>
+                                        <a class="btn btn-xs btn-circle default mr-2 mt-2 curser-default">Melbourne</a>
+                                        <a class="btn btn-xs btn-circle default mr-2 mt-2 curser-default">PR Manager</a>
+                                        <a class="btn btn-xs btn-circle default mr-2 mt-2 curser-default">Melbourne</a>
+                                        <div class="show more mt-2 btn-tag">+2</div>
+                                        <div class="show less mt-2 btn-tag">hide</div>
+                                    </div>
+                                    <div class="text_elip d-none"> {{item.CategoryName}} </div>
+                                    <span class="sub_text mx-1 d-none">(Category)</span>
+                                </div>
+                            </div>
+                            <div class="py-1">
+                                <div class="d-flex align-items-baseline">
+                                    <div class="text_elip">{{item.DocumentTypeName}}</div>
+                                    <span class="sub_text mx-1">( Document Type)</span>
+                                </div>
+                            </div>
+
+
+                            <div class="py-1" *ngIf="item.Physical==true">
+                                <div class="d-flex align-items-baseline">
+                                    <div class="text_elip">
+                                        <div>
+                                            <span class="kt-badge kt-badge--inline cus-btn text-white kt-badge--pill bg-warning">
+                                                Physical
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                    <span class="sub_text mx-1">(Type)</span>
+                                </div>
+                            </div>
+                            <div class="py-1" *ngIf="item.Physical==false">
+                                <div class="d-flex align-items-baseline">
+                                    <div class="text_elip">
+                                        <div><span class="kt-badge kt-badge--inline cus-btn text-white kt-badge--pill bg-primary">Electronic</span>
+                                        </div>
+                                        <!-- <div *ngIf="item.Physical==false">
+                                                    <span class="kt-badge kt-badge--inline cus-btn text-white kt-badge--pill bg-primary">Electronic</span>                                                    
+                                                </div> -->
+                                    </div>
+                                    <span class="sub_text mx-1">(Type)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="crd-fot">
+                            <div class="d-flex-center">
+                                <div data-toggle="tooltip" data-placement="top" class="text_elip" title="Shawne Smith">{{item.UserName}}</div>
+                                <div class="capacity_txt" (click)="docsideviw(item.DocumentId)">View Details
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- <div class="py-1" *ngIf="item.Physical==true">
+                            <div class="d-flex align-items-baseline">
+                                <div class="text_elip">
+                                    <div><span class="kt-badge kt-badge--inline cus-btn text-white kt-badge--pill bg-warning">Physical</span>
+                                    </div>
+                                </div>
+                                <span class="sub_text mx-1">(Type)</span>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- <div class="crd-fot">
+                    <div class="d-flex-center">
+                        <div data-toggle="tooltip" data-placement="top" class="text_elip" title="Shawne Smith">{{item.UserName}}</div>
+                        <div class="capacity_txt" (click)="docsideviw(item.DocumentId)">View Details
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div id="rightbar-overlay"></div>
+
+<div id="docview" class="wc-75 kt-quick-panel kt-quick-panel1  scroll-div">
+    <a (click)="closeInfo()" class="kt-quick-panel__close" id="kt_quick_panel_close_btn"><i
+            class="flaticon2-delete"></i></a>
+
+    <div class="kt-grid__item kt-grid__item--fluid kt-app__content" id="kt_chat_content">
+        <div class="kt-chat">
+            <div class="kt-portlet kt-portlet--head-lg kt-portlet--last">
+                <div class="kt-portlet__head">
+                    <div class="kt-chat__head">
+                        <div class="">
+                            <div class="kt-chat__label">
+                                <h4 class="">
+                                    Share Document
+                                </h4>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="kt-portlet__body py-1">
+                    <div class="mt-1">
+                        <div id="proj_act_acc" class="px-1">
+                            <div class="pro_act_div card-body px-0">
+                                <div class="d-flex flex-grow-1r">
+                                    <div class="col-md-12 checked-rad pl-1">
+                                        <div class="appr-comts">
+                                            <div class="form-group">
+                                                <label class="mb-2">Sharing Type</label>
+
+                                                <div class="">
+                                                    <div class="form-check-inline">
+                                                        <label class="form-check-label lbl-info btn-app">
+                                                            <input id="rdbButtons_0" type="radio" name="rdbButtons"
+                                                                value="E" class="form-check-input">Electronic </label>
+                                                    </div>
+                                                    <div class="form-check-inline">
+                                                        <label class="form-check-label lbl-info btn-app">
+                                                            <input id="rdbButtons_1" type="radio" name="rdbButtons"
+                                                                value="P" class="form-check-input">Physical </label>
+                                                    </div>
+                                                    <div class="form-check-inline">
+                                                        <label class="form-check-label lbl-info btn-app">
+                                                            <input id="rdbButtons_2" type="radio" 
+                                                                name="rdbButtons" value="B"
+                                                                class="form-check-input">Both </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="mb-2"> Company</label>
+                                                <ng-select placeholder="select" [(ngModel)]="CompanyId" (change)="GetUserList($event)">
+                                                    <ng-option [value]="obj.CompanyId" *ngFor="let obj of ObjgetCompanyList">
+                                                        {{obj.CompanyName}}
+                                                    </ng-option>
+                                                </ng-select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="mb-2">User</label>
+                                                <ng-select placeholder="select" [(ngModel)]="ToUserId" (change)="GetSelectedUserId($event)">
+                                                    <ng-option [value]="obj.UserId" *ngFor="let obj of ObjgetuserList">
+                                                        {{obj.ContactName}}
+                                                    </ng-option>
+                                                </ng-select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="mb-2">Permission</label>
+                                                <div class="mb-2">
+                                                    <div class="form-check-inline">
+                                                        <label class="form-check-label lbl-info btn-app">
+                                                            <input type="radio" name="rdbButtons_Permission"
+                                                                (click)="rdPermissionChange(1)" value="1"
+                                                                class="form-check-input" />
+                                                            Read
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check-inline">
+                                                        <label class="form-check-label lbl-info btn-app">
+                                                            <input type="radio" name="rdbButtons_Permission"
+                                                                (click)="rdPermissionChange(2)" value="2"
+                                                                class="form-check-input" />
+                                                            Write
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check-inline">
+                                                        <label class="form-check-label lbl-info btn-app">
+                                                            <input type="radio" name="rdbButtons_Permission"
+                                                                (click)="rdPermissionChange(3)" value="3"
+                                                                class="form-check-input" />
+                                                            Full Access
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <span class="txtm-cus nrml">
+                                                    Full Access i.e read,write and download
+                                                </span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="mb-2">Start Date</label>
+                                                <input type="date" [(ngModel)]="startdate" id="txtstartdate" name="txtstartdate" (change)="clearenddate()" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="mb-2">End Date</label>
+                                                <input type="date" [(ngModel)]="Enddate" id="txtEndDate" name="txtEndDate" (click)="onenddate()" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-end">
+                                            <button class="btn btn-sm btn-info mr-2" (click)="SendShareRequest()">Submit</button>
+                                            <button class="btn btn-sm btn-secondary" (click)="closeInfo()">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="kt-aside-menu-overlay" (click)="closeInfo()"></div>

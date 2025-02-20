@@ -1,0 +1,1361 @@
+<div class="form kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid" id="scrd">
+    <!-- <div class="kt-doc-nav">
+        <div class="kt-doc-nav-heading">{{ "Masterform.StreamDocuments" | translate }}</div>
+        <div class="kt-doc-nav-btn">
+            <div>
+                <button type="button" class="btn btn-primary kt-inbox__compose mx-0 btn-memo1" style="width: 100%;"
+                    routerLink="/backend/materforms/GacFileUpload">
+                    <span class="mr-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon"
+                            style="width: 1.2em; height: 1.2em;vertical-align: middle;fill: currentColor;overflow: hidden;"
+                            viewBox="0 0 1024 1024" version="1.1">
+                            <path
+                                d="M960 448H576V64a64 64 0 0 0-128 0v384H64a64 64 0 0 0 0 128h384v384a64 64 0 0 0 128 0V576h384a64 64 0 0 0 0-128z" />
+                        </svg>
+                    </span>
+                    {{ "Masterform.NewDocument" | translate }}
+                </button>
+            </div>
+        </div>
+    </div> -->
+    <div id="kt_inbox" class="kt-grid kt-grid--desktop kt-grid--ver-desktop kt-inbox">
+        <div id="kt_inbox_aside" class="kt-grid__item kt-portlet kt-inbox__aside pb-0 scroll-y aside-scrolly">
+            <button type="button" class="btn btn-primary kt-inbox__compose mx-0 btn-memo1" style="width: 100%;"
+            routerLink="/backend/materforms/GacFileUpload">
+            <span class="mr-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" version="1.1" class="svg-icon" style="width: 1.2em; height: 1.2em; vertical-align: middle; fill: currentColor; overflow: hidden;"><path d="M960 448H576V64a64 64 0 0 0-128 0v384H64a64 64 0 0 0 0 128h384v384a64 64 0 0 0 128 0V576h384a64 64 0 0 0 0-128z"></path></svg></span>
+            New Document
+        </button>
+        <div class="kt-inbox__nav mt-2">
+            <ul class="kt-nav">
+                <li class="kt-nav__item active">
+                    <a class="kt-nav__link">
+                        <span class="svg-icon svg-icon-2x">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <polygon points="0 0 24 0 24 24 0 24"/>
+                                <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                <rect fill="#000000" x="6" y="11" width="9" height="2" rx="1"/>
+                                <rect fill="#000000" x="6" y="15" width="5" height="2" rx="1"/>
+                            </g>
+                        </svg></span>
+
+                        <span style="margin-left: 10px;" class="kt-nav__link-text">Documents</span>
+                    </a>
+                </li>
+                <li class="kt-nav__item">
+                    <a class="kt-nav__link">
+                        <span class="svg-icon svg-icon-2x">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                        <path opacity="0.3" d="M5.85714 2H13.7364C14.0911 2 14.4343 2.12568 14.7051 2.35474L19.4687 6.38394C19.8057 6.66895 20 7.08788 20 7.5292V20.0833C20 21.8739 19.9796 22 18.1429 22H5.85714C4.02045 22 4 21.8739 4 20.0833V3.91667C4 2.12612 4.02045 2 5.85714 2Z" fill="black"/>
+                                        <path d="M10.2189 9.53356C10.789 8.51119 11.0739 8 11.5 8C11.9261 8 12.211 8.51119 12.7811 9.53356L12.9287 9.79816C13.0907 10.0889 13.1717 10.2342 13.2977 10.33C13.4237 10.4259 13.5812 10.4614 13.8962 10.5325L14.1824 10.5973C15.2894 10.848 15.8424 10.9731 15.9742 11.3965C16.1056 11.8195 15.7285 12.261 14.9739 13.1434L14.7786 13.3715C14.5644 13.6222 14.4569 13.7477 14.4087 13.9025C14.3606 14.0578 14.3768 14.2252 14.4092 14.5595L14.4389 14.8641C14.5527 16.0418 14.6099 16.6303 14.2652 16.8918C13.9205 17.1537 13.4021 16.9147 12.3662 16.4378L12.0976 16.3145C11.8033 16.1786 11.6561 16.1111 11.5 16.1111C11.3439 16.1111 11.1967 16.1786 10.9024 16.3145L10.6342 16.4378C9.59789 16.9147 9.07951 17.1532 8.73526 16.8922C8.39012 16.6303 8.44727 16.0418 8.56112 14.8641L8.59082 14.5599C8.62322 14.2252 8.63942 14.0578 8.59082 13.903C8.54312 13.7477 8.43557 13.6222 8.22138 13.372L8.02608 13.1434C7.27145 12.2614 6.89436 11.82 7.02576 11.3965C7.1576 10.9731 7.71109 10.8475 8.81806 10.5973L9.10426 10.5325C9.4188 10.4614 9.57585 10.4259 9.70229 10.33C9.82829 10.2342 9.90929 10.0889 10.0713 9.79816L10.2189 9.53356Z" fill="black"/>
+                                    </g>
+                                </svg>
+                        </span>
+                        <span style="margin-left: 10px;" class="kt-nav__link-text">Favorite</span>
+                    </a>
+                </li>
+                <!-- <li class="kt-nav__item">
+                    <a class="kt-nav__link">
+                        <span class="svg-icon svg-icon-2x">
+                           
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <path opacity="0.3" d="M5.85714 2H13.7364C14.0911 2 14.4343 2.12568 14.7051 2.35474L19.4687 6.38394C19.8057 6.66895 20 7.08788 20 7.5292V20.0833C20 21.8739 19.9796 22 18.1429 22H5.85714C4.02045 22 4 21.8739 4 20.0833V3.91667C4 2.12612 4.02045 2 5.85714 2Z" fill="black"/>
+                                <path d="M9 8H8V7H16V8H15V9C15 9.8075 14.592 10.4575 14.078 10.9885C13.7265 11.3515 13.299 11.686 12.8655 12C13.299 12.314 13.7265 12.6485 14.078 13.0115C14.592 13.5425 15 14.1925 15 15V16H16V17H8V16H9V15C9 14.1925 9.408 13.5425 9.922 13.0115C10.2735 12.6485 10.701 12.314 11.1345 12C10.701 11.686 10.2735 11.3515 9.922 10.9885C9.408 10.4575 9 9.8075 9 9V8ZM10 8V9C10 9.3425 10.13 9.6675 10.3855 10H13.6145C13.8695 9.6675 14 9.3425 14 9V8H10ZM12 12.611C11.4775 12.98 11.004 13.3315 10.6405 13.707C10.55 13.7998 10.4649 13.8976 10.3855 14H13.6145C13.5351 13.8976 13.45 13.7998 13.3595 13.707C12.996 13.3315 12.5225 12.98 12 12.611Z" fill="black"/>
+                               
+                            </g></svg>
+                        </span>
+
+                        <span style="margin-left: 10px;" class="kt-nav__link-text">Draft</span>
+                    </a>
+                </li> -->
+
+
+                <!-- <li [(ngModel)]="txt11" (click)="onstatus('V')" [ngClass]=" Approval? 'kt-nav__item active' : 'kt-nav__item'">
+                    <a class="kt-nav__link">
+                        <span class="svg-icon svg-icon-2x">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <polygon points="0 0 24 0 24 24 0 24"/>
+                                <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z M10.875,15.75 C11.1145833,15.75 11.3541667,15.6541667 11.5458333,15.4625 L15.3791667,11.6291667 C15.7625,11.2458333 15.7625,10.6708333 15.3791667,10.2875 C14.9958333,9.90416667 14.4208333,9.90416667 14.0375,10.2875 L10.875,13.45 L9.62916667,12.2041667 C9.29375,11.8208333 8.67083333,11.8208333 8.2875,12.2041667 C7.90416667,12.5875 7.90416667,13.1625 8.2875,13.5458333 L10.2041667,15.4625 C10.3958333,15.6541667 10.6354167,15.75 10.875,15.75 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                <path d="M10.875,15.75 C10.6354167,15.75 10.3958333,15.6541667 10.2041667,15.4625 L8.2875,13.5458333 C7.90416667,13.1625 7.90416667,12.5875 8.2875,12.2041667 C8.67083333,11.8208333 9.29375,11.8208333 9.62916667,12.2041667 L10.875,13.45 L14.0375,10.2875 C14.4208333,9.90416667 14.9958333,9.90416667 15.3791667,10.2875 C15.7625,10.6708333 15.7625,11.2458333 15.3791667,11.6291667 L11.5458333,15.4625 C11.3541667,15.6541667 11.1145833,15.75 10.875,15.75 Z" fill="#000000"/>
+                            </g>
+                        </svg></span>
+
+                        <span style="margin-left: 10px;" class="kt-nav__link-text">Approved</span>
+                    </a>
+                </li>
+                <li [(ngModel)]="txt00" (click)="onstatus('P')" [ngClass]=" Pending? 'kt-nav__item active' : 'kt-nav__item'">
+                    <a class="kt-nav__link">
+                        <span class="svg-icon svg-icon-2x">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <path opacity="0.3" d="M5.85714 2H13.7364C14.0911 2 14.4343 2.12568 14.7051 2.35474L19.4687 6.38394C19.8057 6.66895 20 7.08788 20 7.5292V20.0833C20 21.8739 19.9796 22 18.1429 22H5.85714C4.02045 22 4 21.8739 4 20.0833V3.91667C4 2.12612 4.02045 2 5.85714 2Z" fill="black" fill-rule="nonzero"/>
+                                <path d="M11.5 8C13.9853 8 16 10.0147 16 12.5C16 14.9853 13.9853 17 11.5 17C9.01465 17 7 14.9853 7 12.5C7 10.0147 9.01465 8 11.5 8ZM11.5 9.8C11.3807 9.8 11.2662 9.84741 11.1818 9.9318C11.0974 10.0162 11.05 10.1307 11.05 10.25V12.5C11.05 12.6193 11.0975 12.7338 11.1819 12.8181L12.5318 14.1681C12.6167 14.2501 12.7304 14.2955 12.8484 14.2945C12.9664 14.2934 13.0792 14.2461 13.1627 14.1627C13.2461 14.0792 13.2934 13.9664 13.2945 13.8484C13.2955 13.7304 13.2501 13.6167 13.1681 13.5318L11.95 12.3137V10.25C11.95 10.1307 11.9026 10.0162 11.8182 9.9318C11.7338 9.84741 11.6193 9.8 11.5 9.8Z" fill="black"/>
+                            </g></svg>
+                        </span>
+
+                        <span style="margin-left: 10px;" class="kt-nav__link-text">Pending</span>
+                    </a>
+                </li>
+
+                <li [(ngModel)]="txt22" (click)="onstatus('R')" [ngClass]=" Reject? 'kt-nav__item active' : 'kt-nav__item'">
+                    <a class="kt-nav__link">
+                        <span class="svg-icon svg-icon-2x">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <polygon points="0 0 24 0 24 24 0 24"/>
+                                <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="currentColor" fill-rule="nonzero" opacity="0.3"/>
+                                <path d="M10.5857864,13 L9.17157288,11.5857864 C8.78104858,11.1952621 8.78104858,10.5620972 9.17157288,10.1715729 C9.56209717,9.78104858 10.1952621,9.78104858 10.5857864,10.1715729 L12,11.5857864 L13.4142136,10.1715729 C13.8047379,9.78104858 14.4379028,9.78104858 14.8284271,10.1715729 C15.2189514,10.5620972 15.2189514,11.1952621 14.8284271,11.5857864 L13.4142136,13 L14.8284271,14.4142136 C15.2189514,14.8047379 15.2189514,15.4379028 14.8284271,15.8284271 C14.4379028,16.2189514 13.8047379,16.2189514 13.4142136,15.8284271 L12,14.4142136 L10.5857864,15.8284271 C10.1952621,16.2189514 9.56209717,16.2189514 9.17157288,15.8284271 C8.78104858,15.4379028 8.78104858,14.8047379 9.17157288,14.4142136 L10.5857864,13 Z" fill="curretncolor"/>
+                            </g>
+                        </svg>
+                    </span>
+
+                        <span style="margin-left: 10px;" class="kt-nav__link-text">Rejected</span>
+                    </a>
+                </li> -->
+                <li class="kt-nav__item" routerLinkActive="active" >
+                    <a class="kt-nav__link" routerLink="archivetrash">
+                        <span class="svg-icon svg-icon-2x">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24" />
+                                <path opacity="0.3" d="M5.85714 2H13.7364C14.0911 2 14.4343 2.12568 14.7051 2.35474L19.4687 6.38394C19.8057 6.66895 20 7.08788 20 7.5292V20.0833C20 21.8739 19.9796 22 18.1429 22H5.85714C4.02045 22 4 21.8739 4 20.0833V3.91667C4 2.12612 4.02045 2 5.85714 2Z" fill="black"/>
+                                <path d="M15.5556 11.1111L14.6689 16.1538C14.6327 16.3597 14.5251 16.5463 14.365 16.6808C14.2048 16.8152 14.0024 16.8889 13.7933 16.8889H10.2067C9.99757 16.8889 9.79517 16.8152 9.63503 16.6808C9.4749 16.5463 9.36728 16.3597 9.33111 16.1538L8.44444 11.1111M16 9.77778H13.5M13.5 9.77778V8.88889C13.5 8.65314 13.4063 8.42705 13.2397 8.26035C13.073 8.09365 12.8469 8 12.6111 8H11.3889C11.1531 8 10.927 8.09365 10.7603 8.26035C10.5937 8.42705 10.5 8.65314 10.5 8.88889V9.77778M13.5 9.77778H10.5M8 9.77778H10.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+                        </svg>
+                        </span>
+                        <span style="margin-left: 10px;" class="kt-nav__link-text">Trash</span>
+                    </a>
+                </li>
+                <li class="kt-nav__item mt-3"><strong>Shared</strong></li>
+                <li class="kt-nav__separator"></li>
+                <li (click)="onsharedme()" [ngClass]=" toggle ? 'kt-nav__item active' : 'kt-nav__item'">
+                    <a class="kt-nav__link">
+                        <span class="svg-icon svg-icon-2x">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            width="24px" height="24px" viewBox="0 0 24 24" version="1.1" >
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24" />
+                                <path opacity="0.3" d="M5.85714 2H13.7364C14.0911 2 14.4343 2.12568 14.7051 2.35474L19.4687 6.38394C19.8057 6.66895 20 7.08788 20 7.5292V20.0833C20 21.8739 19.9796 22 18.1429 22H5.85714C4.02045 22 4 21.8739 4 20.0833V3.91667C4 2.12612 4.02045 2 5.85714 2Z" fill="black"/>
+                            <path d="M12 7C11.1067 7 10.3817 7.71667 10.3458 8.60167C9.59888 8.92084 8.96236 9.45276 8.51559 10.1311C8.06881 10.8095 7.83154 11.6044 7.83333 12.4167C7.83333 12.4875 7.83 12.5667 7.83333 12.6512C7.33958 12.9412 7 13.4729 7 14.0833C7 14.9987 7.75125 15.75 8.66667 15.75C8.90625 15.75 9.1375 15.6992 9.34375 15.6067C10.0658 16.2133 11.0075 16.5833 12 16.5833C12.9925 16.5833 13.9342 16.2133 14.6562 15.6067C14.8694 15.7015 15.1001 15.7504 15.3333 15.75C16.2487 15.75 17 14.9987 17 14.0833C17 13.4667 16.6562 12.9262 16.1542 12.6375C16.1604 12.5708 16.1667 12.5042 16.1667 12.4167C16.1686 11.6044 15.9313 10.8095 15.4846 10.131C15.0378 9.45264 14.4012 8.92075 13.6542 8.60167C13.6179 7.71667 12.8929 7 12 7ZM12 9.70833C12 9.24333 12.465 9.70833 12 9.70833C12 10.1733 12.465 9.5 12 9.5C11.535 9.5 11.7917 10.1733 11.7917 9.70833C11.7917 9.24333 11.535 9.70833 12 9.70833ZM10.5292 9.435C10.8083 9.96583 11.3625 10.3333 12 10.3333C12.6375 10.3333 13.1917 9.96583 13.4708 9.435C14.0302 9.70662 14.5017 10.1305 14.8311 10.6578C15.1605 11.1852 15.3346 11.7948 15.3333 12.4167C14.4179 12.4167 13.6667 13.1679 13.6667 14.0833C13.6667 14.4562 13.7958 14.7942 14.0054 15.0729C13.4271 15.5083 12.7239 15.7458 12 15.75C11.2761 15.7459 10.5728 15.5084 9.99458 15.0729C10.2126 14.789 10.3316 14.4414 10.3333 14.0833C10.3333 13.1679 9.58208 12.4167 8.66667 12.4167C8.66667 11.1167 9.4125 9.97667 10.5292 9.435ZM9.08333 15.0729C9.54833 15.0729 7.98441 12.7383 8.66667 13.25C7.83333 12.625 8.715 14.0833 8.25 14.0833C8.25 14.5483 8.875 14.7083 8.25 14.0833C8.25 13.6183 8.61833 15.0729 9.08333 15.0729ZM15.3333 15.3333C15.7983 15.3333 15.75 14.4517 15.75 14.9167C15.75 15.3817 15.7983 14.9167 15.3333 14.9167C14.8683 14.9167 15.4846 15.1733 15.4846 14.7083C15.4846 14.2433 14.8683 15.3333 15.3333 15.3333Z" fill="black"/>
+                            </g>
+                        </svg>
+                        </span>
+
+                        <span style="margin-left: 10px;" class="kt-nav__link-text">Shared with me</span>
+                    </a>
+                </li>
+                <li (click)="onsharedby()" [ngClass]=" Select ? 'kt-nav__item active' : 'kt-nav__item'">
+                    <a class="kt-nav__link">
+                        <span class="svg-icon svg-icon-2x">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            width="24px" height="24px" viewBox="0 0 24 24" version="1.1" >
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24" />
+                                <path opacity="0.3" d="M5.85714 2H13.7364C14.0911 2 14.4343 2.12568 14.7051 2.35474L19.4687 6.38394C19.8057 6.66895 20 7.08788 20 7.5292V20.0833C20 21.8739 19.9796 22 18.1429 22H5.85714C4.02045 22 4 21.8739 4 20.0833V3.91667C4 2.12612 4.02045 2 5.85714 2Z" fill="black"/>
+                            <path d="M12.9229 14.2192L10.6516 13.0458C10.4336 13.2508 10.1564 13.3901 9.85492 13.4461C9.55347 13.502 9.24127 13.4722 8.95768 13.3604C8.67409 13.2485 8.43181 13.0596 8.26138 12.8176C8.09095 12.5755 8 12.291 8 12C8 11.709 8.09095 11.4245 8.26138 11.1824C8.43181 10.9404 8.67409 10.7515 8.95768 10.6396C9.24127 10.5278 9.55347 10.498 9.85492 10.5539C10.1564 10.6099 10.4336 10.7492 10.6516 10.9542L12.9229 9.78077C12.845 9.43458 12.9012 9.07339 13.0814 8.76326C13.2615 8.45313 13.5535 8.21478 13.9039 8.0918C14.2543 7.96882 14.6397 7.96942 14.9897 8.0935C15.3396 8.21759 15.6308 8.45685 15.8098 8.76755C15.9889 9.07824 16.0438 9.4396 15.9647 9.78555C15.8856 10.1315 15.6777 10.4389 15.379 10.6516C15.0803 10.8642 14.7107 10.9679 14.3379 10.9437C13.9651 10.9195 13.6139 10.769 13.3487 10.5197L11.0774 11.6931C11.1226 11.8953 11.1226 12.1043 11.0774 12.3065L13.3487 13.4803C13.6139 13.231 13.9651 13.0805 14.3379 13.0563C14.7107 13.0321 15.0803 13.1358 15.379 13.3484C15.6777 13.5611 15.8856 13.8685 15.9647 14.2144C16.0438 14.5604 15.9889 14.9218 15.8098 15.2325C15.6308 15.5432 15.3396 15.7824 14.9897 15.9065C14.6397 16.0306 14.2543 16.0312 13.9039 15.9082C13.5535 15.7852 13.2615 15.5469 13.0814 15.2367C12.9012 14.9266 12.845 14.5654 12.9229 14.2192Z" fill="black"/>
+                            </g>
+                        </svg>
+                        </span>
+
+                        <span style="margin-left: 10px;" class="kt-nav__link-text">Shared by me</span>
+                    </a>
+                </li>
+                <li (click)="OnSharedExpired()" [ngClass]=" Expired ? 'kt-nav__item active' : 'kt-nav__item'">
+                    <a class="kt-nav__link">
+                        <span class="svg-icon svg-icon-2x">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            width="24px" height="24px" viewBox="0 0 24 24" version="1.1" >
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24" />
+                                <path opacity="0.3" d="M5.85714 2H13.7364C14.0911 2 14.4343 2.12568 14.7051 2.35474L19.4687 6.38394C19.8057 6.66895 20 7.08788 20 7.5292V20.0833C20 21.8739 19.9796 22 18.1429 22H5.85714C4.02045 22 4 21.8739 4 20.0833V3.91667C4 2.12612 4.02045 2 5.85714 2Z" fill="black"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.5315 7.00128C11.7438 6.98414 10.9619 7.13912 10.2403 7.45542C9.51874 7.77171 8.87489 8.24168 8.35373 8.83253C7.83256 9.42337 7.44663 10.1209 7.22289 10.8763C6.99915 11.6317 6.94299 12.4268 7.05832 13.2062C7.17366 13.9856 7.45771 14.7304 7.89065 15.3886C8.32359 16.0468 8.89498 16.6027 9.56493 17.0172C10.2349 17.4318 10.9873 17.6952 11.7695 17.7889C12.5518 17.8827 13.3451 17.8045 14.094 17.56C14.222 17.5182 14.3281 17.4272 14.389 17.3072C14.4499 17.1871 14.4606 17.0478 14.4188 16.9198C14.377 16.7919 14.2861 16.6858 14.166 16.6248C14.046 16.5639 13.9066 16.5532 13.7787 16.595C12.9648 16.8608 12.091 16.8832 11.2646 16.6596C10.4381 16.436 9.69489 15.9761 9.12602 15.3363C8.55716 14.6964 8.18739 13.9045 8.06207 13.0575C7.93675 12.2106 8.06132 11.3455 8.42052 10.5683C8.77971 9.7911 9.35791 9.13565 10.0842 8.6823C10.8105 8.22895 11.6533 7.99741 12.5093 8.01609C13.3652 8.03476 14.1971 8.30283 14.903 8.78743C15.6088 9.27202 16.1578 9.95207 16.4828 10.7442C16.5339 10.8687 16.6323 10.9679 16.7565 11.0199C16.818 11.0456 16.8839 11.059 16.9506 11.0592C17.0172 11.0595 17.0833 11.0466 17.145 11.0213C17.2066 10.996 17.2627 10.9588 17.31 10.9119C17.3573 10.8649 17.3949 10.8091 17.4207 10.7476C17.4464 10.6861 17.4598 10.6202 17.46 10.5535C17.4602 10.4868 17.4474 10.4208 17.4221 10.3591C17.0221 9.38418 16.3464 8.54715 15.4777 7.95069C14.6089 7.35422 13.585 7.02427 12.5315 7.00128ZM12.9206 9.5376C12.9206 9.40299 12.8671 9.2739 12.7719 9.17871C12.6768 9.08353 12.5477 9.03006 12.4131 9.03006C12.2784 9.03006 12.1494 9.08353 12.0542 9.17871C11.959 9.2739 11.9055 9.40299 11.9055 9.5376V12.2038L10.5291 13.5796C10.4792 13.6261 10.4392 13.6821 10.4115 13.7443C10.3838 13.8066 10.3688 13.8738 10.3676 13.942C10.3664 14.0101 10.379 14.0778 10.4045 14.141C10.43 14.2042 10.468 14.2616 10.5162 14.3098C10.5644 14.358 10.6218 14.396 10.685 14.4215C10.7482 14.447 10.8159 14.4596 10.884 14.4584C10.9522 14.4572 11.0194 14.4422 11.0817 14.4145C11.1439 14.3868 11.1999 14.3468 11.2464 14.2969L12.7717 12.7723L12.9206 12.6234V9.5376ZM17.15 17.1506C17.15 17.3301 17.0787 17.5022 16.9518 17.6291C16.8249 17.756 16.6528 17.8273 16.4733 17.8273C16.2938 17.8273 16.1217 17.756 15.9948 17.6291C15.8679 17.5022 15.7966 17.3301 15.7966 17.1506C15.7966 16.9711 15.8679 16.799 15.9948 16.6721C16.1217 16.5452 16.2938 16.4739 16.4733 16.4739C16.6528 16.4739 16.8249 16.5452 16.9518 16.6721C17.0787 16.799 17.15 16.9711 17.15 17.1506ZM16.9809 12.9212C16.9809 12.7865 16.9274 12.6575 16.8322 12.5623C16.737 12.4671 16.6079 12.4136 16.4733 12.4136C16.3387 12.4136 16.2096 12.4671 16.1144 12.5623C16.0193 12.6575 15.9658 12.7865 15.9658 12.9212V15.2896C15.9658 15.4242 16.0193 15.5533 16.1144 15.6485C16.2096 15.7437 16.3387 15.7972 16.4733 15.7972C16.6079 15.7972 16.737 15.7437 16.8322 15.6485C16.9274 15.5533 16.9809 15.4242 16.9809 15.2896V12.9212Z" fill="black"/>
+                            </g>
+                        </svg>
+                        </span>
+                        <span style="margin-left: 10px;" class="kt-nav__link-text">Shared Expired</span>
+                    </a>
+                </li>
+
+                <li class="kt-nav__item d-flex justify-content-between mt-3">
+                    <div>
+                        <span class="mr-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                aria-hidden="true" role="img" font-size="1.5rem" class="iconify iconify--mdi sm-icn"
+                                width="1em" height="1em" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M16 17H5V7h11l3.55 5m-1.92-6.16C17.27 5.33 16.67 5 16 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h11c.67 0 1.27-.34 1.63-.85L22 12l-4.37-6.16Z">
+                                </path>
+                            </svg>
+                        </span>
+                        <strong class="">LabelsTags</strong>
+                    </div>
+                    <span class="curser-pointer dropdown-toggle kt-no-after" type="button" data-toggle="dropdown">
+                        <i class="kt-nav__link-icon fas fa-plus kt-font-primary"></i>
+                    </span>
+                    <div id="labelsAddDiv"
+                        class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-menu-md border-light">
+                        <!--begin::Nav-->
+                        <ul class="kt-nav">
+                            <li class="kt-nav__head">
+                                AddLabel
+                            </li>
+                            <li class="kt-nav__separator"></li>
+                            <li class="kt-nav__item px-3">
+                                <input type="text" class="form-control"  id="txtlabels" name="LabelName">
+                            </li>
+                            <li class="kt-nav__separator"></li>
+                            <li class="kt-nav__foot">
+                                <a (click)="AddLabels()" class="btn btn-primary text-white btn-bold btn-sm">AddLabel</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </li>
+                <li class="kt-nav__separator"></li>
+                <li class="kt-nav__item">
+                    <!-- (click)="focustextbox()" -->
+                </li>
+
+                <div class="label-height" id="div_labels"  >
+                    <li *ngFor="let ss of _Lstlabels" class="kt-nav__item LabelsClass" id="li_{{ss.LabelId}}">
+                        <a class="kt-nav__link pr-2">
+                            <small class="kt-lab-tag"></small>
+                            <span class="kt-nav__link-text curser-pointer"
+                               > {{ss.LabelName}} </span>
+                            <span class="kt-nav__link-badge curser-pointer" data-toggle="dropdown">
+                                <i class="fa fa-edit"></i></span>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-menu-md">
+                                <!--begin::Nav-->
+                                <ul class="kt-nav">
+                                    <li class="kt-nav__head">
+                                        EditLabel
+                                    </li>
+                                    <li class="kt-nav__separator"></li>
+                                    <li class="kt-nav__item px-3">
+                                        <input type="text" class="form-control" id="txteditlabels_{{ss.LabelId}}"
+                                        value="{{ss.LabelName}}" name="LabelName">
+                                    </li>
+                                    <li class="kt-nav__separator"></li>
+                                    <li class="kt-nav__foot">
+                                        <a (click)="UpdateLabel(ss.LabelId)"
+                                            class="btn btn-label-primary btn-bold btn-sm">UpdateLabel</a>
+                                    </li>
+                                </ul>
+                                <!--end::Nav-->
+                            </div>
+                            <div>
+                                <span class="kt-nav__link-badge curser-pointer" data-toggle="dropdown"
+                                    (click)="fordelete(ss.LabelId)">
+                                    <i class="fa fa-trash"></i></span>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-menu-md">
+                                    <div class="card-body d-flex flex-column flex-center">
+                                        <div class="mb-2 kt-lb-dtl-body text-center">
+                                            <div class="kt-icon-lb-trash">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                                                    <path
+                                                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                                                </svg>
+                                            </div>
+                                            <h4>
+                                                AreyouSure
+                                            </h4>
+                                            <p id="s">
+                                                Do you want to proceed with deleting the <span>{{ss.LabelName}}</span> Label from the 1 memos assigned to it?
+                                                
+                                            </p>
+                                        </div>
+                                        <div class="kt-dl-lb-btn">
+                                            <a class="btn btn-sm btn-secondary px-3 ml-2 mt-0">
+                                                Cancel </a>
+                                            <a class="btn btn-label-primary btn-bold btn-sm"
+                                                (click)="LabelsRemove()">
+                                                Remove </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <button *ngIf="_Lstlabels.length==0" class="kt-new-label  dropdown-toggle kt-no-after"
+                            data-toggle="dropdown"> <i class="kt-nav__link-icon fas fa-plus mr-2"></i> create new
+                            label</button>
+                        <div id="labelsAddDiv"
+                            class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-menu-md border-light">
+                            <!--begin::Nav-->
+                            <ul class="kt-nav">
+                                <li class="kt-nav__head">
+                                    Add Label
+                                </li>
+                                <li class="kt-nav__separator"></li>
+                                <li class="kt-nav__item px-3">
+                                    <input type="text" class="form-control" id="txtcreateNewLabel" name="LabelName">
+                                </li>
+                                <li class="kt-nav__separator"></li>
+                                <li class="kt-nav__foot">
+                                    <a (click)="CreateNewLabel()" class="btn btn-primary text-white btn-bold btn-sm">Add
+                                        label</a>
+                                </li>
+                            </ul>
+                        </div>
+                    
+                </div>
+                <ng-container *ngIf="_Lstlabels.length>4">
+                    <div (click)="LabelActivaleclass()" class="kt-cnt-v ">
+                        <p>+{{LabelCount}} {{ "Communication.More" | translate }} </p>
+                    </div>
+                </ng-container>
+                <li class="kt-nav__item mt-3"><strong>Actions</strong></li>
+                <li class="kt-nav__separator"></li>
+                <!-- <li class="kt-nav__item">
+                    <a class="kt-nav__link kt-nav__link-nohover">
+                        <i class="kt-nav__link-icon fa fa-square kt-font-Approved"></i>
+                        <span class="kt-nav__link-text">Approved</span>
+                    </a>
+                </li> -->
+                <li class="kt-nav__item">
+                    <a class="kt-nav__link kt-nav__link-nohover">
+                        <i class="kt-nav__link-icon fa fa-square kt-font-primary"></i>
+                        <span class="kt-nav__link-text">Pending</span>
+                    </a>
+                </li>
+                <li class="kt-nav__item">
+                    <a class="kt-nav__link kt-nav__link-nohover">
+                        <i class="kt-nav__link-icon fa fa-square kt-font-danger"></i>
+                        <span class="kt-nav__link-text">Rejected</span>
+                    </a>
+                </li>
+                <li></li>
+            </ul>
+        </div>
+        </div>
+        <div class="kt-grid__item kt-grid__item--fluid kt-portlet kt-inbox__list kt-inbox__list--shown">
+            <div class="kt-portlet__head bg-white">
+                <div class="kt-inbox__toolbar kt-inbox__toolbar--extended">
+                    <div class="kt-inbox__actions kt-inbox__actions--expanded mr-0">
+                        <div class="kt-inbox__search serch-cus d-flex-center">
+                            <div class="input-group" id="search-grp">
+                                <div class="input-group-append">
+                                    <a (click)="IconSearch()" class="input-group-text">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                </div>
+                                <input id="txtMainSearch" (keydown)="onBackspace($event)" [(ngModel)]="_Search"
+                                    (keyup.enter)="Search()" type="text" (click)="Searchighlight()"
+                                    (keyup)="clearshow()" [placeholder]="GacSearch" class="form-control"
+                                    autocomplete="off" />
+                                <button *ngIf="_Search" class="clear-icon kt-search-clr-ic">
+                                    <i (click)="RebindingSeachDocument()" class="fa fa-times"></i></button>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            <button class="srch-btns mr-2" type="button" role="button" id="clrr-btn"
+                                                (click)="OnClear()" data-tooltip="Clear Search" aria-label="Clear Search">
+                                                <svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" font-size="1.5rem" width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path  d="M2 12a9 9 0 0 0 9 9c2.39 0 4.68-.94 6.4-2.6l-1.5-1.5A6.706 6.706 0 0 1 11 19c-6.24 0-9.36-7.54-4.95-11.95C10.46 2.64 18 5.77 18 12h-3l4 4h.1l3.9-4h-3a9 9 0 0 0-18 0Z"></path></svg>
+                                            </button>
+                                            <button class="srch-btns" type="button" role="button" id="filtr-btn"
+                                                (click)="open_fltrs()" data-tooltip="Search options"
+                                                aria-label="Advanced search options">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z">
+                                                    </path>
+                                                </svg>
+                                            </button>
+                                        </span>
+                                    </div>
+                            </div>
+                            
+                            <div class="d-flex-center ml-3 d-none">
+                                
+                                
+                                <span>
+                                    <button data-toggle="kt-tooltip" data-skin="dark" (click)="OnClear()"
+                                        class="kt-inbox__icon tips" [attr.data-tippy-content]="tooltipContent">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                                            font-size="1.5rem" width="22" height="22" fill="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path
+                                                d="M2 12a9 9 0 0 0 9 9c2.39 0 4.68-.94 6.4-2.6l-1.5-1.5A6.706 6.706 0 0 1 11 19c-6.24 0-9.36-7.54-4.95-11.95C10.46 2.64 18 5.77 18 12h-3l4 4h.1l3.9-4h-3a9 9 0 0 0-18 0Z">
+                                            </path>
+                                        </svg><span class="label-hidden">Reload</span>
+                                    </button>
+                                </span>
+                                <span>
+                                    <button type="button" role="button" id="filter-doc-btn" (click)="open_fltrs()"
+                                        data-tooltip="Search options" aria-label="Advanced search options"
+                                        class="kt-inbox__icon tipsFilters" [attr.data-tippy-content]="tooltipContentFilters">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="currentColor">
+                                            <path
+                                                d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </span>
+                                <!-- <span>
+                                    <button class="kt-inbox__icon tips" type="button" role="button" id="list-btn" (click)="list_view()" data-tippy-content="List View">
+                                        <svg clip-rule="evenodd" fill-rule="evenodd" fill="currentColor" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m10.5 17.25c0-.414.336-.75.75-.75h10c.414 0 .75.336.75.75s-.336.75-.75.75h-10c-.414 0-.75-.336-.75-.75zm-1.5-3.55c0-.53-.47-1-1-1h-5c-.53 0-1 .47-1 1v4.3c0 .53.47 1 1 1h5c.53 0 1-.47 1-1zm-5.5.5h4v3.3h-4zm7-2.2c0-.414.336-.75.75-.75h10c.414 0 .75.336.75.75s-.336.75-.75.75h-10c-.414 0-.75-.336-.75-.75zm-1.5-6c0-.53-.47-1-1-1h-5c-.53 0-1 .47-1 1v4.3c0 .53.47 1 1 1h5c.53 0 1-.47 1-1zm-5.5.5h4v3.3h-4zm7 .25c0-.414.336-.75.75-.75h10c.414 0 .75.336.75.75s-.336.75-.75.75h-10c-.414 0-.75-.336-.75-.75z" fill-rule="nonzero"/></svg>
+                                    </button>
+                                </span>
+                                <span>
+                                    <button class="kt-inbox__icon active tips" type="button" role="button" id="grid-btn" (click)="grid_view()" data-tippy-content="Grid View">
+                                        <svg clip-rule="evenodd" fill-rule="evenodd" fill="currentColor" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m11.3 13.7c0-.53-.47-1-1-1h-7.3c-.53 0-1 .47-1 1v5.3c0 .53.47 1 1 1h7.3c.53 0 1-.47 1-1zm10.7 0c0-.53-.47-1-1-1h-7.3c-.53 0-1 .47-1 1v5.3c0 .53.47 1 1 1h7.3c.53 0 1-.47 1-1zm-7.8.5h6.3v4.3h-6.3zm-10.7 0h6.3v4.3h-6.3zm18.5-9.2c0-.53-.47-1-1-1h-7.3c-.53 0-1 .47-1 1v5.3c0 .53.47 1 1 1h7.3c.53 0 1-.47 1-1zm-10.7 0c0-.53-.47-1-1-1h-7.3c-.53 0-1 .47-1 1v5.3c0 .53.47 1 1 1h7.3c.53 0 1-.47 1-1zm2.9.5h6.3v4.3h-6.3zm-10.7 0h6.3v4.3h-6.3z" fill-rule="nonzero"/></svg>
+                                    </button>
+                                </span> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-portlet__head px-4 filter-head">
+                <div class="kt-inbox__toolbar kt-inbox__toolbar--extended">
+                    <div class="kt-inbox__actions kt-inbox__actions--expanded main-bx m-0">
+                        <label class="kt-checkbox kt-checkbox--single kt-checkbox--tick kt-checkbox--brand mb-0 mr-2 d-none">
+                            <input type="checkbox" id="SelectAllcheckbox"  name="checkbox"
+                            [(ngModel)]="_SelectAllCheckBox" [ngModelOptions]="{standalone: true}">
+                            <span></span>
+                        </label>
+            
+                        <div class="d-flex  align-items-center tabs-ies px-2">
+                            <div class="">
+                                <button 
+                                (click)="InitialLoadFilters(false)" [ngClass]="(_UnRead_Parameter==false)?'btn btn-tabbie btn-active':'btn btn-tabbie'">
+                                    All
+                                </button> 
+                                </div> 
+                                <button
+                                (click)="InitialLoadFilters(true)" [ngClass]="(_UnRead_Parameter==true)?'btn btn-tabbie btn-active':'btn btn-tabbie'">
+                                    Unread
+                                </button>
+                            </div>
+                            
+                            <div class="br-line"></div>
+                        <!-- labels start -->
+                        <div id="btngroup_label" class="btn-group dropdown">
+                            <button class="btn btn-hvr" id="dropdownlabel"  title="Labels" data-toggle="dropdown">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    aria-hidden="true" role="img" font-size="1.5rem" class="iconify iconify--mdi" width="1em"
+                                    height="1em" viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="M16 17H5V7h11l3.55 5m-1.92-6.16C17.27 5.33 16.67 5 16 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h11c.67 0 1.27-.34 1.63-.85L22 12l-4.37-6.16Z">
+                                    </path>
+                                </svg>
+                                <span class="label-hidden">Label</span>
+                            </button>
+                            <div id="div_filters" class="dropdown-menu dropdown-menu-left dropdown-menu-fit hand-drop">
+                                <ul class="kt-nav pb-4" (click)="$event.stopPropagation();">
+                                    <li class="kt-nav__head py-0">
+                                        <div>Label</div>
+                                    </li>
+                                    <li class="kt-nav__separator"></li>
+                                    <li class="kt-nav__item px-2 mb-2">
+                                        <input type="search" class="form-control" name="Label" [(ngModel)]="LabelText"  placeholder="SearchLabel">
+                                    </li>
+                                    <li class="pl-3">
+                                        <span *ngFor="let _lbl of SelectLabel">
+                                            {{_lbl}} ,
+                                        </span>
+                                    </li>
+                                    <div class="height-scroll h-scr">
+                                        <li class="kt-nav__item" *ngFor="let ss of _Lstlabels |filter:LabelText">
+                                            <div class="d-flex-cen">
+                                                <label class="kt-checkbox kt-checkbox--single kt-checkbox--tick kt-checkbox--brand mb-0 mr-1">
+                                                    <input name="labelckh" type="checkbox"  
+                                                    (change)="labelchange(ss.LabelId)"
+                                            [(ngModel)]="ss.checked" id="lbl_{{ss.LabelId}}"><span></span>
+                                                </label>
+                                                <label class="form-check-label cs-p" for="lbl_1">{{ss.LabelName}}</label>
+                                            </div>
+                                        </li>
+                                    </div>
+                                    <li class="kt-nav__separator"></li>
+                                    <li class="px-4">
+                                        <a class="btn btn-info btn-xs mr-2 text-white" (click)="AddMemostoLabels()">Add</a>
+                                        <a class="btn btn-outline-info btn-xs text-dark-75" (click)="closedataloadSettings()">Close</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- labels end -->
+                        <button class="btn btn-hvr" (click)="DeleteDocuments(true)" data-toggle="kt-tooltip" data-skin="dark" title="Delete">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                                role="img" font-size="1.5rem" class="iconify iconify--mdi" width="1em" height="1em"
+                                viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12M8 9h8v10H8V9m7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5Z">
+                                </path>
+                            </svg>
+                            <span class="label-hidden">Delete</span>
+                        </button>
+            
+                        <button *ngIf="IsRead" (click)="UpdateDocumentView(false)"  class="btn btn-hvr" data-toggle="kt-tooltip" data-skin="dark" title="UnRead">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                                role="img" font-size="1.5rem" class="iconify iconify--mdi" width="1em" height="1em"
+                                viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6m-2 0l-8 5l-8-5h16m0 12H4V8l8 5l8-5v10Z">
+                                </path>
+                            </svg>
+                            <span class="label-hidden">Mark as UnRead</span>
+                        </button>
+                        <button *ngIf="!IsRead" (click)="UpdateDocumentView(true)"  class="btn btn-hvr" data-toggle="kt-tooltip" data-skin="dark" title="Read">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                                role="img" font-size="1.5rem" class="iconify iconify--mdi" width="1em" height="1em"
+                                viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M21.03 6.29L12 .64L2.97 6.29C2.39 6.64 2 7.27 2 8v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-.73-.39-1.36-.97-1.71M20 18H4v-8l8 5l8-5v8m-8-5L4 8l8-5l8 5l-8 5Z">
+                                </path>
+                            </svg>
+                            <span class="label-hidden">Mark as Read</span>
+                        </button>           
+                        </div>
+                    </div>
+            
+            
+                    <div class="kt-inbox__controls m-0">
+                        <div class="br-line"></div>
+                        <div class="kt-inbox__pages" data-toggle="kt-tooltip" data-skin="dark"
+                                                [title]="Recordsperpage">
+                                                <div class="kt-inbox__perpage w-max">
+                                                    <ng-container *ngIf="activePage==1 || activePage==0">
+                                                        {{activePage}} - {{_CurrentpageRecords}}
+                                                    </ng-container>
+                                                    <ng-container *ngIf="activePage!=1 && activePage!=0 && activePage!=LastPage">
+                                                        {{_CurrentpageRecords * (activePage-1) + 1}} - {{_CurrentpageRecords *
+                                                        activePage}}
+                                                    </ng-container>
+                                                    <ng-container *ngIf="activePage ==LastPage">
+                                                        {{lastPagerecords * (activePage-1) + 1}} - {{lastPagerecords *
+                                                        (activePage-1) + _CurrentpageRecords}}
+                                                    </ng-container>
+            
+                                                    <span class="en-of"> of {{TotalRecords}}</span>
+                                                    <span class="ar-main-of" style="display: none;"><span class="of"> - </span>
+                                                        {{TotalRecords}}</span>
+                                                </div>
+                                            </div>
+                       
+                          
+                        <span
+                                                [ngClass]="(activePage == 1)?'page-item previous paginationdisable':'page-item previous '">
+                                                <button [ngClass]="(activePage == 1)?'paginationpointerdisable':''"
+                                                    (click)="onClickPage(activePage - 1)" class="p-0 btn tipsPreviosepage"
+                                                    data-toggle="kt-tooltip" [disabled]="activePage==1" data-skin="dark"
+                                                    [attr.data-tippy-content]="tooltipContentPreviosepage">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" font-size="1.5rem" width="1em" height="1em" viewBox="0 0 24 24" class="iconify iconify--mdi"><path fill="currentColor" d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"></path></svg>
+                                                </button>
+                                            </span>
+                                            <span
+                                                [ngClass]="(_CurrentpageRecords < 20)?'page-item next paginationdisable':'page-item next'">
+                                                <button [ngClass]="(_CurrentpageRecords < 20) ? 'paginationpointerdisable' : ''"
+                                                    (click)="onClickPage(activePage + 1)" class="p-0 btn tipsNextpage"
+                                                    data-toggle="kt-tooltip" [disabled]="_CurrentpageRecords < 20" data-skin="dark"
+                                                    [attr.data-tippy-content]="tooltipContentNextPage">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" font-size="1.5rem" width="1em" height="1em" viewBox="0 0 24 24" class="iconify iconify--mdi"><path fill="currentColor" d="M8.59 16.58L13.17 12L8.59 7.41L10 6l6 6l-6 6l-1.41-1.42Z"></path></svg>
+                                                </button>
+                                            </span>
+                    </div>
+                </div>
+            <div class="kt-portlet__body kt-portlet__body--fit-x pb-0 grid-scroll">
+                <div id="doc-view" class="doc-list">
+
+                    <ng-container
+                        *ngIf="GACDocumentList.length==0 &&  !toggle &&  !Select && !Expired && !Pending && !Approval && !Reject">
+                        <div class="d-flex-center mt-5 pt-5">
+                            <div class="m-auto text-center kt-error-img">
+                                <img src="assets/media/Img/No Archive Document.png">
+                                <div class="bnk-txt">
+                                    <p class="kt-blank-msg fs-4">Sorry, we could't find any document results.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container
+                        *ngIf="GACDocumentList.length==0 &&  !toggle &&  Select && !Expired && !Pending && !Approval && !Reject">
+                        <div class="d-flex-center mt-5 pt-5">
+                            <div class="m-auto text-center kt-error-img">
+                                <img src="assets/media/Img/Shared by me 02.png">
+                                <div class="bnk-txt">
+                                    <p class="kt-blank-msg fs-4">Sorry, we could't find any Shared documents.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container
+                        *ngIf="GACDocumentList.length==0 &&  toggle &&  !Select && !Expired && !Pending && !Approval && !Reject">
+                        <div class="d-flex-center mt-5 pt-5">
+                            <div class="m-auto text-center kt-error-img">
+                                <img src="assets/media/Img/Shared With Me.png">
+                                <div class="bnk-txt">
+                                    <p class="kt-blank-msg fs-4">Sorry, we could't find any Shared documents.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container
+                        *ngIf="GACDocumentList.length==0 &&  !toggle &&  !Select && !Expired && (Pending || Approval || Reject)">
+                        <div class="d-flex-center mt-5 pt-5">
+                            <div class="m-auto text-center kt-error-img">
+                                <img src="assets/media/Img/Under Approval 04.png">
+                                <div class="bnk-txt">
+                                    <p class="kt-blank-msg fs-4">Sorry, we could't find any Approval documents.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <div   class="doc-detls" *ngFor="let item of GACDocumentList">
+                        <div  [ngClass]="item.IsRead ? 'docs-list' : 'docs-list doc-detls-unread'">
+                            <div class="d-flex-center-start">
+                                <div class="kt-inbox__info">
+                                        <label class="kt-checkbox kt-checkbox--single kt-checkbox--tick kt-checkbox--brand">
+                                            <input type="checkbox" name="checkbox" 
+                                            [(ngModel)]="item.IsChecked"
+                                            (change)="Singleselectcheckbox(item.DocumentId,item.ShareId,item.IsChecked)"
+                                            [ngModelOptions]="{standalone: true}">
+                                            <span></span>
+                                        </label>
+                                        <div (click)="FavoriteDocuments(item.DocumentId,item.ShareId,item.IsFavorite)"
+                                         [className]="item.IsFavorite ? 'kt-inbox__icon kt-inbox__icon--on kt-inbox__icon--light'
+                                    : 'kt-inbox__icon kt-inbox__icon--off kt-inbox__icon--light'"
+                                        data-toggle="kt-tooltip" data-skin="dark" data-placement="right" >
+                                            <i class="flaticon-star"></i>
+                                        </div>
+                                        <span *ngIf="item.IsPin" (click)="DocumentPin(item.DocumentId, item.ShareId, false)" class="kt-pin-v pinnedv">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-pin-angle-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146z" />
+                                            </svg>
+                                        </span>
+                                        <span  *ngIf="!item.IsPin" (click)="DocumentPin(item.DocumentId, item.ShareId, true)" class="kt-pin-v" >
+                                            <svg  xmlns="http://www.w3.org/2000/svg" width="16"
+                                                height="16" fill="currentColor" viewBox="0 0 16 16">
+                                                <path 
+                                                    d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146zm.122 2.112v-.002.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a4.507 4.507 0 0 0-.288-.076 4.922 4.922 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a4.924 4.924 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034.114 0 .23-.011.343-.04L9.927 2.028c-.029.113-.04.23-.04.343a1.779 1.779 0 0 0 .062.46z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                </div>
+                                <div class="leftdiv">
+                                    
+                                    <div class="img-divv">
+                                        <img *ngIf="item.ThumbnailUrl==''"
+                                        src="assets/media/Img/filethumb.png"
+                                        class="" alt="">
+                                    <img *ngIf="item.ThumbnailUrl!=''"
+                                        alt="img"
+                                        src="https://yrglobaldocuments.blob.core.windows.net/documents/{{item.ThumbnailUrl}}"
+                                        class="">
+                                        
+                                    </div>
+                                </div>
+                                <div class="w-100" (click)="sideviw('Gac/DocumentDetails',item.DocumentId,item.ReferenceId,item.ShareId)">
+                                    <div class="main-doc-name">
+                                        <span class="doc-username">{{item.DocumentName}}</span>
+                                        <span class="physical-badge" *ngIf="item.Physical == true">Is Physical</span>
+                                        <span *ngIf="item.DocumentWith == 'Warehouse'" class="physical-badge ware ng-star-inserted">Warehouse</span>
+                                        <span *ngIf="item.DocumentWith == 'Self'" class="physical-badge self ng-star-inserted">With Me</span>
+                                        <span  *ngIf="item.DocumentWith == 'HandoverUser'" class="physical-badge hand ng-star-inserted">Hand over to user</span>
+                                        <span *ngIf="item.ShareId != 0 && LoginUserId != item.CreatedBy"
+                                        class="bg-pend">
+                                        <!-- <i class="material-icons fs-6 mr-1">hourglass_top</i>{{item.DateStatus}} -->
+                                    </span>
+                                    <span *ngIf="item.DocumentStatus == 'P'"
+                                        class="bg-pend">
+                                    </span>
+                                    <span *ngIf="item.DocumentStatus == 'R'"
+                                        class="bg-exp">
+                                    </span>
+                                        <!-- <span class="physical-badge" *ngIf="item.IsFoodItemType == Yes">Is Food Item</span> -->
+                                    </div>
+                                    <div class="shel_div pb-0">
+                                        <div class="shel_name curser-pointer"
+                                            (click)="sideviw('Gac/DocumentDetails',item.DocumentId,item.ReferenceId,item.ShareId)">
+                                            <svg class="shel_icon" viewBox="0 0 32 32" aria-hidden="true"
+                                                focusable="false">
+                                                <path
+                                                    d="M0 6a6 6 0 0 1 6-6h11.84a7 7 0 0 1 4.48 1.622l7.161 5.967A7 7 0 0 1 32 12.967V26a6 6 0 0 1-6 6H6a6 6 0 0 1-6-6V6zm14.688 3.613c0 .435-.153.726-.305 1.306-.305-1.306-.305-2.322 0-3.193.152 0 .152-.145.152-.145l.153.145v.145c.152.145.152.726 0 1.452v.29zM9.048 21.37c.153-.145.458-.29.762-.436-.914 1.742-1.829 2.613-2.743 2.759.152-.436.914-1.452 1.981-2.323zm14.785-2.613c0 .145.152.145.152.145v.145h-.457c-.762 0-1.829-.29-2.896-.725v-.146h.305c2.134 0 2.744.436 2.896.581zm.61 1.161c.305-.29.457-.725.61-.87 0-.29 0-.581-.153-.872-.457-.725-1.677-1.016-3.506-1.016-.61 0-1.219.145-1.981.145-.61-.29-.915-.58-1.372-.87-.914-.871-1.829-2.178-2.439-3.775v-.145c.61-1.887 1.067-4.21 0-5.226-.304-.145-.61-.29-.914-.29h-.305c-.61 0-1.067.58-1.22 1.161-.609 2.033-.304 3.049.306 4.79-.458 1.307-.915 2.759-1.677 4.21-.61 1.016-1.067 1.887-1.524 2.613-.61.29-1.067.58-1.372.726-1.83 1.016-2.744 2.323-2.896 3.048 0 .29 0 .436.152.726v.145l.763.436c.152.145.304.145.61.145 1.219 0 2.743-1.452 4.572-4.5.152-.145.152-.145.305-.145 1.524-.58 3.505-.871 6.096-1.161 1.525.725 3.354 1.016 4.573 1.016a3.17 3.17 0 0 0 1.372-.29zm-9.908-5.66c.61 1.306 1.525 2.467 2.287 3.338.152.145.305.29.61.435-1.22.145-3.049.58-5.03 1.307h-.305c.305-.58.61-1.016.914-1.597.61-1.307 1.22-2.468 1.524-3.484z">
+                                                </path>
+                                            </svg>
+                                            {{item.UserName}}
+                                        </div>
+                                        <span data-toggle="modal" data-target="#exampleModal"
+                                            class="material-icons sub_text fs-4 mt-1 ver-m curser-pointer d-none">
+                                            more_vert
+                                        </span>
+                                    </div>
+                                    <div *ngFor="let doclo of item.DocumentLocationJson" style="display:flex; align-items:center; gap: 6px">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 26 23" fill="none"><path d="M13 0.905762L0.625 6.06276L0 6.34276V22.9998H26V6.34376L25.375 6.06276L13 0.905762ZM13 3.09376L24 7.68676V20.9998H22V9.99976H4V20.9998H2V7.68676L13 3.09376ZM6 11.9998H20V20.9998H6V11.9998Z" fill="#717171"></path></svg>
+                                        <h6 class="mb-0 txtm-cus">
+                                            <span>{{doclo.WareHouseName}}</span>
+                                            <svg fill="#2035cf" height="8px" width="8px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path id="XMLID_222_" d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001 c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213 C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606 C255,161.018,253.42,157.202,250.606,154.389z"></path> </g></svg>
+                                            <span>{{doclo.BlockName}}</span>
+                                            <svg fill="#2035cf" height="8px" width="8px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path id="XMLID_222_" d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001 c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213 C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606 C255,161.018,253.42,157.202,250.606,154.389z"></path> </g></svg>
+                                            <span>{{doclo.RackName}}</span>
+                                            <svg fill="#2035cf" height="8px" width="8px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path id="XMLID_222_" d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001 c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213 C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606 C255,161.018,253.42,157.202,250.606,154.389z"></path> </g></svg>
+                                            <span>{{doclo.ShelveName}}</span>    
+                                        </h6>
+                                    </div>
+                                    <!-- <div style="display:flex; align-items:center; gap: 6px">
+                                        <svg width="64px" height="64px" viewBox="-1.5 0 31 31" xmlns="http://www.w3.org/2000/svg" fill="#000000" style="width: 16px; height: 16px;"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><g id="location_2" transform="translate(-498 -186)"><path id="Path_32" data-name="Path 32" d="M525,209V194h-5" fill="none" stroke="#717171" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path id="Path_33" data-name="Path 33" d="M504,194h-5v22h19" fill="none" stroke="#717171" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path id="Path_34" data-name="Path 34" d="M505.416,199.43" fill="none" stroke="#717171" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path id="Path_35" data-name="Path 35" d="M520,195a8,8,0,0,0-16,0c0,7,8,13,8,13S520,202,520,195Z" fill="none" stroke="#717171" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><circle id="Ellipse_8" data-name="Ellipse 8" cx="3" cy="3" r="3" transform="translate(509 192)" fill="none" stroke="#717171" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><path id="Path_36" data-name="Path 36" d="M525,209h-7v7Z" fill="none" stroke="#717171" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></g></g></svg>
+                                        <h6 class="mb-0 txtm-cus">
+                                            withme   
+                                        </h6>
+                                    </div> -->
+                                    <div *ngIf="item.HandOverUserName"  style="display:flex; align-items:center; gap: 6px">
+                                        <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="#717171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                        <h6 class="mb-0 txtm-cus">
+                                            {{item.HandOverUserName}}   
+                                        </h6>
+                                    </div>
+                                    <div *ngIf="item.Description">
+                                        <h6 class="mb-0 txtm-cus txtm-note text-ellipsis">{{item.Description}}</h6>
+                                    </div>
+                                    <div class="doc-details">
+                                        <div class="pb-1">
+                                            <h6 class="mb-0 txtm-cus">{{item.SourceName}}</h6>
+                                        </div>
+                                        <div class="pb-1" *ngIf="LoginUserId === item.CreatedBy">
+                                            <h6 class="mb-0 txtm-cus">{{item.Manufacture}}</h6>
+                                            <!-- <h6 class="mb-0 txtm-cus">{{item.Distributor}}</h6> -->
+                                        </div>
+                                        <div class="d-flex flex-wrap item-b pb-1">
+                                            <h6 class="mb-0 txtm-cus" *ngFor="let _cat of item.CategoryList">
+                                                {{_cat.CategoryName}},</h6>
+                                        </div>
+                                        <div class="pb-1">
+                                            <h6 class="mb-0 txtm-cus">{{item.DocumentTypeName}}</h6>
+                                        </div>
+                                        <div class="pb-1" >
+                                            <h6 class="mb-0 txtm-cus txtm-note text-ellipsis">{{item.Description}}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="doc-details d-flex">
+                                        <!-- <div class="pb-1 d-none">
+                                            <div class="d-flex-center"><img class="share-icons" src="../../../dmsweb/assets/media/icons/share-document.png" alt="share by me">
+                                                <h6 class="mb-0 ml-2 txtm-cus txtm-note text-ellipsis">Share Document
+                                                </h6>
+                                            </div>
+                                            <div class="d-none"><img class="share-icons" src="../../../dmsweb/assets/media/icons/shared-document.png" alt="shared with me">
+                                                <h6 class="mb-0 ml-2 txtm-cus txtm-note text-ellipsis">Shared Document
+                                                </h6>
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="kt-badge kt-badge--inline kt-badge--pill bg-gre mr-3"><i
+                                                class="material-icons fs-6 mr-2">person_outline</i>{{item.UserName}}
+                                        </div>
+                                        <div class="kt-badge kt-badge--inline kt-badge--pill bg-gre mr-3"><i
+                                                class="material-icons fs-6 mr-2">calendar_today</i>{{item.CreatedDateString}}
+                                        </div> -->
+                                        <!-- <div  class="kt-badge kt-badge--inline kt-badge--pill bg-gre mr-3"><img class="share-icons mr-2" src="../../../assets/media/icons/share-document.png" alt="share by me">Share Document</div> -->
+                                        <!-- <div *ngIf="item.ShareId != 0" class="kt-badge kt-badge--inline kt-badge--pill bg-gre mr-3">
+                                            <img class="share-icons mr-2" src="../../../assets/media/icons/shared-document.png" alt="shared with me"> Shared Document
+                                        </div> -->
+                                        <!-- <div *ngIf="item.ShareId != 0 && LoginUserId != item.CreatedBy"
+                                            class="kt-badge kt-badge--inline kt-badge--pill bg-gre bg-pend text-white mr-3">
+                                            <i class="material-icons fs-6 mr-2">hourglass_top</i>{{item.DateStatus}}
+                                        </div>
+                                        <div *ngIf="item.DocumentStatus == 'P'"
+                                            class="kt-badge kt-badge--inline kt-badge--pill bg-gre bg-pend text-white">
+                                            <i class="material-icons fs-6 mr-2">pending_actions</i>Pending
+                                        </div>
+                                        <div *ngIf="item.DocumentStatus == 'E'"
+                                            class="kt-badge kt-badge--inline kt-badge--pill bg-gre bg-exp text-white">
+                                            <i class="material-icons fs-6 mr-2">pending_actions</i>Expired
+                                        </div> -->
+                                    </div>
+                                    <div class="item-b">
+                                        <ng-container *ngFor="let ref of item.ReferenceList">
+                                            <div class="shel_div py-1 ml-1">
+                                                <span
+                                                    class="material-icons-outlined fs-5 mr-1 mt-1 ver-m ref">file_copy</span>
+                                                <div class="shel_name ref curser-pointer fs-6"
+                                                    (click)="sideviw( 'Gac/DocumentDetails',item.DocumentId,ref.ReferenceId,item.ShareId)">
+                                                    {{ref.DocumentName}}
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="doc-date">{{item.CreatedDate  | date: 'MMM d, y, h:mm a' }}</span>
+                            </div>
+                        </div>
+                        <li class="separator"></li>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mb-0" id="exampleModalLabel">TEST DEMO DOC gitex document</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Details Here...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="btn-nav text-right text-info curser-pointer" (click)="scroll1()">
+    <span class="material-icons fs-2 ver-m">navigation</span>
+</div>
+<button class="btn-prim btn-addb d-none" routerLink="/backend/materforms/GacFileUpload">
+    <span class="mr-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-upload icon">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+        </svg>
+    </span> Upload Documents
+</button>
+<button class="btn-addb btn-info btn-sm btn d-none">
+    <span class="material-icons fs-2 ver-m">add</span>
+</button>
+
+<div class="filter-doc" id="filter-doc">
+    <div class="main-card place-card">
+        <div class="filters-section">
+            <div class="">
+
+                <ul class="kt-nav">
+                    <li class="kt-nav__head d-flex justify-content-between">
+                        <div class="filter-title">{{ "Masterform.Filters" | translate }}</div>
+
+
+                        <!--icons-->
+                        
+                    </li>
+                    <li class="kt-nav__item">
+                        <div class="filter-cont">
+
+                            <!--category filter start-->
+                            <div class="mb-3">
+                                <!-- <label class="form-label">{{ "Masterform.Category" | translate }} <span class="count">{{CategoryList.length}}</span></label> -->
+                                <div class="cont-main">
+                                    <div class="btn-group view-more-btn dropright" id="btn1">
+                                        <a class="showq more text-info" data-toggle="dropdown"
+                                            (click)="loadAllCat()"><span class="item-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1024 1024" version="1.1"><path d="M384 928H192a96 96 0 0 1-96-96V640a96 96 0 0 1 96-96h192a96 96 0 0 1 96 96v192a96 96 0 0 1-96 96zM192 608a32 32 0 0 0-32 32v192a32 32 0 0 0 32 32h192a32 32 0 0 0 32-32V640a32 32 0 0 0-32-32H192zM784 928H640a96 96 0 0 1-96-96V640a96 96 0 0 1 96-96h192a96 96 0 0 1 96 96v144a32 32 0 0 1-64 0V640a32 32 0 0 0-32-32H640a32 32 0 0 0-32 32v192a32 32 0 0 0 32 32h144a32 32 0 0 1 0 64zM384 480H192a96 96 0 0 1-96-96V192a96 96 0 0 1 96-96h192a96 96 0 0 1 96 96v192a96 96 0 0 1-96 96zM192 160a32 32 0 0 0-32 32v192a32 32 0 0 0 32 32h192a32 32 0 0 0 32-32V192a32 32 0 0 0-32-32H192zM832 480H640a96 96 0 0 1-96-96V192a96 96 0 0 1 96-96h192a96 96 0 0 1 96 96v192a96 96 0 0 1-96 96zM640 160a32 32 0 0 0-32 32v192a32 32 0 0 0 32 32h192a32 32 0 0 0 32-32V192a32 32 0 0 0-32-32H640z"/></svg>
+                                            </span> Category</a>
+                                        <div id="div_filters2"
+                                            class="dropdown-menu  dropdown-menu-fit dropdown-width-600 filtsd serch-cus">
+                                            <ul class="kt-nav pt-2" (click)="$event.stopPropagation();">
+                                                <li class="kt-nav__head d-flex justify-content-between py-1">
+                                                    <div class="input-group">
+                                                        <input type="text" [(ngModel)]="catsearchtxt"
+                                                            placeholder="Search" class="form-control fil-serch" />
+                                                        <div class="input-group-append"><a class="input-group-text"><i
+                                                                    class="fa fa-search text-info"></i></a></div>
+                                                    </div>
+                                                </li>
+                                                <li class="kt-nav__separator"></li>
+                                                <li class="kt-nav__item px-4">
+                                                    <div class="more-sec">
+                                                        <div class="lbl-dvs"
+                                                            *ngFor="let _cat of CategoryList | filter:catsearchtxt">
+                                                            <label class="kt-checkbox kt-checkbox-info filtxt">
+                                                                <input type="checkbox" name="categorychk"
+                                                                    (change)="oncategorychange11($event)"
+                                                                    value="{{_cat.CategoryId}}" />
+                                                                {{_cat.CategoryName}}
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="kt-nav__separator"></li>
+                                                <li class="px-4">
+                                                    <button class="btn btn-info mr-2 btn-xs text-white"
+                                                        (click)="FiltersData()">{{ "Masterform.Filter" | translate
+                                                        }}</button>
+                                                    <button class="btn btn-outline-info btn-xs"
+                                                        (click)="closedataloadSettings1()">{{ "Masterform.Close" |
+                                                        translate }}</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div id="ctrdv1" class="srch-divp">
+                                        <div class="opts-flx">
+                                            <ng-container *ngFor="let ss of CategoryList">
+                                                <div class="selectd-opts" *ngIf="(ss.isChecked == true)">
+                                                    <div class="slt-div">
+                                                        <div class="opt-txt">
+                                                            {{ss.CategoryName}}
+                                                        </div>
+                                                    </div>
+                                                    <div (click)="removeCategory(ss.CategoryId,$event)"
+                                                        class="removeButton" aria-hidden="true">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                            class="rmv-icn w-6 h-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M6 18L18 6M6 6l12 12">
+                                                            </path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+
+                                        <!-- <ng-container *ngFor="let ss of CategoryList">
+                                        <code *ngIf="(ss.isChecked == true)">{{ss.CategoryName}},</code>
+                                    </ng-container> -->
+                                    </div>
+                                    <div id="ctrdv2" class="item-c">
+                                        <ng-container *ngFor="let _cat of CategoryList">
+                                            <label class="kt-checkbox kt-checkbox-info filtxt">
+                                                <input type="checkbox" name="categorychk" [checked]="_cat.isChecked"
+                                                    (change)="oncategorychange($event)" value="{{_cat.CategoryId}}" />
+                                                <p class="checkname">{{_cat.CategoryName}}</p>
+                                                <span></span>
+                                            </label>
+                                        </ng-container>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--category filter end-->
+                            <!--Source filter start-->
+                            <div class="mb-3">
+                                <!-- <label class="form-label">{{ "Masterform.Source" | translate }} <span class="count">{{SourceList.length}}</span></label> -->
+                                <div class="cont-main">
+                                    <div class="btn-group dropup view-more-btn">
+                                        <a class="showq showq1 more mt-1 text-info" data-toggle="dropdown"
+                                            (click)="loadAllCat11()"> <span class="item-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 1024 1024" version="1.1"><path d="M810.666667 682.666667a42.666667 42.666667 0 0 1 42.666666 42.666666v170.666667a42.666667 42.666667 0 0 1-42.666666 42.666667H213.333333a42.666667 42.666667 0 0 1-42.666666-42.666667v-170.666667a42.666667 42.666667 0 0 1 42.666666-42.666666h597.333334z m-21.333334 64H234.666667v128h554.666666v-128z m-98.517333 32a32 32 0 1 1 0 64 32 32 0 0 1 0-64zM810.666667 405.333333a42.666667 42.666667 0 0 1 42.666666 42.666667v170.666667a42.666667 42.666667 0 0 1-42.666666 42.666666H213.333333a42.666667 42.666667 0 0 1-42.666666-42.666666v-170.666667a42.666667 42.666667 0 0 1 42.666666-42.666667h597.333334z m-21.333334 64H234.666667v128h554.666666v-128z m-98.517333 32a32 32 0 1 1 0 64 32 32 0 0 1 0-64zM810.666667 128a42.666667 42.666667 0 0 1 42.666666 42.666667v170.666666a42.666667 42.666667 0 0 1-42.666666 42.666667H213.333333a42.666667 42.666667 0 0 1-42.666666-42.666667V170.666667a42.666667 42.666667 0 0 1 42.666666-42.666667h597.333334z m-21.333334 64H234.666667v128h554.666666V192z m-98.517333 32a32 32 0 1 1 0 64 32 32 0 0 1 0-64z" fill="currentColor"/></svg>
+                                            </span> Source</a>
+                                        <!--dropdown filters code-->
+                                        <div id="div_filters3"
+                                            class="dropdown-menu  dropdown-menu-fit dropdown-width-600 filtsd serch-cus"
+                                            x-placement="top-start">
+                                            <ul class="kt-nav" (click)="$event.stopPropagation();">
+                                                <li class="kt-nav__head d-flex justify-content-between py-1">
+                                                    <!--search here-->
+                                                    <div class="input-group">
+                                                        <input type="text" [(ngModel)]="submenusource"
+                                                            placeholder="Search" class="form-control fil-serch" />
+                                                        <div class="input-group-append"><a class="input-group-text"><i
+                                                                    class="fa fa-search text-info"></i></a></div>
+                                                    </div>
+                                                </li>
+                                                <li class="kt-nav__separator"></li>
+                                                <li class="kt-nav__item px-4">
+                                                    <div class="more-sec">
+                                                        <div class="lbl-dvs"
+                                                            *ngFor="let _src of SourceList | filter:submenusource">
+                                                            <label class="kt-checkbox kt-checkbox-info filtxt">
+                                                                <input type="checkbox" name="sourcechk"
+                                                                    (change)="onsourcechange22($event)"
+                                                                    value="{{_src.SourceId}}" />
+                                                                <!-- Label Name -->
+                                                                {{_src.SourceName}}
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="kt-nav__separator"></li>
+                                                <li class="px-4">
+                                                    <button class="btn btn-info mr-2 btn-xs text-white"
+                                                        (click)="FiltersData()">{{ "Masterform.Filter" | translate
+                                                        }}</button>
+                                                    <button class="btn btn-outline-info btn-xs"
+                                                        (click)="closedataloadSettings1()">{{ "Masterform.Close" |
+                                                        translate }}</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="srch-divp" id="ctrdv3">
+                                        <div class="opts-flx">
+                                            <ng-container *ngFor="let ss of SourceList">
+                                                <div class="selectd-opts" *ngIf="(ss.isChecked == true)">
+                                                    <div class="slt-div">
+                                                        <div class="opt-txt">
+                                                            {{ss.SourceName}}
+                                                        </div>
+                                                    </div>
+                                                    <div (click)="removeSource(ss.SourceId,$event)" class="removeButton"
+                                                        aria-hidden="true">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                            class="rmv-icn w-6 h-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M6 18L18 6M6 6l12 12">
+                                                            </path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                        <!-- <ng-container *ngFor="let ss of SourceList">
+                                            <code *ngIf="(ss.isChecked == true)">{{ss.SourceName}},</code>
+                                        </ng-container> -->
+                                    </div>
+                                    <div class="item-c" id="ctrdv4">
+                                        <ng-container *ngFor="let _src of SourceList">
+                                            <label class="kt-checkbox kt-checkbox-info filtxt">
+                                                <input type="checkbox" name="sourcechk" [checked]="_src.isChecked"
+                                                    (change)="onsourcechange($event)" value="{{_src.SourceId}}" />
+                                                <p class="checkname">{{_src.SourceName}}</p>
+                                                <span></span>
+                                            </label>
+                                        </ng-container>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--Source filter end-->
+
+                            <!--Document filter start-->
+                            <div class="mb-3">
+                                <!-- <label class="form-label">{{ "Masterform.DocumentType" | translate }} <span class="count">{{DocumentTypeList.length}}</span></label> -->
+                                <div class="cont-main">
+                                    <div class="btn-group dropup view-more-btn">
+                                        <a class="showq showq2 more mt-1 text-info" data-toggle="dropdown"
+                                            (click)="loadAllCat22()"> <span class="item-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1024 1024" version="1.1"><path d="M798.6 337.8c-1.4-5.8-4-10-7-13.6l-167.4-183.4c-3.8-4.2-8.2-6.2-13.2-8.8-5.8-3-12.2-3.2-18.8-3.2L272.4 128.8c-24.8 0-47.4 19.2-47.4 45.8l0 670.4c0 26.8 22.6 51.8 47.4 51.8l486.2 0c24.8 0 42.4-25 42.4-51.8L801 356.8C801 349.6 800.2 344.4 798.6 337.8zM611 222l116 127-116 0L611 222zM289 833l0-640 258 0 0 163.4c0 29.6 26.8 56.6 56.2 56.6l133.8 0 0 420L289 833z"/></svg>
+                                            </span> Document Type</a>
+                                        <!--dropdown filters code-->
+                                        <div id="div_filters4"
+                                            class="dropdown-menu  dropdown-menu-fit dropdown-width-600 filtsd serch-cus"
+                                            x-placement="top-start">
+                                            <ul class="kt-nav" (click)="$event.stopPropagation();">
+                                                <li class="kt-nav__head d-flex justify-content-between py-1">
+                                                    <!--search here-->
+                                                    <div class="input-group">
+                                                        <input type="text" [(ngModel)]="submenuDocument"
+                                                            placeholder="Search" class="form-control fil-serch">
+                                                        <div class="input-group-append"><a class="input-group-text"><i
+                                                                    class="fa fa-search text-info"></i></a></div>
+                                                    </div>
+                                                </li>
+                                                <li class="kt-nav__separator"></li>
+                                                <li class="kt-nav__item px-4">
+                                                    <div class="more-sec">
+                                                        <div class="lbl-dvs"
+                                                            *ngFor="let _dty of DocumentTypeList | filter:submenuDocument">
+                                                            <label class="kt-checkbox kt-checkbox-info filtxt">
+                                                                <input type="checkbox" name="documenttypechk"
+                                                                    (change)="ondocumenttypechange33($event)"
+                                                                    value="{{_dty.DocumentTypeId}}" />
+                                                                <!-- Label Name -->
+                                                                {{_dty.DocumentTypeName}}
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="kt-nav__separator"></li>
+                                                <li class="px-4">
+                                                    <button class="btn btn-info mr-2 btn-xs text-white"
+                                                        (click)="FiltersData()">{{ "Masterform.Filter" | translate
+                                                        }}</button>
+                                                    <button class="btn btn-outline-info btn-xs"
+                                                        (click)="closedataloadSettings1()">{{ "Masterform.Close" |
+                                                        translate }}</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="srch-divp" id="ctrdv5">
+                                        <!-- <ng-container *ngFor="let ss of DocumentTypeList">
+                                            <code *ngIf="(ss.isChecked == true)">{{ss.DocumentTypeName}},</code>
+                                        </ng-container> -->
+                                        <div class="opts-flx">
+                                            <ng-container *ngFor="let ss of DocumentTypeList">
+                                                <div class="selectd-opts" *ngIf="(ss.isChecked == true)">
+                                                    <div class="slt-div">
+                                                        <div class="opt-txt">
+                                                            {{ss.DocumentTypeName}}
+                                                        </div>
+                                                    </div>
+                                                    <div (click)="removeDocumentType(ss.DocumentTypeId,$event)"
+                                                        class="removeButton" aria-hidden="true">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                            class="rmv-icn w-6 h-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M6 18L18 6M6 6l12 12">
+                                                            </path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                    <div class="item-c" id="ctrdv6">
+                                        <ng-container *ngFor="let _dty of DocumentTypeList">
+                                            <label class="kt-checkbox kt-checkbox-info filtxt">
+                                                <input type="checkbox" name="documenttypechk" [checked]="_dty.isChecked"
+                                                    (change)="ondocumenttypechange($event)"
+                                                    value="{{_dty.DocumentTypeId}}" />
+                                                <p class="checkname">{{_dty.DocumentTypeName}}</p>
+                                                <span></span>
+                                            </label>
+                                        </ng-container>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--Document filter end-->
+
+                            <!--Distributor filter start-->
+                            <!-- <div class="sidecard">
+                                <h5 class="mb-0 titlediv" data-toggle="collapse" data-target="#districollapse"
+                                    aria-expanded="true" aria-controls="districollapse">Distributor
+                                    <i class="material-icons fs-2">expand_more</i>
+                                </h5>
+                                <div class="collapse show" id="districollapse">
+                                    <div class="cont-main">
+                                        <div class="srch-divp" id="ctrdv7">
+                                            <ng-container *ngFor="let ss of DistributorList">
+                                                <code *ngIf="(ss.isChecked == true)">{{ss.Name}},</code>
+                                            </ng-container>
+                                        </div>
+                                        <div class="height-scroll item-c" id="ctrdv8">
+                                            <ng-container *ngFor="let _dst of DistributorList">
+                                                <label class="kt-checkbox kt-checkbox-info filtxt">
+                                                    <input type="checkbox" name="distributorchk"
+                                                        (change)="ondistributorchange($event)" value="{{_dst.DMId}}" />
+                                                    {{_dst.Name}}
+                                                    <span></span>
+                                                </label>
+                                            </ng-container>
+                                        </div>
+                                        <div class="btn-group dropup">
+                                            <a class="showq showq3 more mt-1 text-info" data-toggle="dropdown"
+                                                (click)="loadAllCat33()">more {{DistributorList.length}}</a>
+                                           
+                                            <div id="div_filters5"
+                                                class="dropdown-menu  dropdown-menu-fit dropdown-width-600 filtsd serch-cus"
+                                                x-placement="top-start">
+                                                <ul class="kt-nav" (click)="$event.stopPropagation();">
+                                                    <li class="kt-nav__head d-flex justify-content-between py-1">
+                                                       
+                                                        <div class="input-group">
+                                                            <input type="text" [(ngModel)]="submenuDistributor"
+                                                                placeholder="Search" class="form-control fil-serch" />
+                                                            <div class="input-group-append"><a
+                                                                    class="input-group-text"><i
+                                                                        class="fa fa-search text-info"></i></a></div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="kt-nav__separator"></li>
+                                                    <li class="kt-nav__item px-4">
+                                                        <div class="more-sec">
+                                                            <div class="lbl-dvs"
+                                                                *ngFor="let _dst of DistributorList | filter:submenuDistributor">
+                                                                <label class="kt-checkbox kt-checkbox-info filtxt">
+                                                                    <input type="checkbox" name="distributorchk"
+                                                                        (change)="ondistributorchange44($event)"
+                                                                        value="{{_dst.DMId}}" />
+                                                                    {{_dst.Name}}
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="kt-nav__separator"></li>
+                                                    <li class="px-4">
+                                                        <button class="btn btn-info mr-2 btn-xs text-white"
+                                                            (click)="FiltersData()">Filter</button>
+                                                        <button class="btn btn-outline-info btn-xs"
+                                                            (click)="closedataloadSettings1()">Close</button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!--Distributor filter end-->
+
+                            <!--Manufacture filter start-->
+                            <div class="mb-3">
+                                <!-- <label class="form-label">{{ "Masterform.DistributorandManufacture" | translate}}  <span class="count">{{ManufactureList.length}}</span></label> -->
+                                <div class="cont-main">
+                                    <div class="btn-group dropup view-more-btn">
+                                        <a class="showq showq4 more mt-1 text-info" data-toggle="dropdown"
+                                            (click)="loadAllCat44()"><span class="item-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1024 1024" version="1.1"><path d="M852.185385 0h20.926213c17.379397 0.59495 34.793117 1.178458 52.035218 3.592581 7.299575 1.201341 14.976715 1.967911 21.58981 5.560492 8.992894 6.201207 12.837184 17.173453 15.400044 27.321921 4.51933 19.54181 4.885453 39.712894 5.686347 59.666593 0.903866 31.703955 3.169251 63.350704 4.816804 95.020335 12.539709 223.563799 25.983285 447.070391 42.092693 670.405363 1.338637 22.95133 4.107441 45.765363 6.338503 68.636603 1.567464 18.271821 2.997631 36.738145 0.743687 55.021408-1.407285 10.137028-4.004469 20.663061-10.709095 28.683441-4.450682 5.411754-10.960804 8.798391-17.791285 10.091263H31.326391C17.562458 1018.267888 6.372827 1007.043933 0.572067 993.325765V504.174123c4.473564-10.274324 12.242235-18.672268 20.560089-25.983285 15.194101-13.157542 32.699352-23.203039 49.598213-33.935017 46.657788-30.319553 92.651978-61.668827 139.870391-91.118838 13.580872-9.370458 26.257877-20.193966 40.937117-27.893989 8.70686-4.507888 18.271821-7.997497 28.202905-7.848759 10.468827 0.194503 21.315218 4.279061 27.882548 12.734212 8.169117 10.537475 10.228559 24.267084 11.166748 37.195799 1.899263 35.376626-4.210413 70.753251-0.93819 106.095553 10.92648 1.350078 22.081788-0.59495 32.08152-5.091397 18.271821-7.997497 32.333229-22.585207 48.911732-33.259977 29.941989-20.045229 59.643709-40.44514 89.562815-60.524693 16.567061-11.292603 33.660425-21.818637 49.849922-33.660425 14.130056-9.770905 28.729207-19.79352 45.582302-24.129787 11.887553-3.180693 25.85743-1.018279 34.678704 8.066145 8.798391 9.141631 11.612961 22.150436 13.043128 34.346905 3.649788 37.344536-4.096 74.792045-0.549184 112.136581 25.914637 0.011441 51.840715-0.011441 77.755352 0.011441 0.983955 46.154369 0.572067 92.320179 0.274592 138.485989 4.404916 0.034324 8.809832 0.034324 13.22619 0 12.436737-145.774123 25.971844-291.456715 38.305609-437.230838 2.139531-33.957899 2.803128-68.075978 7.505519-101.816492 2.459888-16.132291 5.20581-32.516291 12.11638-47.424357 3.638346-7.619933 9.072983-15.503017 17.734078-17.711196C815.595978 0.961073 834.05086 0.880983 852.185385 0m-32.607821 47.927777c-3.912939 12.276559-5.72067 25.102302-7.299575 37.847955-3.58114 30.788648-4.153207 61.806123-6.22409 92.697743-13.580872 159.011754-28.397408 317.909095-41.657921 476.943732-33.786279 0.400447-67.584 0.057207-101.381721 0.17162 0.137296-46.200134 0.903866-92.411709 0.446212-138.588961-24.473028 0.160179-48.957497 0.045765-73.430525 0.057207-2.265385-23.592045-6.384268-47.115441-5.72067-70.901989 0.125855-27.173184 3.935821-54.346369 1.819173-81.519553-13.409251 7.242369-25.411218 16.715799-37.996693 25.251039-42.06981 27.470659-83.338726 56.142659-125.111061 84.059531-8.867039 5.880849-16.864536 12.917274-25.537073 19.049832-17.207777 12.699888-36.955531 22.779709-58.350838 25.628603-9.828112 1.384402-19.839285 1.212782-29.667397-0.160178-11.201073-1.407285-22.413587-2.780246-33.614659-4.210414-1.70476-19.644782-4.462123-39.232358-4.713832-58.96867-0.617832-29.873341 3.706994-59.712358 1.658994-89.574257-13.283397 7.391106-24.770503 17.482369-37.367419 25.903195-48.454078 30.147933-95.48943 62.469721-143.474413 93.338458-15.61743 10.079821-32.241698 19.095598-45.547978 32.276023v460.994503c310.060335 0.011441 620.12067 0.011441 930.181006 0 1.716201-19.084156-0.617832-38.214078-2.425564-57.206704-2.700156-23.569162-4.553654-47.229855-6.144-70.901989-17.379397-242.762369-31.646749-485.742123-45.078883-728.756201-1.235665-24.084022-0.583508-48.431196-4.816805-72.240626-3.867173-1.350078-8.352179-1.029721-12.45962-1.670436-28.626235-2.162413-57.504179-2.551419-86.084648 0.480537z"/><path d="M242.590749 586.506011c16.223821-4.187531 33.957899 8.821274 34.724469 25.559955 0.308916 19.827844 0.057207 39.67857 0.137296 59.517855 0.217385 10.022615-5.343106 19.850726-13.981318 24.896358-9.004335 5.491844-21.07495 5.320223-29.919107-0.411888-8.272089-5.148603-13.477899-14.736447-13.306279-24.473028 0-17.162011 0.011441-34.324022 0-51.474593-0.022883-4.587978-0.217385-9.278927 1.155575-13.706726 2.73448-9.850994 11.223955-17.756961 21.189364-19.907933zM461.063151 586.517453c16.223821-4.221855 33.992223 8.775508 34.781676 25.514189 0.308916 19.839285 0.057207 39.701453 0.125855 59.540738 0.194503 9.450547-4.69095 18.752358-12.528269 23.992492-8.203441 5.674905-19.415955 6.521564-28.374525 2.150972-9.519196-4.43924-16.097966-14.461855-16.258145-24.976447-0.080089-17.905698 0-35.799955-0.045765-53.694213-0.057207-4.553654-0.068648-9.198838 1.441609-13.546547 2.974749-9.416223 11.223955-16.864536 20.857564-18.981184zM790.207642 700.473207c31.967106-0.606391 63.957095-0.091531 95.935643-0.274592 8.95857-0.308916 17.951464 3.729877 23.500514 10.800625 6.578771 8.031821 8.054704 19.770637 3.855732 29.255509-4.359151 10.194235-15.056804 17.264983-26.166347 17.150569-31.269184 0.011441-62.54981 0.045765-93.818994-0.022882-10.262883-0.011441-20.159642-6.098235-24.884916-15.194101-5.54905-10.159911-3.981587-23.63781 3.787084-32.230257 4.507888-5.20581 10.972246-8.626771 17.791284-9.484871zM242.499218 765.01381c16.21238-4.244737 33.980782 8.70686 34.816 25.445542 0.297475 20.239732 0.102972 40.479464 0.102972 60.719195 0.011441 15.011039-13.592313 28.191464-28.569028 27.8139-14.965274 0.366123-28.523263-12.779978-28.569028-27.745251-0.045765-19.816402-0.068648-39.644246 0.011441-59.460649 0.240268-12.608358 9.89676-24.164112 22.207643-26.772737zM461.017385 765.01381c16.223821-4.256179 34.026547 8.729743 34.827442 25.491307 0.308916 19.839285 0.057207 39.67857 0.137296 59.517855 0.160179 8.672536-3.890056 17.253542-10.674771 22.642413-8.054704 6.635978-19.850726 8.203441-29.369922 3.935822-9.953966-4.244737-16.967508-14.519061-17.127687-25.354011-0.091531-19.072715 0-38.14543-0.045765-57.218146-0.697922-13.374927 9.13019-26.269318 22.253407-29.01524zM755.082726 822.209073c3.947263-0.892425 8.031821-0.720804 12.059173-0.720805 40.056134 0.022883 80.112268-0.022883 120.168403 0.011441 9.095866-0.045765 18.031553 4.587978 23.271687 12.02485 5.308782 7.299575 6.681743 17.184894 3.798525 25.720134-2.894659 8.729743-10.274324 15.777609-19.107039 18.294704C890.822793 878.900916 886.131844 878.694972 881.555307 878.694972c-40.067575-0.022883-80.123709 0.022883-120.179843-0.011441-8.329296 0.022883-16.532737-3.821408-21.852961-10.217118-6.304179-7.356782-8.375061-18.054436-5.2859-27.241832 2.963307-9.416223 11.212514-16.887419 20.846123-19.015508z"/></svg>
+                                             </span> Distributor & Manufacture </a>
+                                        <!--dropdown filters code-->
+                                        <div id="div_filters3"
+                                            class="dropdown-menu  dropdown-menu-fit dropdown-width-600 filtsd serch-cus"
+                                            x-placement="top-start">
+                                            <ul class="kt-nav" (click)="$event.stopPropagation();">
+                                                <li class="kt-nav__head d-flex justify-content-between py-1">
+                                                    <!--search here-->
+                                                    <div class="input-group">
+                                                        <input type="text" [(ngModel)]="subManufacture"
+                                                            placeholder="Search" class="form-control fil-serch" />
+                                                        <div class="input-group-append"><a class="input-group-text"><i
+                                                                    class="fa fa-search text-info"></i></a></div>
+                                                    </div>
+                                                    <!--<div class="">
+                                                        <i class="material-icons fs-3 cursor-pointer" (click)="closedataloadSettings1()">close</i>
+                                                    </div>-->
+                                                </li>
+                                                <li class="kt-nav__separator"></li>
+                                                <li class="kt-nav__item px-4">
+                                                    <div class="more-sec">
+                                                        <div class="lbl-dvs"
+                                                            *ngFor="let _mnf of ManufactureList | filter:subManufacture">
+                                                            <label class="kt-checkbox kt-checkbox-info filtxt">
+                                                                <input type="checkbox" name="manufacturechk"
+                                                                    (change)="onmanufacturechange55($event)"
+                                                                    value="{{_mnf.DMId}}" />
+                                                                <!-- Label Name -->
+                                                                {{_mnf.Name}}
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="kt-nav__separator"></li>
+                                                <li class="px-4">
+                                                    <button class="btn btn-info mr-2 btn-xs text-white"
+                                                        (click)="FiltersData()">{{ "Masterform.Filter" | translate
+                                                        }}</button>
+                                                    <button class="btn btn-outline-info btn-xs"
+                                                        (click)="closedataloadSettings1()">{{ "Masterform.Close" |
+                                                        translate }}</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="srch-divp" id="ctrdv9">
+                                        <!-- <ng-container *ngFor="let ss of ManufactureList">
+                                            <code *ngIf="(ss.isChecked == true)">{{ss.Name}},</code>
+                                        </ng-container> -->
+                                        <div class="opts-flx">
+                                            <ng-container *ngFor="let ss of ManufactureList">
+                                                <div class="selectd-opts" *ngIf="(ss.isChecked == true)">
+                                                    <div class="slt-div">
+                                                        <div class="opt-txt">
+                                                            {{ss.Name}}
+                                                        </div>
+                                                    </div>
+                                                    <div (click)="removeManufacture(ss.DMId,$event)"
+                                                        class="removeButton" aria-hidden="true">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                            class="rmv-icn w-6 h-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M6 18L18 6M6 6l12 12">
+                                                            </path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                    <div class="item-c" id="ctrdv10">
+                                        <ng-container *ngFor="let _mnf of ManufactureList">
+                                            <label class="kt-checkbox kt-checkbox-info filtxt">
+                                                <input type="checkbox" name="manufacturechk" [checked]="_mnf.isChecked"
+                                                    (change)="onmanufacturechange($event)" value="{{_mnf.DMId}}" />
+                                                <p class="checkname">{{_mnf.Name}}</p>
+                                                <span></span>
+                                            </label>
+                                        </ng-container>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--Manufacture filter end-->
+                            <div>
+                                <!--status filter start-->
+                                <div class="mb-3">
+                                    <label class="form-label">Status</label>
+                                    <div class="d-flex align-items-center">
+                                        <div [(ngModel)]="txt11"
+                                        [ngClass]="Approval? 'filtr fltr-btn fil-selected' : 'filtr fltr-btn'"
+                                        (click)="onstatus('V')">
+                                        <span class="item-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1024 1024" version="1.1"><path d="M800 288a47.84 47.84 0 0 0-33.936 14.064L432 636.112 257.936 462.064a48 48 0 1 0-67.872 67.872l208 208c8.688 8.688 20.688 14.064 33.936 14.064s25.248-5.376 33.936-14.064l368-368A48 48 0 0 0 800 288z" fill=""/></svg>
+                                         </span>
+                                        <span>Approved</span>
+                                    </div>
+                                    <div class="b-right"></div>
+                                        <div [(ngModel)]="txt00"
+                                            [ngClass]="Pending? ' filtr fltr-btn fil-selected ' : 'filtr fltr-btn'"
+                                            (click)="onstatus('P')">
+                                            <span class="item-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1024 1024" version="1.1"><path d="M512.118704 212.006532c22.965038 0 41.584094 18.615986 41.584094 41.582047l0 216.712717 127.996163 0c22.966061 0 41.584094 18.615986 41.582047 41.580001 0 22.970154-18.615986 41.584094-41.582047 41.584094L511.804549 553.46539c-22.962991 0-41.580001-18.615986-41.580001-41.580001 0-1.062192 0.23536-2.057869 0.312108-3.099594L470.536656 253.588579C470.537679 230.622518 489.153666 212.004485 512.118704 212.006532zM933.729044 625.030309c-10.784624 40.248679-27.16571 77.43358-47.573505 111.480001l-0.461511-0.276293c-7.012717 13.05841-20.632923 22.039969-36.494169 22.039969-22.962991 0-41.580001-18.615986-41.580001-41.584094 0-9.314133 3.170203-17.823947 8.345062-24.755824 16.023952-27.071565 28.949332-56.536644 37.489846-88.412632 50.531883-188.587146-61.383022-382.425899-249.964028-432.957783-188.585099-50.529837-382.425899 61.385069-432.955736 249.968122-50.531883 188.581006 61.383022 382.423853 249.968122 432.953689 95.677083 25.63689 192.547341 9.195429 271.530207-37.59627 6.906294-5.112438 15.371082-8.239662 24.626887-8.239662 22.962991 0 41.582047 18.618033 41.582047 41.584094 0 15.869433-8.993838 29.495778-22.065552 36.504402l0.270153 0.451278c-97.916077 58.72345-218.455407 79.45154-337.451592 47.567365C166.083619 871.349321 27.861558 631.93865 90.269933 399.025972c62.409398-232.914724 301.815977-371.134739 534.730701-308.724317C857.915357 152.709007 996.139465 392.113539 933.729044 625.030309z"/></svg>
+                                             </span>
+                                            <span>Pending</span>
+                                        </div>
+                                        <div class="b-right"></div>
+                                        <div [(ngModel)]="txt22"
+                                            [ngClass]="Reject? 'filtr fltr-btn fil-selected  ' : 'filtr fltr-btn'"
+                                            (click)="onstatus('R')">
+                                            <span class="item-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1024 1024" version="1.1"><path d="M572.16 512l183.466667-183.04a42.666667 42.666667 0 1 0-60.586667-60.586667L512 451.84l-183.04-183.466667a42.666667 42.666667 0 0 0-60.586667 60.586667l183.466667 183.04-183.466667 183.04a42.666667 42.666667 0 0 0 0 60.586667 42.666667 42.666667 0 0 0 60.586667 0l183.04-183.466667 183.04 183.466667a42.666667 42.666667 0 0 0 60.586667 0 42.666667 42.666667 0 0 0 0-60.586667z"/></svg>
+                                             </span>
+                                            <span>Rejected</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--status filter end-->
+                                <!--date filter start-->
+                                <div class="mb-3">
+                                    <label class="form-label">{{ "Masterform.Dateselectionrange" | translate }}</label>
+                                    <div class="datrange position-relative">
+                                        <input class="rangepic form-control" type="text" ngxDaterangepickerMd
+                                            [(ngModel)]="selected" [showCustomRangeLabel]="true"
+                                            [alwaysShowCalendars]="true" [ranges]="ranges" [linkedCalendars]="true"
+                                            [isInvalidDate]="isInvalidDate" [showClearButton]="true"
+                                            (datesUpdated)="datesUpdated($event)" placeholder="Date selection range" />
+                                        <!-- <i class="la la-calendar fs-2"></i> -->
+                                    </div>
+                                </div>
+                                <!--date filter end-->
+                                </div>
+                            <div class="pt-2 px-3 pb-0 text-right text-info curser-pointer d-none" (click)="scroll1()">
+                                Go to top</div>
+                        </div>
+                    </li>
+                    <li class="kt-nav__separator"></li>
+                    <li class="px-4 text-right">
+                        <a class="btn btn-sm btn-secondary mr-2" (click)="clse_fltrs()">Close</a>
+                        <a class="btn btn-sm btn-secondary mr-2" (click)="OnClear()">Clear Filters</a>
+                        <a class="btn btn-sm btn-info  text-white">Filter</a>
+                        
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>

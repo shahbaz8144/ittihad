@@ -1,0 +1,14 @@
+@media (min-width: 576px) {
+    .modal-dialog {
+        width: 100vw;
+        max-width: 100%;
+        margin: 0px;
+    }
+    .modal-content {
+        height: 100vh;
+    }
+    .modal-body {
+        height: calc(100vh - 130px);
+        overflow-y: auto;
+    }
+}

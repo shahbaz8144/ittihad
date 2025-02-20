@@ -1,0 +1,222 @@
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid side_view">
+    <div class="col-lg-12">
+        <h4 class="mb-3"> {{ "Masterform.Specialization" | translate }} </h4>
+
+        <div class="card ribbon-box">
+            <div class="card-header align-items-center d-flex py-3">
+                <div class="flex-1">
+                    <div class="search-bar">
+                        <input type="text"  [placeholder]="SpecializationSearchs" [(ngModel)]="specializationSearch" class="form-control search_clear">
+                        <a *ngIf="specializationSearch" class="close close-icn"><i  (click)="ReBindData()" class="material-icons">close<i></i></i></a>
+                    </div>
+                </div>
+                <div class="flex-shrink-0">
+                    <button class="btn btn-sm btn-info m-0"  id="specialization_add" (click)="specialization_add()">
+                        <i class="material-icons fs-4">add</i>
+                        {{ "Masterform.AddSpecialization" | translate }}
+                    </button>
+                </div>
+            </div>
+            <div class="">
+                <div class="mb-0 table-responsive">
+                    <table class="table b-table">
+                        <thead>
+                            <tr>
+                                <th>{{ "Masterform.Specialization" | translate }}</th>
+                                <th> {{ "Masterform.Note" | translate }}</th>
+                                <th>{{ "Masterform.Status" | translate }}</th>
+                                <th>{{ "Masterform.Action" | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngIf="(ObjSpecialization_data|filter:specializationSearch)as ObjSpecialization_data">
+                            <tr *ngFor="let item of ObjSpecialization_data|filter:specializationSearch">
+                                <td>
+                                    {{item.Specialization}}
+                                </td>
+                                <td>
+                                    {{item.Description}}
+                                </td>
+
+                                <td [ngStyle]="{'color':item.IsActive=== true ? '#1dc9b7' : '#dc3545'}" (click)="UpdateStatus(item)">
+
+
+                                    <label *ngIf="item.IsActive" class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-success curser-pointer w-min-70">Active</label>
+                                    <label *ngIf="!item.IsActive" class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-danger curser-pointer w-min-70">Inactive</label>
+
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline btn-circle fs-5 btn-sm text-info px-0" (click)="specialization_edit(item)">
+                                        
+                                    <span class="mr-2">
+                                        <svg data-v-9a6e255c="" xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 24 24" fill="none" stroke="#2786fb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit">
+                                            <path data-v-9a6e255c="" d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                            <path data-v-9a6e255c="" d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                        </svg>
+                                    </span><span>Edit</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <ng-container *ngIf="ObjSpecialization_data.length==0">
+                                <div class="d-flex-center kt-tb-error-box">
+                                    <div class="m-auto text-center">
+                                        <div class="svgs-1 kt-blank-msg">
+                                            <img src="assets/media/Img/Specialization.png">
+                                        </div>
+                                        <h3 class="kt-blank-ttl"> {{ "Masterform.NoDataCompany" | translate }} </h3>
+                                        <p class="kt-blank-msg"> {{ "Masterform.NodataSpecialization" | translate }} </p>
+                                    </div>
+                                </div>
+                                
+                            </ng-container>
+                        </ng-container>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="kt-aside-menu-overlay" (click)="closeInfo()"></div>
+
+<div id="addrck" class="wc-75 kt-quick-panel kt-quick-panel1 scroll-div">
+    <a id="kt_quick_panel_close_btn" class="kt-quick-panel__close" (click)="closeInfo()">
+        <i class="flaticon2-delete"></i>
+    </a>
+    <div id="kt_chat_content" class="kt-grid__item kt-grid__item--fluid kt-app__content">
+        <div class="kt-chat">
+            <div class="kt-portlet kt-portlet--head-lg kt-portlet--last">
+                <div class="kt-portlet__head">
+                    <div class="kt-chat__head">
+                        <div>
+                            <div class="kt-chat__label">
+                                <h4 class="mb-0" id="editrck"> Add </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__body py-1">
+
+                    <div class="tab-content mt-2">
+                        <div class="tab-pane d-flex flex-wrap justify-content-start align-items-baseline form-m">
+                            <div class="form-cus">
+                                <label class="form-label">{{ "Masterform.Specialization" | translate }}</label>
+                                <span class="text-danger ml-1">*</span>
+                                <!-- <div class="more_text1">
+                                    <div><i class="fas fa-info-circle mr-1"></i>Add details here
+                                    </div>
+                                </div> -->
+                                <span id="EnterSpecialization" class="material-icons fs-4 float-right">
+                                    info_outline
+                                    </span>
+                                <input class="form-control" type="text" [placeholder]="EnterSpecializationName"  id="checkSpc" [(ngModel)]="specilization" [ngModelOptions]="{standalone: true}" (change)="CheckSpecialization()" (keyup)="TriggerLengthValidation()">
+                                <!-- <span style="color:red" [hidden]="MinSpecializationLength"> 
+                                    MinLength 3</span> -->
+                            </div>
+
+                            <div class="form-cus">
+                                <div class="form-group col">
+                                    <label>{{ "Masterform.Status" | translate }}</label><br>
+                                    <mat-slide-toggle color="primary" [(ngModel)]="InActive" [ngModelOptions]="{standalone: true}">
+                                    </mat-slide-toggle>
+                                </div>
+                            </div>
+                            <div class="form-cus">
+                                <label class="form-label">{{ "Masterform.Note" | translate }}</label>
+                                <textarea class="form-control" [placeholder]="EnterDescription" class="form-control" [(ngModel)]="note" [ngModelOptions]="{standalone: true}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task_act form-m">
+                        <div class="form-cus">
+                            <button [disabled]="!specilization|| !MinSpecializationLength" (click)="OnCreate()" class="btn btn-sm btn-info px-3 mt-2" *ngIf='!isShow'>
+                                {{ "Masterform.Save" | translate }}
+                            </button>
+                            <button (click)="OnCreate()" type="submit" class="btn btn-sm btn-info px-3 mt-2" *ngIf='isShow'>{{ "Masterform.Update" | translate  }}</button>
+                            <button class="btn btn-sm btn-secondary px-3 ml-2 mt-2" (click)="specialization_cl()">
+                                {{ "Masterform.Cancel" | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="flt-btn-div">
+    <div class="">
+        <button class="foot-btn btn btn-sm" id="specialization_add"
+       ><i class="fs-6 material-icons">add</i>Add Specialization</button>
+        <button class="foot-btn btn btn-sm" id="remove_btn" (click)="specialization_cl()" style="display: none;"><i class="fs-6 material-icons">remove</i>Close</button>
+    </div>
+</div> -->
+
+<div class="foot-container" style="display: none;">
+    <div class="main-view">
+        <div class="cont-title">
+            <div class="flex-grow-1">
+                <div class="title1">Add</div>
+            </div>
+            <div class="close-btn" (click)="specialization_cl()">
+                <i class="material-icons fs-4">close</i>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="add_rck">
+                <!-- <h5 class="my-2 px-2" id="editrck"> Add Specialization </h5> -->
+                <div class="px-2">
+                    <form>
+                        <div class="">
+                            <div class="form-group">
+                                <label class="form-label">Specialization</label>
+                                <span class="text-danger ml-1">*</span>
+                                <span id="myButton" class="material-icons fs-4 float-right">
+                                    info_outline
+                                    </span>
+                                <!-- <div class="more_text1"><div><i class="fas fa-info-circle mr-1"></i>Add details here</div></div> -->
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Status</label>
+                                <div>
+                                    <mat-slide-toggle color="primary">
+                                    </mat-slide-toggle>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Note</label>
+                                <textarea class="form-control" placeholder="Enter Description" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <!-- <div class="task_act">
+                            <button class="btn btn-sm btn-info px-3 mt-2" *ngIf='!isShow'>
+                                Save
+                            </button>
+                            <button type="submit" class="btn btn-sm btn-info px-3 mt-2" *ngIf='isShow'>Update</button>
+                            <button class="btn btn-sm btn-secondary px-3 ml-2 mt-2">
+                                Cancel
+                            </button>
+                        </div> -->
+                        <!-- <div class="task_act">
+                            <button  (click)="OnCreate()" class="btn btn-sm btn-info px-3 mt-2" *ngIf='!isShow'>
+                                Save
+                            </button>
+                            <button (click)="OnCreate()" type="submit" class="btn btn-sm btn-info px-3 mt-2" *ngIf='isShow'>Update</button>
+                            <button class="btn btn-sm btn-secondary px-3 ml-2 mt-2" (click)="specialization_cl()">
+                                Cancel
+                            </button>
+                        </div> -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,109 @@
+<div class="kt-portlet__head">
+    <div class="kt-inbox__toolbar kt-inbox__toolbar--extended">
+        <div class="kt-inbox__actions kt-inbox__actions--expanded">
+
+            <div class="kt-inbox__search">
+                <div class="input-group">
+                    <input id="txtSearch" (keyup.enter)="Search()" type="text" class="form-control" placeholder="Search">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+<a (click)="Search()">
+<i class="fa fa-search"></i>
+</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="kt-inbox__controls">
+            <div class="kt-inbox__pages" title="Records per page">
+                <span class="kt-inbox__perpage">
+                    <ng-container *ngIf="activePage==1">
+                        {{activePage}}
+                        -
+                        {{_CurrentpageRecords}}
+                    </ng-container>
+                    <ng-container *ngIf="activePage!=1">
+                          
+                        {{_CurrentpageRecords * (activePage-1) + 1}}
+                        -
+                        {{_CurrentpageRecords * activePage}}
+                    </ng-container>
+                    
+                    of {{TotalRecords}}</span>
+            </div>
+            <button (click)="onClickPage(activePage - 1)" class="kt-inbox__icon" data-toggle="kt-tooltip" title="Previose page">
+                <i class="flaticon2-left-arrow"></i>
+            </button>
+            <button (click)="onClickPage(activePage + 1)" class="kt-inbox__icon" data-toggle="kt-tooltip" title="Next page">
+                <i  class="flaticon2-right-arrow"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="kt-portlet__body kt-portlet__body--fit-x">
+    <div class="kt-inbox__items" data-type="inbox">
+        <!-- kt-inbox__item kt-inbox__item--unread -->
+        <div *ngFor="let ss of _LstToMemos" data-id="{{ss.MailId}}" data-type="inbox" [className]="ss.MailView == true ? 'kt-inbox__item' : 'kt-inbox__item kt-inbox__item--unread'">
+            <div class="kt-inbox__info">
+                <div class="kt-inbox__actions">
+                    <app-favorite [favObj]="ss"></app-favorite>
+                    <!-- <span *ngIf=(ss.Favorite) (click)="Favorite(false)" class="kt-inbox__icon kt-inbox__icon--on kt-inbox__icon--light" data-toggle="kt-tooltip" data-placement="right" title="Star">
+                            <i class="flaticon-star"></i>
+                        </span>
+                    <span *ngIf=(!ss.Favorite) (click)="Favorite(true)" class="kt-inbox__icon kt-inbox__icon--off kt-inbox__icon--light" data-toggle="kt-tooltip" data-placement="right" title="Star">
+                            <i class="flaticon-star"></i>
+                        </span> -->
+                </div>
+                <div class="kt-inbox__sender" data-toggle="view">
+                    <span class="kt-media kt-media--sm kt-media--dark">
+                            <span class="letter-spacing">{{ss.TwoLetters}}</span></span>
+                </div>
+            </div>
+
+            <a (click)="gotoMemoDetailsV2('Memo/Details',ss.MailId)" class="kt-inbox__details">
+                <div class="kt-inbox__message">
+                    <span *ngIf="(ss.Attachment)">
+                            <i class="fa fa-paperclip"></i>
+                        </span>
+                    <span class="kt-inbox__subject">{{ ss.Subject }} </span>
+                </div>
+                <div class="kt-inbox__labels">
+                    <span *ngIf="ss.Status=='Reply Required'" style="margin-right: 12px;">
+                            <i class="kt-nav__link-icon fa fa-square kt-font-ReplyRequired"></i>
+                        </span>
+                    <span *ngIf="ss.Status=='Approval Pending'" style="margin-right: 12px;">
+                            <i class="kt-nav__link-icon fa fa-square kt-font-primary"></i>
+                        </span>
+                    <span *ngIf="ss.Status=='Expired'" style="margin-right: 12px;">
+                            <i class="kt-nav__link-icon fa fa-square kt-font-danger"></i>
+                        </span>
+                    <span *ngIf="ss.Status=='UnderProcess'" style="margin-right: 12px;">
+                            <i class="kt-nav__link-icon fa fa-square kt-font-warning"></i>
+                        </span>
+
+
+                    <span class="kt-inbox__label kt-badge kt-badge--unified-dark kt-badge.kt-badge-light-bold kt-badge--inline">{{ ss.MemoType }}</span>
+
+                    <span *ngIf="ss.Status=='Reply Required'" class="kt-inbox__label kt-badge kt-badge--unified-brand kt-badge.kt-badge-light-bold kt-badge--inline">
+                        Reply Required
+                        </span>
+                    <span *ngIf="ss.Status=='Approval Pending'" class="kt-inbox__label kt-badge kt-badge--unified-brand kt-badge.kt-badge-light-bold kt-badge--inline">
+                              Approval Pending
+                        </span>
+                    <span *ngIf="ss.Status=='Expired'" class="kt-inbox__label kt-badge kt-badge--unified-brand kt-badge.kt-badge-light-bold kt-badge--inline">
+                        Expired
+                        </span>
+                    <span *ngIf="ss.Status=='UnderProcess'" class="kt-inbox__label kt-badge kt-badge--unified-brand kt-badge.kt-badge-light-bold kt-badge--inline">
+                        Under Process
+                        </span>
+                    <span class="kt-inbox__label kt-badge kt-badge--unified-dark kt-badge.kt-badge-light-bold kt-badge--inline">{{ ss.FromUser }}</span>
+                </div>
+            </a>
+            <div class="kt-inbox__datetime" data-toggle="view">
+                {{ ss.MemoDate }}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+
+.removelbl{
+    transform: rotate(180deg);
+}
+p.kt-blank-msg {
+    font-size: 14px;
+    padding: 0px 15px;
+    color: #aba9a9;
+    font-weight: 400;
+}
+.kt-error-img img {
+    width: 80%;
+}
+h3.kt-blank-ttl {
+    color: #979797;
+    text-transform: capitalize;
+    font-size: 20px;
+}
+h3.kt-blank-ttl {
+    text-transform: none;
+}

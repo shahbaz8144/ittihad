@@ -1,0 +1,929 @@
+<div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid" id="workflow-list">
+    <div *ngIf="WorkflowLeftsectionlist.length==0" class="kt-grid kt-grid--desktop kt-grid--ver-desktop kt-inbox">
+        <div class="no-workflow">
+            <div class="d-flex align-items-center justify-content-between mb-3 w-100">
+                <h4 class="mb-0 pro-nm">  </h4>
+                <div class="backbtn" (click)="workflow_create()">
+                    <span class="backbtn-icon">
+                        <svg width="34px" height="34px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 12H18M12 6V18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                    </span>
+                    <span class="backbtn-label">Create Workflow</span>
+                </div>
+            </div>
+            <div class="no-workflow-img">
+                <img src="assets/media/Img/no-workflow.png">
+            </div>
+            <p>No workflow created, click on <b (click)="workflow_create()">New workflow</b> to create one</p>
+        </div>
+    </div>
+    <div *ngIf="WorkflowLeftsectionlist.length >0" id="kt_inbox" class="kt-grid kt-grid--desktop kt-grid--ver-desktop kt-inbox">
+        <div id="kt_inbox_aside" class="kt-grid__item kt-portlet kt-inbox__aside pb-0 scroll-y aside-scrolly">
+            <button type="button" class="btn btn-primary kt-inbox__compose mx-0 btn-memo1" style="width: 100%;" (click)="workflow_create()">
+                <span class="mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="51" height="57" viewBox="0 0 51 57" fill="none">
+                        <path
+                            d="M41.8333 36.3889C37.9814 36.3889 36.0568 36.3889 34.8644 37.5867C33.6667 38.7817 33.6667 40.7063 33.6667 44.5555C33.6667 48.4075 33.6667 50.3321 34.8644 51.5244C36.0595 52.7222 37.9841 52.7222 41.8333 52.7222C45.6826 52.7222 47.6072 52.7222 48.8022 51.5244C50 50.3294 50 48.4048 50 44.5555C50 40.7063 50 38.7817 48.8022 37.5867C47.6072 36.3889 45.6853 36.3889 41.8333 36.3889ZM41.8333 36.3889C41.8333 28.6904 41.8333 24.8385 39.4405 22.4484C37.0504 20.0556 33.1984 20.0556 25.5 20.0556H17.3333M9.16667 11.8889C5.31472 11.8889 3.39011 11.8889 2.19778 13.0867C1 14.2817 1 16.2063 1 20.0556C1 23.9075 1 25.8321 2.19778 27.0244C3.39283 28.2222 5.31472 28.2222 9.16667 28.2222M9.16667 11.8889C13.0186 11.8889 14.9405 11.8889 16.1356 13.0867C17.3333 14.279 17.3333 16.2036 17.3333 20.0556M9.16667 11.8889V1M17.3333 20.0556C17.3333 23.9075 17.3333 25.8294 16.1356 27.0244C14.9432 28.2222 13.0186 28.2222 9.16667 28.2222M9.16667 28.2222V55.4444"
+                            stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span>
+                New Workflow
+            </button>
+            <div class="kt-inbox__nav mt-2">
+                <ul class="kt-nav">
+                    <li class="kt-nav__item active"  *ngFor="let item of WorkflowLeftsectionlist" (click)="WorkFlowDetails(item.WorkFlowId)" [ngClass]="{ 'active': item.WorkFlowId === selectedWorkflowId }">
+                        <a class="kt-nav__link">
+                            <span class="svg-icon svg-icon-2x">
+                                <svg fill="currentColor" width="24px" height="24px" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path fill-rule="evenodd"
+                                            d="M1 3a2 2 0 012-2h6.5a2 2 0 012 2v6.5a2 2 0 01-2 2H7v4.063C7 16.355 7.644 17 8.438 17H12.5v-2.5a2 2 0 012-2H21a2 2 0 012 2V21a2 2 0 01-2 2h-6.5a2 2 0 01-2-2v-2.5H8.437A2.938 2.938 0 015.5 15.562V11.5H3a2 2 0 01-2-2V3zm2-.5a.5.5 0 00-.5.5v6.5a.5.5 0 00.5.5h6.5a.5.5 0 00.5-.5V3a.5.5 0 00-.5-.5H3zM14.5 14a.5.5 0 00-.5.5V21a.5.5 0 00.5.5H21a.5.5 0 00.5-.5v-6.5a.5.5 0 00-.5-.5h-6.5z">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </span>
+                            <span style="margin-left: 10px;" class="kt-nav__link-text"> {{item.WorkFlowName}} </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="workflow-preview kt-grid__item kt-grid__item--fluid kt-portlet kt-inbox__list kt-inbox__list--shown">
+            <div class="workflow-preview-head">
+                <div class="workflow-preview-group">
+                    <div class="workflow-preview-info">
+                        <h4>{{WorkFlowName}}</h4>
+                        <p>Action: <b> {{_ActionType}} </b></p>
+                    </div>
+                </div>
+                <div class="workflow-preview-date-action">
+                    <div class="workflow-preview-date">
+                        <span class="workflow-preview-date-icon">
+                            <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 2a1 1 0 0 0-1 1v1.001c-.961.014-1.34.129-1.721.333a2.272 2.272 0 0 0-.945.945C3.116 5.686 3 6.09 3 7.205v10.59c0 1.114.116 1.519.334 1.926.218.407.538.727.945.945.407.218.811.334 1.926.334h11.59c1.114 0 1.519-.116 1.926-.334.407-.218.727-.538.945-.945.218-.407.334-.811.334-1.926V7.205c0-1.115-.116-1.519-.334-1.926a2.272 2.272 0 0 0-.945-.945C19.34 4.13 18.961 4.015 18 4V3a1 1 0 1 0-2 0v1H8V3a1 1 0 0 0-1-1zM5 9v8.795c0 .427.019.694.049.849.012.06.017.074.049.134a.275.275 0 0 0 .124.125c.06.031.073.036.134.048.155.03.422.049.849.049h11.59c.427 0 .694-.019.849-.049a.353.353 0 0 0 .134-.049.275.275 0 0 0 .125-.124.353.353 0 0 0 .048-.134c.03-.155.049-.422.049-.849L19.004 9H5zm8.75 4a.75.75 0 0 0-.75.75v2.5c0 .414.336.75.75.75h2.5a.75.75 0 0 0 .75-.75v-2.5a.75.75 0 0 0-.75-.75h-2.5z" fill="currentColor"></path></g></svg>
+                        </span>
+                        {{_CreatedDate}}
+                    </div>
+                    <div class="workflow-preview-toggle">
+                        <div class="workflow-stat-container">
+                            <input type="radio" type="radio" name="workflowstatRadioOption"  id="workflowstatRadioYes" value="P" checked="checked" />
+                            <input type="radio" name="workflowstatRadioOption"  id="workflowstatRadioNo" value="T" />
+                            <label for="workflowstatRadioYes" >Active</label>
+                            <label for="workflowstatRadioNo" >In Active</label>
+                            <div class="workflow-stat-wrapper">
+                                <div class="workflow-stat">
+                                    <div>Active</div>
+                                    <div>In Active</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="workflow-preview-body">
+                <div class="workflow-item-ul">
+                    <div class="workflow-item-li workflow-start">
+                        <span>Start</span>
+                        <svg class="line-svg" viewBox="0 0 10 100">
+                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                        </svg>
+                    </div>
+                    <ng-container *ngFor="let details of Workflowdetails; let last = last">
+                        <div class="workflow-item-li reject-new-workflow">
+                            <div class="workflow-item-user-details">
+                                <div class="workflow-item-user-img">
+                                    <img *ngIf="details.UserInboxThumbnail==''" src="assets/media/icons/user2.png" class="" alt="">
+                                <img *ngIf="details.UserInboxThumbnail!=''" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{details.UserInboxThumbnail}}" class="">
+                                </div>
+                                <div class="workflow-item-user-control">
+                                    <div class="workflow-item-user-stepname"> {{details.StepName}} </div>
+                                    <div class="workflow-item-name">{{details.DisplayName}}</div>
+                                    <div class="workflow-item-desgniation">{{details.DesignationName}}</div>
+                                    <div class="workflow-item-badges">
+                                        <span class="wf-bg active" *ngIf="details.isActive==true" >Active</span>
+                                        <span class="wf-bg inactive" *ngIf="details.isActive==false" >In-Active</span>
+                                        <span class="wf-bg attach" *ngIf="details.AttachmentRequired == true">Attachment Required</span>
+                                    </div>
+                                    <!-- Render Approved & Rejected if both conditions are true -->
+                                    <ng-container *ngIf="hasApprovedAndRejectedNextStep(details.Actions)">
+                                        <p class="workflow-item-detail apprej">Approved &nbsp; Rejected</p>
+                                    </ng-container>
+                                    <!-- Render individual Approved and Rejected otherwise -->
+                                    <ng-container *ngIf="!hasApprovedAndRejectedNextStep(details.Actions)">
+                                        <ng-container *ngFor="let actions of details.Actions">
+                                            <p class="workflow-item-detail" *ngIf="actions.UserAction === 'Approved' && actions.SystemAction === 'Next step'">
+                                                Approved
+                                            </p>
+                                            <p class="workflow-item-detail" *ngIf="actions.UserAction === 'Rejected' && actions.SystemAction === 'Next step'">
+                                                Rejected
+                                            </p>
+                                            <p class="workflow-item-detail" *ngIf="actions.UserAction === 'Replied' && actions.SystemAction === 'Next step'">
+                                                Replied
+                                            </p>
+                                        </ng-container>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <ng-container *ngFor="let actions of details.Actions">
+                                <svg class="line-svg" viewBox="0 0 10 100" *ngIf="(actions.UserAction == 'Approved' || actions.UserAction == 'Replied') && actions.SystemAction == 'Next step'">
+                                    <line x1="5" x2="5" y1="0" y2="100"></line>
+                                </svg>
+                                <ng-container *ngIf="!last">
+                                    <ng-container *ngIf="actions.UserAction == 'Rejected' && actions.SystemAction == 'Close'">
+                                        <svg class="reject-workflow-line line-svg" viewBox="0 0 10 100">
+                                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                                        </svg>
+                                        <div class="reject-workflow-info">
+                                            <span>Closed</span>
+                                        </div>
+                                        <div class="reject-workflow-info-bg">
+                                            Rejected
+                                        </div>
+                                    </ng-container>
+                                    <ng-container *ngIf="actions.UserAction == 'Replied' && actions.SystemAction == 'Close'">
+                                        <svg class="reject-workflow-line line-svg" viewBox="0 0 10 100">
+                                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                                        </svg>
+                                        <div class="reject-workflow-info">
+                                            <span>Closed</span>
+                                        </div>
+                                    </ng-container>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="last">
+                                <svg class="line-svg" viewBox="0 0 10 100">
+                                    <line x1="5" x2="5" y1="0" y2="100"></line>
+                                </svg>
+                            </ng-container>
+                        </div>
+                        <ng-container *ngIf="last">
+                            <div class="workflow-item-li last-workflow workflow-end">
+                                <span>Closed</span>
+                                <svg class="line-svg" viewBox="0 0 10 100">
+                                    <line x1="5" x2="5" y1="0" y2="100"></line>
+                                </svg>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                    <div class="workflow-item-li reject-new-workflow d-none">
+                        <div class="workflow-item-user-details">
+                            <div class="workflow-item-user-img">
+                                <img alt="image" src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/1861/thumbs/263918_icons8-user-48.png" class="ng-star-inserted">
+                            </div>
+                            <div class="workflow-item-user-control">
+                                <div class="workflow-item-name">Shiva Devbox</div>
+                                <div class="workflow-item-desgniation">UI Developer</div>
+                                <div class="workflow-item-badges">
+                                    <span class="wf-bg active">Active</span>
+                                </div>
+                                <p class="workflow-item-detail apprej">Approved &nbsp; Rejected</p>
+                            </div>
+                        </div>
+                        <svg class="line-svg" viewBox="0 0 10 100">
+                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                        </svg>
+                        <svg class="reject-workflow-line line-svg" viewBox="0 0 10 100">
+                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                        </svg>
+                        <div class="reject-workflow-info">
+                            <span>Closed-123</span>
+                        </div>
+                        <div class="reject-workflow-info-bg">
+                            Rejected-123
+                        </div>
+                    </div>
+                    <div class="workflow-item-li d-none">
+                        <div class="workflow-item-user-details">
+                            <div class="workflow-item-user-img">
+                                <img src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/user2.png" alt="image" class="ng-star-inserted">
+                            </div>
+                            <div class="workflow-item-user-control">
+                                <div class="workflow-item-name">Vinod Devbox</div>
+                                <div class="workflow-item-desgniation">Graphic Designer</div>
+                                <div class="workflow-item-badges">
+                                    <span class="wf-bg inactive">In active</span>
+                                </div>
+                            </div>
+                        </div>
+                        <svg class="line-svg" viewBox="0 0 10 100">
+                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                        </svg>
+                    </div>
+                </div>
+                <div class="workflow-item-ul d-none">
+                    <div class="workflow-item-li">
+                        <div class="workflow-item-user-details">
+                            <div class="workflow-item-user-img">
+                                <img src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/31/thumbs/298200_Thumbnail.jpeg">
+                            </div>
+                            <div class="workflow-item-user-control">
+                                <div class="workflow-item-name">Ramesh Kumar</div>
+                                <div class="workflow-item-desgniation">UI Developer</div>
+                                <div class="workflow-item-badges">
+                                    <span class="wf-bg active">Active</span>
+                                </div>
+                                <p class="workflow-item-detail">Approved</p>
+                            </div>
+                        </div>
+                        <svg class="line-svg" viewBox="0 0 10 100">
+                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                        </svg>
+                    </div>
+                    <div class="workflow-item-li">
+                        <div class="workflow-item-user-details">
+                            <div class="workflow-item-user-img">
+                                <img alt="image" src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/38/thumbs/265846_premium_photo-1661726660137-61b182d93809.jpeg" class="ng-star-inserted">
+                            </div>
+                            <div class="workflow-item-user-control">
+                                <div class="workflow-item-name">Srujan Devbox</div>
+                                <div class="workflow-item-desgniation">UI Developer</div>
+                                <div class="workflow-item-badges">
+                                    <span class="wf-bg active">Active</span>
+                                </div>
+                                <p class="workflow-item-detail">Approved</p>
+                            </div>
+                        </div>
+                        <svg class="line-svg" viewBox="0 0 10 100">
+                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                        </svg>
+                    </div>
+                    <div class="workflow-item-li reject-workflow">
+                        <div class="workflow-item-user-details">
+                            <div class="workflow-item-user-img">
+                                <img alt="image" src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/1861/thumbs/263918_icons8-user-48.png" class="ng-star-inserted">
+                            </div>
+                            <div class="workflow-item-user-control">
+                                <div class="workflow-item-name">Shiva Devbox</div>
+                                <div class="workflow-item-desgniation">UI Developer</div>
+                                <div class="workflow-item-badges">
+                                    <span class="wf-bg active">Active</span>
+                                </div>
+                                <p class="workflow-item-detail rej">Rejected</p>
+                            </div>
+                        </div>
+                        <svg class="line-svg" viewBox="0 0 10 100">
+                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                        </svg>
+                    </div>
+                    <div class="workflow-item-li last-workflow">
+                        <div class="workflow-item-user-details">
+                            <div class="workflow-item-user-img">
+                                <img src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/user2.png" alt="image" class="ng-star-inserted">
+                            </div>
+                            <div class="workflow-item-user-control">
+                                <div class="workflow-item-name">Vinod Devbox</div>
+                                <div class="workflow-item-desgniation">Graphic Designer</div>
+                                <div class="workflow-item-badges">
+                                    <span class="wf-bg inactive">In active</span>
+                                </div>
+                            </div>
+                        </div>
+                        <svg class="line-svg" viewBox="0 0 10 100">
+                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                        </svg>
+                    </div>
+                </div>
+                <div class="workflow-item-ul d-none">
+                    <div class="workflow-item-li">
+                        <div class="workflow-item-user-details">
+                            <div class="workflow-item-user-img">
+                                <img src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/31/thumbs/298200_Thumbnail.jpeg">
+                            </div>
+                            <div class="workflow-item-user-control">
+                                <div class="workflow-item-name">Ramesh Kumar</div>
+                                <div class="workflow-item-desgniation">UI Developer</div>
+                                <div class="workflow-item-badges">
+                                    <span class="wf-bg active">Active</span>
+                                </div>
+                                <p class="workflow-item-detail">Approved</p>
+                            </div>
+                        </div>
+                        <svg class="line-svg" viewBox="0 0 10 100">
+                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                        </svg>
+                    </div>
+                    <div class="workflow-item-li">
+                        <div class="workflow-item-user-details">
+                            <div class="workflow-item-user-img">
+                                <img alt="image" src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/38/thumbs/265846_premium_photo-1661726660137-61b182d93809.jpeg" class="ng-star-inserted">
+                            </div>
+                            <div class="workflow-item-user-control">
+                                <div class="workflow-item-name">Srujan Devbox</div>
+                                <div class="workflow-item-desgniation">UI Developer</div>
+                                <div class="workflow-item-badges">
+                                    <span class="wf-bg active">Active</span>
+                                </div>
+                                <p class="workflow-item-detail">Approved</p>
+                            </div>
+                        </div>
+                        <svg class="line-svg" viewBox="0 0 10 100">
+                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                        </svg>
+                    </div>
+                    <div class="workflow-item-li">
+                        <div class="workflow-item-user-details">
+                            <div class="workflow-item-user-img">
+                                <img alt="image" src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/1861/thumbs/263918_icons8-user-48.png" class="ng-star-inserted">
+                            </div>
+                            <div class="workflow-item-user-control">
+                                <div class="workflow-item-name">Shiva Devbox</div>
+                                <div class="workflow-item-desgniation">UI Developer</div>
+                                <div class="workflow-item-badges">
+                                    <span class="wf-bg active">Active</span>
+                                </div>
+                                <p class="workflow-item-detail apprej">Approved / Rejected</p>
+                            </div>
+                        </div>
+                        <svg class="line-svg" viewBox="0 0 10 100">
+                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                        </svg>
+                    </div>
+                    <div class="workflow-item-li last-workflow">
+                        <div class="workflow-item-user-details">
+                            <div class="workflow-item-user-img">
+                                <img src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/user2.png" alt="image" class="ng-star-inserted">
+                            </div>
+                            <div class="workflow-item-user-control">
+                                <div class="workflow-item-name">Vinod Devbox</div>
+                                <div class="workflow-item-desgniation">Graphic Designer</div>
+                                <div class="workflow-item-badges">
+                                    <span class="wf-bg inactive">In active</span>
+                                </div>
+                            </div>
+                        </div>
+                        <svg class="line-svg" viewBox="0 0 10 100">
+                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                        </svg>
+                    </div>
+                </div>
+                <div class="workflow-item-ul d-none">
+                    <div class="workflow-item-li workflow-start">
+                        <span>Start</span>
+                        <svg class="line-svg" viewBox="0 0 10 100">
+                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                        </svg>
+                    </div>
+                    <div class="workflow-item-li">
+                        <div class="workflow-item-user-details">
+                            <div class="workflow-item-user-img">
+                                <img src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/31/thumbs/298200_Thumbnail.jpeg">
+                            </div>
+                            <div class="workflow-item-user-control">
+                                <div class="workflow-item-name">Ramesh Kumar</div>
+                                <div class="workflow-item-desgniation">UI Developer</div>
+                                <div class="workflow-item-badges">
+                                    <span class="wf-bg active">Active</span>
+                                </div>
+                                <p class="workflow-item-detail">Approved</p>
+                            </div>
+                        </div>
+                        <svg class="line-svg" viewBox="0 0 10 100">
+                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                        </svg>
+                    </div>
+                    <div class="workflow-item-li">
+                        <div class="workflow-item-user-details">
+                            <div class="workflow-item-user-img">
+                                <img alt="image" src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/38/thumbs/265846_premium_photo-1661726660137-61b182d93809.jpeg" class="ng-star-inserted">
+                            </div>
+                            <div class="workflow-item-user-control">
+                                <div class="workflow-item-name">Srujan Devbox</div>
+                                <div class="workflow-item-desgniation">UI Developer</div>
+                                <div class="workflow-item-badges">
+                                    <span class="wf-bg active">Active</span>
+                                </div>
+                                <p class="workflow-item-detail">Approved</p>
+                            </div>
+                        </div>
+                        <svg class="line-svg" viewBox="0 0 10 100">
+                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                        </svg>
+                    </div>
+                    <div class="workflow-item-li reject-new-workflow">
+                        <div class="workflow-item-user-details">
+                            <div class="workflow-item-user-img">
+                                <img alt="image" src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/1861/thumbs/263918_icons8-user-48.png" class="ng-star-inserted">
+                            </div>
+                            <div class="workflow-item-user-control">
+                                <div class="workflow-item-name">Shiva Devbox</div>
+                                <div class="workflow-item-desgniation">UI Developer</div>
+                                <div class="workflow-item-badges">
+                                    <span class="wf-bg active">Active</span>
+                                </div>
+                                <p class="workflow-item-detail apprej">Approved &nbsp; Rejected</p>
+                            </div>
+                        </div>
+                        <svg class="line-svg" viewBox="0 0 10 100">
+                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                        </svg>
+                        <svg class="reject-workflow-line line-svg" viewBox="0 0 10 100">
+                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                        </svg>
+                        <div class="reject-workflow-info">
+                            <span>Closed</span>
+                        </div>
+                        <div class="reject-workflow-info-bg">
+                            Rejected
+                        </div>
+                    </div>
+                    <div class="workflow-item-li">
+                        <div class="workflow-item-user-details">
+                            <div class="workflow-item-user-img">
+                                <img src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/user2.png" alt="image" class="ng-star-inserted">
+                            </div>
+                            <div class="workflow-item-user-control">
+                                <div class="workflow-item-name">Vinod Devbox</div>
+                                <div class="workflow-item-desgniation">Graphic Designer</div>
+                                <div class="workflow-item-badges">
+                                    <span class="wf-bg inactive">In active</span>
+                                </div>
+                            </div>
+                        </div>
+                        <svg class="line-svg" viewBox="0 0 10 100">
+                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                        </svg>
+                    </div>
+                    <div class="workflow-item-li last-workflow workflow-end">
+                        <span>Closed</span>
+                        <svg class="line-svg" viewBox="0 0 10 100">
+                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                        </svg>
+                    </div>
+                </div>
+                <div class="workflow-item-nodep-ul d-none">
+                    <span class="workflow-item-nodep-card wf-nd-s">Start</span>
+                    <div class="workflow-item-nodep-branch lv1">
+                        <div class="workflow-item-nodep-entry">
+                            <div class="workflow-item-nodep-card">
+                                <div class="workflow-item-user-details">
+                                    <div class="workflow-item-user-img">
+                                        <img src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/31/thumbs/298200_Thumbnail.jpeg">
+                                    </div>
+                                    <div class="workflow-item-user-control">
+                                        <div class="workflow-item-name">Ramesh Kumar</div>
+                                        <div class="workflow-item-desgniation">UI Developer</div>
+                                        <div class="workflow-item-badges">
+                                            <span class="wf-bg active">Active</span>
+                                            <span class="wf-bg app">Approved</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="workflow-item-nodep-entry">
+                            <div class="workflow-item-nodep-card">
+                                <div class="workflow-item-user-details">
+                                    <div class="workflow-item-user-img">
+                                        <img alt="image" src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/38/thumbs/265846_premium_photo-1661726660137-61b182d93809.jpeg" class="ng-star-inserted">
+                                    </div>
+                                    <div class="workflow-item-user-control">
+                                        <div class="workflow-item-name">Srujan Devbox</div>
+                                        <div class="workflow-item-desgniation">UI Developer</div>
+                                        <div class="workflow-item-badges">
+                                            <span class="wf-bg active">Active</span>
+                                            <span class="wf-bg app">Approved</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="workflow-item-nodep-entry">
+                            <div class="workflow-item-nodep-card">
+                                <div class="workflow-item-user-details">
+                                    <div class="workflow-item-user-img">
+                                        <img alt="image" src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/1861/thumbs/263918_icons8-user-48.png" class="ng-star-inserted">
+                                    </div>
+                                    <div class="workflow-item-user-control">
+                                        <div class="workflow-item-name">Shiva Devbox</div>
+                                        <div class="workflow-item-desgniation">UI Developer</div>
+                                        <div class="workflow-item-badges">
+                                            <span class="wf-bg active">Active</span>
+                                            <span class="wf-bg rej">Rejected</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="workflow-item-nodep-entry">
+                            <div class="workflow-item-nodep-card">
+                                <div class="workflow-item-user-details">
+                                    <div class="workflow-item-user-img">
+                                        <img src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/user2.png" alt="image" class="ng-star-inserted">
+                                    </div>
+                                    <div class="workflow-item-user-control">
+                                        <div class="workflow-item-name">Vinod Devbox</div>
+                                        <div class="workflow-item-desgniation">Graphic Designer</div>
+                                        <div class="workflow-item-badges">
+                                            <span class="wf-bg inactive">In active</span>
+                                            <span class="wf-bg rej">Rejected</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- workflow create start -->
+<div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid" id="workflow-create" style="display: none;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card workflow-create-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <h4 class="mb-0 pro-nm"> Create Workflow </h4>
+                        <div class="backbtn" (click)="workflow_list()">
+                            <span class="backbtn-icon">
+                                <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="64px" height="64px"
+                                    viewBox="0 0 52 52" enable-background="new 0 0 52 52" xml:space="preserve">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path
+                                            d="M48.6,23H15.4c-0.9,0-1.3-1.1-0.7-1.7l9.6-9.6c0.6-0.6,0.6-1.5,0-2.1l-2.2-2.2c-0.6-0.6-1.5-0.6-2.1,0 L2.5,25c-0.6,0.6-0.6,1.5,0,2.1L20,44.6c0.6,0.6,1.5,0.6,2.1,0l2.1-2.1c0.6-0.6,0.6-1.5,0-2.1l-9.6-9.6C14,30.1,14.4,29,15.3,29 h33.2c0.8,0,1.5-0.6,1.5-1.4v-3C50,23.8,49.4,23,48.6,23z">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </span>
+                            <span class="backbtn-label">Back</span>
+                        </div>
+                    </div>
+                    <div class="row workflow-create-form">
+                        <div class="col-md-10 workflow-create-form-col">
+                            <div class="se-row">
+                                <div class="se-col-1">
+                                    <div class="label-icon">
+                                        <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                stroke-linejoin="round"></g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <path d="M12 6V19M6 6H18" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="se-col-11">
+                                    <input type="email" class="form-control" id="workflowname" autocomplete="off" [(ngModel)]="Workflowname" placeholder="Enter workflow name">
+                                    <div class="kt-error" *ngIf="WorkflowNameRequired && !Workflowname">
+                                        <span class="kt-error-msg">
+                                            Please enter workflow name</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="se-row">
+                                <div class="se-col-1">
+                                    <div class="label-icon">
+                                        <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                stroke-linejoin="round"></g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <path
+                                                    d="M3 21C3 21.5523 3.44772 22 4 22C4.55228 22 5 21.5523 5 21H3ZM11.8584 15.0608C12.4051 15.139 12.9117 14.7592 12.9899 14.2125C13.0681 13.6658 12.6883 13.1592 12.1416 13.081L11.8584 15.0608ZM17.29 17.2929C16.8994 17.6834 16.8994 18.3166 17.29 18.7071C17.6805 19.0976 18.3137 19.0976 18.7042 18.7071L17.29 17.2929ZM15.0916 14.7507C14.954 15.2856 15.2759 15.8308 15.8108 15.9684C16.3457 16.1061 16.8908 15.7841 17.0285 15.2493L15.0916 14.7507ZM17.9971 20C17.4448 20 16.9971 20.4477 16.9971 21C16.9971 21.5523 17.4448 22 17.9971 22V20ZM18.0071 22C18.5594 22 19.0071 21.5523 19.0071 21C19.0071 20.4477 18.5594 20 18.0071 20V22ZM14 7C14 8.65685 12.6569 10 11 10V12C13.7614 12 16 9.76142 16 7H14ZM11 10C9.34315 10 8 8.65685 8 7H6C6 9.76142 8.23858 12 11 12V10ZM8 7C8 5.34315 9.34315 4 11 4V2C8.23858 2 6 4.23858 6 7H8ZM11 4C12.6569 4 14 5.34315 14 7H16C16 4.23858 13.7614 2 11 2V4ZM5 21C5 17.6863 7.68629 15 11 15V13C6.58172 13 3 16.5817 3 21H5ZM11 15C11.292 15 11.5786 15.0208 11.8584 15.0608L12.1416 13.081C11.7682 13.0276 11.387 13 11 13V15ZM18.997 15.5C18.997 15.6732 18.9516 15.8053 18.6776 16.0697C18.5239 16.218 18.3429 16.3653 18.0919 16.574C17.8536 16.7723 17.5741 17.0087 17.29 17.2929L18.7042 18.7071C18.92 18.4913 19.1405 18.3033 19.3709 18.1116C19.5887 17.9305 19.8452 17.7223 20.0665 17.5087C20.5426 17.0493 20.997 16.4314 20.997 15.5H18.997ZM17.997 14.5C18.5493 14.5 18.997 14.9477 18.997 15.5H20.997C20.997 13.8431 19.6539 12.5 17.997 12.5V14.5ZM17.0285 15.2493C17.1396 14.8177 17.5325 14.5 17.997 14.5V12.5C16.5978 12.5 15.4246 13.457 15.0916 14.7507L17.0285 15.2493ZM17.9971 22H18.0071V20H17.9971V22Z"
+                                                    fill="currentColor"></path>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="se-col-11">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div>
+                                                <div class="se-label">Action Type</div>
+                                                <div class="form-check-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input cust-radio" type="radio" [checked]="selectedOption === '2'" (change)="toggleDocumentLocation('2')" name="actiontypeOption" id="actiontypeRadio2">
+                                                        <label class="form-check-label" for="actiontypeRadio2">
+                                                            Approval Pending
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input cust-radio" type="radio" [checked]="selectedOption === '1'" (change)="toggleDocumentLocation('1')" name="actiontypeOption" id="actiontypeRadio1">
+                                                        <label class="form-check-label" for="actiontypeRadio1">
+                                                            Reply Required
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 d-none">
+                                            <div>
+                                                <div class="se-label">Is Dependent</div>
+                                                <div class="form-check-group">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input cust-radio" type="radio" name="isdepOption" id="isdepRadio1">
+                                                        <label class="form-check-label" for="isdepRadio1">
+                                                            Yes
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input cust-radio" type="radio" name="isdepOption" id="isdepRadio2">
+                                                        <label class="form-check-label" for="isdepRadio2">
+                                                            No
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="se-row">
+                                <div class="se-col-1">
+                                    <div class="label-icon">
+                                        <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M6 6C6 5.44772 6.44772 5 7 5H17C17.5523 5 18 5.44772 18 6C18 6.55228 17.5523 7 17 7H7C6.44771 7 6 6.55228 6 6Z" fill="currentColor"></path><path d="M6 10C6 9.44771 6.44772 9 7 9H17C17.5523 9 18 9.44771 18 10C18 10.5523 17.5523 11 17 11H7C6.44771 11 6 10.5523 6 10Z" fill="currentColor"></path><path d="M7 13C6.44772 13 6 13.4477 6 14C6 14.5523 6.44771 15 7 15H17C17.5523 15 18 14.5523 18 14C18 13.4477 17.5523 13 17 13H7Z" fill="currentColor"></path><path d="M6 18C6 17.4477 6.44772 17 7 17H11C11.5523 17 12 17.4477 12 18C12 18.5523 11.5523 19 11 19H7C6.44772 19 6 18.5523 6 18Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M2 4C2 2.34315 3.34315 1 5 1H19C20.6569 1 22 2.34315 22 4V20C22 21.6569 20.6569 23 19 23H5C3.34315 23 2 21.6569 2 20V4ZM5 3H19C19.5523 3 20 3.44771 20 4V20C20 20.5523 19.5523 21 19 21H5C4.44772 21 4 20.5523 4 20V4C4 3.44772 4.44771 3 5 3Z" fill="currentColor"></path></g></svg>
+                                    </div>
+                                </div>
+                                <div class="se-col-11">
+                                    <textarea type="text" class="form-control" placeholder="EnterNote" [(ngModel)]="User_Note"></textarea>
+                                </div>
+                            </div>
+                            <div class="se-row">
+                                <div class="se-col-1">
+                                    <div class="label-icon">
+                                        <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M22 21V19C22 17.1362 20.7252 15.5701 19 15.126M15.5 3.29076C16.9659 3.88415 18 5.32131 18 7C18 8.67869 16.9659 10.1159 15.5 10.7092M17 21C17 19.1362 17 18.2044 16.6955 17.4693C16.2895 16.4892 15.5108 15.7105 14.5307 15.3045C13.7956 15 12.8638 15 11 15H8C6.13623 15 5.20435 15 4.46927 15.3045C3.48915 15.7105 2.71046 16.4892 2.30448 17.4693C2 18.2044 2 19.1362 2 21M13.5 7C13.5 9.20914 11.7091 11 9.5 11C7.29086 11 5.5 9.20914 5.5 7C5.5 4.79086 7.29086 3 9.5 3C11.7091 3 13.5 4.79086 13.5 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></g></svg>
+                                    </div>
+                                </div>
+                                <div class="se-col-11">
+                                    <div type="button" class="workflowuser-select mb-3" (click)="open_workflow_user_modal()">
+                                        <div class="title">Add User(s) </div>
+                                    </div>
+                                    <div class="kt-error" *ngIf="AddUserRequired">
+                                        <span class="kt-error-msg">
+                                            Please select user(s)</span>
+                                    </div>
+                                    <div *ngIf="SelectedUsers.length>0">
+                                        <label>{{SelectedUsers.length}} User(s) Selected</label>
+                                    </div>
+                                    <div class="workflowuser-select-ul" *ngIf="SelectedUsers.length>0">
+                                        <div class="workflowuser-select-li" *ngFor="let user of SelectedUsers; let i = index; let last = last">
+                                            <div class="name-sort-action">
+                                                <div class="row mb-2">
+                                                    <div class="col-6">
+                                                        <div class="w-100">
+                                                            <label>Step {{ i + 1 }} </label>
+                                                            <input type="text" class="form-control w-100"  [(ngModel)]="user.Stepname"  placeholder="Enter step name" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div>
+                                                            <label>Attachment Required</label>
+                                                            <div class="form-check-group">
+                                                                <div class="form-check">
+                                                                    <!-- <input class="form-check-input cust-radio" [checked]="AttReqselectedOption === true" (change)="AttachmentRequired(true)" type="radio" name="attachreqOption" id="attachreqRadio1">
+                                                                    <label class="form-check-label" for="attachreqRadio1">
+                                                                        Yes
+                                                                    </label> -->
+                                                                    <input 
+                                                                    class="form-check-input cust-radio" 
+                                                                    [(ngModel)]="user.AttachmentRequired" 
+                [value]="true" 
+                                                                    type="radio" 
+                                                                    name="attachreqOption{{i}}" 
+                                                                    id="attachreqRadio1_{{i}}">
+                                                                  <label class="form-check-label" for="attachreqRadio1_{{i}}">
+                                                                    Yes
+                                                                  </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <!-- <input class="form-check-input cust-radio" [checked]="AttReqselectedOption === false" (change)="AttachmentRequired(false)" type="radio" name="attachreqOption" id="attachreqRadio2">
+                                                                    <label class="form-check-label" for="attachreqRadio2">
+                                                                        No
+                                                                    </label> -->
+                                                                    <input 
+                                                                    class="form-check-input cust-radio" 
+                                                                    [(ngModel)]="user.AttachmentRequired" 
+                                                                    [value]="false" 
+                                                                    type="radio" 
+                                                                    name="attachreqOption{{i}}" 
+                                                                    id="attachreqRadio2_{{i}}">
+                                                                  <label class="form-check-label" for="attachreqRadio2_{{i}}">
+                                                                    No
+                                                                  </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <label>Name</label>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label>Sorting Order</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="workflowuser-select-value"> {{user.ContactName}} </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="workflowuser-select-number">
+                                                            <!-- <input type="email" class="form-control" [value]="i + 1" placeholder="Add order"> -->
+                                                            <input disabled="true" type="text" class="form-control" id="txt_{{user.EmployeeId}}" [(ngModel)]="user.sortId" (input)="validateDuplicates()" [class.error]="duplicateIndexes.includes(i)" placeholder="Enter value" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="user-system-action">
+                                                <div class="user-system-action-item mb-2">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <label>User Action</label>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label>System Action</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-2" *ngIf="selectedOption === '2'">
+                                                        <div class="col-6">
+                                                            <div class="workflowuser-select-value w-s-v-line">Approved
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div>
+                                                                <select placeholder="Select Option" [(ngModel)]="user.SystemActionApproved" (change)="SystemDropApproved($event, user)" class="form-control form-select" aria-label="Default select example">
+                                                                    <!-- <option   value="Select Option">Select Option</option> -->
+                                                                    <option  *ngIf="user.sortId != getLastSortId()" value="Next step">Next step</option>
+                                                                    <option  *ngIf="user.sortId != getLastSortId()" value="Close">close</option>
+                                                                    <option *ngIf="user.sortId === getLastSortId()" value="Close">Close</option>
+                                                                  </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-2" *ngIf="selectedOption === '2'">
+                                                        <div class="col-6">
+                                                            <div class="workflowuser-select-value w-s-v-line">Rejected
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div>
+                                                                <select [(ngModel)]="user.SystemActionReject" placeholder="Select Option" (change)="SystemDropRejected($event, user)" class="form-control form-select" aria-label="Default select example">
+                                                                    <!-- <option  value="Select Option">Select Option</option> -->
+                                                                    <option  *ngIf="user.sortId != getLastSortId()" value="Next step">Next step</option>
+                                                                    <option  *ngIf="user.sortId != getLastSortId()" value="Close">close</option>
+                                                                    <option *ngIf="user.sortId === getLastSortId()" value="Close">Close</option>
+                                                                  </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-2" *ngIf="selectedOption === '1'">
+                                                        <div class="col-6">
+                                                            <div class="workflowuser-select-value w-s-v-line">Replied</div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div>
+                                                                <select [(ngModel)]="user.SystemActionReplied" placeholder="Select Option" (ngModelChange)="SystemDropReplied(user)" class="form-control form-select" aria-label="Default select example">
+                                                                    <option  *ngIf="user.sortId != getLastSortId()" value="Next step">Next step</option>
+                                                                    <option  *ngIf="user.sortId != getLastSortId()" value="Close">close</option>
+                                                                    <option *ngIf="user.sortId === getLastSortId()" value="Close">Close</option>
+                                                                  </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="workflow-user-note">
+                                                <b>Note:</b> please do proper mapping to user action and system action.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="duplicateIndexes.length > 0" class="error-message">
+                                    Duplicate sort values found!
+                                </div>
+                            </div>
+                            <div class="workflow-create-form-footer">
+                                <p *ngIf="allValidationsPassed == false" class="error-note mr-2" style="align-items: center;">
+                                    <span>
+                                        <svg fill="currentColor" width="64px" height="64px" viewBox="0 0 1024 1024"
+                                            version="1" xmlns="http://www.w3.org/2000/svg">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                stroke-linejoin="round"></g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <path
+                                                    d="M512 717a205 205 0 1 0 0-410 205 205 0 0 0 0 410zm0 51a256 256 0 1 1 0-512 256 256 0 0 1 0 512z">
+                                                </path>
+                                                <path
+                                                    d="M485 364c7-7 16-11 27-11s20 4 27 11c8 8 11 17 11 28 0 10-3 19-11 27-7 7-16 11-27 11s-20-4-27-11c-8-8-11-17-11-27 0-11 3-20 11-28zM479 469h66v192h-66z">
+                                                </path>
+                                            </g>
+                                        </svg>
+                                    </span>
+                                    <span>
+                                        Note: Mandatory (*) Fields Are Required
+                                    </span>
+                                </p>
+                                <button class="btn btn-secondary mr-2" (click)="ClearWorkflowdata()" id="button">
+                                    Cancel
+                                 </button>
+                                <button type="button" class="btn btn-info" (click)="Workflowsubmit()">Submit</button>                             
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- workflow create end -->
+<div class="modal-backdrop fade show" id="workflow-user-modal-backdrop" style="display: none;"></div>
+<!-- workflow user Modal Start -->
+<div class="workflow-user modal fade show" id="workflow-user-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="workflow-user-modalLabel" aria-hidden="true" style="display: none">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header  gap-1">
+                <svg focusable="false" width="20" height="20" viewBox="0 0 24 24" class="svg-icn mt-2 mb-2">
+                    <path
+                        d="M15 8c0-1.42-.5-2.73-1.33-3.76.42-.14.86-.24 1.33-.24 2.21 0 4 1.79 4 4s-1.79 4-4 4c-.43 0-.84-.09-1.23-.21-.03-.01-.06-.02-.1-.03A5.98 5.98 0 0 0 15 8zm1.66 5.13C18.03 14.06 19 15.32 19 17v3h4v-3c0-2.18-3.58-3.47-6.34-3.87zM9 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2m0 9c-2.7 0-5.8 1.29-6 2.01V18h12v-1c-.2-.71-3.3-2-6-2M9 4c2.21 0 4 1.79 4 4s-1.79 4-4 4-4-1.79-4-4 1.79-4 4-4zm0 9c2.67 0 8 1.34 8 4v3H1v-3c0-2.66 5.33-4 8-4z">
+                    </path>
+                </svg>
+                <h5 class="modal-title  flex-grow-1" id="workflow-user-modalLabel">Select User(s)</h5>
+                <button type="button" class="close d-none" (click)="close_workflow_user_modal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-search">
+                    <div class="search-svg">
+                        <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M16.6725 16.6412L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+                                    stroke="#a3a4a5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                </path>
+                            </g>
+                        </svg>
+                    </div>
+                    <input id="InputSearch" class="search-input" [(ngModel)]="Adduserserach" type="text" autocomplete="off" placeholder="Search" />
+                    <div class="modal-icon mr-1 curser-pointer d-none" id="filter-icon">
+                        <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M3 4.6C3 4.03995 3 3.75992 3.10899 3.54601C3.20487 3.35785 3.35785 3.20487 3.54601 3.10899C3.75992 3 4.03995 3 4.6 3H19.4C19.9601 3 20.2401 3 20.454 3.10899C20.6422 3.20487 20.7951 3.35785 20.891 3.54601C21 3.75992 21 4.03995 21 4.6V6.33726C21 6.58185 21 6.70414 20.9724 6.81923C20.9479 6.92127 20.9075 7.01881 20.8526 7.10828C20.7908 7.2092 20.7043 7.29568 20.5314 7.46863L14.4686 13.5314C14.2957 13.7043 14.2092 13.7908 14.1474 13.8917C14.0925 13.9812 14.0521 14.0787 14.0276 14.1808C14 14.2959 14 14.4182 14 14.6627V17L10 21V14.6627C10 14.4182 10 14.2959 9.97237 14.1808C9.94787 14.0787 9.90747 13.9812 9.85264 13.8917C9.7908 13.7908 9.70432 13.7043 9.53137 13.5314L3.46863 7.46863C3.29568 7.29568 3.2092 7.2092 3.14736 7.10828C3.09253 7.01881 3.05213 6.92127 3.02763 6.81923C3 6.70414 3 6.58185 3 6.33726V4.6Z"
+                                    stroke="#a3a4a5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                </path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="modal-icon curser-pointer">
+                        <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M4.52185 7H7C7.55229 7 8 7.44772 8 8C8 8.55229 7.55228 9 7 9H3C1.89543 9 1 8.10457 1 7V3C1 2.44772 1.44772 2 2 2C2.55228 2 3 2.44772 3 3V5.6754C4.26953 3.8688 6.06062 2.47676 8.14852 1.69631C10.6633 0.756291 13.435 0.768419 15.9415 1.73041C18.448 2.69239 20.5161 4.53782 21.7562 6.91897C22.9963 9.30013 23.3228 12.0526 22.6741 14.6578C22.0254 17.263 20.4464 19.541 18.2345 21.0626C16.0226 22.5842 13.3306 23.2444 10.6657 22.9188C8.00083 22.5931 5.54702 21.3041 3.76664 19.2946C2.20818 17.5356 1.25993 15.3309 1.04625 13.0078C0.995657 12.4579 1.45216 12.0088 2.00445 12.0084C2.55673 12.0079 3.00351 12.4566 3.06526 13.0055C3.27138 14.8374 4.03712 16.5706 5.27027 17.9625C6.7255 19.605 8.73118 20.6586 10.9094 20.9247C13.0876 21.1909 15.288 20.6513 17.0959 19.4075C18.9039 18.1638 20.1945 16.3018 20.7247 14.1724C21.2549 12.043 20.9881 9.79319 19.9745 7.8469C18.9608 5.90061 17.2704 4.3922 15.2217 3.6059C13.173 2.8196 10.9074 2.80968 8.8519 3.57803C7.11008 4.22911 5.62099 5.40094 4.57993 6.92229C4.56156 6.94914 4.54217 6.97505 4.52185 7Z"
+                                    fill="#a3a4a5"></path>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+                <div class="position-relative">
+                    <ul class="modal-workflow-user-list" id="participant-list">
+                        <ng-container *ngIf="(ObjgetCompanyList|filter:Adduserserach) as ObjgetCompanyList">
+                            <li *ngFor="let _user of ObjgetCompanyList|filter:Adduserserach" class="modal-workflow-user-list-item">
+                                <span>
+                                    <mat-checkbox color="primary" [checked]="_user.Check" [disabled]="_user.disabled"
+                                    (change)="updateSelectedValues(_user.EmployeeId, $event)" ></mat-checkbox>
+                                </span>
+                                <span class="modal-workflow-user-name">
+                                    {{_user.ContactName}}- 
+                                    <strong *ngIf="_user.sortId">Sort ID: {{ _user.sortId }}</strong>
+                                    </span>
+                            </li>
+                            <div *ngIf="ObjgetCompanyList.length == 0" class="w-100 h-100 d-flex align-items-center justify-content-center">
+                                <svg fill="#757575" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path
+                                            d="M55.9,49.3l22.7-22.8c0.8-0.8,0.8-2,0-2.9l-2.7-2.9c-0.8-0.8-2-0.8-2.9,0L50.1,43.6c-0.5,0.5-1.4,0.5-1.9,0 l-22.8-23c-0.8-0.8-2-0.8-2.9,0l-2.9,2.9c-0.8,0.8-0.8,2,0,2.9l22.8,22.8c0.5,0.5,0.5,1.4,0,1.9L19.6,74c-0.8,0.8-0.8,2,0,2.9 l2.9,2.9c0.8,0.8,2,0.8,2.9,0l22.8-22.8c0.5-0.5,1.4-0.5,1.9,0l22.6,22.6c0.8,0.8,2,0.8,2.9,0l2.9-2.9c0.8-0.8,0.8-2,0-2.9 L55.9,51.2C55.3,50.6,55.3,49.8,55.9,49.3z">
+                                        </path>
+                                    </g>
+                                </svg>
+                                <span style="color:#757575" class="ml-2">No User found.</span>
+                            </div>
+                        </ng-container>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-add-primary" (click)="AddSelectUser()">Add </button>
+                <button type="button" class="btn btn-close-secondary" (click)="close_workflow_user_modal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- workflow user Modal End -->

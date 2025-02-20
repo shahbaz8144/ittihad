@@ -1,0 +1,10 @@
+small.sub-replay-svg svg {
+    height: 22px;
+    position: relative;
+    top: -3px;
+    fill: #e4e8ee;
+    margin-bottom: -6px;
+}
+.sub-replay-svg svg path {
+    fill: #727272 !important;
+}

@@ -1,0 +1,350 @@
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid" id="scrd">
+    <div class="col-lg-12">
+        <h4 class="mb-3 pro-nm"> {{ "Administration.ManageCompany/DivisionHierarchy" | translate }} </h4>
+        <div class="card">
+            <div class="card-body">
+
+                <div class="pt-3">
+                    <div class="form-cus col-md-6 col-lg-4">
+                        <label class="form-label">{{ "Administration.SelectCompany" | translate }}</label>
+                        <ng-select [placeholder]="CompanyHierarchyselect" (change)="GetDeptList($event)">
+                            <!-- <div *ngIf="submitted && f.town.errors" class="invalid-feedback">
+                                            <div *ngIf="f.town.errors.required">CompanyName is Required</div>
+                                        </div> -->
+                            <ng-option [value]="obj.CompanyId" (click)="GetDropdown()"
+                                *ngFor="let obj of ObjgetCompanyList">
+                                {{obj.CompanyName}}
+                            </ng-option>
+                        </ng-select>
+
+                    </div>
+                    <div class="txtm-cus mt-2 ml-2"> {{ "Administration.CompanyhierarchyNote" | translate }}
+                    </div>
+
+                    <!-- Departments-->
+                    <div class="menu_cards">
+                        <!-- Existing Departments-->
+                        <div class="card cards mb-3">
+                            <div class="card-body">
+                                <div class="">
+                                    <div class="">
+                                        <h5>{{ "Administration.ExistingDepartments" | translate }}</h5>
+                                        <div class="List_options" id="ExistingDept_ul">
+
+                                            <ul class="menu_ul" *ngFor="let item of ObjgetDepartmentList">
+                                                <li [ngClass]="(item.ManagersCount>0)?'list-item menu_li existcrd':'list-item menu_li'"
+                                                    (click)="GetDetailsList(item.DepartmentId)">
+
+                                                    <span class="menu_text"
+                                                        data-toggle="tab">{{item.DepartmentName}}
+                                                    </span>
+                                                    <span *ngIf="item.SharedService==true"
+                                                        class="material-icons fs-6 mr-2 icn">shuffle</span>
+                                                    <span *ngIf="item.ManagersCount>0"
+                                                        class="material-icons fs-6 mr-1 icn">check</span>
+                                                    <span *ngIf="item.ManagersCount==0"
+                                                        class="material-icons fs-6 mr-1 icn">settings_suggest</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Mandatory Departments-->
+                        <div class="card cards mb-3 dragcrd">
+                            <div class="card-body">
+                                <div class="">
+                                    <div class="">
+                                        <h5>{{ "Administration.MandatoryDepartments" | translate }}</h5>
+                                        <div class="List_options">
+                                            <ul class="menu_ul" *ngFor="let item of ObjgetDepartmentList1">
+                                                <li (click)="GetDetailsList(item.DepartmentId)"
+                                                    class="list-item menu_li">
+                                                    <div class="pl-2">
+                                                        <svg aria-hidden="true" data-prefix="tw"
+                                                            data-icon="draghandle-tw-solid"
+                                                            class="svg-inline--fa fa-draghandle-tw-solid fa-w-16 fa-1x"
+                                                            role="img" xmlns="http://www.w3.org/2000/svg"
+                                                            viewBox="0 0 512 512" style="width: 1em;">
+                                                            <path fill="#aaa"
+                                                                d="M176 96c26.51 0 48 21.49 48 48s-21.49 48-48 48-48-21.49-48-48 21.49-48 48-48zm0 160c26.51 0 48 21.49 48 48s-21.49 48-48 48-48-21.49-48-48 21.49-48 48-48zm0 160c26.51 0 48 21.49 48 48s-21.49 48-48 48-48-21.49-48-48 21.49-48 48-48zM304 0c26.51 0 48 21.49 48 48s-21.49 48-48 48-48-21.49-48-48 21.49-48 48-48zm0 160c26.51 0 48 21.49 48 48s-21.49 48-48 48-48-21.49-48-48 21.49-48 48-48zm0 160c26.51 0 48 21.49 48 48s-21.49 48-48 48-48-21.49-48-48 21.49-48 48-48z">
+                                                            </path>
+                                                        </svg>
+                                                    </div>
+                                                    <span class="menu_text"
+                                                        data-toggle="tab">{{item.DepartmentName}}
+                                                    </span>
+                                                    <div class="menu_toggle">
+                                                        <span class="material-icons fs-6 mr-1">west</span>
+                                                        <span class="sub_text mr-1">Move</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Optional Departments-->
+                        <div class="card cards mb-3 dragcrd">
+                            <div class="card-body">
+                                <div class="">
+                                    <div class="">
+                                        <h5>{{ "Administration.OptionalDepartments" | translate }}</h5>
+                                        <div class="List_options">
+                                            <ul class="menu_ul" *ngFor="let item of ObjgetDepartmentList2">
+                                                <li (click)="GetDetailsList(item.DepartmentId)"
+                                                 class="list-item menu_li">
+                                                    <div class="pl-2">
+                                                        <svg aria-hidden="true" data-prefix="tw"
+                                                            data-icon="draghandle-tw-solid"
+                                                            class="svg-inline--fa fa-draghandle-tw-solid fa-w-16 fa-1x"
+                                                            role="img" xmlns="http://www.w3.org/2000/svg"
+                                                            viewBox="0 0 512 512" style="width: 1em;">
+                                                            <path fill="#aaa"
+                                                                d="M176 96c26.51 0 48 21.49 48 48s-21.49 48-48 48-48-21.49-48-48 21.49-48 48-48zm0 160c26.51 0 48 21.49 48 48s-21.49 48-48 48-48-21.49-48-48 21.49-48 48-48zm0 160c26.51 0 48 21.49 48 48s-21.49 48-48 48-48-21.49-48-48 21.49-48 48-48zM304 0c26.51 0 48 21.49 48 48s-21.49 48-48 48-48-21.49-48-48 21.49-48 48-48zm0 160c26.51 0 48 21.49 48 48s-21.49 48-48 48-48-21.49-48-48 21.49-48 48-48zm0 160c26.51 0 48 21.49 48 48s-21.49 48-48 48-48-21.49-48-48 21.49-48 48-48z">
+                                                            </path>
+                                                        </svg>
+                                                    </div>
+                                                    <span class="menu_text"
+                                                        data-toggle="tab">{{item.DepartmentName}}
+                                                    </span>
+                                                    <div class="menu_toggle"><span
+                                                            class="material-icons fs-6 mr-1">west</span><span
+                                                            class="sub_text mr-1">Move</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="kt-aside-menu-overlay" (click)="closeInfo()"></div>
+
+<div id="proview" class="wc-75 kt-quick-panel kt-quick-panel1">
+    <a (click)="closeInfo()" class="kt-quick-panel__close" id="kt_quick_panel_close_btn"><i
+            class="flaticon2-delete"></i></a>
+
+    <div class="kt-grid__item kt-grid__item--fluid kt-app__content" id="kt_chat_content">
+        <div class="kt-chat">
+            <div class="kt-portlet kt-portlet--head-lg kt-portlet--last">
+                <div class="kt-portlet__head">
+                    <div class="kt-chat__head">
+                        <div class="">
+                            <div class="kt-chat__label">
+                                <span class="h4">
+                                    {{CompanyName}}
+                                </span>
+                                <span class="sub_title">
+                                    {{DepartmentName}}
+                                </span>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="kt-portlet__body flex-row py-0 pl-0">
+                    <div class="col-md-4 py-4 pl-4" style="background: #f5f7fa;">
+                        <div class="ovlay-div">
+                            <div class="d-flex-center">
+                                <h4>{{ "Administration.Managers" | translate }}</h4>
+                                <button class="btn btn-primary mb-2" type="button" data-toggle="collapse"
+                                    data-target="#add_man" aria-expanded="false" aria-controls="add_man">
+                                    {{ "Administration.AddActingManager" | translate }}
+                                </button>
+
+                            </div>
+                            <div class="collapse ovlay" id="add_man">
+                                <div class="card crd-sd">
+                                    <div class="card-body">
+                                        <div class="tab-content">
+                                            <div class="form-cus form-group">
+                                                <label class="form-label">{{ "Administration.SelectCompany" | translate }} </label>
+
+                                                <ng-select (change)="GetKeyManager($event)" [(ngModel)]="Compy"
+                                                    placeholder="select">
+                                                    <ng-option *ngFor="let _val of ObjGetCompanyList"
+                                                        [value]="_val.CompanyId">
+                                                        {{_val.CompanyName}}
+                                                    </ng-option>
+                                                </ng-select>
+                                            </div>
+                                            <div class="form-cus form-group">
+                                                <label class="form-label">{{ "Administration.SelectManager" | translate }}</label>
+                                                <ng-select placeholder="select" (change)="GetManagerId($event)"
+                                                    [(ngModel)]="Manager">
+                                                    <ng-option *ngFor="let _val of ObjManagerlist"
+                                                        [value]="_val.UserId">{{_val.UserName}}
+                                                    </ng-option>
+                                                </ng-select>
+                                            </div>
+                                        </div>
+                                        <div class="task_act">
+                                            <button class="btn btn-sm btn-primary px-3 mt-2" data-toggle="collapse"
+                                                data-target="#add_man" (click)="OnSaveManager(1,0)">
+                                                {{ "Administration.Save" | translate }}
+                                            </button>
+                                            <button class="btn btn-sm btn-secondary px-3 ml-2 mt-2"
+                                                data-toggle="collapse" data-target="#add_man">
+                                                {{ "Administration.Cancel" | translate }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-2">
+                            <div class="kt-widget kt-widget--users">
+                                <div class="kt-scroll scroll-y">
+                                    <div class="kt-widget__items mt-2 mr-1">
+                                        <div *ngFor="let item of ObjGetUserList">
+                                            <div class="kt-widget__item active p-2 card crd-sd"
+                                                id="Managerdiv_{{item.UserId}}" *ngIf="item.IsDepartmentHead==true">
+                                                <div class="kt-widget__info">
+                                                    <div class="kt-widget__section">
+                                                        <h6 class="kt-widget__username my-1">{{item.DisplayName}}</h6>
+                                                        <label *ngIf="item.OutsourceId !=0"
+                                                            class="kt-badge kt-badge--inline cus-btn text-white px-2 py-0 kt-badge--pill bg-info">
+                                                            Acting
+                                                            Manager</label>
+                                                    </div>
+                                                    <span class="kt-widget__desc f-curs"> <i
+                                                            class="far fa-envelope mr-2"></i>
+                                                        {{item.Email}}</span>
+                                                    <small class="kt-widget__desc"> <i
+                                                            class="material-icons fs-6 ver-m">
+                                                            call
+                                                        </i>
+                                                        {{item.Phone}}</small>
+                                                    <span class="kt-widget__desc f-curs"> <i
+                                                            class="far fa-id-badge mr-2"></i>
+                                                        {{item.EmployeeId}}1</span>
+                                                    <div class="kt-widget__section justify-content-between">
+                                                        <button class="btn btn-primary btn-sm py-1 px-2"
+                                                            (click)="GetselectedUserId(item.UserId)" >{{ "Administration.TeamMembers" | translate }}</button>
+                                                        <div class="" *ngIf="item.OutsourceId!=0">
+                                                            <i class="fa fa-trash"
+                                                                (click)="Delete(item.OutsourceId)"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 py-4">
+
+                        <div [ngClass]="(ObjTeamMemberId!=0)?'ovlay-div':'ovlay-div d-none'">
+                            <div class="d-flex-center">
+                                <h4>Key Members</h4>
+                                <button class="btn btn-primary mb-2" type="button" (click)="toggleAddKeyMembersdiv()">
+                                    Add Key Members
+                                </button>
+                            </div>
+                            <div class="collapse ovlay" id="add_key_mem">
+                                <div class="card crd-sd">
+                                    <div class="card-body">
+                                        <div class="tab-content">
+                                            <div class="form-cus form-group">
+                                                <label class="form-label">Select Company </label>
+                                                <ng-select (change)="GetKeyMembers($event)" placeholder="select" >
+                                                    <ng-option *ngFor="let _val of ObjGetCompanyList" 
+                                                        [value]="_val.CompanyId">
+                                                        {{_val.CompanyName}}
+                                                    </ng-option>
+                                                </ng-select>
+                                            </div>
+                                            <div class="form-cus form-group">
+                                                <label class="form-label">Select Members </label>
+                                                <ng-select placeholder="select" [(ngModel)]="Member"
+                                                    (change)="GetMemberId($event)">
+                                                    <ng-option *ngFor="let _val of Objmemberlist" [value]="_val.UserId">
+                                                        {{_val.UserName}}
+                                                    </ng-option>
+                                                </ng-select>
+                                            </div>
+                                        </div>
+                                        <div class="task_act">
+                                            <button class="btn btn-sm btn-primary px-3 mt-2"
+                                                (click)="OnSavekeyMember(0,1)">
+                                                Save
+                                            </button>
+                                            <button class="btn btn-sm btn-secondary px-3 ml-2 mt-2"
+                                                (click)="toggleAddKeyMembersdiv()">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-2">
+                            <div class="kt-widget kt-widget--users">
+                                <div class="kt-scroll scroll-y">
+                                    <div class="kt-widget__items mt-2 mr-1">
+
+
+                                        <div class="kt-widget__item p-2 card crd-sd" *ngFor="let key of KeymemberList">
+                                            <div class="kt-widget__info">
+                                                <div class="kt-widget__section">
+                                                    <h6 class="kt-widget__username my-1">{{key.DisplayName}}</h6>
+                                                </div>
+                                                <span class="kt-widget__desc f-curs"> <i
+                                                        class="far fa-envelope mr-2"></i>
+                                                    {{key.Email}}</span>
+                                                <small class="kt-widget__desc"> <i class="material-icons fs-6 ver-m">
+                                                        call
+                                                    </i>
+                                                    {{key.Phone}}</small>
+                                                <div class="kt-widget__section justify-content-between">
+                                                    <span class="kt-widget__desc f-curs"> <i
+                                                            class="far fa-id-badge mr-2"></i>
+                                                        {{key.EmployeeId}}{{key.OutsourceId}}</span>
+                                                    <i *ngIf="key.OutsourceId!=0" class="fa fa-trash"
+                                                        (click)="DeleteMember(key.OutsourceId)">
+                                                    </i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <ng-container *ngIf="KeymemberList.length==0">
+                                            <p>{{ "Administration.NoRecordsfound" | translate }}</p>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>

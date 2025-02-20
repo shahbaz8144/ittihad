@@ -1,0 +1,417 @@
+    .kt-quick-panel.kt-quick-panel--on {
+        width: 75% !important;
+    }
+    
+    .kt-quick-panel.kt-quick-panel--on {
+        width: 97% !important;
+    }
+    
+    .material-icons-outlined {
+        font-family: 'Material Icons Outlined';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-feature-settings: 'liga';
+        -webkit-font-smoothing: antialiased;
+    }
+    
+    .ellipsis_Dot {
+        max-height: 50px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+    }
+    
+    .dd {
+        max-width: 100% !important;
+    }
+    
+    .dd-list .dd-item .dd-item-c {
+        border: none;
+        padding: 8px 16px;
+        height: auto;
+        font-weight: 600;
+        border-radius: 3px;
+        background: #f3f7f9;
+        background: #eceff6;
+        color: #6c757d;
+        margin: 5px 0;
+    }
+    
+     ::ng-deep .dd-list .dd-item button {
+        height: 36px;
+        font-size: 17px;
+        margin: 0;
+        color: #98a6ad;
+        width: 36px;
+    }
+    
+    .edt-btn {
+        float: right;
+        color: #2786fb;
+    }
+    
+    .search-bar {
+        height: 33px;
+        display: flex;
+        width: 100%;
+        max-width: 300px;
+        padding-left: 10px;
+        border-radius: 4px;
+    }
+    
+    .search-bar input {
+        width: 100%;
+        height: 100%;
+        color: #3c3a3a;
+        font-size: 15px;
+        padding: 0 20px 0 40px;
+        /* background-color: rgb(255 255 255 / 31%);
+    font-weight: 500;
+    border-radius: 4px;
+    border: none;    
+    box-shadow: 0 0 0 2px rgba(134, 140, 160, 0.02); */
+        background-image: url("../../../assets/media/icons/search.svg");
+        background-size: 14px;
+        background-repeat: no-repeat;
+        background-position: 12px 48%;
+    }
+    
+    .right-div {
+        position: absolute;
+        top: 7px;
+        right: 15px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    .crd-date h6 {
+        text-align: center;
+        background-color: #75a8ae;
+        color: #fff;
+        border-radius: 4px;
+        padding: 2px 8px;
+        margin-bottom: 0;
+    }
+    
+    .prev-w {
+        -webkit-box-flex: 1;
+        flex-grow: 1;
+        width: 100%;
+        padding: 1.5rem;
+        transition: padding 0.25s ease-in-out 0s;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .prev-card {
+        background-color: rgb(255, 255, 255);
+        color: rgba(76, 78, 100, 0.87);
+        transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+        border-radius: 10px;
+        background-image: none;
+        overflow: hidden;
+        box-shadow: rgb(76 78 100 / 22%) 0px 2px 10px 0px;
+    }
+    
+    .prev-head {
+        box-sizing: border-box;
+        display: flex;
+        flex-flow: row wrap;
+        width: 100%;
+        padding: 1.25rem;
+        border-bottom: 1px solid rgba(76, 78, 100, 0.12);
+        justify-content: space-between;
+        align-items: flex-start;
+        /* flex-direction: column; */
+    }
+    
+    .policy-content {
+        text-align: justify;
+    }
+    
+    .policy-body,
+    .policy-footer {
+        padding: 1.25rem;
+    }
+    
+    .policy-body {
+        overflow: auto;
+        max-height: calc(100vh - 260px);
+        border-bottom: 1px solid rgba(76, 78, 100, 0.12);
+    }
+    
+    .foot-btns {
+        display: flex;
+        justify-content: end;
+        text-align: right;
+    }
+    
+    .policy-title {
+        color: #646c9a;
+    }
+    
+    .d-listr {
+        /* background: #e4e4e4 !important; */
+        background: #f3f7f9 !important;
+    }
+    
+    @media (min-width: 1200px) {
+        .prev-w {
+            max-width: 100%;
+        }
+    }
+    
+    @media (min-width: 1440px) {
+        .prev-w {
+            max-width: 1440px;
+        }
+    }
+    
+    .policy-body::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    .policy-body::-webkit-scrollbar-track {
+        background: #d5def2;
+        border-radius: 6px;
+    }
+    
+    .policy-body::-webkit-scrollbar-thumb {
+        background: #c5c7d0;
+    }
+    
+    .policy-body::-webkit-scrollbar-thumb:hover {
+        background: #9c9c9c;
+    }
+    
+    .contetv {
+        white-space: nowrap;
+        display: inline-block;
+        width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .content-poli .ellipsis_Dot {
+        cursor: none !important;
+        pointer-events: none !important;
+    }
+    
+     ::ng-deep .content-poli .ellipsis_Dot br {
+        display: none;
+    }
+    
+     ::ng-deep .content-poli .ellipsis_Dot h1,
+     ::ng-deep .content-poli .ellipsis_Dot h2,
+     ::ng-deep .content-poli .ellipsis_Dot h3,
+     ::ng-deep .content-poli .ellipsis_Dot h4,
+     ::ng-deep .content-poli .ellipsis_Dot h5,
+     ::ng-deep .content-poli .ellipsis_Dot h6,
+     ::ng-deep .content-poli .ellipsis_Dot p {
+        font-size: 13px;
+        color: #6c757d;
+    }
+    
+    .w-40 {
+        width: 40%;
+    }
+    
+    .content-poli .ellipsis_Dot a {
+        cursor: none !important;
+        pointer-events: none !important;
+    }
+    
+    .in-active-tab {
+        opacity: 0.7 !important;
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+        /* background: #e4e4e4 !important; */
+        /* background: #f3f7f9 !important; */
+    }
+    /*------sv chnage for prv 15/11/22---*/
+    
+    .prev-head-min-height {
+        min-height: 60px;
+    }
+    
+    .prev-body-min-height {
+        min-height: 550px;
+        border-bottom: 0px;
+    }
+    /*------sv chnage for prv 15/11/22---*/
+    /*     
+    #nestable>ol>li.dd-item::before {
+        content: "";
+    }
+
+    #nestable>ol>li.dd-item::before {
+        background: #8a9be7;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: -17px;
+        left: 12px;
+        border-radius: 50%;
+        z-index: 0;
+    }
+    #nestable>ol>li.dd-item{
+        margin-bottom: 35px;
+        position: relative;
+    }
+    ::ng-deep .dd-list .dd-item button.dd-expand, ::ng-deep .dd-list .dd-item button.dd-collapse {
+        
+        position: absolute;
+        right: 0;
+        color: #8a9be7;
+        top: -26px;
+        background: #ffffff;
+        border-radius: 50%;
+        height: 20px;
+        width: 20px;
+    }
+    ::ng-deep .dd-list .dd-item button.dd-expand:before, ::ng-deep .dd-list .dd-item button.dd-collapse:before {
+        top: 0px;
+    }
+    .dd-list .dd-item .dd-item-c {
+        background: #ffffff;
+    }
+    #nestable{
+        margin-top: 30px;
+    }
+    .d-listr {
+        background: #ffffff !important;
+    }
+    span.chck-ic svg path {
+        fill: #ffffff;
+    }
+    span.chck-ic {
+        position: absolute;
+        top: -14px;
+        left: 15px;
+        color: #ffffff;
+    }
+    h5.dd-item-c.dd-nodrag {
+        padding-left: 45px !important;
+    } */
+    
+    .btn-app {
+        background: #fff;
+        border: 1px solid #cfcbcb;
+        color: #1e1f21;
+        font-size: 1rem;
+        height: 28px;
+        line-height: 28px;
+        padding: 0 12px;
+        display: inline-flex;
+        align-items: center;
+        flex-shrink: 0;
+        justify-content: center;
+        border-radius: 6px;
+        margin-right: 8px;
+    }
+    
+    .ql-toolbar .ql-stroke,
+    .ql-toolbar .ql-fill {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .ql-toolbar button svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+     ::ng-deep .ql-snow .ql-picker.ql-font {
+        width: 59px;
+    }
+    
+     ::ng-deep .ql-toolbar.ql-snow {
+        border: 1px solid #ebedf2;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        background-color: #f4f8ff;
+    }
+    
+     ::ng-deep .ql-snow .ql-picker.ql-header {
+        width: 73px;
+    }
+    
+     ::ng-deep.ql-snow .ql-picker.ql-size {
+        width: 73px;
+    }
+    /* Ensure the emoji button is visible in the Quill toolbar */
+    
+     ::ng-deep .ql-toolbar .ql-formats .ql-emoji::before {
+        content: "\1F642";
+        /* Unicode for a smiley emoji, can be customized */
+        font-size: 14px;
+        /* Adjust the size of the emoji */
+    }
+    
+     ::ng-deep .ql-emoji {
+        width: 25px;
+        /* Set button width */
+        height: 25px;
+        /* Set button height */
+        text-align: center;
+        line-height: 20px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    
+     ::ng-deep .ql-emoji svg {
+        display: none;
+        /* Hide the default SVG icon if present */
+    }
+    
+     ::ng-deep .ql-toolbar.ql-snow .ql-formats {
+        margin-right: 10px;
+    }
+    /* emoji-picker {
+        position: absolute;
+        z-index: 1000;
+        bottom: 50px;
+        right: 20px;
+        width: 300px;
+        height: auto;
+    }
+    
+    button {
+        margin-top: 10px;
+        font-size: 18px;
+    } */
+    
+    .quilleditor-relative {
+        position: relative;
+    }
+    
+    .emoji-editor-edit {
+        position: absolute;
+        top: 7px;
+        right: 38px;
+    }
+    
+    .emoji-editor-edit button {
+        background: transparent;
+        border: 0px;
+        height: 24px;
+        padding: 3px 5px;
+        width: 28px;
+        line-height: 1;
+    }
+    
+    .emoji-editor-edit emoji-mart {
+        transform: translate3d(-309px, 34px, 0px);
+        position: absolute;
+    }

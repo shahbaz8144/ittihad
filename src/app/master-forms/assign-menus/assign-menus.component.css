@@ -1,0 +1,118 @@
+.menu_cards {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 8px;
+}
+.cards{
+    min-width: 24%;
+    width: 24%;   
+    background: #F5F7FA;
+    padding: 0;
+    flex: 0 0 auto;
+    border-radius: 4px;
+    color: #0b0e1f;
+    margin: 0px 8px;
+} 
+.desc{
+    color: #0b0e1f;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 1em;
+    line-height: 1.42857;
+    margin-bottom: 15px;
+    margin-left: 5px;
+}
+.cards ul{
+    padding-left: 5px;
+}
+li{
+    list-style: none;
+}
+.list-item {
+    display: flex;
+    align-items: center;
+    margin: 0 5px;
+    padding: 8px 0 8px 10px;
+    overflow: hidden;
+}
+.menu_li{
+    background: #fff;
+    border: 1px solid #E7EBF1;
+    border-radius: 4px;
+    padding: 4px 0;
+    margin: 8px 0px;
+}
+.menu_li:hover {
+    background: #fff;
+    box-shadow: 0 0 2px #cfcfcf;
+    border-radius: 4px;
+}
+.menu_text {
+    width: 100%;
+    color: #0b0e1f;
+    padding-left: 10px;
+}
+.menu_toggle{
+    margin: -1px 4px 2px 0;
+}
+.menu_checkbox {
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+    vertical-align: middle;
+    line-height: normal;
+    margin-bottom: 0;
+}
+.menu_checkbox input {
+    opacity: 0;
+    position: absolute;
+}
+.onoff-toggle {
+    display: inline-block;
+    cursor: pointer;
+    width: 28px;
+    height: 16px;
+    border-radius: 56px;
+    background-color: #C5CEE0;
+    position: relative;
+    vertical-align: middle;
+    box-shadow: 0 1px 0 rgb(255 255 255 / 50%), inset 0 1px 1px rgb(0 0 0 / 10%);
+    transition: background-color 210ms ease;
+}
+.onoff-toggle:before {
+    content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 25%), 0 0 2px rgb(0 0 0 / 15%);
+    border-radius: 50%;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    transition: transform 120ms ease;
+}
+input:checked ~ .onoff-toggle {
+    background-color: #59C894;
+}
+input:checked ~ .onoff-toggle:before {
+    transform: translateX(100%);
+}
+
+@media Screen and (max-width: 1740px) {
+    .cards {
+        min-width: 23%;
+        width: 23%;
+    }
+}
+@media Screen and (max-width: 1366px) {
+.cards {
+    min-width: 31%;
+    width: 31%;
+}
+}
+@media Screen and (max-width: 768px) {
+.cards {
+    min-width: 47%;
+    width: 47%;
+}
+}

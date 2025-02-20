@@ -1,0 +1,423 @@
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid side_view">
+    <div class="col-lg-12">
+        <h4 class="mb-3 pro-nm"> {{ "Masterform.Company" | translate }} </h4>
+        <!-- <div class="card mb-3 w-50" style="display: none;">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="add_rck">
+                            <div class="px-3 edit_options">
+                                <ul class="nav nav-pills">
+                                    <li class="tab_one active">
+                                        <a href="#1a" data-toggle="tab" class="px-3"> <span> Add Company </span></a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div> -->
+        <!--View company-->
+        <div class="card ribbon-box">
+            <div class="card-header align-items-center d-flex py-3">
+                <div class="flex-1">
+                    <div class="search-bar">
+                        <input type="search" class="form-control search_clear" id="txtMainSearch" [(ngModel)]="Comysearch"
+                            (keyup.enter)="Search()" [placeholder]="CompanySearch" autocomplete="off" aria-controls="example" (keyup)="handleKeyUp($event)" >
+                        <a *ngIf="Comysearch" class="close close-icn"><i  (click)="ReBindData()" class="material-icons">close<i></i></i></a>
+                    </div>
+                </div>
+                <div class="flex-shrink-0">
+                    <button class="btn btn-sm btn-info m-0" style="display: block;" id="company_add"
+                        (click)="company_add()">
+                        <i class="material-icons fs-4">add</i>
+                        {{ "Masterform.AddCompany" | translate }}
+                    </button>
+                    <button class="btn btn-sm btn-info d-none" data-toggle="modal" data-target="#exampleModal"> <i
+                            class="material-icons fs-4">add</i> Add (Modal) </button>
+                </div>
+            </div>
+            <div class="mb-0 table-responsive">
+                <table class="table b-table">
+                    <thead>
+                        <tr>
+                            <th>{{ "Masterform.Company" | translate }}</th>
+                            <th>{{ "Masterform.Phone" | translate }}</th>
+                            <th>{{ "Masterform.Email" | translate }}</th>
+                            <th>{{ "Masterform.Address" | translate }}</th>
+                            <th>{{ "Masterform.Country" | translate }}</th>
+                            <th>{{ "Masterform.Status" | translate }}</th>
+                            <th>{{ "Masterform.Action" | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of _objCompany">
+                            <td>{{item.CompanyName}}</td>
+                            <td>({{item.CountryCode}}){{item.Phone}}</td>
+                            <td>{{item.Email}}</td>
+                            <td>{{item.Address}}</td>
+                            <td>{{item.Country}}</td>
+                            <td [ngStyle]="{'color':item.IsActive=== true ? '#3f51b5' : 'red'}"
+                                (click)="UpdateStatus(item)">
+                                <div *ngIf="item.IsActive"
+                                    class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-success curser-pointer w-min-70">
+                                    Active
+                                </div>
+                                <div *ngIf="!item.IsActive"
+                                    class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-danger curser-pointer w-min-70">
+                                    In-Active
+                                </div>
+                            </td>
+                            <td>
+                                <a class="btn btn-outline btn-circle fs-5 btn-sm text-info p-0"
+                                    (click)="company_edit(item)">
+                                    <span class="mr-2">
+                                        <svg data-v-9a6e255c="" xmlns="http://www.w3.org/2000/svg" width="14px"
+                                            height="14px" viewBox="0 0 24 24" fill="none" stroke="#2786fb"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            class="feather feather-edit">
+                                            <path data-v-9a6e255c=""
+                                                d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                            <path data-v-9a6e255c=""
+                                                d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="align-middle">Edit</span>
+                                </a>
+                            </td>
+                        </tr>
+                        <ng-container *ngIf="_objCompany.length==0">
+                            <div class="d-flex-center kt-tb-error-box">
+                                <div class="m-auto text-center">
+                                    <div class="svgs-1 kt-blank-msg">
+                                        <img src="assets/media/Img/Company.png">
+                                     </div>
+                                      <h3 class="kt-blank-ttl"> {{ "Masterform.NoDataCompany" |translate }} </h3>
+                           <p class="kt-blank-msg"> {{ "Masterform.NotfoundCompany" | translate }} </p>                                     
+                                </div>
+                            </div> 
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                <div class="page-div p-1 d-flex-center">
+                    <div class="card-footer-left">
+                        <span class="text-muted">
+                            <!-- <span class="pagination__desc">
+                                <ng-container *ngIf="activePage==1">
+                                    {{activePage}} - {{_CurrentpageRecords}}
+                                </ng-container>
+                                <ng-container *ngIf="activePage!=1 && activePage!=LastPage">
+                                    {{_CurrentpageRecords * (activePage-1) + 1}} - {{_CurrentpageRecords * activePage}}
+                                </ng-container>
+                                <ng-container *ngIf="activePage==LastPage">
+                                    {{lastPagerecords * (activePage-1) + 1}} - {{lastPagerecords * (activePage-1) + _CurrentpageRecords}}
+                                </ng-container>                               
+                                <span class="en-of"> of {{TotalRecords}}</span>
+                                <span class="ar-main-of" style="display: none;"><span class="of"> - </span> {{TotalRecords}}</span>
+                            </span>                           -->
+
+                            <span class="pagination__desc">
+                                <ng-container *ngIf="activePage==1">
+                                    {{activePage}} - {{_CurrentpageRecords}}
+                                </ng-container>
+                                <ng-container *ngIf="activePage!=1 && activePage!=LastPage">
+                                    {{_CurrentpageRecords * (activePage-1) + 1}} - {{_CurrentpageRecords * activePage}}
+                                </ng-container>
+                                <ng-container *ngIf="activePage==LastPage && activePage!=1">
+                                    {{lastPagerecords * (activePage-1) + 1}} - {{lastPagerecords * (activePage-1) +
+                                    _CurrentpageRecords}}
+                                </ng-container>
+                                <span class="en-of"> of {{TotalRecords}}</span>
+                        <span class="ar-main-of" style="display: none;"><span class="of"> - </span> {{TotalRecords}}</span>
+                        </span>
+                        </span>
+                    </div>
+                    <!-- pagenation start Showing 1 to 10 of 11 customers -->
+                    <div class="card-footer-right d-flex">
+                        <nav aria-label="items">
+                            <ul class="pagination m-0">
+                                <li class="page-item"
+                                    [ngClass]="(NextPage == false)?'page-item ar-first-page  paginationdisable':'page-item ar-first-page '">
+                                    <span [ngClass]="(NextPage == false)?'paginationpointerdisable':''" role="button"
+                                        class="page-link" aria-label="null page" tabindex="-1" aria-disabled="true"
+                                        (click)="onClickPage(1)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24"
+                                            width="1em" class="svg-icon--material svg-icon"
+                                            data-name="Material--FirstPage">
+                                            <path d="M24 0v24H0V0h24z" fill="none" opacity="0.87"></path>
+                                            <path
+                                                d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6 1.41-1.41zM6 6h2v12H6V6z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                </li>
+                                <!-- [disabled]="activePage==1" -->
+                                <li class="page-item"
+                                    [ngClass]="(activePage == 1)?'page-item ar-first-page  paginationdisable':'page-item ar-first-page '">
+                                    <span [ngClass]="(activePage == 1)?'paginationpointerdisable':''" role="button"
+                                        class="page-link" aria-label="First Page" tabindex="-1" aria-disabled="true"
+                                        (click)="onClickPage(activePage - 1)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24"
+                                            width="1em" class="svg-icon--material svg-icon"
+                                            data-name="Material--ChevronLeft">
+                                            <path d="M0 0h24v24H0V0z" fill="none"></path>
+                                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12l4.58-4.59z"></path>
+                                        </svg>
+                                    </span>
+                                </li>
+                                <!-- <li class="page-item "  [ngClass]="(activePage == 1)?'page-item active':'page-item '" (click)="onClickPage(activePage -1)">
+                                    <span role="button" class="page-link" [ngClass]="(activePage == 1)?'':''" aria-label="1 page">{{activePage}}</span>
+                                </li> -->
+                                <li class="page-item active">
+                                    <span role="button" class="page-link curser-pointer" aria-label="1 page">{{activePage}}</span>
+                                </li>
+                                <!-- <li class="page-item" [ngClass]="(_CurrentpageRecords < 9)?'page-item  ':'page-item active'" (click)="onClickPage(activePage +1)">
+                                    <span role="button"  [ngClass]="(_CurrentpageRecords < 9)?'':''" class="page-link" aria-label="2 page">{{activePage+1}}</span>
+                                </li> -->
+                                <!-- <li class="page-item" (click)="onClickPage(activePage + 1)">
+                                    <span role="button" class="page-link" aria-label="2 page">{{activePage+2}}</span>
+                                </li> -->
+                                <li [ngClass]="(_CurrentpageRecords < 9)?'page-item  ar-last-page paginationdisable':'page-item ar-last-page '">
+                                    <!-- [disabled]="_CurrentpageRecords < 10" -->
+                                    <span [ngClass]="(_CurrentpageRecords < 9)?'paginationpointerdisable':''"
+                                        role="button" class="page-link" aria-label="Last Page"
+                                        (click)="onClickPage(activePage + 1)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24"
+                                            width="1em" class="svg-icon--material svg-icon"
+                                            data-name="Material--ChevronRight">
+                                            <path d="M0 0h24v24H0V0z" fill="none"></path>
+                                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z"></path>
+                                        </svg>
+                                    </span>
+                                </li>
+                                <li [ngClass]="(_CurrentpageRecords < 9)?'page-item  ar-last-page paginationdisable':'page-item ar-last-page '">
+                                    <span [ngClass]="(_CurrentpageRecords < 9)?'paginationpointerdisable':''"
+                                        role="button" class="page-link" aria-label="null page"
+                                        (click)="onClickPage(LastPage)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24"
+                                            width="1em" class="svg-icon--material svg-icon"
+                                            data-name="Material--LastPage">
+                                            <path d="M0 0h24v24H0V0z" fill="none" opacity="0.87"></path>
+                                            <path
+                                                d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6-1.41 1.41zM16 6h2v12h-2V6z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <!--pagenation start-->
+            </div>
+            <!-- <div class="card-body">
+                <div class="ribbon ribbon-info float-left d-none"><i class="mdi mdi-access-point me-1"></i> Company List
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<div class="kt-aside-menu-overlay" (click)="closeInfo()"></div>
+
+<div id="addrck" class="wc-75 kt-quick-panel kt-quick-panel1 scroll-div">
+    <a id="kt_quick_panel_close_btn" class="kt-quick-panel__close" (click)="closeInfo()">
+        <i class="flaticon2-delete"></i>
+    </a>
+    <div id="kt_chat_content" class="kt-grid__item kt-grid__item--fluid kt-app__content">
+        <div class="kt-chat">
+            <div class="kt-portlet kt-portlet--head-lg kt-portlet--last">
+                <div class="kt-portlet__head">
+                    <div class="kt-chat__head">
+                        <div>
+                            <div class="kt-chat__label">
+                                <h4 class="mb-0" id="editrck"> {{ "Masterform.Add" | translate }} </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__body py-1">
+
+                    <form [formGroup]="companyformGroup" (ngSubmit)="OnCreate()">
+                        <div class="tab-content mt-2">
+                            <div class="tab-pane d-flex flex-wrap justify-content-start align-items-baseline form-m">
+                                <div class="form-cus">
+                                    <label class="form-label">{{ "Masterform.Company" | translate }}</label><span class="text-danger ml-1">*</span>
+                                    <span id="myButton" class="material-icons fs-4 float-right">
+                                        info_outline
+                                    </span>
+                                    <input type="text" id="txtCompanyName" (change)="checkcompanynameExist()"
+                                        class="form-control" formControlName="CName" [placeholder]="EnterCompanyName"
+                                        [(ngModel)]="services._obj.CompanyName" minlength="3" maxlength="50">
+                                    <div>
+                                        <!-- <span style="color:red" [hidden]="companyNameMinLength">
+                                            Required Atleast 3 Characters</span> -->
+                                    </div>
+                                </div>
+                                <div class="form-cus">
+                                    <span id="myButton1" class="material-icons fs-4 float-right">
+                                        info_outline
+                                    </span>
+                                    <label class="form-label">{{ "Masterform.Code" | translate }}</label>
+                                    <!-- <span class="text-danger ml-1">*</span> -->
+                                    <input type="text" id="txtCode" (change)="checkcodeExist()" class="form-control"
+                                        formControlName="Code" [placeholder]="EnterCompanyCode"
+                                        [(ngModel)]="services._obj.Code">
+                                    <div>
+                                        <!-- <span style="color:red" [hidden]="CodeMinLength">
+                                            Required Atleast 3 Characters</span> -->
+                                    </div>
+                                </div>
+                                <div class="form-cus">
+                                    <label class="col-form-label ">{{ "Masterform.PhoneNumber" | translate }}</label><span class="text-danger ml-1">*</span>
+                                    <div class="">
+                                        <div class="input-group">
+
+                                            <input formControlName="phonecode" (change)="checkphoneNoExist()"
+                                                type="text" ng2TelInput (countryChange)="onCountryChange($event)"
+                                                class="form-control inputgrp-first" style="width: 90px;"
+                                                value="{{ObjCountryCode}}" [(ngModel)]="services._obj.CountryCode"
+                                                maxlength="50" />
+                                            <input (keypress)="keyPress($event)" type="text" formControlName="phone"
+                                                id="txtphoneNo" class="form-control" [placeholder]="EnterPhoneNumber"
+                                                [(ngModel)]="services._obj.Phone" />
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="form-cus w-50">
+                                    <label class="form-label">Phone Number</label><span class="text-danger ml-1">*</span>
+                                    <input (keypress)="keyPress($event)" id="txtphoneNo" (change)="checkphoneNoExist()" type="text" class="form-control" formControlName="phone" minlength="9" maxlength="14" placeholder="Enter Phone Number" [(ngModel)]="services._obj.Phone" />
+                                    <div>
+                                        <span style="color:red" [hidden]="PhoneNoMinLength">
+                                            Required Atleast 9 Characters</span>
+                                    </div>
+                                </div> -->
+                                <div class="form-cus">
+                                    <label class="form-label">{{ "Masterform.Fax" | translate }}</label>
+                                    <input type="text" class="form-control" formControlName="Fax"
+                                        [placeholder]="EnterFaxNumber" [(ngModel)]="services._obj.Fax">
+                                    <!-- <div
+                                        <span style="color:red" [hidden]="FaxMinLength">
+                                            Required Atleast 3 Characters</span>
+                                    </div> -->
+                                </div>
+                                <div class="form-cus">
+                                    <label class="form-label">{{ "Masterform.Email" | translate }}</label><span class="text-danger ml-1">*</span>
+                                    <input type="text" id="txtEmail" (change)="checkcompanyemailExist()"
+                                        class="form-control" formControlName="Email" [placeholder]="EnterEmailAddress"
+                                        [(ngModel)]="services._obj.Email" />
+                                    <!-- <div *ngIf="submitted && f.Email.errors" class="invalid-feedback">
+                                        <div *ngIf="f.Email.errors.pattern">Email must be a valid email address</div>
+                                    </div> -->
+                                </div>
+                                <div class="form-cus">
+                                    <label class="form-label">{{ "Masterform.Address" | translate }}</label>
+                                    <!-- <span class="text-danger ml-1">*</span> -->
+                                    <input type="text" id="txtaddress" (change)="checkaddressExist()"
+                                        class="form-control" formControlName="Address" [placeholder]="EnterFullAddress"
+                                        [(ngModel)]="services._obj.Address" minlength="3" maxlength="50">
+                                    <div>
+                                        <span style="color:red" [hidden]="AddressMinLength">
+                                            {{ "Masterform.fieldsalertmessage" | translate }} </span>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-cus w-50">
+                                    <!-- <span id="myButton2" class="material-icons fs-4 float-right">
+                                            info_outline
+                                            </span> -->
+                                    <label class="form-label">{{ "Masterform.Latitude" | translate }}</label>
+                                    <!-- <span class="text-danger ml-1">*</span> -->
+                                    <input id="txtlatitude" (change)="checklatitudeExist()" type="text"
+                                        class="form-control" formControlName="latitude"
+                                        [placeholder]="EnterLatitude" [(ngModel)]="services._obj.latitude"
+                                        minlength="3" maxlength="50">
+                                    <div>
+                                        <span style="color:red" [hidden]="LatitudeMinLength">
+                                            {{ "Masterform.LatitudeNote" | translate }} </span>
+                                    </div>
+                                </div>
+                                <div class="form-cus w-50">
+                                    <span id="myButton3" class="material-icons fs-4 float-right">
+                                        info_outline
+                                    </span>
+                                    <label class="form-label">{{ "Masterform.Longitude" | translate }}</label>
+                                    <!-- <span class="text-danger ml-1">*</span> -->
+                                    <input id="txtlongitude" (change)="checklongitudeExist()" type="text"
+                                        class="form-control" formControlName="longitude"
+                                        [placeholder]="EnterLongitude" [(ngModel)]="services._obj.longitude"
+                                        minlength="3" maxlength="50">
+                                    <div>
+                                        <span style="color:red" [hidden]="LongitudeMinLength">
+                                            {{ "Masterform.LongitudeNote" | translate }} </span>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-cus w-50">
+                                    <label class="form-label">{{ "Masterform.Country" | translate }}</label>&nbsp;
+                                    <!-- <span class="text-danger ml-1">*</span> -->
+                                    <ng-select (change)="getcities($event)" formControlName="Country"
+                                        [placeholder]="SelectCountry" [(ngModel)]="services._obj.CountryId">
+                                        <!-- <div *ngIf="submitted && f.Country.errors" class="invalid-feedback">
+                                            <div *ngIf="f.Country.errors.required">Country is Required </div>
+                                        </div> -->
+                                        <ng-option [value]="pd.CountryId" *ngFor="let pd of lstPrdcts">
+                                            {{pd.Country}}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                                <div class="form-cus w-50">
+                                    <label class="form-label">{{ "Masterform.City" | translate  }}</label>&nbsp;
+                                    <!-- <span class="text-danger ml-1">*</span> -->
+                                    <ng-select formControlName="city" [placeholder]="SelectCity"
+                                        [(ngModel)]="services._obj.CityId">
+                                        <!-- <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                                            <div *ngIf="f.city.errors.required">City is Required
+                                            </div>
+                                        </div> -->
+                                        <ng-option [value]="cc.CityId" *ngFor="let cc of lstCities">
+                                            {{cc.City}}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                                <div class="form-cus">
+                                    <label class="form-label">{{ "Masterform.Status" | translate }}</label><br>
+                                    <mat-slide-toggle color="primary" formControlName="status"
+                                        [(ngModel)]="services._obj.IsActive">
+                                    </mat-slide-toggle>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="task_act form-m">
+                            <div class="form-cus">
+                                <button class="btn btn-sm btn-info px-3 mt-2" [disabled]="companyformGroup.invalid"
+                                    *ngIf='!isShow'>
+                                    {{ "Masterform.Save" |translate   }}
+                                </button>
+                                <button type="submit" class="btn btn-sm btn-info px-3 mt-2" *ngIf='isShow'>{{ "Masterform.Update" | translate }}</button>
+                                <button class="btn btn-sm btn-secondary px-3 ml-2 mt-2" (click)="company_cl()">
+                                    {{ "Masterform.Cancel" | translate }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <br><br>
+Audio Demo:
+
+<ang-music-player [audioList] = audioList></ang-music-player>
+<br><br>
+Video Demo:
+<ng-plyr src='https://yrglobaldocuments.blob.core.windows.net/documents/DMS/226081/992423_Pexels%20Videos%202516162.mp4'></ng-plyr> -->

@@ -1,0 +1,832 @@
+<div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
+
+    <div class="kt-header-mobile__logo">
+        <a href="index.html">
+            <img alt="Logo" src="assets/media/logos/dms-logo.png" style="width:35px;" />
+        </a>
+        <h3 class="ml-2" style="color: #518EF6;">SMAIL</h3>
+    </div>
+    <div class="kt-header-mobile__toolbar">
+        <button class="kt-header-mobile__toolbar-toggler kt-header-mobile__toolbar-toggler--left" id="kt_aside_mobile_toggler" (click)="menuopen1()"><span></span></button>
+        <button class="kt-header-mobile__toolbar-toggler d-none" id="kt_header_mobile_toggler"><span></span></button>
+        <button class="kt-header-mobile__toolbar-topbar-toggler" id="kt_header_mobile_topbar_toggler"><i class="flaticon-more"></i></button>
+    </div>
+</div>
+
+<div class="kt-grid kt-grid--hor kt-grid--root">
+    <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+        <button class="kt-aside-close " id="kt_aside_close_btn"><i class="la la-close"></i></button>
+        <div class="kt-aside  kt-aside--fixed  kt-grid__item kt-grid kt-grid--desktop kt-grid--hor-desktop" id="kt_aside">
+            <div class="kt-aside__brand kt-grid__item " id="kt_aside_brand">
+                <div class="kt-aside__brand-logo">
+                    <a class="brand-logo">
+                        <img alt="Logo" src="assets/media/logos/dms-logo.png" />
+                    </a>
+                    <h3 class="ml-2 strm" style="color: #518EF6;">SMAIL</h3>
+                </div>
+                <button class="brand-toggle btn btn-sm px-0 kt-aside__brand-aside-toggler--active d-none">
+                    <span class="svg-icon svg-icon svg-icon-xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                <path d="M5.29288961,6.70710318 C4.90236532,6.31657888 4.90236532,5.68341391 5.29288961,5.29288961 C5.68341391,4.90236532 6.31657888,4.90236532 6.70710318,5.29288961 L12.7071032,11.2928896 C13.0856821,11.6714686 13.0989277,12.281055 12.7371505,12.675721 L7.23715054,18.675721 C6.86395813,19.08284 6.23139076,19.1103429 5.82427177,18.7371505 C5.41715278,18.3639581 5.38964985,17.7313908 5.76284226,17.3242718 L10.6158586,12.0300721 L5.29288961,6.70710318 Z" fill="#3699FF" fill-rule="nonzero" transform="translate(8.999997, 11.999999) scale(-1, 1) translate(-8.999997, -11.999999)"></path>
+                                <path d="M10.7071009,15.7071068 C10.3165766,16.0976311 9.68341162,16.0976311 9.29288733,15.7071068 C8.90236304,15.3165825 8.90236304,14.6834175 9.29288733,14.2928932 L15.2928873,8.29289322 C15.6714663,7.91431428 16.2810527,7.90106866 16.6757187,8.26284586 L22.6757187,13.7628459 C23.0828377,14.1360383 23.1103407,14.7686056 22.7371482,15.1757246 C22.3639558,15.5828436 21.7313885,15.6103465 21.3242695,15.2371541 L16.0300699,10.3841378 L10.7071009,15.7071068 Z" fill="#3699FF" fill-rule="nonzero" opacity="0.5" transform="translate(15.999997, 11.999999) scale(-1, 1) rotate(-270.000000) translate(-15.999997, -11.999999)"></path>
+                            </g>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+            <app-left-section></app-left-section>
+        </div>
+
+        <div class="anc-overlay" (click)="closeanc()"></div>
+
+        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+            <div id="kt_header" class="kt-header kt-grid kt-grid--ver  kt-header--fixed">
+                <div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_header_menu_wrapper">
+                    <div class="header--menu-main new-header--menu-main">
+                        <div class="header--menu d-none">
+                            <div class="header-menu-icon">
+                                <!-- <button class="brand-toggle btn btn-sm px-0 kt-aside__brand-aside-toggler--active ml-0" id="kt_aside_toggler">
+                                    <i class="material-icons">menu</i>
+                                </button> -->
+                                <!-- <button class="brand-toggle btn btn-sm px-0 kt-aside__brand-aside-toggler--active" id="kt_aside_toggler">
+                                    <span class="svg-icon svg-icon svg-icon-xl">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                                <path d="M5.29288961,6.70710318 C4.90236532,6.31657888 4.90236532,5.68341391 5.29288961,5.29288961 C5.68341391,4.90236532 6.31657888,4.90236532 6.70710318,5.29288961 L12.7071032,11.2928896 C13.0856821,11.6714686 13.0989277,12.281055 12.7371505,12.675721 L7.23715054,18.675721 C6.86395813,19.08284 6.23139076,19.1103429 5.82427177,18.7371505 C5.41715278,18.3639581 5.38964985,17.7313908 5.76284226,17.3242718 L10.6158586,12.0300721 L5.29288961,6.70710318 Z" fill="#3699FF" fill-rule="nonzero" transform="translate(8.999997, 11.999999) scale(-1, 1) translate(-8.999997, -11.999999)"></path>
+                                                <path d="M10.7071009,15.7071068 C10.3165766,16.0976311 9.68341162,16.0976311 9.29288733,15.7071068 C8.90236304,15.3165825 8.90236304,14.6834175 9.29288733,14.2928932 L15.2928873,8.29289322 C15.6714663,7.91431428 16.2810527,7.90106866 16.6757187,8.26284586 L22.6757187,13.7628459 C23.0828377,14.1360383 23.1103407,14.7686056 22.7371482,15.1757246 C22.3639558,15.5828436 21.7313885,15.6103465 21.3242695,15.2371541 L16.0300699,10.3841378 L10.7071009,15.7071068 Z" fill="#3699FF" fill-rule="nonzero" opacity="0.5" transform="translate(15.999997, 11.999999) scale(-1, 1) rotate(-270.000000) translate(-15.999997, -11.999999)"></path>
+                                            </g>
+                                        </svg>
+                                    </span>
+                                </button> -->
+                            </div>
+                        </div>
+                        <h3 class="mb-0 new-f" style="color: #518EF6;">Stream Mail</h3>
+                    </div>
+                </div>
+
+
+                <!-- end: Header Menu -->
+                <!-- begin:: Header Topbar -->
+                <div class="kt-header__topbar">
+                    <!--begin: Notifications -->
+                    <div class="d-flex align-items-center">
+                        <div class="arabic-btn-div">
+                            <div class="dropdown">
+                                <button class="btn btn-lan dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                    <span class="globe-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                                    </span>
+                                  <span id="en-lan" *ngIf="currentLang==='en'">English</span>
+                                  <span id="ar-lan" *ngIf="currentLang==='ar'">Arabic</span>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <button class="dropdown-item" *ngIf="currentLang==='ar'" (click)="ChangelangTo('en')">English</button>
+                                    <button class="dropdown-item" *ngIf="currentLang==='en'" (click)="ChangelangTo('ar')">Arabic</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <button *ngIf="currentLang==='en'"  (click)="ChangelangTo('ar')"  class="arabic-btn" >Arabic</button>
+                        <button  *ngIf="currentLang==='ar'" (click)="ChangelangTo('en')"  class="arabic-btn" >English</button> -->
+                    </div>
+                    <div class="kt-header__topbar-item mr-3 blink position-relative">
+                        <div class="kt-header__topbar-wrapper d-none">
+                            <button class="enable-notifications btn-info btn btn-sm" style="display: block;height: 35px;align-self: center;">Enable Notifications</button>
+                        </div>
+                        <div class="kt-header__topbar-wrapper" (click)="openanc()">
+                            <span class="kt-header__topbar-icon kt-header__topbar-icon--success anc-ic">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M9 17C9 17 16 18 19 21H20C20.5523 21 21 20.5523 21 20V13.937C21.8626 13.715 22.5 12.9319 22.5 12C22.5 11.0681 21.8626 10.285 21 10.063V4C21 3.44772 20.5523 3 20 3H19C16 6 9 7 9 7H5C3.89543 7 3 7.89543 3 9V15C3 16.1046 3.89543 17 5 17H6L7 22H9V17ZM11 8.6612C11.6833 8.5146 12.5275 8.31193 13.4393 8.04373C15.1175 7.55014 17.25 6.77262 19 5.57458V18.4254C17.25 17.2274 15.1175 16.4499 13.4393 15.9563C12.5275 15.6881 11.6833 15.4854 11 15.3388V8.6612ZM5 9H9V15H5V9Z"></path></svg>
+                                <span class="noti" *ngIf="AnnouncementCount>0">{{AnnouncementCount}}</span>
+                            </span>
+                        </div>
+
+                        <!-- <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px" (click)="openanc()"></div> -->
+                        <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl">
+                            <form>
+                                <!--begin: Head -->
+                                <div class="kt-head kt-head--skin-light kt-head-grey kt-head--fit-x p-3 bnr-hed">
+                                    <div class="d-flex-cen justify-content-center gap-1 py-2">
+                                        <div>
+                                            <div class="ancs-mega">
+                                                <img src="assets/media/files/megaphone.png" width="20px">
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <h3 class="kt-head__title text-left"> Anouncements &nbsp; </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end: Head -->
+                                <div class="">
+                                    <div class="">
+                                        <div class="kt-notification kt-margin-t-10 kt-margin-b-10 kt-scroll curser-pointer" data-scroll="true" data-height="300" data-mobile-height="200" style="height: 400px; overflow: hidden;">
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <span>
+                                                        <img src="assets/media/files/megaphone.png" width="20px">
+                                                    </span>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        Announment 1
+                                                    </div>
+                                                    <div class="kt-notification__item-time clamp-2">
+                                                        Comments: Request Type: A business is an economic institution engaged in production and / or distribution of goods and services in order to earn profits and acquire wealth. Whatever may be the form of business organisation, for example Sole Trader ship,
+                                                        Hindu Undivided Family, Partnership Firm.
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        Announced On: Apr 7 2023 11:49 AM
+                                                    </div>
+                                                    <div class="">
+                                                        <label class="badge bdg-new kt-badge--inline mr-2 py-6px btn-sm">Admin</label>
+                                                    </div>
+                                                </div>
+                                            </a>
+
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <span>
+                                                        <img src="assets/media/files/megaphone.png" width="20px">
+                                                    </span>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        Announment 1
+                                                    </div>
+                                                    <div class="kt-notification__item-time clamp-2">
+                                                        Comments: Request Type: A business is an economic institution engaged in production and / or distribution of goods and services in order to earn profits and acquire wealth. Whatever may be the form of business organisation, for example Sole Trader ship,
+                                                        Hindu Undivided Family, Partnership Firm.
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        Announced On: Apr 7 2023 11:49 AM
+                                                    </div>
+                                                    <div class="">
+                                                        <label class="badge bdg-new kt-badge--inline mr-2 py-6px btn-sm">Admin</label>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
+                                        <div class="py-3 text-center border-top">
+                                            <a href="#" class="btn btn-color-gray-600 btn-active-color-primary">{{ "Shared.ViewAll" | translate }}
+                                            <!--begin::Svg Icon-->
+                                            <span class="svg-icon svg-icon-5">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black"></rect>
+                                                    <path d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z" fill="black"></path>
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon--></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="kt-header__topbar-item dropdown mr-2 d-none">
+                        <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px">
+                            <span class="kt-header__topbar-icon kt-header__topbar-icon--success btn-noti" data-content="23"><i class="flaticon2-bell-alarm-symbol"></i></span>
+
+                        </div>
+                        <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl">
+                            <form>
+                                <!--begin: Head -->
+                                <div class="kt-head kt-head--skin-light kt-head-grey kt-head--fit-x kt-head--fit-b pt-3">
+                                    <h3 class="kt-head__title pl-4 text-left">
+                                        Notifications &nbsp;
+                                        <span class="btn btn-label-primary btn-sm btn-bold btn-font-md">23 new</span>
+                                    </h3>
+                                    <ul class="nav nav-tabs nav-tabs-line nav-tabs-bold nav-tabs-line-3x nav-tabs-line-brand  kt-notification-item-padding-x mt-0" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link show active" data-toggle="tab" href="#topbar_notifications_notifications" role="tab" aria-selected="true">Alerts</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#topbar_notifications_events" role="tab" aria-selected="false">Events</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--end: Head -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active show" id="topbar_notifications_notifications" role="tabpanel">
+                                        <div class="kt-notification kt-margin-t-10 kt-margin-b-10 kt-scroll ps" data-scroll="true" data-height="300" data-mobile-height="200" style="height: 300px; overflow: hidden;">
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon2-line-chart kt-font-success"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        New order has been received
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        2 hrs ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon2-box-1 kt-font-brand"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        New customer is registered
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        3 hrs ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon2-chart2 kt-font-danger"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        Application has been approved
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        3 hrs ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon2-image-file kt-font-warning"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        New file has been uploaded
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        5 hrs ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon2-drop kt-font-info"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        New user feedback received
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        8 hrs ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon2-pie-chart-2 kt-font-success"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        System reboot has been successfully completed
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        12 hrs ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon2-favourite kt-font-danger"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        New order has been placed
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        15 hrs ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item kt-notification__item--read">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon2-safe kt-font-primary"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        Company meeting canceled
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        19 hrs ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon2-psd kt-font-success"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        New report has been received
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        23 hrs ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon-download-1 kt-font-danger"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        Finance report has been generated
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        25 hrs ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon-security kt-font-warning"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        New customer comment recieved
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        2 days ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon2-pie-chart kt-font-success"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        New customer is registered
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        3 days ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+                                                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+                                            </div>
+                                            <div class="ps__rail-y" style="top: 0px; right: 0px;">
+                                                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="py-3 text-center border-top">
+                                            <a href="#" class="btn btn-color-gray-600 btn-active-color-primary">View All
+                                            <!--begin::Svg Icon-->
+                                            <span class="svg-icon svg-icon-5">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black"></rect>
+                                                    <path d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z" fill="black"></path>
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon--></a>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="topbar_notifications_events" role="tabpanel">
+                                        <div class="kt-notification kt-margin-t-10 kt-margin-b-10 kt-scroll ps" data-scroll="true" data-height="300" data-mobile-height="200" style="height: 300px; overflow: hidden;">
+
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon2-box-1 kt-font-brand"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        New customer is registered
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        3 hrs ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon2-chart2 kt-font-danger"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        Application has been approved
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        3 hrs ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon2-line-chart kt-font-success"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        New order has been received
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        2 hrs ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon2-image-file kt-font-warning"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        New file has been uploaded
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        5 hrs ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon2-drop kt-font-info"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        New user feedback received
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        8 hrs ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon2-pie-chart-2 kt-font-success"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        System reboot has been successfully completed
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        12 hrs ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon2-favourite kt-font-danger"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        New order has been placed
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        15 hrs ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item kt-notification__item--read">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon2-safe kt-font-primary"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        Company meeting canceled
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        19 hrs ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon2-psd kt-font-success"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        New report has been received
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        23 hrs ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon-download-1 kt-font-danger"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        Finance report has been generated
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        25 hrs ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon-security kt-font-warning"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        New customer comment recieved
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        2 days ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="kt-notification__item">
+                                                <div class="kt-notification__item-icon">
+                                                    <i class="flaticon2-pie-chart kt-font-success"></i>
+                                                </div>
+                                                <div class="kt-notification__item-details">
+                                                    <div class="kt-notification__item-title">
+                                                        New customer is registered
+                                                    </div>
+                                                    <div class="kt-notification__item-time">
+                                                        3 days ago
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+                                                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+                                            </div>
+                                            <div class="ps__rail-y" style="top: 0px; right: 0px;">
+                                                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="py-3 text-center border-top">
+                                            <a href="#" class="btn btn-color-gray-600 btn-active-color-primary">View All
+                                            <!--begin::Svg Icon-->
+                                            <span class="svg-icon svg-icon-5">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black"></rect>
+                                                    <path d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z" fill="black"></path>
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon--></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--end: Notifications -->
+                    <!--begin: User bar -->
+                    <div id="post1" class="d-flex align-items-center">
+                        <div class="kt-header__topbar-item kt-header__topbar-item--user">
+                            <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px">
+                                <span class="kt-header__topbar-icon">
+                                    <!-- <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png" id="imgUpload" alt="image" *ngIf="item.UserProfile== 'NA'">
+                                    <img src="https://yrglobaldocuments.blob.core.windows.net/documents/{{item.UserProfile}}" id="imgUpload" alt="image" *ngIf="item.UserProfile != 'NA'"> -->
+                                    <img *ngIf="UserProfile =='NA'" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png">
+                                    <img *ngIf="UserProfile !='NA'" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{UserProfile}}">
+                                </span>
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl">
+                                <!--begin: Head -->
+                                <div class="kt-user-card kt-user-card--skin-light kt-notification-item-padding-x">
+                                    <div class="kt-user-card__name">
+                                        {{UserName}} 
+                                        <label *ngIf="DesignationName != 'N/A'" >({{DesignationName}})</label>
+                                    </div>
+                                </div>
+                                <!--end: Head -->
+                                <!--begin: Navigation -->
+                                <div class="kt-notification">
+                                    <a class="kt-notification__item">
+                                        <div class="kt-notification__item-icon">
+                                            <i class="flaticon2-calendar-3 kt-font-success"></i>
+                                        </div>
+                                        <div class="kt-notification__item-details" routerLink="/backend/Setting/MyProfile">
+                                            <div class="kt-notification__item-title kt-font-bold">
+                                                {{ "Shared.MyProfile" | translate }}
+                                            </div>
+                                            <div class="kt-notification__item-time">
+                                                {{ "Shared.AccountSetting" | translate }}
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="kt-notification__item">
+                                        <div class="kt-notification__item-icon">
+                                            <i class="flaticon2-lock kt-font-warning"></i>
+                                        </div>
+                                        <div class="kt-notification__item-details" routerLink="/backend/Setting/ChangePassword">
+                                            <div class="kt-notification__item-title kt-font-bold">
+                                                {{ "Shared.ChangePassword" | translate }}
+                                            </div>
+                                            <div class="kt-notification__item-time">
+                                                {{ "Shared.ManagePassword" | translate }}
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="kt-notification__item">
+                                        <div class="kt-notification__item-icon">
+                                            <i class="flaticon2-crisp-icons kt-font-primary"></i>
+                                        </div>
+                                        <div class="kt-notification__item-details" routerLink="/backend/Setting/UserPolicy">
+                                            <div class="kt-notification__item-title kt-font-bold">
+                                                {{ "Shared.UserPolicy" | translate }}
+                                            </div>
+                                            <div class="kt-notification__item-time">
+                                                {{ "Shared.CreatePolicy" | translate }}
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <!-- <a class="kt-notification__item">
+                                        <div class="kt-notification__item-icon">
+                                            <i class="flaticon2-document kt-font-brand"></i>
+                                        </div>
+                                        <div class="kt-notification__item-details" routerLink="/backend/Setting/UserPolicyMaster">
+                                            <div class="kt-notification__item-title kt-font-bold">
+                                                User Policy Master
+                                            </div>
+                                            <div class="kt-notification__item-time">
+                                                Manage Policy
+                                            </div>
+                                        </div>
+                                    </a> -->
+                                    <div class="kt-notification__custom kt-space-between" (click)="logout()">
+                                        <a target="_blank" class="btn btn-label btn-label-brand btn-sm btn-bold">{{ "Shared.SignOut" | translate }}</a>
+                                    </div>
+                                </div>
+                                <!--end: Navigation -->
+                            </div>
+                        </div>
+                    </div>
+                    <ngx-guided-tour></ngx-guided-tour>
+                    <!--end: User bar -->
+                </div>
+                <!-- end:: Header Topbar -->
+            </div>
+            <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+                <app-render-body></app-render-body>
+            </div>
+        </div>
+        <div class="right-bar d-none">
+            <div class="">
+
+                <div class="py-4">
+                    <a href="javascript:void(0)" (click)="openanc()">
+                        <span class="svg-icon svg-icon-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 22px;height: 22px;">
+                                <path d="M21 10.063V4C21 3.44772 20.5523 3 20 3H19C17.0214 4.97864 13.3027 6.08728 11 6.61281V17.3872C13.3027 17.9127 17.0214 19.0214 19 21H20C20.5523 21 21 20.5523 21 20V13.937C21.8626 13.715 22.5 12.9319 22.5 12C22.5 11.0681 21.8626 10.285 21 10.063Z M5 7C3.89543 7 3 7.89543 3 9V15C3 16.1046 3.89543 17 5 17H6L7 22H9V7H5Z"></path>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+
+                <div class="py-4">
+                    <!-- <a class="btn btn-sm btn-icon btn-bg-light btn-icon-warning btn-hover-warning"> -->
+                    <a>
+                        <span class="svg-icon note_icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi bi-sticky-fill" viewBox="0 0 16 16">
+                                <path d="M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1h-11zm6 8.5a1 1 0 0 1 1-1h4.396a.25.25 0 0 1 .177.427l-5.146 5.146a.25.25 0 0 1-.427-.177V9.5z"/>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+
+
+                <div class="py-4">
+                    <span class="svg-icon svg-icon-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <rect x="0" y="0" width="24" height="24"/>
+                            <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M14.4862 18L12.7975 21.0566C12.5304 21.54 11.922 21.7153 11.4386 21.4483C11.2977 21.3704 11.1777 21.2597 11.0887 21.1255L9.01653 18H5C3.34315 18 2 16.6569 2 15V6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V15C22 16.6569 20.6569 18 19 18H14.4862Z" fill="black"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M6 7H15C15.5523 7 16 7.44772 16 8C16 8.55228 15.5523 9 15 9H6C5.44772 9 5 8.55228 5 8C5 7.44772 5.44772 7 6 7ZM6 11H11C11.5523 11 12 11.4477 12 12C12 12.5523 11.5523 13 11 13H6C5.44772 13 5 12.5523 5 12C5 11.4477 5.44772 11 6 11Z" fill="black"/>
+                        </g>
+                        </svg>
+                        <!--end::Svg Icon-->
+                    </span>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div id="announcebar" class="announcebar animate-right">
+            <div class="">
+                <div class="sidebar_head">
+                    <div class="offcanvas-header d-flex align-items-center justify-content-between flex-1">
+                        <h4 class="m-0">{{ "Shared.Announcement" | translate }}</h4>
+                        <a href="javascript:void(0)" class="btn btn-icon btn-hover-info" (click)="closeanc()">
+                            <!-- (click)="closeevearea2()"> -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                                <path fill="none" d="M0 0h24v24H0z"/>
+                                <path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="p-4 kt-portlet__body_scroll">
+                    <div class="">
+                        <div class="">
+                            <ng-container *ngFor="let item of _LstToAnnouncement; let i=index">
+                                <div *ngIf="i<=2" (click)="gotoAnnoucementDetailsV2('Memo/AnnouncementDetails',item.AnnouncementId)" class="card card-bx">
+                                    <div class="card-head">
+                                        <div class="d-flex-cen">
+                                            <span class="card-icn">
+                                                <svg _ngcontent-cba-c421="" width="19" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" _ngcontent-osd-c392="" class="ani" style="fill: #2786fb;"><path _ngcontent-cba-c421="" _ngcontent-osd-c392="" d="M9 17C9 17 16 18 19 21H20C20.5523 21 21 20.5523 21 20V13.937C21.8626 13.715 22.5 12.9319 22.5 12C22.5 11.0681 21.8626 10.285 21 10.063V4C21 3.44772 20.5523 3 20 3H19C16 6 9 7 9 7H5C3.89543 7 3 7.89543 3 9V15C3 16.1046 3.89543 17 5 17H6L7 22H9V17ZM11 8.6612C11.6833 8.5146 12.5275 8.31193 13.4393 8.04373C15.1175 7.55014 17.25 6.77262 19 5.57458V18.4254C17.25 17.2274 15.1175 16.4499 13.4393 15.9563C12.5275 15.6881 11.6833 15.4854 11 15.3388V8.6612ZM5 9H9V15H5V9Z"></path></svg>
+                                        </span>
+                                            <h4 class="header-text header-date">
+                                                {{item.Subject}}
+                                            </h4>
+
+                                        </div>
+
+                                        <div class="">
+                                            <div class="d-flex-cen">
+
+                                                <div class="">
+                                                    <label *ngIf="item.ReadCount=='0'" class="badge bdg-new text-white bg-info kt-badge--inline mr-2 btn-sm">New</label>
+                                                </div>
+                                                <span class="mr-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20px" height="20px">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                </svg>
+                                            </span>
+                                                <span class="mr-2">{{item.AnnouncementDate}}</span>
+                                                <span>{{item.AnnouncementTime}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body mx-4">
+
+                                        <div class="card-text fs-6 achv-txt clamp-3">
+                                            <div [innerHTML]="item.Description"></div>
+                                            <!-- {{item.Description}} -->
+                                        </div>
+
+                                        <div class="d-flex-cen gap-1 attch-list mt-1" *ngFor="let src of item.AttachmentJson">
+                                            <div class="attachmnt d-flex-cen">
+                                                <span class="atch-svg mr-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
+                                                </svg>                                      
+                                            </span>
+                                                <span>{{src.FileName}}</span>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+                                    <div class="card-footer d-flex-end">
+                                        <div class="">
+                                            <div class="">
+                                                <div *ngIf="item.IsOwner=='1'" class="d-flex-cen mb-1 flex-1 gap-1">
+                                                    Announcement by
+                                                    <div class="user-img mr-1">
+                                                        <img src="assets/media/icons/user3.png">
+                                                    </div> Administrator
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="_LstToAnnouncement?.length==0">
+                                <div class="d-flex-center">
+                                    <div class="m-auto">
+                                        <div class="svgs-1">
+                                            <img src="assets/media/Img/Announcement.png">
+                                            <!-- <svg height="226" viewBox="8 -5 110 106" width="250" xmlns="http://www.w3.org/2000/svg" class="mega-svg">
+                                        <g id="megaphone-all">
+                                            <g id="megaphone">
+                                                <path d="M53 53l-3-8.4 4-5 7.5-1L65 42l4 7.2-4 3.9-6.6 6.3-5.3-6.3z" fill="#6CB1FF" id="Vector 7"></path>
+                                                <path d="M36 52.5l-15.5 9.7-3.5 5.4 3.5 6.7 7.3 3 7-2.1 5.2 4.2 10.4 15.5 4.1.6 8.5-4.8-.9-3.3-3-1.7-4.3-5.5L46.9 69l-2.1-3.4-3.5-.4-3-3-2.2-2.5v-7.1z" fill="#6CB1FF" id="Vector 6"></path>
+                                                <path d="M47.3 19.2c-3.9 2.4-5.1 6.8-4.5 12 1 8-1 14.7-6.3 18L19.1 59.7c-4.3 2.6-4.8 8.6-1.2 13.7 3.6 5 9.7 7 14 4.4 2-1.3 4.9-.7 6.3 1.3l11.5 16.2c1.4 2 4.3 2.6 6.3 1.3l7.6-4.6c2.1-1.3 2.7-4 1.2-6l-1.2-1.8C62.3 82.5 59.8 83 59 82l-9-12.7v-.1a2 2 0 01-.3-.8V68c0-.3 0-.6.2-.9l.5-.5c5-2.4 12-1.4 18.9 2.3 5 2.5 9.8 3.2 13.7.8 8.7-5.3 4.3-20.8-4.6-33.4-9-12.5-22.5-22.5-31.2-17.1zm8.5 31a61.4 61.4 0 01-3.6-5.5l5.4-3.3c2-1.3 5.5 0 7.6 3 2.1 3 2.2 6.5 0 7.8L60 55.5a62.8 62.8 0 01-4.1-5.2zm-34.1 21c-2.1-3-2.2-6.5 0-7.8l13.2-8.1c-.2 2 .4 4.4 2 6.6 1.5 2.2 3.6 3.6 5.7 4.2l-13.3 8.2c-2 1.3-5.5-.1-7.6-3.1zM61 88.4l-7.6 4.7L42 76.9a9.2 9.2 0 00-3.6-3l1.3-.8 5.7-3.5c.2.7.5 1.3 1 2l9 12.6c1.2 1.7 3 2.3 4.1 2.6l.5.1 1 1.5zM46.8 63.6l-.4.2c-2.1 1.3-5.6 0-7.7-3-2.1-3-2.1-6.5 0-7.8l.4-.3c3.6-2.2 6-5.6 7.3-9.7a62.8 62.8 0 0012.8 18.2c-4.6-.5-8.8.2-12.4 2.4zM80.6 66c-3.9 2.4-10.8-.8-17.6-7.3l4.8-3c4.3-2.6 4.8-8.6 1.2-13.7-3.6-5-9.7-7-14-4.3l-4.8 2.9c-3.7-8.4-4.1-15.6-.3-18 5.2-3.1 16.3 4 24.8 16 8.5 11.9 11 24.2 5.9 27.4z" fill="#244F9A" id="Vector"></path>
+                                            </g>
+                                            <path class="linesh one" d="M85.3 30.1l12.4-9" id="line2" stroke="#3681D7" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"></path>
+                                            <path class="linesh two" d="M72.7 16.5l6-13.7" id="line1" stroke="#3681D7" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"></path>
+                                            <path class="linesh three" d="M92.3 48.3h15" id="line3" stroke="#3681D7" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"></path>
+                                        </g>
+                                    </svg> -->
+
+                                        </div>
+                                        <div class="bnk-txt mt-3">
+                                            <h3 class="blank-txt"> No New Announcements </h3>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer py-2">
+                    <div class="text-center">
+                        <button class="btn-info btn btn-sm" routerLink="/backend/Inbox/Announcement" (click)="closeanc()">
+                            View All
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

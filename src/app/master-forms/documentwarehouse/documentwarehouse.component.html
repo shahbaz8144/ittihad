@@ -1,0 +1,570 @@
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+    <div class="col-lg-12">
+        <h4 class="mb-3 pro-nm">{{ "Masterform.MoveDocumentsToWarehouse" | translate }}</h4>
+        <div class="card">
+            <div class="card-header d-flex-center" id="faqhead1">
+                <a class="btn btn-header-link p-0"> {{ShelveName}}<span class="sub_text mx-1">({{ "Masterform.SelectedShelve" | translate }})</span></a>
+            </div>
+            <div class="card-body">
+                <h6 class="txtm-cus mt-1 ml-2 mb-0 pt-1"><span>{{ "Masterform.Note" | translate }}: </span> {{ "Masterform.MovetowarehouseNote" | translate }} </h6>
+                <div class="d-flex flex-wrap ">
+                    <div class="col-md-4">
+                        <div class="treeview js-treeview">
+                            <ul>
+                                <li *ngFor="let obj of Objwarehousedrp">
+                                    <div class="treeview__level" (click)="bindblock(obj.WareHouseId)" data-level="A">
+                                        <span class="level-title">{{obj.WareHouseName}}</span>
+                                        <input type="hidden" id="warehousehdn_{{obj.WareHouseId}}" value="0">
+                                    </div>
+                                    <ul id="blockdiv_{{obj.WareHouseId}}" class="blocksdiv" style="display: none;">
+                                        <ng-container *ngFor="let _block of blocklist">
+                                            <ng-container *ngIf="obj.WareHouseId == _block.WareHouseId">
+                                                <li>
+                                                    <div class="treeview__level" data-level="B" (click)="bindRacks(_block.BlockId)">
+                                                        <span class="level-title">{{_block.BlockName}}</span>
+                                                        <input type="hidden" id="blockshdn_{{_block.BlockId}}" value="0">
+                                                    </div>
+                                                    <ul id="rackdiv_{{_block.BlockId}}" class="racksdiv" style="display: none;">
+                                                        <ng-container *ngFor="let _Rack of Rackslist">
+                                                            <ng-container *ngIf="_block.BlockId == _Rack.BlockId">
+                                                                <li>
+                                                                    <div class="treeview__level" data-level="C" (click)="bindshelves(_Rack.RackId)">
+                                                                        <span class="level-title">{{_Rack.RackName}}</span>
+                                                                        <input type="hidden" id="rackshdn_{{_Rack.RackId}}" value="0">
+                                                                    </div>
+                                                                    <ul id="shelvesdiv_{{_Rack.RackId}}" class="shelvediv" style="display: none;">
+                                                                        <ng-container *ngFor="let _shelves of shelveslist">
+                                                                            <ng-container *ngIf="_Rack.RackId == _shelves.RackId && _shelves.IsFull==false">
+                                                                                <li>
+                                                                                    <div class="treeview__level" id="shelve_div_{{_shelves.ShelveId}}{{_Rack.RackId}}" data-level="D" (click)="GetShelveId(_shelves.ShelveId,_Rack.RackId,_shelves.ShelveName)">
+                                                                                        <span class="level-title">{{_shelves.ShelveName}}</span>
+                                                                                    </div>
+                                                                                </li>
+                                                                            </ng-container>
+                                                                        </ng-container>
+                                                                    </ul>
+                                                                </li>
+                                                            </ng-container>
+                                                        </ng-container>
+                                                    </ul>
+                                                </li>
+                                            </ng-container>
+                                        </ng-container>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="menu_cards">
+                            <div class="card cards mb-3">
+                                <div class="card-header">
+                                    <div class="d-flex-center">
+                                        <div>{{ "Masterform.Documents" | translate }}:<span class="sub_text mx-1">{{selectedItemList.length}}</span></div>
+                                        <!-- [disabled]="!ShelveId || selectedItemList.length == 0"  -->
+                                        <button class="btn btn-sm btn-info" [disabled]="!ShelveId || selectedItemList.length == 0" (click)="Movewarehouse()">{{ "Masterform.Submit" | translate  }}</button></div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="view_filter docs-white">
+                                        <div class="search-div">
+                                            <div class="search-div-inner">
+                                                <input type="text" class="search-input" [placeholder]="Filterbyname" [(ngModel)]="searchText">
+                                                <div class="search-icon">
+                                                    <i class="material-icons sch_icon">search</i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="">
+                                            <div class="d-flex-center mr-2">
+                                                <div class="mr-2">
+                                                    <input type="checkbox" class="" [(ngModel)]="check" (change)="checkbox()">
+                                                </div>
+                                                {{ "Masterform.Select All" | translate }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="scroll-body mt-2">
+                                        <div class="bg-gray d-flex flex-wrap">
+                                            <ng-container *ngIf="(objshelvesview | filter:searchText) as objshelvesview">
+                                            <div class="card card-item" *ngFor="let item  of objshelvesview | filter:searchText">
+                                                <div class="crd-hed">
+                                                    <div class="crd-ck"><input type="checkbox" [(ngModel)]="item.checked" (change)="oncheckbox()" class="mr-2"><span>{{ "Masterform.Select" | translate }}</span></div>
+                                                </div>
+                                                <div class="crd-body">
+                                                    <div class="shel_div">
+                                                        <div class="shel_name">
+                                                            <!-- Historical Shelve -->
+                                                            {{item.DocumentName}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="pb-1">
+                                                        <div class="d-flex align-items-baseline flex-column">
+                                                            <span class="sub_text mx-1">{{ "Masterform.Company" | translate }}</span>
+                                                            <div class="text_elip" data-toggle="tooltip" data-placement="top" title="ASM Enterprises">{{item.CompanyName}} </div> 
+                                                        </div>
+                                                    </div>
+                                                    <div class="py-1">
+                                                        <div class="d-flex align-items-baseline flex-column">
+                                                            <span class="sub_text mx-1">{{ "Masterform.Type" | translate }}</span>
+                                                            <div class="text_elip">{{item.DocumentTypeName}}</div> 
+                                                        </div>
+                                                    </div>
+                                                    <div class="pt-1">
+                                                        <div class="d-flex align-items-baseline flex-column">
+                                                            <span class="sub_text mx-1">{{ "Masterform.Lengthandbreadthandhigh" | translate }}</span>
+                                                            <div class="text_elip">{{item.Dimension}}</div> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="crd-fot">
+                                                    <div class="d-flex-center">
+                                                        <div class="text_elip" data-toggle="tooltip" data-placement="top" title="Ramesh Kumar Neelapala Smith">{{item.ContactUserName}}{{item.UserName}}</div> <span class="sub_text mx-1 mb-0 d-none">(User)</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <ng-container *ngIf="objshelvesview.length==0">
+                                                <div class="d-flex-center kt-tb-error-box p-relative">
+                                                    <div class="m-auto text-center">
+                                                        <div class="svgs-1 kt-error-img">
+                                                            <img src="assets/media/Img/Archive To Ware House.png">
+                                                         </div>
+                                                          <h3 class="kt-blank-ttl"> {{ "Masterform.NoBlockData" | translate }} </h3>
+                                               <p class="kt-blank-msg"> {{ "Masterform.NOdatawarehouse" | translate }} </p>                                     
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </ng-container>
+                                            <!-- <div class="card card-item">
+                                            <div class="crd-hed">
+                                                <div class="crd-ck"><input type="checkbox" class="mr-2"><span>Select</span></div>
+                                                <div class="crd-divdr"></div>
+                                                <div class="crd-drop"><i class="material-icons">more_horiz</i></div>
+                                            </div>
+                                            <div class="crd-body">
+                                                <div class="shel_div">
+                                                    <div class="shel_name">
+                                                        Mythology Shelve
+                                                    </div>
+                                                </div>
+                                                <div class="">
+                                                    <div class="d-flex align-items-baseline">
+                                                        <h1 class="fs-1 grad-text mr-1 mb-0">1</h1><span class="">Docs</span>
+                                                    </div>
+                                                </div>
+                                                <div class="pt-1">
+                                                    <div class="d-flex align-items-baseline">
+                                                        <h1 class="fs-4 grad2 mr-1 mb-0">1/2</h1><span class="fs-7">Row/Column</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="crd-fot">
+                                                <div class="d-flex-center">
+                                                    <div class="capacity_txt fase">False</div>                                    
+                                                    <div class="menu_toggle">
+                                                        <label class="menu_checkbox">
+                                                            <input type="checkbox">
+                                                            <span class="onoff-toggle onoff-toggle--on" title="Yes">
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                            <!-- <div class="card card-item">
+                                            <div class="crd-hed">
+                                                <div class="crd-ck"><input type="checkbox" class="mr-2"><span>Select</span></div>
+                                                <div class="crd-divdr"></div>
+                                                <div class="crd-drop"><i class="material-icons">more_horiz</i></div>
+                                            </div>
+                                            <div class="crd-body">
+                                                <div class="shel_div">
+                                                    <div class="shel_name">
+                                                        Historical Shelve
+                                                    </div>
+                                                </div>
+                                                <div class="">
+                                                    <div class="d-flex align-items-baseline">
+                                                        <h1 class="fs-1 grad-text mr-1 mb-0">3</h1><span class="">Docs</span>
+                                                    </div>
+                                                </div>
+                                                <div class="pt-1">
+                                                    <div class="d-flex align-items-baseline">
+                                                        <h1 class="fs-4 grad2 mr-1 mb-0">2/2</h1><span class="fs-7">Row/Column</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="crd-fot">
+                                                <div class="d-flex-center">
+                                                    <div class="capacity_txt">True</div>                                    
+                                                    <div class="menu_toggle">
+                                                        <label class="menu_checkbox">
+                                                            <input type="checkbox" checked>
+                                                            <span class="onoff-toggle onoff-toggle--on" title="Yes">
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+
+                                            <!-- <div class="card card-item">
+                                            <div class="crd-hed">
+                                                <div class="crd-ck"><input type="checkbox" class="mr-2"><span>Select</span></div>
+                                                <div class="crd-divdr"></div>
+                                                <div class="crd-drop"><i class="material-icons">more_horiz</i></div>
+                                            </div>
+                                            <div class="crd-body">
+                                                <div class="shel_div">
+                                                    <div class="shel_name">
+                                                        Historical Shelve
+                                                    </div>
+                                                </div>
+                                                <div class="">
+                                                    <div class="d-flex align-items-baseline">
+                                                        <h1 class="fs-1 grad-text mr-1 mb-0">3</h1><span class="">Docs</span>
+                                                    </div>
+                                                </div>
+                                                <div class="pt-1">
+                                                    <div class="d-flex align-items-baseline">
+                                                        <h1 class="fs-4 grad2 mr-1 mb-0">2/2</h1><span class="fs-7">Row/Column</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="crd-fot">
+                                                <div class="d-flex-center">
+                                                    <div class="capacity_txt">True</div>                                    
+                                                    <div class="menu_toggle">
+                                                        <label class="menu_checkbox">
+                                                            <input type="checkbox" checked>
+                                                            <span class="onoff-toggle onoff-toggle--on" title="Yes">
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                            <!-- <div class="card card-item">
+                                            <div class="crd-hed">
+                                                <div class="crd-ck"><input type="checkbox" class="mr-2"><span>Select</span></div>
+                                                <div class="crd-divdr"></div>
+                                                <div class="crd-drop"><i class="material-icons">more_horiz</i></div>
+                                            </div>
+                                            <div class="crd-body">
+                                                <div class="shel_div">
+                                                    <div class="shel_name">
+                                                        Mythology Shelve
+                                                    </div>
+                                                </div>
+                                                <div class="">
+                                                    <div class="d-flex align-items-baseline">
+                                                        <h1 class="fs-1 grad-text mr-1 mb-0">1</h1><span class="">Docs</span>
+                                                    </div>
+                                                </div>
+                                                <div class="pt-1">
+                                                    <div class="d-flex align-items-baseline">
+                                                        <h1 class="fs-4 grad2 mr-1 mb-0">1/2</h1><span class="fs-7">Row/Column</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="crd-fot">
+                                                <div class="d-flex-center">
+                                                    <div class="capacity_txt fase">False</div>                                    
+                                                    <div class="menu_toggle">
+                                                        <label class="menu_checkbox">
+                                                            <input type="checkbox">
+                                                            <span class="onoff-toggle onoff-toggle--on" title="Yes">
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!-- <div  class="menu_cards d-none">
+                        <div class="card cards mb-3">
+                            <div class="card-body">
+                                <div class="">
+                                    <div  class="">
+                                        <h6>Selected Shelves</h6>
+                                        <div class="List_options">
+                                            <ul class="menu_ul">
+                                                <li class="list-item menu_li">
+                                                    <span class="menu_text" data-toggle="tab">Historical Shelve</span>
+                                                    <a class="menu_toggle cncl"><label class="menu_checkbox">
+                                                        <span class="material-icons">cancel</span></label>
+                                                    </a>
+                                                </li>
+                                                <li class="list-item menu_li">
+                                                    <span class="menu_text" data-toggle="tab">Mythology Shelve</span>
+                                                    <a class="menu_toggle cncl"><label class="menu_checkbox">
+                                                        <span class="material-icons">cancel</span></label>
+                                                    </a>
+                                                </li>
+                                                <li class="list-item menu_li">
+                                                    <span class="menu_text" data-toggle="tab">Ramesh Shelve</span>
+                                                    <a class="menu_toggle cncl"><label class="menu_checkbox">
+                                                        <span class="material-icons">cancel</span></label>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--accordian-->
+
+<!-- <div class="accordion mb-3 d-none" id="faq">
+    
+    <div class="card">
+        <div class="card-header" id="faqhead1">
+            <a class="btn btn-header-link" data-toggle="collapse" data-target="#faq1" aria-expanded="true" aria-controls="faq1">Documents <span class="mx-1">(3 Selected)</span></a>
+        </div>
+
+        <div id="faq1" class="collapse show" aria-labelledby="faqhead1" data-parent="#faq">                    
+            <div class="card-body">
+                
+                <div class="view_filter docs-white">
+                    <div class="search-div">
+                        <div class="search-div-inner">
+                            <input type="text" class="search-input" placeholder="Filter by name...">
+                            <div class="search-icon">
+                                <i class="material-icons sch_icon">search</i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex-center">
+                        <div class="d-flex-center mr-2">
+                            <div class="mr-2">
+                                <input type="checkbox" class="">
+                            </div>
+                            Select All
+                        </div>
+                        <div class="d-flex-center">
+                            Show
+                            <div class="ml-1">
+                                <select class="form-control filtr">
+                                    <option>All</option>
+                                    <option>All</option>
+                                    <option>All</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="w-100 pt-5 scroll-body">
+                    <div class="d-flex flex-wrap">
+                        <div class="card card-item">
+                            <div class="crd-hed">
+                                <div class="crd-ck"><input type="checkbox" class="mr-2"><span>Select</span></div>
+                                <div class="crd-divdr"></div>
+                                <div class="crd-drop"><i class="material-icons">more_horiz</i></div>
+                            </div>
+                            <div class="crd-body">
+                                <div class="shel_div">
+                                    <div class="shel_name">
+                                        Historical Shelve
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <div class="d-flex align-items-baseline">
+                                        <h1 class="fs-1 grad-text mr-1 mb-0">3</h1><span class="">Docs</span>
+                                    </div>
+                                </div>
+                                <div class="pt-1">
+                                    <div class="d-flex align-items-baseline">
+                                        <h1 class="fs-4 grad2 mr-1 mb-0">2/2</h1><span class="fs-7">Row/Column</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="crd-fot">
+                                <div class="d-flex-center">
+                                    <div class="capacity_txt">True</div>                                    
+                                    <div class="menu_toggle">
+                                        <label class="menu_checkbox">
+                                            <input type="checkbox" checked>
+                                            <span class="onoff-toggle onoff-toggle--on" title="Yes">
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-item">
+                            <div class="crd-hed">
+                                <div class="crd-ck"><input type="checkbox" class="mr-2"><span>Select</span></div>
+                                <div class="crd-divdr"></div>
+                                <div class="crd-drop"><i class="material-icons">more_horiz</i></div>
+                            </div>
+                            <div class="crd-body">
+                                <div class="shel_div">
+                                    <div class="shel_name">
+                                        Mythology Shelve
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <div class="d-flex align-items-baseline">
+                                        <h1 class="fs-1 grad-text mr-1 mb-0">1</h1><span class="">Docs</span>
+                                    </div>
+                                </div>
+                                <div class="pt-1">
+                                    <div class="d-flex align-items-baseline">
+                                        <h1 class="fs-4 grad2 mr-1 mb-0">1/2</h1><span class="fs-7">Row/Column</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="crd-fot">
+                                <div class="d-flex-center">
+                                    <div class="capacity_txt fase">False</div>                                    
+                                    <div class="menu_toggle">
+                                        <label class="menu_checkbox">
+                                            <input type="checkbox">
+                                            <span class="onoff-toggle onoff-toggle--on" title="Yes">
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-item">
+                            <div class="crd-hed">
+                                <div class="crd-ck"><input type="checkbox" class="mr-2"><span>Select</span></div>
+                                <div class="crd-divdr"></div>
+                                <div class="crd-drop"><i class="material-icons">more_horiz</i></div>
+                            </div>
+                            <div class="crd-body">
+                                <div class="shel_div">
+                                    <div class="shel_name">
+                                        Historical Shelve
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <div class="d-flex align-items-baseline">
+                                        <h1 class="fs-1 grad-text mr-1 mb-0">3</h1><span class="">Docs</span>
+                                    </div>
+                                </div>
+                                <div class="pt-1">
+                                    <div class="d-flex align-items-baseline">
+                                        <h1 class="fs-4 grad2 mr-1 mb-0">2/2</h1><span class="fs-7">Row/Column</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="crd-fot">
+                                <div class="d-flex-center">
+                                    <div class="capacity_txt">True</div>                                    
+                                    <div class="menu_toggle">
+                                        <label class="menu_checkbox">
+                                            <input type="checkbox" checked>
+                                            <span class="onoff-toggle onoff-toggle--on" title="Yes">
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-item">
+                            <div class="crd-hed">
+                                <div class="crd-ck"><input type="checkbox" class="mr-2"><span>Select</span></div>
+                                <div class="crd-divdr"></div>
+                                <div class="crd-drop"><i class="material-icons">more_horiz</i></div>
+                            </div>
+                            <div class="crd-body">
+                                <div class="shel_div">
+                                    <div class="shel_name">
+                                        Historical Shelve
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <div class="d-flex align-items-baseline">
+                                        <h1 class="fs-1 grad-text mr-1 mb-0">3</h1><span class="">Docs</span>
+                                    </div>
+                                </div>
+                                <div class="pt-1">
+                                    <div class="d-flex align-items-baseline">
+                                        <h1 class="fs-4 grad2 mr-1 mb-0">2/2</h1><span class="fs-7">Row/Column</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="crd-fot">
+                                <div class="d-flex-center">
+                                    <div class="capacity_txt">True</div>                                    
+                                    <div class="menu_toggle">
+                                        <label class="menu_checkbox">
+                                            <input type="checkbox" checked>
+                                            <span class="onoff-toggle onoff-toggle--on" title="Yes">
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-item">
+                            <div class="crd-hed">
+                                <div class="crd-ck"><input type="checkbox" class="mr-2"><span>Select</span></div>
+                                <div class="crd-divdr"></div>
+                                <div class="crd-drop"><i class="material-icons">more_horiz</i></div>
+                            </div>
+                            <div class="crd-body">
+                                <div class="shel_div">
+                                    <div class="shel_name">
+                                        Mythology Shelve
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <div class="d-flex align-items-baseline">
+                                        <h1 class="fs-1 grad-text mr-1 mb-0">1</h1><span class="">Docs</span>
+                                    </div>
+                                </div>
+                                <div class="pt-1">
+                                    <div class="d-flex align-items-baseline">
+                                        <h1 class="fs-4 grad2 mr-1 mb-0">1/2</h1><span class="fs-7">Row/Column</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="crd-fot">
+                                <div class="d-flex-center">
+                                    <div class="capacity_txt fase">False</div>                                    
+                                    <div class="menu_toggle">
+                                        <label class="menu_checkbox">
+                                            <input type="checkbox">
+                                            <span class="onoff-toggle onoff-toggle--on" title="Yes">
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-footer text-right">
+                <button class="btn btn-sm btn-info">Submit</button> 
+            </div>
+        </div>
+    </div>
+</div> -->

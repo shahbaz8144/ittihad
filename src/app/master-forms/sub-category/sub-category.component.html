@@ -1,0 +1,223 @@
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+    <div class="col-lg-12">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+            <h4 class="mb-3">{{ "Masterform.SubCategory" | translate }} </h4>
+             
+        </div>
+        <div class="col-lg-12 m-auto">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-wrap">
+                        <div class="col-md-6">
+                            
+                            <div class="folder-tree-wrapper">
+                                <ul class="folder-tree" id="folder-tr">
+                                    <ng-container *ngFor="let _cat of _LstCategory">
+                                        <li>
+                                            <div class="trree">
+                                                <i class="fa fa-folder"></i>
+                                                <div class="fdr-name">
+                                                    <span
+                                                        (click)="AddSubChildCategory(_cat.CategoryId)">
+                                                        {{_cat.CategoryName}}
+                                                    </span>
+                                                    <span class="CatName"
+                                                        id="Category_{{_cat.CategoryId}}"
+                                                        style="display: none;">
+                                                        <i class="fa fa-plus"
+                                                            id="{{_cat.CategoryId}}"
+                                                            aria-hidden="true"></i>
+                                                    </span>
+                                                </div>
+                                                <div *ngIf="filterItemsOfSubCategory(_cat.CategoryId).length>0"
+                                                    id="{{_cat.CategoryId}}" class="arrow"><i
+                                                        class="fa fa-angle-down"></i></div>
+                                            </div>
+                                            <ul id="DivCat_{{_cat.CategoryId}}" class="nested">
+                                                <li id="SubCategory_{{_cat.CategoryId}}"
+                                                    style="display: none;">
+                                                    <div class="trree">
+                                                        <i class="fa fa-folder"></i>
+                                                        <div class="fdr-name">
+                                                            <input
+                                                                id="txtsubcategoryname_{{_cat.CategoryId}}"
+                                                                type="text" />
+                                                            <span
+                                                                class="mx-2 btn btn-sm btn-success btn-cust"
+                                                                (click)="AddSubCategory(_cat.CategoryId,0,false)">
+                                                                <i aria-hidden="true"
+                                                                    class="mr-2 fa fa-check text-white"></i>
+                                                                {{ "Masterform.Add" | translate }}
+                                                            </span>
+                                                            <span
+                                                                class="ml-2 btn btn-sm btn-danger btn-cust"
+                                                                (click)="canceltextbox(_cat.CategoryId)">
+                                                                <i aria-hidden="true"
+                                                                    class="mr-2 fa fa-times text-white"
+                                                                    id="27"></i> {{ "Masterform.Cancel" | translate}}
+                                                            </span>
+                                                        </div>
+                                                        <!-- <div *ngIf="filterItemsOfType(_subcat.SubCategoryId).length>0" class="arrow"><i class="fa fa-angle-down"></i></div> -->
+                                                    </div>
+                                                </li>
+                                                <li
+                                                    *ngFor="let _subcat of filterItemsOfSubCategory(_cat.CategoryId)">
+                                                    <div class="trree">
+                                                        <i class="fa fa-folder"></i>
+                                                        <div class="fdr-name">
+                                                            <span
+                                                                (click)="AddSubChildCategory(_subcat.SubCategoryId)">
+                                                                {{_subcat.SubCategoryName}}
+                                                            </span>
+                                                            <span class="CatName"
+                                                                id="Category_{{_subcat.SubCategoryId}}"
+                                                                style="display: none;">
+                                                                <i class="fa fa-plus"
+                                                                    id="{{_subcat.SubCategoryId}}"
+                                                                    aria-hidden="true"></i>
+                                                            </span>
+                                                            <!-- {{_subcat.SubCategoryName}} -->
+                                                        </div>
+                                                        <div *ngIf="filterItemsOfType(_subcat.SubCategoryId).length>0"
+                                                            class="arrow"><i
+                                                                class="fa fa-angle-down"></i></div>
+                                                    </div>
+                                                    <ul id="DivCat_{{_subcat.SubCategoryId}}"
+                                                        class="nested">
+                                                        <li id="SubCategory_{{_subcat.SubCategoryId}}"
+                                                            style="display: none;">
+                                                            <div class="trree">
+                                                                <i class="fa fa-folder"></i>
+                                                                <div class="fdr-name">
+                                                                    <input
+                                                                        id="txtsubcategoryname_{{_subcat.SubCategoryId}}"
+                                                                        type="text" />
+                                                                    <span
+                                                                        class="mx-2 btn btn-sm btn-success btn-cust"
+                                                                        (click)="AddSubCategory(_cat.CategoryId,_subcat.SubCategoryId,true)">
+                                                                        <i aria-hidden="true"
+                                                                            class="mr-2 fa fa-check text-white"></i>
+                                                                        {{ "Masterform.Add" | translate }}
+                                                                    </span>
+                                                                    <span
+                                                                        class="ml-2 btn btn-sm btn-danger btn-cust"
+                                                                        (click)="canceltextbox(_subcat.SubCategoryId)">
+                                                                        <i aria-hidden="true"
+                                                                            class="mr-2 fa fa-times text-white"
+                                                                            id="27"></i> {{ "Masterform.Cancel" | translate }}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li
+                                                            *ngFor="let _childsubcat of filterItemsOfType(_subcat.SubCategoryId)">
+                                                            <!-- <div *ngIf="_childsubcat.SubId == _subcat.SubCategoryId"> -->
+                                                            <div class="trree">
+                                                                <i class="fa fa-folder"></i>
+                                                                <div class="fdr-name">
+                                                                    <span
+                                                                        (click)="AddSubChildCategory(_childsubcat.SubCategoryId)">
+                                                                        {{_childsubcat.SubCategoryName}}
+                                                                    </span>
+                                                                    <span class="CatName"
+                                                                        id="Category_{{_childsubcat.SubCategoryId}}"
+                                                                        style="display: none;">
+                                                                        <i class="fa fa-plus"
+                                                                            id="{{_childsubcat.SubCategoryId}}"
+                                                                            aria-hidden="true"></i>
+                                                                    </span>
+                                                                    <!-- {{_childsubcat.SubCategoryName}} -->
+                                                                </div>
+                                                                <div *ngIf="filterItemsOfType(_childsubcat.SubCategoryId).length>0"
+                                                                    class="arrow"><i
+                                                                        class="fa fa-angle-down"></i>
+                                                                </div>
+                                                            </div>
+                                                            <ng-container
+                                                                *ngTemplateOutlet="ChildCategoryList; context:{ SubCategoryId:_childsubcat.SubCategoryId,CategoryId:_cat.CategoryId}">
+                                                            </ng-container>
+                                                            <ng-template #ChildCategoryList
+                                                                let-SubCategoryId="SubCategoryId"
+                                                                let-CategoryId="CategoryId">
+                                                                <ul id="DivCat_{{SubCategoryId}}"
+                                                                    class="nested">
+                                                                    <li id="SubCategory_{{SubCategoryId}}"
+                                                                        style="display: none;">
+                                                                        <div class="trree">
+                                                                            <i
+                                                                                class="fa fa-folder"></i>
+                                                                            <div class="fdr-name">
+                                                                                <input
+                                                                                    id="txtsubcategoryname_{{SubCategoryId}}"
+                                                                                    type="text" />
+                                                                                <span
+                                                                                    class="mx-2 btn btn-sm btn-success btn-cust"
+                                                                                    (click)="AddSubCategory(CategoryId,SubCategoryId,true)">
+                                                                                    <i aria-hidden="true"
+                                                                                        class="mr-2 fa fa-check text-white"></i>
+                                                                                    {{ "Masterform.Add" | translate }}
+                                                                                </span>
+                                                                                <span
+                                                                                    class="ml-2 btn btn-sm btn-danger btn-cust"
+                                                                                    (click)="canceltextbox(SubCategoryId)">
+                                                                                    <i aria-hidden="true"
+                                                                                        class="mr-2 fa fa-times text-white"
+                                                                                        id="27"></i>
+                                                                                    {{ "Masterform.Cancel" | translate }}
+                                                                                </span>
+                                                                            </div>
+                                                                            <!-- <div *ngIf="filterItemsOfType(_subcat.SubCategoryId).length>0" class="arrow"><i class="fa fa-angle-down"></i></div> -->
+                                                                        </div>
+                                                                    </li>
+                                                                    <li
+                                                                        *ngFor="let _childsubcat of filterItemsOfType(SubCategoryId)">
+                                                                        <!-- <div *ngIf="_childsubcat.SubId==SubCategoryId"> -->
+                                                                        <div class="trree">
+                                                                            <i
+                                                                                class="fa fa-folder"></i>
+                                                                            <div class="fdr-name">
+                                                                                <span
+                                                                                    (click)="AddSubChildCategory(_childsubcat.SubCategoryId)">
+                                                                                    {{_childsubcat.SubCategoryName}}
+                                                                                </span>
+                                                                                <span
+                                                                                    class="CatName"
+                                                                                    id="Category_{{_childsubcat.SubCategoryId}}"
+                                                                                    style="display: none;">
+                                                                                    <i class="fa fa-plus"
+                                                                                        id="{{_childsubcat.SubCategoryId}}"
+                                                                                        aria-hidden="true"></i>
+                                                                                </span>
+                                                                                <!-- {{_childsubcat.SubCategoryName}} -->
+                                                                            </div>
+                                                                            <div *ngIf="filterItemsOfType(_childsubcat.SubCategoryId).length>0"
+                                                                                class="arrow"><i
+                                                                                    class="fa fa-angle-down"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                        <ng-container
+                                                                            *ngTemplateOutlet="ChildCategoryList; context:{SubCategoryId:_childsubcat.SubCategoryId,CategoryId:CategoryId }">
+                                                                        </ng-container>
+                                                                        <!-- </div> -->
+                                                                    </li>
+                                                                </ul>
+                                                            </ng-template>
+                                                            <!-- </div> -->
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ng-container>
+                                    <ng-container *ngIf="_LstCategory.length==0">
+                                      <img src="assets/media/Img/Sub Category.png">
+                                    </ng-container>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

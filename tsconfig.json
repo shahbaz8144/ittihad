@@ -1,0 +1,35 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+      "baseUrl": "./",
+      "outDir": "./dist/out-tsc",
+      "sourceMap": true,
+      "declaration": false,
+      "downlevelIteration": true,
+      "experimentalDecorators": true,
+      "module": "esnext",
+      "moduleResolution": "node",
+      "importHelpers": true,
+      "allowJs": true,
+      "target": "es2020",
+      "typeRoots": [
+          "node_modules/@types"
+      ],
+      "lib": [
+          "es2018",
+          "es2019",
+          "dom"
+      ],
+      "noImplicitAny": false,
+      "skipLibCheck": true
+  },
+  "angularCompilerOptions": {
+      "fullTemplateTypeCheck": true,
+      "strictInjectionParameters": true
+  },
+  "enableIvy": false,
+  "dependencies": {
+      "ng2-pdf-viewer": "^9.1.0",
+      "pdfjs-dist": "^2.16.105"
+  }
+}

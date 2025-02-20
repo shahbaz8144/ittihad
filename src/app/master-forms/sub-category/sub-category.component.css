@@ -1,0 +1,138 @@
+/* tree */
+
+.folder-tree-wrapper {
+    padding: 20px;
+    /* margin: 20px auto; */
+    border-radius: 3px;
+}
+
+.folder-tree {
+    list-style: none;
+    cursor: pointer;
+    padding-left: 20px;
+    transition: all .4s ease;
+}
+
+.folder-tree li {
+    margin-bottom: 10px;
+    font-size: 14px;
+    transition: all .4s ease;
+    position: relative;
+    transition: all .4s ease;
+}
+
+.fdr-name input[type="text"] {
+    border: none;
+    outline: 0;
+    border-bottom: 2px solid #677390;
+}
+
+.fdr-name input[type="text"]:focus {
+    border: none;
+    outline: 0;
+    border-bottom: 2px solid #16d899;
+}
+
+
+/* .folder-tree li:hover {} */
+
+.folder-tree li i {
+    color: #46526e;
+}
+
+.folder-tree li ul {
+    padding-left: 10px;
+    padding-top: 8px;
+}
+
+.folder-tree ul {
+    display: none;
+    position: relative;
+    transition: all .4s ease;
+}
+
+.folder-tree ul:before {
+    position: absolute;
+    content: '';
+    left: -10px;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background-color: transparent;
+    border-left: dashed 1px #c2c2c2;
+    border-bottom: dashed 1px #c2c2c2;
+}
+
+.folder-tree li ul li {
+    display: block;
+    margin-bottom: 8px;
+    transition: all .4s ease;
+}
+
+.folder-tree .arrow {
+    position: absolute;
+    top: 8px;
+    left: -14px;
+    width: 8px;
+    height: 8px;
+    transition: all .4s ease;
+    transform: rotate(-90deg);
+}
+
+.folder-tree .arrow i {
+    color: #595959;
+    transition: all .4s ease;
+}
+
+.folder-tree .arrow:hover i {
+    color: #292929;
+}
+
+.folder-tree li .nested.expanded {
+    display: block;
+    transition: all .4s ease;
+}
+
+.folder-tree li .caret-down>.arrow {
+    transform: rotate(0deg);
+    top: 4px;
+}
+
+.folder-tree li .caret-down.trree>.fa-folder::before {
+    content: "\f07c";
+}
+
+.fdr-name {
+    display: inline-block;
+}
+
+i.fa.fa-folder,
+i.fa.fa-folder-open {
+    margin-left: 10px;
+    margin-right: 4px;
+}
+
+.folder-tree .fa-folder,
+.folder-tree .fa-folder-open,
+.arrow .fa {
+    font-size: 20px;
+    ;
+}
+
+.btn-cust {
+    padding: 4px 6px;
+}
+
+.btn-cust.btn-danger {
+    background: #90a3b4;
+    border: #90a3b4;
+}
+
+.btn-cust.btn-success {
+    background-color: #04aa6d;
+    border-color: #04aa6d;
+}
+
+.red-snackbar {
+    background: red;
+}

@@ -1,0 +1,145 @@
+<div class="kt-portlet__head">
+    <div class="kt-inbox__toolbar kt-inbox__toolbar--extended">
+        <div class="kt-inbox__actions kt-inbox__actions--expanded">
+            <div class="kt-inbox__search">
+                <div class="input-group">
+                    <input id="txtSearch" type="text" [(ngModel)]="txtSearch" class="form-control" [placeholder]="EPSearch">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <a>
+                                <i class="fa fa-search"></i>
+                                </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="kt-inbox__controls">
+            <div class="kt-inbox__pages" title="Records per page">
+                <span class="kt-inbox__perpage">
+                    <ng-container *ngIf="activePage==1">
+                        {{activePage}}
+                        -
+                        {{_CurrentpageRecords}}
+                    </ng-container>
+                    <ng-container *ngIf="activePage!=1">
+                          
+                        {{_CurrentpageRecords * (activePage-1) + 1}}
+                        -
+                        {{_CurrentpageRecords * activePage}}
+                    </ng-container>
+                    <span class="en-of"> of {{TotalRecords}}</span>
+                    <span class="ar-main-of" style="display: none;"><span class="of"> - </span> {{TotalRecords}}</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="kt-portlet__body p-0 kt-portlet__body--fit-x">
+    <div class="kt-inbox__items" data-type="inbox">
+        <ng-container *ngIf="(_LstToMemos | filter:txtSearch) as _LstToMemos">
+        <div *ngFor="let ss of _LstToMemos|filter:txtSearch" class="mb_1" id="mailid_{{ss.MailId}}">
+            <div>
+                <div [ngClass]="
+                {
+                    'rplr_border_left' : ss.MailView == false &&  ss.Status=='Reply Required',
+                    'app_border_left' : ss.MailView == false &&  ss.Status=='Approval Pending',
+                    'exp_border_left' : ss.MailView == false &&  ss.Status=='Expired',
+                    'Replied_border_left' : ss.MailView == false &&  ss.Status=='Approved',
+                    'Approved_border_left' : ss.MailView == false &&  ss.Status=='Replied',
+                    'unprc_border_left' : ss.MailView == false &&  ss.Status=='UnderProcess',
+                    'rplr_border_left_true' : ss.MailView == true &&  ss.Status=='Reply Required',
+                    'app_border_left_true' : ss.MailView == true &&  ss.Status=='Approval Pending',
+                    'exp_border_left_true' : ss.MailView == true &&  ss.Status=='Expired',
+                    'Approved_border_left_true' : ss.MailView == true &&  ss.Status=='Approved',
+                    'Replied_border_left_true' : ss.MailView == true &&  ss.Status=='Replied',
+                    'unprc_border_left_true' : ss.MailView == true &&  ss.Status=='UnderProcess',
+                    'plain_border_left_true' :  ss.Status=='N/A',
+                    'Sent_border_left' :  ss.Status=='Request Pending'}">
+                    <div data-id="MemoId_{{ss.MailId}}" data-type="inbox" [className]="ss.MailView == true ? 'kt-inbox__item py-2' : 'kt-inbox__item kt-inbox__item--unread py-2'">
+                        <div class="kt-inbox__info">
+                            <div class="kt-inbox__actions">
+                                <app-favorite [favObj]="ss"></app-favorite>
+                            </div>
+                            <!-- <div class="kt-inbox__sender">
+                                <span class="kt-media kt-media--sm kt-media--dark">
+                                    <span class="letter-spacing">{{ss.TwoLetters}}</span>
+                                </span>
+                            </div> -->
+                            <div class="kt-inbox__sender">
+                                <span class="kt-media kt-media--sm kt-media--dark">
+                                    <img class="rounded-circle" *ngIf="ss.UserProfile =='NA'"
+                                        src="assets/media/icons/user2.png">
+                                    <img class="rounded-circle" *ngIf="ss.UserProfile !='NA'"
+                                        src="https://yrglobaldocuments.blob.core.windows.net/documents/{{ss.UserProfile}}">
+                                </span>
+                            </div>
+                        </div>
+                        <div (click)="gotoMemoDetailsV2('Memo/Details',ss.MailId,ss.LastReplyId)" class="kt-inbox__details">
+                            <div class="kt-inbox__message">
+                                <span class="kt-inbox__subject">{{ ss.Subject }} </span>
+                                <span *ngIf="(ss.Attachment)" style="margin-right: 12px;">
+                                    <i class="fa fa-paperclip"></i>
+                                </span>
+                            </div>
+                            <div class="kt-inbox__labels">
+                                <ng-container *ngIf="ss.MemoType=='General'">
+                                    <span class="kt-inbox__label kt-badge kt-badge--unified-info kt-badge--bold kt-badge--inline">
+                                     {{ ss.MemoType }}
+                                    </span>
+                                </ng-container>
+                                <ng-container *ngIf="ss.MemoType=='Approval'">
+                                    <span class="kt-inbox__label kt-badge kt-badge--unified-success kt-badge--bold kt-badge--inline">
+                                        {{ ss.MemoType }}
+                                    </span>
+                                </ng-container>
+
+                                <span *ngIf="ss.Status=='Reply Required'" class="kt-inbox__label kt-badge kt-badge--unified-brand kt-badge.kt-badge-light-bold kt-badge--inline">
+                                {{ss.ActualStatus}}
+                                </span>
+                                <span *ngIf="ss.Status=='Approval Pending'" class="kt-inbox__label kt-badge kt-badge--unified-brand kt-badge.kt-badge-light-bold kt-badge--inline">
+                                        {{ss.ActualStatus}}
+                                </span>
+                                <span *ngIf="ss.Status=='Expired'" class="kt-inbox__label kt-badge kt-badge--unified-brand kt-badge.kt-badge-light-bold kt-badge--inline">
+                                        {{ss.ActualStatus}}
+                                </span>
+                                <span *ngIf="ss.Status=='Request Pending'" class="kt-inbox__label kt-badge kt-badge--unified-brand kt-badge.kt-badge-light-bold kt-badge--inline">
+                                        {{ss.ActualStatus}}
+                                    </span>
+                                <span *ngIf="ss.Status=='UnderProcess'" class="kt-inbox__label kt-badge kt-badge--unified-brand kt-badge.kt-badge-light-bold kt-badge--inline">
+                                        {{ss.ActualStatus}}
+                                </span>
+                                <span class="kt-inbox__label kt-badge kt-badge--unified-primary kt-badge.kt-badge-light-bold kt-badge--inline">
+                                {{ ss.FromUser }}
+                            </span>
+                                <span id="i_{{ss.MailId}}" [ngClass]="(ss.IsTag==true)?'kt-inbox__label kt-badge kt-badge--unified-hideskin kt-badge.kt-badge-light-bold kt-badge--inline':'kt-inbox__label kt-badge kt-badge--unified-hideskin kt-badge.kt-badge-light-bold kt-badge--inline d-none'">
+                                <i class="fa fa-tag"></i>
+                            </span>
+                            </div>
+                        </div>
+                        <div (click)="gotoMemoDetailsV2('Memo/Details',ss.MailId,ss.LastReplyId)" class="kt-inbox__datetime">
+                            {{ ss.MemoDate }}
+                        </div>
+                        <!-- <div class="memohover memohover-sm">
+                            <ng-container *ngIf="ss.MemoSource=='TO'">
+                                <div class="memohover_icon">
+                                    <i (click)="removetag(ss.MailId)" title="remove" style="font-size: 18px;" class="icon-1x text-dark-50 flaticon-circle"></i>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="ss.MemoSource=='CC'">
+                                <div class="memohover_icon">
+                                    <i (click)="removetag(ss.MailId)" title="remove" style="font-size: 18px;" class="icon-1x text-dark-50 flaticon-circle"></i>
+                                </div>
+                            </ng-container>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="_LstToMemos.length == 0" class="text-center py-4" style="color: lightgrey">
+            <h4 style="font-size: 1.5rem;"> {{ "Communication.NoMoreMemosMatchedSearch" | translate }} </h4>
+            <p> {{"Communication.ClearFiltersAndTryAgain" | translate }} </p>
+        </div>
+    </ng-container>
+    </div>
+</div>

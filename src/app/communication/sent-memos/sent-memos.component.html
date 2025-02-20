@@ -1,0 +1,908 @@
+<div class="kt-portlet__head">
+    <div class="kt-inbox__toolbar kt-inbox__toolbar--extended">
+        <div class="kt-inbox__actions kt-inbox__actions--expanded  mr-0">
+            <div class="kt-inbox__search">
+                <div id="search-grp" class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text pr-0">
+                            <button type="button" (click)="IconSearch()" role="button" id="srch-btn"
+                                data-tooltip="Search" aria-label="Search" class="srch-btns pr-0">
+                                <svg focusable="false" height="24px" viewBox="0 0 24 24" width="24px"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M20.49,19l-5.73-5.73C15.53,12.2,16,10.91,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.41,0,2.7-0.47,3.77-1.24L19,20.49L20.49,19z M5,9.5C5,7.01,7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14S5,11.99,5,9.5z">
+                                    </path>
+                                    <path d="M0,0h24v24H0V0z" fill="none"></path>
+                                </svg>
+                            </button>
+                        </span>
+                    </div>
+                    <input id="txtSearch" [(ngModel)]="_Search" (keydown)="onBackspace($event)" type="text"
+                        (keyup.enter)="Search()" (click)="Searchighlight()" (keyup)="clearshow()" autocomplete="off"
+                        class="form-control" [placeholder]="SentSearch">
+                    <button class="clear-icon kt-search-clr-ic" *ngIf="_Search" (click)="clearSearch()">
+                        <i class="fa fa-times"></i>
+                    </button>
+                    <!-- <div class="input-group-append">
+                    <span class="input-group-text">
+                        <button (click)="ClearFilters()" id="clear-filter" class="srch-btns mr-2" data-toggle="kt-tooltip" data-skin="dark"
+                            title="Clear Filters">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                                role="img" font-size="1.5rem"  width="1em" height="1em"
+                                viewBox="0 0 24 24">
+                                <path 
+                                    d="M2 12a9 9 0 0 0 9 9c2.39 0 4.68-.94 6.4-2.6l-1.5-1.5A6.706 6.706 0 0 1 11 19c-6.24 0-9.36-7.54-4.95-11.95C10.46 2.64 18 5.77 18 12h-3l4 4h.1l3.9-4h-3a9 9 0 0 0-18 0Z">
+                                </path>
+                            </svg>
+                            <span class="label-hidden">Reload</span>
+                        </button>
+                        <button type="button" role="button" id="filtr-btn" (click)="open_fltrs()"  data-tooltip="Search options"
+                            aria-label="Advanced search options" class="srch-btns">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path
+                                    d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z">
+                                </path>
+                            </svg>
+                        </button>
+                    </span>
+                </div> -->
+                </div>
+                <!-- <div class="kt-filterdetails">
+                    <div class="kt-details">
+                        <p>#status1</p>
+                        <p>#status2</p>
+                        <p>#status3</p>
+                        <p>#company1</p>
+                        <p>#company2</p>
+                        <p>#company3</p>
+                        <p>#company4</p>
+                        <p>#company5</p>
+                        <p>#user1</p>
+                        <p>#user2</p>
+                        <p>#user3</p>
+                        <p>#user4</p>
+                        <p>#user5</p>
+                    </div>
+                    <div class="kt-filtercount">
+                        <span>20+</span>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="kt-portlet__head px-2">
+    <div class="kt-inbox__toolbar kt-inbox__toolbar--extended">
+        <div class="kt-inbox__actions kt-inbox__actions--expanded main-bx">
+            <div class="d-flex align-items-center tabs-ies px-2">
+                <div class="dropdown">
+                    <button (click)="InitialLoadFilters(true)"
+                        [ngClass]="(_All_Parameter==true)?'btn btn-tabbie btn-active':'btn btn-tabbie'"
+                        data-toggle="dropdown" aria-expanded="false">
+                        {{ "Communication.All" | translate }}
+                        <span class="info-badge1 d-none">5</span>
+                    </button>
+                    <div class="dropdown-menu alldropdown-menu d-none">
+                        <ul class="alldropdownul">
+                            <li class="dropdown-header">Filter By</li>
+                            <li>
+                                <button id="btn1" class="btn btn-filter active1">
+                                    <div class="d-flex align-items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" viewBox="0 0 16 16" class="bi bi-envelope">
+                                            <path
+                                                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z">
+                                            </path>
+                                        </svg>
+                                        <div class="fill-label">All Mail</div>
+                                        <span class="check-count">
+                                            100
+                                        </span>
+                                    </div>
+                                </button>
+                            </li>
+                            <li>
+                                <button id="btn2" class="btn btn-filter">
+                                    <div class="d-flex align-items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" viewBox="0 0 16 16" class="bi bi-envelope-fill">
+                                            <path _ngcontent-hem-c417=""
+                                                d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z">
+                                            </path>
+                                        </svg>
+                                        <div class="fill-label">Unread</div>
+                                        <span class="check-count">
+                                            100
+                                        </span>
+                                    </div>
+                                </button>
+                            </li>
+                            <li>
+                                <button id="btn3" class="btn btn-filter">
+                                    <div class="d-flex align-items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" viewBox="0 0 16 16" class="bi bi-envelope-check">
+                                            <path _ngcontent-hem-c417=""
+                                                d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2H2Zm3.708 6.208L1 11.105V5.383l4.708 2.825ZM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2-7-4.2Z">
+                                            </path>
+                                            <path _ngcontent-hem-c417=""
+                                                d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686Z">
+                                            </path>
+                                        </svg>
+                                        <div class="fill-label">Approval</div>
+                                        <span class="check-count">
+                                            100
+                                        </span>
+                                    </div>
+                                </button>
+                            </li>
+                            <li>
+                                <button id="btn4" class="btn btn-filter">
+                                    <div class="d-flex align-items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" viewBox="0 0 16 16" class="bi bi-reply">
+                                            <path _ngcontent-hem-c417=""
+                                                d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.74 8.74 0 0 0-1.921-.306 7.404 7.404 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254a.503.503 0 0 0-.042-.028.147.147 0 0 1 0-.252.499.499 0 0 0 .042-.028l3.984-2.933zM7.8 10.386c.068 0 .143.003.223.006.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96v-.667z">
+                                            </path>
+                                        </svg>
+                                        <div class="fill-label">Reply Required</div>
+                                        <span class="check-count">
+                                            100
+                                        </span>
+                                    </div>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- <button [ngClass]="(_All_Parameter==true)?'btn btn-tabbie btn-active':'btn btn-tabbie'"
+                    (click)="InitialLoadFilters(true)">All</button> -->
+                <button [ngClass]="(_All_Parameter==false)?'btn btn-tabbie btn-active':'btn btn-tabbie'"
+                    (click)="InitialLoadFilters(false)">{{ "Communication.Initiatedbyme" | translate }}</button>
+            </div>
+            <div class="br-line d-none"></div>
+            <!------ delete option -->
+            <button (click)="deletememo(0)" class="btn btn-hvr d-none" data-toggle="kt-tooltip" data-skin="dark"
+                title="Delete">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                    role="img" font-size="1.5rem" class="iconify iconify--mdi" width="1em" height="1em"
+                    viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12M8 9h8v10H8V9m7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5Z">
+                    </path>
+                </svg>
+                <span class="label-hidden">Delete</span>
+            </button>
+            <!------ delete option -->
+
+            <!----- more  options -->
+
+            <!-- <div class="d-flex align-items-center filters-send-memos">
+                    <button class="Kt_filters_btn Has_attachment" (click)="Has_attachment()">
+                       <span class="check-icon-send d-none"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                      </svg></span> <span>Has Attachment</span>
+                    </button>
+                    <div class="Kt_date_select">
+                        <span class="check-icon-send d-none"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                          </svg></span>
+                          <select class="form-select select_time" (click)="select_time()" data-control="select2" data-placeholder="Select an option">
+                            <option selected>Any Time</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                        </select>
+                        <div class="datrange position-relative">
+                            <input class="rangepic form-control" type="text" ngxDaterangepickerMd
+                                [(ngModel)]="selected" [showCustomRangeLabel]="true"
+                                [alwaysShowCalendars]="true" [ranges]="ranges"
+                                [linkedCalendars]="true" [isInvalidDate]="isInvalidDate"
+                                [showClearButton]="true" (datesUpdated)="datesUpdated($event)"
+                                placeholder="MM/DD/YYYY" />
+                            <i class="la la-calendar fs-2"></i>
+                        </div>
+                    </div>
+                    <div class="Kt_date_select St_user">
+                        <span class="check-icon-send d-none"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                          </svg></span>
+                          <select class="form-select select_time"  (change)="select_User($event)" data-control="select2" placeholder="Select Users">
+                            <option selected [value]="0">All</option>
+                            <option *ngFor="let user of _UserList" [value]="user.ToUserId" >{{user.UserName}}</option>
+                        </select>
+                    </div> 
+            </div> -->
+
+
+            <!----- more  options -->
+        </div>
+
+        <div class="kt-inbox__controls">
+            <button (click)="ClearFilters()" class="btn btn-hvr" data-toggle="kt-tooltip" data-skin="dark"
+                id="ReloadClearFilters">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                    role="img" font-size="1.5rem" class="iconify iconify--mdi" width="1em" height="1em"
+                    viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M2 12a9 9 0 0 0 9 9c2.39 0 4.68-.94 6.4-2.6l-1.5-1.5A6.706 6.706 0 0 1 11 19c-6.24 0-9.36-7.54-4.95-11.95C10.46 2.64 18 5.77 18 12h-3l4 4h.1l3.9-4h-3a9 9 0 0 0-18 0Z">
+                    </path>
+                </svg>
+                <span class="label-hidden">Reload</span>
+            </button>
+
+            <!-- <button class="kt-inbox__icon" (click)="ToMemos(1,'')"><i style="font-size: 1.5rem;" class="flaticon-refresh"></i></button> -->
+
+            <!-- <div class="btn-group">
+                <button [ngClass]="(FiltersSelected==true)?'btn-act btn btn-hvr filter-dot1':'btn btn-hvr btn-act'" class="" data-toggle="dropdown">
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" role="img"
+                        font-size="1.5rem" class="iconify iconify--mdi" width="1em" height="1em" viewBox="0 -1 17 17">
+                        <path
+                            d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z" />
+                    </svg>
+                    <span class="label-hidden">Filters</span>
+                </button>
+                
+                <div id="div_filters" class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-width-600">
+                    <ul (click)="$event.stopPropagation();" class="kt-nav">
+                        <li class="kt-nav__head d-flex justify-content-between">
+                            <div>Data Load Settings</div>
+                            <div class="display: inline-block">
+                                <button id="btnAll" class="btn btn-outline-info btn-xs mr-1 active" (click)="InboxTypeFn('All')">All</button>
+                                <button id="btnTO" class="btn btn-outline-info btn-xs mr-1" (click)="InboxTypeFn('TO')">TO </button>
+                                <button id="btnCC" class="btn btn-outline-info btn-xs mr-1" (click)="InboxTypeFn('CC')">CC</button>
+                            </div>
+                        </li>
+                        <li class="kt-nav__separator"></li>
+                        <li class="kt-nav__item px-3 mb-2">
+                            <input autoFocus type="search" class="form-control" [(ngModel)]="txtSearch" [ngModelOptions]="{standalone: true}" placeholder="Search Users, Status, Company...">
+                        </li>
+                        <li class="kt-nav__item px-4">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <h4 class="mb-0">Status</h4>
+                                    <ng-container *ngFor="let ss of _LstMemoStatus">
+                                        <code *ngIf="(ss.isChecked == true)">{{ss.Status}},</code>
+                                    </ng-container>
+
+                                    
+                                    <div class="kt-nav__separator"></div>
+                                    <div class="height-scroll">
+                                        <label *ngFor="let ss of _LstMemoStatus|filter:txtSearch" class="kt-checkbox kt-checkbox--info">
+                                            <input type="checkbox" name="statuschk" value="{{ss.Status}}"
+                                                [checked]="ss.isChecked" (change)="onstatuschange($event)">
+                                            {{ss.Status}}
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <h4 class="mb-0">Company</h4>
+                                    <ng-container *ngFor="let ss of _LstCompaniesTO">
+                                        <code *ngIf="(ss.isChecked == true)">{{ss.CompanyName}},</code>
+                                    </ng-container>
+                                    <div class="kt-nav__separator"></div>
+                                    <div class="height-scroll">
+                                        <label *ngFor="let ss of _LstCompaniesTO|filter:txtSearch" class="kt-checkbox kt-checkbox--info">
+                                            <input type="checkbox" name="companychk" value="{{ss.CompanyId}}"
+                                                [checked]="ss.isChecked" (change)="oncompanychange($event)">
+                                            {{ss.CompanyName}}
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h4 class="mb-0">Users</h4>
+                                    <ng-container *ngFor="let ss of _LstUsers">
+                                        <code *ngIf="(ss.isChecked == true)">{{ss.FromUser}},</code>
+                                    </ng-container>
+                                    <div class="kt-nav__separator"></div>
+                                    <div class="height-scroll">
+                                        <label *ngFor="let ss of _LstUsers|filter:txtSearch" class="kt-checkbox kt-checkbox--info">
+                                            <input type="checkbox" name="userschk" value="{{ss.FromUserId}}"
+                                                [checked]="ss.isChecked" (change)="onuserchange($event)">
+                                            {{ss.FromUser}}
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="kt-nav__separator"></li>
+                        <li class="px-4">
+                            <input type="hidden" id="hdnFilterText">
+                            <input type="hidden" id="hdnFilterOrderType">
+                            <a class="btn btn-info mr-2 text-white btn-xs" (click)="FiltersData()">Filter</a>
+                            <a class="btn btn-outline-info btn-xs text-dark-75" (click)="closedataloadSettings()">Close</a>
+                        </li>
+                    </ul>
+                </div>
+            </div> -->
+            <!-- <button (click)="ClearFilters()" class="btn btn-hvr" data-toggle="kt-tooltip" data-skin="dark" title="Clear Filters">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                    role="img" font-size="1.5rem" class="iconify iconify--mdi" width="1em" height="1em"
+                    viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M2 12a9 9 0 0 0 9 9c2.39 0 4.68-.94 6.4-2.6l-1.5-1.5A6.706 6.706 0 0 1 11 19c-6.24 0-9.36-7.54-4.95-11.95C10.46 2.64 18 5.77 18 12h-3l4 4h.1l3.9-4h-3a9 9 0 0 0-18 0Z">
+                    </path>
+                </svg>
+                <span class="label-hidden">Reload</span>
+            </button> -->
+            <div class="br-line"></div>
+            <!-- <div class="kt-inbox__pages" data-toggle="kt-tooltip" data-skin="dark" title="Records per page">
+                <span class="kt-inbox__perpage">
+                    <ng-container *ngIf="activePage==1">
+                        {{activePage}} - {{_CurrentpageRecords}}
+                    </ng-container>
+                    <ng-container *ngIf="activePage!=1  && activePage!=LastPage">
+                        {{_CurrentpageRecords * (activePage-1) + 1}} - {{_CurrentpageRecords * activePage}}
+                    </ng-container>
+                    <ng-container *ngIf="activePage == LastPage">
+                        {{lastPagerecords * (activePage-1) + 1}} - {{lastPagerecords * (activePage-1) +
+                        _CurrentpageRecords}}
+                    </ng-container>
+                    of {{TotalRecords}}
+                </span>
+            </div> -->
+            <div class="kt-inbox__pages" data-toggle="kt-tooltip" data-skin="dark" id="Recordsperpage">
+                <span class="kt-inbox__perpage">
+                    <ng-container *ngIf="activePage==1">
+                        {{activePage}} - {{_CurrentpageRecords}}
+                    </ng-container>
+                    <ng-container *ngIf="activePage!=1 && activePage!=LastPage">
+                        {{_CurrentpageRecords * (activePage-1) + 1}} - {{_CurrentpageRecords * activePage}}
+                    </ng-container>
+                    <ng-container *ngIf="activePage ==LastPage">
+                        {{lastPagerecords * (activePage-1) + 1}} - {{lastPagerecords * (activePage-1) +
+                        _CurrentpageRecords}}
+                    </ng-container>
+                    <span class="en-of"> of {{TotalRecords}}</span>
+                    <span class="ar-main-of" style="display: none;"><span class="of"> - </span> {{TotalRecords}}</span>
+                </span>
+            </div>
+            <span id="Previosepage" [ngClass]="(activePage == 1)?'page-item paginationdisable previous':'page-item previous'">
+                <button [ngClass]="(activePage == 1)?'paginationpointerdisable':''"
+                    (click)="onClickPage(activePage - 1)" class="p-0 btn" data-toggle="kt-tooltip"
+                    [disabled]="activePage==1" data-skin="dark" >
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        aria-hidden="true" role="img" font-size="1.5rem" class="iconify iconify--mdi" width="1em"
+                        height="1em" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"></path>
+                    </svg>
+                </button>
+                <!-- <button  [ngClass]="(activePage == 1)?'paginationpointerdisable':''" (click)="onClickPage(activePage - 1)" class="kt-inbox__icon" data-toggle="kt-tooltip" [disabled]="activePage==1" data-skin="dark" title="Previose page">
+                        <i class="flaticon2-left-arrow"></i>
+                </button> -->
+            </span>
+            <span [ngClass]="(_CurrentpageRecords < 30)?'page-item paginationdisable next':'page-item next'">
+                <button [ngClass]="(_CurrentpageRecords < 30)?'paginationpointerdisable':''"
+                    (click)="onClickPage(activePage + 1)" class="btn p-0" data-toggle="kt-tooltip"
+                    [disabled]="_CurrentpageRecords<30" data-skin="dark" id="Nextpage">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        aria-hidden="true" role="img" font-size="1.5rem" class="iconify iconify--mdi" width="1em"
+                        height="1em" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M8.59 16.58L13.17 12L8.59 7.41L10 6l6 6l-6 6l-1.41-1.42Z"></path>
+                    </svg>
+                </button>
+                <!-- <button [ngClass]="(_CurrentpageRecords < 30)?'paginationpointerdisable':''" (click)="onClickPage(activePage + 1)" class="kt-inbox__icon" data-toggle="kt-tooltip" [disabled]="_CurrentpageRecords<30" data-skin="dark" title="Next page">
+                        <i class="flaticon2-right-arrow"></i>
+                </button> -->
+            </span>
+        </div>
+    </div>
+</div>
+<div class="kt-portlet__body kt-portlet__body--fit-x py-0 scroll-y">
+    <div class="kt-inbox__items" data-type="inbox">
+        <div *ngFor="let ss of _LstToMemos" class="mb_1" id="mailid_{{ss.MailId}}">
+            <div class="pln-br">
+                <div class="plain_border_left_true">
+                    <div data-id="MemoId_{{ss.MailId}}" data-type="inbox"
+                        [className]="ss.MailView == true ? 'kt-inbox__item py-2' : 'kt-inbox__item py-2'">
+                        <div class="kt-inbox__info">
+                            <div class="kt-inbox__actions d-none">
+                                <label class="kt-checkbox kt-checkbox--single kt-checkbox--tick kt-checkbox--brand">
+                                    <input type="checkbox" id="checkbox1" [(ngModel)]="ss.checked"
+                                        (change)="Singleselectcheckbox(ss.MailId,ss.checked)"
+                                        [ngModelOptions]="{standalone: true}">
+                                    <span></span>
+                                </label>
+                                <!-- <app-favorite [favObj]="ss"></app-favorite> -->
+                                <!-- <div (click)="ChangeFavoriteValue(ss.Favorite,ss.MailId)" [className]="ss.Favorite == true ? 'kt-inbox__icon kt-inbox__icon--on kt-inbox__icon--light'
+                                : 'kt-inbox__icon kt-inbox__icon--off kt-inbox__icon--light'" data-toggle="kt-tooltip" data-skin="dark" data-placement="right" title="Favorite">
+                                              <i class="flaticon-star"></i>
+                                          </div> -->
+                            </div>
+                            <div class="kt-inbox__sender d-none">
+                                <span class="kt-media kt-media--sm kt-media--dark">
+                                    <img class="rounded-circle" *ngIf="ss.UserProfile =='NA'"
+                                        src="assets/media/icons/user2.png">
+                                    <img class="rounded-circle" *ngIf="ss.UserProfile !='NA'"
+                                        src="https://yrglobaldocuments.blob.core.windows.net/documents/{{ss.UserProfile}}">
+                                </span>
+                            </div>
+                        </div>
+                        <div (click)="gotoMemoDetailsV2('Memo/Details',ss.MailId,ss.ReplyId)" class="kt-inbox__details">
+                            <div class="kt-inbox__message flex-wrap">
+                                <span class="kt-inbox__user_name d-none"> {{ss.FromUser}}
+                                    <small *ngIf="(ss.Attachment)" class="attchmt">
+                                        <i class="fa fa-paperclip"></i>
+                                    </small>
+                                    <a title="Reply" *ngIf="(ss.IsMain==false)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" viewBox="0 0 16 16" class="">
+                                            <path _ngcontent-xfs-c420=""
+                                                d="M8.098 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.74 8.74 0 0 0-1.921-.306 7.404 7.404 0 0 0-.798.008h-.013l-.005.001h-.001L8.8 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L4.114 8.254a.502.502 0 0 0-.042-.028.147.147 0 0 1 0-.252.497.497 0 0 0 .042-.028l3.984-2.933zM9.3 10.386c.068 0 .143.003.223.006.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96v-.667z">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                    <small *ngIf="(ss.IsConfidential)" class="kt-confidential"><span
+                                            class="svg-icon svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Communication/Mail-locked.svg-->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
+                                                viewBox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <rect x="0" y="0" width="15" height="15" />
+                                                    <path
+                                                        d="M12.9835977,18 C12.7263047,14.0909841 9.47412135,11 5.5,11 C4.98630124,11 4.48466491,11.0516454 4,11.1500272 L4,7 C4,5.8954305 4.8954305,5 6,5 L20,5 C21.1045695,5 22,5.8954305 22,7 L22,16 C22,17.1045695 21.1045695,18 20,18 L12.9835977,18 Z M19.1444251,6.83964668 L13,10.1481833 L6.85557487,6.83964668 C6.4908718,6.6432681 6.03602525,6.77972206 5.83964668,7.14442513 C5.6432681,7.5091282 5.77972206,7.96397475 6.14442513,8.16035332 L12.6444251,11.6603533 C12.8664074,11.7798822 13.1335926,11.7798822 13.3555749,11.6603533 L19.8555749,8.16035332 C20.2202779,7.96397475 20.3567319,7.5091282 20.1603533,7.14442513 C19.9639747,6.77972206 19.5091282,6.6432681 19.1444251,6.83964668 Z"
+                                                        fill="#000000" />
+                                                    <path
+                                                        d="M8,17 C8.55228475,17 9,17.4477153 9,18 L9,21 C9,21.5522847 8.55228475,22 8,22 L3,22 C2.44771525,22 2,21.5522847 2,21 L2,18 C2,17.4477153 2.44771525,17 3,17 L3,16.5 C3,15.1192881 4.11928813,14 5.5,14 C6.88071187,14 8,15.1192881 8,16.5 L8,17 Z M5.5,15 C4.67157288,15 4,15.6715729 4,16.5 L4,17 L7,17 L7,16.5 C7,15.6715729 6.32842712,15 5.5,15 Z"
+                                                        fill="#000000" opacity="0.9" />
+                                                </g>
+                                            </svg>
+                                            <!--end::Svg Icon--></span> confidential </small>
+                                </span>
+                                <span class="kt-inbox__subject sub-subject w-100 d-flex flex-wrap">
+                                    <span class="kt-inbox__subject w-100">{{ ss.Subject }}</span>
+                                    <span class="kt-inbox__subject w-100" *ngIf="ss.Subject!=ss.Title">
+                                        <small class="sub-replay-svg">
+                                            <svg xmlns:dc="http://purl.org/dc/elements/1.1/"
+                                                xmlns:cc="http://creativecommons.org/ns#"
+                                                xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                                                xmlns:svg="http://www.w3.org/2000/svg"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                                                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+                                                version="1.1" x="0px" y="0px" viewBox="0 0 100 100">
+                                                <g transform="translate(0,-952.36218)">
+                                                    <path
+                                                        style="text-indent:0;text-transform:none;direction:ltr;block-progression:
+                                                    tb;baseline-shift:baseline;color:#000000;enable-background:accumulate;"
+                                                        d="m 43.8125,977.2284 a 2.1493567,1.8722565 0 0 0 -1.9375,1.85451 l 0,6.03501 -18.875,0
+                                                     c -9.383406,0 -17,7.66101 -17,17.09918 0,9.4382 7.616594,17.0992 17,17.0992 l 7,0 a 2.0002,2.0118724
+                                                      0 1 0 0,-4.0233 l -7,0 c -7.236594,0 -13,-5.797 -13,-13.0759 0,-7.27884 5.763406,-13.07584 13,-13.07584 l 18.875,0
+                                                       0,6.03502 a 2.1493567,1.8722565 0 0 0 0,0.18859 2.1493567,1.8722565 0 0 0 3.1875,1.44589 l 16,-8.04668 a 2.1493567,1.8722565
+                                                        0 0 0 0,-3.26897 l -16,-8.04668 a 2.1493567,1.8722565 0 0 0 -1.25,-0.22003 z m 2.3125,5.09204 9.5625,4.80915 -9.5625,4.80915 
+                                                        0,-9.6183 z m 23.6875,2.79748 A 2.0021961,2.0138801 0 1 0 70,989.14126 l 7,0 c 7.236594,0 13,5.79705 13,13.07584 0,7.2789
+                                                         -5.763406,13.0759 -13,13.0759 l -18.875,0 0,-6.035 a 2.1493567,1.8722565 0 0 0 0,-0.1886 2.1493567,1.8722565 0 0 0 -3.1875,
+                                                         -1.4459 l -16,8.0467 a 2.1493567,1.8722565 0 0 0 0,3.2689 l 16,8.0467 a 2.1493567,1.8722565 0 0 0 3.1875,-1.6345 
+                                                         l 0,-6.035 18.875,0 c 9.383406,0 17,-7.661 17,-17.0992 0,-9.43814 -7.616594,-17.09918 -17,-17.09918 
+                                                         l -7,0 a 2.0002,2.0118724 0 0 0 -0.1875,0 z m -15.9375,27.37758 0,9.6183 -9.5625,-4.8091 9.5625,
+                                                         -4.8092 z" fill="#000000" fill-opacity="1" stroke="none"
+                                                        marker="none" visibility="visible" display="inline"
+                                                        overflow="visible" />
+                                                </g>
+                                            </svg></small>
+                                        {{ ss.Title }}</span>
+                                </span>
+                            </div>
+                            <div class="kt_inde_memo_msg" [innerHTML]="ss.Matter">
+                            </div>
+
+                            <div class="kt-inbox__labels d-none">
+                                <ng-container *ngIf="ss.MemoType=='General'">
+                                    <span
+                                        class="kt-inbox__label kt-badge kt-badge--unified-info kt-badge--bold kt-badge--inline">
+                                        {{ ss.MemoType }}
+                                    </span>
+                                </ng-container>
+                                <ng-container *ngIf="ss.MemoType=='Approval'">
+                                    <span
+                                        class="kt-inbox__label kt-badge kt-badge--unified-success kt-badge--bold kt-badge--inline">
+                                        {{ ss.MemoType }}
+                                    </span>
+                                </ng-container>
+
+                                <span *ngIf="ss.Status=='Reply Required'"
+                                    class="kt-inbox__label kt-badge kt-badge--unified-brand kt-badge.kt-badge-light-bold kt-badge--inline">
+                                    {{ss.Status}}
+                                </span>
+                                <span *ngIf="ss.Status=='Approval Pending'"
+                                    class="kt-inbox__label kt-badge kt-badge--unified-brand kt-badge.kt-badge-light-bold kt-badge--inline">
+                                    {{ss.Status}}
+                                </span>
+                                <span *ngIf="ss.Status=='Expired'"
+                                    class="kt-inbox__label kt-badge kt-badge--unified-brand kt-badge.kt-badge-light-bold kt-badge--inline">
+                                    {{ss.Status}}
+                                </span>
+                                <span *ngIf="ss.Status=='Request Pending'"
+                                    class="kt-inbox__label kt-badge kt-badge--unified-brand kt-badge.kt-badge-light-bold kt-badge--inline">
+                                    {{ss.Status}}
+                                </span>
+                                <span *ngIf="ss.Status=='UnderProcess'"
+                                    class="kt-inbox__label kt-badge kt-badge--unified-brand kt-badge.kt-badge-light-bold kt-badge--inline">
+                                    {{ss.Status}}
+                                </span>
+                                <span
+                                    class="kt-inbox__label kt-badge kt-badge--unified-primary kt-badge.kt-badge-light-bold kt-badge--inline">
+                                    {{ ss.FromUser }}
+                                </span>
+
+                                <span
+                                    class="kt-inbox__label kt-badge kt-badge--unified-info kt-badge.kt-badge-light-bold kt-badge--inline d-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        aria-hidden="true" role="img" font-size="1.5rem" width="1em" height="1em"
+                                        viewBox="0 0 24 20">
+                                        <path fill="currentColor"
+                                            d="M18 16h-4v2h4v2l3-3l-3-3v2M11 4C8.8 4 7 5.8 7 8s1.8 4 4 4s4-1.8 4-4s-1.8-4-4-4m0 2c1.1 0 2 .9 2 2s-.9 2-2 2s-2-.9-2-2s.9-2 2-2m0 7c-2.7 0-8 1.3-8 4v3h9.5c-.3-.6-.4-1.2-.5-1.9H4.9V17c0-.6 3.1-2.1 6.1-2.1c.5 0 1 .1 1.5.1c.3-.6.6-1.2 1.1-1.7c-1-.2-1.9-.3-2.6-.3">
+                                        </path>
+                                    </svg>
+
+                                    Handover
+                                </span>
+
+                                <span id="i_{{ss.MailId}}"
+                                    [ngClass]="(ss.IsTag==true)?'kt-inbox__label kt-badge kt-badge--unified-hideskin kt-badge.kt-badge-light-bold kt-badge--inline':'kt-inbox__label kt-badge kt-badge--unified-hideskin kt-badge.kt-badge-light-bold kt-badge--inline d-none'">
+                                    <i class="fa fa-tag"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="kt-widget__details">
+                            <div class="kt-section__content kt-section__content--solid">
+                                <div class="kt-media-group">
+                                    <ng-container *ngFor="let _icons of ss.UserIcons ; let i = index">
+                                        <ng-container *ngIf="i<3">
+                                            <a class="kt-media kt-media--sm kt-media--circle" data-toggle="kt-tooltip"
+                                                data-skin="brand" data-placement="top" title=""
+                                                data-original-title="John Myer">
+                                                <ng-container *ngIf="_icons.UserHeaderThumbnail=='NA'">
+                                                    <img src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/user2.png"
+                                                        alt="image">
+                                                </ng-container>
+                                                <ng-container *ngIf="_icons.UserHeaderThumbnail!='NA'">
+                                                    <img src="https://yrglobaldocuments.blob.core.windows.net/documents/{{_icons.UserHeaderThumbnail}}"
+                                                        alt="image">
+                                                </ng-container>
+                                            </a>
+                                        </ng-container>
+                                    </ng-container>
+                                    <a *ngIf="ss.UserIcons.length > 3" class="kt-media kt-media--sm kt-media--circle"
+                                        data-toggle="kt-tooltip" data-skin="brand" data-placement="top" title=""
+                                        data-original-title="Micheal York">
+                                        <span>{{ss.UserIcons.length - 3}}+</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div (click)="gotoMemoDetailsV2('Memo/Details',ss.MailId,ss.ReplyId)"
+                            class="kt-inbox__datetime">
+                            {{ ss.MemoDate }}
+                        </div>
+                        <div class="memohover memohover-sm d-none">
+                            <div class="memohover_icon svg-icn" (click)="$event.stopPropagation();">
+                                <span title="Delete" (click)="deletememo1(ss.MailId)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        aria-hidden="true" role="img" font-size="1.5rem" class="iconify iconify--mdi"
+                                        width="1em" height="1em" viewBox="0 0 24 24">
+                                        <path fill="currentColor"
+                                            d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12M8 9h8v10H8V9m7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5Z">
+                                        </path>
+                                    </svg>
+                                </span>
+                            </div>
+                            <ng-container *ngIf="ss.MemoSource=='TO'">
+                                <div class="memohover_icon svg-icn">
+                                    <span title="Delete" (click)="deletememo1(ss.MailId)">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                                            font-size="1.5rem" class="iconify iconify--mdi" width="1em" height="1em"
+                                            viewBox="0 0 24 24">
+                                            <path fill="currentColor"
+                                                d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12M8 9h8v10H8V9m7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5Z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="ss.MemoSource=='CC'">
+                                <div class="memohover_icon svg-icn">
+                                    <span (click)="deletememo1(ss.MailId)" title="Delete">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                                            font-size="1.5rem" class="iconify iconify--mdi" width="1em" height="1em"
+                                            viewBox="0 0 24 24">
+                                            <path fill="currentColor"
+                                                d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12M8 9h8v10H8V9m7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5Z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </ng-container>
+                            <!-- <ng-container *ngIf="ss.MailView==true">
+                                <div class="memohover_icon svg-icn">
+                                    <i (click)="UpdateMailView(ss.MailId,false)" title="Mark as unread" class="fa fa-envelope"></i>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="ss.MailView==false">
+                                <div class="memohover_icon svg-icn">
+                                    <i (click)="UpdateMailView(ss.MailId,true)" title="Mark as read" class="fa fa-envelope-open"></i>
+                                </div>
+                            </ng-container> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="_LstToMemos.length==0" class="text-center py-4" style="color: lightgrey">
+            <img src="assets/media/Img/No Memo Found 01.png">
+            <h3 class="kt-blank-ttl"> {{ "Communication.Nosentmemomessage" | translate }} </h3>
+            <p class="kt-erorr-msg"> {{ "Communication.NotSentmemos" | translate }} </p>
+            <!-- <h4 style="font-size: 1.5rem;">{{_filtersMessage}}</h4>
+            <p> {{_filtersMessage2}}</p> -->
+
+        </div>
+    </div>
+</div>
+<div class="fltrs-dropdown" id="fltrs-drop">
+    <div class="main-card place-card">
+        <div class="main-card_body">
+            <div class="w-100">
+                <ul class="kt-nav">
+                    <!-- <li class="kt-nav__head d-flex justify-content-between">
+                        <div>Custom Settings</div>
+                    </li> -->
+                    <div class="form-group mb-2 d-none">
+                        <label for="from">From</label>
+                        <input type="text" class="form-control" id="from" placeholder="">
+                    </div>
+                    <div class="form-group mb-2">
+                        <mat-form-field class="example-chip-list">
+                            <mat-label>To:</mat-label>
+                            <mat-chip-list #chipListAddUsers aria-label="User selection">
+                                <mat-chip *ngFor="let item of AddNewUserValues;" class="Data_chip_kt"
+                                    (removed)="RemoveAddUser(item)">
+                                    <span *ngIf="item.UserInboxThumbnail=='NA'" class="user-ic-vc">
+                                        <svg fill="#000000" width="64px" height="64px" viewBox="0 0 16 16"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                stroke-linejoin="round"></g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <g>
+                                                    <path
+                                                        d="M10.31,9.12H5.5A4.52,4.52,0,0,0,1,13.62,2.34,2.34,0,0,0,1,14H14.78a2.34,2.34,0,0,0,0-.38A4.51,4.51,0,0,0,10.31,9.12ZM8,7.88A3.94,3.94,0,1,0,4.06,3.94,3.94,3.94,0,0,0,8,7.88Z">
+                                                    </path>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </span>
+                                    <span *ngIf="item.UserInboxThumbnail!='NA'" class="user-ic-vc">
+                                        <img
+                                            src="https://yrglobaldocuments.blob.core.windows.net/documents/{{item.UserInboxThumbnail}}">
+                                    </span> {{item.UserName}}
+                                    <button matChipRemove [attr.aria-label]="'remove ' + item.UserName">
+                                        <mat-icon>cancel</mat-icon>
+                                    </button>
+                                </mat-chip>
+                            </mat-chip-list>
+                            <div class="d-flex">
+                                <input placeholder="Select To from here" #Userfilter
+                                    [matChipInputFor]="chipListAddUsers" id="txtsearchAddUsers"
+                                    [matAutocomplete]="autoAddsentUser" (input)="filterAddUsers($event.target.value)"
+                                    #inputField3 />
+                                <mat-icon class="curser-pointer" (click)="OpenAddUsers()" *ngIf="!isSelection_AddUsers"
+                                    (click)="openAutocompleteDrpDwnAddUser('AddUser_Dropdown')">add_circle_outline</mat-icon>
+                                <mat-icon class="curser-pointer" (click)="closePanelAddusers()"
+                                    *ngIf="isSelection_AddUsers"
+                                    (click)="closeAutocompleteDrpDwnAddUser('AddUser_Dropdown')">clear</mat-icon>
+                            </div>
+                            <mat-autocomplete #autoAddsentUser="matAutocomplete" (optionSelected)="_AddNewUsers($event)"
+                                aria-label="AddUser_Dropdown">
+                                <mat-option class="mat-font" *ngFor="let item of _UserList|filter:Userfilter.value"
+                                    [value]="item.ToUserId">
+                                    <mat-checkbox color="primary" name="item" [checked]="isSelectedAddusers(item)"
+                                        (change)="_AddNewUsers($event)">{{item.UserName}}</mat-checkbox>
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group mb-2">
+                        <mat-form-field class="example-full-width w-100 mt-3 Subject-input-Mt">
+                            <mat-label>Subject:</mat-label>
+                            <input type="text" name="Title" #Title="ngModel" [(ngModel)]="SentSearchSubject"
+                                [ngModelOptions]="{standalone: true}" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group mb-2">
+                        <mat-form-field class="example-full-width w-100 mt-3 Subject-input-Mt">
+                            <mat-label>Has the words:</mat-label>
+                            <input type="text" name="Title" #Title="ngModel" [(ngModel)]="Hasthewords"
+                                [ngModelOptions]="{standalone: true}" matInput>
+                        </mat-form-field>
+                    </div>
+                    <!-- <div class="kt-nav-filter-main d-none">
+                        <li class="kt-nav__item px-4">
+                            <div class="row">
+                                <div class="col-lg-4 filter-border-right">
+                                    <div class="dropdown">
+                                        <button class="btn btn-dropdown dropdown-toggle" type="button" id="dropdownStatusButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          Status
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownStatusButton">
+                                            <div class="height-scroll">
+                                                <label *ngFor="let ss of StatusJSON|filter:txtSearch" class="kt-checkbox kt-checkbox--info">
+                                                    <input type="checkbox" name="statuschk" value="{{ss.Status}}"
+                                                        [checked]="ss.isChecked" (change)="onstatuschange($event)">
+                                                    {{ss.Status}}
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="opts-flx">
+                                        <ng-container *ngFor="let ss of StatusJSON">
+                                            <div class="selectd-opts" *ngIf="(ss.isChecked == true)">
+                                                <div class="slt-div">
+                                                    <div class="opt-txt">
+                                                        {{ss.Status}}
+                                                    </div>
+                                                </div>
+                                                <div (click)="removeStatus(ss.Status,$event)" class="removeButton" aria-hidden="true">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="rmv-icn w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M6 18L18 6M6 6l12 12">
+                                                        </path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 filter-border-right">
+                                    <div class="dropdown">
+                                        <button class="btn btn-dropdown dropdown-toggle" type="button" id="dropdownCompanyButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Company
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownCompanyButton">
+                                            <div class="height-scroll">
+                                                <label *ngFor="let ss of CompanyListJSON|filter:txtSearch" class="kt-checkbox kt-checkbox--info">
+                                                    <input type="checkbox" name="companychk" value="{{ss.CompanyId}}"
+                                                        [checked]="ss.isCompanyChecked" (change)="oncompanychange($event)">
+                                                    {{ss.CompanyName}}
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="opts-flx">
+                                        <ng-container *ngFor="let ss of CompanyListJSON">
+                                            <div class="selectd-opts" *ngIf="(ss.isCompanyChecked == true)">
+                                                <div class="slt-div">
+                                                    <div class="opt-txt">
+                                                        {{ss.CompanyName}}
+                                                    </div>
+                                                </div>
+                                                <div (click)="removeCompany(ss.CompanyId,$event)" class="removeButton" aria-hidden="true">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="rmv-icn w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M6 18L18 6M6 6l12 12">
+                                                        </path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="dropdown">
+                                        <button class="btn btn-dropdown dropdown-toggle" type="button" id="dropdownUsersButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Users
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownUsersButton">
+                                            <div class="height-scroll">
+                                                <label *ngFor="let ss of UserListJSON|filter:txtSearch" class="kt-checkbox kt-checkbox--info">
+                                                    <input type="checkbox" name="userschk" value="{{ss.UserId}}"
+                                                        [checked]="ss.isUserChecked" (change)="onuserchange($event)">
+                                                    {{ss.FromUser}}
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="opts-flx">
+                                        <ng-container *ngFor="let ss of UserListJSON">
+                                            <div class="selectd-opts" *ngIf="(ss.isUserChecked == true)">
+                                                <div class="slt-div">
+                                                    <div class="opt-txt">
+                                                        {{ss.FromUser}}
+                                                    </div>
+                                                </div>
+                                                <div (click)="removeUser(ss.UserId,$event)" class="removeButton" aria-hidden="true">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="rmv-icn w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M6 18L18 6M6 6l12 12">
+                                                        </path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                    <li class="kt-nav__separator"></li> -->
+                    <div class="row">
+                        <div class="col-lg-4 filter-border-right">
+                            <div class="attachment">
+                                <mat-checkbox #Has_AttachmnetCheck="ngModel"
+                                    (ngModelChange)="onNgModelChangeAttachment($event)" name="Has_Attachmnet"
+                                    [(ngModel)]="Has_Attachmnet" [ngModelOptions]="{standalone: true}"> Has
+                                    Attachment</mat-checkbox>
+                                <!-- <label class="labelattach" for="hasattachment"> Has Attachment</label> -->
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="datdiv">
+                                <div class="datrange position-relative">
+                                    <input class="rangepic form-control" type="text" ngxDaterangepickerMd
+                                        [(ngModel)]="selected" [showCustomRangeLabel]="true"
+                                        [alwaysShowCalendars]="true" [ranges]="ranges" [linkedCalendars]="true"
+                                        [isInvalidDate]="isInvalidDate" [showClearButton]="true"
+                                        (datesUpdated)="datesUpdated($event)" placeholder="Date selection range" />
+                                    <i class="la la-calendar fs-2"></i>
+                                </div>
+                                <!-- <div class="datrange">
+                                    <label>
+                                        START
+                                    </label>
+                                        <input type="date" name="start"/>
+                                      
+                                </div>
+                                <span class="divider">-</span>
+                                <div class="datrange datrange2">
+                                    <label>
+                                      END
+                                  </label>
+                                      <input type="date" name="end" />
+                                    
+                              </div> -->
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="data-info">
+                        <a class="data-info-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon"
+                                style="width: 1em;height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;"
+                                viewBox="0 0 1024 1024" version="1.1">
+                                <path
+                                    d="M448 304c0-26.4 21.6-48 48-48h32c26.4 0 48 21.6 48 48v32c0 26.4-21.6 48-48 48h-32c-26.4 0-48-21.6-48-48v-32zM640 768h-256v-64h64v-192h-64v-64h192v256h64z">
+                                </path>
+                                <path
+                                    d="M512 0C229.216 0 0 229.216 0 512s229.216 512 512 512 512-229.216 512-512S794.784 0 512 0z m0 928C282.24 928 96 741.76 96 512S282.24 96 512 96s416 186.24 416 416-186.24 416-416 416z">
+                                </path>
+                            </svg>
+                            <span class="dat-info-content">No changes are saved in this custom settings</span>
+                        </a>
+                    </div>
+                    <li class="kt-nav__separator"></li>
+                </ul>
+            </div>
+
+
+
+            <div class="w-100 text-right">
+                <input type="hidden" id="hdnFilterText">
+                <input type="hidden" id="hdnFilterOrderType">
+                <button class="btn btn-sm btn-secondary mr-2" (click)="clse_fltrs()">Close</button>
+                <button class="btn btn-sm btn-secondary mr-2" (click)="clse_fltrs()">Clear Filters</button>
+                <button class="btn btn-sm btn-info" (click)="SentFilters()">Filter</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>{{_SelectedUserName}}</h1>
+<ng-container *ngIf="_ReplyList.length != 0">
+    <div id="scroll" class="kt-scroll scroll-dailog pr-3">
+        <div *ngFor="let item of _ReplyList" class="brdr-btm">
+            <div class="d-flex mt-3">
+                <mat-checkbox (change)="onChange(item.ReplyId)" value="{{item.ReplyId}}" class="example-margin flex-1" color="primary">
+                    {{item.DisplayName}}
+                </mat-checkbox>
+                <p class="text-right flex-1 font-bolder"> {{item.SentDate}} </p>
+            </div>
+            <p>{{item.Title}}</p>
+        </div>
+    </div>
+    <div class="my-2 text-center">
+        <span class=""> Note : If none of the replies are checked, then the user will not have below replies,
+            <br> but user can restore in memo
+        </span>
+    </div>
+</ng-container>
+<ng-container *ngIf="_ReplyList.length==0">
+    <span class=""> Note : No repies to restore,but user can restore in memo. </span>
+    <br>
+</ng-container>
+
+<div mat-dialog-actions class="float-right">
+    <button mat-stroked-button (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button [mat-dialog-close]="data.animal" color="primary" (click)="onYesClick()">Restore</button>
+</div>

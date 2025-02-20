@@ -1,0 +1,323 @@
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid side_view">
+    <div class="col-lg-12">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+            <h4 class="mb-2 pro-nm"> {{ "Masterform.Category" | translate }} </h4>
+        </div>
+
+        <div class="card ribbon-box">
+            <div class="card-header align-items-center d-flex py-3">
+                <div class="flex-1">
+                    <div class="search-bar">
+                        <input type="search" [(ngModel)]="SearchCategory" class="form-control search_clear" [placeholder]="PCSearch" aria-controls="">
+                        <a *ngIf="SearchCategory" class="close close-icn"><i (click)="ReBindData()" class="material-icons">close<i></i></i></a>
+                    </div>
+                </div>
+                <div class="flex-shrink-0">
+                    <button class="btn btn-sm btn-info" id="Category_add" (click)=" Category_add()">
+                        <i class="material-icons fs-4">add</i>
+                        {{ "Masterform.AddCategory" | translate }}
+                    </button>
+                </div>
+
+            </div>
+            <!-- <button mat-icon-button [matMenuTriggerFor]="appMenu">
+                <mat-icon>calendar_today</mat-icon>
+              </button> -->
+            <!-- <a (click)="daysdata()" class="btn btn-info">dates</a>
+            <mat-card class="demo-inline-calendar-card">
+                <div>
+                    <mat-calendar (dblclick)="doubleClick(1)" (selectedChange)="select($event)" [dateClass]="isSelected" [minDate]="minDate" [maxDate]="maxDate">
+                    </mat-calendar>
+                </div>
+            </mat-card>
+            <pre>
+                {{daysSelected|json}}
+            </pre>
+            <div>
+                <div class="list-msg-wrapper">
+                    <div class="msg-item-row"> Hi, i have some questions about this product. </div>
+                    <div class="msg-item-row"> What is the most favorited color in the world? </div>
+                    <div class="msg-item-row"> Bla bla bla bla bla</div>
+                </div>
+            </div> -->
+
+            <!-- <p>Selected date: {{selected}}</p> -->
+            <!-- <mat-menu>
+                <div (click)="$event.stopPropagation()">
+                    <mat-calendar opened="true" #calendar (selectedChange)="select($event,calendar)" [dateClass]="isSelected">
+                    </mat-calendar>
+                </div>
+            </mat-menu> -->
+            <div class="">
+                <div class="mb-0 table-responsive">
+                    <table class="table b-table">
+                        <thead>
+                            <tr>
+
+                                <th>{{ "Masterform.CategoryName" | translate }}</th>
+                                <th> {{ "Masterform.Note" | translate }}</th>
+                                <th>{{ "Masterform.Status" | translate }}</th>
+                                <th>{{ "Masterform.Action" | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngIf="(ObjCategory_data | filter : SearchCategory) as ObjCategory_data">
+                            <tr *ngFor="let item of ObjCategory_data|filter:SearchCategory">
+                                <td>
+                                    {{item.CategoryName}}
+                                </td>
+                                <td>
+                                    {{item.Description}}
+                                    <td [ngStyle]="{'color':item.IsActive=== true ? '#1dc9b7' : '#dc3545'}" (click)="UpdateStatus(item)">
+
+
+                                        <label *ngIf="item.IsActive" class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-success curser-pointer w-min-70">Active</label>
+                                        <label *ngIf="!item.IsActive" class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-danger curser-pointer w-min-70">Inactive</label>
+
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-outline btn-circle fs-5 btn-sm text-info px-0" (click)="Category_edit(item)">
+                                            <span class="mr-2">
+                                                <svg data-v-9a6e255c="" xmlns="http://www.w3.org/2000/svg" width="14px"
+                                                    height="14px" viewBox="0 0 24 24" fill="none" stroke="#2786fb"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="feather feather-edit">
+                                                    <path data-v-9a6e255c=""
+                                                        d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                                    <path data-v-9a6e255c=""
+                                                        d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                                </svg>
+                                            </span><span>Edit</span>
+                                        </a>
+                                    </td>
+                            </tr>
+                            <ng-container  *ngIf="ObjCategory_data.length === 0">
+                                <div class="d-flex-center kt-tb-error-box">
+                                    <div class="m-auto text-center">
+                                        <div class="svgs-1 kt-blank-msg">
+                                            <img src="assets/media/Img/No Category 06.png">
+                                         </div>
+                                          <h3 class="kt-blank-ttl"> {{ "Masterform.NoDataCompany" | translate }} </h3>
+                               <p class="kt-blank-msg"> {{ "Masterform.NocategoryList" | translate }} </p>                                     
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                        </tbody>
+                    </table>
+             
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="kt-aside-menu-overlay" (click)="closeInfo()"></div>
+
+<div id="addrck" class="wc-75 kt-quick-panel kt-quick-panel1 scroll-div">
+    <a id="kt_quick_panel_close_btn" class="kt-quick-panel__close" (click)="closeInfo()">
+        <i class="flaticon2-delete"></i>
+    </a>
+    <div id="kt_chat_content" class="kt-grid__item kt-grid__item--fluid kt-app__content">
+        <div class="kt-chat">
+            <div class="kt-portlet kt-portlet--head-lg kt-portlet--last">
+                <div class="kt-portlet__head">
+                    <div class="kt-chat__head">
+                        <div>
+                            <div class="kt-chat__label">
+                                <h4 class="mb-0" id="editrck"> Add </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__body py-1">
+
+                    <div class="tab-content">
+                        <div class="tab-pane d-flex flex-wrap justify-content-start align-items-baseline form-m">
+                            <div class="form-cus">
+                                <label class="form-label">{{ "Masterform.CategoryName" | translate }}</label>
+                                <span class="text-danger ml-1">*</span>
+                                <span id="EnterCategory" class="material-icons fs-4 float-right">
+                                    info_outline
+                                    </span>
+                                <div class="more_text1">
+                                    <!-- <div><i class="fas fa-info-circle mr-1"></i>Add details here
+                                    </div> -->
+                                </div>
+                                <input type="text" class="form-control" Id="checkSpc" [placeholder]="EntercategoryName" [(ngModel)]="CName" (change)="checkCategoryName()" (keyup)="TriggerLengthValidation()">
+                                <!-- <span style="color:red" [hidden]="MinSpecializationLength">
+                                    MinLength 3</span> -->
+                            </div>
+                            <div class="form-cus">
+                                <label class="form-label">{{ "Masterform.Status" | translate   }}</label>
+                                <div>
+                                    <mat-slide-toggle color="primary" [(ngModel)]="Inactive">
+                                    </mat-slide-toggle>
+                                </div>
+                            </div>
+                            <div class="form-cus">
+                                <label class="form-label">{{ "Masterform.Note" | translate }}</label>
+                                <textarea class="form-control" [placeholder]="EnterDescription" [(ngModel)]="note" class="form-control"></textarea>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task_act form-m">
+                        <div class="form-cus">
+                            <!-- <a id="btnSave" [disabled]="!MinSpecializationLength"
+                            class="btn btn-sm btn-info px-3 mt-2" style="display: block;"
+                            (click)="OnCreate()">
+                            Save
+                        </a>
+                        <a id="btnUpdate" (click)="OnCreate()"
+                            class="btn btn-sm btn-info px-3 mt-2"
+                            style="display: block;">Update</a>
+                        <a class="btn btn-sm btn-secondary px-3 ml-2 mt-2" (click)="Category_cl()">
+                            Cancel
+                        </a> -->
+                            <button [disabled]="!CName || !MinSpecializationLength" (click)="OnCreate()" class="btn btn-sm btn-info px-3 mt-2" *ngIf='!isShow'>
+                            {{ "Masterform.Save" | translate }}
+                        </button>
+                            <button (click)="OnCreate()" type="submit" class="btn btn-sm btn-info px-3 mt-2" *ngIf='isShow'>{{ "Masterform.Update" | translate }}</button>
+                            <button class="btn btn-sm btn-secondary px-3 ml-2 mt-2" (click)="Category_cl()">
+                            {{ "Masterform.Cancel" | translate }}
+                        </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_wrapper">
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+        <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+            <div class="col-lg-12">
+                <a mat-button color="primary" (click)="Panel_Hide_Show()" [hidden]="plus_btn">
+                    <mat-icon>add</mat-icon> Create New
+                </a>
+                <br><br>
+                <mat-accordion>
+                    <mat-expansion-panel [expanded]='f_firstPanel' [disabled]='!f_firstPanel'>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title style="color:#3f51b5;">
+                                Category Form
+                            </mat-panel-title>
+                            <mat-panel-description>
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <br>
+                        <form [formGroup]="CategoryFrmGroup" (ngSubmit)="OnCreate()">
+                            <div class="form-group">
+                                <div class="form-group col">
+                                    <label>Category Name</label>
+                                    <input type="text" formControlName="category" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.category.errors }" placeholder="Enter category" [(ngModel)]="service.formData.CategoryName" />
+                                    <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
+                                        <div *ngIf="f.category.errors.required">Category is Required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group col">
+                                    <label>Note</label>
+                                    <textarea formControlName="note" cols="50" rows="5" class="form-control" placeholder="Enter Note" [(ngModel)]="service.formData.Description" [ngClass]="{ 'is-invalid': submitted && f.note.errors }" class="form-control"></textarea>
+                                    <div *ngIf="submitted && f.note.errors" class="invalid-feedback">
+                                        <div *ngIf="f.note.errors.required">Note is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group col">
+                                    <label>Status</label><br>
+                                    <mat-slide-toggle color="primary" formControlName="status" [(ngModel)]="service.formData.IsActive">
+                                    </mat-slide-toggle>
+                                </div>
+                            </div>
+                            <mat-action-row>
+                                <button mat-button color="primary" type="submit" [disabled]="!CategoryFrmGroup.valid">{{BtnSubmit_TextChange}}</button>
+                                <button type="reset" class="btn btn-secondary" (click)="ResetForm()"><span
+                                        class="reset">Reset</span> |
+                                    <span class="back">Back</span> </button>
+                            </mat-action-row>
+                        </form>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- View Category -->
+<!-- 
+<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_wrapper">
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+        <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+            <div class="col-lg-12">
+                <mat-accordion>
+                    <mat-expansion-panel [expanded]='S_SecondPanel' [disabled]='!S_SecondPanel'>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Manage Category
+                            </mat-panel-title>
+                            <mat-panel-description>
+
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <span class="totalItems">Total items :<b> {{ObjCategory_data.length}}</b></span>
+                        <table datatable [dtOptions]="dtOptions" class="table table-bordered">
+                            <thead>
+                                <tr style="color:#3f51b5;">
+                                    <th>Category Name</th>
+                                    <th>Note</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let f1 of ObjCategory_data">
+                                   
+                                    <td>
+                                        {{f1.CategoryName}}
+                                    </td>
+                                    <td>
+                                        {{f1.Description}}
+                                    </td>
+                                    <td [ngStyle]="{'color':f1.IsActive=== true ? '#3f51b5' : 'red'}" (click)="UpdateStatus(f1)">
+                                        <div *ngIf="f1.IsActive">
+                                            Active
+                                            <button mat-mini-fab color="primary" class="btnActive">
+                                            </button>
+                                        </div>
+                                        <div *ngIf="!f1.IsActive">
+                                            <button mat-mini-fab color="warn" class="btnActive">
+                                            </button> In-Active
+                                           
+                                        </div>
+                                    </td>
+                                    <td (click)="populateForm(f1)">
+                                        <a class="table-row-action edit-action" mat-stroked-button color="primary">
+                                            <mat-icon>edit</mat-icon>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                  
+
+
+
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+               
+
+            </div>
+        </div>
+    </div>
+</div> -->

@@ -1,0 +1,278 @@
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid side_view">
+    <div class="col-lg-12">
+        <h4 class="mb-3 pro-nm">{{ "Masterform.Blocks" | translate }}</h4>
+        <div class="card mb-3 w-50" id="draggable">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="">
+                            <div class="form-group pl-0 mb-0">
+                                <label class="form-label"> {{ "Masterform.Warehouse" | translate }}</label><span class="text-danger ml-1">*</span>
+                                <ng-select (change)="OnBlocksChange($event)" [placeholder]="SelectWarehouse">
+                                    <ng-option *ngFor="let obj of service.ObjblocksList" [value]="obj.WareHouseId">
+                                        {{obj.WareHouseName}}
+                                    </ng-option>
+                                </ng-select>
+                                <div class="mt-1">
+                                    <h6 class=" txtm-cus mb-1 pt-1"><span>{{ "Masterform.Note" | translate }}: </span>  {{ "Masterform.BolckNote" | translate }} </h6>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card ribbon-box" id="kt_wrapper123">
+
+            <div class="card-header align-items-center d-flex py-3">
+                <div class="flex-1">
+                    <div class="search-bar">
+                        <input type="search" [(ngModel)]="BlockSearch" class="form-control search_clear"
+                            [placeholder]="BlockSearchs" aria-controls="">
+                        <a (click)="serachIconClear()" class="close close-icn"><i  *ngIf="BlockSearch" class="material-icons">close<i></i></i></a>
+                    </div>
+                </div>
+                <div class="flex-shrink-0">
+                    <button class="btn btn-sm btn-info fs-7" id="block_add" (click)="blockad_fun()"
+                        style="display: none;">
+                        <i class="material-icons fs-4">add</i>
+                        {{ "Masterform.AddBlock" | translate }}
+                    </button>
+                </div>
+            </div>
+
+            <div class="">
+                <div class="mb-0 table-responsive">
+                    <table class="table b-table">
+                        <thead>
+                            <tr style="color:#3f51b5;">
+                                <th>{{ "Masterform.Name" | translate }}</th>
+                                <th>{{ "Masterform.Description" | translate }} </th>
+                                <th>{{ "Masterform.Status" | translate }}</th>
+                                <th>{{"Masterform.Action" | translate }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngIf="(Objblocks_data|filter: BlockSearch) as Objblocks_data">
+                                <tr *ngFor="let f2 of Objblocks_data|filter:BlockSearch; let i=index">
+                                    <td>
+                                        {{f2.BlockName}}
+                                    </td>
+                                    <td>
+                                        {{f2.Description}}
+                                    </td>
+                                    <td [ngStyle]="{'color':f2.IsActive=== true ? '#1dc9b7' : '#dc3545'}"
+                                        (click)="UpdateStatus(f2)">
+
+                                        <div *ngIf="f2.IsActive"
+                                            class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-success curser-pointer w-min-70">
+                                            Active
+                                        </div>
+                                        <div *ngIf="!f2.IsActive"
+                                            class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-danger curser-pointer w-min-70">
+                                            In-Active
+                                        </div>
+                                    </td>
+                                    <td (click)="populateForm(f2)">
+                                        <a class="btn btn-outline btn-circle fs-5 btn-sm text-info px-0">
+                                            <span class="mr-2">
+                                                <svg data-v-9a6e255c="" xmlns="http://www.w3.org/2000/svg" width="14px"
+                                                    height="14px" viewBox="0 0 24 24" fill="none" stroke="#2786fb"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="feather feather-edit">
+                                                    <path data-v-9a6e255c=""
+                                                        d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
+                                                    </path>
+                                                    <path data-v-9a6e255c=""
+                                                        d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
+                                                    </path>
+                                                </svg>
+                                            </span><span>Edit</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <ng-container *ngIf="Objblocks_data.length==0">
+                                    
+                                    <div class="d-flex-center kt-tb-error-box">
+                                        <div class="m-auto text-center">
+                                            <div class="svgs-1 kt-error-img ">
+                                            <img src="assets/media/Img/No Blocks.png">
+                                             </div>
+                                              <h3 class="kt-blank-ttl"> {{"Masterform.NoBlockData" |  translate }} </h3>
+                                   <p class="kt-blank-msg"> {{"Masterform.NofoundBlock" | translate }} </p>
+                                            <!-- <div class="bnk-txt">
+                                                <h3 class="blank-txt">No Results Found</h3>
+            
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                </ng-container>
+                        </tbody>
+                    </table>
+                    
+                </div>
+                <!-- <div class="card-footer">
+                    <div class="page-div p-1 d-flex-center">
+                    <div class="card-footer-left">
+                      <span class="text-muted">
+                        <span class="pagination__desc">
+                          <ng-container *ngIf="activePage==1">
+                              {{activePage}} - {{_CurrentpageRecords}}
+                          </ng-container>
+                          <ng-container *ngIf="activePage!=1">
+                              {{_CurrentpageRecords * (activePage-1) + 1}} - {{_CurrentpageRecords * activePage}}
+                          </ng-container>
+                          of {{TotalRecords}}
+                          </span>
+                      </span>
+                    </div>
+                      <div class="card-footer-right d-flex">
+                        <nav aria-label="items">
+                            <ul class="pagination m-0" >
+                              <li class="page-item" [ngClass]="(NextPage == false)?'page-item paginationdisable':'page-item'">
+                                <span [ngClass]="(NextPage == false)?'paginationpointerdisable':''"   role="button" class="page-link" aria-label="null page" tabindex="-1" aria-disabled="true" (click)="onClickPage(1)">
+                                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24" width="1em" class="svg-icon--material svg-icon" data-name="Material--FirstPage">
+                                    <path d="M24 0v24H0V0h24z" fill="none" opacity="0.87"></path>
+                                    <path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6 1.41-1.41zM6 6h2v12H6V6z"></path>
+                                  </svg>
+                                </span>
+                              </li>
+                              <li class="page-item"  [ngClass]="(activePage == 1)?'page-item paginationdisable':'page-item'" >
+                                <span  [ngClass]="(activePage == 1)?'paginationpointerdisable':''" role="button" class="page-link" aria-label="First Page" tabindex="-1" aria-disabled="true"  (click)="onClickPage(activePage - 1)">
+                                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24" width="1em" class="svg-icon--material svg-icon" data-name="Material--ChevronLeft">
+                                    <path d="M0 0h24v24H0V0z" fill="none"></path>
+                                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12l4.58-4.59z"></path>
+                                  </svg>
+                                </span>
+                              </li>
+                              <li class="page-item active">
+                                <span role="button" class="page-link" aria-label="1 page">{{activePage}}</span>
+                              </li>
+                              <li class="page-item" *ngFor="let iteam of data">
+                                <span role="button" class="page-link" aria-label="2 page">{{activePage+1}}</span>
+                              </li>
+                              <li [ngClass]="(_CurrentpageRecords < 10)?'page-item paginationdisable':'page-item'">
+                                <span  [ngClass]="(_CurrentpageRecords < 10)?'paginationpointerdisable':''" role="button" class="page-link" aria-label="Last Page" (click)="onClickPage(activePage + 1)" >
+                                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24" width="1em" class="svg-icon--material svg-icon" 
+                                  data-name="Material--ChevronRight">
+                                    <path d="M0 0h24v24H0V0z" fill="none"></path>
+                                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z"></path>
+                                  </svg>
+                                </span>
+                              </li>
+                              <li class="page-item">
+                                <span role="button" class="page-link" aria-label="null page" (click)="onClickPage(LastPage)">
+                                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24" width="1em" class="svg-icon--material svg-icon" data-name="Material--LastPage">
+                                    <path d="M0 0h24v24H0V0z" fill="none" opacity="0.87"></path>
+                                    <path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6-1.41 1.41zM16 6h2v12h-2V6z"></path>
+                                  </svg>
+                                </span>
+                              </li>
+                            </ul>
+                          </nav>
+      
+                      </div>
+                  </div>
+                  </div> -->
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<div class="kt-aside-menu-overlay" (click)="closeInfo()"></div>
+
+<div id="kt_wrapper122" class="wc-75 kt-quick-panel kt-quick-panel1 scroll-div">
+    <a id="kt_quick_panel_close_btn" class="kt-quick-panel__close" (click)="closeInfo()">
+        <i class="flaticon2-delete"></i>
+    </a>
+    <div id="kt_chat_content" class="kt-grid__item kt-grid__item--fluid kt-app__content">
+        <div class="kt-chat">
+            <div class="kt-portlet kt-portlet--head-lg kt-portlet--last">
+                <div class="kt-portlet__head">
+                    <div class="kt-chat__head">
+                        <div>
+                            <div class="kt-chat__label">
+                                <h4 class="mb-0" id="editrck"> Add </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__body py-1">
+
+                    <div class="tab-content">
+                        <div class="tab-pane d-flex flex-wrap justify-content-start align-items-baseline form-m">
+                            <div class="form-cus">
+                                <label class="form-label">{{ "Masterform.BlockName" | translate }}</label><span class="text-danger ml-1">*</span>
+
+                                <span id="myButton" class="material-icons fs-4 float-right">
+                                    info_outline
+                                </span>
+
+                                <!-- <div class="more_text1"><div><i class="fas fa-info-circle mr-1"></i>Please mention Block Name</div></div> -->
+                                <input type="text" class="form-control" autocomplete="off" minlength="3" maxlength="50"
+                                    [placeholder]="EnterBlockName" [(ngModel)]="BName" id="BlocksName" value=""
+                                    (keyup)="TriggerLengthValidation()" />
+                                <!-- <span style="color:red" [hidden]="MinblocksLength"> Min Length
+                                    3</span> -->
+                            </div>
+
+                            <div class="form-cus">
+                                <label class="form-label">{{ "Masterform.Status" | translate }}</label>
+                                <div class="">
+                                    <mat-slide-toggle color="primary" id="yourstatus" [(ngModel)]="status">
+                                    </mat-slide-toggle>
+                                </div>
+                            </div>
+                            <div class="form-cus">
+                                <label class="form-label">{{ "Masterform.Note" | translate }}</label>
+                                <!-- <div class="more_text1"><div><i class="fas fa-info-circle mr-1"></i>Describe Block</div></div> -->
+                                <textarea class="form-control" [placeholder]="EnterNote" [(ngModel)]="note"
+                                    class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task_act form-m">
+                        <div class="form-cus">
+                            <button *ngIf='!isShow' [disabled]="!BName||!MinblocksLength" (click)="OnCreate()"
+                                class="btn btn-sm btn-info px-3 mt-2 mr-2">{{ "Masterform.Submit" | translate }}</button>
+                            <button type="submit" *ngIf='isShow' class="btn btn-sm btn-info px-3 mt-2"
+                                (click)="OnCreate()">{{ "Masterform.Update" |translate  }}</button>
+                            <button class="btn btn-sm btn-secondary px-3 ml-2 mt-2" (click)="onRest()" id="button">
+                                {{ "Masterform.Cancel" | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<div id="colorpad" style="width:300px;height:300px;background-color:#000">
+
+</div>
+<button (click)="setRandomColor()">Random Color</button> -->

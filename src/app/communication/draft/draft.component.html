@@ -1,0 +1,163 @@
+<div class="kt-portlet__head">
+    <div class="kt-inbox__toolbar kt-inbox__toolbar--extended">
+        <div class="kt-inbox__actions kt-inbox__actions--expanded">
+
+            <!-- <div class="kt-inbox__search">
+                <div class="input-group">
+                    <input  type="text" name="Search" [(ngModel)]="searchText" class="form-control" placeholder="Search" autocomplete="off">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <a>
+                                <i class="fa fa-search"></i>
+                                </a>
+                        </span>
+                    </div>
+                </div>
+            </div> -->
+            <div id="search-grp" class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text pr-0">
+                        <button type="button" role="button" id="srch-btn" data-tooltip="Search" aria-label="Search"
+                            class="srch-btns pr-0">
+                            <svg focusable="false" height="24px" viewBox="0 0 24 24" width="24px"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20.49,19l-5.73-5.73C15.53,12.2,16,10.91,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.41,0,2.7-0.47,3.77-1.24L19,20.49L20.49,19z M5,9.5C5,7.01,7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14S5,11.99,5,9.5z">
+                                </path>
+                                <path d="M0,0h24v24H0V0z" fill="none"></path>
+                            </svg>
+                        </button>
+                    </span>
+                </div>
+                <input id="txtSearch" [(ngModel)]="searchText" type="text" (keyup.enter)="Search()"
+                    (click)="Searchighlight()" (keyup)="clearshow()" autocomplete="off" class="form-control"
+                    [placeholder]="Draftsearch">
+                <button class="clear-icon kt-search-clr-ic" *ngIf="searchText" (click)="clearSearch()"> <i
+                        class="fa fa-times"></i> </button>
+                <div class="input-group-append d-none">
+                    <span class="input-group-text">
+                        <button type="button" role="button" id="clrr-btn" data-tooltip="Clear Search"
+                            aria-label="Clear Search" class="srch-btns mr-2">
+                            <svg focusable="false" height="24px" viewBox="0 0 24 24" width="24px"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                                </path>
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                            </svg>
+                        </button>
+                        <button type="button" role="button" id="filtr-btn" data-tooltip="Search options"
+                            aria-label="Advanced search options" class="srch-btns">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path
+                                    d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z">
+                                </path>
+                            </svg>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="kt-portlet__head px-4">
+    <div class="kt-inbox__toolbar kt-inbox__toolbar--extended">
+        <div class="kt-inbox__actions kt-inbox__actions--expanded main-bx">
+            <label class="kt-checkbox kt-checkbox--single kt-checkbox--tick kt-checkbox--brand mb-0 mr-2">
+                <input type="checkbox" (change)="selectAllcheckbox()" [(ngModel)]="check"
+                    [ngModelOptions]="{standalone: true}">
+                <span></span>
+            </label>
+            <button (click)="DeletedMemosFromDraft(0)" class="btn btn-hvr" data-toggle="kt-tooltip" data-skin="dark"
+                id="Delete">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                    role="img" font-size="1.5rem" class="iconify iconify--mdi" width="1em" height="1em"
+                    viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12M8 9h8v10H8V9m7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5Z">
+                    </path>
+                </svg>
+                <span class="label-hidden">Delete</span>
+            </button>
+        </div>
+        <div class="kt-inbox__controls">
+            <button (click)="ClearFilters()" class="btn btn-hvr" data-toggle="kt-tooltip" data-skin="dark"
+                id="ReloadClearFilters">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                    role="img" font-size="1.5rem" class="iconify iconify--mdi" width="1em" height="1em"
+                    viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M2 12a9 9 0 0 0 9 9c2.39 0 4.68-.94 6.4-2.6l-1.5-1.5A6.706 6.706 0 0 1 11 19c-6.24 0-9.36-7.54-4.95-11.95C10.46 2.64 18 5.77 18 12h-3l4 4h.1l3.9-4h-3a9 9 0 0 0-18 0Z">
+                    </path>
+                </svg>
+                <span class="label-hidden">Reload</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<div class="kt-portlet__body p-0 kt-portlet__body--fit-x scroll-y">
+    <div class="kt-inbox__items draft">
+        <ng-container *ngIf="(_LstToMemos | filter : searchText) as _LstToMemos">
+            <div class="mb_1" *ngFor="let item of _LstToMemos| filter:searchText">
+                <div>
+                    <div class="plain_border_left_true">
+                        <div class="kt-inbox__item  py-2 align-items-center">
+                            <div class="kt-inbox__info">
+                                <div class="kt-inbox__actions">
+                                    <label class="kt-checkbox kt-checkbox--single kt-checkbox--tick kt-checkbox--brand">
+                                        <input type="checkbox" id="checkbox1" [(ngModel)]="item.checked"
+                                            (change)="Singleselectcheckbox(item.DraftId,item.checked)"
+                                            [ngModelOptions]="{standalone: true}">
+                                        <span></span>
+                                    </label>
+                                </div>
+                                <div class="kt-inbox__sender">
+                                    <label
+                                        class="kt-badge kt-badge--inline cus-btn text-white px-2 py-0 mr-3 kt-badge--pill bg-warning">Draft</label>
+                                </div>
+                            </div>
+                            <div class="kt-inbox__details">
+                                <div class="kt-inbox__message">
+                                    <span class="kt-inbox__subject mr-2">({{item.Subject}})</span>
+                                    <span class="drft_cont" [innerHTML]="item.TextContent">
+                                        <!-- [innerHTML]="item.Note" -->
+                                        <!-- {{item.TextContent}} -->
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="kt-inbox__datetime"> {{item.DeadLineDateString}} </div>
+                            <div class="memohover">
+                                <div class="memohover_icon svg-icn tippy_Delete ">
+                                    <span (click)="DeletedMemosFromDraft1(item.DraftId)">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                                            font-size="1.5rem" class="iconify iconify--mdi" width="1em" height="1em"
+                                            viewBox="0 0 24 24">
+                                            <path fill="currentColor"
+                                                d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12M8 9h8v10H8V9m7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5Z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div class="memohover_icon tippy_Share">
+                                    <i (click)="redirectnewmemo(item.Note,item.DraftId,item.Subject,item.MailId,item.ReplyId,'Memo/Details')"
+                                        class="fa fa-share"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="_LstToMemos.length==0" class="text-center py-4" style="color: lightgrey">
+                <img src="assets/media/Img/No Draft Memos.png">
+                <h3 class="kt-blank-ttl"> {{ "Communication.NoDraftdatamessage" | translate }} </h3>
+                <p class="kt-erorr-msg"> {{ "Communication.NoDraftmessage" | translate }} </p>
+                <!-- <h4 style="font-size: 1.5rem;">No more memos matched your search</h4>
+            <p> Clear the filters & try again</p> -->
+            </div>
+        </ng-container>
+
+    </div>
+</div>

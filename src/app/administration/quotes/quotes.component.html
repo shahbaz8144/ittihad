@@ -1,0 +1,97 @@
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid" id="scrd">
+    <div class="col-lg-12">
+        <h4 class="mb-3 pro-nm"> {{ "Administration.Quotes" | translate }} </h4>
+        <div class="card mb-3">
+            <div class="card-body">
+                <div>
+                    <h6 class="font-13 pl-2 ml-1">{{ "Administration.Quotes" | translate }}</h6>
+                    <div class="d-flex align-items-center col-md-6 col-lg-4 gap-3">
+                        <div class="flex-1">
+                            <input type="text" id="" [(ngModel)]="Quotes" name="quotes" [placeholder]="EnterQuote"
+                                class="form-control cust-form">
+                        </div>
+                        <div class="">
+                            <a [class.disabled]="!Quotes" *ngIf='!isShow' class="btn btn-info btn-sm waves-effect waves-light mr-2 text-white"
+                            (click)="AddQuotes()">{{ "Administration.Submit" | translate }}</a>
+                            <a type="submit" *ngIf='isShow' class="btn btn-sm btn-info px-3 mt-2 mr-2"
+                            (click)="AddQuotes()">{{ "Administration.Update" | translate }}</a>
+                            <a class="btn btn-secondary btn-sm waves-effect waves-light" (click)="onclear()">{{ "Administration.Cancel" | translate }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card ribbon-box">
+            <div class="card-header align-items-center d-flex py-3">
+                <div class="flex-1">
+                    <div class="search-bar">
+                        <input type="search" [(ngModel)]="searchText" name="search" class="form-control search_clear"
+                            [placeholder]="TableSearch">
+                        <a *ngIf="searchText" class="close close-icn"><i (click)="ReBindData()" class="material-icons">close<i></i></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-0 table-responsive">
+                <table class="table b-table">
+                    <thead>
+                        <tr>
+                            <th>{{ "Administration.Quotes" | translate }}</th>
+                            <th>{{ "Administration.StartDate" | translate }}</th>
+                            <th>{{ "Administration.EndDate" | translate }}</th>
+                            <th>{{ "Administration.Status" | translate }}</th>
+                            <th>{{ "Administration.Action" | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngIf="(_QuotesList | filter: searchText) as _QuotesList">
+                        <tr *ngFor="let item of _QuotesList | filter: searchText">
+                            <td>{{item.Quotes}}</td>
+                            <td>{{item.StartDateS}}</td>
+                            <td>{{item.EndDateS}}</td>
+                            <td>
+                                <div *ngIf="item.IsActive==true">
+                                    <p><span class="text-primary">Active</span></p>
+                                </div>
+                                <div *ngIf="item.IsActive==false">
+                                    <p><span class="text-danger">InActive</span></p>
+                                </div>
+                            </td>
+                            <td>
+                                <a class="btn btn-outline btn-circle fs-5 btn-sm text-info p-0"
+                                    (click)="Quotes_edit(item)">
+                                    <span class="mr-2">
+                                        <svg data-v-9a6e255c="" xmlns="http://www.w3.org/2000/svg" width="14px"
+                                            height="14px" viewBox="0 0 24 24" fill="none" stroke="#2786fb"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            class="feather feather-edit">
+                                            <path data-v-9a6e255c=""
+                                                d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                            <path data-v-9a6e255c=""
+                                                d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="align-middle">Edit</span>
+                                </a>
+                            </td>
+                        </tr>
+                        <ng-container *ngIf="_QuotesList.length==0">
+                            <div class="d-flex-center kt-tb-error-box">
+                                <div class="m-auto text-center">
+                                    <div class="svgs-1 kt-blank-msg">
+                                        <img src="assets/media/Img/No Memo Found 01.png">
+                                    </div>
+                                    <h3 class="kt-blank-ttl"> {{ "Administration.NoQuotes" | translate }} </h3>
+                                    <p class="kt-blank-msg"> {{ "Administration.DataNotFoundInQuotes" | translate }} </p>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+
+    </div>
+</div>

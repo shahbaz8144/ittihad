@@ -1,0 +1,356 @@
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid side_view">
+    <div class="col-lg-12 mt-3 px-0">
+        <div class="card  radius-xl mx-2">
+            <div class="card-body">
+                <div class="d-flex-center">
+                    <h4 class="mb-0 pro-nm"> {{ "Administration.Banners" | translate }} </h4>
+                    <div class="d-flex-cen gap-2">
+                        <div class="search-bar"><input type="text" [(ngModel)]="BannerSearch" [placeholder]="BannerSearchs" aria-controls="example" class="form-control"></div>
+                        <a *ngIf="BannerSearch" class="close banner-close-icn"><i (click)="ReBindData()" class="material-icons">close<i></i></i></a>
+                        <button type="button" class="btn btn-info btn-sm" id="bnr_add" (click)="bnr_add()">
+                            {{ "Administration.Addbanner" | translate }}
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="banr-container">
+            <ng-container
+            *ngIf="( _LstToBanner | filter : BannerSearch) as _LstToBanner">
+            <div *ngFor="let item of _LstToBanner |filter : BannerSearch ; let i=index " class="banner-item col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <div class="card">
+                    <div class="img-container">
+                        <div class="bng-img" *ngFor="let src of item.AttachmentJson">
+                            <img src="{{src.FileUrl}}" alt="img" class="w-100 radius-xl">
+                            <!-- <p>{{src.FileUrl}}</p> -->
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex-cen">
+                            
+                            <div class="bnr-details flex-1">
+                                <p class="bnr-nme">{{item.BannerName}}</p>
+                                <div class="bnr-dets my-1"> 
+                                    <div class="d-flex-cen">
+                                    <div class="user-img mr-1">
+                                            <img src="assets/media/icons/user3.png">
+                                    </div> {{item.DisplayName}}
+                                    </div> 
+
+                                    <p class="bnr-txt clamp-1 cmp-nams" title="Company Name">
+                                        <ng-container *ngIf="!item.IsAll">
+                                            {{item.CompanyNames}}
+                                        </ng-container>
+                                        <ng-container *ngIf="item.IsAll">
+                                            All
+                                        </ng-container>
+                                        </p>                                
+                                </div>
+                                <span class="dater">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-16 h-16">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                                    </svg>
+                                    {{item.StartDate}}
+                                </span>
+                                <span> &#8211; </span>
+                                <span class="dater">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-16 h-16">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                                    </svg>
+                                    {{item.EndDate}}
+                                </span>
+                            </div>
+                            <div class="">
+                                <button type="button" id="bnr_edt" (click)="bnr_edit(item,i)" class="btn btn-info btn-sm"> {{ "Administration.Edit" | translate }} </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-container *ngIf="_LstToBanner.length==0">
+                <div class="d-flex-center flex-1 pt-5">
+                    <div class="m-auto">
+                        <svg fill="none" xmlns="http://www.w3.org/2000/svg"
+                            width="142" height="173" viewBox="0 0 142 173">
+                            <g clip-path="url(#a)">
+                                <path
+                                    d="m28.216 18.71 1.428-5.099a.852.852 0 0 1 .454-.542.867.867 0 0 1 .71-.018c1.669.692 5.19 2.162 6.68 2.768a.78.78 0 0 1 .45.972c-.27.823-.556 1.66-.74 2.193a.876.876 0 0 1-.81.588l-7.362.15a.819.819 0 0 1-.66-.305.803.803 0 0 1-.15-.706ZM52.916 0l-5.338.038a.868.868 0 0 0-.647.293.853.853 0 0 0-.205.676c.245 1.775.754 5.536.956 7.113.022.198.12.38.273.509a.79.79 0 0 0 .55.183c.873-.041 1.766-.097 2.335-.138a.873.873 0 0 0 .778-.62l2.093-7.01a.802.802 0 0 0-.423-.962.822.822 0 0 0-.372-.082ZM39.769 12.148c-1.546-1.038-4.627-3.073-6.068-4.035a.726.726 0 0 1-.32-.55.718.718 0 0 1 .24-.588l4.396-3.9a.73.73 0 0 1 .861-.082.727.727 0 0 1 .224.207l4.627 6.55a.722.722 0 0 1-.178 1.007l-1.954 1.353a1.624 1.624 0 0 1-1.828.038ZM23.921 49.697C5.537 72.29 1.455 109.695 25.038 132.184c29.308 27.942 65.334 26.52 94.883 9.618 32.937-18.839 21.632-70.477 12.857-85.223-25.865-43.431-82.116-39.757-108.857-6.882Z"
+                                    fill="#FFD56A"></path>
+                                <path
+                                    d="M101.816 172.993c-2 0-3.92-.788-5.334-2.191a7.448 7.448 0 0 1-2.21-5.289c0-1.984.795-3.887 2.21-5.289a7.575 7.575 0 0 1 5.334-2.191c10.795 0 18.782-5.19 20.844-13.532 3.74-15.158-12.488-29.602-27.522-37.366a7.547 7.547 0 0 1-2.295-1.829 7.476 7.476 0 0 1-1.414-2.561 7.424 7.424 0 0 1 .507-5.705 7.492 7.492 0 0 1 1.845-2.275 7.565 7.565 0 0 1 2.582-1.402 7.607 7.607 0 0 1 5.753.503c31.768 16.403 39.019 38.75 35.209 54.188-3.737 15.158-17.694 24.939-35.509 24.939Z"
+                                    fill="#EAB094"></path>
+                                <path
+                                    d="m138.155 142.757-15.035-1.096c.349-4.536-.697-20.431-27.972-34.516l6.978-13.269c23.904 12.342 37.393 30.627 36.029 48.881Z"
+                                    fill="#F03063"></path>
+                                <path
+                                    d="M68.31 154.376c15.003 0 29.148.366 41.52-6.228-.251-12.518-.868-31.011-3.723-41.65-3.803-14.185-9.748-15.009-12.822-14.97L69.692 92.91c-3.078-.038-13.067-1.533-16.364 12.76-3.866 16.739-5.234 30.146-8.057 44.286 7.33 1.972 15.045 4.419 23.039 4.419Z"
+                                    fill="#F03063"></path>
+                                <path
+                                    d="M108.993 118.549a1.024 1.024 0 0 1-.722-.305 21.64 21.64 0 0 0-5.443-4.048.99.99 0 0 1-.421-1.347 1.006 1.006 0 0 1 1.359-.417 23.526 23.526 0 0 1 5.949 4.425.988.988 0 0 1 .201 1.082 1.005 1.005 0 0 1-.923.61ZM91.097 129.838a1 1 0 0 1-.495-.131c-.513-.291-5.045-2.865-6.465-4.18a.992.992 0 0 1-.318-.726v-9.114c0-.249.096-.49.266-.673.17-.184.404-.298.655-.32a69.372 69.372 0 0 1 12.373.032c.265.022.51.148.683.35a.992.992 0 0 1-.121 1.405c-.204.17-.468.253-.733.231a67.49 67.49 0 0 0-11.113-.101v7.729c1.34 1.063 4.536 2.941 5.764 3.633a.989.989 0 0 1 .118 1.66 1.001 1.001 0 0 1-.617.205h.003Z"
+                                    fill="#C00839"></path>
+                                <mask id="b" style="mask-type:alpha"
+                                    maskUnits="userSpaceOnUse" x="95" y="93"
+                                    width="44" height="50">
+                                    <path
+                                        d="m138.155 142.757-15.035-1.096c.349-4.536-.697-20.431-27.972-34.516l6.978-13.269c23.904 12.342 37.393 30.627 36.029 48.881Z"
+                                        fill="#F03063"></path>
+                                </mask>
+                                <g mask="url(#b)" fill="#C00839">
+                                    <path
+                                        d="M120.654 137.329a1.01 1.01 0 0 1-.679-.257.989.989 0 0 1-.13-1.338c.15-.199.37-.335.617-.381a82.455 82.455 0 0 1 19.235-1.456c.267.011.518.126.699.321a.995.995 0 0 1-.06 1.409 1.01 1.01 0 0 1-.722.263 80.42 80.42 0 0 0-18.761 1.428 1.208 1.208 0 0 1-.199.011ZM118.867 132.661a1.006 1.006 0 0 1-1-.837.994.994 0 0 1 .683-1.107 68.047 68.047 0 0 1 20.334-3.439h.018c.266 0 .522.105.71.292a.99.99 0 0 1 0 1.409 1.008 1.008 0 0 1-.71.292 66.052 66.052 0 0 0-19.735 3.339 1.015 1.015 0 0 1-.3.051Z">
+                                    </path>
+                                </g>
+                                <path
+                                    d="M14.508 105.585a33.167 33.167 0 0 1-7.226-6.405c-10.045-11.992-9.669-28.945.952-43.13a7.52 7.52 0 0 1 2.179-1.985 7.585 7.585 0 0 1 5.736-.866 7.572 7.572 0 0 1 2.675 1.253 7.502 7.502 0 0 1 1.984 2.176 7.44 7.44 0 0 1 .826 5.695 7.454 7.454 0 0 1-1.285 2.643c-6.434 8.598-6.979 18.047-1.462 24.662a19.014 19.014 0 0 0 4.752 4.072"
+                                    fill="#EAB094"></path>
+                                <path
+                                    d="m11.071 103.014 9.853-11.328c3.472 2.969 16.957 11.625 44.623-1.705l6.59 13.469c-24.26 11.673-47.085 11.518-61.066-.436Z"
+                                    fill="#F03063"></path>
+                                <path
+                                    d="M51.245 110.491a1.002 1.002 0 0 1 .677-.395c2.268-.297 2.222-.443 4.284-1.418a1.004 1.004 0 0 1 1.106.157.997.997 0 0 1 .277 1.074 1.008 1.008 0 0 1-.514.568c-2.254 1.069-2.415 1.273-4.885 1.595a1.011 1.011 0 0 1-1-.481.987.987 0 0 1 .058-1.1h-.003Z"
+                                    fill="#C00839"></path>
+                                <mask id="c" style="mask-type:alpha"
+                                    maskUnits="userSpaceOnUse" x="11" y="89"
+                                    width="62" height="24">
+                                    <path
+                                        d="m11.071 103.014 9.853-11.328c3.472 2.969 16.957 11.625 44.623-1.705l6.59 13.469c-24.26 11.673-47.085 11.518-61.066-.436Z"
+                                        fill="#F03063"></path>
+                                </mask>
+                                <g mask="url(#c)" fill="#C00839">
+                                    <path
+                                        d="M25.896 92.313a1.012 1.012 0 0 1 1.357-.292.989.989 0 0 1 .357 1.33 80.747 80.747 0 0 1-10.28 16.174 1.009 1.009 0 0 1-1.407.142.994.994 0 0 1-.156-1.394 78.966 78.966 0 0 0 10.024-15.794c.031-.058.066-.114.105-.166ZM30.739 93.669a1.01 1.01 0 0 1 1.269-.286.992.992 0 0 1 .497 1.192 66.672 66.672 0 0 1-9.334 18.244.996.996 0 0 1-.657.397 1.013 1.013 0 0 1-1.012-.467.993.993 0 0 1 .047-1.106 64.816 64.816 0 0 0 9.071-17.7c.026-.097.066-.19.119-.274Z">
+                                    </path>
+                                </g>
+                                <path
+                                    d="M79.775 13.597c-22.156 1.796-29.909 10.09-30.997 32.682-1.047 21.666 7.275 23.994 30.617 23.154 17.972-.644 29.535-2.301 29.333-21.898-.227-22.506-10.53-35.425-28.953-33.938Z"
+                                    fill="#EAB094"></path>
+                                <path
+                                    d="M43.966 86.559c7.736 13.808 30.495 17.206 46.133 14.68 45.282-7.31 20.499-63.039 17.976-66.121-1.51-1.851-5.642-1.876-6.601 2.252-.785 3.37 2.285 14.531 1.744 16.106-1.427 4.151-13.258 5.57-17.661 6.068-13.988 1.588-31.256 1.173-34.323-1.993-3.276-3.383-2.33-13.895-1.744-18.814 0 0-3.172-.779-3.664 1.57-.572 2.644-8.07 35.166-1.86 46.252Z"
+                                    fill="#373753"></path>
+                                <path
+                                    d="M84.356 43.594a.955.955 0 0 1-.14 0 1.008 1.008 0 0 1-.664-.387.99.99 0 0 1-.19-.74c.516-3.62 2.844-4.689 4.675-4.498 2.024.207 4.107 1.992 3.943 4.497a.994.994 0 0 1-.34.685 1.01 1.01 0 0 1-1.418-.09.991.991 0 0 1-.248-.723c.084-1.294-1.047-2.283-2.142-2.394-1.305-.131-2.206.886-2.481 2.792a.99.99 0 0 1-.335.614 1.007 1.007 0 0 1-.66.244ZM59.566 44.764c-.236 0-.466-.083-.647-.233a1.002 1.002 0 0 1-.347-.59c-.415-2.488 1.48-4.467 3.489-4.872 1.804-.367 4.229.463 5.104 4.013a.99.99 0 0 1-.115.755 1.014 1.014 0 0 1-1.382.338.999.999 0 0 1-.456-.615c-.46-1.872-1.462-2.796-2.746-2.536-1.085.221-2.094 1.314-1.891 2.591a.993.993 0 0 1-.175.744 1.01 1.01 0 0 1-.652.405c-.06.004-.121.004-.182 0Z"
+                                    fill="#935032"></path>
+                                <path
+                                    d="M94.09 31.83a1.505 1.505 0 0 1-1.067-.141 11.51 11.51 0 0 0-7.303-1.242 1.518 1.518 0 0 1-1.123-.262 1.485 1.485 0 0 1-.343-2.087 1.51 1.51 0 0 1 .982-.602c3.17-.51 6.42.042 9.239 1.567a1.5 1.5 0 0 1 .623.639 1.484 1.484 0 0 1-.233 1.68 1.51 1.51 0 0 1-.774.449ZM56.335 34.844a1.515 1.515 0 0 1-.826-.34 1.494 1.494 0 0 1-.462-1.631c.099-.287.283-.537.528-.717a14.552 14.552 0 0 1 8.928-2.816c.39.025.753.199 1.016.484a1.491 1.491 0 0 1-.05 2.074 1.517 1.517 0 0 1-1.039.434 11.513 11.513 0 0 0-7.062 2.225c-.296.22-.665.322-1.033.287Z"
+                                    fill="#373753"></path>
+                                <path
+                                    d="M76.454 51.957a1.01 1.01 0 0 1-.374-.073c-5.68-2.245-5.666-2.737-5.645-3.418 0-.208.02-.64 4.567-12.238a.995.995 0 0 1 .529-.567 1.011 1.011 0 0 1 1.339.515.988.988 0 0 1 .006.772c-1.43 3.657-3.65 9.393-4.281 11.206.816.447 2.655 1.256 4.232 1.88a.989.989 0 0 1 .27 1.697 1.01 1.01 0 0 1-.643.226Z"
+                                    fill="#B57352"></path>
+                                <path
+                                    d="M60.173 52.528c2.467-2.319 20.153-3.18 23.356-1.56 5.52 2.791 8.657 10.642 8.067 12.548-.307.993-30.355 4.744-34.975 0-2.236-2.318 2.935-10.407 3.552-10.988Z"
+                                    fill="#373753"></path>
+                                <path
+                                    d="M74.168 60.769c-2.066 0-4.11-.377-5.495-1.28a1.003 1.003 0 0 1-.433-.632.991.991 0 0 1 .145-.75 1.013 1.013 0 0 1 1.394-.285c1.674 1.092 5.46 1.276 8.436.407.256-.074.532-.045.766.081a.99.99 0 0 1 .402 1.353 1.004 1.004 0 0 1-.599.48c-1.502.42-3.055.631-4.616.626Z"
+                                    fill="#0D0D19"></path>
+                                <path opacity=".2"
+                                    d="M79.695 63.208c-23.87 22.763-52.633-9.705-35.146-31.215 4.864-5.982 13.091-9.037 20.746-7.84 17.725 2.772 27.585 26.482 14.4 39.055Z"
+                                    fill="#1D1C39"></path>
+                                <path
+                                    d="M77.231 57.088C53.36 79.85 24.598 47.4 42.086 25.873c4.863-5.982 13.09-9.037 20.746-7.84 17.721 2.771 27.581 26.482 14.4 39.055Z"
+                                    fill="#C5CADA"></path>
+                                <path
+                                    d="M38.335 48.888c-2.209 2.183-18.492 10.483-18.492 10.49-6.427 2.477-10.332-8.73-3.772-10.725.02 0 17.533-4.775 20.628-4.426"
+                                    fill="#373753"></path>
+                                <path
+                                    d="m43.08 51.967-4.093 1.415a2.736 2.736 0 0 1-1.971-.076 2.703 2.703 0 0 1-1.4-1.38c-1.227-2.737-2.012-5.66-2.822-8.574a2.671 2.671 0 0 1 .187-1.907c.296-.59.8-1.054 1.418-1.3 1.242-.495 2.279-.952 3.988-1.54.757 4.678 2.935 8.958 4.693 13.362Z"
+                                    fill="#373753"></path>
+                                <path
+                                    d="M76.537 54.804c-23.872 22.766-52.633-9.687-35.15-31.211 4.868-5.986 13.092-9.04 20.75-7.844 17.718 2.775 27.582 26.482 14.4 39.055Z"
+                                    fill="#E1E6EE"></path>
+                                <mask id="d" style="mask-type:alpha"
+                                    maskUnits="userSpaceOnUse" x="41" y="21"
+                                    width="36" height="36">
+                                    <path
+                                        d="M72.277 50.901c-18.021 17.19-39.738-7.307-26.535-23.568 3.674-4.498 9.885-6.82 15.663-5.913 13.38 2.107 20.823 19.991 10.872 29.481Z"
+                                        fill="#F9C8B7"></path>
+                                </mask>
+                                <g mask="url(#d)">
+                                    <path
+                                        d="M72.277 50.901c-18.021 17.19-39.738-7.307-26.535-23.568 3.674-4.498 9.885-6.82 15.663-5.913 13.38 2.107 20.823 19.991 10.872 29.481Z"
+                                        fill="#F9C8B7"></path>
+                                    <path
+                                        d="M62.162 34.062a4.792 4.792 0 0 1 2.373 2.801 4.745 4.745 0 0 1-.61 4.133 4.46 4.46 0 0 1-1.997 1.365 4.495 4.495 0 0 1-2.42.127 4.47 4.47 0 0 1-2.131-1.147 4.413 4.413 0 0 1-1.21-2.083 4.386 4.386 0 0 1 .067-2.403 4.42 4.42 0 0 1 1.326-2.013 4.494 4.494 0 0 1 4.602-.766v-.014Z"
+                                        fill="#935032"></path>
+                                    <path
+                                        d="M76.76 46.447c-6.629-2.595-21.562-1.488-24.075 11.936 6.92.346 21.424-1.556 24.075-11.936Z"
+                                        fill="#373753"></path>
+                                </g>
+                                <path
+                                    d="M67.909 25.489a2.41 2.41 0 0 1-1.665.415 18.268 18.268 0 0 0-11.51 2.467 2.415 2.415 0 0 1-3.297-.803 2.367 2.367 0 0 1 .809-3.27 23.188 23.188 0 0 1 14.574-3.113 2.41 2.41 0 0 1 1.3.576 2.361 2.361 0 0 1 .665 2.616c-.169.452-.472.842-.87 1.119l-.006-.007Z"
+                                    fill="#373753"></path>
+                            </g>
+                            <defs>
+                                <clipPath id="a">
+                                    <path fill="#fff" d="M0 0h142v173H0z">
+                                    </path>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                        <div class="bnk-txt">
+                            <h3 class="blank-txt"> {{ "Administration.NoResultsFound" | translate }} </h3>
+
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            </ng-container>
+        </div>
+    </div>
+</div>
+<div class="kt-aside-menu-overlay" (click)="closeInfo()"></div>
+<div id="addbnr" class="wc-75 kt-quick-panel kt-quick-panel1 scroll-div">
+    <a id="kt_quick_panel_close_btn" class="kt-quick-panel__close" (click)="closeInfo()">
+        <i class="flaticon2-delete"></i>
+    </a>
+    <div id="kt_chat_content" class="kt-grid__item kt-grid__item--fluid kt-app__content">
+        <div class="kt-chat">
+            <div class="kt-portlet kt-portlet--head-lg kt-portlet--last">
+                <div class="kt-portlet__head">
+                    <div class="kt-chat__head">
+                        <div>
+                            <div class="kt-chat__label">
+                                <h4 class="mb-0" id="editbnr"> {{ "Administration.Banner" | translate }} </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__body scroll-auto pt-2">
+                    <form id="forms_1">
+                        <div class="tab-content">
+                            <div class="form-m">
+                                <div class="form-group">
+                                    <mat-list-item>
+                                        <mat-checkbox name="CheckboxAll" [(ngModel)]="All"  [ngModelOptions]="{standalone: true}">
+                                            {{ "Administration.All" | translate }}</mat-checkbox>
+                                    </mat-list-item>
+                                </div>
+                                <div  *ngIf="All==false" class="form-group">
+                                    <label  class="form-label">{{ "Administration.Company" | translate }}</label>
+                                    <ng-select [multiple]="true" [(ngModel)]="CompanyDrp" [ngModelOptions]="{standalone: true}" name="Company" [placeholder]="Companyselect">
+                                        <ng-option  [value]="obj.CompanyId" *ngFor="let obj of ObjgetCompanyList">
+                                            {{obj.CompanyName}}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">{{ "Administration.BannerName" | translate }}</label><span class="text-danger ml-1">*</span>
+                                    <input type="text" [(ngModel)]="Banner" [ngModelOptions]="{standalone: true}" (input)="onSubjectChange()" name="Banner" class="form-control" [placeholder]="BannerName">
+                                    <div class="kt-error">
+                                        <span class="kt-erorr-msg" *ngIf="BannerErrorlog">
+                                            {{ "Administration.PleaseEnterBannerName" | translate }}
+                                        </span>
+                                    </div>
+                                </div>
+                               
+                                <div class="form-group">
+                                    <label class="form-label">{{ "Administration.Banner" | translate }}</label>
+                                    <span class="text-danger ml-1">*</span>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" accept="image/*"  [(ngModel)]="FileName" [ngModelOptions]="{standalone: true}" name="Filename" (change)="onFileChange($event)" class="custom-file-input" id="fileUpload">
+                                            <label class="custom-file-label" for="fileUpload" id="fileuploadtext">Choose file</label>
+                                        </div>
+                                        
+                                    </div>
+                                    <span class="txtm-cus nrml"> {{ "Administration.FileUploadNote" | translate }} </span>
+                                    <div class="kt-error"> <span class="kt-erorr-msg"
+                                        *ngIf="BannerAttachmentErrorlog">
+                                        {{ "Administration.PleaseSelectBanner" | translate }}
+                                    </span>
+                                </div>
+                                </div>
+                                <div *ngIf="preview==true" class="form-group">
+                                    <label class="form-label">{{ "Administration.Preview" | translate }}</label>
+                                    <div class="w-50">
+                                        <div class="img-container">
+                                            <div class="bng-img">
+                                                <img [src]="filesrc" alt="img" class="w-100 radius-xl">
+                                                <!-- <p>{{src.FileUrl}}</p> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div id="" class="dropzone dropzone-multi">
+                                        <div id="" class="dropzone-items">
+                                            <div *ngFor='let url of _lstMultipleFiales' class="dropzone-item p-3 m-0 border">
+                                                <div class="dropzone-file">
+                                                    <div class="dropzone-filename">
+                                                        <span>{{url.FileName}}</span>
+                                                        <strong>( <span>{{url.Size}}kb</span>) </strong>
+                                                        <span class="dropzone-delete" (click)="RemoveSelectedFile(url.UniqueId)">
+                                                            <i class="flaticon2-cross"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+
+                                    <!-- <div class="py-1 img-prew">
+                                        <div class="pres col-lg-6">
+                                            <img src="../../../assets/media/files/anounce23.jpg" />
+                                        </div>
+                                    </div> -->
+                                </div>
+
+                                <div class="d-flex gap-1">
+
+                                    <div class="form-group w-100">
+                                        <label class="form-label">{{ "Administration.StartDate" | translate }}</label>
+                                        <div class="input-group">
+                                            <!-- <input type="text" class="form-control " id="" placeholder="Start Date">
+                                            <div class="input-group-append input-group-text">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </div> -->
+                                            <input name="Start Date" matInput [matDatepicker]="picker1" (click)="picker1.open()" [min]="disablePreviousDate" (dateChange)="selectStartDate($event)" [(ngModel)]="StartDate" placeholder="Start Date" class="form-control">
+                                            <div class="input-group-text p-0 dater">
+                                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker1></mat-datepicker>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group w-100">
+                                        <label class="form-label">{{ "Administration.EndDate" | translate }}</label>
+                                        <div class="input-group">
+                                            <!-- <input type="text" class="form-control " id="" placeholder="End Date">
+                                            <div class="input-group-append input-group-text">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </div> -->
+                                            <input matInput [matDatepicker]="picker2" (click)="picker2.open()" [min]="StartDate" name="End Date" [(ngModel)]="EndDate"   placeholder="End Date" class="form-control">
+                                            <div class="input-group-text p-0">
+                                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker2></mat-datepicker>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="kt-portlet__foot py-1">
+                    <div class="task_act form-m">
+                        <div class="form-group">
+                            <button *ngIf='!isShow' (click)="OnSubmitBanner()"  class="btn btn-sm btn-info px-3 mt-2">
+                                {{ "Administration.AddBanner" | translate }}
+                            </button>
+                            <button *ngIf='isShow' (click)="OnUpdateBanner()"  class="btn btn-sm btn-info px-3 mt-2">
+                                {{ "Administration.UpdateBanner" | translate }}
+                            </button>
+                            <button class="btn btn-sm btn-secondary px-3 ml-2 mt-2" (click)="bnr_cl()">
+                                {{ "Administration.Cancel" | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,686 @@
+<div class="kt-subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
+    <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+        <!--begin::Info-->
+        <div class="d-flex align-items-center flex-wrap mr-1">
+            <!--begin::Mobile Toggle-->
+            <button class="burger-icon burger-icon-left d-inline-block d-lg-none btn btn-sm m-0"
+                id="kt_subheader_mobile_toggle" (click)="openinbmenu()">
+                <span class="svg-icon svg-icon-primary svg-icon-2x">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                        height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <rect x="0" y="0" width="24" height="24"></rect>
+                            <rect fill="#000000" x="4" y="5" width="16" height="3" rx="1.5"></rect>
+                            <path
+                                d="M5.5,15 L18.5,15 C19.3284271,15 20,15.6715729 20,16.5 C20,17.3284271 19.3284271,18 18.5,18 L5.5,18 C4.67157288,18 4,17.3284271 4,16.5 C4,15.6715729 4.67157288,15 5.5,15 Z M5.5,10 L18.5,10 C19.3284271,10 20,10.6715729 20,11.5 C20,12.3284271 19.3284271,13 18.5,13 L5.5,13 C4.67157288,13 4,12.3284271 4,11.5 C4,10.6715729 4.67157288,10 5.5,10 Z"
+                                fill="#000000" opacity="0.3"></path>
+                        </g>
+                    </svg>
+                </span>
+            </button>
+            <!--end::Mobile Toggle-->
+            <!--begin::Page Heading-->
+            <div class="d-flex align-items-baseline flex-wrap mr-5">
+                <!--begin::Page Title-->
+                <h5 class="text-dark font-weight-bold my-1 mr-5">Inbox</h5>
+                <!--end::Page Title-->
+            </div>
+            <!--end::Page Heading-->
+        </div>
+        <!--end::Info-->
+        <!--begin::Toolbar-->
+        <div class="d-flex align-items-center">
+            <!--begin::Actions-->
+            <a class="btn btn-info font-weight-bolder btn-sm">Actions</a>
+            <!--end::Actions-->
+        </div>
+        <!--end::Toolbar-->
+    </div>
+</div>
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid side_view">
+    <div class="kt-grid kt-grid--desktop kt-grid--ver-desktop  kt-inbox" id="kt_inbox">
+        <button class="kt-inbox__aside-close" id="kt_inbox_aside_close">
+            <i class="la la-close"></i>
+        </button>
+
+        <div class="kt-grid__item   kt-portlet  kt-inbox__aside pb-0 scroll-y aside-scrolly" id="kt_inbox_aside">
+            <!-- <button type="button" class="btn btn-brand  btn-upper btn-bold  kt-inbox__compose">
+                new message
+            </button> (click)="ViewReplyDiv()"-->
+            <button (click)="ViewReplyDiv1()" class="btn-primary kt-inbox__compose mx-0 btn-memo1" type="button">
+                <span class="mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-mail icon">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </span>
+                {{ "Communication.NewMemo" | translate }}
+            </button>
+            <div class="kt-inbox__nav mt-2">
+                <ul class="kt-nav">
+                    <li class="kt-nav__item" routerLinkActive="active">
+                        <a routerLink="Memos" class="kt-nav__link">
+                            <span class="svg-icon svg-icon-2x">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                width="24px" height="24px" viewBox="0 0 24 24" version="1.1" >
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24" />
+                                    <path
+                                        d="M6,2 L18,2 C18.5522847,2 19,2.44771525 19,3 L19,13 C19,13.5522847 18.5522847,14 18,14 L6,14 C5.44771525,14 5,13.5522847 5,13 L5,3 C5,2.44771525 5.44771525,2 6,2 Z M13.8,4 C13.1562,4 12.4033,4.72985286 12,5.2 C11.5967,4.72985286 10.8438,4 10.2,4 C9.0604,4 8.4,4.88887193 8.4,6.02016349 C8.4,7.27338783 9.6,8.6 12,10 C14.4,8.6 15.6,7.3 15.6,6.1 C15.6,4.96870845 14.9396,4 13.8,4 Z"
+                                        fill="#000000" opacity="0.3" />
+                                    <path
+                                        d="M3.79274528,6.57253826 L12,12.5 L20.2072547,6.57253826 C20.4311176,6.4108595 20.7436609,6.46126971 20.9053396,6.68513259 C20.9668779,6.77033951 21,6.87277228 21,6.97787787 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,6.97787787 C3,6.70173549 3.22385763,6.47787787 3.5,6.47787787 C3.60510559,6.47787787 3.70753836,6.51099993 3.79274528,6.57253826 Z"
+                                        fill="#000000" />
+                                </g>
+                            </svg>
+                            </span>
+
+                            <span style="margin-left: 10px;" class="kt-nav__link-text">{{ "Communication.Inbox" | translate  }}</span>
+                        </a>
+                    </li>
+                    <li class="kt-nav__item" routerLinkActive="active">
+                        <a routerLink="FavoriteMemoList" class="kt-nav__link">
+                            <span class="svg-icon svg-icon-2x">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <polygon points="0 0 24 0 24 24 0 24" />
+                                        <path
+                                            d="M12,18 L7.91561963,20.1472858 C7.42677504,20.4042866 6.82214789,20.2163401 6.56514708,19.7274955 C6.46280801,19.5328351 6.42749334,19.309867 6.46467018,19.0931094 L7.24471742,14.545085 L3.94038429,11.3241562 C3.54490071,10.938655 3.5368084,10.3055417 3.92230962,9.91005817 C4.07581822,9.75257453 4.27696063,9.65008735 4.49459766,9.61846284 L9.06107374,8.95491503 L11.1032639,4.81698575 C11.3476862,4.32173209 11.9473121,4.11839309 12.4425657,4.36281539 C12.6397783,4.46014562 12.7994058,4.61977315 12.8967361,4.81698575 L14.9389263,8.95491503 L19.5054023,9.61846284 C20.0519472,9.69788046 20.4306287,10.2053233 20.351211,10.7518682 C20.3195865,10.9695052 20.2170993,11.1706476 20.0596157,11.3241562 L16.7552826,14.545085 L17.5353298,19.0931094 C17.6286908,19.6374458 17.263103,20.1544017 16.7187666,20.2477627 C16.5020089,20.2849396 16.2790408,20.2496249 16.0843804,20.1472858 L12,18 Z"
+                                            fill="#000000" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span style="margin-left: 10px;" class="kt-nav__link-text">{{ "Communication.Favorite" | translate }}</span>
+                        </a>
+                    </li>
+                    <li class="kt-nav__item" routerLinkActive="active">
+                        <a routerLink="SentMemos" class="kt-nav__link">
+                            <span class="svg-icon svg-icon-2x">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24" />
+                                    <path
+                                        d="M8,13.1668961 L20.4470385,11.9999863 L8,10.8330764 L8,5.77181995 C8,5.70108058 8.01501031,5.63114635 8.04403925,5.56663761 C8.15735832,5.31481744 8.45336217,5.20254012 8.70518234,5.31585919 L22.545552,11.5440255 C22.6569791,11.5941677 22.7461882,11.6833768 22.7963304,11.794804 C22.9096495,12.0466241 22.7973722,12.342628 22.545552,12.455947 L8.70518234,18.6841134 C8.64067359,18.7131423 8.57073936,18.7281526 8.5,18.7281526 C8.22385763,18.7281526 8,18.504295 8,18.2281526 L8,13.1668961 Z"
+                                        fill="#000000" />
+                                    <path
+                                        d="M4,16 L5,16 C5.55228475,16 6,16.4477153 6,17 C6,17.5522847 5.55228475,18 5,18 L4,18 C3.44771525,18 3,17.5522847 3,17 C3,16.4477153 3.44771525,16 4,16 Z M1,11 L5,11 C5.55228475,11 6,11.4477153 6,12 C6,12.5522847 5.55228475,13 5,13 L1,13 C0.44771525,13 6.76353751e-17,12.5522847 0,12 C-6.76353751e-17,11.4477153 0.44771525,11 1,11 Z M4,6 L5,6 C5.55228475,6 6,6.44771525 6,7 C6,7.55228475 5.55228475,8 5,8 L4,8 C3.44771525,8 3,7.55228475 3,7 C3,6.44771525 3.44771525,6 4,6 Z"
+                                        fill="#000000" opacity="0.3" />
+                                </g>
+                            </svg>
+                            </span>
+                            <span style="margin-left: 10px;" class="kt-nav__link-text">{{ "Communication.Sent" | translate }}</span>
+                        </a>
+                    </li>
+                    <li class="kt-nav__item" routerLinkActive="active">
+                        <a routerLink="MemoRequest" class="kt-nav__link">
+                            <span class="svg-icon svg-icon-2x">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path
+                                            d="M3,17 L3,16 C3,15.4477153 2.55228475,15 2,15 C1.44771525,15 1,15.4477153 1,16 L0,16 C-1.48029737e-16,14.8954305 0.8954305,14 2,14 C3.1045695,14 4,14.8954305 4,16 L4,17 L8,17 C8.55228475,17 9,17.4477153 9,18 L9,21 C9,21.5522847 8.55228475,22 8,22 L3,22 C2.44771525,22 2,21.5522847 2,21 L2,18 C2,17.4477153 2.44771525,17 3,17 Z"
+                                            fill="#000000" opacity="0.3" />
+                                        <path
+                                            d="M12.9835977,18 C12.7263047,14.0909841 9.47412135,11 5.5,11 C4.98630124,11 4.48466491,11.0516454 4,11.1500272 L4,7 C4,5.8954305 4.8954305,5 6,5 L20,5 C21.1045695,5 22,5.8954305 22,7 L22,16 C22,17.1045695 21.1045695,18 20,18 L12.9835977,18 Z M19.1444251,6.83964668 L13,10.1481833 L6.85557487,6.83964668 C6.4908718,6.6432681 6.03602525,6.77972206 5.83964668,7.14442513 C5.6432681,7.5091282 5.77972206,7.96397475 6.14442513,8.16035332 L12.6444251,11.6603533 C12.8664074,11.7798822 13.1335926,11.7798822 13.3555749,11.6603533 L19.8555749,8.16035332 C20.2202779,7.96397475 20.3567319,7.5091282 20.1603533,7.14442513 C19.9639747,6.77972206 19.5091282,6.6432681 19.1444251,6.83964668 Z"
+                                            fill="#000000" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span style="margin-left: 10px;" class="kt-nav__link-text">{{ "Communication.MemoRequest" | translate }}</span>
+                            <span class="kt-nav__link-text" style="left: 5px;position: relative;flex: 0;"
+                            *ngIf="DMSCount?.PendingCount != null && DMSCount?.PendingCount > 0"></span>
+                            {{DMSCount?.PendingCount}}
+                        </a>
+                    </li>
+                    <li class="kt-nav__item" routerLinkActive="active">
+                        <a routerLink="PendingFromReceiver" class="kt-nav__link">
+                            <span class="svg-icon  svg-icon-2x">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path
+                                            d="M12.9835977,18 C12.7263047,14.0909841 9.47412135,11 5.5,11 C4.98630124,11 4.48466491,11.0516454 4,11.1500272 L4,7 C4,5.8954305 4.8954305,5 6,5 L20,5 C21.1045695,5 22,5.8954305 22,7 L22,16 C22,17.1045695 21.1045695,18 20,18 L12.9835977,18 Z M19.1444251,6.83964668 L13,10.1481833 L6.85557487,6.83964668 C6.4908718,6.6432681 6.03602525,6.77972206 5.83964668,7.14442513 C5.6432681,7.5091282 5.77972206,7.96397475 6.14442513,8.16035332 L12.6444251,11.6603533 C12.8664074,11.7798822 13.1335926,11.7798822 13.3555749,11.6603533 L19.8555749,8.16035332 C20.2202779,7.96397475 20.3567319,7.5091282 20.1603533,7.14442513 C19.9639747,6.77972206 19.5091282,6.6432681 19.1444251,6.83964668 Z"
+                                            fill="#000000" />
+                                        <path
+                                            d="M8.4472136,18.1055728 C8.94119209,18.3525621 9.14141644,18.9532351 8.89442719,19.4472136 C8.64743794,19.9411921 8.0467649,20.1414164 7.5527864,19.8944272 L5,18.618034 L5,14.5 C5,13.9477153 5.44771525,13.5 6,13.5 C6.55228475,13.5 7,13.9477153 7,14.5 L7,17.381966 L8.4472136,18.1055728 Z"
+                                            fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                    </g>
+                                </svg><!--end::Svg Icon--></span>
+                            <span style="margin-left: 10px;" class="kt-nav__link-text">{{ "Communication.PendingFromOthers" | translate }}</span>
+                        </a>
+                    </li>
+                    <li class="kt-nav__item" routerLinkActive="active">
+                        <a routerLink="Bookmarks" class="kt-nav__link">
+                            <span class="svg-icon  svg-icon-2x">
+                                <span class="svg-icon svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/General/Bookmark.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                  
+                                    <defs/>
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"/>
+                                        <path d="M8,4 L16,4 C17.1045695,4 18,4.8954305 18,6 L18,17.726765 C18,18.2790497 17.5522847,18.726765 17,18.726765 C16.7498083,18.726765 16.5087052,18.6329798 16.3242754,18.4639191 L12.6757246,15.1194142 C12.2934034,14.7689531 11.7065966,14.7689531 11.3242754,15.1194142 L7.67572463,18.4639191 C7.26860564,18.8371115 6.63603827,18.8096086 6.26284586,18.4024896 C6.09378519,18.2180598 6,17.9769566 6,17.726765 L6,6 C6,4.8954305 6.8954305,4 8,4 Z" fill="#000000"/>
+                                    </g>
+                                </svg><!--end::Svg Icon--></span>
+                                <!--end::Svg Icon--></span>
+                            <span style="margin-left: 10px;" class="kt-nav__link-text">{{ "Communication.Bookmarks" | translate }}</span>
+                        </a>
+                    </li>
+                    <li class="kt-nav__item d-none" routerLinkActive="active">
+                        <a routerLink="Draft" class="kt-nav__link">
+                            <span class="svg-icon svg-icon-2x">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path
+                                            d="M6,2 L18,2 C18.5522847,2 19,2.44771525 19,3 L19,12 C19,12.5522847 18.5522847,13 18,13 L6,13 C5.44771525,13 5,12.5522847 5,12 L5,3 C5,2.44771525 5.44771525,2 6,2 Z M7.5,5 C7.22385763,5 7,5.22385763 7,5.5 C7,5.77614237 7.22385763,6 7.5,6 L13.5,6 C13.7761424,6 14,5.77614237 14,5.5 C14,5.22385763 13.7761424,5 13.5,5 L7.5,5 Z M7.5,7 C7.22385763,7 7,7.22385763 7,7.5 C7,7.77614237 7.22385763,8 7.5,8 L10.5,8 C10.7761424,8 11,7.77614237 11,7.5 C11,7.22385763 10.7761424,7 10.5,7 L7.5,7 Z"
+                                            fill="#000000" opacity="0.3" />
+                                        <path
+                                            d="M3.79274528,6.57253826 L12,12.5 L20.2072547,6.57253826 C20.4311176,6.4108595 20.7436609,6.46126971 20.9053396,6.68513259 C20.9668779,6.77033951 21,6.87277228 21,6.97787787 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,6.97787787 C3,6.70173549 3.22385763,6.47787787 3.5,6.47787787 C3.60510559,6.47787787 3.70753836,6.51099993 3.79274528,6.57253826 Z"
+                                            fill="#000000" />
+                                    </g>
+                                </svg><!--end::Svg Icon--></span>
+
+                            <span style="margin-left: 10px;" class="kt-nav__link-text">{{ "Communication.Draft" | translate  }}</span>
+                        </a>
+                    </li>
+                    <li class="kt-nav__item d-none" routerLinkActive="active">
+                        <a routerLink="DeleteMemos" class="kt-nav__link">
+                            <span class="svg-icon svg-icon-2x">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path
+                                            d="M6,8 L18,8 L17.106535,19.6150447 C17.04642,20.3965405 16.3947578,21 15.6109533,21 L8.38904671,21 C7.60524225,21 6.95358004,20.3965405 6.89346498,19.6150447 L6,8 Z M8,10 L8.45438229,14.0894406 L15.5517885,14.0339036 L16,10 L8,10 Z"
+                                            fill="#000000" fill-rule="nonzero" />
+                                        <path
+                                            d="M14,4.5 L14,3.5 C14,3.22385763 13.7761424,3 13.5,3 L10.5,3 C10.2238576,3 10,3.22385763 10,3.5 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z"
+                                            fill="#000000" opacity="0.3" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span style="margin-left: 10px;" class="kt-nav__link-text">{{ "Communication.Trash" | translate }}</span>
+                        </a>
+                    </li>
+
+                    <li class="kt-nav__item d-none" routerLinkActive="active">
+                        <a routerLink="Announcement" class="kt-nav__link">
+                            <span class="svg-icon svg-icon-2x">
+                                <svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="22px"  viewBox="0 0 24 24">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <path fill="#000000" d="M9 17C9 17 16 18 19 21H20C20.5523 21 21 20.5523 21 20V13.937C21.8626 13.715 22.5 12.9319 22.5 12C22.5 11.0681 21.8626 10.285 21 10.063V4C21 3.44772 20.5523 3 20 3H19C16 6 9 7 9 7H5C3.89543 7 3 7.89543 3 9V15C3 16.1046 3.89543 17 5 17H6L7 22H9V17ZM11 8.6612C11.6833 8.5146 12.5275 8.31193 13.4393 8.04373C15.1175 7.55014 17.25 6.77262 19 5.57458V18.4254C17.25 17.2274 15.1175 16.4499 13.4393 15.9563C12.5275 15.6881 11.6833 15.4854 11 15.3388V8.6612ZM5 9H9V15H5V9Z"></path>
+                                </g>
+                                </svg>
+                            </span>
+                            <span style="margin-left: 10px;" class="kt-nav__link-text">{{ "Communication.Announcements" | translate }}</span>
+                        </a>
+                    </li>
+                    <li class="kt-nav__item d-none" routerLinkActive="active">
+                        <a routerLink="Suggestions" class="kt-nav__link">
+                            <span class="">
+                                <i class="fas fa-poll i-poll d-none"></i>
+                            </span>
+                            <span class="svg-icon svg-icon-2x">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <defs></defs>
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"></rect>
+                                        <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5"></rect>
+                                        <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5"></rect>
+                                        <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5"></rect>
+                                        <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5"></rect>
+                                    </g>
+                                </svg>
+                            </span>
+                            <span style="margin-left: 10px;" class="kt-nav__link-text">{{ "Communication.Polls" | translate }}</span>
+                        </a>
+                    </li>
+                    <li class="kt-nav__item d-none" routerLinkActive="active">
+                        <a routerLink="Meetings" class="kt-nav__link">
+                            <span class="svg-icon svg-icon-2x">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <defs/>
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24"/>
+                                    <rect fill="#000000" x="2" y="6" width="13" height="12" rx="2"/>
+                                    <path d="M22,8.4142119 L22,15.5857848 C22,16.1380695 21.5522847,16.5857848 21,16.5857848 C20.7347833,16.5857848 20.4804293,16.4804278 20.2928929,16.2928912 L16.7071064,12.7071013 C16.3165823,12.3165768 16.3165826,11.6834118 16.7071071,11.2928877 L20.2928936,7.70710477 C20.683418,7.31658067 21.316583,7.31658098 21.7071071,7.70710546 C21.8946433,7.89464181 22,8.14899558 22,8.4142119 Z" fill="#000000" opacity="0.3"/>
+                                </g>
+                            </svg>
+                        </span>
+                            
+                            <span class="svg-icon svg-icon-2x d-none">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path
+                                            d="M11.0879549,18.2771971 L17.8286578,12.3976203 C18.0367595,12.2161036 18.0583109,11.9002555 17.8767943,11.6921539 C17.8622027,11.6754252 17.8465132,11.6596867 17.8298301,11.6450431 L11.0891271,5.72838979 C10.8815919,5.54622572 10.5656782,5.56679309 10.3835141,5.7743283 C10.3034433,5.86555116 10.2592899,5.98278612 10.2592899,6.10416552 L10.2592899,17.9003957 C10.2592899,18.1765381 10.4831475,18.4003957 10.7592899,18.4003957 C10.8801329,18.4003957 10.9968872,18.3566309 11.0879549,18.2771971 Z"
+                                            fill="#000000" opacity="0.3"
+                                            transform="translate(14.129645, 12.002277) scale(-1, 1) translate(-14.129645, -12.002277) " />
+                                        <path
+                                            d="M5.08795487,18.2771971 L11.8286578,12.3976203 C12.0367595,12.2161036 12.0583109,11.9002555 11.8767943,11.6921539 C11.8622027,11.6754252 11.8465132,11.6596867 11.8298301,11.6450431 L5.08912711,5.72838979 C4.8815919,5.54622572 4.56567821,5.56679309 4.38351414,5.7743283 C4.30344325,5.86555116 4.25928988,5.98278612 4.25928988,6.10416552 L4.25928988,17.9003957 C4.25928988,18.1765381 4.48314751,18.4003957 4.75928988,18.4003957 C4.88013293,18.4003957 4.99688719,18.3566309 5.08795487,18.2771971 Z"
+                                            fill="#000000"
+                                            transform="translate(8.129645, 12.002277) scale(-1, 1) translate(-8.129645, -12.002277) " />
+                                    </g>
+                                </svg>
+                            </span>
+                            <span style="margin-left: 10px;" class="kt-nav__link-text">{{ "Communication.Meetings" | translate  }}</span>
+                        </a>
+                    </li>
+                    <!-- <li class="kt-nav__item" routerLinkActive="active">
+                        <a routerLink="Handover" class="kt-nav__link">
+                            <span class="svg-icon svg-icon-2x">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24"/>
+                                    <path d="M6,8 L18,8 L17.106535,19.6150447 C17.04642,20.3965405 16.3947578,21 15.6109533,21 L8.38904671,21 C7.60524225,21 6.95358004,20.3965405 6.89346498,19.6150447 L6,8 Z M8,10 L8.45438229,14.0894406 L15.5517885,14.0339036 L16,10 L8,10 Z" fill="#000000" fill-rule="nonzero"/>
+                                    <path d="M14,4.5 L14,3.5 C14,3.22385763 13.7761424,3 13.5,3 L10.5,3 C10.2238576,3 10,3.22385763 10,3.5 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#000000" opacity="0.3"/>
+                                </g>
+                            </svg>
+                        </span>
+                            <span style="margin-left: 10px;" class="kt-nav__link-text">Handover</span>
+                        </a>
+                    </li> -->
+                    <!-- <li class="kt-nav__item" routerLinkActive="active">
+                        <a routerLink="Draft" class="kt-nav__link">
+                            <span class="svg-icon svg-icon-2x">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24"/>
+                                    <path d="M6,2 L18,2 C18.5522847,2 19,2.44771525 19,3 L19,12 C19,12.5522847 18.5522847,13 18,13 L6,13 C5.44771525,13 5,12.5522847 5,12 L5,3 C5,2.44771525 5.44771525,2 6,2 Z M7.5,5 C7.22385763,5 7,5.22385763 7,5.5 C7,5.77614237 7.22385763,6 7.5,6 L13.5,6 C13.7761424,6 14,5.77614237 14,5.5 C14,5.22385763 13.7761424,5 13.5,5 L7.5,5 Z M7.5,7 C7.22385763,7 7,7.22385763 7,7.5 C7,7.77614237 7.22385763,8 7.5,8 L10.5,8 C10.7761424,8 11,7.77614237 11,7.5 C11,7.22385763 10.7761424,7 10.5,7 L7.5,7 Z" fill="#000000" opacity="0.3"/>
+                                    <path d="M3.79274528,6.57253826 L12,12.5 L20.2072547,6.57253826 C20.4311176,6.4108595 20.7436609,6.46126971 20.9053396,6.68513259 C20.9668779,6.77033951 21,6.87277228 21,6.97787787 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,6.97787787 C3,6.70173549 3.22385763,6.47787787 3.5,6.47787787 C3.60510559,6.47787787 3.70753836,6.51099993 3.79274528,6.57253826 Z" fill="#000000"/>
+                                </g>
+                            </svg></span>
+
+                            <span style="margin-left: 10px;" class="kt-nav__link-text">Draft</span>
+                        </a>
+                    </li> -->
+
+                    <!--Handover-->
+                    <!-- <li class="kt-nav__item " routerLinkActive="active">
+                        <a routerLink="Handover" class="kt-nav__link pl-3 ml-1">
+                            <span class="svg-icon svg-icon-2x">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"/>
+                                        <path d="M4,16 L5,16 C5.55228475,16 6,16.4477153 6,17 C6,17.5522847 5.55228475,18 5,18 L4,18 C3.44771525,18 3,17.5522847 3,17 C3,16.4477153 3.44771525,16 4,16 Z M1,11 L5,11 C5.55228475,11 6,11.4477153 6,12 C6,12.5522847 5.55228475,13 5,13 L1,13 C0.44771525,13 6.76353751e-17,12.5522847 0,12 C-6.76353751e-17,11.4477153 0.44771525,11 1,11 Z M3,6 L5,6 C5.55228475,6 6,6.44771525 6,7 C6,7.55228475 5.55228475,8 5,8 L3,8 C2.44771525,8 2,7.55228475 2,7 C2,6.44771525 2.44771525,6 3,6 Z" fill="#000000" opacity="0.3"/>
+                                        <path d="M10,6 L22,6 C23.1045695,6 24,6.8954305 24,8 L24,16 C24,17.1045695 23.1045695,18 22,18 L10,18 C8.8954305,18 8,17.1045695 8,16 L8,8 C8,6.8954305 8.8954305,6 10,6 Z M21.0849395,8.0718316 L16,10.7185839 L10.9150605,8.0718316 C10.6132433,7.91473331 10.2368262,8.02389331 10.0743092,8.31564728 C9.91179228,8.60740125 10.0247174,8.9712679 10.3265346,9.12836619 L15.705737,11.9282847 C15.8894428,12.0239051 16.1105572,12.0239051 16.294263,11.9282847 L21.6734654,9.12836619 C21.9752826,8.9712679 22.0882077,8.60740125 21.9256908,8.31564728 C21.7631738,8.02389331 21.3867567,7.91473331 21.0849395,8.0718316 Z" fill="#000000"/>
+                                    </g>
+                                </svg>
+                            </span>
+
+                            <span style="margin-left: 10px;" class="kt-nav__link-text">Handover</span>
+                        </a>
+                    </li> -->
+                    <div class="kt-nav__item kt-db-vm" (click)="More()">
+
+                        <div class="kt-vt-m1">
+                            <span class="kt-in-down-arw"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                                </svg></span>
+                            <span style="margin-left: 10px;" class="kt-nav__link-text">{{ "Communication.More" | translate  }}</span>
+                        </div>
+
+
+                    </div>
+                    <li class="kt-nav__item d-flex justify-content-between mt-3">
+                        <div>
+                            <span class="mr-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    aria-hidden="true" role="img" font-size="1.5rem" class="iconify iconify--mdi sm-icn"
+                                    width="1em" height="1em" viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="M16 17H5V7h11l3.55 5m-1.92-6.16C17.27 5.33 16.67 5 16 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h11c.67 0 1.27-.34 1.63-.85L22 12l-4.37-6.16Z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <!-- <i class="fa fa-tag mr-2"></i> -->
+                            <!-- <img src="https://cswebapps.com/TestCreativePlanner/assets/images/logo.png" height="30" /> -->
+                            <strong class="">{{ "Communication.LabelsTags" | translate }}</strong>
+                        </div>
+                        <span class="curser-pointer dropdown-toggle kt-no-after" type="button" data-toggle="dropdown">
+                            <i class="kt-nav__link-icon fas fa-plus kt-font-primary"></i>
+                        </span>
+                        <div id="labelsAddDiv"
+                            class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-menu-md border-light">
+                            <!--begin::Nav-->
+                            <ul class="kt-nav">
+                                <li class="kt-nav__head">
+                                    {{ "Communication.AddLabel" | translate }}
+                                </li>
+                                <li class="kt-nav__separator"></li>
+                                <li class="kt-nav__item px-3">
+                                    <input type="text" class="form-control"  id="txtlabels" name="LabelName">
+                                </li>
+                                <li class="kt-nav__separator"></li>
+                                <li class="kt-nav__foot">
+                                    <a (click)="AddLabels()" class="btn btn-primary text-white btn-bold btn-sm">{{ "Communication.AddLabel" | translate }}</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </li>
+                    <li class="kt-nav__separator"></li>
+                    <li class="kt-nav__item">
+                        <!-- (click)="focustextbox()" -->
+                    </li>
+
+                    <div class="label-height" id="div_labels">
+                        <li *ngFor="let ss of _Lstlabels" class="kt-nav__item LabelsClass" id="li_{{ss.LabelId}}">
+                            <a class="kt-nav__link pr-2">
+                                <small class="kt-lab-tag"></small>
+                                <span class="kt-nav__link-text curser-pointer"
+                                    (click)="LoadLabelMemos(ss.LabelId)">{{ss.LabelName}}</span>
+                                <span class="kt-nav__link-badge curser-pointer" data-toggle="dropdown">
+                                    <i class="fa fa-edit"></i></span>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-menu-md">
+                                    <!--begin::Nav-->
+                                    <ul class="kt-nav">
+                                        <li class="kt-nav__head">
+                                            {{ "Communication.EditLabel" | translate }}
+                                        </li>
+                                        <li class="kt-nav__separator"></li>
+                                        <li class="kt-nav__item px-3">
+                                            <input type="text" class="form-control" id="txteditlabels_{{ss.LabelId}}"
+                                                value="{{ss.LabelName}}" name="LabelName">
+                                        </li>
+                                        <li class="kt-nav__separator"></li>
+                                        <li class="kt-nav__foot">
+                                            <a (click)="UpdateLabel(ss.LabelId)"
+                                                class="btn btn-label-primary btn-bold btn-sm">{{ "Communication.UpdateLabel" | translate }}</a>
+                                        </li>
+                                    </ul>
+                                    <!--end::Nav-->
+                                </div>
+                                <div>
+                                    <span class="kt-nav__link-badge curser-pointer" data-toggle="dropdown"
+                                        (click)="fordelete(ss.LabelId)">
+                                        <i class="fa fa-trash"></i></span>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-menu-md">
+                                        <div class="card-body d-flex flex-column flex-center">
+                                            <div class="mb-2 kt-lb-dtl-body text-center">
+                                                <div class="kt-icon-lb-trash">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                                                        <path
+                                                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                                                    </svg>
+                                                </div>
+                                                <h4>
+                                                    {{ "Communication.AreyouSure" | translate  }}
+                                                </h4>
+                                                <p id="txteditlabels_{{ss.LabelId}}">
+                                                    {{ "Communication.LabelDeletesfirst" | translate }}
+                                                    <span>{{ss.LabelName}}</span> {{ "Communication.LabelDeletessecond" | translate }} {{ss.MemoCount}} {{ "Communication.LabelDeletesthrid" | translate }}
+                                                </p>
+                                            </div>
+                                            <div class="kt-dl-lb-btn">
+                                                <a class="btn btn-sm btn-secondary px-3 ml-2 mt-0">
+                                                    {{ "Communication.Cancel" | translate }} </a>
+                                                <a class="btn btn-label-primary btn-bold btn-sm"
+                                                    (click)="LabelsRemove()">
+                                                    {{ "Communication.Remove" | translate }} </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <button *ngIf="_Lstlabels.length==0" class="kt-new-label  dropdown-toggle kt-no-after"
+                            data-toggle="dropdown"> <i class="kt-nav__link-icon fas fa-plus mr-2"></i> create new
+                            label</button>
+                        <div id="labelsAddDiv"
+                            class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-menu-md border-light">
+                            <!--begin::Nav-->
+                            <ul class="kt-nav">
+                                <li class="kt-nav__head">
+                                    Add Label
+                                </li>
+                                <li class="kt-nav__separator"></li>
+                                <li class="kt-nav__item px-3">
+                                    <input type="text" class="form-control" id="txtcreateNewLabel" name="LabelName">
+                                </li>
+                                <li class="kt-nav__separator"></li>
+                                <li class="kt-nav__foot">
+                                    <a (click)="CreateNewLabel()" class="btn btn-primary text-white btn-bold btn-sm">Add
+                                        label</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ng-container *ngIf="_Lstlabels.length>4">
+                        <div (click)="LabelActivaleclass()" class="kt-cnt-v ">
+                            <p>+{{LabelCount}} {{ "Communication.More" | translate }} </p>
+                        </div>
+                    </ng-container>
+
+                    <li class="kt-nav__item ext-projects mt-3">
+                        <img src="assets/icons/Ep_Logo.png" height="34" />
+                        <strong class="">{{ "Communication.StreamPlanner" | translate }}</strong>
+                    </li>
+                    <li class="kt-nav__separator"></li>
+                    <div class="kt-projects-v" id="div_Projects">
+                        <li *ngFor="let ss of _EPProjects" class="kt-nav__item LabelsClass" id="li_{{ss.Project_Code}}">
+                            <a class="kt-nav__link">
+                                <span class="kt-nav__link-text curser-pointer textoverflow"
+                                    (click)="LoadEPMemos(ss.Project_Code)"
+                                    title="{{ss.Project_Name}}">{{ss.Project_Name}}</span>
+                            </a>
+                        </li>
+                        <div *ngIf="EpProjectCount==0" class="kt-no-projects">
+                            <span class="no-prg-svg">
+                                <svg width="18px" height="18px" fill="#a0a0a0" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <path
+                                        d="M448 75.2v361.7c0 24.3-19 43.2-43.2 43.2H43.2C19.3 480 0 461.4 0 436.8V75.2C0 51.1 18.8 32 43.2 32h361.7c24 0 43.1 18.8 43.1 43.2zm-37.3 361.6V75.2c0-3-2.6-5.8-5.8-5.8h-9.3L285.3 144 224 94.1 162.8 144 52.5 69.3h-9.3c-3.2 0-5.8 2.8-5.8 5.8v361.7c0 3 2.6 5.8 5.8 5.8h361.7c3.2.1 5.8-2.7 5.8-5.8zM150.2 186v37H76.7v-37h73.5zm0 74.4v37.3H76.7v-37.3h73.5zm11.1-147.3l54-43.7H96.8l64.5 43.7zm210 72.9v37h-196v-37h196zm0 74.4v37.3h-196v-37.3h196zm-84.6-147.3l64.5-43.7H232.8l53.9 43.7zM371.3 335v37.3h-99.4V335h99.4z" />
+                                </svg>
+                            </span>
+                            <span>{{ "Communication.EpNoProject" | translate }}</span>
+                        </div>
+                    </div>
+                    <ng-container *ngIf="_EPProjects.length>4">
+                        <div (click)="EPActivaleclass()" class="kt-prg-v ">
+                            <p>+{{EpProjectCount}} {{ "Communication.More" | translate }} </p>
+                        </div>
+                    </ng-container>
+                    <li class="kt-nav__item mt-3">
+                        <strong class="">{{ "Communication.Actions" | translate }}</strong>
+                    </li>
+                    <li class="kt-nav__separator"></li>
+                    <li class="kt-nav__item">
+                        <a class="kt-nav__link kt-nav__link-nohover">
+                            <i class="kt-nav__link-icon fa fa-square kt-font-ReplyRequired"></i>
+                            <span class="kt-nav__link-text">{{ "Communication.ReplyRequired" | translate }}</span>
+                        </a>
+                    </li>
+                    <li class="kt-nav__item">
+                        <a class="kt-nav__link kt-nav__link-nohover">
+                            <i class="kt-nav__link-icon fa fa-square kt-font-primary"></i>
+                            <span class="kt-nav__link-text">{{ "Communication.ApprovalPending" | translate }}</span>
+                        </a>
+                    </li>
+                    <li class="kt-nav__item">
+                        <a class="kt-nav__link kt-nav__link-nohover">
+                            <i class="kt-nav__link-icon fa fa-square kt-font-danger"></i>
+                            <span class="kt-nav__link-text">{{ "Communication.Expired" | translate }}</span>
+                        </a>
+                    </li>
+                    <!-- <li class="kt-nav__item">
+                        <a class="kt-nav__link kt-nav__link-nohover">
+                            <i class="kt-nav__link-icon fa fa-square kt-font-warning"></i>
+                            <span class="kt-nav__link-text">Under Process</span>
+                        </a>
+                    </li> -->
+                   
+                    <!-- <li class="kt-nav__item">
+                        <a class="kt-nav__link kt-nav__link-nohover">
+                            <i class="kt-nav__link-icon fa fa-square kt-font-success"></i>
+                            <span class="kt-nav__link-text">Done</span>
+                        </a>
+                    </li> -->
+                    <li>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="kt-grid__item kt-grid__item--fluid kt-portlet kt-inbox__list kt-inbox__list--shown">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+<input type="hidden" value="0" id="hdnMailId">
+<!-- <router-outlet></router-outlet> -->
+<app-new-memo [selectedMemoType]="parentValue"></app-new-memo>
+<div id="Kt_merge_Memo" class="wc-75 kt-quick-panel kt-quick-panel1">
+    <a (click)="ClosemergePanel()" class="kt-quick-panel__close" id="kt_quick_panel_close_btn"><i
+            class="flaticon2-delete"></i></a>
+    <!--Begin:: App Content -->
+    <div class="kt-grid__item kt-grid__item--fluid kt-app__content" id="kt_chat_content">
+        <div class="kt-chat">
+            <div class="kt-portlet kt-portlet--head-lg kt-portlet--last">
+                <div class="kt-portlet__head">
+                    <div class="kt-chat__head">
+                        <div class="">
+                            <div class="kt-chat__label">
+                                <h4 class="h4 text-muted mb-0">
+                                    Merge Memos
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="kt-chat__right"></div>
+                    </div>
+                </div>
+                <div class="kt-portlet__body kt-merge-body">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5">
+                            <div class="merge-list-box">
+                                <div class="kt-subject-icon">
+                                    <img class="w-100"
+                                        src="https://static.vecteezy.com/system/resources/previews/018/006/168/large_2x/chart-data-graph-reports-valuation-flat-color-icon-free-vector.jpg">
+                                </div>
+                                <div class="kt-subject-dw">
+                                    <div class="kt-merge-fl">
+                                        <h4>Please select Merge Memo</h4>
+                                        <h4>LeftSubjectSelected
+                                            <span class="kt-sub-RP"> LeftDropdownCount Reply's</span>
+                                        </h4>
+                                    </div>
+                                    <ng-select class="form-select" aria-label="Select example">
+                                        <ng-option>
+                                            _sub.Subject
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="kt-right-moving-iocn">
+                                <div class="ico animated">
+                                    <div class="circle circle-top"></div>
+                                    <div class="circle circle-main"></div>
+                                    <div class="circle circle-bottom"></div>
+                                    <svg class="svg" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 612 612"
+                                        style="enable-background:new 0 0 612 612;" xml:space="preserve">
+                                        <defs>
+                                            <clipPath id="cut-off-arrow">
+                                                <circle cx="306" cy="306" r="287" />
+                                            </clipPath>
+                                            <filter id="goo">
+                                                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                                                <feColorMatrix in="blur" mode="matrix"
+                                                    values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+                                                    result="goo" />
+                                                <feBlend in="SourceGraphic" in2="goo" />
+                                            </filter>
+                                        </defs>
+                                        <path class="st-arrow" d="M317.5,487.6c0.3-0.3,0.4-0.7,0.7-1.1l112.6-112.6c6.3-6.3,6.3-16.5,0-22.7c-6.3-6.3-16.5-6.3-22.7,0
+                                                      l-86,86V136.1c0-8.9-7.3-16.2-16.2-16.2c-8.9,0-16.2,7.3-16.2,16.2v301.1l-86-86c-6.3-6.3-16.5-6.3-22.7,0
+                                                      c-6.3,6.3-6.3,16.5,0,22.7l112.7,112.7c0.3,0.3,0.4,0.7,0.7,1c0.5,0.5,1.2,0.5,1.7,0.9c1.7,1.4,3.6,2.3,5.6,2.9
+                                                      c0.8,0.2,1.5,0.4,2.3,0.4C308.8,492.6,313.8,491.3,317.5,487.6z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="merge-list-box">
+                                <div class="kt-subject-icon">
+                                    <img class="w-100"
+                                        src="https://img.freepik.com/free-vector/add-files-concept-illustration_114360-341.jpg?w=826&t=st=1691056938~exp=1691057538~hmac=107c804f1854972ee84fcf374890a7150f668ec2f690255d7643b3d479dda88e">
+                                </div>
+                                <div class="kt-subject-dw">
+                                    <div class="kt-merge-fl">
+                                        <h4>Dropdowntopsubject</h4>
+                                    </div>
+                                    <ng-select class="form-select" aria-label="Select example">
+                                        <ng-option>
+                                            _sub.Subject
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="kt-meg-meg">
+                                <h4><span class="text-info"> LeftSubjectSelected</span> Will be merged into
+                                    <span>RightSubjectSelected</span>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 mt-4">
+                            <div class="kt-merge-note">
+                                <p>1. "Caution", You are about to merge subjects. </p>
+                                <p>2. This action will consolidate data and may result in irreversible changes.</p>
+                                <div class="kt-wrg-msg">
+                                    <span class="kt-war-svg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" height="27"
+                                            viewBox="0 0 27 27" width="27">
+                                            <path
+                                                d="M4.6 25.925H22.5C25.2 25.925 26.8 23.022 25.6 20.6195L16.6 3.80194C15.3 1.29934 11.8 1.29934 10.5 3.80194L1.5 20.6195C0.299997 23.022 1.9 25.925 4.6 25.925Z"
+                                                stroke="#4F4F4F" stroke-linecap="round" stroke-miterlimit="10"
+                                                stroke-width="2" />
+                                            <path
+                                                d="M13.9 18.0168H13.2C12.5 18.0168 12.6 17.4162 12.6 16.7154L11.9 9.30769C11.9 8.60696 12.5 8.00635 13.2 8.00635H13.9C14.6 8.00635 15.2 8.60696 15.2 9.30769L14.5 16.7154C14.5 17.4162 14.6 18.0168 13.9 18.0168Z"
+                                                fill="#4F4F4F" />
+                                            <path
+                                                d="M13.5 21.9208C14.4389 21.9208 15.2 21.3382 15.2 20.6195C15.2 19.9008 14.4389 19.3181 13.5 19.3181C12.5611 19.3181 11.8 19.9008 11.8 20.6195C11.8 21.3382 12.5611 21.9208 13.5 21.9208Z"
+                                                fill="#4F4F4F" />
+                                        </svg>
+                                    </span> A merged subject cannot be undone once it has been applied, so make sure
+                                    before merging it.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__foot fixed-bw">
+                    <div class="kt-chat__input">
+                        <div class="kt-chat__toolbar mt-0">
+                            <div class="kt_chat__actions">
+                                <button type="submit"
+                                    class="btn btn-brand btn-sm btn-bold kt-chat__reply">Merge</button>
+                                <a class="btn btn-sm btn-secondary px-3 ml-2 mt-0">cancal</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--End:: App Content-->
+</div>
+<div class="kt-aside-menu-overlay" (click)="closeInfo()"></div>
+<div class="kt-aside-menu-overlay1" (click)="closeInfo1()"></div>

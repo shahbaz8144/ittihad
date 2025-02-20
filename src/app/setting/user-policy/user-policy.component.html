@@ -1,0 +1,77 @@
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <!--begin::Portlet-->
+            <div class="kt-portlet ">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">
+                            {{ "Setting.UserPolicy" | translate }}
+                        </h3>
+                    </div>
+                </div>
+                <div class="kt-portlet__body kt-portlet__body_scroll">
+
+                    <div class="accordion accordion-solid accordion-toggle-plus" id="accordionpolicy">
+                        <!-- <div class="card">
+                            <div class="card-header" id="headingOne6">
+                                <div class="card-title fs-4" data-toggle="collapse" data-target="#policy1" aria-expanded="true" aria-controls="policy1">
+                                    <i class="fas fa-file text-info"></i> Policy 1
+                                </div>
+                                <div class="created-date">
+                                    <h6>01/12/2020</h6>
+                                </div>
+                            </div>
+                            <div id="policy1" class="collapse show" aria-labelledby="heading1" data-parent="#accordionpolicy">
+                                <div class="card-body">
+                                    <p class="kt-widget5__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="">
+                                            <a href="#" class="btn btn-info">
+                                                Accept</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div *ngFor="let p of _LstPolicy; let i=index" class="card">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title collapsed  fs-4" data-toggle="collapse"  [attr.data-target]="'#ac_' + p.PolicyId"  aria-expanded="false" aria-controls="policy20">
+                                        <i class="fas fa-file text-info"></i> {{p.PolicyHeader}}
+                                    </div>
+                                    <div class="created-date">
+                                        <h6>{{p.AgreementDate}}</h6>
+                                    </div>
+                                </div>
+                                <div id="ac_{{p.PolicyId}}" class="collapse" aria-labelledby="heading2" data-parent="#accordionpolicy">
+                                    <div class="card-body">
+                                        <div class="kt-widget5__desc" [innerHTML]="p.PolicyContent">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="card-header" id="policydivid_{{p.PolicyId}}">
+                                <div class="card-title fs-4" data-toggle="collapse" data-target="#policydiv_{{p.PolicyId}}" aria-controls="policydiv_{{p.PolicyId}}">
+                                    <i class="fas fa-file text-info"></i> {{p.PolicyHeader}}
+                                </div>
+                                <div class="created-date">
+                                    <h6>{{p.AgreementDate}}</h6>
+                                </div>
+                            </div>
+                            <div id="policydiv_{{p.PolicyId}}" class="collapse show" aria-labelledby="policydsivid_{{p.PolicyId}}" data-parent="#accordionpolicy_{{p.PolicyId}}">
+                                <div class="card-body">
+                                    <div class="kt-widget5__desc" [innerHTML]="p.PolicyContent">
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,27 @@
+<!-- begin:: Page -->
+
+
+<!-- <ng-container *ngIf="(IscurrentUser==false); then Login;">
+</ng-container>
+<ng-container *ngIf="(IscurrentUser==true); then RouterOutlet;">
+</ng-container>
+<ng-template #Login>
+    <app-login></app-login>
+</ng-template>
+
+<ng-template #RouterOutlet>
+    <ngx-loading-bar ref="http" [height]="'3px'" [includeSpinner]="false"></ngx-loading-bar>
+    <router-outlet></router-outlet>
+</ng-template> -->
+<!-- <ngx-loading-bar ref="router" [includeSpinner]="false"></ngx-loading-bar> -->
+
+<ngx-loading-bar ref="http" [height]="'3px'" [diameter]="'25px'" [includeSpinner]="true" [includeBar]="true"></ngx-loading-bar>
+
+<router-outlet></router-outlet>
+
+
+
+<!-- end:: Page -->
+<!-- <app-login></app-login> -->
+<!-- <app-header></app-header> -->
+<!-- <router-outlet></router-outlet> -->

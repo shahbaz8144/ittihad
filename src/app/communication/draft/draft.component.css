@@ -1,0 +1,26 @@
+.kt-inbox__items.draft .kt-inbox__item {
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 12px 15px;
+}
+
+.drft_cont {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 700px;
+}
+
+.w-100px {
+    width: 100px;
+}
+
+.kt-inbox__item:hover .memohover {
+    line-height: 41px;
+}
+
+@media (max-width: 1024px) {
+    .drft_cont {
+        width: 600px;
+    }
+}
+

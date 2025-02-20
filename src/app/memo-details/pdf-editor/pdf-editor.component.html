@@ -1,0 +1,10 @@
+<p>pdf-editor works!</p>
+
+<div class="pdf-container">
+    <canvas #pdfCanvas></canvas>
+    <canvas #signatureCanvas class="signature-canvas"></canvas>
+</div>
+
+<button (click)="enableSignature()">Enable Signature</button>
+<button (click)="clearSignature()">Clear Signature</button>
+<button (click)="saveSignedPDF()">Save Signed PDF</button>

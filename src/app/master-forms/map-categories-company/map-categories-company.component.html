@@ -1,0 +1,347 @@
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+                <h4 class="mb-3"> {{ "Masterform.MapCategoriesToCompany" | translate }} </h4>
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="form-group w-49">
+                        <label class="form-label">{{ "Masterform.Company" | translate }} </label>
+                        <!-- <div class="more_text1">
+                            <div><i class="fas fa-info-circle mr-1"></i>Add details here
+                            </div>
+                        </div> -->
+                        <span id="SearchCompanyForMapping" class="material-icons fs-4 float-right">
+                            info_outline
+                        </span>
+                        <ng-select (change)="mappedCatogries($event)" [placeholder]="SelectCompany" >
+                            <ng-option *ngFor="let obj of objcompanyList" [value]="obj.CompanyId">
+                                {{obj.CompanyName}}
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="kt-portlet mb-lg-0">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">
+                            {{ "Masterform.Category" | translate }}
+                        </h3>
+                    </div>
+                    <div class="kt-portlet__head-label">
+                        <!-- <mat-list-item>
+                            <mat-checkbox [(ngModel)]="master_checked" (change)="master_change()">
+                                Check/ Uncheck All</mat-checkbox>
+                        </mat-list-item> -->
+                    </div>
+                </div>
+                <div>
+                    <div class="kt-portlet__body scroll-body pt-2">
+                        <div class="mappy-cates">
+                            <div class="vertical-tree">
+                                   <ul>
+                                     <li *ngFor="let _cat of _LstCategory">
+                                        <div class="treeview__level" (click)="bindblock(_cat.CategoryId)" data-level="A">
+                                            <span class="level-title">{{_cat.CategoryName}}</span>
+                                            <input type="hidden" id="warehousehdn_{{_cat.CategoryId}}" (change)="Mapping_changeSelection()" value="0">
+                                        </div>
+                                        <ul id="blockdiv_{{_cat.CategoryId}}" class="blocksdiv" style="display: none;">
+                                            <ng-container *ngFor="let _subcat of filterItemsOfSubCategory(_cat.CategoryId); let i=index">
+                                                <ng-container *ngIf="_cat.CategoryId == _subcat.CategoryId">
+                                                    <li>
+                                                        <div class="treeview__level" data-level="B" (click)="bindRacks(_subcat.SubCategoryId)">
+                                                            <span class="level-title"><input type="checkbox"
+                                                                    value="_subcat.SubCategoryId"
+                                                                    (change)="updateCheckedValues($event, _subcat)"
+                                                                    class="ver-m mr-2">{{_subcat.SubCategoryName}}</span>
+                                                            <input type="hidden" id="blockshdn_{{_subcat.SubCategoryId}}" value="0">
+                                                        </div>
+                                                        <ul id="rackdiv_{{_subcat.SubCategoryId}}" class="racksdiv" style="display: none;">
+                                                            <ng-container *ngFor="let _childsubcat of filterItemsOfType(_subcat.SubCategoryId)">
+                                                                <ng-container *ngIf="_subcat.SubCategoryId == _childsubcat.SubId">
+                                                                    <li>
+                                                                        <div class="treeview__level" data-level="C" (click)="bindshelves(_childsubcat.SubCategoryId)">
+                                                                            <span class="level-title"><input
+                                                                                    type="checkbox" value="_childsubcat.SubId" 
+                                                                                    (change)="updateCheckedValues($event, _childsubcat)"
+                                                                                    class="ver-m mr-2">{{_childsubcat.SubCategoryName}}</span>
+                                                                            <input type="hidden" id="rackshdn_{{_childsubcat.SubCategoryId}}" value="0">
+                                                                        </div>
+                                                                        <ng-container *ngTemplateOutlet="ChildCategoryList; context:{ SubCategoryId:_childsubcat.SubCategoryId,CategoryId:_cat.CategoryId}">
+                                                                        </ng-container>
+
+                                                                        <ng-template #ChildCategoryList let-SubCategoryId="SubCategoryId" let-CategoryId="CategoryId">
+                                                                            <ul id="shelvesdiv_{{_childsubcat.SubCategoryId}}" class="shelvediv" style="display: none;">
+                                                                                <ng-container *ngFor="let _childsubcatII of filterItemsOfType(SubCategoryId)">
+                                                                                    <ng-container>
+                                                                                        <li>
+                                                                                            <div class="treeview__level" data-level="D" (click)="bindshelves(_childsubcatII.SubCategoryId)">
+                                                                                                <span class="level-title"><input
+                                                                                                    type="checkbox"
+                                                                                                    (change)="updateCheckedValues($event, _childsubcatII)"
+                                                                                                    class="ver-m mr-2">{{_childsubcatII.SubCategoryName}}</span>
+                                                                                                    <input type="hidden" id="rackshdn_{{_childsubcat.SubCategoryId}}" value="0">
+                                                                                            </div>
+                                                                                            <ng-container *ngTemplateOutlet="ChildCategoryList; context:{SubCategoryId:_childsubcatII.SubCategoryId,CategoryId:CategoryId}">
+                                                                                            </ng-container>
+                                                                                        </li>
+                                                                                    </ng-container>
+                                                                                </ng-container>
+                                                                            </ul>
+                                                                        </ng-template>
+                                                                       
+                                                                    </li>
+                                                                </ng-container>
+                                                            </ng-container>
+                                                        </ul>
+                                                    </li>
+                                                </ng-container>
+                                            </ng-container>
+                                        </ul>
+                                    </li>
+                                </ul>  
+                                <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                                    <!-- This is the tree node template for leaf nodes -->
+                                    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+                                      <!-- use a disabled button to provide padding for tree leaf -->
+                                      <button mat-icon-button disabled></button>
+                                      {{node.name}}
+                                    </mat-tree-node>
+                                    <!-- This is the tree node template for expandable nodes -->
+                                    <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding matTreeNodeToggle
+                                                   [cdkTreeNodeTypeaheadLabel]="node.name">
+                                      <button mat-icon-button matTreeNodeToggle
+                                              [attr.aria-label]="'Toggle ' + node.name">
+                                        <mat-icon class="mat-icon-rtl-mirror">
+                                          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                                        </mat-icon>
+                                      </button>
+                                      {{node.name}}
+                                    </mat-tree-node>
+                                  </mat-tree>
+                            </div>
+                        </div>
+                        <span>
+                        </span>
+                    </div>
+                    <div class="kt-portlet__foot p-3 text-right">
+                        <button class="btn btn-brand btn-sm btn-info" (click)="MappingCategory()" style="width: 150px">{{ "Masterform.Mapping" | translate }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="kt-portlet mb-0">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">
+                            {{ "Masterform.MappedCategories" | translate }}
+                        </h3>
+                    </div>
+                </div>
+                <div>
+                    <div class="kt-portlet__body scroll-body pt-2">
+                        <div class="unmappy-cates">
+                            <div class="vertical-tree">
+                                <ul>
+                                    <!-- <ng-container *ngFor="let _ucat of _UnLstCategory">
+                                        <li>
+                                            <a href="javascript:void(0);">
+                                                
+                                                {{_ucat.CategoryName}}
+                                            </a>
+
+                                            <ul *ngFor="let _usubcat of UnfilterItemsOfSubCategory(_ucat.CategoryId)">
+                                                <li>
+                                                    <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">{{_usubcat.SubCategoryName}}</a>
+
+                                                    <ul *ngFor="let _uchildsubcat of UnfilterItemsOfType(_usubcat.SubCategoryId)">
+                                                        <li>
+                                                            <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">{{_uchildsubcat.SubCategoryName}}</a>
+                                                            <ng-container *ngTemplateOutlet="UnChildCategoryList; context:{ SubCategoryId:_uchildsubcat.SubCategoryId,CategoryId:_ucat.CategoryId}">
+                                                            </ng-container>
+                                                            <ng-template #UnChildCategoryList let-SubCategoryId="SubCategoryId" let-CategoryId="CategoryId">
+                                                                <ul *ngFor="let _uchildsubcat of UnfilterItemsOfType(SubCategoryId)">
+                                                                    <li>
+                                                                        <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">{{_uchildsubcat.SubCategoryName}}</a>
+                                                                        <ng-container *ngTemplateOutlet="UnChildCategoryList; context:{SubCategoryId:_uchildsubcat.SubCategoryId,CategoryId:CategoryId }">
+                                                                        </ng-container>
+                                                                    </li>
+                                                                </ul>
+                                                            </ng-template>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ng-container> -->
+                                    <ng-container *ngFor="let _ucat of _UnLstCategory">
+                                        <li>
+                                            <div class="treeview__level" (click)="bindblock1(_ucat.CategoryId)" data-level="A">
+                                                <span class="level-title">{{_ucat.CategoryName}}</span>
+                                                <input type="hidden" id="1warehousehdn_{{_ucat.CategoryId}}" (change)="UnMapping_changeSelection()" value="0">
+                                            </div>
+                                            <ul id="1blockdiv_{{_ucat.CategoryId}}" class="blocksdiv1" style="display: none;">
+                                                <ng-container *ngFor="let _usubcat of UnfilterItemsOfSubCategory(_ucat.CategoryId)">
+                                                    <ng-container>
+                                                        <li>
+                                                            <div class="treeview__level" data-level="B" (click)="bindRacks1(_usubcat.SubCategoryId)">
+                                                                <span class="level-title"><input type="checkbox"
+                                                                    value="_usubcat.SubCategoryId"
+                                                                    class="ver-m mr-2">{{_usubcat.SubCategoryName}}</span>
+                                                                <input type="hidden" id="1blockshdn_{{_usubcat.SubCategoryId}}" value="0">
+                                                            </div>
+                                                            <ul id="1rackdiv_{{_usubcat.SubCategoryId}}" class="racksdiv1" style="display: none;">
+                                                                <ng-container *ngFor="let _uchildsubcat of UnfilterItemsOfType(_usubcat.SubCategoryId)">
+                                                                    <ng-container>
+                                                                        <li>
+                                                                            <div class="treeview__level" data-level="C" (click)="bindshelves1(_uchildsubcat.SubCategoryId)">
+                                                                                <span class="level-title"><input
+                                                                                    type="checkbox"
+                                                                                    class="ver-m mr-2">{{_uchildsubcat.SubCategoryName}}</span>
+                                                                                <input type="hidden" id="1rackshdn_{{_uchildsubcat.SubCategoryId}}" value="0">
+                                                                            </div>
+                                                                            <!-- <ng-container *ngTemplateOutlet="UnChildCategoryList; context:{ SubCategoryId:_uchildsubcat.SubCategoryId,CategoryId:_ucat.CategoryId}">
+                                                                            </ng-container> -->
+                                                                            <ng-template #ChildCategoryList let-SubCategoryId="SubCategoryId" let-CategoryId="CategoryId">
+                                                                                <ul id="1shelvesdiv_{{_uchildsubcat.SubCategoryId}}" class="shelvediv1" style="display: none;">
+                                                                                    <ng-container *ngFor="let _uchildsubcat of UnfilterItemsOfType(SubCategoryId)">
+                                                                                        <ng-container>
+                                                                                            <li>
+                                                                                                <div class="treeview__level" data-level="D">
+                                                                                                    <span class="level-title"><input
+                                                                                                    type="checkbox"
+                                                                                                    class="ver-m mr-2">{{_uchildsubcat.SubCategoryName}}</span>
+                                                                                                </div>
+                                                                                            </li>
+                                                                                            <!-- <ng-container *ngTemplateOutlet="UnChildCategoryList; context:{SubCategoryId:_uchildsubcat.SubCategoryId,CategoryId:CategoryId }">
+                                                                                            </ng-container> -->
+                                                                                        </ng-container>
+                                                                                    </ng-container>
+                                                                                </ul>
+                                                                            </ng-template>
+                                                                        </li>
+                                                                    </ng-container>
+                                                                </ng-container>
+                                                            </ul>
+                                                        </li>
+                                                    </ng-container>
+                                                </ng-container>
+                                            </ul>
+                                        </li>
+                                    </ng-container>
+                                </ul>
+                                <!-- <ul>
+                                    <li>
+                                        <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1</a>
+                                        <ul>
+                                            <li>
+                                                <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category </a>
+                                                <ul>
+                                                    <li>
+                                                        <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-1-1</a>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-1-1-1</a>
+                                                                <ul>
+                                                                    <li>
+                                                                        <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-1-1-1-1</a>
+                                                                        <ul>
+                                                                            <li>
+                                                                                <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-1-1-1-1-1</a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-1-1-1-1-2</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-1-1-2</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-1-1-3</a>
+                                                                <ul>
+                                                                    <li>
+                                                                        <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-1-1-3-1</a>
+                                                                        <ul>
+                                                                            <li>
+                                                                                <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-1-1-3-1-1</a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-1-1-3-1-2</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-2</a>
+                                                <ul>
+                                                    <li>
+                                                        <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-2-1</a>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-2-1-1</a>
+                                                                <ul>
+                                                                    <li>
+                                                                        <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-2-1-1-1</a>
+                                                                        <ul>
+                                                                            <li>
+                                                                                <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-2-1-1-1-1</a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-2-1-1-1-2</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-2-1-2</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-2-1-3</a>
+                                                                <ul>
+                                                                    <li>
+                                                                        <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-2-1-3-1</a>
+                                                                        <ul>
+                                                                            <li>
+                                                                                <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-2-1-3-1-1</a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="javascript:void(0);"><input type="checkbox" class="ver-m mr-2">Category 1-2-1-3-1-2</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__foot p-3 text-right">
+                        <button type="button" class="btn btn-info btn-sm" style="width: 150px">{{ "Masterform.Un-Mapped" | translate }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

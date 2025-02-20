@@ -1,0 +1,321 @@
+.mt-date {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    box-sizing: border-box;
+    background-color: white;
+    line-height: 1.5em;
+    border-radius: 10px;
+    width: 70px;
+    overflow: hidden;
+    box-shadow: 1px 3px 4px #cccccca3;
+}
+.mt-date-haed.met-month {
+    padding: 6px 0;
+    color: white;
+    background-color: #2786fb;
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: 0 5px 10px rgb(39 134 251);
+    text-transform: uppercase;
+}
+
+.mt-date-body.met-date {
+    line-height: 0.8em;
+    font-size: 2.5em;
+    padding-top: 7px;
+    font-weight: 500;
+}
+.mt-date-footer.met-day {
+    margin-top: 4px;
+    border-top: 1px dotted #959595;
+    margin: 7px 12px;
+    margin-bottom: 4px;
+}
+.kt-met-dtl {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2px;
+}
+.kt-app-svg-v svg {
+    display: inline-block;
+    height: 18px;
+    width: 18px;
+    margin-right: 10px;
+}
+.mt-left {
+    margin-right: 15px;
+}
+.kt-met-label {
+    font-size: 13px;
+    color: #999;
+    font-weight: 400;
+    width: 70px;
+}
+.kt-met-app {
+    margin-left: 1rem;
+    border-left: 1px solid #c9c9c9;
+    padding-left: 10px;
+}
+.kt-met-info {
+    font-size: 13px;
+}
+.kt-met-tlt-in h4 {
+    font-size: 20px;
+    text-transform: capitalize;
+    color: #5e5f63;
+    width: 400px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.mt-dtl-kt {
+    width: 100%;
+}
+.mt-dtl-right {
+    width: 53%;
+    border-left: 1px solid #ccc;
+    padding-left: 20px;
+}
+span.user-ft-ltr {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: #518ef6;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 400;
+    border-radius: 100px;
+}
+.org-name {
+   
+        display: flex;
+        align-items: center;
+        /* justify-content: flex-start; */
+        margin-left: 20px;
+  
+}
+.org-name-email p {
+    margin-bottom: 0px;
+    line-height: 6px;
+}
+.org-name-email span {
+    font-size: 11px;
+    line-height: 0px;
+    color: #ababab;
+}
+.org-name-email {
+    margin-left: 9px;
+}
+.attens-total {
+    display: flex;
+    align-items: center;
+    padding: 2px 12px;
+    margin-left: 20px;
+    background-color: #ccc;
+    border-radius: 5px;
+    line-height: 12px;
+    background-color: #f0ebff;
+    text-align: center;
+    color: #8157f4;
+    box-shadow: 0px 13px 74px -15px rgba(129,87,244,1);
+}
+.att-tv-kt {
+    padding: 5px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    line-height: 4px;
+}
+.stt-sp-line {
+    height: 18px;
+    width: 2px;
+    background-color: #fff;
+    margin: 0px 3px;
+    border-radius: 50px;
+}
+.met-card.mb-3 {
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    border-radius: 5px;
+}
+.kt-met-tlt-in {
+    display: flex;
+    align-items: center;
+}
+.kt-met-status {
+    margin-left: 15px;margin-top: -6px;
+}
+span.Running {
+    color: #37ad3b;
+    font-weight: 500;
+    font-size: 10px;
+    padding: 1px 6px;
+    background-color: #e9ffea;
+    border-radius: 5px;
+    text-transform: uppercase;
+    top: -2px;
+}
+.Sheduled {
+    color: #818181;
+    font-weight: 500;
+    font-size: 10px;
+    padding: 1px 6px;
+    background-color: #e9e9e9;
+    border-radius: 5px;
+    text-transform: uppercase;
+    position: relative;
+    top: -2px;
+}
+.date-d {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.date-anc {
+    font-size: 13px;
+    line-height: 1.6923076923;
+    color: #848c93;
+}
+
+.dat-icn {
+    width: 16px;
+    height: 16px;
+    color: #848c93;
+}
+.date-mt-v {
+    margin-bottom: 10px;
+    border-left: 2px solid #3f51b56b;
+    padding-left: 5px;
+}
+
+.tabs-iconic{
+    background-color: #e2e8f0;
+    background-color: #e2e8f0c9;
+    color: #475569;
+    border-radius: 0.5rem;
+}
+.icon-btn{
+    display: inline-flex;
+    padding: 0.25rem 0.75rem;
+    flex-shrink: 0;
+    justify-content: center;
+    letter-spacing: .025em;
+    color: rgb(71, 85, 105);
+    transform: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+}
+span.lbl-hdn {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 500;
+}
+.icn-active {
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px;
+    border-radius: 8px;
+    background-color: #fff;
+    z-index: 2;
+}
+.icn-hvr.active {
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px;
+    border-radius: 5px;
+    background-color: #fff;
+    z-index: 2;
+}
+
+.icn-hvr {
+    margin: 1px 5px;
+}
+i.date-rg-icon {
+    position: relative;
+    top: -2px;
+    left: 7px;
+}
+.datrange {
+    display: flex;
+    align-items: center;
+    border: 0;
+    margin-left: 0px;
+    background-color: #e8edf3;
+    border-radius: 3px;
+    padding: 3px 11px;
+    color: #646c9a;
+}
+.active .datrange{
+    background-color: #e8edf300;
+}
+.datrange input[type=text] {
+    padding: 0px 0px;
+    height: auto;
+    border: 0;
+    line-height: 14px;
+    background-color: transparent;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 590;
+}
+.datrange .la-calendar{
+    position: absolute;
+    top: 0px;
+    right: -10px;
+}
+.active .datrange .la-calendar{
+    right: -16px;
+    top: 1.2px;
+}
+
+.md-drppicker{
+    width: max-content;
+    left: -34rem !important;
+    top: 3rem !important;
+    z-index: 999999999999999999;
+    display: inline-block;
+}
+.org-name-email p {
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 10px!important;
+}
+
+::ng-deep .md-drppicker.drops-down-auto.ltr.shown.double.show-ranges {
+    min-width: 640px !important;
+    top: 45px !important;
+    right: unset !important;
+    left: -35.6rem !important;
+}
+
+::ng-deep button.btn.btn-default.clear svg {
+    display: none;
+}
+
+::ng-deep .md-drppicker .buttons_input .clear {
+    background-color: #e0e7ed !important;
+    margin-right: 15px;
+}
+
+::ng-deep .md-drppicker .btn {
+    padding: 0 12px !important;
+}
+.datrange input::placeholder {
+    text-transform: uppercase;
+    color: #606d7f;  
+    font-size: 12px;
+    font-weight: 500;
+}
+.kt-body-arabic .org-name-email span {
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 10px !important;
+    display: block;
+    margin-top: 4px;
+}

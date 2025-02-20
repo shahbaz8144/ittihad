@@ -1,0 +1,1974 @@
+<!-- New Memo Mat start here -->
+<div id="progress-overlay" class="progress-overlay"></div>
+<div id="Kt_reply_Memo_New" class="kt-quick-panel kt-quick-panel2">
+    <a (click)="CloseReplyPanelV2()" class="kt-quick-panel__close" id="kt_quick_panel_close_btn"><i
+            class="flaticon2-delete"></i></a>
+    <div class="kt-grid__item kt-grid__item--fluid kt-app__content" id="kt_chat_content">
+        <div class="kt-chat">
+            <div class="kt-portlet kt-portlet--head-lg kt-portlet--last">
+                <div class="kt-portlet__head">
+                    <div class="kt-chat__head">
+                        <div class="newmemo-nav-div">
+                            <!-- <div class="kt-chat__label">
+                                <a href="#" id="txtmemotypevalue" class="kt-chat__title">
+                                    {{selectedMemoType}}
+                                </a>
+                            </div> -->
+
+                            <ul class="nav nav-pills" id="newmemo-tab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button (click)="MemoTypeChangeEvent('New Memo')" name="MemoType" value="New Memo"
+                                        [(ngModel)]="newmemoService._NewMemoobj.MemoType" class="nav-link active"
+                                        id="newmemo-memo-tab" data-toggle="pill" data-target="#newmemo-memo"
+                                        type="button" role="tab" aria-controls="newmemo-memo" aria-selected="true">new
+                                        memo</button>
+                                </li>
+                                <li class="nav-item" role="presentation" *ngIf="newmemofile.length === 0">
+                                    <button (click)="MemoTypeChangeEvent('Announcements')" name="MemoType"
+                                        value="Announcements" [(ngModel)]="newmemoService._NewMemoobj.MemoType"
+                                        class="nav-link" id="newmemo-announcement-tab" data-toggle="pill"
+                                        data-target="#newmemo-announcement" type="button" role="tab"
+                                        aria-controls="newmemo-announcement" aria-selected="false">announcement</button>
+                                </li>
+                                <li class="nav-item" role="presentation"
+                                    *ngIf="this.CurrentRoleId == 502 &&  newmemofile.length === 0">
+                                    <button (click)="MemoTypeChangeEvent('Suggestions')" name="MemoType"
+                                        value="Suggestions" [(ngModel)]="newmemoService._NewMemoobj.MemoType"
+                                        class="nav-link" id="newmemo-vote-tab" data-toggle="pill"
+                                        data-target="#newmemo-vote" type="button" role="tab"
+                                        aria-controls="newmemo-vote" aria-selected="false">vote</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button (click)="MemoTypeChangeEvent('Workflow')" name="MemoType"
+                                        [(ngModel)]="newmemoService._NewMemoobj.MemoType" class="nav-link"
+                                        id="newmemo-workflow-tab" data-toggle="pill" data-target="#newmemo-workflow"
+                                        type="button" role="tab" aria-controls="newmemo-workflow"
+                                        (click)="WorkflowDropdownlist()" aria-selected="false">workflow</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="kt-chat__right"></div>
+                    </div>
+                </div>
+                <div class="col-md-12 progress_container">
+                    <div class="progress form-group" *ngIf="progress>0">
+                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                            [style.width.%]="progress">
+                            {{progress}}
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__body scroll-auto pt-2">
+                    <div class="kt-inbox__reply kt-inbox__reply--on">
+                        <div class="kt-inbox__form" id="kt_inbox_reply_form">
+                            <div class="kt-inbox__body">
+                                <div class="kt-inbox__to">
+                                    <div class="kt-inbox__wrapper">
+                                        <div class="tab-content" id="newmemo-tabContent">
+                                            <div class="tab-pane fade show active" id="newmemo-memo" role="tabpanel"
+                                                aria-labelledby="newmemo-memo-tab"></div>
+                                            <div class="tab-pane fade" id="newmemo-announcement" role="tabpanel"
+                                                aria-labelledby="newmemo-announcement-tab"></div>
+                                            <div class="tab-pane fade" id="newmemo-vote" role="tabpanel"
+                                                aria-labelledby="newmemo-vote-tab"></div>
+                                            <div class="tab-pane fade" id="newmemo-workflow" role="tabpanel"
+                                                aria-labelledby="newmemo-workflow-tab">
+                                                <div>
+                                                    <div *ngIf="(selectedMemoType == 'Workflow' || selectedMemoType == 'سير العمل')"
+                                                        class="d-flex align-items-center px-3 py-2 min-h-50px">
+                                                        <div class="flex-grow-1 brdng-0">
+                                                            <div type="button" class="workflowuser-select" (click)="open_workflow_user_modal()">
+                                                                <div class="title">Select Workflow</div>
+                                                            </div>
+                                                           
+                                                            <div class="kt-error">
+                                                                <span class="kt-erorr-msg" *ngIf="WorkflowErrorlog">
+                                                                    {{ "Communication.PleaseSelectWorkflow" | translate }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="workflow-selcted-div" >
+                                                        <div class="workflow-selected-ul">
+                                                            <div class="workflow-selected-li active" *ngFor="let item of SelectedUsers" [ngClass]="{ 'active': item.WorkFlowId === selectedWorkflowId }">
+                                                                <span class="svg-icon svg-icon-2x"><svg fill="currentColor" width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" d="M1 3a2 2 0 012-2h6.5a2 2 0 012 2v6.5a2 2 0 01-2 2H7v4.063C7 16.355 7.644 17 8.438 17H12.5v-2.5a2 2 0 012-2H21a2 2 0 012 2V21a2 2 0 01-2 2h-6.5a2 2 0 01-2-2v-2.5H8.437A2.938 2.938 0 015.5 15.562V11.5H3a2 2 0 01-2-2V3zm2-.5a.5.5 0 00-.5.5v6.5a.5.5 0 00.5.5h6.5a.5.5 0 00.5-.5V3a.5.5 0 00-.5-.5H3zM14.5 14a.5.5 0 00-.5.5V21a.5.5 0 00.5.5H21a.5.5 0 00.5-.5v-6.5a.5.5 0 00-.5-.5h-6.5z"></path></g></svg></span>
+                                                                <span (click)="WorkFlowDetails(item.WorkFlowId)" class="workflow-selected-li-text" style="margin-left: 10px;"> {{item.WorkFlowName}} </span>
+                                                                <span class="workflow-selected-li-user d-none">
+                                                                    <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                                                    <span> {{item.sortId}} </span>
+                                                                </span>
+                                                            </div>
+                                                            <!-- <div class="workflow-selected-li">
+                                                                <span class="svg-icon svg-icon-2x"><svg fill="currentColor" width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" d="M1 3a2 2 0 012-2h6.5a2 2 0 012 2v6.5a2 2 0 01-2 2H7v4.063C7 16.355 7.644 17 8.438 17H12.5v-2.5a2 2 0 012-2H21a2 2 0 012 2V21a2 2 0 01-2 2h-6.5a2 2 0 01-2-2v-2.5H8.437A2.938 2.938 0 015.5 15.562V11.5H3a2 2 0 01-2-2V3zm2-.5a.5.5 0 00-.5.5v6.5a.5.5 0 00.5.5h6.5a.5.5 0 00.5-.5V3a.5.5 0 00-.5-.5H3zM14.5 14a.5.5 0 00-.5.5V21a.5.5 0 00.5.5H21a.5.5 0 00.5-.5v-6.5a.5.5 0 00-.5-.5h-6.5z"></path></g></svg></span>
+                                                                <span class="workflow-selected-li-text" style="margin-left: 10px;">Workflow 2</span>
+                                                                <span class="workflow-selected-li-user">
+                                                                    <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                                                    <span>2</span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="workflow-selected-li">
+                                                                <span class="svg-icon svg-icon-2x"><svg fill="currentColor" width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" d="M1 3a2 2 0 012-2h6.5a2 2 0 012 2v6.5a2 2 0 01-2 2H7v4.063C7 16.355 7.644 17 8.438 17H12.5v-2.5a2 2 0 012-2H21a2 2 0 012 2V21a2 2 0 01-2 2h-6.5a2 2 0 01-2-2v-2.5H8.437A2.938 2.938 0 015.5 15.562V11.5H3a2 2 0 01-2-2V3zm2-.5a.5.5 0 00-.5.5v6.5a.5.5 0 00.5.5h6.5a.5.5 0 00.5-.5V3a.5.5 0 00-.5-.5H3zM14.5 14a.5.5 0 00-.5.5V21a.5.5 0 00.5.5H21a.5.5 0 00.5-.5v-6.5a.5.5 0 00-.5-.5h-6.5z"></path></g></svg></span>
+                                                                <span class="workflow-selected-li-text" style="margin-left: 10px;">Workflow 3</span>
+                                                                <span class="workflow-selected-li-user">
+                                                                    <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                                                    <span>2</span>
+                                                                </span>
+                                                            </div> -->
+                                                        </div>
+                                                        <div class="newmemo-workflow-preview" *ngIf="SelectedUsers.length>0">
+                                                            <div class="workflow-preview-body">
+                                                                <div class="workflow-item-ul">
+                                                                    <div class="workflow-item-li workflow-start">
+                                                                        <span>Start</span>
+                                                                        <svg class="line-svg" viewBox="0 0 10 100">
+                                                                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                                                                        </svg>
+                                                                    </div>
+                                                                    <ng-container *ngFor="let details of Workflowdetails; let last = last">
+                                                                        <div class="workflow-item-li reject-new-workflow">
+                                                                            <div class="workflow-item-user-details">
+                                                                                <div class="workflow-item-user-img">
+                                                                                    <img *ngIf="details.UserInboxThumbnail==''" src="assets/media/icons/user2.png" class="" alt="">
+                                <img *ngIf="details.UserInboxThumbnail!=''" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{details.UserInboxThumbnail}}" class="">
+                                                                                </div>
+                                                                                <div class="workflow-item-user-control">
+                                                                                    <div class="workflow-item-user-stepname">{{details.StepName}}</div>
+                                                                                    <div class="workflow-item-name">{{details.DisplayName}}</div>
+                                                                                    <div class="workflow-item-desgniation">{{details.DesignationName}}</div>
+                                                                                    <div class="workflow-item-badges">
+                                                                                        <span class="wf-bg active" *ngIf="details.isActive==true" >Active</span>
+                                                                                        <span class="wf-bg inactive" *ngIf="details.isActive==false" >In-Active</span>
+                                                                                        <span class="wf-bg attach" *ngIf="details.AttachmentRequired == true">Attachment Required</span>
+                                                                                    </div>
+                                                
+                                                                                    <!-- Render Approved & Rejected if both conditions are true -->
+                                                
+                                                                                    <ng-container *ngIf="hasApprovedAndRejectedNextStep(details.Actions)">
+                                                                                        <p class="workflow-item-detail apprej">Approved &nbsp; Rejected</p>
+                                                                                    </ng-container>
+                                                
+                                                
+                                                                                    <!-- Render individual Approved and Rejected otherwise -->
+                                                                                    <ng-container *ngIf="!hasApprovedAndRejectedNextStep(details.Actions)">
+                                                                                        <ng-container *ngFor="let actions of details.Actions">
+                                                                                            <p class="workflow-item-detail" *ngIf="actions.UserAction === 'Approved' && actions.SystemAction === 'Next step'">
+                                                                                                Approved
+                                                                                            </p>
+                                                                                            <p class="workflow-item-detail" *ngIf="actions.UserAction === 'Rejected' && actions.SystemAction === 'Next step'">
+                                                                                                Rejected
+                                                                                            </p>
+                                                                                            <p class="workflow-item-detail" *ngIf="actions.UserAction === 'Replied' && actions.SystemAction === 'Next step'">
+                                                                                                Replied
+                                                                                            </p>
+                                                                                        </ng-container>
+                                                                                    </ng-container>
+                                                
+                                                                                </div>
+                                                                            </div>
+                                                                            <ng-container *ngFor="let actions of details.Actions">
+                                                                                <svg class="line-svg" viewBox="0 0 10 100" *ngIf="(actions.UserAction == 'Approved' || actions.UserAction == 'Replied') && actions.SystemAction == 'Next step'">
+                                                                                    <line x1="5" x2="5" y1="0" y2="100"></line>
+                                                                                </svg>
+                                                                                <ng-container *ngIf="!last">
+                                                                                    <ng-container *ngIf="actions.UserAction == 'Rejected' && actions.SystemAction == 'Close'">
+                                                                                        <svg class="reject-workflow-line line-svg" viewBox="0 0 10 100">
+                                                                                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                                                                                        </svg>
+                                                                                        <div class="reject-workflow-info">
+                                                                                            <span>Closed</span>
+                                                                                        </div>
+                                                                                        <div class="reject-workflow-info-bg">
+                                                                                            Rejected
+                                                                                        </div>
+                                                                                    </ng-container>
+                                                                                    <ng-container *ngIf="actions.UserAction == 'Replied' && actions.SystemAction == 'Close'">
+                                                                                        <svg class="reject-workflow-line line-svg" viewBox="0 0 10 100">
+                                                                                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                                                                                        </svg>
+                                                                                        <div class="reject-workflow-info">
+                                                                                            <span>Closed</span>
+                                                                                        </div>
+                                                                                    </ng-container>
+                                                                                </ng-container>
+                                                                            </ng-container>
+                                                                            <ng-container *ngIf="last">
+                                                                                <svg class="line-svg" viewBox="0 0 10 100">
+                                                                                    <line x1="5" x2="5" y1="0" y2="100"></line>
+                                                                                </svg>
+                                                                            </ng-container>
+                                                                        </div>
+                                                                        <ng-container *ngIf="last">
+                                                                            <div class="workflow-item-li last-workflow workflow-end">
+                                                                                <span>Closed</span>
+                                                                                <svg class="line-svg" viewBox="0 0 10 100">
+                                                                                    <line x1="5" x2="5" y1="0" y2="100"></line>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </ng-container>
+                                                                    </ng-container>
+    
+    
+                                                                    <div class="workflow-item-li d-none">
+                                                                        <div class="workflow-item-user-details">
+                                                                            <div class="workflow-item-user-img">
+                                                                                <img
+                                                                                    src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/31/thumbs/298200_Thumbnail.jpeg">
+                                                                            </div>
+                                                                            <div class="workflow-item-user-control">
+                                                                                <div class="workflow-item-name">Ramesh Kumar
+                                                                                </div>
+                                                                                <div class="workflow-item-desgniation">UI
+                                                                                    Developer</div>
+                                                                                <div class="workflow-item-badges">
+                                                                                    <span class="wf-bg active">Active</span>
+                                                                                </div>
+                                                                                <p class="workflow-item-detail">Approved</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <svg class="line-svg" viewBox="0 0 10 100">
+                                                                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                                                                        </svg>
+                                                                    </div>
+                                                                    <div class="workflow-item-li d-none">
+                                                                        <div class="workflow-item-user-details">
+                                                                            <div class="workflow-item-user-img">
+                                                                                <img alt="image"
+                                                                                    src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/38/thumbs/265846_premium_photo-1661726660137-61b182d93809.jpeg"
+                                                                                    class="ng-star-inserted">
+                                                                            </div>
+                                                                            <div class="workflow-item-user-control">
+                                                                                <div class="workflow-item-name">Srujan
+                                                                                    Devbox</div>
+                                                                                <div class="workflow-item-desgniation">UI
+                                                                                    Developer</div>
+                                                                                <div class="workflow-item-badges">
+                                                                                    <span class="wf-bg active">Active</span>
+                                                                                </div>
+                                                                                <p class="workflow-item-detail">Approved</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <svg class="line-svg" viewBox="0 0 10 100">
+                                                                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                                                                        </svg>
+                                                                    </div>
+                                                                    <div
+                                                                        class="workflow-item-li reject-new-workflow d-none ">
+                                                                        <div class="workflow-item-user-details">
+                                                                            <div class="workflow-item-user-img">
+                                                                                <img alt="image"
+                                                                                    src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/1861/thumbs/263918_icons8-user-48.png"
+                                                                                    class="ng-star-inserted">
+                                                                            </div>
+                                                                            <div class="workflow-item-user-control">
+                                                                                <div class="workflow-item-name">Shiva Devbox
+                                                                                </div>
+                                                                                <div class="workflow-item-desgniation">UI
+                                                                                    Developer</div>
+                                                                                <div class="workflow-item-badges">
+                                                                                    <span class="wf-bg active">Active</span>
+                                                                                </div>
+                                                                                <p class="workflow-item-detail apprej">
+                                                                                    Approved &nbsp; Rejected</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <svg class="line-svg" viewBox="0 0 10 100">
+                                                                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                                                                        </svg>
+                                                                        <svg class="reject-workflow-line line-svg"
+                                                                            viewBox="0 0 10 100">
+                                                                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                                                                        </svg>
+                                                                        <div class="reject-workflow-info">
+                                                                            <span>Closed</span>
+                                                                        </div>
+                                                                        <div class="reject-workflow-info-bg">
+                                                                            Rejected
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="workflow-item-li d-none ">
+                                                                        <div class="workflow-item-user-details">
+                                                                            <div class="workflow-item-user-img">
+                                                                                <img src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/user2.png"
+                                                                                    alt="image" class="ng-star-inserted">
+                                                                            </div>
+                                                                            <div class="workflow-item-user-control">
+                                                                                <div class="workflow-item-name">Vinod Devbox
+                                                                                </div>
+                                                                                <div class="workflow-item-desgniation">
+                                                                                    Graphic Designer</div>
+                                                                                <div class="workflow-item-badges">
+                                                                                    <span class="wf-bg inactive">In
+                                                                                        active</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <svg class="line-svg" viewBox="0 0 10 100">
+                                                                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                                                                        </svg>
+                                                                    </div>
+                                                                    <div
+                                                                        class="workflow-item-li last-workflow workflow-end d-none ">
+                                                                        <span>Closed</span>
+                                                                        <svg class="line-svg" viewBox="0 0 10 100">
+                                                                            <line x1="5" x2="5" y1="0" y2="100"></line>
+                                                                        </svg>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="workflow-item-nodep-ul d-none">
+                                                                    <span
+                                                                        class="workflow-item-nodep-card wf-nd-s">Start</span>
+                                                                    <div class="workflow-item-nodep-branch lv1">
+                                                                        <div class="workflow-item-nodep-entry">
+                                                                            <div class="workflow-item-nodep-card">
+                                                                                <div class="workflow-item-user-details">
+                                                                                    <div class="workflow-item-user-img">
+                                                                                        <img
+                                                                                            src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/31/thumbs/298200_Thumbnail.jpeg">
+                                                                                    </div>
+                                                                                    <div class="workflow-item-user-control">
+                                                                                        <div class="workflow-item-name">
+                                                                                            Ramesh Kumar</div>
+                                                                                        <div
+                                                                                            class="workflow-item-desgniation">
+                                                                                            UI Developer</div>
+                                                                                        <div class="workflow-item-badges">
+                                                                                            <span
+                                                                                                class="wf-bg active">Active</span>
+                                                                                            <span
+                                                                                                class="wf-bg app">Approved</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="workflow-item-nodep-entry">
+                                                                            <div class="workflow-item-nodep-card">
+                                                                                <div class="workflow-item-user-details">
+                                                                                    <div class="workflow-item-user-img">
+                                                                                        <img alt="image"
+                                                                                            src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/38/thumbs/265846_premium_photo-1661726660137-61b182d93809.jpeg"
+                                                                                            class="ng-star-inserted">
+                                                                                    </div>
+                                                                                    <div class="workflow-item-user-control">
+                                                                                        <div class="workflow-item-name">
+                                                                                            Srujan Devbox</div>
+                                                                                        <div
+                                                                                            class="workflow-item-desgniation">
+                                                                                            UI Developer</div>
+                                                                                        <div class="workflow-item-badges">
+                                                                                            <span
+                                                                                                class="wf-bg active">Active</span>
+                                                                                            <span
+                                                                                                class="wf-bg app">Approved</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="workflow-item-nodep-entry">
+                                                                            <div class="workflow-item-nodep-card">
+                                                                                <div class="workflow-item-user-details">
+                                                                                    <div class="workflow-item-user-img">
+                                                                                        <img alt="image"
+                                                                                            src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/1861/thumbs/263918_icons8-user-48.png"
+                                                                                            class="ng-star-inserted">
+                                                                                    </div>
+                                                                                    <div class="workflow-item-user-control">
+                                                                                        <div class="workflow-item-name">
+                                                                                            Shiva Devbox</div>
+                                                                                        <div
+                                                                                            class="workflow-item-desgniation">
+                                                                                            UI Developer</div>
+                                                                                        <div class="workflow-item-badges">
+                                                                                            <span
+                                                                                                class="wf-bg active">Active</span>
+                                                                                            <span
+                                                                                                class="wf-bg rej">Rejected</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="workflow-item-nodep-entry">
+                                                                            <div class="workflow-item-nodep-card">
+                                                                                <div class="workflow-item-user-details">
+                                                                                    <div class="workflow-item-user-img">
+                                                                                        <img src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/user2.png"
+                                                                                            alt="image"
+                                                                                            class="ng-star-inserted">
+                                                                                    </div>
+                                                                                    <div class="workflow-item-user-control">
+                                                                                        <div class="workflow-item-name">
+                                                                                            Vinod Devbox</div>
+                                                                                        <div
+                                                                                            class="workflow-item-desgniation">
+                                                                                            Graphic Designer</div>
+                                                                                        <div class="workflow-item-badges">
+                                                                                            <span class="wf-bg inactive">In
+                                                                                                active</span>
+                                                                                            <span
+                                                                                                class="wf-bg rej">Rejected</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="d-flex align-items-center px-3 py-2 fd-c d-none">
+                                            <div class="d-flex align-items-center">
+                                                <div class="kt-inbox__label mr-2 nowrap">
+                                                    {{ "Communication.Type" | translate }}:
+                                                </div>
+                                                <ng-container *ngIf=" this.currentLang =='en'">
+                                                    <select (change)="MemoTypeChangeEvent($event)" name="MemoType"
+                                                        [(ngModel)]="newmemoService._NewMemoobj.MemoType"
+                                                        class="form-control" id="memtyp" required>
+                                                        <option value="New Memo">New Memo</option>
+                                                        <option *ngIf="newmemofile.length === 0" value="Announcements">
+                                                            Announcement</option>
+                                                        <option
+                                                            *ngIf="this.CurrentRoleId == 502 &&  newmemofile.length === 0"
+                                                            value="Suggestions">
+                                                            Vote</option>
+                                                    </select>
+                                                </ng-container>
+                                                <ng-container *ngIf=" this.currentLang =='ar'">
+                                                    <select (change)="MemoTypeChangeEvent($event)" name="MemoType"
+                                                        [(ngModel)]="newmemoService._NewMemoobj.MemoType"
+                                                        class="form-control" id="memtyp2" required>
+                                                        <option value="New Memo">مذكرة جديدة</option>
+                                                        <option value="Announcements">الإعلانات</option>
+                                                        <option *ngIf="this.CurrentRoleId == 502" value="Suggestions">
+                                                            اقتراحات
+                                                        </option>
+                                                    </select>
+                                                </ng-container>
+
+
+                                            </div>
+
+                                        </div> -->
+
+                                        <div *ngIf="(selectedMemoType == 'New Memo' || selectedMemoType == 'مذكرة جديدة') || 
+                                        (selectedMemoType == 'Approval' || selectedMemoType == 'موافقة')"
+                                            class="d-flex align-items-center px-3 py-2 min-h-50px">
+
+                                            <div class="flex-grow-1 brdng-0">
+                                                <!-- (change)="onChangeCompany($event)" [ngModelOptions]="{standalone: true}" -->
+                                                <!-- <ng-select [appendTo]="'body'" [(ngModel)]="newmemoService._NewMemoobj.ToUserAry" name="ToUserAry" (change)="onChangeToUser($event)" placeholder="Select Users" [disabled]="isFormDisabled" multiple="true" required>
+                                                        <ng-option [value]="item.UserId" [disabled]="item.disabled" *ngFor="let item of _UpdatedTOUsers">
+                                                            {{item.ContactName}}
+                                                        </ng-option>
+                                                    </ng-select> -->
+                                                <mat-form-field class="example-chip-list">
+                                                    <mat-label>{{ "Communication.TO" | translate }}:</mat-label>
+                                                    <mat-chip-list #chipList aria-label="Fruit selection">
+                                                        <mat-chip *ngFor="let item of selectedToEmployees;"
+                                                            class="Data_chip_kt" (removed)="remove(item)">
+                                                            <span *ngIf="item.UserInboxThumbnail=='NA'"
+                                                                class="user-ic-vc">
+                                                                <svg fill="#000000" width="64px" height="64px"
+                                                                    viewBox="0 0 16 16"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                        stroke-linejoin="round"></g>
+                                                                    <g id="SVGRepo_iconCarrier">
+                                                                        <g>
+                                                                            <path
+                                                                                d="M10.31,9.12H5.5A4.52,4.52,0,0,0,1,13.62,2.34,2.34,0,0,0,1,14H14.78a2.34,2.34,0,0,0,0-.38A4.51,4.51,0,0,0,10.31,9.12ZM8,7.88A3.94,3.94,0,1,0,4.06,3.94,3.94,3.94,0,0,0,8,7.88Z">
+                                                                            </path>
+                                                                        </g>
+                                                                    </g>
+                                                                </svg>
+                                                            </span>
+                                                            <span *ngIf="item.UserInboxThumbnail!='NA'"
+                                                                class="user-ic-vc">
+                                                                <img
+                                                                    src="https://yrglobaldocuments.blob.core.windows.net/documents/{{item.UserInboxThumbnail}}">
+                                                            </span> {{item.DisplayName}}
+                                                            ({{item.DesignationName}}/{{item.CompanyName}})
+                                                            <button matChipRemove
+                                                                [attr.aria-label]="'remove ' + item.DisplayName">
+                                                                <mat-icon>cancel</mat-icon>
+                                                            </button>
+                                                        </mat-chip>
+                                                    </mat-chip-list>
+                                                    <div class="d-flex">
+                                                        <input [placeholder]="searchTOfromhere"
+                                                            id="txtsearchToEmpployees" [matChipInputFor]="chipList"
+                                                            [matAutocomplete]="autoTO" #inputField1
+                                                            (input)="filterEmployees($event.target.value)" />
+                                                        <mat-icon class="curser-pointer" (click)="_keeppanelopen()"
+                                                            *ngIf="!isSelection"
+                                                            (click)="openAutocompleteDrpDwnTO('TO_Dropdown')">add_circle_outline</mat-icon>
+                                                        <mat-icon class="curser-pointer" (click)="closePanel()"
+                                                            *ngIf="isSelection"
+                                                            (click)="closeAutocompleteDrpDwnTO('TO_Dropdown')">clear</mat-icon>
+                                                    </div>
+                                                    <div class="ngtoselectdrp">
+                                                        <mat-autocomplete #autoTO="matAutocomplete"
+                                                            (optionSelected)="selected($event)"
+                                                            aria-label="TO_Dropdown">
+                                                            <ng-container
+                                                                *ngFor="let group of _AllUsersToList | mapToIterable: 'UserGroup'">
+                                                                <mat-optgroup [label]="group.key">
+                                                                    <mat-option *ngFor="let item of group.value"
+                                                                        [value]="item.CreatedBy"
+                                                                        [ngClass]="{'disabled-option': _disabledUsers.includes(item.CreatedBy)}">
+                                                                        <mat-checkbox color="primary" name="item"
+                                                                            [checked]="isSelected(item)"
+                                                                            (change)="selected($event)">
+                                                                            {{item.DisplayName}}
+                                                                            ({{item.DesignationName}}/{{item.CompanyName}})
+                                                                        </mat-checkbox>
+                                                                    </mat-option>
+                                                                </mat-optgroup>
+                                                            </ng-container>
+                                                        </mat-autocomplete>
+                                                    </div>
+                                                </mat-form-field>
+                                                <div class="kt-error">
+                                                    <span class="kt-erorr-msg" *ngIf="ToErrorlog">
+                                                        {{ "Communication.PleaseSelectToUsers" | translate }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="(selectedMemoType == 'New Memo' || selectedMemoType == 'مذكرة جديدة') || 
+                                        (selectedMemoType == 'Approval' || selectedMemoType == 'موافقة') || (selectedMemoType == 'Workflow' || selectedMemoType == 'سير العمل')"
+                                            class="d-flex align-items-center px-3 py-2 min-h-50px">
+                                            <div class="flex-grow-1">
+                                                <mat-form-field class="example-chip-list mt-3">
+                                                    <mat-label>{{ "Communication.CC" | translate }}:</mat-label>
+                                                    <mat-chip-list #chipListCC aria-label="Fruit selection">
+                                                        <mat-chip *ngFor="let item of selectedCCEmployees;"
+                                                            class="Data_chip_kt" (removed)="CCUserremove(item)">
+                                                            <span *ngIf="item.UserInboxThumbnail=='NA'"
+                                                                class="user-ic-vc">
+                                                                <svg fill="#000000" width="64px" height="64px"
+                                                                    viewBox="0 0 16 16"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                        stroke-linejoin="round"></g>
+                                                                    <g id="SVGRepo_iconCarrier">
+                                                                        <g>
+                                                                            <path
+                                                                                d="M10.31,9.12H5.5A4.52,4.52,0,0,0,1,13.62,2.34,2.34,0,0,0,1,14H14.78a2.34,2.34,0,0,0,0-.38A4.51,4.51,0,0,0,10.31,9.12ZM8,7.88A3.94,3.94,0,1,0,4.06,3.94,3.94,3.94,0,0,0,8,7.88Z">
+                                                                            </path>
+                                                                        </g>
+                                                                    </g>
+                                                                </svg>
+                                                            </span>
+                                                            <span *ngIf="item.UserInboxThumbnail!='NA'"
+                                                                class="user-ic-vc">
+                                                                <img
+                                                                    src="https://yrglobaldocuments.blob.core.windows.net/documents/{{item.UserInboxThumbnail}}">
+                                                            </span> {{item.DisplayName}}
+                                                            ({{item.DesignationName}}/{{item.CompanyName}})
+                                                            <button matChipRemove
+                                                                [attr.aria-label]="'CCUserremove ' + item.DisplayName">
+                                                                <mat-icon>cancel</mat-icon>
+                                                            </button>
+                                                        </mat-chip>
+                                                    </mat-chip-list>
+                                                    <div class="d-flex">
+                                                        <input [placeholder]="searchCCfromhere" class="mt-drop-input"
+                                                            id="txtsearchCCEmpployees" [matChipInputFor]="chipListCC"
+                                                            [matAutocomplete]="autoCC" #inputField2
+                                                            (input)="filterUsersInCC($event.target.value)" />
+                                                        <mat-icon class="curser-pointer" (click)="_keeppanelopenCC()"
+                                                            *ngIf="!isSelectionCC"
+                                                            (click)="openAutocompleteDrpDwnCC('CC_Dropdown')">add_circle_outline</mat-icon>
+                                                        <mat-icon class="curser-pointer" (click)="closePanelCC()"
+                                                            *ngIf="isSelectionCC"
+                                                            (click)="closeAutocompleteDrpDwnCC('CC_Dropdown')">clear</mat-icon>
+                                                    </div>
+                                                    <mat-autocomplete #autoCC="matAutocomplete"
+                                                        (optionSelected)="CCUsersselected($event)"
+                                                        aria-label="CC_Dropdown">
+                                                        <ng-container
+                                                            *ngFor="let group of _AllUsersCCList | mapToIterable: 'UserGroup'">
+                                                            <mat-optgroup [label]="group.key">
+                                                                <mat-option *ngFor="let item of group.value"
+                                                                    [value]="item.CreatedBy"
+                                                                    [disabled]="_disabledUsers.includes(item.UserId)"
+                                                                    >
+                                                                    <mat-checkbox color="primary" name="item"
+                                                                        [checked]="isSelectedCCUsers(item)"
+                                                                        (change)="CCUsersselected($event)"
+                                                                        [disabled]="_disabledUsers.includes(item.UserId)"
+                                                                        >
+                                                                        {{item.DisplayName}}
+                                                                        ({{item.DesignationName}}/{{item.CompanyName}})
+                                                                    </mat-checkbox>
+                                                                </mat-option>
+                                                            </mat-optgroup>
+                                                        </ng-container>
+                                                    </mat-autocomplete>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="selectedMemoType!=='Suggestions' && selectedMemoType!=='اقتراحات'"
+                                            class="d-flex align-items-center px-3 py-2 min-h-50px">
+                                            <div class="flex-grow-1">
+                                                <mat-form-field class="example-full-width w-100 mt-3 Subject-input-Mt">
+                                                    <mat-label>{{ "Communication.Subject" | translate }}</mat-label>
+                                                    <input type="text" (input)="onSubjectChange($event)" name="Title"
+                                                        #Title="ngModel"
+                                                        [(ngModel)]="this.newmemoService._NewMemoobj.Subject"
+                                                        [ngModelOptions]="{standalone: true}" matInput>
+                                                </mat-form-field>
+                                                <div class="kt-error"> <span class="kt-erorr-msg"
+                                                        *ngIf="SubjectErrorlog">
+                                                        {{ "Communication.PleaseEnterSubject" | translate }} </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <ng-container
+                                            *ngIf="(selectedMemoType=='New Memo' || selectedMemoType=='مذكرة جديدة') || (selectedMemoType=='Announcements' || selectedMemoType=='الإعلانات')  || (selectedMemoType=='Approval' || selectedMemoType=='موافقة' )
+                                           || (selectedMemoType =='Workflow' || selectedMemoType =='سير العمل') ">
+                                            <div class="btn-group dropright mb-3">
+                                                <button type="button" class="btn btn-sm btn-fileupload dropdown-toggle"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <svg fill="currentColor" height="64px" width="64px" version="1.1"
+                                                        id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"
+                                                        xml:space="preserve">
+                                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                            stroke-linejoin="round"></g>
+                                                        <g id="SVGRepo_iconCarrier">
+                                                            <g>
+                                                                <g>
+                                                                    <path
+                                                                        d="M359.784,103.784v262.919c0,57.226-46.557,103.784-103.784,103.784s-103.784-46.557-103.784-103.784V103.784 c0-34.336,27.934-62.27,62.27-62.27c34.336,0,62.27,27.934,62.27,62.27v262.919c0,11.445-9.312,20.757-20.757,20.757 s-20.757-9.311-20.757-20.757V103.784H193.73v262.919c0,34.336,27.934,62.27,62.27,62.27s62.27-27.934,62.27-62.27V103.784 C318.27,46.557,271.713,0,214.487,0S110.703,46.557,110.703,103.784v262.919C110.703,446.82,175.883,512,256,512 s145.297-65.18,145.297-145.297V103.784H359.784z">
+                                                                    </path>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </svg>
+                                                    Attach file
+                                                </button>
+                                                <div class="dropdown-menu dropdown-fileupload-menu" id="File_pop">
+                                                    <div class="dropdown-item">
+                                                        <input type="file" id="fileUpload"
+                                                            (change)="onFileChange($event)" multiple>
+                                                        <div class="item-fup">
+                                                            <svg width="64px" height="64px" viewBox="0 0 24 24"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                    stroke-linejoin="round"></g>
+                                                                <g id="SVGRepo_iconCarrier">
+                                                                    <path d="M21 3H3M18 13L12 7M12 7L6 13M12 7V21"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                                    </path>
+                                                                </g>
+                                                            </svg> Choose from computer
+                                                        </div>
+                                                    </div>
+                                                   
+                                                    <div class="dropdown-item" *ngIf="!isSMailClicked">
+                                                        <div class="item-fup" (click)="gacarchivelistModal()">
+                                                            <svg width="64px" height="64px" viewBox="0 0 24 24"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                    stroke-linejoin="round"></g>
+                                                                <g id="SVGRepo_iconCarrier">
+                                                                    <path
+                                                                        d="M12 21V11M12 11L9 14M12 11L15 14M7 16.8184C4.69636 16.2074 3 14.1246 3 11.6493C3 9.20008 4.8 6.9375 7.5 6.5C8.34694 4.48637 10.3514 3 12.6893 3C15.684 3 18.1317 5.32251 18.3 8.25C19.8893 8.94488 21 10.6503 21 12.4969C21 14.8148 19.25 16.7236 17 16.9725"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                                    </path>
+                                                                </g>
+                                                            </svg> Attach from streambox
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="kt-error">
+                                                <span class="kt-erorr-msg" *ngIf="FileUploadErrorlog">
+                                                    {{ "Communication.FileUploadError" | translate }}
+                                                </span>
+                                            </div>
+                                            <!-- <div class="d-flex align-items-center px-3 py-2 min-h-50px">
+                                                <div class="text-dark-50 w-75px">
+                                                    {{ "Communication.FileUpload" | translate }}
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <div class="custom-file">
+                                                        <input type="file" id="fileUpload" (change)="onFileChange($event)" multiple>
+                                                        <span class="ch-fi">Choose Files</span>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <div class="kt-inbox__attachments">
+                                                <div class="dropzone dropzone-multi" id="kt_inbox_reply_attachments">
+                                                    <div id="div_exixtingfiles" class="dropzone-items">
+                                                        <div *ngIf="FileUploadErrorlogs" class="dropzone-item dropzone-item-danger p-3 m-0 border-bottom">
+                                                            <div class="dropzone-file">
+                                                                <div class="dropzone-filename">
+                                                                    <span>Upload failed - file is empty</span>
+                                                                    <span class="dropzone-delete" (click)="ClosefileErrorlog()">
+                                                                        <i class="flaticon2-cross"  ></i>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div *ngFor='let url of _lstMultipleFiales'>
+                                                            <div class="dropzone-item p-3 m-0 border-bottom">
+                                                                <div class="dropzone-file">
+                                                                    <div class="dropzone-filename">
+                                                                        <span>{{url.FileName}}</span>
+                                                                        <strong>(<span>{{formatSize(url.Size)}}</span>)</strong>
+                                                                        <span class="dropzone-delete"
+                                                                            (click)="RemoveSelectedFile(url.UniqueId)"><i
+                                                                                class="flaticon2-cross"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div *ngFor='let streamfile of newmemofile'>
+                                                            <div class="dropzone-item p-3 m-0 border-bottom">
+                                                                <div class="dropzone-file">
+                                                                    <div class="dropzone-filename">
+                                                                        <span>{{streamfile.name}}</span>
+                                                                        <strong>(<span>{{formatSizeStream(streamfile.size)}}</span>)</strong>
+                                                                        <span class="dropzone-delete"
+                                                                            (click)="RemoveSelectedFileinstreambox(streamfile.UniqueId)"><i
+                                                                                class="flaticon2-cross"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- <div *ngFor='let _Could of couldfiles'>
+                                                            <div class="dropzone-item p-3 m-0 border-bottom">
+                                                                <div class="dropzone-file">
+                                                                    <div class="dropzone-filename">
+                                                                        <span>{{_Could.name}}</span>
+                                                                        <strong>(<span>{{formatSizecould(_Could.size)}}</span>)</strong>
+                                                                        <span class="dropzone-delete" (click)="RemoveSelectedCouldFile(_Could.UniqueId)"><i
+                                                                                class="flaticon2-cross"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+
+                                        <div *ngIf="(selectedMemoType=='New Memo' || selectedMemoType=='مذكرة جديدة' ) ||  (selectedMemoType=='Approval' || selectedMemoType=='موافقة' )"
+                                            class="d-flex justify-content-between new-memo align-items-center  px-3 pt-0 pb-3 fd-cs">
+                                            <div class="d-flex align-items-center px-0 fd-cs-1">
+                                                <div>
+                                                    <label class="kt-checkbox kt-checkbox--success mb-auto">
+                                                        <!-- <input name="Reply" #Reply="ngModel" [(ngModel)]="newmemoService._NewMemoobj.Reply"
+                                                            type="checkbox">
+                                                        Reply Required
+                                                        <span></span> -->
+                                                        <mat-checkbox #ReplyRequiredCheck="ngModel"
+                                                            (ngModelChange)="onNgModelChangeReplys($event)"
+                                                            name="ReplyRequired" [(ngModel)]="ReplyRequired"
+                                                            [ngModelOptions]="{standalone: true}"> {{
+                                                            "Communication.ReplyRequired" | translate }}</mat-checkbox>
+                                                    </label>
+                                                </div>
+                                                <span class="br-line"></span>
+                                                <div
+                                                    *ngIf="(selectedMemoType=='New Memo' || selectedMemoType=='مذكرة جديدة' )">
+                                                    <label class="kt-checkbox kt-checkbox--success mb-auto">
+                                                        <!-- <input #ApprovalPending_F="ngModel"
+                                                            name="ApprovalPending_F"
+                                                            [(ngModel)]="newmemoService._NewMemoobj.ApprovalPending_F"
+                                                            type="checkbox"> Approval Required
+                                                        <span></span> -->
+                                                        <mat-checkbox #ApprovalPendingcheck="ngModel"
+                                                            (ngModelChange)="onNgModelChangeApprovals($event)"
+                                                            name="ApprovalPending" [(ngModel)]="ApprovalPending"
+                                                            [ngModelOptions]="{standalone: true}"> {{
+                                                            "Communication.ApprovalRequired" | translate
+                                                            }}</mat-checkbox>
+                                                    </label>
+                                                </div>
+                                                <span class="br-line"></span>
+                                                <div class="d-flex align-items-center position-relative">
+                                                    <label class="kt-checkbox kt-checkbox--success mb-0">
+                                                        <mat-checkbox [(ngModel)]="DeadlineDatecheck"
+                                                            name="Deadline Date" type="checkbox"> {{
+                                                            "Communication.DeadlineDate" | translate }}</mat-checkbox>
+                                                    </label>
+                                                    <div class="deadline-input-div" *ngIf="DeadlineDatecheck==true">
+                                                        <div class="input-group">
+                                                            <input name="DeadLineDate" matInput
+                                                                [matDatepicker]="picker1" (click)="picker1.open()"
+                                                                [min]="disablePreviousDate" [(ngModel)]="myDate"
+                                                                [ngModelOptions]="{standalone: true}"
+                                                                placeholder="Expiry Date" class="form-control">
+                                                            <div class="input-group-text p-0 dater">
+                                                                <mat-datepicker-toggle matSuffix
+                                                                    [for]="picker1"></mat-datepicker-toggle>
+                                                                <mat-datepicker #picker1></mat-datepicker>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+
+                                                <div *ngIf="(selectedMemoType=='New Memo' || selectedMemoType=='مذكرة جديدة') || (selectedMemoType=='Approval'  || selectedMemoType=='موافقة' )"
+                                                    class="">
+                                                    <span _ngcontent-jlk-c175="" class="br-line mr-4"></span>
+                                                    <label class="pl-0 kt-checkbox kt-checkbox--success mb-0 w-100">
+                                                        <mat-checkbox #_IsConfidentialcheck="ngModel"
+                                                            (ngModelChange)="onNgModelChangeConfidential($event)"
+                                                            name="Deadline Date" type="checkbox"
+                                                            [(ngModel)]="_IsConfidential">{{
+                                                            "Communication.IsConfidential" | translate }}</mat-checkbox>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <!-- <pre>Model: {{ myDate | json }}</pre> -->
+                                        </div>
+                                        <div *ngIf="(selectedMemoType=='New Memo' || selectedMemoType=='مذكرة جديدة' )"
+                                            class="d-flex justify-content-between new-memo align-items-center  px-3 pt-0 pb-3  fd-cs">
+                                            <!-- <div class="d-flex align-items-center px-0 fd-cs-1 w-100 d-none"> 
+                                                <div class="d-flex align-items-center position-relative w-100">
+                                                    <label class="kt-checkbox kt-checkbox--success mb-0" style="width: 150px;">
+                                                        <mat-checkbox #_Meetingscheck="ngModel"
+                                                        (ngModelChange)="onNgModelChangeMeetings($event)"
+                                                        [(ngModel)]="Meetings"
+                                                            name="Deadline Date" type="checkbox">Create Meeting</mat-checkbox>
+                                                    </label>
+                                                    <div *ngIf="Meetings == true" class="createmeeting-input-div w-100 ml-3">
+                                                            <input [(ngModel)]="CreateMeetingText"     placeholder="Enter Title" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                        <div *ngIf="(selectedMemoType=='New Memo' || selectedMemoType=='مذكرة جديدة' )"
+                                            class="d-flex justify-content-between new-memo align-items-center  px-3 pt-0 pb-3  fd-cs">
+                                            <div class="d-flex align-items-center px-0 fd-cs-1 w-100">
+                                                <div class="d-flex align-items-center position-relative w-100">
+                                                    <label class="kt-checkbox kt-checkbox--success mb-0"
+                                                        style="width: 150px;">
+                                                        <mat-checkbox #_Labelscheck="ngModel"
+                                                            (ngModelChange)="onNgModelChangeLabels($event)"
+                                                            [(ngModel)]="Labels" name="Deadline Date"
+                                                            type="checkbox">Labels/Tags</mat-checkbox>
+                                                    </label>
+                                                    <div *ngIf="Labels == true" class="label-input-div w-100 ml-3">
+                                                        <mat-form-field class="example-chip-list">
+                                                            <mat-label> {{ "Memodeatils.Labels" | translate
+                                                                }}:</mat-label>
+                                                            <mat-chip-list #chipListAddLabel
+                                                                aria-label="Label selection">
+                                                                <mat-chip *ngFor="let item of AddLabelList;"
+                                                                    (removed)="RemoveAddLabel(item)">
+                                                                    {{item.LabelName}}
+                                                                    <button matChipRemove
+                                                                        [attr.aria-label]="'remove ' + item.LabelName">
+                                                                        <mat-icon>cancel</mat-icon>
+                                                                    </button>
+                                                                </mat-chip>
+                                                            </mat-chip-list>
+                                                            <div class="d-flex">
+                                                                <input placeholder=" select label" #dmsSelectTF
+                                                                    [matChipInputFor]="chipListAddLabel"
+                                                                    id="txtsearchAddLabel"
+                                                                    [matAutocomplete]="autoAddLabels"
+                                                                    (input)="filterAddLabel($event.target.value)"
+                                                                    #inputField3 />
+                                                                <mat-icon class="curser-pointer"
+                                                                    (click)="OpenAddLabel()"
+                                                                    *ngIf="!isSelection_AddLabel"
+                                                                    (click)="openAutocompleteDrpDwnAddLabel('AddLabel_Dropdown')">add_circle_outline</mat-icon>
+                                                                <mat-icon class="curser-pointer"
+                                                                    (click)="closePanelAddLabel()"
+                                                                    *ngIf="isSelection_AddLabel"
+                                                                    (click)="closeAutocompleteDrpDwnAddLabel('AddLabel_Dropdown')">clear</mat-icon>
+                                                            </div>
+                                                            <mat-autocomplete #autoAddLabels="matAutocomplete"
+                                                                (optionSelected)="_AddLabel($event); dmsSelectTF.value='';"
+                                                                aria-label="AddLabel_Dropdown">
+                                                                <mat-option class="mat-font"
+                                                                    *ngFor="let item of LabelsJsondata|filter:dmsSelectTF.value"
+                                                                    [value]="item.LabelId">
+                                                                    <mat-checkbox color="primary" name="item"
+                                                                        [checked]="isSelectedAddLabel(item)"
+                                                                        (change)="_AddLabel($event)">{{item.LabelName}}</mat-checkbox>
+                                                                </mat-option>
+                                                            </mat-autocomplete>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="(selectedMemoType=='Announcements' || selectedMemoType=='الإعلانات' ) || (selectedMemoType=='Suggestions' || selectedMemoType=='اقتراحات' )"
+                                            class="">
+                                            <div *ngIf="_DisplayOptions" class="promts">
+                                                <div class="promts-card">
+                                                    <div class="promts-card-header">
+                                                        <div class="d-flex-center">
+                                                            <span class="srch-icn">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                    viewBox="0 0 24 24" stroke-width="1.5"
+                                                                    stroke="currentColor" class="w-6 h-6">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                                                </svg>
+                                                            </span>
+                                                            <input type="text" name="Search"
+                                                                [(ngModel)]="AnouncementsSearch"
+                                                                class="form-control promts-serch"
+                                                                [ngModelOptions]="{standalone: true}"
+                                                                [placeholder]="SearchorEnteraText" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="all-lbl">
+                                                            <div class="chk-all">
+                                                                <input type="checkbox" [(ngModel)]="All" id="select-all"
+                                                                    name="fav_language" value="a"
+                                                                    class="form-check-input">
+                                                                <span class="chks-all pl-0 pr-1">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                        viewBox="0 0 24 24" stroke-width="1"
+                                                                        stroke="currentColor" class="w-6 h-6">
+                                                                        <path
+                                                                            d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                        viewBox="0 0 24 24" stroke="currentColor"
+                                                                        class="w-6 h-6">
+                                                                        <path
+                                                                            d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z">
+                                                                        </path>
+                                                                    </svg>
+                                                                </span>
+                                                                <label class="label mb-0 all-label"
+                                                                    for="select-all">{{"Communication.All" | translate
+                                                                    }}</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="promts-lists">
+                                                            <div class="d-flex align-items-start">
+                                                                <div *ngIf="All==false" class="filtr-lsts p-2">
+                                                                    <div class="list-title">{{ "Communication.Company" |
+                                                                        translate }}</div>
+                                                                    <div class="main-flrs">
+                                                                        <div class="height-scroll lbs-list">
+                                                                            <ng-container
+                                                                                *ngFor="let obj of ObjgetCompanyList |filter:AnouncementsSearch;">
+                                                                                <div class="lbls-items" name="company">
+                                                                                    <input class="" type="checkbox"
+                                                                                        id="comp_{{obj.CompanyId}}"
+                                                                                        (click)="SelectCompany($event)"
+                                                                                        [checked]="obj.isChecked" />
+                                                                                    <span class="chks">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                            fill="none"
+                                                                                            viewBox="0 0 24 24"
+                                                                                            stroke-width="1"
+                                                                                            stroke="currentColor"
+                                                                                            class="w-6 h-6">
+                                                                                            <path
+                                                                                                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z">
+                                                                                            </path>
+                                                                                        </svg>
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                            fill="none"
+                                                                                            viewBox="0 0 24 24"
+                                                                                            stroke="currentColor"
+                                                                                            class="w-6 h-6">
+                                                                                            <path
+                                                                                                d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z">
+                                                                                            </path>
+                                                                                        </svg>
+                                                                                    </span>
+                                                                                    <label class="label mb-0"
+                                                                                        for="comp_{{obj.CompanyId}}">{{obj.CompanyName}}
+                                                                                        <!-- <span class="usr-cnt">(56 Mem)</span> -->
+                                                                                    </label>
+                                                                                    <span class="lbl-bg"></span>
+                                                                                </div>
+                                                                            </ng-container>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="opts-flx">
+                                                                        <div class="selectd-opts"
+                                                                            *ngFor="let item of CmySelectValue">
+                                                                            <div class="slt-div">
+                                                                                <div class="opt-txt">
+                                                                                    {{item.CompanyName}}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="removeButton" aria-hidden="true"
+                                                                                (click)="removeSelectedCompany(item.CompanyId)">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                    fill="none" viewBox="0 0 24 24"
+                                                                                    stroke-width="1.5"
+                                                                                    stroke="currentColor"
+                                                                                    class="rmv-icn w-6 h-6">
+                                                                                    <path stroke-linecap="round"
+                                                                                        stroke-linejoin="round"
+                                                                                        d="M6 18L18 6M6 6l12 12">
+                                                                                    </path>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div *ngIf="All==false" class="filtr-lsts p-2">
+                                                                    <div class="list-title">{{
+                                                                        "Communication.Department" | translate }}</div>
+                                                                    <div class="main-flrs">
+                                                                        <div class="height-scroll lbs-list">
+                                                                            <ng-container
+                                                                                *ngFor="let obj of ObjgetDepartmentList|filter:AnouncementsSearch">
+                                                                                <div class="lbls-items"
+                                                                                    name="Department">
+                                                                                    <input class="" type="checkbox"
+                                                                                        id="dept_{{obj.DepartmentId}}"
+                                                                                        (click)="SelectDepartment($event)"
+                                                                                        [checked]="obj.isChecked" />
+                                                                                    <span class="chks">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                            fill="none"
+                                                                                            viewBox="0 0 24 24"
+                                                                                            stroke-width="1"
+                                                                                            stroke="currentColor"
+                                                                                            class="w-6 h-6">
+                                                                                            <path
+                                                                                                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z">
+                                                                                            </path>
+                                                                                        </svg>
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                            fill="none"
+                                                                                            viewBox="0 0 24 24"
+                                                                                            stroke="currentColor"
+                                                                                            class="w-6 h-6">
+                                                                                            <path
+                                                                                                d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z">
+                                                                                            </path>
+                                                                                        </svg>
+                                                                                    </span>
+                                                                                    <label class="label mb-0"
+                                                                                        for="dept_{{obj.DepartmentId}}">{{obj.DepartmentName}}</label>
+                                                                                    <span class="lbl-bg"></span>
+                                                                                </div>
+                                                                            </ng-container>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="opts-flx">
+                                                                        <div class="selectd-opts"
+                                                                            *ngFor="let obj of DeprtSelectValue">
+                                                                            <div class="slt-div">
+                                                                                <div class="opt-txt">
+                                                                                    {{obj.DepartmentName}}</div>
+                                                                            </div>
+                                                                            <div class="removeButton" aria-hidden="true"
+                                                                                (click)="removeSelectedDepartment(obj.DepartmentId)">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                    fill="none" viewBox="0 0 24 24"
+                                                                                    stroke-width="1.5"
+                                                                                    stroke="currentColor"
+                                                                                    class="rmv-icn w-6 h-6">
+                                                                                    <path stroke-linecap="round"
+                                                                                        stroke-linejoin="round"
+                                                                                        d="M6 18L18 6M6 6l12 12">
+                                                                                    </path>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div *ngIf="All==false" class="filtr-lsts p-2">
+                                                                    <div class="list-title">{{
+                                                                        "Communication.Designation" | translate }}</div>
+                                                                    <div class="main-flrs">
+                                                                        <div class="height-scroll lbs-list">
+                                                                            <ng-container
+                                                                                *ngFor="let obj of ObjgetDesignationList|filter:AnouncementsSearch">
+                                                                                <div class="lbls-items"
+                                                                                    name="Designation">
+                                                                                    <input class="" type="checkbox"
+                                                                                        id="desg_{{obj.DesignationId}}"
+                                                                                        (click)="SelectDesignation($event)"
+                                                                                        [checked]="obj.isChecked" />
+                                                                                    <span class="chks">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                            fill="none"
+                                                                                            viewBox="0 0 24 24"
+                                                                                            stroke-width="1"
+                                                                                            stroke="currentColor"
+                                                                                            class="w-6 h-6">
+                                                                                            <path
+                                                                                                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z">
+                                                                                            </path>
+                                                                                        </svg>
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                            fill="none"
+                                                                                            viewBox="0 0 24 24"
+                                                                                            stroke="currentColor"
+                                                                                            class="w-6 h-6">
+                                                                                            <path
+                                                                                                d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z">
+                                                                                            </path>
+                                                                                        </svg>
+                                                                                    </span>
+                                                                                    <label class="label mb-0"
+                                                                                        for="desg_{{obj.DesignationId}}">{{obj.DesignationName}}</label>
+                                                                                    <span class="lbl-bg"></span>
+                                                                                </div>
+                                                                            </ng-container>
+
+                                                                            <!-- <div class="lbls-items">
+                                                                                    <input class="" type="checkbox" id="degn-in2" />
+                                                                                    <span class="chks">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-6 h-6">
+                                                                                            <path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"></path>
+                                                                                        </svg>                                                                                     
+                                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                                                                                            <path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
+                                                                                        </svg>
+                                                                                    </span>
+                                                                                    <label class="label mb-0" for="degn-in2"> Designation 2</label>
+                                                                                    <span class="lbl-bg"></span>
+                                                                                </div>
+                                                                                <div class="lbls-items">
+                                                                                    <input class="" type="checkbox" id="degn-in3" />
+                                                                                    <span class="chks">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-6 h-6">
+                                                                                            <path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"></path>
+                                                                                        </svg>                                                                                     
+                                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                                                                                            <path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
+                                                                                        </svg>
+                                                                                    </span>
+                                                                                    <label class="label mb-0" for="degn-in3"> Designation 3</label>
+                                                                                    <span class="lbl-bg"></span>
+                                                                                </div>
+                                                                                <div class="lbls-items">
+                                                                                    <input class="" type="checkbox" id="chks-in3" />
+                                                                                    <span class="chks">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-6 h-6">
+                                                                                            <path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"></path>
+                                                                                        </svg>                                                                                     
+                                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                                                                                            <path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
+                                                                                        </svg>
+                                                                                    </span>
+                                                                                    <label class="label mb-0" for="chks-in3"> Designation 4</label>
+                                                                                    <span class="lbl-bg"></span>
+                                                                                </div>     
+                                                                                <div class="lbls-items">
+                                                                                    <input class="" type="checkbox" id="chks-in3" />
+                                                                                    <span class="chks">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-6 h-6">
+                                                                                            <path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"></path>
+                                                                                        </svg>                                                                                     
+                                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                                                                                            <path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
+                                                                                        </svg>
+                                                                                    </span>
+                                                                                    <label class="label mb-0" for="chks-in3"> Designation 5</label>
+                                                                                    <span class="lbl-bg"></span>
+                                                                                </div>
+                                                                                <div class="lbls-items">
+                                                                                    <input class="" type="checkbox" id="chks-in3" />
+                                                                                    <span class="chks">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-6 h-6">
+                                                                                            <path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"></path>
+                                                                                        </svg>                                                                                     
+                                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                                                                                            <path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
+                                                                                        </svg>
+                                                                                    </span>
+                                                                                    <label class="label mb-0" for="chks-in3"> Designation 6</label>
+                                                                                    <span class="lbl-bg"></span>
+                                                                                </div> 
+                                                                                <div class="lbls-items">
+                                                                                    <input class="" type="checkbox" id="chks-in3" />
+                                                                                    <span class="chks">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-6 h-6">
+                                                                                            <path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"></path>
+                                                                                        </svg>                                                                                     
+                                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                                                                                            <path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
+                                                                                        </svg>
+                                                                                    </span>
+                                                                                    <label class="label mb-0" for="chks-in3"> Designation 6</label>
+                                                                                    <span class="lbl-bg"></span>
+                                                                                </div>                                                                           -->
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="opts-flx">
+                                                                        <div class="selectd-opts"
+                                                                            *ngFor="let D1 of DesigSelectValue">
+                                                                            <div class="slt-div">
+                                                                                <div class="opt-txt">
+                                                                                    {{D1.DesignationName}}</div>
+                                                                            </div>
+                                                                            <div class="removeButton" aria-hidden="true"
+                                                                                (click)="removeSelectedDesignation(D1.DesignationId)">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                    fill="none" viewBox="0 0 24 24"
+                                                                                    stroke-width="1.5"
+                                                                                    stroke="currentColor"
+                                                                                    class="rmv-icn w-6 h-6">
+                                                                                    <path stroke-linecap="round"
+                                                                                        stroke-linejoin="round"
+                                                                                        d="M6 18L18 6M6 6l12 12">
+                                                                                    </path>
+                                                                                </svg>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- <div class="selectd-opts">
+                                                                              <div class="slt-div">
+                                                                                <div class="opt-txt">vfx4</div>
+                                                                              </div>
+                                                                              <div class="removeButton" aria-hidden="true">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="rmv-icn w-6 h-6">
+                                                                                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                                                                                </svg>
+                                                                              </div>
+                                                                            </div>
+                                                                            <div class="selectd-opts">
+                                                                              <div class="slt-div">
+                                                                                <div class="opt-txt">vfx4</div>
+                                                                              </div>
+                                                                              <div class="removeButton" aria-hidden="true">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="rmv-icn w-6 h-6">
+                                                                                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                                                                                </svg>
+                                                                              </div>
+                                                                            </div>
+                                                                            <div class="selectd-opts">
+                                                                              <div class="slt-div">
+                                                                                <div class="opt-txt">vfx4</div>
+                                                                              </div>
+                                                                              <div class="removeButton" aria-hidden="true">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="rmv-icn w-6 h-6">
+                                                                                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                                                                                </svg>
+                                                                              </div>
+                                                                            </div>
+                                                                            <div class="selectd-opts">
+                                                                              <div class="slt-div">
+                                                                                <div class="opt-txt">vfx4</div>
+                                                                              </div>
+                                                                              <div class="removeButton" aria-hidden="true">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="rmv-icn w-6 h-6">
+                                                                                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                                                                                </svg>
+                                                                              </div>
+                                                                            </div>
+                                                                            <div class="selectd-opts">
+                                                                              <div class="slt-div">
+                                                                                <div class="opt-txt">vfx4</div>
+                                                                              </div>
+                                                                              <div class="removeButton" aria-hidden="true">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="rmv-icn w-6 h-6">
+                                                                                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                                                                                </svg>
+                                                                              </div>
+                                                                            </div>
+                                                                            <div class="selectd-opts">
+                                                                              <div class="slt-div">
+                                                                                <div class="opt-txt">vfx4</div>
+                                                                              </div>
+                                                                              <div class="removeButton" aria-hidden="true">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="rmv-icn w-6 h-6">
+                                                                                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                                                                                </svg>
+                                                                              </div>
+                                                                            </div> -->
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div *ngIf="All==false" class="promts pt-2">
+                                                <h5 class="ml-2 pb-2" style="color: #676c76;">{{
+                                                    "Communication.SelectedUsers" | translate }}</h5>
+                                                <div class="promts-card">
+                                                    <div class="promts-card-header">
+                                                        <div class="d-flex-center">
+                                                            <span class="srch-icn">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                    viewBox="0 0 24 24" stroke-width="1.5"
+                                                                    stroke="currentColor" class="w-6 h-6">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                                                </svg>
+                                                            </span>
+                                                            <input type="text" name="Search" [(ngModel)]="SerachUser"
+                                                                class="form-control promts-serch"
+                                                                [placeholder]="SearchorEnteraText" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="all-lbl">
+                                                            <div class="chk-all">
+                                                                <input type="checkbox" id="select-allusers"
+                                                                    [(ngModel)]="check" name="SelectAll" value=""
+                                                                    (click)="selectAll($event)"
+                                                                    class="form-check-input">
+                                                                <span class="chks-all pl-0 pr-1">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                        viewBox="0 0 24 24" stroke-width="1"
+                                                                        stroke="currentColor" class="w-6 h-6">
+                                                                        <path
+                                                                            d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                        viewBox="0 0 24 24" stroke="currentColor"
+                                                                        class="w-6 h-6">
+                                                                        <path
+                                                                            d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z">
+                                                                        </path>
+                                                                    </svg>
+                                                                </span>
+                                                                <label class="label mb-0 all-label"
+                                                                    for="select-allusers">{{ "Communication.Select All"
+                                                                    | translate }}</label>
+                                                            </div>
+                                                            <label class="mb-0"
+                                                                style="color: #676c76;">{{CheckboxCount}} {{
+                                                                "Communication.UsersSelected" | translate }}</label>
+                                                        </div>
+                                                        <div class="promts-lists">
+                                                            <div class="flex-1">
+                                                                <div class="filtr-lsts p-2 w-100">
+                                                                    <div class="list-title">{{ "Communication.UsersList"
+                                                                        | translate }}</div>
+                                                                    <div class="main-flrs">
+                                                                        <div class="height-scroll lbs-list">
+                                                                            <ng-container
+                                                                                *ngIf="( FilteredUsersJson | filter : SerachUser) as FilteredUsersJson">
+                                                                                <div class="lbls-items"
+                                                                                    *ngFor="let obj of FilteredUsersJson |filter:SerachUser">
+                                                                                    <input class="" type="checkbox"
+                                                                                        (click)="unselectOption($event)"
+                                                                                        id="{{obj.UserId}}"
+                                                                                        [checked]="obj.isChecked" />
+                                                                                    <!-- [(ngModel)]="selectedOptions" (click)="unselectOption($event)"  id="degn-in2_{{obj.UserId}}" [checked]="obj.Checked"  -->
+                                                                                    <span class="chks">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                            fill="none"
+                                                                                            viewBox="0 0 24 24"
+                                                                                            stroke-width="1"
+                                                                                            stroke="currentColor"
+                                                                                            class="w-6 h-6">
+                                                                                            <path
+                                                                                                d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z">
+                                                                                            </path>
+                                                                                        </svg>
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                            fill="none"
+                                                                                            viewBox="0 0 24 24"
+                                                                                            stroke="currentColor"
+                                                                                            class="w-6 h-6">
+                                                                                            <path
+                                                                                                d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z">
+                                                                                            </path>
+                                                                                        </svg>
+                                                                                    </span>
+                                                                                    <label class="label mb-0"
+                                                                                        for="degn-in2_{{obj.UserId}}">{{obj.ContactName}}</label>
+                                                                                    <span class="lbl-bg"></span>
+                                                                                </div>
+                                                                                <div class="px-2 py-3"
+                                                                                    *ngIf="FilteredUsersJson.length==0">
+                                                                                    <span>{{
+                                                                                        "Communication.NoRecordsFound" |
+                                                                                        translate }}</span>
+                                                                                </div>
+                                                                            </ng-container>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div *ngIf="CompanyHide==true || DerptHide==true || Design==true"
+                                                class="card-footer d-none" style="border-radius: 0 0 20px 20px;">
+                                                <div class="ml-2 my-1">
+                                                    <div class="">Total <a class="vlue" data-toggle="modal"
+                                                            data-target="#mem-edit">{{CheckboxCount}}Users</a> Selected.
+                                                        Click <a class="vlue" data-toggle="modal"
+                                                            data-target="#mem-edit"> here</a> to Manage Selected Users
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="(selectedMemoType=='Announcements' || selectedMemoType=='الإعلانات')"
+                                                class="d-flex align-items-center border-bottom px-3 py-2 min-h-50px gap-2">
+                                                <div class="d-flex align-items-center flex-1">
+                                                    <div class="text-dark-50 w-75px">{{ "Communication.StartDate" |
+                                                        translate}}</div>
+                                                    <div class="flex-grow-1">
+                                                        <div class="input-group">
+                                                            <!-- <input type="text" class="form-control" placeholder="Date"> -->
+
+                                                            <!-- <div class="input-group-append">
+                                                                    <span class="input-group-text"><i class="fa fa-calendar-alt"></i></span>
+                                                                </div> -->
+                                                            <input name="Start Date" matInput [matDatepicker]="picker1"
+                                                                (click)="picker1.open()" [min]="disablePreviousDate"
+                                                                (dateChange)="selectStartDate($event)"
+                                                                [(ngModel)]="StartDate"
+                                                                [ngModelOptions]="{standalone: true}"
+                                                                placeholder="Start Date" class="af form-control">
+                                                            <div class="input-group-text p-0 dater">
+                                                                <mat-datepicker-toggle matSuffix
+                                                                    [for]="picker1"></mat-datepicker-toggle>
+                                                                <mat-datepicker #picker1></mat-datepicker>
+                                                            </div>
+
+                                                            <!-- <mat-form-field>
+                                                                <input formControlName="dateTimeSelect" matInput type="datetime-local" id="date" name="date" required />
+                                                              </mat-form-field> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center flex-1">
+                                                    <div class="text-dark-50 w-75px">{{ "Communication.EndDate" |
+                                                        translate }}</div>
+                                                    <div class="flex-grow-1">
+                                                        <div class="input-group">
+                                                            <!-- <input type="text" class="form-control" placeholder="Date">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text"><i class="fa fa-calendar-alt"></i></span>
+                                                            </div> -->
+                                                            <input matInput [matDatepicker]="picker2"
+                                                                (click)="picker2.open()" [min]="StartDate"
+                                                                name="End Date" [(ngModel)]="EndDate"
+                                                                [ngModelOptions]="{standalone: true}"
+                                                                placeholder="End Date" class="af form-control"
+                                                                style="padding-left: 10px;">
+                                                            <div class="input-group-text p-0 dater">
+                                                                <mat-datepicker-toggle matSuffix
+                                                                    [for]="picker2"></mat-datepicker-toggle>
+                                                                <mat-datepicker #picker2></mat-datepicker>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="(selectedMemoType=='Suggestions' || selectedMemoType=='اقتراحات')"
+                                            class="">
+                                            <div class="d-flex align-items-center border-bottom px-3 pt-2 min-h-50px">
+                                                <div class="text-dark-50 w-75px">
+                                                    {{ "Communication.Question" | translate }}:
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <input type="text" [(ngModel)]="QuestionType" id="txtquestiontype"
+                                                        [ngModelOptions]="{standalone: true}" autocomplete="off"
+                                                        class="form-control border-0" [placeholder]="AskaQuestion"
+                                                        required>
+                                                </div>
+                                                <div class="kt-error"> <span class="kt-erorr-msg"
+                                                        *ngIf="QuestionTypeErrorlog">
+                                                        {{ "Communication.EnterQuestion" | translate }} </span></div>
+                                            </div>
+                                            <div class="d-flex align-items-center border-bottom px-3 pb-3 pt-1">
+                                                <div class="text-dark-50 w-75px">{{ "Communication.Poll" | translate }}
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <div class="polls-row">
+                                                        <div id="textboxes" class="pol w-50">
+                                                            <div *ngFor="let txt of _arrayText" class="form-group">
+                                                                <input type="text" id="txt_{{txt}}"
+                                                                    [placeholder]="Choice" class="form-control">
+                                                                <i *ngIf="_arrayText.length > 2"
+                                                                    (click)="removetxt(txt)"
+                                                                    class="far fa-trash-alt"></i>
+                                                            </div>
+                                                        </div>
+
+                                                        <div id="plus_div" class="pol-add d-flex flex-column"
+                                                            style="justify-content: end;">
+                                                            <a (click)="SelectNewTextBox()"
+                                                                class="btn btn-sm btn-outline-info btn-rght">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                    height="20" fill="currentColor" class="bi bi-plus"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                                                </svg>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- <div class="polls-row d-none">
+                                                            <div class="pol w-50">
+                                                                <div class="form-group">
+                                                                    <label class="mb-1">Ends On</label>
+                                                                </div>
+
+                                                            </div>
+                                                        </div> -->
+
+
+                                                    <!-- <div class="input-group">
+                                                            <input name="DeadLineDate" matInput [matDatepicker]="picker1" (click)="picker1.open()" [min]="disablePreviousDate" [(ngModel)]="myDate" [ngModelOptions]="{standalone: true}" placeholder="Expiry Date" class="form-control">
+                                                            <div class="input-group-text p-0 dater">
+                                                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                                                <mat-datepicker #picker1></mat-datepicker>
+                                                            </div>
+                                                        </div> -->
+                                                </div>
+                                            </div>
+                                            <div class="d-flex align-items-center border-bottom px-3 py-3 min-h-50px">
+                                                <div class="text-dark-50 w-75px">
+                                                    {{ "Communication.PollEndOn" | translate }}
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <div class="input-group w-50">
+                                                        <input type="text" name="DeadLineDate" matInput
+                                                            [matDatepicker]="picker1" (click)="picker1.open()"
+                                                            [min]="disablePreviousDate" [(ngModel)]="PollDuration"
+                                                            [ngModelOptions]="{standalone: true}"
+                                                            class="af form-control" placeholder="Date">
+                                                        <div class="input-group-append">
+
+                                                            <span class="input-group-text ang-dtpkr">
+                                                                <mat-datepicker-toggle matSuffix
+                                                                    [for]="picker1"></mat-datepicker-toggle>
+                                                                <mat-datepicker #picker1></mat-datepicker>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="(selectedMemoType!='Suggestions' && selectedMemoType!='اقتراحات')"
+                                    class="p-3">
+                                    <!-- <angular-editor  [(ngModel)]="this.newmemoService._NewMemoobj.Purpose" name="Purpose" [config]="config"></angular-editor>
+                                         -->
+                                    <div class="quilleditor-relative">
+                                        <ckeditor [editor]="Editor"
+                                            [(ngModel)]="this.newmemoService._NewMemoobj.Purpose" name="Description"
+                                            #editors id="ngeditor">
+                                        </ckeditor>
+                                        <div class="emoji-editor-edit">
+                                            <button (click)="toggleEmojiPicker()">😊</button>
+                                            <emoji-mart *ngIf="showEmojiPicker" (emojiSelect)="addEmoji($event)"
+                                                set="apple"></emoji-mart>
+                                        </div>
+                                    </div>
+                                    <div class="kt-error">
+                                        <span class="kt-erorr-msg" *ngIf="DescriptionErrorlog">
+                                            {{ "Communication.Pleaseenterdescription" | translate }}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <input type="text" #DraftId="ngModel" class="d-none" name="Draft"
+                                    [(ngModel)]="this.newmemoService._NewMemoobj.DraftId" />
+                                <!-- <div class="kt-inbox__to"
+                                        *ngIf="(selectedMemoType=='New Memo' || selectedMemoType=='Approval' || selectedMemoType=='Anouncements')">
+                                        <div class="kt-inbox__wrapper">
+                                            <div class="d-flex align-items-center border-bottom px-3 min-h-50px">
+                                                <div class="text-dark-50 w-75px">
+                                                    File Upload
+                                                </div>
+                                                <div class="w-50">
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" name="Filename"
+                                                                (change)="onFileChange($event)"
+                                                                class="custom-file-input" id="fileUpload" multiple>
+                                                            <label class="custom-file-label" for="fileUpload"
+                                                                id="fileuploadtext">Choose file</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1 d-none">
+                                                    <div class="custom-file pl-2 pt-2">
+                                                        <input type="file" id="fileUpload"
+                                                            (change)="onFileChange($event)" multiple>
+                                                         <input type="file" class="custom-file-input" id="customFile" multiple>
+                                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="kt-inbox__attachments">
+                                                <div class="dropzone dropzone-multi" id="kt_inbox_reply_attachments">
+                                                    <div id="div_exixtingfiles" class="dropzone-items">
+                                                        <div *ngFor='let url of _lstMultipleFiales'>
+                                                            <div class="dropzone-item p-3 m-0 border-bottom">
+                                                                <div class="dropzone-file">
+                                                                    <div class="dropzone-filename">
+                                                                        <span>{{url.FileName}}</span>
+                                                                        <strong>(<span>{{url.Size}}kb</span>)</strong>
+                                                                        <span class="dropzone-delete"
+                                                                            (click)="RemoveSelectedFile(url.UniqueId)"><i
+                                                                                class="flaticon2-cross"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div *ngIf="(selectedMemoType=='New Memo' || selectedMemoType=='Approval')"
+                                        class="d-flex justify-content-between align-items-center p-3">
+                                        <div class="">
+                                            <label class="kt-checkbox kt-checkbox--success mb-auto">
+                                                <input name="Reply" #Reply="ngModel"  (change)="checkValue($event)"
+                                                    [(ngModel)]="newmemoService._NewMemoobj.Reply" type="checkbox">
+                                                Reply Required
+                                                <span></span>
+                                            </label>
+                                        </div>
+
+
+                                        <div class="d-flex align-items-center">
+                                            <div class="w-100 mr-2">Deadline Date</div>
+                                            <div class="input-group">
+                                                <input name="DeadLineDate" matInput [matDatepicker]="picker1"
+                                                    (click)="picker1.open()" [min]="disablePreviousDate"
+                                                    [(ngModel)]="myDate" [ngModelOptions]="{standalone: true}"
+                                                    placeholder="Expiry Date" class="form-control">
+                                                <div class="input-group-text p-0 dater">
+                                                    <mat-datepicker-toggle matSuffix
+                                                        [for]="picker1"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker1></mat-datepicker>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="error-msg-pop-x d-none">
+                    <span>
+                        <svg width="64px" height="64px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <title>ionicons-v5-r</title>
+                                <path
+                                    d="M85.57,446.25H426.43a32,32,0,0,0,28.17-47.17L284.18,82.58c-12.09-22.44-44.27-22.44-56.36,0L57.4,399.08A32,32,0,0,0,85.57,446.25Z"
+                                    style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                </path>
+                                <path
+                                    d="M250.26,195.39l5.74,122,5.73-121.95a5.74,5.74,0,0,0-5.79-6h0A5.74,5.74,0,0,0,250.26,195.39Z"
+                                    style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px">
+                                </path>
+                                <path d="M256,397.25a20,20,0,1,1,20-20A20,20,0,0,1,256,397.25Z"></path>
+                            </g>
+                        </svg>
+                    </span>
+                    <span>{{ "Communication.requiredfields" | translate }} </span>
+                </div>
+                <div class="kt-portlet__foot">
+                    <div class="kt-chat__input">
+                        <div class="kt-chat__toolbar">
+                            <div class="kt_chat__actions"
+                                *ngIf="(selectedMemoType=='New Memo' || selectedMemoType=='مذكرة جديدة') || (selectedMemoType=='Approval' || selectedMemoType=='موافقة') ">
+                                <button (click)="onSubmitV2()" type="submit" [disabled]="IsSubmitting"
+                                    class="btn btn-brand btn-sm btn-bold kt-chat__reply">
+                                    {{ "Communication.Send" | translate }}
+                                </button>
+                                <a class="btn btn-sm btn-dull ml-2" (click)="saveasdraft()">{{ "Communication.SaveDraft"
+                                    | translate }}</a>
+                                <a *ngIf="this.newmemoService._NewMemoobj.DraftId!= ''"
+                                    class="btn btn-sm btn-draft ml-2" (click)="Deletedraft()">{{
+                                    "Communication.DeleteDraft" | translate }}</a>
+                                <a (click)="CloseReplyPanelV2()" class="btn btn-secondary btn-sm ml-2">
+                                    {{ "Communication.Cancel" | translate }}
+                                </a>
+                            </div>
+
+                            <!-- [class.disabled]="!this.newmemoService._NewMemoobj.Subject ||!this.newmemoService._NewMemoobj.Purpose" -->
+                            <div class="kt_chat__actions"
+                                *ngIf="(selectedMemoType=='Announcements' || selectedMemoType=='الإعلانات') && !_ReportingUserNote">
+                                <a (click)="OnSubmitAnnouncement()" class="btn btn-info btn-sm">
+                                    {{ "Communication.SendAnnouncemnt" | translate }}
+                                </a>
+                                <a (click)="ResetAnnouncements()" class="btn btn-secondary btn-sm ml-2">
+                                    {{ "Communication.Cancel" | translate }}
+                                </a>
+                            </div>
+                            <div class="kt_chat__actions"
+                                *ngIf="(selectedMemoType=='Suggestions' || selectedMemoType=='اقتراحات') && !_ReportingUserNote">
+                                <a (click)="OnSubmitSuggestions()" class="btn btn-info btn-sm">
+
+                                    {{ "Communication.SendSuggestions" | translate }}
+                                </a>
+                                <a (click)="ResetSuggestions()" class="btn btn-secondary btn-sm ml-2">
+                                    {{ "Communication.Cancel" | translate }}
+                                </a>
+                            </div>
+                            <div
+                                *ngIf="(selectedMemoType=='Announcements' || selectedMemoType=='الإعلانات')  && _ReportingUserNote">
+                                {{ "Communication.Reportinguseronlymessage" | translate }}
+                            </div>
+                            <div class="kt_chat__actions"
+                            *ngIf="(selectedMemoType=='Workflow' || selectedMemoType=='سير العمل') && !_ReportingUserNote">
+                            <a (click)="SendWorkflow()" class="btn btn-info btn-sm">
+                                {{ "Communication.Send" | translate }}
+                            </a>
+                            <a (click)="CloseReplyPanelV2()" class="btn btn-secondary btn-sm ml-2">
+                                {{ "Communication.Cancel" | translate }}
+                            </a>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- New Memo Mat end -->
+
+<!-- Members Edit Modal -->
+<div class="modal fade" id="mem-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Users Selected ({{CheckboxCount}})</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Search..." name="Search"
+                            [(ngModel)]="SerachUser">
+                    </div>
+                    <div class="all-lbl">
+                        <div class="chk-all">
+                            <input type="checkbox" id="select-allusers" [(ngModel)]="check" name="SelectAll" value=""
+                                (click)="selectAll($event)" class="form-check-input">
+                            <span class="chks-all pl-0 pr-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
+                                    stroke="currentColor" class="w-6 h-6">
+                                    <path
+                                        d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z">
+                                    </path>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" class="w-6 h-6">
+                                    <path
+                                        d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <label class="label mb-0 all-label" for="select-allusers">Select All</label>
+                        </div>
+                    </div>
+                    <div class="promts-lists">
+                        <div class="flex-1">
+                            <div class="filtr-lsts p-2 w-100">
+                                <div class="list-title">Users List</div>
+                                <div class="main-flrs">
+                                    <div class="height-scroll lbs-list">
+                                        <ng-container
+                                            *ngIf="( FilteredUsersJson | filter : SerachUser) as FilteredUsersJson">
+                                            <div class="lbls-items"
+                                                *ngFor="let obj of FilteredUsersJson |filter:SerachUser">
+
+                                                <input class="" type="checkbox" (click)="unselectOption($event)"
+                                                    id="{{obj.UserId}}" [checked]="obj.isChecked" />
+                                                <!-- [(ngModel)]="selectedOptions" (click)="unselectOption($event)"  id="degn-in2_{{obj.UserId}}" [checked]="obj.Checked"  -->
+                                                <span class="chks">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
+                                                        class="w-6 h-6">
+                                                        <path
+                                                            d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z">
+                                                        </path>
+                                                    </svg>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                                                        <path
+                                                            d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z">
+                                                        </path>
+                                                    </svg>
+                                                </span>
+                                                <label class="label mb-0"
+                                                    for="degn-in2_{{obj.UserId}}">{{obj.ContactName}}</label>
+                                                <span class="lbl-bg"></span>
+                                            </div>
+                                            <div *ngIf="FilteredUsersJson.length==0">
+                                                <span>No Records Found</span>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Gac Archive Modal Start -->
+<div class="modal-backdrop fade" id="gacarchivelistModalBackdrop" style="display: none"></div>
+<div class="gacarchivelist-modal modal fade" id="gacarchivelistModal" data-backdrop="static" data-keyboard="false"
+    tabindex="-1" role="dialog" aria-labelledby="gacarchivelistModalTitle" aria-modal="true" style="display: none">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body p-0">
+                <app-gacarchivinglist *ngIf="isModalOpen"
+                    (filesSelected)="onFilesSelected($event)"></app-gacarchivinglist>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Gac Archive Modal End -->
+
+<!-- In the parent component's template -->
+
+<!-- workflow create end -->
+
+<div class="modal-backdrop fade show" id="workflow-user-modal-backdrop" style="display: none;"></div>
+<!-- workflow user Modal Start -->
+<div class="workflow-user modal fade show" id="workflow-user-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="workflow-user-modalLabel" aria-hidden="true" style="display: none">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header  gap-1">
+                <svg focusable="false" width="20" height="20" viewBox="0 0 24 24" class="svg-icn mt-2 mb-2">
+                    <path
+                        d="M15 8c0-1.42-.5-2.73-1.33-3.76.42-.14.86-.24 1.33-.24 2.21 0 4 1.79 4 4s-1.79 4-4 4c-.43 0-.84-.09-1.23-.21-.03-.01-.06-.02-.1-.03A5.98 5.98 0 0 0 15 8zm1.66 5.13C18.03 14.06 19 15.32 19 17v3h4v-3c0-2.18-3.58-3.47-6.34-3.87zM9 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2m0 9c-2.7 0-5.8 1.29-6 2.01V18h12v-1c-.2-.71-3.3-2-6-2M9 4c2.21 0 4 1.79 4 4s-1.79 4-4 4-4-1.79-4-4 1.79-4 4-4zm0 9c2.67 0 8 1.34 8 4v3H1v-3c0-2.66 5.33-4 8-4z">
+                    </path>
+                </svg>
+
+                <h5 class="modal-title  flex-grow-1" id="workflow-user-modalLabel">Select Workflow(s)</h5>
+                <button type="button" class="close d-none" (click)="close_workflow_user_modal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-search">
+                    <div class="search-svg">
+                        <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M16.6725 16.6412L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+                                    stroke="#a3a4a5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                </path>
+                            </g>
+                        </svg>
+                    </div>
+                    <input id="InputSearch" class="search-input" [(ngModel)]="Adduserserach" type="text" autocomplete="off" placeholder="Search" />
+                    <div class="modal-icon mr-1 curser-pointer d-none" id="filter-icon">
+                        <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M3 4.6C3 4.03995 3 3.75992 3.10899 3.54601C3.20487 3.35785 3.35785 3.20487 3.54601 3.10899C3.75992 3 4.03995 3 4.6 3H19.4C19.9601 3 20.2401 3 20.454 3.10899C20.6422 3.20487 20.7951 3.35785 20.891 3.54601C21 3.75992 21 4.03995 21 4.6V6.33726C21 6.58185 21 6.70414 20.9724 6.81923C20.9479 6.92127 20.9075 7.01881 20.8526 7.10828C20.7908 7.2092 20.7043 7.29568 20.5314 7.46863L14.4686 13.5314C14.2957 13.7043 14.2092 13.7908 14.1474 13.8917C14.0925 13.9812 14.0521 14.0787 14.0276 14.1808C14 14.2959 14 14.4182 14 14.6627V17L10 21V14.6627C10 14.4182 10 14.2959 9.97237 14.1808C9.94787 14.0787 9.90747 13.9812 9.85264 13.8917C9.7908 13.7908 9.70432 13.7043 9.53137 13.5314L3.46863 7.46863C3.29568 7.29568 3.2092 7.2092 3.14736 7.10828C3.09253 7.01881 3.05213 6.92127 3.02763 6.81923C3 6.70414 3 6.58185 3 6.33726V4.6Z"
+                                    stroke="#a3a4a5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                </path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="modal-icon curser-pointer">
+                        <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M4.52185 7H7C7.55229 7 8 7.44772 8 8C8 8.55229 7.55228 9 7 9H3C1.89543 9 1 8.10457 1 7V3C1 2.44772 1.44772 2 2 2C2.55228 2 3 2.44772 3 3V5.6754C4.26953 3.8688 6.06062 2.47676 8.14852 1.69631C10.6633 0.756291 13.435 0.768419 15.9415 1.73041C18.448 2.69239 20.5161 4.53782 21.7562 6.91897C22.9963 9.30013 23.3228 12.0526 22.6741 14.6578C22.0254 17.263 20.4464 19.541 18.2345 21.0626C16.0226 22.5842 13.3306 23.2444 10.6657 22.9188C8.00083 22.5931 5.54702 21.3041 3.76664 19.2946C2.20818 17.5356 1.25993 15.3309 1.04625 13.0078C0.995657 12.4579 1.45216 12.0088 2.00445 12.0084C2.55673 12.0079 3.00351 12.4566 3.06526 13.0055C3.27138 14.8374 4.03712 16.5706 5.27027 17.9625C6.7255 19.605 8.73118 20.6586 10.9094 20.9247C13.0876 21.1909 15.288 20.6513 17.0959 19.4075C18.9039 18.1638 20.1945 16.3018 20.7247 14.1724C21.2549 12.043 20.9881 9.79319 19.9745 7.8469C18.9608 5.90061 17.2704 4.3922 15.2217 3.6059C13.173 2.8196 10.9074 2.80968 8.8519 3.57803C7.11008 4.22911 5.62099 5.40094 4.57993 6.92229C4.56156 6.94914 4.54217 6.97505 4.52185 7Z"
+                                    fill="#a3a4a5"></path>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+                <!-- <ng-select [placeholder]="'Select workflow'"
+                [(ngModel)]="selectedWorkflowId"
+                (ngModelChange)="WorkFlowDetails($event)">
+                <ng-option *ngFor="let item of WorkflowLeftsectionlist"
+                    [value]="item.WorkFlowId">{{ item.WorkFlowName }}</ng-option>
+            </ng-select> -->
+                <div class="position-relative">
+                    <ul class="modal-workflow-user-list" id="participant-list">
+                        <ng-container *ngIf="(WorkflowLeftsectionlist|filter:Adduserserach) as WorkflowLeftsectionlist">
+                            <li *ngFor="let _user of WorkflowLeftsectionlist|filter:Adduserserach" class="modal-workflow-user-list-item">
+                                <span>
+                                    <mat-checkbox color="primary" [checked]="_user.Check" [disabled]="_user.disabled"
+                                    (change)="updateSelectedValues(_user.WorkFlowId, $event)" ></mat-checkbox>
+                                </span>
+                                <span class="modal-workflow-user-name">
+                                    {{_user.WorkFlowName}}- 
+                                    <strong *ngIf="_user.sortId">Sort ID: {{ _user.sortId }}</strong>
+                                    </span>
+                            </li>
+                            <div *ngIf="WorkflowLeftsectionlist.length == 0" class="w-100 h-100 d-flex align-items-center justify-content-center">
+                                <svg fill="#757575" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path
+                                            d="M55.9,49.3l22.7-22.8c0.8-0.8,0.8-2,0-2.9l-2.7-2.9c-0.8-0.8-2-0.8-2.9,0L50.1,43.6c-0.5,0.5-1.4,0.5-1.9,0 l-22.8-23c-0.8-0.8-2-0.8-2.9,0l-2.9,2.9c-0.8,0.8-0.8,2,0,2.9l22.8,22.8c0.5,0.5,0.5,1.4,0,1.9L19.6,74c-0.8,0.8-0.8,2,0,2.9 l2.9,2.9c0.8,0.8,2,0.8,2.9,0l22.8-22.8c0.5-0.5,1.4-0.5,1.9,0l22.6,22.6c0.8,0.8,2,0.8,2.9,0l2.9-2.9c0.8-0.8,0.8-2,0-2.9 L55.9,51.2C55.3,50.6,55.3,49.8,55.9,49.3z">
+                                        </path>
+                                    </g>
+                                </svg>
+                                <span style="color:#757575" class="ml-2">No User found.</span>
+                            </div>
+                        </ng-container>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-add-primary" (click)="AddSelectUser()">Add </button>
+
+                <button type="button" class="btn btn-close-secondary" (click)="close_workflow_user_modal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- workflow user Modal End -->
