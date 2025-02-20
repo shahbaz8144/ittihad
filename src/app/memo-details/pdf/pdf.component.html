@@ -21,7 +21,7 @@
             <img [src]="signature.image" width="100" height="50" />
             <button (click)="removeSignature(signature.id)">Delete</button>
         </div> -->
-        <div *ngFor="let signature of signatures" class="signature-container" cdkDrag [attr.data-id]="signature.id" (cdkDragStarted)="onDragStart($event, signature)" (cdkDragEnded)="onDragEnd($event, signature)">
+        <div *ngFor="let signature of signatures" class="signature-container" cdkDrag [attr.data-id]="signature.id" (cdkDragStarted)="onDragStart($event)" (cdkDragEnded)="onDragEnd($event)">
             <img [src]="signature.image" width="100" height="50" />
             <div class="signature-tools">
                 <div class="signature-tools-btn">
