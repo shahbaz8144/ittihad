@@ -14,6 +14,10 @@ export const BACKEND_ROUTES: Routes = [
         loadChildren: () => import('../archive/archive.module').then(m => m.ArchiveModule)
     },
     {
+        path: 'ArchiveSettings',
+        loadChildren: () => import('../archivesettings/archivesettings.module').then(m => m.ArchivesettingsModule)
+    },
+    {
         path: 'customerticketing',
         loadChildren: () => import('../customerticketing/customerticketing.module').then(m => m.CustomerticketingModule)
     },
