@@ -70,7 +70,7 @@ filterItemsOfType(type) {
   return this._LstChildSubCategory.filter(x => x.SubId == type);
 }
 filterItemsOfSubCategory(CategoryId) {
-  debugger
+  
   return this._LstChildSubCategory.filter(element => element.IsUnderSubCategory==false 
     && element.SubId==0 
     && element.CategoryId==CategoryId);
@@ -79,14 +79,15 @@ AddSubChildCategory(CategoryId){
   $('#Category_'+CategoryId).toggle();
 }
 AddSubCategory(CategoryId:number,SubCategoryId:number,IsUnderSubCategory:boolean){
-  //txtsubcategoryname_
   var _text="";
   if(IsUnderSubCategory==false)
   {
-    _text=$('#txtsubcategoryname_'+CategoryId).val()
+    _text=$('#txtsubcategoryname_'+CategoryId).val();
+    $('.folder-tree').find('li ul').addClass('expanded');
   }
   else{
-    _text=$('#txtsubcategoryname_'+SubCategoryId).val()
+    _text=$('#txtsubcategoryname_'+SubCategoryId).val();
+    $('.folder-tree').find('li ul').addClass('expanded');
   }
   if(_text.length<3){
     this._snackBar.open('Minimum 3 length character required', 'End now', {
@@ -128,14 +129,54 @@ AddSubCategory(CategoryId:number,SubCategoryId:number,IsUnderSubCategory:boolean
   )
 }
 
+AddCategory:string = "";
+AddCategoryerrormessage:boolean = false;
+AddCategorys() {
+  if(this.AddCategory == ""){
+    this.AddCategoryerrormessage = true;
+  }else if(this.AddCategory != ""){
+    this.AddCategoryerrormessage = false;
+    try {
+      this._obj.CategoryId = 0;
+      this._obj.CategoryName = this.AddCategory;
+      this._obj.Description = "";
+      this._obj.IsActive = true
+      this._obj.FlagId = 1;
+      this.subCategoryService.Category_add(this._obj).subscribe(
+        (data) => {
+          if (data["message"] == "1") {
+            this._snackBar.open('Added Successfully', 'End now', {
+              duration: 5000,
+              verticalPosition: 'bottom',
+              horizontalPosition: 'right',
+            });
+            this.AddCategory = "";
+            this.LoadSubCategories();
+            this.AddCategoryerrormessage = false;
+            document.getElementById("addcategory-modal-backdrop").style.display = "none";
+            document.getElementById("addcategoryModal").style.display = "none";
+          }
+         
+        });
+    } catch (error) {
+      alert(error)
+    }
+  }
+ 
 
+}
+
+CancelCategorys(){
+  this.AddCategory = "";
+  this.AddCategoryerrormessage = false;
+}
 LoadSubCategories(){
   this._obj.CreatedBy=this.currentUserValue.createdby;
   this._obj.OrganizationId=this.currentUserValue.organizationid;
   this._obj.RoleId=this.currentUserValue.RoleId;
   this.subCategoryService.LoadSubCategoryDetails(this._obj).subscribe(
       data=>{
-        debugger
+        
         this._obj=data as SubcategoriesDTO;
         this._LstCategory=JSON.parse(this._obj.CategoryJson);
         this._LstChildSubCategory=JSON.parse(this._obj.SubCategoryJson);
@@ -184,8 +225,15 @@ ViewTextBox(CategoryId){
 canceltextbox(CategoryId){
   $('#SubCategory_'+CategoryId).toggle();
 }
+open_addcategory_modal() {
+  document.getElementById("addcategory-modal-backdrop").style.display = "block";
+  document.getElementById("addcategoryModal").style.display = "block";
+}
 
-
+close_addcategory_modal() {
+  document.getElementById("addcategory-modal-backdrop").style.display = "none";
+  document.getElementById("addcategoryModal").style.display = "none";
+}
 
 }
 
@@ -207,7 +255,7 @@ $(document).on('click', '.fa-plus', function() {
 });
 
 function myFunction() {
-  debugger
+  
   var input, filter, ul, li, a, i, txtValue;
   input = document.getElementById("myInput");
   filter = input.value.toUpperCase();

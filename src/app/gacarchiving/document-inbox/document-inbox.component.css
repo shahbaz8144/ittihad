@@ -1919,7 +1919,7 @@ span.s-label {
 .grid-scroll {
     position: relative;
     overflow-y: auto;
-    max-height: calc(100vh - 190px);
+    max-height: calc(100vh - 200px);
     scrollbar-width: thin;
     padding-top: 0rem;
 }
@@ -2761,4 +2761,20 @@ svg.doc_attachment_img {
     border-color: #fcb71f;
     box-shadow: 0 3px 10px -3px #f47d20;
     background: #ff8900 !important;
+}
+
+
+.btn-memo1:disabled {
+    border-color: #ffe2a2;
+    box-shadow: 0 3px 10px -3px #fbc69c;
+    background: #fdd09b !important;
+}
+
+span.cabinet-count {
+    background-color: #f4d9b9;
+    color: #ff8900;
+    border-radius: 4px;
+    padding: 0px 2px;
+    font-size: 12px;
+    font-weight: 500;
 }

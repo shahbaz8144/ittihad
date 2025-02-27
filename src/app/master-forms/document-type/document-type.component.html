@@ -200,6 +200,37 @@
                                     </div>
                                 </div>
                                 <div class="form-cus">
+                                    <label>Add Document Type Keys</label>
+                                    <span class="text-danger ml-1">*</span>
+                                    <span id="TippyDocumentTypeName" class="material-icons fs-4 float-right">
+                                        info_outline
+                                    </span>
+                                    <input type="text" id="txtdocumentname" formControlName="docName"
+                                        class="form-control"
+                                        placeholder="Enter Document Type Keys...."
+                                        [(ngModel)]="Documenttypekeys" 
+                                        (keydown.enter)="addDocumentType($event)"
+                                        required minlength="3"
+                                        maxlength="50" />
+
+                                        <table class="table mt-3" *ngIf="documentTypeList.length > 0">
+                                            <thead>
+                                              <tr>
+                                                <th>S.No</th>
+                                                <th>Key Name</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr *ngFor="let key of documentTypeList; index as i">
+                                                <td>{{ i + 1 }}</td>
+                                                <td>{{ key }}</td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                    <div>
+                                    </div>
+                                </div>
+                                <div class="form-cus">
                                     <label class="form-label">{{ "Masterform.Status" | translate }}</label>
                                     <div>
                                         <mat-slide-toggle color="primary" formControlName="status"

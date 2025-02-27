@@ -150,6 +150,20 @@ this.EnterDescription = lang === 'en' ? 'Enter Description' : 'أدخل الوص
       inertia: true
     });
   }
+
+  Documenttypekeys:string = "";
+  documentTypeList: string[] = [];
+
+  addDocumentType(event: KeyboardEvent) {
+    if (event.key === 'Enter' && this.Documenttypekeys.trim().length >= 3) {
+      // Split the input by spaces and add each word separately
+      const words = this.Documenttypekeys.trim().split(/\s+/);
+      this.documentTypeList.push(...words);
+   console.log(this.documentTypeList , "Key Array");
+      this.Documenttypekeys = ""; // Clear input field after adding
+    }
+  }
+
   get f() {
     return this.DocTypeFormgroup.controls;
   }

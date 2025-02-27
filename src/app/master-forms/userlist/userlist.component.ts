@@ -48,6 +48,7 @@ export class UserlistComponent implements OnInit {
   ObjgetcountryList: any;
   ObjCountryCode: string;
   GlobalUsers: any;
+  CanbinetList:any;
   lstCities: any;
   Fname: string;
   mname: string;
@@ -60,7 +61,7 @@ export class UserlistComponent implements OnInit {
   code: number;
   tele1: any;
   tele2: any;
-
+  SelectCabinet:string = "";
   _CurrentpageRecords: number
   countrycode: string = "";
   companyid: number;
@@ -111,6 +112,7 @@ export class UserlistComponent implements OnInit {
   CheckDepartment = [];
   CheckDesignation = [];
   _globalsers: any[] = [];
+  _CabinetArray:any[] = [];
   txtSearch: string;
   currentLang:"ar"|"en"="ar";
   UserSearch:string;
@@ -141,6 +143,7 @@ export class UserlistComponent implements OnInit {
     this.UserSearch = lang === 'en' ? 'Search' : 'يبحث';
     this.FilterSearch = lang === 'en' ? 'Search Company, Department, Designation...' : 'البحث عن الشركة، القسم، المسمى الوظيفي...';
     this.SelectGlobalUsers = lang === 'en' ? 'Select Global Users' : 'حدد المستخدمين العالميين';
+    this.SelectCabinet = lang === 'en' ? 'Select Cabinet' : 'حدد الخزانة';
     })
 
   }
@@ -162,6 +165,7 @@ export class UserlistComponent implements OnInit {
     this.UserSearch = lang === 'en' ? 'Search' : 'يبحث';
     this.FilterSearch = lang === 'en' ? 'Search Company, Department, Designation...' : 'البحث عن الشركة، القسم، المسمى الوظيفي...';
     this.SelectGlobalUsers = lang === 'en' ? 'Select Global Users' : 'حدد المستخدمين العالميين';
+    this.SelectCabinet = lang === 'en' ? 'Select Cabinet' : 'حدد الخزانة';
     if(lang == 'ar'){
       this.renderer.addClass(document.body, 'kt-body-arabic');
     }else if (lang == 'en'){
@@ -469,7 +473,7 @@ export class UserlistComponent implements OnInit {
     this._services.GetUserProfile(this._obj)
       .subscribe(data => {
         // debugger
-        console.log(data, 'userlist');
+        console.log(data, 'Userlist details');
         this._obj = data as UserRegistrationDTO;
         this.companyid = this._obj.Data["UserDetails"][0].CompanyId;
         this.Repuser = this._obj.Data["UserDetails"][0].ReportingUserId;
@@ -481,8 +485,9 @@ export class UserlistComponent implements OnInit {
         this.ObjgetRoleList = this._obj.Data["Role"]
         this.ObjgetDesignationList = this._obj.Data["Designation"];
         this.ObjgetReportingUser = this._obj.Data["ReportingUsers"];
-        this.ObjgetcountryList = this._obj.Data["Country"];
         this.GlobalUsers = this._obj.Data["GlobalUsers"];
+        this.CanbinetList = this._obj.Data["Cabinet"];
+        this.ObjgetcountryList = this._obj.Data["Country"];
         this.lstCities = this._obj.Data["City"];
         this.Fname = this._obj.Data["UserDetails"][0].FirstName;
         this.mname = this._obj.Data["UserDetails"][0].MiddleName;
@@ -506,6 +511,14 @@ export class UserlistComponent implements OnInit {
         parsedData.forEach(element => {
           this._globalsers.push(parseInt(element.UserId));
         });
+
+        const AssignedCabinetsJson = this._obj.Data["UserDetails"][0].AssignedCabinetsJson;
+        const parseCabinet = JSON.parse(AssignedCabinetsJson);
+        this._CabinetArray = [];
+        parseCabinet.forEach(element => {
+          this._CabinetArray.push(parseInt(element.CabinetId));
+        });
+        console.log(this._CabinetArray , "Selected Cabinet");
         this.Repuser = this._obj.Data["UserDetails"][0].ReportingUserId;
         this.Empid = this._obj.Data["UserDetails"][0].EmployeeId;
         this.Positionid = this._obj.Data["UserDetails"][0].PositionId;
@@ -684,6 +697,15 @@ export class UserlistComponent implements OnInit {
     }
   }
  
+  UpdateCabinet(){
+    this._obj.UserId = this.SelectedUserId;
+    this._obj.CabinetIds = this._CabinetArray.toString();
+    this._services.AssignCabiteAPI(this._obj).subscribe(data =>{
+    console.log(data, "Add Cabinet API");
+    this.sidev(this.SelectedUserId);
+    this.GetUserList();
+    })
+  }
   CheckEmailExist() {
     let mail = (<HTMLInputElement>document.getElementById("txtemail")).value;
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;

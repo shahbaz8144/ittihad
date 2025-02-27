@@ -41,6 +41,7 @@ export class AnnouncementDetailsComponent implements OnInit {
   UserSearch:string;
   currentLang:"ar"|"en"="ar";
   ReadUserSearch:string;
+  _IsConfidential:boolean;
   public get currentUserValue(): UserDTO {
     this.currentUserSubject = new BehaviorSubject<UserDTO>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
@@ -158,10 +159,11 @@ translate.setDefaultLang('en');
     this._obj.AnnouncementId = AnnouncementId;
     this.inboxService.AnnouncementDetails(AnnouncementId, this.currentUserValue.organizationid, this.currentUserValue.createdby).subscribe(
       data => {
+        console.log(data, "Announcement list");
         this._obj = data as InboxDTO;
         this._LstToAnnouncement = JSON.parse(this._obj.AnnoucementJson);
         console.log(this._LstToAnnouncement, "AnnouncementdetailsJSON");
-      
+        this._IsConfidential = this._LstToAnnouncement[0].IsConfidential;
         this.annou = this._LstToAnnouncement[0]['SStartDate'];
         this.annou = this.datepipe.transform(this.annou, 'yyyy/MM/dd');
         this.annouEnd = this._LstToAnnouncement[0]['SEndDate'];
@@ -266,7 +268,9 @@ translate.setDefaultLang('en');
     // alert(url1)
     // alert(filename)
     let encodeduserid = encoder.encode(this.currentUserValue.createdby.toString());
-    var myurl = rurl + "/url?url=" + url + "&" + "uid=" + encodeduserid + "&" + "filename=" + encoder.encode(filename) + "&type=1" + "&" + "MailDocId=" + 0 + "&" + "MailId=" + 0 + "&" + "LoginUserId=" + this._LoginUserId + "&" + "AnnouncementDocId=" + AnnouncementDocId;
+    var myurl = rurl + "/url?url=" + url + "&" + "uid=" + encodeduserid + "&" + "filename=" + encoder.encode(filename) + "&type=1" + "&" + "MailDocId=" + 0 + "&" + "MailId=" + 0 + "&" + "LoginUserId=" + this._LoginUserId + "&" + "IsConfidential=" + this._IsConfidential + "&" +"AnnouncementDocId=" + AnnouncementDocId;
+
+    // var myurl = rurl + "/url?url=" + url + "&" + "uid=" + encodeduserid + "&" + "filename=" + encoder.encode(filename) + "&type=1" + "&" + "MailDocId=" + 0 + "&" + "MailId=" + 0 + "&" + "LoginUserId=" + this._LoginUserId + "&" + "AnnouncementDocId=" + AnnouncementDocId;
     var myWindow = window.open(myurl, url.toString());
     myWindow.focus();
   }

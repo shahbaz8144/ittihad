@@ -85,4 +85,5 @@ export class UserRegistrationDTO {
   Sortby: number;
   ToUserIdsStr: string;
   IsStreamDownload: boolean
+  CabinetIds:string;
 }

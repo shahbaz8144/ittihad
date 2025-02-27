@@ -1965,10 +1965,9 @@
                                                                             <div class="user-i-label">Designation
                                                                             </div>
                                                                             <div class="user-i-form">
-                                                                                DesignationName/DepartmentName</div>
+                                                                               {{detail.SentUserDesignation}} </div>
                                                                         </div>
                                                                     </div>
-
                                                                     <div class="user-i">
                                                                         <div class="user-i-icon">
                                                                             <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1994,7 +1993,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="user-i d-none">
+                                                                    <div class="user-i">
                                                                         <div class="user-i-icon">
                                                                             <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                                     <g id="SVGRepo_bgCarrier"
@@ -4818,7 +4817,16 @@
                     <div class="kt-portlet__body">
                         <div class="kt-chat__messages">
                             <div class="timeline">
-                                <div class="timeline-item" *ngFor="let _his of AttachmentList">
+                                <div class="position-relative w-100 mb-3">
+                                    <input type="text" [(ngModel)]="History_Search"  autocomplete="off" class="form-control mr-3  pr-5 right-flter-bd" name="Search" placeholder="Search">
+                                    <a *ngIf="History_Search" class="close-icnb kt-search-cross-i">
+                                        <i (click)="ClearHistorySearch()" class="material-icons">
+                                            close
+                                        </i>
+                                    </a>
+                                </div>
+                                <ng-container *ngIf="(AttachmentList|filter:History_Search) as AttachmentList">
+                                <div class="timeline-item" *ngFor="let _his of AttachmentList|filter:History_Search">
                                     <div class="timeline-line w-40px"></div>
                                     <div *ngIf="!_his.Attachment" class="timeline-icon symbol symbol-circle symbol-40px">
                                         <div class="symbol-label kt-bg-light-primary">
@@ -4893,6 +4901,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <ng-container *ngIf="AttachmentList.length == 0">
+                                    <div class="d-flex align-items-center justify-content-between flex-column w-100">
+                                     <img style="    width: 60%; opacity: 0.6;"
+                                      src="assets/media/Img/search no memo image 04.png">
+                                    <p class="kt-blank-msg fs-4">No Activiy Found</p>
+                                    </div>
+                         </ng-container>
+                            </ng-container>
                             </div>
                         </div>
                     </div>

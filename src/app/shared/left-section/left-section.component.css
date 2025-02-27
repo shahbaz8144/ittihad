@@ -64,8 +64,8 @@
 
 .kt-menu__nav__scroll {
     /* max-height: calc(100vh - 210px); */
-    overflow: auto;
-    overflow-x: hidden;
+    /* overflow: auto;
+    overflow-x: hidden; */
 }
 
 .hover-scroll-overlay-y {
@@ -340,6 +340,6 @@ svg.toggle-arrow-svg {
 .kt-menu__nav__scroll {
     /* max-height: calc(100vh - 210px); */
     max-height: calc(100vh - 60px);
-    overflow: auto;
-    overflow-x: hidden;
+    /* overflow: auto;
+    overflow-x: hidden; */
 }

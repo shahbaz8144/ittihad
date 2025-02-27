@@ -248,7 +248,7 @@ export class DocumentsComponent implements OnInit {
       .subscribe(data => {
         // this.getContentType("https://yrglobaldocuments.blob.core.windows.net/documents/Archive/2/1737994985611Ramesh Neelapala Medical Certificate 4-12-2024.pdf");
         // console.log(this.contentType,"this.contentType")
-        console.log(data, "All List Data");
+        console.log(data, "All Document List Data");
         this._obj = data as GACFiledto;
         this.GACDocumentList = this._obj.Data["ArchiveJson"];
         this.GACDocumentPinList = this._obj.Data["PinJson"];

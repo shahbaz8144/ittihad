@@ -20,14 +20,15 @@ export class UserRegistrationService {
   objUserRegDTO: UserRegistrationDTO;
   private currentUserSubject: BehaviorSubject<UserDTO>;
   public currentUser: Observable<UserDTO>;
-  readonly rootUrl = this.commonUrl.apiurl;
-
+ 
 
   constructor(private http: HttpClient, private commonUrl: ApiurlService) {
     this.currentUserSubject = new BehaviorSubject<UserDTO>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
     this._obj = new UserRegistrationDTO();
   }
+  readonly rootUrl = this.commonUrl.apiurl;
+  readonly rootUrlII = this.commonUrl.apiurlNew;
   public get currentUserValue(): UserDTO {
     return this.currentUserSubject.value[0];
   }
@@ -110,7 +111,6 @@ export class UserRegistrationService {
     this._obj.OrganizationId = this.currentUserValue.organizationid;
     this._obj.RoleId = this.currentUserValue.RoleId;
     return this.http.post(this.rootUrl + '/UsersAPI/NewGetUsers', this._obj);
-
   }
 
   GetUserProfile(_values: UserRegistrationDTO) {
@@ -123,6 +123,16 @@ export class UserRegistrationService {
     this._obj.ToUserIdsStr = _values.ToUserIdsStr;
     return this.http.post(this.rootUrl + '/UsersAPI/NewAddRemoveGlobalUser', this._obj)
   }
+
+  AssignCabiteAPI(_values: UserRegistrationDTO) {
+    this._obj.UserId = _values.UserId;
+    this._obj.CabinetIds = _values.CabinetIds;
+    this._obj.CreatedBy = this.currentUserValue.createdby;
+   
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewAssignCabite', this._obj);
+  }
+
+
   UpdateUserProfile(_values: UserRegistrationDTO,_CreatedBy: number,organizationid:number) {
     
     this._obj.UserName = _values.UserName;

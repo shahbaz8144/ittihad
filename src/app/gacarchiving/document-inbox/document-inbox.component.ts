@@ -30,10 +30,10 @@ export class DocumentInboxComponent implements OnInit {
   Expired:any;
   Select:any;
   toggle:any;
+  selectedCabinet: string = "All Documents"; // Default selection
   currentRoute:any;
   private currentUserSubject: BehaviorSubject<UserDTO>;
   public currentUser: Observable<UserDTO>;
-  
   public get currentUserValue(): UserDTO {
     return this.currentUserSubject.value[0];
   }
@@ -69,8 +69,25 @@ export class DocumentInboxComponent implements OnInit {
     } else if (lang == 'en') {
       this.renderer.removeClass(document.body, 'kt-body-arabic');
     }
+    this.CabinetList();
+   
     this.GetLables();
+    this.selectedCabinet === "All Documents";
   } 
+
+ 
+
+  // Function to change the selected cabinet
+  selectCabinet(cabinetName: string) {
+    this.selectedCabinet = cabinetName;
+  }
+
+  // Function to check if "New Document" should be disabled
+  isNewDocumentDisabled(): boolean {
+    return this.selectedCabinet === "All Documents" || 
+    this.selectedCabinet === "Favorite" || 
+    this.selectedCabinet === "Trash";;
+  }
 
   oncolor() {
     $('#myelement').addClass('.fil-selected');
@@ -87,6 +104,13 @@ export class DocumentInboxComponent implements OnInit {
         this.LabelCount = this._Lstlabels.length;
         this.cd.detectChanges();
       });
+  }
+  _CabinetList:any[] = [];
+  CabinetList(){
+    this.service.AssignedCabinetAPI().subscribe(data => {
+      this._CabinetList  = data['Data'].CabinetJson;
+      console.log(this._CabinetList , "CabinetList");
+    })
   }
 
   labelchange(LabelId) {

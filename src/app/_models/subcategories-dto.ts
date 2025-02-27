@@ -17,5 +17,5 @@ export class SubcategoriesDTO {
     Data:string;
   checked: boolean
   Subcategories?: SubcategoriesDTO[]; // Recursive for nested subcategories
-
+  FlagId:number;
 }

@@ -883,6 +883,7 @@
                     </div>
 
                 </div>
+                <ng-container *ngIf="isArchiveApproval">
                 <div class="kt-Note-msg  d-flex mt-3" *ngIf="doc?.WorkFlowId != 0 || (UserActionJson && UserActionJson.length > 0)">
                     <div class="kt-note-icon" style="align-self:flex-start">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" version="1.1" x="0px" y="0px" viewBox="0 0 66 65" style="enable-background:new 0 0 66 66;" xml:space="preserve">
@@ -973,6 +974,8 @@
                         </div>
                     </div>
                 </div>
+            </ng-container>
+            
                 <div class="kt-document-box" *ngIf="isMainDocumentActive || IsRefrenceDocumentActive">
                     <div class="kt-main-doc">
                         <div class="content w-100">

@@ -204,6 +204,7 @@ export class MemoDetailsV2Component implements OnInit, AfterViewInit {
 
   // Memo History start here
   AttachmentList: any[];
+  History_Search:string;
   //Memo History end here..
 
   //Attachment Section start here
@@ -2974,6 +2975,7 @@ export class MemoDetailsV2Component implements OnInit, AfterViewInit {
           } else {
             element.AttachmentJson = []; // Assign a fallback value if undefined
           }
+          this.History_Search = "";
         });
       });
   }
@@ -6608,12 +6610,15 @@ export class MemoDetailsV2Component implements OnInit, AfterViewInit {
 
 
   MergeDocument() {
-
     this._obj.Urls = this.selectedAttachments;
     this.inboxService.MergeDocumentApI(this._obj)
       .subscribe(data => {
         console.log(data, "Merge Document");
       })
+  }
+
+  ClearHistorySearch(){
+    this.History_Search = "";
   }
 
 }

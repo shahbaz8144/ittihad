@@ -390,4 +390,28 @@ export class GACFileService {
      return this.http.post(this.rootUrlII + 'ArchiveAPI/NewUpdateArchiveInfo', this._ObjGac);
    }
 
+   CabinetInsertAndUpdate(ObjGac: GACFiledto) {
+    this._ObjGac.FlagId = ObjGac.FlagId;
+    this._ObjGac.CabinetId = ObjGac.CabinetId;
+    this._ObjGac.IsActive = ObjGac.IsActive;
+    this._ObjGac.CabinetName = ObjGac.CabinetName;
+    this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
+    this._ObjGac.CreatedBy = this.currentUserValue.createdby;
+  
+     return this.http.post(this.rootUrlII + 'ArchiveAPI/NewCabinetInsertAndUpdate', this._ObjGac);
+   }
+
+   CabinetListAPI() {
+   
+    this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
+    
+     return this.http.post(this.rootUrlII + 'ArchiveAPI/NewCabinetList', this._ObjGac);
+   }
+
+   AssignedCabinetAPI() {
+   
+    this._ObjGac.CreatedBy = this.currentUserValue.createdby;
+    
+     return this.http.post(this.rootUrlII + 'ArchiveAPI/NewGetAssignedCabinet', this._ObjGac);
+   }
 }

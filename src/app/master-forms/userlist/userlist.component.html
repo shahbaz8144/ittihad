@@ -813,9 +813,11 @@
                                                         </li>
 
                                                         <li class="tab_three tabs_li" id="ver2">
-                                                            <a href="#User_access" data-toggle="tab" class="tab_link p-3">{{ "Masterform.UserAccessControls" |  translate }}</a>
+                                                            <a href="#User_access" data-toggle="tab" class="tab_link p-3">{{ "Masterform.UserAccessControls" | translate }}</a>
                                                         </li>
-
+                                                        <li class=" tabs_li" id="ver3">
+                                                            <a href="#archive_settings" data-toggle="tab" class="tab_link p-3">{{"Masterform.ArchiveSettings" |translate }}</a>
+                                                        </li>
                                                     </ul>
                                                     <div class="tab-content">
                                                         <div class="tab-pane show active" aria-expanded="true" id="homeee">
@@ -1304,6 +1306,27 @@
                                                                     {{ "Masterform.UpdateCompanyDetails" | translate }}
                                                                 </button>
 
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane" aria-expanded="false" id="archive_settings">
+                                                            <div class="p-0">
+                                                                <div class="d-flex flex-wrap justify-content-start align-items-baseline form-m">
+                                                                    <div class="form-cus">
+                                                                        <label class="form-label">{{"Masterform.Cabinet" | translate }}</label>
+                                                                        <span class="text-danger ml-1">*</span>
+                                                                        <ng-select [(ngModel)]="_CabinetArray" [placeholder]="SelectCabinet" appendTo="body" multiple="true" [closeOnSelect]="false" class="TEST-CLASS">
+                                                                            <ng-option *ngFor="let _user of CanbinetList" [value]="_user.CabinetId"> {{_user.CabinetName}}</ng-option>
+                                                                        </ng-select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-cus task_act text-right">
+                                                                    <button class="btn btn-sm btn-primary px-3 mt-2" (click)="UpdateCabinet()">
+                                                                      {{ "Masterform.Update" | translate }}
+                                                                    </button>
+                                                                    <button class="btn btn-sm btn-secondary px-3 ml-2 mt-2" (click)="closeInfo()">
+                                                                        {{ "Masterform.Cancel" | translate }}
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </div>

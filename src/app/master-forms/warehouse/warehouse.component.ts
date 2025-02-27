@@ -425,6 +425,7 @@ if (element) {
       }
     });
   }
+  
   ware_add() {
     document.getElementById("addwarehouse_div").classList.add("kt-quick-panel--on");
     document.getElementsByClassName("side_view")[0].classList.add("position-fixed");

@@ -681,7 +681,7 @@
                                                         </div>
                                                     </div>
                                                    
-                                                    <div class="dropdown-item" *ngIf="!isSMailClicked">
+                                                    <div class="dropdown-item" *ngIf="!isSMailClicked && (selectedMemoType=='New Memo' || selectedMemoType=='مذكرة جديدة')">
                                                         <div class="item-fup" (click)="gacarchivelistModal()">
                                                             <svg width="64px" height="64px" viewBox="0 0 24 24"
                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1480,6 +1480,22 @@
                                                             </div>
                                                         </div>
 
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center flex-1">
+                                                    <!-- <div class="text-dark-50 w-75px">{{ "Communication.EndDate" |
+                                                        translate }}</div> -->
+                                                    <div class="flex-grow-1">
+                                                        <div class="input-group">
+                                                            <!-- <span _ngcontent-jlk-c175="" class="br-line mr-4"></span> -->
+                                                            <label class="pl-0 kt-checkbox kt-checkbox--success mb-0 w-100">
+                                                                <mat-checkbox #_IsConfidentialcheck="ngModel"
+                                                                    (ngModelChange)="onNgModelChangeConfidential($event)"
+                                                                    name="Deadline Date" type="checkbox"
+                                                                    [(ngModel)]="_IsConfidential">{{
+                                                                    "Communication.IsConfidential" | translate }}</mat-checkbox>
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

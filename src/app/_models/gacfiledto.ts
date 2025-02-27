@@ -94,4 +94,8 @@ export class GACFiledto {
   SortId:number;
   WorkFlowId:number;
   ThumbnailUrl:string;
+  FlagId:number;
+  CabinetId:number;
+  IsActive:boolean;
+  CabinetName:string;
 }

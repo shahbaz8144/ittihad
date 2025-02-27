@@ -228,6 +228,7 @@
         "Close": "Close",
         "Workflow" : "Workflow",
         "AddLabel": "Add Label",
+        "Announcementconfidential": "confidential",
         "History": "History",
         "Send": "Send",
         "requiredfields": "Please fill the required fields.",
@@ -413,7 +414,12 @@
         "Edit": "Edit"
     },
     "Masterform": {
+        "AddCabinet" : "Add Cabinet",
         "Labels": "Labels",
+        "Cabinet" : "Cabinet",
+        "CabinetName" : "Cabinet Name",
+        "errormsg" : "Please Enter Cabinet Name",
+        "ArchiveSettings" : "Archive Settings",
         "products" : "Products",
         "Quantity" : "Quantity",
         "Expirydate" : "Expiry date",
@@ -676,6 +682,7 @@
         "AddCompany": "Add Company",
         "NoDataCompany": "Data Not Available.",
         "NotfoundCompany": "No data found in company list.",
+        "NotfoundCabinet": "No data found in cabinet list.",
         "Code": "Code",
         "Fax": "Fax",
         "Latitude": "Latitude",
@@ -774,7 +781,7 @@
     },
     "Archive": {
         "NewDocument": "New Document",
-        "Documents": "Documents",
+        "Documents": "All Documents",
         "Favorite": "Favorite",
         "Trash": "Trash",
         "Shared": "Shared",

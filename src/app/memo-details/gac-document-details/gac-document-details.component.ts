@@ -355,6 +355,7 @@ export class GacDocumentDetailsComponent implements OnInit {
     datepicker.setAttribute('min', `${year}-${month}-${date}`);
     document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.add("d-none");
   }
+  
   Favorites(DocumentId: number, ShareId: number, IsFavorite: boolean) {
 
     this.service.DocumentsArchiveFavorite(DocumentId, ShareId, IsFavorite).subscribe(
@@ -381,6 +382,24 @@ export class GacDocumentDetailsComponent implements OnInit {
     );
   }
 
+  isArchiveApproval: boolean = false;
+  getIsArchiveDownload(): void {
+    const userData = localStorage.getItem('currentUser');
+    // console.log(userData ,"localStorage value");
+    if (userData) {
+      try {
+        const parsedData = JSON.parse(userData);
+        // Access IsArchiveDownload value
+        this.isArchiveApproval = parsedData[0]?.IsArchiveApproval ?? false;
+        // alert(this.isArchiveApproval);
+        console.log('IsArchiveApproval:', this.isArchiveApproval);
+      } catch (error) {
+        console.error('Error parsing currentUser data from localStorage:', error);
+      }
+    } else {
+      console.warn('No currentUser data found in localStorage');
+    }
+  }
 
 
   VersionDropdown(name, version: string, documentId: string, _shareId: string) {

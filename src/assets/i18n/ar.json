@@ -229,6 +229,7 @@
         "History": "تاريخ",
         "requiredfields": "يرجى تعبئة جميع الحقول المطلوبة.",
         "AddLabel": "إضافة تسمية",
+        "Announcementconfidential": "مؤتمن",
         "PleaseSelectToUsers": "الرجاء التحديد للمستخدمين",
         "PleaseEnterSubject": "الرجاء إدخال الموضوع",
         "Download": "تحميل",
@@ -411,6 +412,11 @@
         "AddPolicy": "أضف سياسة"
     },
     "Masterform": {
+        "AddCabinet" : "أضف خزانة",
+        "Cabinet" : "مجلس الوزراء",
+        "CabinetName" : "اسم مجلس الوزراء",
+        "errormsg" : "الرجاء إدخال اسم الخزانة",
+        "ArchiveSettings" : "إعدادات الأرشيف",
         "PhysicalDocumentSampleDetails": "الوثيقة المادية / تفاصيل العينة",
         "products" : "منتجات",
         "Labels": " التسميات",
@@ -669,6 +675,7 @@
         "AddCompany": "أضف شركة",
         "NoDataCompany": "البيانات غير متوفرة.",
         "NotfoundCompany": "لم يتم العثور على بيانات في قائمة الشركة.",
+        "NotfoundCabinet":"لم يتم العثور على بيانات في قائمة الخزانة.",
         "Code": "شفرة",
         "Fax": "فاكس",
         "Latitude": "خط العرض",
@@ -770,7 +777,7 @@
     },
     "Archive": {
         "NewDocument": "مستند جديد",
-        "Documents": "وثائق",
+        "Documents": "جميع المستندات",
         "Favorite": "المفضلة",
         "Trash": "نفاية",
         "Shared": "مشترك",

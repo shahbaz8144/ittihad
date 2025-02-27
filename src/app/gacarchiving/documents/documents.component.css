@@ -1923,7 +1923,7 @@ span.s-label {
 .grid-scroll {
     position: relative;
     overflow-y: auto;
-    max-height: calc(100vh - 190px);
+    max-height: calc(100vh - 200px);
     scrollbar-width: thin;
     padding-top: 0rem;
 }

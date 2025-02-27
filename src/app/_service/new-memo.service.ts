@@ -346,8 +346,8 @@ export class NewMemoService {
     this._objInb.CreatedBy = this.currentUserValue.createdby;
     this._objInb.ReportingUserId = _obj.ReportingUserId;
     this._objInb.IsReportingUser = _obj.IsReportingUser;
-    this._objInb.UserIds = _obj.UserIds
-
+    this._objInb.UserIds = _obj.UserIds;
+    this._objInb.IsConfidential = _obj.IsConfidential;
     // Core Api
     //  CommunicationAPI/AddAnnouncementANG
     // Old Api

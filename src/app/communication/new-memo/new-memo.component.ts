@@ -805,6 +805,7 @@ export class NewMemoComponent implements OnInit {
     this._obj.ReportingUserId = this.currentUserValue.createdby;
     if (this.currentUserValue.RoleId == 502) this._obj.IsReportingUser = false;
     else this._obj.IsReportingUser = true;
+    this._obj.IsConfidential = this._IsConfidential === undefined ? false : this._IsConfidential;
     // this.FilteredUsersJson.forEach(element => {
     //   if (element.isChecked)
     //     this._selectedUserIds.push(element.UserId);
@@ -959,6 +960,7 @@ export class NewMemoComponent implements OnInit {
     this.ObjgetDesignationList.forEach(element => {
       element.isChecked = false;
     });
+    this._IsConfidential = false;
     (<HTMLInputElement>document.getElementById("fileUpload")).value = "";
   }
 

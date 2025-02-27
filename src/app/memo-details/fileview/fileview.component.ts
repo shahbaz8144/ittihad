@@ -177,7 +177,6 @@ export class FileviewComponent implements OnInit {
 
       let AnnouncementDocId = params['AnnouncementDocId'];
       this._AnnouncementDocId = AnnouncementDocId;
-
       let loginuserid = params['LoginUserId'];
       this.createdBy = loginuserid;
 

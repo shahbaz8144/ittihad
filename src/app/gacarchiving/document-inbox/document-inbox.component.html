@@ -19,16 +19,38 @@
         </div>
     </div> -->
     <div id="kt_inbox" class="kt-grid kt-grid--desktop kt-grid--ver-desktop kt-inbox">
-        <div id="kt_inbox_aside" class="kt-grid__item kt-portlet kt-inbox__aside pb-0 scroll-y aside-scrolly">
+        <div id="kt_inbox_aside"
+         class="kt-grid__item kt-portlet kt-inbox__aside pb-0 scroll-y aside-scrolly">
             <!-- routerLink="/backend/masterforms/GacFileUpload" -->
             <button type="button" class="btn btn-primary kt-inbox__compose mx-0 btn-memo1" style="width: 100%;" 
-            routerLink="/backend/NewArchive">
+            routerLink="/backend/NewArchive" [disabled]="isNewDocumentDisabled()">
             <span class="mr-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" version="1.1" class="svg-icon" style="width: 1.2em; height: 1.2em; vertical-align: middle; fill: currentColor; overflow: hidden;"><path d="M960 448H576V64a64 64 0 0 0-128 0v384H64a64 64 0 0 0 0 128h384v384a64 64 0 0 0 128 0V576h384a64 64 0 0 0 0-128z"></path></svg></span>
             {{ "Archive.NewDocument" | translate }}
         </button>
-            <div class="kt-inbox__nav mt-2">
+         <div class="kt-inbox__nav mt-2">
                 <ul class="kt-nav">
-                    <li class="kt-nav__item" (click)="Labelcolorremove()" [ngClass]="{'active': currentRoute === 'Documents'}" routerLinkActive="active">
+                    <ng-container *ngFor="let item of _CabinetList">
+                    <li class="kt-nav__item" [class.active]="selectedCabinet === item.CabinetName" >
+                        <a class="kt-nav__link"  
+                        (click)="selectCabinet(item.CabinetName)">
+                            <span class="svg-icon svg-icon-2x">
+                                <svg xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px" width="54" height="47" viewBox="0 0 54 47" fill="none">
+                                    <g>
+                                    <path d="M53.6387 27.9021L44.7457 1.06081C44.6843 0.875759 44.5717 0.715737 44.4232 0.602603C44.2747 0.489469 44.0976 0.42874 43.9161 0.428711H41.6926C41.4588 0.428711 41.2345 0.529309 41.0692 0.708376C40.9039 0.887442 40.811 1.13031 40.811 1.38354C40.811 1.63678 40.9039 1.87965 41.0692 2.05871C41.2345 2.23778 41.4588 2.33838 41.6926 2.33838H43.2954L51.521 27.1641H34.7004C34.5128 27.1641 34.3301 27.2289 34.1788 27.3491C34.0275 27.4693 33.9156 27.6386 33.8594 27.8324C33.3736 29.3125 32.4767 30.5934 31.2919 31.4992C30.107 32.4051 28.6922 32.8914 27.2419 32.8914C25.7915 32.8914 24.3768 32.4051 23.1919 31.4992C22.007 30.5934 21.1101 29.3125 20.6244 27.8324C20.5681 27.6386 20.4562 27.4693 20.3049 27.3491C20.1536 27.2289 19.9709 27.1641 19.7833 27.1641H2.96269L11.1883 2.33838H12.7911C13.0249 2.33838 13.2492 2.23778 13.4145 2.05871C13.5799 1.87965 13.6727 1.63678 13.6727 1.38354C13.6727 1.13031 13.5799 0.887442 13.4145 0.708376C13.2492 0.529309 13.0249 0.428711 12.7911 0.428711H10.5676C10.3861 0.42874 10.209 0.489469 10.0605 0.602603C9.91197 0.715737 9.79936 0.875759 9.73799 1.06081L0.845018 27.9021C0.810641 28.0057 0.793044 28.1149 0.793002 28.2249V41.646C0.788544 42.8631 1.22998 44.0325 2.02049 44.8976C2.811 45.7627 3.88604 46.2529 5.00983 46.2607H49.4738C50.5976 46.2529 51.6727 45.7627 52.4632 44.8976C53.2537 44.0325 53.6951 42.8631 53.6907 41.646V28.2249C53.6906 28.1149 53.673 28.0057 53.6387 27.9021ZM49.4738 44.3511H5.00983C4.35354 44.3438 3.72671 44.0549 3.26678 43.5478C2.80684 43.0407 2.55132 42.3568 2.55626 41.646V29.0737H19.1635C19.8502 30.7753 20.9801 32.2231 22.415 33.2398C23.8498 34.2565 25.5272 34.798 27.2419 34.798C28.9565 34.798 30.6339 34.2565 32.0687 33.2398C33.5036 32.2231 34.6335 30.7753 35.3202 29.0737H51.9274V41.646C51.9324 42.3568 51.6768 43.0407 51.2169 43.5478C50.757 44.0549 50.1301 44.3438 49.4738 44.3511Z" fill="currentColor" stroke="currentColor"/>
+                                    <path d="M43.9933 23.822C44.2271 23.822 44.4513 23.7214 44.6167 23.5424C44.782 23.3633 44.8749 23.1204 44.8749 22.8672V20.0027C44.8749 19.7494 44.782 19.5066 44.6167 19.3275C44.4513 19.1484 44.2271 19.0479 43.9933 19.0479H10.4914C10.2576 19.0479 10.0334 19.1484 9.86808 19.3275C9.70274 19.5066 9.60986 19.7494 9.60986 20.0027V22.8672C9.60986 23.1204 9.70274 23.3633 9.86808 23.5424C10.0334 23.7214 10.2576 23.822 10.4914 23.822C10.7253 23.822 10.9495 23.7214 11.1149 23.5424C11.2802 23.3633 11.3731 23.1204 11.3731 22.8672V20.9575H43.1117V22.8672C43.1117 23.1204 43.2045 23.3633 43.3699 23.5424C43.5352 23.7214 43.7595 23.822 43.9933 23.822Z" fill="currentColor" stroke="currentColor"/>
+                                    <path d="M13.1362 11.4089V14.2734C13.1362 14.5267 13.2291 14.7695 13.3944 14.9486C13.5597 15.1277 13.784 15.2283 14.0178 15.2283C14.2516 15.2283 14.4759 15.1277 14.6412 14.9486C14.8066 14.7695 14.8994 14.5267 14.8994 14.2734V12.3638H39.585V14.2734C39.585 14.5267 39.6779 14.7695 39.8432 14.9486C40.0086 15.1277 40.2328 15.2283 40.4666 15.2283C40.7005 15.2283 40.9247 15.1277 41.09 14.9486C41.2554 14.7695 41.3483 14.5267 41.3483 14.2734V11.4089C41.3483 11.1557 41.2554 10.9128 41.09 10.7338C40.9247 10.5547 40.7005 10.4541 40.4666 10.4541H14.0178C13.784 10.4541 13.5597 10.5547 13.3944 10.7338C13.2291 10.9128 13.1362 11.1557 13.1362 11.4089Z" fill="currentColor" stroke="currentColor"/>
+                                    <path d="M17.5442 6.6355C17.778 6.6355 18.0023 6.5349 18.1676 6.35583C18.333 6.17677 18.4259 5.9339 18.4259 5.68066V3.771H36.0584V5.68066C36.0584 5.9339 36.1513 6.17677 36.3166 6.35583C36.482 6.5349 36.7062 6.6355 36.94 6.6355C37.1738 6.6355 37.3981 6.5349 37.5634 6.35583C37.7288 6.17677 37.8216 5.9339 37.8216 5.68066V2.81616C37.8216 2.56292 37.7288 2.32006 37.5634 2.14099C37.3981 1.96193 37.1738 1.86133 36.94 1.86133H17.5442C17.3104 1.86133 17.0862 1.96193 16.9208 2.14099C16.7555 2.32006 16.6626 2.56292 16.6626 2.81616V5.68066C16.6626 5.9339 16.7555 6.17677 16.9208 6.35583C17.0862 6.5349 17.3104 6.6355 17.5442 6.6355Z" fill="currentColor" stroke="currentColor"/>
+                                    </g>
+                                    </svg>
+                    </span>
+                    <span style="margin-left: 10px;" class="kt-nav__link-text ">{{item.CabinetName}} </span>
+                    <span class="cabinet-count" >5</span>
+                        </a>
+                    </li>
+                </ng-container>
+                    <li class="kt-nav__item" (click)="selectCabinet('All Documents')"
+                    [ngClass]="{'active': selectedCabinet === 'All Documents' || currentRoute === '/Documents'}"
+                      routerLinkActive="active">
                         <a class="kt-nav__link" routerLink="Documents">
                             <span class="svg-icon svg-icon-2x">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -40,9 +62,13 @@
                             </g>
                         </svg></span>
                             <span style="margin-left: 10px;" class="kt-nav__link-text">{{"Archive.Documents" | translate }}</span>
+                            <span class="cabinet-count" >5</span>
                         </a>
                     </li>
-                    <li class="kt-nav__item" (click)="Labelcolorremove()" [ngClass]="{'active': currentRoute === 'Favorite'}" routerLinkActive="active">
+                    <!-- [ngClass]="{'active': currentRoute === 'Favorite'}"  -->
+                    <li class="kt-nav__item" (click)="selectCabinet('Favorite')" 
+                    [ngClass]="{'active': selectedCabinet === 'Favorite' || currentRoute === '/Favorite'}"
+                    routerLinkActive="active">
                         <a class="kt-nav__link" routerLink="Favorite">
                             <span class="svg-icon svg-icon-2x">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -117,7 +143,10 @@
                         <span style="margin-left: 10px;" class="kt-nav__link-text">Rejected</span>
                     </a>
                 </li> -->
-                    <li class="kt-nav__item" (click)="Labelcolorremove()" [ngClass]="{'active': currentRoute === 'Trash'}" routerLinkActive="active">
+                <!-- [ngClass]="{'active': currentRoute === 'Trash'}" -->
+                <li class="kt-nav__item" (click)="selectCabinet('Trash')" 
+                     [ngClass]="{'active': selectedCabinet === 'Trash' || currentRoute === '/Trash'}" 
+                     routerLinkActive="active">
                         <a class="kt-nav__link" routerLink="Trash">
                             <span class="svg-icon svg-icon-2x">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
