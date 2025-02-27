@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule,NO_ERRORS_SCHEMA  } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,7 +38,7 @@ import { LoaderInterceptor } from './_service/loader.interceptor';
 // import { AngMusicPlayerModule } from  'ang-music-player';
 // import { NgPlyrModule } from 'ng-plyr';
 // import { ServiceWorkerModule } from '@angular/service-worker';
-
+import { ArchivesettingsModule } from './archivesettings/archivesettings.module';
 
 
 @NgModule({
@@ -52,6 +52,7 @@ import { LoaderInterceptor } from './_service/loader.interceptor';
   imports: [
     BrowserModule,
     HttpClientModule,
+    ArchivesettingsModule,
     SharedModule,
     AppRoutingModule,
     // ServiceWorkerModule,
@@ -97,7 +98,8 @@ import { LoaderInterceptor } from './_service/loader.interceptor';
   exports: [
     RouterModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+   schemas: [NO_ERRORS_SCHEMA]
 })
 
 export class AppModule {
