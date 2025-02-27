@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NgxBarcodeModule } from 'ngx-barcode';
+import { FormsModule } from '@angular/forms';
 import { ArchivesettingsRoutingModule } from './archivesettings-routing.module';
 import { CabinetComponent } from './cabinet/cabinet.component';
 import { BarcodeComponent } from './barcode/barcode.component';
 import { AssignusersComponent } from './assignusers/assignusers.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ResizableModule } from 'angular-resizable-element';
+import { GeneratedTemplateComponent } from './generated-template/generated-template.component';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -18,11 +22,16 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader'
   declarations: [
     CabinetComponent,
     BarcodeComponent,
-    AssignusersComponent
+    AssignusersComponent,
+    GeneratedTemplateComponent
   ],
   imports: [
     CommonModule,
     ArchivesettingsRoutingModule,
+    DragDropModule,
+    ResizableModule,
+    NgxBarcodeModule,
+    FormsModule,
     NgSelectModule,
     FormsModule,
     MatCheckboxModule,

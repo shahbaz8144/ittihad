@@ -312,6 +312,18 @@ canvas {
     height: auto;
 }
 
+svg {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.barcode {
+    font-family: 'Libre Barcode 39', sans-serif;
+    /* Example */
+    letter-spacing: 0;
+}
+
 
 /* Ensure text sharpness */
 
@@ -332,4 +344,44 @@ canvas {
     font-family: Arial, sans-serif;
     font-weight: bold;
     letter-spacing: 0.5px;
+}
+
+.rendered-pdf {
+    width: 100% !important;
+    height: calc(100vh - 240px) !important;
+    border: 1px solid #000000;
+}
+
+.pdf-container {
+    position: relative;
+    width: 100% !important;
+    height: calc(100vh - 240px) !important;
+    border: 1px solid #ddd;
+    background-color: #f5f5f5;
+}
+
+.draggable-box {
+    position: absolute;
+    cursor: grab;
+}
+
+.position-display {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.drag-handle {
+    width: 100%;
+    background: #007bff;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    cursor: grab;
+    font-weight: bold;
+}
+
+.no-drag.cdk-drag {
+    touch-action: none;
+    pointer-events: none !important;
 }

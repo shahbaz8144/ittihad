@@ -1,1 +1,146 @@
-<p>barcode works!</p>
+<!-- Selection Panel -->
+<div class="selection-panel">
+    <h3>Add Elements</h3>
+    <button (click)="openLabelDialog()">Add Label</button>
+    <input type="file" (change)="onFileSelected($event)" multiple />
+    <button (click)="saveElements()">Save Elements</button>
+    <button (click)="addElement('barcode')">Add Barcode</button>
+    <button (click)="addElement('table')">Add Table</button>
+    <button (click)="clearAllElements()">Clear All</button>
+
+    <button (click)="saveTemplate()">Save Template</button>
+
+    <h3>System Defined Values</h3>
+    <button *ngFor="let sysVal of systemDefinedValues" (click)="addSystemDefinedElement(sysVal)">
+        Add {{ sysVal }}
+    </button>
+</div>
+
+<div class="workspace-controls">
+    <label>Width:</label>
+    <input type="number" [(ngModel)]="workspaceWidth" />
+
+    <label>Height:</label>
+    <input type="number" [(ngModel)]="workspaceHeight" />
+
+    <label>Background Color:</label>
+    <input type="color" [(ngModel)]="workspaceBgColor" />
+
+    <label>Border Color:</label>
+    <input type="color" [(ngModel)]="workspaceBorderColor" />
+
+    <label>Border Width:</label>
+    <input type="number" [(ngModel)]="workspaceBorderWidth" />
+
+    <label>Border Radius:</label>
+    <input type="number" [(ngModel)]="workspaceBorderRadius" />
+
+    <button (click)="updateWorkspaceStyles(workspaceWidth, workspaceHeight, workspaceBgColor, workspaceBorderColor, workspaceBorderWidth, workspaceBorderRadius)">Apply</button>
+</div>
+<!-- Workspace (Resizable) -->
+<div class="workspace" #workspaceContainer [style.width.px]="workspaceWidth" [style.height.px]="workspaceHeight" [style.background-color]="workspaceBgColor" [style.border]="workspaceBorderWidth + 'px solid ' + workspaceBorderColor" [style.border-radius.px]="workspaceBorderRadius"
+    (contextmenu)="openWorkspaceContextMenu($event)">
+
+    <!-- Draggable & Resizable Elements -->
+    <div *ngFor="let element of elements; let i = index" class="resizable-draggable" [style.fontSize.px]="element.fontSize" [style.width.px]="element.width" [style.height.px]="element.height" [style.background-color]="element.backgroundColor || '#ffffff'"
+        cdkDrag [cdkDragBoundary]="'.workspace'" [cdkDragFreeDragPosition]="{x: element.x, y: element.y}" (cdkDragEnded)="onDragEnd($event, i)" (contextmenu)="openContextMenu($event, i)">
+
+
+
+        <!-- If user-defined, display as normal -->
+        <span *ngIf="element.valueType === 'userDefined'">
+            {{ element.staticText }} {{ element.userValue }}
+        </span>
+
+        <!-- Uploaded Image -->
+        <img *ngIf="element.type === 'image' && element.fileUrl" [src]="element.fileUrl" class="uploaded-file" />
+
+        <!-- Barcode -->
+        <div *ngIf="element.type === 'barcode'" class="barcode-container">
+            <canvas [id]="'barcode-' + i" [style.width.px]="element.width" [style.height.px]="element.height"></canvas>
+        </div>
+
+        <!-- If it's a system-defined element, print its value -->
+        <svg *ngIf="element.type === 'systemDefined'" [attr.x]="element.x" [attr.y]="element.y" [attr.width]="element.width" [attr.height]="element.height">
+       <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+             [style.fill]="element.fontColor" 
+             [style.font-size.px]="element.fontSize" 
+             [style.font-weight]="element.fontWeight" 
+             [style.font-style]="element.fontStyle">
+           {{ element.text }}
+       </text>
+   </svg>
+    </div>
+</div>
+
+<ul class="context-menu" *ngIf="contextMenuVisible" [style.top]="contextMenuPosition.y" [style.left]="contextMenuPosition.x">
+    <li *ngIf="contextMenuTarget === 'element'" (click)="copyElement()">Copy</li>
+    <li *ngIf="copiedElement" (click)="pasteElement()">Paste</li>
+    <li *ngIf="contextMenuTarget === 'element'" (click)="deleteSelectedElement()">Delete</li>
+    <li *ngIf="contextMenuTarget === 'element'" (click)="openPropertiesPanel()">Properties</li>
+</ul>
+
+<!-- Properties Panel -->
+<div class="properties-panel" *ngIf="showPropertiesPanel">
+    <h3>Element Properties (ID: {{selectedElement?.id}})</h3>
+
+    <label>Text:</label>
+    <input type="text" [(ngModel)]="selectedElement!.staticText" (change)="updateSelectedElement()" />
+
+    <label>Font Color:</label>
+    <input type="color" [(ngModel)]="selectedElement!.fontColor" (change)="updateSelectedElement()" />
+
+    <label>Font Size:</label>
+    <input type="number" [(ngModel)]="selectedElement!.fontSize" (change)="updateFontSize()" min="8" max="100" />
+
+    <label>Font Style:</label>
+    <select [(ngModel)]="selectedElement!.fontStyle" (change)="updateSelectedElement()">
+        <option value="normal">Normal</option>
+        <option value="italic">Italic</option>
+    </select>
+
+    <label>Bold:</label>
+    <select [(ngModel)]="selectedElement!.fontWeight" (change)="updateSelectedElement()">
+        <option value="normal">Normal</option>
+        <option value="bold">Bold</option>
+    </select>
+
+    <label>Width:</label>
+    <input type="number" [(ngModel)]="selectedElement!.width" (change)="updateSelectedElement()" />
+
+    <label>Height:</label>
+    <input type="number" [(ngModel)]="selectedElement!.height" (change)="updateSelectedElement()" />
+
+    <label>X Position:</label>
+    <input type="number" [(ngModel)]="selectedElement!.x" (change)="updateSelectedElement()" />
+
+    <label>Y Position:</label>
+    <input type="number" [(ngModel)]="selectedElement!.y" (change)="updateSelectedElement()" />
+
+    <label>Background Color:</label>
+    <input type="color" [(ngModel)]="selectedElement!.backgroundColor" (change)="updateSelectedElement()" />
+
+    <button (click)="closePropertiesPanel()">Close</button>
+</div>
+
+
+<div *ngIf="showLabelDialog" class="modal">
+    <div class="modal-content">
+        <h3 *ngIf="editLabelIndex === null">Create Label</h3>
+        <h3 *ngIf="editLabelIndex !== null">Edit Label</h3>
+
+        <label>Static Text:</label>
+        <input *ngIf="editLabelIndex === null" type="text" [(ngModel)]="newLabelStaticText" />
+        <input *ngIf="editLabelIndex !== null" type="text" [(ngModel)]="editLabelStaticText" />
+
+        <label>
+        <input *ngIf="editLabelIndex === null" type="checkbox" [(ngModel)]="newLabelHasPlaceholder" />
+        <input *ngIf="editLabelIndex !== null" type="checkbox" [(ngModel)]="editLabelHasPlaceholder" />
+        Dynamic Value?
+      </label>
+
+        <button *ngIf="editLabelIndex === null" (click)="addLabel()">Add</button>
+        <button *ngIf="editLabelIndex !== null" (click)="saveEditedLabel()">Save</button>
+        <button (click)="showLabelDialog = false">Cancel</button>
+    </div>
+</div>
