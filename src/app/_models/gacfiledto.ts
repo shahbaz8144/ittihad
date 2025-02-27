@@ -98,4 +98,5 @@ export class GACFiledto {
   CabinetId:number;
   IsActive:boolean;
   CabinetName:string;
+  TemplateData:string;
 }

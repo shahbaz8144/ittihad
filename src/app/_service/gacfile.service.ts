@@ -414,4 +414,12 @@ export class GACFileService {
     
      return this.http.post(this.rootUrlII + 'ArchiveAPI/NewGetAssignedCabinet', this._ObjGac);
    }
+
+   AddDynamicTemplateAPI(ObjGac: GACFiledto) {
+    
+   this._ObjGac.TemplateData = ObjGac.TemplateData;
+    this._ObjGac.CreatedBy = this.currentUserValue.createdby;
+    
+     return this.http.post(this.rootUrlII + 'ArchiveAPI/NewAddDynamicTemplate', this._ObjGac);
+   }
 }

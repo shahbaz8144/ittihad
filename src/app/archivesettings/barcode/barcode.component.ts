@@ -3,6 +3,8 @@ import { CdkDragEnd } from '@angular/cdk/drag-drop';
 import { ResizeEvent } from 'angular-resizable-element';
 import { HttpClient } from '@angular/common/http';
 import * as JsBarcode from 'jsbarcode';
+import { GACFileService } from 'src/app/_service/gacfile.service';
+import { GACFiledto } from 'src/app/_models/gacfiledto';
 interface ElementData {
   id?: number;
   type: string;
@@ -72,8 +74,13 @@ export class BarcodeComponent implements AfterViewInit {
   };
   systemDefinedValues = ['{{code}}', '{{type}}', '{{date}}', '{{hj_date}}'];
   fontSize: number = 10.6;
-  constructor(private http: HttpClient) { }
+  obj:GACFiledto;
+  TextValues:string;
+  constructor(private http: HttpClient,private service:GACFileService) {
+    this.obj = new GACFiledto();
+  }
 
+ 
   ngAfterViewInit() {
     if (this.workspaceRef) {
       this.workspaceWidth = this.workspaceRef.nativeElement.clientWidth;
@@ -582,11 +589,20 @@ export class BarcodeComponent implements AfterViewInit {
       elements: this.elements // Nested elements inside the workspace
     };
 
+    console.log(this.elements , "Check the value");
     console.log("🚀 Parent JSON:", JSON.stringify(workspaceData));
+
+    this.obj.TemplateData  = JSON.stringify(workspaceData);
+    this.service.AddDynamicTemplateAPI(this.obj).subscribe(data =>{
+     console.log(data ,"Save Temple Data");
+     this.clearAllElements();
+    })
     // this.http.post(this.apiUrl, this.elements).subscribe(response => {
     //   console.log('Elements saved!', response);
     // });
   }
 
+ 
+  
 
 }

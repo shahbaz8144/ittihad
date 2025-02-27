@@ -38,7 +38,7 @@
     <button (click)="updateWorkspaceStyles(workspaceWidth, workspaceHeight, workspaceBgColor, workspaceBorderColor, workspaceBorderWidth, workspaceBorderRadius)">Apply</button>
 </div>
 <!-- Workspace (Resizable) -->
-<div class="workspace" #workspaceContainer [style.width.px]="workspaceWidth" [style.height.px]="workspaceHeight" [style.background-color]="workspaceBgColor" [style.border]="workspaceBorderWidth + 'px solid ' + workspaceBorderColor" [style.border-radius.px]="workspaceBorderRadius"
+<div class="workspace" [(ngModel)]="TextValues" #workspaceContainer [style.width.px]="workspaceWidth" [style.height.px]="workspaceHeight" [style.background-color]="workspaceBgColor" [style.border]="workspaceBorderWidth + 'px solid ' + workspaceBorderColor" [style.border-radius.px]="workspaceBorderRadius"
     (contextmenu)="openWorkspaceContextMenu($event)">
 
     <!-- Draggable & Resizable Elements -->
