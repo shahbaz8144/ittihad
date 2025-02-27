@@ -146,4 +146,7 @@ export class GeneratedTemplateComponent implements OnInit, AfterViewInit {
       }
     }, 100);
   }
+  AddPositions(){
+   //this.position 
+  }
 }
