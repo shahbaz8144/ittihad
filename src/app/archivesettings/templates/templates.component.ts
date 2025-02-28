@@ -4,6 +4,7 @@ import { GACFiledto } from '../../_models/gacfiledto';
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
 import * as moment from 'moment-hijri';
 import * as JsBarcode from 'jsbarcode';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-templates',
@@ -30,7 +31,7 @@ export class TemplatesComponent implements OnInit,AfterViewInit {
     hj_date: "",
     barcode: "1234567890"
   };
-  constructor(private service: GACFileService) {
+  constructor(private service: GACFileService,private _snackBar: MatSnackBar) {
     this.obj = new GACFiledto();
   }
 
@@ -79,10 +80,12 @@ export class TemplatesComponent implements OnInit,AfterViewInit {
         }
       }, 100);
     }
-    SelectedTemplateId:number
-  template_open(TemplateId) {
+    SelectedTemplateId:number;
+    SelectedTemplateName:string = "";
+  template_open(TemplateId:number,TemplateName:string) {
     this.obj.TemplateId = TemplateId;
     this.SelectedTemplateId = TemplateId;
+    this.SelectedTemplateName = TemplateName;
     this.service.GetTemplateByIdAPI(this.obj).subscribe(data => {
       // Extract the TemplateData string
        
@@ -155,6 +158,15 @@ export class TemplatesComponent implements OnInit,AfterViewInit {
       this.obj.PositionY = Yvalue;
       this.service.NewAddTemplatePositionsAPI(this.obj).subscribe(data => {
         console.log(data);
+        this._snackBar.open(('Updated Successfully'), 'End now', {
+          duration: 5000,
+          verticalPosition: 'bottom',
+          horizontalPosition:'right',
+        });
+        this.TemplatesList();
+        document.getElementById("template_preview").classList.remove("kt-quick-panel--on");
+        document.getElementsByClassName("side_view")[0].classList.remove("position-fixed");
+        document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");
       })
     }
 }

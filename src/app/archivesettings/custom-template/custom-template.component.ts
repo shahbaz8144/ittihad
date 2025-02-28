@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import * as JsBarcode from 'jsbarcode';
 import { GACFileService } from 'src/app/_service/gacfile.service';
 import { GACFiledto } from 'src/app/_models/gacfiledto';
+import { MatSnackBar } from '@angular/material/snack-bar';
 interface ElementData {
   id?: number;
   type: string;
@@ -76,7 +77,9 @@ export class CustomTemplateComponent implements AfterViewInit {
   fontSize: number = 10.6;
   obj:GACFiledto;
   TextValues:string;
-  constructor(private http: HttpClient,private service:GACFileService) {
+  constructor(private http: HttpClient,private service:GACFileService,
+     private _snackBar: MatSnackBar,
+  ) {
     this.obj = new GACFiledto();
   }
 
@@ -197,6 +200,10 @@ export class CustomTemplateComponent implements AfterViewInit {
       return;
     }
 
+    if (this.newLabelStaticText.length > 50) {
+      alert('Label name cannot exceed 50 characters!');
+      return;
+    }
     const formattedPlaceholder = this.newLabelHasPlaceholder
       ? `{{${this.newLabelStaticText.replace(/\s+/g, '')}}}`
       : '';
@@ -424,6 +431,7 @@ export class CustomTemplateComponent implements AfterViewInit {
   clearAllElements() {
     this.elements = [];
     this.selectedElementIndex = null;
+    this.templateName = "";
   }
 
   // ==============================
@@ -595,6 +603,11 @@ export class CustomTemplateComponent implements AfterViewInit {
     this.obj.TemplateData  = JSON.stringify(workspaceData);
     this.service.AddDynamicTemplateAPI(this.obj).subscribe(data =>{
      console.log(data ,"Save Temple Data");
+     this._snackBar.open(('Added Successfully'), 'End now', {
+      duration: 5000,
+      verticalPosition: 'bottom',
+      horizontalPosition: 'right',
+    });
      this.clearAllElements();
     })
     // this.http.post(this.apiUrl, this.elements).subscribe(response => {
