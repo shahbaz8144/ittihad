@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { ArchivesettingsRoutingModule } from './archivesettings-routing.module';
 import { CabinetComponent } from './cabinet/cabinet.component';
 import { BarcodeComponent } from './barcode/barcode.component';
-
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ResizableModule } from 'angular-resizable-element';
 import { GeneratedTemplateComponent } from './generated-template/generated-template.component';
@@ -36,6 +35,7 @@ import { TemplatesComponent } from './templates/templates.component';
 
   ],
   imports: [
+    CommonModule,
     ArchivesettingsRoutingModule,
     DragDropModule,
     ResizableModule,

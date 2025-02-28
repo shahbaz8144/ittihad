@@ -13,7 +13,6 @@ const routes: Routes = [
   { path: 'cabinet', component: CabinetComponent, canActivate: [AuthGuard]},
   { path: 'barcode', component: BarcodeComponent, canActivate: [AuthGuard]},
 
-  { path: 'template', component: GeneratedTemplateComponent, canActivate: [AuthGuard]},
   { path: 'Maptemplatetocabinet', component: MaptemplatetocabinetComponent, canActivate: [AuthGuard]},
   { path: 'templatesample', component: GeneratedTemplateComponent, canActivate: [AuthGuard]},
   { path: 'pdf', component: PdfdownloadComponent, canActivate: [AuthGuard]},

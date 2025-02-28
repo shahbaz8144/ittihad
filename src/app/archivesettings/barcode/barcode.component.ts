@@ -94,12 +94,12 @@ this.service.GetTemplatesAPI().subscribe(data => {
 })
   }
  
-  GetTemplateByIdAPI(){
-     this.obj.TemplateId = '1'
-    this.service.GetTemplateByIdAPI(this.obj).subscribe(data =>{
- console.log(data, "Templates Id Data");
-    })
-  }
+//   GetTemplateByIdAPI(){
+//      this.obj.TemplateId = '1'
+//     this.service.GetTemplateByIdAPI(this.obj).subscribe(data =>{
+//  console.log(data, "Templates Id Data");
+//     })
+//   }
 
   ngAfterViewInit() {
     if (this.workspaceRef) {

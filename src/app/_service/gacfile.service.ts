@@ -434,7 +434,6 @@ export class GACFileService {
    GetTemplateByIdAPI(ObjGac: GACFiledto) {
    
     this._ObjGac.TemplateId = ObjGac.TemplateId;
-    
      return this.http.post(this.rootUrlII + 'ArchiveAPI/NewGetTemplateById', this._ObjGac);
    }
 

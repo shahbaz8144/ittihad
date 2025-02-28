@@ -6,7 +6,7 @@
             <div class="card-header align-items-center d-flex py-3">
                 <div class="flex-1">
                     <div class="search-bar">
-                        <input type="text" class="form-control" placeholder="Search" aria-controls="example">
+                        <input type="text" [(ngModel)]="TemplateSearch" class="form-control" placeholder="Search" aria-controls="example">
                         <!-- <a class="close close-icn"><i class="material-icons">close</i></a> -->
                     </div>
                 </div>
@@ -27,55 +27,48 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <ng-container *ngIf="(TemplateList|filter:TemplateSearch) as TemplateList">
+                            <tr *ngFor="let item of TemplateList|filter:TemplateSearch">
                                 <td>
-                                    Template name
+                                   {{item.TemplateName}}
                                 </td>
                                 <td>
-                                    1231
+                                    {{item.PositionX}}
                                 </td>
                                 <td>
-                                    1231
+                                    {{item.PositionY}}
+                                </td>
+                                <td [ngStyle]="{'color':item.IsActive=== true ? '#3f51b5' : 'red'}" >
+                                    <div *ngIf="item.IsActive"
+                                            class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-success curser-pointer w-min-70">
+                                            Active
+                                        </div>
+                                        <div *ngIf="!item.IsActive"
+                                            class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-danger curser-pointer w-min-70">
+                                            In-Active
+                                        </div>
                                 </td>
                                 <td>
-                                    <div class="kt-badge kt-badge--inline  kt-badge--pill kt-badge--unified-success curser-pointer w-min-70">
-                                        Active
-                                    </div>
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline btn-circle fs-5 btn-sm text-info p-0" (click)="template_open()">
+                                    <a class="btn btn-outline btn-circle fs-5 btn-sm text-info p-0" (click)="template_open(item.TemplateId)">
                                         <span class="mr-2">
                                                 <svg width="14px" height="14px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"></circle> <path d="M21 12C21 12 20 4 12 4C4 4 3 12 3 12" stroke="currentColor" stroke-width="2"></path> </g></svg>
                                              </span>
-                                        <span class="align-middle">Preview</span>
+                                        <span class="align-middle"  >Preview</span>
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    Template name
-                                </td>
-                                <td>
-                                    1231
-                                </td>
-                                <td>
-                                    1231
-                                </td>
-                                <td>
-
-                                    <div class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-danger curser-pointer w-min-70">
-                                        In-Active
+                            <ng-container *ngIf="TemplateList.length==0">
+                                <div class="d-flex-center kt-tb-error-box">
+                                    <div class="m-auto text-center">
+                                        <div class="svgs-1 kt-blank-msg">
+                                            <img src="assets/media/Img/No Racks.png">
+                                        </div>
+                                        <h3 class="kt-blank-ttl"> Data Not Available. </h3>
+                                        <p class="kt-blank-msg"> No data found in Template  list.</p> 
                                     </div>
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline btn-circle fs-5 btn-sm text-info p-0" (click)="template_open()">
-                                        <span class="mr-2">
-                                               <svg width="14px" height="14px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"></circle> <path d="M21 12C21 12 20 4 12 4C4 4 3 12 3 12" stroke="currentColor" stroke-width="2"></path> </g></svg>
-                                            </span>
-                                        <span class="align-middle">Preview</span>
-                                    </a>
-                                </td>
-                            </tr>
+                                </div>
+                            </ng-container>
+                        </ng-container>
                         </tbody>
                     </table>
                 </div>
