@@ -81,3 +81,279 @@
 .kt-blank-msg img {
     width: 70%;
 }
+
+
+/* popup css */
+
+
+/* popup css */
+
+
+/* popup css */
+
+
+/* popup css */
+
+
+/* popup css */
+
+
+/* popup css */
+
+
+/* Selection Panel */
+
+.selection-panel {
+    padding: 10px;
+    background: #f3f3f3;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+
+/* Workspace */
+
+.workspace {
+    border: 2px solid #ccc;
+    background-color: #f3f3f3;
+    position: relative;
+    overflow: hidden;
+    /* Prevents overflow */
+}
+
+
+/* Draggable & Resizable Elements */
+
+.resizable-draggable:focus,
+.resizable-draggable:hover {
+    border: 2px solid blue;
+}
+
+
+/* Label Input */
+
+.label-input {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border: none;
+    background: transparent;
+}
+
+
+/* Uploaded Image */
+
+.uploaded-file {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+/* Resize Handle */
+
+.resizable-draggable::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+    /* background: black; */
+    /* ✅ Keep resize handles visible */
+    cursor: nwse-resize;
+}
+
+
+/* Barcode Container */
+
+.barcode-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: white;
+    transition: transform 0.3s ease;
+}
+
+
+/* Barcode Number (Sharp & Readable) */
+
+.barcode-number {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5px;
+    letter-spacing: 1px;
+}
+
+
+/* Ensure Barcode Stays Sharp */
+
+canvas {
+    border: none !important;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+}
+
+
+/* Resizable Draggable Element (Table Container) */
+
+.resizable-draggable {
+    position: absolute;
+    background: transparent !important;
+    /* ✅ Make background fully transparent */
+    border: none !important;
+    /* ✅ Remove unwanted borders */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: fit-content;
+    min-height: fit-content;
+}
+
+
+/* Display Workspace Dimensions */
+
+.workspace-dimensions {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    padding: 5px;
+    margin-bottom: 5px;
+    background: #f3f3f3;
+    border: 1px solid #ccc;
+    display: inline-block;
+}
+
+.workspace-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.workspace-controls label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.workspace-controls input {
+    width: 80px;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.workspace-controls button {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.workspace-controls button:hover {
+    background-color: #0056b3;
+}
+
+.direct-text {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+    /* ✅ Keep text color visible */
+    white-space: nowrap;
+}
+
+.resizable-draggable span {
+    display: inline-block;
+    width: auto;
+    /* Adjusts to content */
+    height: auto;
+}
+
+svg {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.barcode {
+    font-family: 'Libre Barcode 39', sans-serif;
+    /* Example */
+    letter-spacing: 0;
+}
+
+
+/* Ensure text sharpness */
+
+.resizable-draggable,
+.barcode-container,
+.system-defined-text {
+    font-smooth: never;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    image-rendering: pixelated;
+}
+
+
+/* Improve font clarity */
+
+.system-defined-text {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.rendered-pdf {
+    width: 100% !important;
+    height: calc(100vh - 240px) !important;
+    border: 1px solid #000000;
+}
+
+.pdf-container {
+    position: relative;
+    width: 100% !important;
+    height: calc(100vh - 240px) !important;
+    border: 1px solid #ddd;
+    background-color: #f5f5f5;
+}
+
+.draggable-box {
+    position: absolute;
+    cursor: grab;
+}
+
+.position-display {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.drag-handle {
+    width: 100%;
+    background: #007bff;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    cursor: grab;
+    font-weight: bold;
+}
+
+.no-drag.cdk-drag {
+    touch-action: none;
+    pointer-events: none !important;
+}
