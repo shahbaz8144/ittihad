@@ -87,7 +87,8 @@ export class TemplatesComponent implements OnInit,AfterViewInit {
       // Extract the TemplateData string
        
       const templateDataString = data['Data'].TemplateDetailsJson[0].TemplateData;
-
+      this.position.x = data['Data'].TemplateDetailsJson[0].PositionX;
+      this.position.y = data['Data'].TemplateDetailsJson[0].PositionY;
       // Parse the string to convert it into an object
       const templateData = JSON.parse(templateDataString);
 
@@ -116,6 +117,8 @@ export class TemplatesComponent implements OnInit,AfterViewInit {
   }
   onDragEnd(event: CdkDragEnd) {
     this.position = event.source.getFreeDragPosition();
+    this.position.x = event.source.getFreeDragPosition().x;
+    this.position.y = event.source.getFreeDragPosition().y;
   }
    getIslamicDate(): string {
       return moment().format('iYYYY/iMM/iDD'); // Example: 1445/07/15
