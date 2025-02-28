@@ -114,150 +114,35 @@
                         <div class="pdf-container" #pdfContainer>
                             <div class="draggable-box" cdkDrag cdkDragBoundary=".pdf-container" (cdkDragEnded)="onDragEnd($event)">
                                 <div class="workspace" #workspaceContainer [style.width.px]="workspaceWidth" [style.height.px]="workspaceHeight" [style.background-color]="workspaceBgColor" [style.border]="workspaceBorderWidth + 'px solid ' + workspaceBorderColor" [style.border-radius.px]="workspaceBorderRadius"
-                                    (contextmenu)="openWorkspaceContextMenu($event)" ```html <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid side_view">
-                                    <div class="col-lg-12">
-                                        <h4 class="mb-3 pro-nm text-dark"> Template List </h4>
-                                        <!-- Document View Component -->
-                                        <div class="card ribbon-box">
-                                            <div class="card-header align-items-center d-flex py-3">
-                                                <div class="flex-1">
-                                                    <div class="search-bar">
-                                                        <input type="text" [(ngModel)]="TemplateSearch" class="form-control" placeholder="Search" aria-controls="example">
-                                                        <!-- <a class="close close-icn"><i class="material-icons">close</i></a> -->
-                                                    </div>
-                                                </div>
-                                                <div class="flex-shrink-0">
-                                                    <button class="btn btn-sm btn-info" style="display: block;"> Create Template </button>
-                                                </div>
-                                            </div>
-                                            <div class="card-body p-0">
-                                                <div class="mb-0 table-responsive">
-                                                    <table class="table b-table">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Template name</th>
-                                                                <th>X position</th>
-                                                                <th>Y position</th>
-                                                                <th>Action</th>
-                                                                <th>Preview</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <ng-container *ngIf="(TemplateList|filter:TemplateSearch) as TemplateList">
-                                                                <tr *ngFor="let item of TemplateList|filter:TemplateSearch">
-                                                                    <td>
-                                                                        {{item.TemplateName}}
-                                                                    </td>
-                                                                    <td>
-                                                                        {{item.PositionX}}
-                                                                    </td>
-                                                                    <td>
-                                                                        {{item.PositionY}}
-                                                                    </td>
-                                                                    <td [ngStyle]="{'color':item.IsActive=== true ? '#3f51b5' : 'red'}">
-                                                                        <div *ngIf="item.IsActive" class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-success curser-pointer w-min-70">
-                                                                            Active
-                                                                        </div>
-                                                                        <div *ngIf="!item.IsActive" class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-danger curser-pointer w-min-70">
-                                                                            In-Active
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <a class="btn btn-outline d-flex align-items-center fs-5 btn-sm text-info p-0" (click)="template_open(item.TemplateId)">
-                                                                            <span class="mr-2">
-                                                <svg width="14px" height="14px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"></circle> <path d="M21 12C21 12 20 4 12 4C4 4 3 12 3 12" stroke="currentColor" stroke-width="2"></path> </g></svg>
-                                             </span>
-                                                                            <span class="align-middle">Preview</span>
-                                                                        </a>
-                                                                    </td>
-                                                                </tr>
-                                                                <ng-container *ngIf="TemplateList.length==0">
-                                                                    <div class="d-flex-center kt-tb-error-box">
-                                                                        <div class="m-auto text-center">
-                                                                            <div class="svgs-1 kt-blank-msg">
-                                                                                <img src="assets/media/Img/No Racks.png">
-                                                                            </div>
-                                                                            <h3 class="kt-blank-ttl"> Data Not Available. </h3>
-                                                                            <p class="kt-blank-msg"> No data found in Template list.</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </ng-container>
-                                                            </ng-container>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="kt-aside-menu-overlay" (click)="closeInfo()"></div>
-                                <div id="template_preview" class="wc-75 kt-quick-panel kt-quick-panel1 scroll-div">
-                                    <a id="kt_quick_panel_close_btn" class="kt-quick-panel__close" (click)="template_close()">
-                                        <i class="flaticon2-delete"></i>
-                                    </a>
-                                    <div id="kt_chat_content" class="kt-grid__item kt-grid__item--fluid kt-app__content">
-                                        <div class="kt-chat">
-                                            <div class="kt-portlet kt-portlet--head-lg kt-portlet--last">
-                                                <div class="kt-portlet__head">
-                                                    <div class="kt-chat__head">
-                                                        <div>
-                                                            <div class="kt-chat__label">
-                                                                <h4 class="mb-0 text-dark"> Template name </h4>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="kt-portlet__body py-1">
-                                                    <div class="template-card">
-                                                        <div class="template-card-position">
-                                                            <div class="template-card-position-item">
-                                                                <div class="template-card-position-item-icon">
-                                                                    <svg width="64px" height="64px" viewBox="0 0 76 76" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" enable-background="new 0 0 76.00 76.00" xml:space="preserve" fill="currentColor"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill="currentColor" fill-opacity="1" stroke-width="0.2" stroke-linejoin="round" d="M 56.0143,57L 45.683,57L 39.0246,44.6245C 38.7758,44.1665 38.5156,43.3183 38.2442,42.0799L 38.1339,42.0799C 38.0095,42.6623 37.7127,43.5473 37.2433,44.7348L 30.5594,57L 20.1857,57L 32.5018,38L 21.2714,19L 31.8487,19L 37.3621,30.3915C 37.7918,31.2963 38.1763,32.365 38.5156,33.5977L 38.6259,33.5977C 38.8408,32.857 39.2394,31.7543 39.8219,30.2897L 45.8951,19L 55.4714,19L 44.0969,37.8388L 56.0143,57 Z "></path> </g></svg>
-                                                                </div>
-                                                                <div class="template-card-position-item-value">{{ position.x }} px</div>
-                                                            </div>
-                                                            <div class="template-card-position-item">
-                                                                <div class="template-card-position-item-icon">
-                                                                    <svg width="64px" height="64px" viewBox="0 0 76 76" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" enable-background="new 0 0 76.00 76.00" xml:space="preserve" fill="currentColor"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill="currentColor" fill-opacity="1" stroke-width="0.2" stroke-linejoin="round" d="M 54.6572,19L 42.1714,43.4879L 42.1714,57L 33.4857,57L 33.4857,43.6406L 21.5429,19L 31.3228,19L 37.4045,33.1736C 37.5063,33.4394 37.7947,34.4742 38.2697,36.2781L 38.3799,36.2781C 38.6118,35.0058 38.8917,34.0077 39.2197,33.2839L 45.5897,19L 54.6572,19 Z "></path> </g></svg>
-                                                                </div>
-                                                                <div class="template-card-position-item-value">{{ position.y }} px</div>
-                                                            </div>
-                                                            <button type="button" class="btn btn-update-position" (click)="UpdatePosition(position.x, position.y)">Update Position</button>
-                                                        </div>
-                                                        <!-- <div class="template-card-adjust"> -->
-
-                                                    </div>
-                                                    <div class="pdf-container" #pdfContainer>
-                                                        <div class="dr>
+                                    (contextmenu)="openWorkspaceContextMenu($event)">
 
 
-                                    <div *ngFor=" let element of workspaceData?.elements; let i=i ndex " class="resizable-draggable " [style.width.px]="element.width " [style.height.px]="element.height " [style.fontSize.px]="element.fontSize
-                                                            " [style.background-color]="element.backgroundColor || '#ffffff' "
-                                        [style.transform]=" 'translate(' + element.x + 'px, ' + element.y + 'px)' " (contextmenu)="openContextMenu($event, i) ">
+                                    <div *ngFor="let element of workspaceData?.elements; let i = index" class="resizable-draggable" [style.width.px]="element.width" [style.height.px]="element.height" [style.fontSize.px]="element.fontSize" [style.background-color]="element.backgroundColor || '#ffffff'"
+                                        [style.transform]="'translate(' + element.x + 'px, ' + element.y + 'px)'" (contextmenu)="openContextMenu($event, i)">
 
-                                        <span *ngIf="element.valueType==='userDefined' ">
+                                        <span *ngIf="element.valueType === 'userDefined'">
                                             {{ element.staticText }}
                                          </span>
-                                        <img *ngIf="element.type==='image' && element.fileUrl " [src]="element.fileUrl " class="uploaded-file " />
-                                        <div *ngIf="element.type==='barcode' " class="barcode-container ">
-                                            <canvas [id]=" 'barcode-' + i " [style.width.px]="element.width " [style.height.px]="element.height "></canvas>
+                                        <img *ngIf="element.type === 'image' && element.fileUrl" [src]="element.fileUrl" class="uploaded-file" />
+                                        <div *ngIf="element.type === 'barcode'" class="barcode-container">
+                                            <canvas [id]="'barcode-' + i" [style.width.px]="element.width" [style.height.px]="element.height"></canvas>
                                         </div>
-                                        <svg *ngIf="element.type==='systemDefined' " [attr.x]="element.x " [attr.y]="element.y " [attr.width]="element.width + 10 " [attr.height]="element.height + 5 ">
+                                        <svg *ngIf="element.type === 'systemDefined'" [attr.x]="element.x" [attr.y]="element.y" [attr.width]="element.width + 10" [attr.height]="element.height + 5">
                               
-                                                <text x="50% " y="50% " dominant-baseline="middle " text-anchor="middle "
-                                                        [style.fill]="element.fontColor "
-                                                        [style.font-size.px]="element.fontSize || 10 "
-                                                        [style.font-weight]="element.text==='{{code}}' ? 'bold' : element.fontWeight "
-                                                        [style.font-style]="element.fontStyle ">
+                                                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+                                                        [style.fill]="element.fontColor"
+                                                        [style.font-size.px]="element.fontSize || 10"
+                                                        [style.font-weight]="element.text === '{{code}}' ? 'bold' : element.fontWeight"
+                                                        [style.font-style]="element.fontStyle">
                                                 
                                                     
-                                                    <ng-container *ngIf="element.text==='{{code}}' && isTextTooLong(bindValue(element), element.width); else singleLineText ">
-                                                        <tspan x="50% " dy="-6 ">{{ getFirstLine(bindValue(element)) }}</tspan>
-                                                        <tspan x="50% " dy="14 ">{{ getSecondLine(bindValue(element)) }}</tspan>
+                                                    <ng-container *ngIf="element.text === '{{code}}' && isTextTooLong(bindValue(element), element.width); else singleLineText">
+                                                        <tspan x="50%" dy="-6">{{ getFirstLine(bindValue(element)) }}</tspan>
+                                                        <tspan x="50%" dy="14">{{ getSecondLine(bindValue(element)) }}</tspan>
                                                     </ng-container>
                                                     
                                                     <ng-template #singleLineText>
-                                                    <tspan x="50% ">{{ bindValue(element) }}</tspan>
+                                                    <tspan x="50%">{{ bindValue(element) }}</tspan>
                                                     </ng-template>
                                                 
                                                 </text>
@@ -267,7 +152,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="pdfViewer " class="rendered-pdf "></div>
+                            <div id="pdfViewer" class="rendered-pdf"></div>
                         </div>
                     </div>
                 </div>
