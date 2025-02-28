@@ -1819,7 +1819,7 @@ span.css-w0pj6f {
     outline: none;
     padding: 4px 10px;
     position: relative;
-    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    /* font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif; */
     -webkit-font-smoothing: antialiased;
     font-weight: 400;
     color: #838383;
@@ -1860,9 +1860,9 @@ span.css-w0pj6f {
     .scroll-y.kt-portlet__body--fit-x {
         position: relative;
         overflow-y: auto;
-        max-height: calc(100vh - 211px);
+        max-height: calc(100vh - 160px);
     }
     .scroll-y.aside-scrolly {
-        max-height: calc(100vh - 91px);
+        max-height: calc(100vh - 48px);
     }
 }

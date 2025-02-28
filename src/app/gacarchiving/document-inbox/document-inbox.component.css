@@ -1582,9 +1582,9 @@ svg.rmv-icn:hover {
         overflow-y: auto;
         height: calc(100vh - 150px);
     }
-    .scroll-y.aside-scrolly {
+    /* .scroll-y.aside-scrolly {
         height: calc(100vh - 85px);
-    }
+    } */
 }
 
 
@@ -1919,7 +1919,7 @@ span.s-label {
 .grid-scroll {
     position: relative;
     overflow-y: auto;
-    max-height: calc(100vh - 200px);
+    max-height: calc(100vh - 160px);
     scrollbar-width: thin;
     padding-top: 0rem;
 }

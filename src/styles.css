@@ -126,8 +126,12 @@ body {
 
 body {
     margin: 0;
-    font-family: var(--font-family-sans-serif);
+    /* font-family: var(--font-family-sans-serif); */
+    font-family: "Schibsted Grotesk", serif;
     line-height: 1.5 !important;
+}
+.mat-checkbox, mat-label{
+    font-family: "Schibsted Grotesk", serif; 
 }
 
 .mat-simple-snackbar-action {
