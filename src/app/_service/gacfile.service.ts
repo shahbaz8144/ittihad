@@ -459,4 +459,14 @@ export class GACFileService {
     this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
      return this.http.post(this.rootUrlII + 'ArchiveAPI/NewAddMapTemplate', this._ObjGac);
    }
+
+   NewAddTemplatePositionsAPI(ObjGac: GACFiledto) {
+    this._ObjGac.TemplateId = ObjGac.TemplateId;
+    this._ObjGac.PositionX = ObjGac.PositionX;
+    this._ObjGac.PositionY = ObjGac.PositionY;
+    this._ObjGac.CreatedBy = this.currentUserValue.createdby;
+    
+     return this.http.post(this.rootUrlII + 'ArchiveAPI/NewAddTemplatePositions', this._ObjGac);
+   }
+
 }

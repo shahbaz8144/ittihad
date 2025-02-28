@@ -29,6 +29,7 @@ interface ElementData {
   templateUrl: './generated-template.component.html',
   styleUrls: ['./generated-template.component.css']
 })
+
 export class GeneratedTemplateComponent implements OnInit, AfterViewInit {
   @ViewChild('workspaceContainer') workspaceContainer!: ElementRef;
 
