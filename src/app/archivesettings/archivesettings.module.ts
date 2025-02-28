@@ -17,13 +17,17 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import {  HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader'
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { PdfdownloadComponent } from './pdfdownload/pdfdownload.component'
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+
 @NgModule({
   declarations: [
     CabinetComponent,
     BarcodeComponent,
     AssignusersComponent,
-    GeneratedTemplateComponent
+    GeneratedTemplateComponent,
+    PdfdownloadComponent
   ],
   imports: [
     CommonModule,
@@ -45,6 +49,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader'
           deps: [HttpClient]
       }
   }),
+  PdfViewerModule  
   ]
 })
 export class ArchivesettingsModule { }

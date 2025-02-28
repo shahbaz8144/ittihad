@@ -443,9 +443,6 @@ export class ArchiveComponent implements OnInit {
     } else {
       console.warn('No currentUser data found in localStorage');
     }
-
-
-
   }
 
   updateSelectedValues(UserId: number, event: any) {
@@ -461,12 +458,9 @@ export class ArchiveComponent implements OnInit {
         this.SelectedUsers.push(element);
       }
     });
-
   }
 
   updateSelectedRequiredapprovalValues(UserId: number, event: any) {
-
-
     const isChecked = event.checked;
     this.ObjRequiredApprovalList.forEach(element => {
       if (element.UserId === UserId) {
@@ -479,7 +473,6 @@ export class ArchiveComponent implements OnInit {
         this.SelectedRequiredapprovalUsers.push(element);
       }
     });
-
 
     console.log(this.SelectedRequiredapprovalUsers, "add share users");
     this.ObjShareUserList.forEach(element => {
@@ -2231,7 +2224,7 @@ export class ArchiveComponent implements OnInit {
   FirstFileDocumentName: string = "";
   UploadingFiles: boolean = false;
   async selectFile(event: any): Promise<void> {
-    debugger
+     
     const files = Array.from(event.target.files) as File[]; // Convert FileList to File[]
     let folderPath = "Draft/" + this.currentUserValue.createdby;
     if (files.length > 0) {

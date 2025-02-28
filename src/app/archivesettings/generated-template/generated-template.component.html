@@ -4,6 +4,7 @@
     <p>Y Position: {{ position.y }} px</p>
 
     <a (click)="AddPositions()">Add Positions</a>
+    <button (click)="generatePDF()">Download PDF with Overlay</button>
 </div>
 <div class="pdf-container" #pdfContainer>
     <!-- Draggable custom template -->
@@ -55,7 +56,17 @@
             </div>
         </div>
     </div>
-
-
     <div id="pdfViewer" class="rendered-pdf"></div>
+    <!-- <div class="row">
+        <div class="col-md-6">
+            
+        </div>
+        <div class="col-md-6">
+            
+        </div>
+    </div> -->
+
+</div>
+<div id="pdfViewer123" class="rendered-pdf-1">
+    <pdf-viewer [src]="pdfSrc" (after-load-complete)="capturePDF()"></pdf-viewer>
 </div>
