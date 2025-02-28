@@ -62,10 +62,10 @@ export class AzureUploadService {
       const formattedDate = format(new Date(), 'dd/MM/yyyy');
 
       // If it's a PDF, add watermark before uploading
-      const processedFile = file.type === 'application/pdf' ? await this.addWatermarkToPdf(file, name, formattedDate) : file;
+      //const processedFile = file.type === 'application/pdf' ? await this.addWatermarkToPdf(file, name, formattedDate) : file;
 
       // Upload original file
-      await blobClient.uploadData(processedFile, {
+      await blobClient.uploadData(file, {
         blobHTTPHeaders: { blobContentType: file.type },
         // onProgress: (progress) => {
         //   const percentDone = Math.round((100 * progress.loadedBytes) / (progress.total ?? 1));

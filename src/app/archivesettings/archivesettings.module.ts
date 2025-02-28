@@ -19,15 +19,23 @@ import {  HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MaptemplatetocabinetComponent } from './maptemplatetocabinet/maptemplatetocabinet.component'
+import { PdfdownloadComponent } from './pdfdownload/pdfdownload.component'
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { CustomTemplateComponent } from './custom-template/custom-template.component';
+import { TemplatesComponent } from './templates/templates.component';
+
 @NgModule({
   declarations: [
     CabinetComponent,
     BarcodeComponent,
     GeneratedTemplateComponent,
-    MaptemplatetocabinetComponent
+    MaptemplatetocabinetComponent,
+    CustomTemplateComponent,
+    TemplatesComponent,
+    PdfdownloadComponent
+
   ],
   imports: [
-    CommonModule,
     ArchivesettingsRoutingModule,
     DragDropModule,
     ResizableModule,
@@ -46,6 +54,7 @@ import { MaptemplatetocabinetComponent } from './maptemplatetocabinet/maptemplat
           deps: [HttpClient]
       }
   }),
+  PdfViewerModule  
   ]
 })
 export class ArchivesettingsModule { }

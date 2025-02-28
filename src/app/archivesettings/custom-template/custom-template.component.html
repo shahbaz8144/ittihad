@@ -1,0 +1,256 @@
+<div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid side_view px-3">
+    <h4 class="temp-main-head">Create Template</h4>
+    <div class="template-container">
+        <div class="template-container-wrapper">
+            <div class="template-left">
+                <div class="template-left-header">
+                    <h5 class="mb-0" id="template_name">{{ templateName || 'Template Name' }}</h5>
+                    <button class="btn btn-save-template" (click)="saveTemplate()">Save Template</button>
+                </div>
+                <div class="template-inner">
+                    <!-- Workspace (Resizable) -->
+                    <div class="workspace" [(ngModel)]="TextValues" #workspaceContainer [style.width.px]="workspaceWidth" [style.height.px]="workspaceHeight" [style.background-color]="workspaceBgColor" [style.border]="workspaceBorderWidth + 'px solid ' + workspaceBorderColor"
+                        [style.border-radius.px]="workspaceBorderRadius" (contextmenu)="openWorkspaceContextMenu($event)">
+                        <!-- Draggable & Resizable Elements -->
+                        <div *ngFor="let element of elements; let i = index" class="resizable-draggable" [style.fontSize.px]="element.fontSize" [style.width.px]="element.width" [style.height.px]="element.height" [style.background-color]="element.backgroundColor || '#ffffff'"
+                            cdkDrag [cdkDragBoundary]="'.workspace'" [cdkDragFreeDragPosition]="{x: element.x, y: element.y}" (cdkDragEnded)="onDragEnd($event, i)" (contextmenu)="openContextMenu($event, i)">
+                            <!-- If user-defined, display as normal -->
+                            <span *ngIf="element.valueType === 'userDefined'">
+                                {{ element.staticText }} {{ element.userValue }}
+                            </span>
+
+                            <!-- Uploaded Image -->
+                            <img *ngIf="element.type === 'image' && element.fileUrl" [src]="element.fileUrl" class="uploaded-file" />
+
+                            <!-- Barcode -->
+                            <div *ngIf="element.type === 'barcode'" class="barcode-container">
+                                <canvas [id]="'barcode-' + i" [style.width.px]="element.width" [style.height.px]="element.height"></canvas>
+                            </div>
+
+                            <!-- If it's a system-defined element, print its value -->
+                            <svg *ngIf="element.type === 'systemDefined'" [attr.x]="element.x" [attr.y]="element.y" [attr.width]="element.width" [attr.height]="element.height">
+                                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+                                        [style.fill]="element.fontColor" 
+                                        [style.font-size.px]="element.fontSize" 
+                                        [style.font-weight]="element.fontWeight" 
+                                        [style.font-style]="element.fontStyle">
+                                    {{ element.text }}
+                                </text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="template-right">
+                <div class="template-righ-inner">
+                    <div class="template-actions">
+                        <div class="selection-panel-li selection-panel-temp-name">
+                            <div class="selection-panel-li-icon">
+                                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 6V19M6 6H18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                            </div>
+                            <div class="selection-panel-li-control">
+                                <input type="text" class="form-control" placeholder="Enter Template Name" [(ngModel)]="templateName">
+                            </div>
+                        </div>
+                        <div class="tab-content" id="v-pills-tabContent">
+                            <div class="tab-pane fade show active" id="v-pills-elements" role="tabpanel" aria-labelledby="v-pills-elements-tab">
+                                <div class="selection-panel">
+                                    <div class="selection-panel-header">
+                                        <h5 class="selection-panel-title mb-0">Add Elements</h5>
+                                        <button class="btn btn-clearall" (click)="clearAllElements()">Clear All</button>
+                                    </div>
+                                    <div class="selection-panel-ul">
+                                        <div class="selection-panel-li" (click)="openLabelDialog()">
+                                            <div class="selection-panel-li-icon">
+                                                <svg width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 19h14M7 15l1.5-3m8.5 3-1.5-3m0 0L12 5l-3.5 7m7 0h-7"></path></g></svg>
+                                            </div>
+                                            <div class="selection-panel-li-control">Add Label</div>
+                                        </div>
+                                        <label class="selection-panel-li" for="template-images">
+                                            <div class="selection-panel-li-icon">
+                                                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14.2639 15.9375L12.5958 14.2834C11.7909 13.4851 11.3884 13.086 10.9266 12.9401C10.5204 12.8118 10.0838 12.8165 9.68048 12.9536C9.22188 13.1095 8.82814 13.5172 8.04068 14.3326L4.04409 18.2801M14.2639 15.9375L14.6053 15.599C15.4112 14.7998 15.8141 14.4002 16.2765 14.2543C16.6831 14.126 17.12 14.1311 17.5236 14.2687C17.9824 14.4251 18.3761 14.8339 19.1634 15.6514L20 16.4934M14.2639 15.9375L18.275 19.9565M18.275 19.9565C17.9176 20 17.4543 20 16.8 20H7.2C6.07989 20 5.51984 20 5.09202 19.782C4.71569 19.5903 4.40973 19.2843 4.21799 18.908C4.12796 18.7313 4.07512 18.5321 4.04409 18.2801M18.275 19.9565C18.5293 19.9256 18.7301 19.8727 18.908 19.782C19.2843 19.5903 19.5903 19.2843 19.782 18.908C20 18.4802 20 17.9201 20 16.8V16.4934M4.04409 18.2801C4 17.9221 4 17.4575 4 16.8V7.2C4 6.0799 4 5.51984 4.21799 5.09202C4.40973 4.71569 4.71569 4.40973 5.09202 4.21799C5.51984 4 6.07989 4 7.2 4H16.8C17.9201 4 18.4802 4 18.908 4.21799C19.2843 4.40973 19.5903 4.71569 19.782 5.09202C20 5.51984 20 6.0799 20 7.2V16.4934M17 8.99989C17 10.1045 16.1046 10.9999 15 10.9999C13.8954 10.9999 13 10.1045 13 8.99989C13 7.89532 13.8954 6.99989 15 6.99989C16.1046 6.99989 17 7.89532 17 8.99989Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                            </div>
+                                            <div class="selection-panel-li-control">
+                                                Select Images
+                                            </div>
+                                        </label>
+                                        <input type="file" id="template-images" (change)="onFileSelected($event)" multiple />
+                                        <div class="selection-panel-li" (click)="addElement('barcode')">
+                                            <div class="selection-panel-li-icon">
+                                                <svg width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 6v12m7-12v12m7-12v12M10 6.5v11a.5.5 0 0 0 1 0v-11a.5.5 0 0 0-1 0zm7 0v11a.5.5 0 0 0 1 0v-11a.5.5 0 0 0-1 0zM3.5 6v0a.5.5 0 0 0-.5.5v11a.5.5 0 0 0 .5.5v0a.5.5 0 0 0 .5-.5v-11a.5.5 0 0 0-.5-.5z"></path></g></svg>
+                                            </div>
+                                            <div class="selection-panel-li-control">Add Barcode</div>
+                                        </div>
+                                        <div class="selection-panel-li" (click)="addElement('table')">
+                                            <div class="selection-panel-li-icon">
+                                                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9 4L9 20M15 4L15 20M3 9H21M3 15H21M6.2 20H17.8C18.9201 20 19.4802 20 19.908 19.782C20.2843 19.5903 20.5903 19.2843 20.782 18.908C21 18.4802 21 17.9201 21 16.8V7.2C21 6.0799 21 5.51984 20.782 5.09202C20.5903 4.71569 20.2843 4.40973 19.908 4.21799C19.4802 4 18.9201 4 17.8 4H6.2C5.07989 4 4.51984 4 4.09202 4.21799C3.71569 4.40973 3.40973 4.71569 3.21799 5.09202C3 5.51984 3 6.07989 3 7.2V16.8C3 17.9201 3 18.4802 3.21799 18.908C3.40973 19.2843 3.71569 19.5903 4.09202 19.782C4.51984 20 5.07989 20 6.2 20Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                            </div>
+                                            <div class="selection-panel-li-control">Add Table
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <button (click)="saveElements()">Save Elements</button> -->
+                                    <!-- <button (click)="saveTemplate()">Save Template</button> -->
+                                    <hr>
+                                    <div class="selection-panel-header">
+                                        <h5 class="selection-panel-title mb-0">System Defined Values</h5>
+                                    </div>
+                                    <div class="selection-panel-ul">
+                                        <div class="selection-panel-li system-def" *ngFor="let sysVal of systemDefinedValues" (click)="addSystemDefinedElement(sysVal)">
+                                            <div class="selection-panel-li-control">
+                                                {{ sysVal }}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-workspace" role="tabpanel" aria-labelledby="v-pills-workspace-tab">
+                                <div class="workspace-controls">
+                                    <div class="workspace-controls-header">
+                                        <h5 class="workspace-controls-title mb-0">Workspace</h5>
+                                    </div>
+                                    <div class="workspace-controls-ul">
+                                        <div class="workspace-controls-li">
+                                            <label>Width</label>
+                                            <input type="number" class="form-control" [(ngModel)]="workspaceWidth" />
+                                        </div>
+                                        <div class="workspace-controls-li">
+                                            <label>Height</label>
+                                            <input type="number" class="form-control" [(ngModel)]="workspaceHeight" />
+                                        </div>
+                                        <div class="workspace-controls-li">
+                                            <label>Background Color</label>
+                                            <input type="color" class="form-control" [(ngModel)]="workspaceBgColor" />
+                                        </div>
+                                        <div class="workspace-controls-li">
+                                            <label>Border Color</label>
+                                            <input type="color" class="form-control" [(ngModel)]="workspaceBorderColor" />
+                                        </div>
+                                        <div class="workspace-controls-li">
+                                            <label>Border Width</label>
+                                            <input type="number" class="form-control" [(ngModel)]="workspaceBorderWidth" />
+                                        </div>
+                                        <div class="workspace-controls-li">
+                                            <label>Border Radius</label>
+                                            <input type="number" class="form-control" [(ngModel)]="workspaceBorderRadius" />
+                                        </div>
+                                    </div>
+                                    <!-- <button (click)="updateWorkspaceStyles(workspaceWidth, workspaceHeight, workspaceBgColor, workspaceBorderColor, workspaceBorderWidth, workspaceBorderRadius)">Apply</button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active" id="v-pills-elements-tab" data-toggle="pill" href="#v-pills-elements" role="tab" aria-controls="v-pills-elements" aria-selected="true">
+                            <div class="nav-link-svg">
+                                <svg width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> <style>.cls-1{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5px;}</style> </defs> <g id="ic-layout-left-menu"> <rect class="cls-1" x="2" y="2" width="20" height="20" rx="2"></rect> <line class="cls-1" x1="2" y1="10" x2="22" y2="10"></line> <line class="cls-1" x1="10" y1="10" x2="10" y2="22"></line> </g> </g></svg>
+                            </div>
+                            <div class="nav-link-label">Elements</div>
+                        </a>
+                        <a class="nav-link" id="v-pills-workspace-tab" data-toggle="pill" href="#v-pills-workspace" role="tab" aria-controls="v-pills-workspace" aria-selected="false">
+                            <div class="nav-link-svg">
+                                <svg width="64px" height="64px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" fill="currentColor"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>resize</title> <desc>Created with Sketch Beta.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"> <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-256.000000, -879.000000)" fill="currentColor"> <path d="M284,909 C282.896,909 282,908.104 282,907 C282,905.896 282.896,905 284,905 C285.104,905 286,905.896 286,907 C286,908.104 285.104,909 284,909 L284,909 Z M280.142,906 L263.858,906 C263.496,904.6 262.401,903.505 261,903.142 L261,886.858 C262.401,886.496 263.496,885.4 263.858,884 L280.142,884 C280.504,885.4 281.599,886.496 283,886.858 L283,903.142 C281.599,903.505 280.504,904.6 280.142,906 L280.142,906 Z M260,909 C258.896,909 258,908.104 258,907 C258,905.896 258.896,905 260,905 C261.104,905 262,905.896 262,907 C262,908.104 261.104,909 260,909 L260,909 Z M258,883 C258,881.896 258.896,881 260,881 C261.104,881 262,881.896 262,883 C262,884.104 261.104,885 260,885 C258.896,885 258,884.104 258,883 L258,883 Z M284,881 C285.104,881 286,881.896 286,883 C286,884.104 285.104,885 284,885 C282.896,885 282,884.104 282,883 C282,881.896 282.896,881 284,881 L284,881 Z M285,903.142 L285,886.858 C286.722,886.413 288,884.862 288,883 C288,880.791 286.209,879 284,879 C282.138,879 280.587,880.278 280.142,882 L263.858,882 C263.413,880.278 261.862,879 260,879 C257.791,879 256,880.791 256,883 C256,884.862 257.278,886.413 259,886.858 L259,903.142 C257.278,903.588 256,905.139 256,907 C256,909.209 257.791,911 260,911 C261.862,911 263.413,909.723 263.858,908 L280.142,908 C280.587,909.723 282.138,911 284,911 C286.209,911 288,909.209 288,907 C288,905.139 286.722,903.588 285,903.142 L285,903.142 Z" id="resize" sketch:type="MSShapeGroup"> </path> </g> </g> </g></svg>
+                            </div>
+                            <div class="nav-link-label">workspace</div>
+                        </a>
+                    </div>
+                </div>
+                <!-- Properties Panel -->
+                <div class="properties-panel" id="properties-panel" *ngIf="showPropertiesPanel">
+                    <h3>Element Properties (ID: {{selectedElement?.id}})</h3>
+
+                    <label>Text</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectedElement!.staticText" (change)="updateSelectedElement()" />
+
+                    <label>Font Color</label>
+                    <input type="color" class="form-control" [(ngModel)]="selectedElement!.fontColor" (change)="updateSelectedElement()" />
+
+                    <label>Font Size</label>
+                    <input type="number" class="form-control" [(ngModel)]="selectedElement!.fontSize" (change)="updateFontSize()" min="8" max="100" />
+
+                    <label>Font Style </label>
+                    <select [(ngModel)]="selectedElement!.fontStyle" class="form-control" (change)="updateSelectedElement()">
+                        <option value="normal">Normal</option>
+                        <option value="italic">Italic</option>
+                    </select>
+
+                    <label>Bold</label>
+                    <select [(ngModel)]="selectedElement!.fontWeight" class="form-control" (change)="updateSelectedElement()">
+                        <option value="normal">Normal</option>
+                        <option value="bold">Bold</option>
+                    </select>
+
+                    <label>Width</label>
+                    <input type="number" class="form-control" [(ngModel)]="selectedElement!.width" (change)="updateSelectedElement()" />
+
+                    <label>Height</label>
+                    <input type="number" class="form-control" [(ngModel)]="selectedElement!.height" (change)="updateSelectedElement()" />
+
+                    <label>X Position</label>
+                    <input type="number" class="form-control" [(ngModel)]="selectedElement!.x" (change)="updateSelectedElement()" />
+
+                    <label>Y Position</label>
+                    <input type="number" class="form-control" [(ngModel)]="selectedElement!.y" (change)="updateSelectedElement()" />
+
+                    <label>Background Color</label>
+                    <input type="color" class="form-control" [(ngModel)]="selectedElement!.backgroundColor" (change)="updateSelectedElement()" />
+
+                    <button (click)="closePropertiesPanel()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ul class="context-menu" *ngIf="contextMenuVisible" [style.top]="contextMenuPosition.y" [style.left]="contextMenuPosition.x">
+    <li *ngIf="contextMenuTarget === 'element'" (click)="copyElement()">Copy</li>
+    <li *ngIf="copiedElement" (click)="pasteElement()">Paste</li>
+    <li *ngIf="contextMenuTarget === 'element'" (click)="deleteSelectedElement()">Delete</li>
+    <li *ngIf="contextMenuTarget === 'element'" (click)="openPropertiesPanel()">Properties</li>
+</ul>
+
+
+
+
+
+
+
+<!-- addlabel Modal Start -->
+<div *ngIf="showLabelDialog">
+    <div class="modal-backdrop fade show" id="addlabelmodal-modal-backdrop" style="display: block;"></div>
+    <div class="addlabel-modal modal fade show" id="addlabelmodal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addlabelmodalLabel" aria-hidden="true" style="display: block">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title  flex-grow-1" *ngIf="editLabelIndex === null"> Create Label </h5>
+                    <h5 class="modal-title  flex-grow-1" *ngIf="editLabelIndex !== null"> Edit Label </h5>
+
+                    <button type="button" class="close" (click)="showLabelDialog = false" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group mb-3">
+                        <label>Static Text</label>
+                        <input *ngIf="editLabelIndex === null" class="form-control" type="text" [(ngModel)]="newLabelStaticText" />
+                        <input *ngIf="editLabelIndex !== null" class="form-control" type="text" [(ngModel)]="editLabelStaticText" />
+                    </div>
+
+                    <div class="form-check">
+                        <input *ngIf="editLabelIndex === null" type="checkbox" class="form-check-input" id="dynamicvalue" [(ngModel)]="newLabelHasPlaceholder" />
+                        <input *ngIf="editLabelIndex !== null" type="checkbox" class="form-check-input" id="dynamicvalue" [(ngModel)]="editLabelHasPlaceholder" />
+                        <label class="form-check-label" for="dynamicvalue">Dynamic Value?</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button *ngIf="editLabelIndex === null" (click)="addLabel()" class="btn btn-primary" type="button">Add</button>
+                    <button *ngIf="editLabelIndex !== null" (click)="saveEditedLabel()" class="btn btn-primary" type="button">Save</button>
+                    <button (click)="showLabelDialog = false" class="btn btn-secondary" type="button">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- addlabel Modal End -->

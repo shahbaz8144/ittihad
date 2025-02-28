@@ -1,12 +1,10 @@
-<!-- Display X and Y Positions -->
 <div class="position-display">
     <p>X Position: {{ position.x }} px</p>
     <p>Y Position: {{ position.y }} px</p>
-
     <a (click)="AddPositions()">Add Positions</a>
+    <button (click)="generatePDF()">Download PDF with Overlay</button>
 </div>
 <div class="pdf-container" #pdfContainer>
-    <!-- Draggable custom template -->
     <div class="draggable-box" cdkDrag cdkDragBoundary=".pdf-container" (cdkDragEnded)="onDragEnd($event)">
         <div class="workspace" #workspaceContainer [style.width.px]="workspaceWidth" [style.height.px]="workspaceHeight" [style.background-color]="workspaceBgColor" [style.border]="workspaceBorderWidth + 'px solid ' + workspaceBorderColor" [style.border-radius.px]="workspaceBorderRadius"
             (contextmenu)="openWorkspaceContextMenu($event)">
@@ -55,7 +53,8 @@
             </div>
         </div>
     </div>
-
-
     <div id="pdfViewer" class="rendered-pdf"></div>
+</div>
+<div id="pdfViewer123" class="rendered-pdf-1">
+    <pdf-viewer [src]="pdfSrc" (after-load-complete)="capturePDF()"></pdf-viewer>
 </div>
