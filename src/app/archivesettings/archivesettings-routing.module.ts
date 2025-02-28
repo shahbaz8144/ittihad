@@ -11,13 +11,14 @@ import { TemplatesComponent } from './templates/templates.component';
 
 const routes: Routes = [
   { path: 'cabinet', component: CabinetComponent, canActivate: [AuthGuard]},
-  { path: 'barcode', component: BarcodeComponent, canActivate: [AuthGuard]},
-
   { path: 'Maptemplatetocabinet', component: MaptemplatetocabinetComponent, canActivate: [AuthGuard]},
-  { path: 'templatesample', component: GeneratedTemplateComponent, canActivate: [AuthGuard]},
-  { path: 'pdf', component: PdfdownloadComponent, canActivate: [AuthGuard]},
-  { path: 'template', component: TemplatesComponent, canActivate: [AuthGuard]}
+  { path: 'template', component: TemplatesComponent, canActivate: [AuthGuard]},
+  { path: 'customtemplate', component: CustomTemplateComponent, canActivate: [AuthGuard]},
 
+  //Dummy Url for testing
+  { path: 'barcode', component: BarcodeComponent, canActivate: [AuthGuard]},
+  { path: 'templatesample', component: GeneratedTemplateComponent, canActivate: [AuthGuard]},
+  { path: 'pdf', component: PdfdownloadComponent, canActivate: [AuthGuard]}
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],
