@@ -1,0 +1,562 @@
+::ng-deep div#kt_header {
+    display: none;
+}
+
+::ng-deep body {
+    background: #ffffff;
+}
+
+@media (min-width: 1025px) {
+     ::ng-deep .kt-subheader--enabled:not(.kt-subheader--fixed) .kt-content {
+        padding-top: 0px;
+    }
+}
+
+
+/* Modal */
+
+.addlabel-modal {
+    color: #2a2f2d;
+}
+
+.addlabel-modal .modal-content {
+    border-radius: 16px;
+    border: 0px;
+}
+
+.modal.show .modal-dialog {
+    animation: fadeshowEffect 0.3s ease-out;
+}
+
+@keyframes fadeshowEffect {
+    from {
+        transform: translate(0, -50px);
+    }
+    to {
+        transform: none;
+    }
+}
+
+.temp-main-head {
+    color: #000000;
+}
+
+.template-container-wrapper {
+    display: flex;
+    border: 1px solid #eaeaea;
+    height: calc(100vh - 60px);
+    border-radius: 4px;
+}
+
+.template-left {
+    padding: 2rem;
+    background-color: #f4f6f8;
+    flex: 1;
+}
+
+.template-left-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    gap: 8px;
+}
+
+.template-left-header h5 {
+    color: #272f33;
+}
+
+.template-inner {
+    width: calc(100vw - 520px);
+    height: calc(100vh - 180px);
+    overflow: auto;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-save-template {
+    background-color: #3479f3;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.template-right {
+    background-color: #fff;
+    border-left: 1px solid #eaeaea;
+    position: relative;
+    overflow: hidden;
+}
+
+.template-righ-inner {
+    display: flex;
+    height: 100%;
+}
+
+.template-actions {
+    border-right: 1px solid #eaeaea;
+    padding: 1rem 0px;
+    width: 260px;
+    height: calc(100vh - 60px);
+    overflow: auto;
+    scrollbar-width: thin;
+}
+
+div#v-pills-tab {
+    margin: 0px;
+    background-color: #f4f6f8;
+    height: 100%;
+}
+
+.nav-pills .nav-link {
+    border-radius: 0rem;
+    color: #505f70;
+    text-align: center;
+    padding: 1.25rem 0.75rem;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    color: #0084ff;
+    background-color: #ecf0f3;
+}
+
+.nav-link-label {
+    text-transform: uppercase;
+    margin-top: 6px;
+}
+
+.nav-link-svg svg {
+    width: 30px;
+    height: 30px;
+}
+
+.selection-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #2e2c2c;
+    padding: 10px 16px;
+}
+
+button.btn.btn-clearall {
+    padding: 0px;
+    color: #8b8b8b;
+}
+
+button.btn.btn-clearall:hover {
+    text-decoration: underline;
+    color: #6a6a6a;
+}
+
+.selection-panel-li.selection-panel-temp-name {
+    padding: 0px 16px;
+    cursor: default;
+    margin-bottom: 10px;
+}
+
+.selection-panel-li.selection-panel-temp-name:hover {
+    background-color: transparent;
+}
+
+.selection-panel-li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #2e2c2c;
+    padding: 10px 16px;
+    cursor: pointer;
+    margin-bottom: 0px;
+    transition: all 0.15s ease-in-out;
+}
+
+.selection-panel-li:hover {
+    background-color: #ecf0f3;
+}
+
+.selection-panel-li-control {
+    font-size: 14px;
+    width: 100%;
+    color: #505f70;
+}
+
+.selection-panel-li-control .form-control {
+    border: 0px;
+    border-radius: 0px;
+    border-bottom: 1px solid #e2e5ec;
+}
+
+.selection-panel-li-icon {
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.selection-panel-li-icon svg {
+    width: 26px;
+    height: 26px;
+}
+
+.selection-panel hr {
+    margin: 1rem;
+}
+
+#template-images {
+    display: none;
+}
+
+.selection-panel-li.system-def {
+    margin: 10px 16px;
+    padding: 8px 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.workspace-controls {
+    color: #2e2c2c;
+}
+
+.workspace-controls-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #2e2c2c;
+    padding: 10px 16px;
+}
+
+.workspace-controls-li {
+    padding: 10px 16px;
+}
+
+
+/* Selection Panel */
+
+
+/* .selection-panel {
+    padding: 10px;
+    background: #f3f3f3;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+} */
+
+
+/* Workspace */
+
+
+/* .workspace {
+    border: 2px solid #ccc;
+    background-color: #f3f3f3;
+    position: relative;
+    overflow: hidden;
+
+} */
+
+
+/* Draggable & Resizable Elements */
+
+.resizable-draggable:focus,
+.resizable-draggable:hover {
+    border: 2px solid blue;
+}
+
+
+/* Label Input */
+
+.label-input {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border: none;
+    background: transparent;
+}
+
+
+/* Uploaded Image */
+
+.uploaded-file {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+/* Resize Handle */
+
+.resizable-draggable::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+    /* background: black; */
+    /* ✅ Keep resize handles visible */
+    cursor: nwse-resize;
+}
+
+
+/* Barcode Container */
+
+.barcode-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: white;
+    transition: transform 0.3s ease;
+}
+
+
+/* Barcode Number (Sharp & Readable) */
+
+.barcode-number {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5px;
+    letter-spacing: 1px;
+}
+
+
+/* Ensure Barcode Stays Sharp */
+
+canvas {
+    border: none !important;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+}
+
+
+/* Context Menu */
+
+
+/* Context Menu */
+
+.context-menu {
+    position: absolute;
+    background: #ffffff;
+    padding: 6px 0;
+    margin: 0;
+    z-index: 1000;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 6px;
+    box-shadow: 0px 0px 8px 0px rgb(0 0 0 / 15%);
+}
+
+.context-menu li {
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.context-menu li:hover {
+    background: #f3f3f3;
+}
+
+
+/* Ensure Table Fits Inside the Draggable Div */
+
+.table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+
+/* Table Cells */
+
+.table td {
+    border: 1px solid #ccc;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+
+/* Table Inputs - Make Them Fit Inside Cells */
+
+.table input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+
+/* Resizable Draggable Element (Table Container) */
+
+.resizable-draggable {
+    position: absolute;
+    background: transparent !important;
+    /* ✅ Make background fully transparent */
+    border: none !important;
+    /* ✅ Remove unwanted borders */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: fit-content;
+    min-height: fit-content;
+}
+
+
+/* Display Workspace Dimensions */
+
+.workspace-dimensions {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    padding: 5px;
+    margin-bottom: 5px;
+    background: #f3f3f3;
+    border: 1px solid #ccc;
+    display: inline-block;
+}
+
+
+/* .workspace-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.workspace-controls label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.workspace-controls input {
+    width: 80px;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.workspace-controls button {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.workspace-controls button:hover {
+    background-color: #0056b3;
+} */
+
+
+/* 🔹 Properties Panel */
+
+.properties-panel {
+    position: absolute;
+    top: 0;
+    bottom: 0px;
+    right: 0;
+    /* left: 100%; */
+    left: 0;
+    width: 100%;
+    background: white;
+    padding: 16px;
+    z-index: 1000;
+    overflow: auto;
+    color: #272f33;
+    transition: all 0.3sease-in-out;
+}
+
+.properties-panel.show {
+    left: 0;
+}
+
+.properties-panel h3 {
+    margin-top: 0;
+    font-size: 16px;
+}
+
+
+/* .properties-panel label {
+    font-size: 14px;
+    display: block;
+    margin-top: 5px;
+} */
+
+.properties-panel input {
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.properties-panel button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.properties-panel button:hover {
+    background-color: #0056b3;
+}
+
+.direct-text {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+    /* ✅ Keep text color visible */
+    white-space: nowrap;
+}
+
+.resizable-draggable span {
+    display: inline-block;
+    width: auto;
+    /* Adjusts to content */
+    height: auto;
+}
+
+
+/* Ensure text sharpness */
+
+.resizable-draggable,
+.barcode-container,
+.system-defined-text {
+    font-smooth: never;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    image-rendering: pixelated;
+}
+
+
+/* Improve font clarity */
+
+.system-defined-text {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
