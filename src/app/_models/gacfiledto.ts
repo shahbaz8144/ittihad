@@ -99,4 +99,7 @@ export class GACFiledto {
   IsActive:boolean;
   CabinetName:string;
   TemplateData:string;
+  TemplateName:string;
+  TemplateId:string;
+  BarcodeSequence:string;
 }

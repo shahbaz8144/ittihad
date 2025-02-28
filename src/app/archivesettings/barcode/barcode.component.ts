@@ -37,6 +37,7 @@ interface ElementData {
 export class BarcodeComponent implements AfterViewInit {
   
   @ViewChild('workspaceContainer') workspaceRef!: ElementRef;
+  Template_Name:string = "";
   elements: ElementData[] = [];
   elementIdCounter = 1;
   copiedElement: ElementData | null = null;
@@ -76,11 +77,30 @@ export class BarcodeComponent implements AfterViewInit {
   fontSize: number = 10.6;
   obj:GACFiledto;
   TextValues:string;
+  TemplateList:any[]=[];
   constructor(private http: HttpClient,private service:GACFileService) {
     this.obj = new GACFiledto();
+    
   }
 
+  ngOnInit(): void {
+    this.TemplatesList();
+   }
+   
+  TemplatesList(){
+this.service.GetTemplatesAPI().subscribe(data => {
+  this.TemplateList = data['Data'].TemplateJson;
+  console.log(this.TemplateList , "TemplatesList");
+})
+  }
  
+  GetTemplateByIdAPI(){
+     this.obj.TemplateId = '1'
+    this.service.GetTemplateByIdAPI(this.obj).subscribe(data =>{
+ console.log(data, "Templates Id Data");
+    })
+  }
+
   ngAfterViewInit() {
     if (this.workspaceRef) {
       this.workspaceWidth = this.workspaceRef.nativeElement.clientWidth;
@@ -591,7 +611,7 @@ export class BarcodeComponent implements AfterViewInit {
 
     console.log(this.elements , "Check the value");
     console.log("🚀 Parent JSON:", JSON.stringify(workspaceData));
-
+   this.obj.TemplateName = this.Template_Name;
     this.obj.TemplateData  = JSON.stringify(workspaceData);
     this.service.AddDynamicTemplateAPI(this.obj).subscribe(data =>{
      console.log(data ,"Save Temple Data");

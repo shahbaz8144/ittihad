@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ArchivesettingsRoutingModule } from './archivesettings-routing.module';
 import { CabinetComponent } from './cabinet/cabinet.component';
 import { BarcodeComponent } from './barcode/barcode.component';
-import { AssignusersComponent } from './assignusers/assignusers.component';
+
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ResizableModule } from 'angular-resizable-element';
 import { GeneratedTemplateComponent } from './generated-template/generated-template.component';
@@ -17,13 +17,14 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import {  HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader'
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MaptemplatetocabinetComponent } from './maptemplatetocabinet/maptemplatetocabinet.component'
 @NgModule({
   declarations: [
     CabinetComponent,
     BarcodeComponent,
-    AssignusersComponent,
-    GeneratedTemplateComponent
+    GeneratedTemplateComponent,
+    MaptemplatetocabinetComponent
   ],
   imports: [
     CommonModule,

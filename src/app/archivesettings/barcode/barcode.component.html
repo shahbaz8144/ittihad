@@ -1,6 +1,8 @@
 <!-- Selection Panel -->
 <div class="selection-panel">
     <h3>Add Elements</h3>
+    <label>Template Name:</label>
+    <input type="text" placeholder="Enter Template Name" [(ngModel)]="Template_Name">
     <button (click)="openLabelDialog()">Add Label</button>
     <input type="file" (change)="onFileSelected($event)" multiple />
     <button (click)="saveElements()">Save Elements</button>

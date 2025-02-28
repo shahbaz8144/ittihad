@@ -416,10 +416,48 @@ export class GACFileService {
    }
 
    AddDynamicTemplateAPI(ObjGac: GACFiledto) {
-    
+    this._ObjGac.TemplateName = ObjGac.TemplateName
    this._ObjGac.TemplateData = ObjGac.TemplateData;
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
     
      return this.http.post(this.rootUrlII + 'ArchiveAPI/NewAddDynamicTemplate', this._ObjGac);
+   }
+
+   
+   GetTemplatesAPI() {
+   
+    this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
+    
+     return this.http.post(this.rootUrlII + 'ArchiveAPI/NewGetTemplates', this._ObjGac);
+   }
+
+   GetTemplateByIdAPI(ObjGac: GACFiledto) {
+   
+    this._ObjGac.TemplateId = ObjGac.TemplateId;
+    
+     return this.http.post(this.rootUrlII + 'ArchiveAPI/NewGetTemplateById', this._ObjGac);
+   }
+
+   MapTemplatetoCabinetListAPI() {
+   
+    this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
+    
+     return this.http.post(this.rootUrlII + 'ArchiveAPI/NewMapTemplatetoCabinetList', this._ObjGac);
+   }
+
+   GetMappedTemplatesListAPI() {
+   
+    this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
+    
+     return this.http.post(this.rootUrlII + 'ArchiveAPI/NewGetMappedTemplatesList', this._ObjGac);
+   }
+
+   AddMapTemplateAPI(ObjGac: GACFiledto) {
+    this._ObjGac.TemplateId = ObjGac.TemplateId;
+    this._ObjGac.CabinetId = ObjGac.CabinetId;
+    this._ObjGac.BarcodeSequence = ObjGac.BarcodeSequence;
+    this._ObjGac.CreatedBy = this.currentUserValue.createdby;
+    this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
+     return this.http.post(this.rootUrlII + 'ArchiveAPI/NewAddMapTemplate', this._ObjGac);
    }
 }

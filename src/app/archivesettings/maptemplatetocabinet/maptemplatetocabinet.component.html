@@ -1,0 +1,114 @@
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid side_view">
+    <div class="col-lg-12">
+        <h4 class="mb-3 pro-nm">Map Template To Cabinet</h4>
+        <!-- Document View Component -->
+        <div class="card ribbon-box">
+            <div class="card-header align-items-center d-flex py-3">
+                <div class="flex-1">
+                    <div class="search-bar">
+                        <input type="text" class="form-control" [(ngModel)]="MapTemplateSearch" placeholder="Search"
+                            aria-controls="example">
+                            <a class="close close-icn"><i *ngIf="MapTemplateSearch"  (click)="ClearSearch()" class="material-icons">close<i></i></i></a>
+                    </div>
+                </div>
+                <div class="flex-shrink-0">
+                    <button class="btn btn-sm btn-info" style="display: block;" id="cabinet_add">
+                        <i class="material-icons fs-4">add</i>
+                        Add
+                    </button>
+                </div>
+            </div>
+            <div class="d-flex flex-wrap justify-content-start align-items-baseline form-m">
+                <div class="form-cus">
+                    <label class="form-label">Cabinet:</label>
+                    <span class="text-danger ml-1">*</span>
+                    <ng-select [(ngModel)]="_CabinetArray" placeholder="Select Cabinet" >
+                        <ng-option *ngFor="let item of _CabinetJson"  [value]="item.CabinetId" > {{item.CabinetName}} </ng-option>
+                    </ng-select>
+                    <div class="kt-error" *ngIf="Cabineterrormessage && !_CabinetArray">
+                        <span class="kt-error-msg">
+                           Please Select Cabinet</span>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-wrap justify-content-start align-items-baseline form-m">
+                <div class="form-cus">
+                    <label class="form-label">Template</label>
+                    <span class="text-danger ml-1">*</span>
+                    <ng-select [(ngModel)]="_TemplateArray" placeholder ="Select Template"  class="TEST-CLASS">
+                        <ng-option *ngFor="let temp of _TemplateJson"  [value]="temp.TemplateId"> {{temp.TemplateName}} </ng-option>
+                    </ng-select>
+                    <div class="kt-error" *ngIf="Templateerrormessage && !_TemplateArray">
+                        <span class="kt-error-msg">
+                           Please Select Template</span>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-wrap justify-content-start align-items-baseline form-m">
+                <div class="form-cus">
+                    <label class="form-label">Barcode sequence:</label>
+                    <span class="text-danger ml-1">*</span>
+                   <input type="text" [(ngModel)]="Barcodesequence"  placeholder="Enter Barcode sequence">
+                   <div class="kt-error" *ngIf="Barcodeerrormessage && !Barcodesequence">
+                    <span class="kt-error-msg">
+                       Enter Barcode sequence</span>
+                </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-sm btn-info px-3" (click)="AddMapTemplate()" >Submit</button><br>
+            <button type="submit" class="btn btn-sm btn-secondary px-3" (click)="ClearTemplate()" >Cancel</button>
+            <div class="card-body p-0">
+                <div class="mb-0 table-responsive">
+                    <table class="table b-table">
+                        <thead>
+                            <tr>
+                                <th>Cabinet Name</th>
+                                <th>Template Name </th>
+                                <th>Barcode sequence</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngIf="(_MapJson|filter:MapTemplateSearch) as _MapJson">
+                                <tr *ngFor="let item of _MapJson|filter:MapTemplateSearch">
+                                    <td>
+                                        {{item.CabinetName}}
+                                    </td>
+                                    <td>
+                                       {{item.TemplateName}}
+                                    </td>
+                                    <td>
+                                        {{item.BarcodeSequence}}
+                                    </td>
+                                    <!-- [ngStyle]="{'color':item.Status=== true ? '#3f51b5' : 'red'}" -->
+                                        <td [ngStyle]="{'color':item.IsActive=== true ? '#3f51b5' : 'red'}" >
+                                        <div  *ngIf="item.IsActive"
+                                            class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-success curser-pointer w-min-70">
+                                            Active
+                                        </div>
+                                        <div *ngIf="!item.IsActive"
+                                            class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-danger curser-pointer w-min-70">
+                                            In-Active
+                                        </div>
+                                    </td>
+                                    
+                                </tr> 
+                                <ng-container *ngIf="_MapJson.length==0">
+                                    <div class="d-flex-center kt-tb-error-box">
+                                        <div class="m-auto text-center">
+                                            <div class="svgs-1 kt-blank-msg">
+                                                <img src="assets/media/Img/No Racks.png">
+                                            </div>
+                                            <h3 class="kt-blank-ttl"> NoDataCompany </h3>
+                                            <p class="kt-blank-msg"> NotfoundCabinet</p> 
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
