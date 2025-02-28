@@ -42,6 +42,11 @@
     src: url('./AvenirNextCyr-Bold.ttf') format('truetype');
 
 }
+@font-face {
+    font-family: 'Schibsted Grotesk';
+    src: url('../fonts/Schibsted_Grotesk/SchibstedGrotesk-VariableFont_wght.ttf') format('truetype');
+
+}
 *,
 *::before,
 *::after {

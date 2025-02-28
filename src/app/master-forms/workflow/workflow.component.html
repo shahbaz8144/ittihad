@@ -1,4 +1,5 @@
 <div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid" id="workflow-list">
+    <h4 class="mb-3 pro-nm text-dark"> Workflow </h4>
     <div *ngIf="WorkflowLeftsectionlist.length==0" class="kt-grid kt-grid--desktop kt-grid--ver-desktop kt-inbox">
         <div class="no-workflow">
             <div class="d-flex align-items-center justify-content-between mb-3 w-100">
@@ -17,7 +18,7 @@
         </div>
     </div>
     <div *ngIf="WorkflowLeftsectionlist.length >0" id="kt_inbox" class="kt-grid kt-grid--desktop kt-grid--ver-desktop kt-inbox">
-        <div id="kt_inbox_aside" class="kt-grid__item kt-portlet kt-inbox__aside pb-0 scroll-y aside-scrolly">
+        <div id="kt_inbox_aside" class="kt-grid__item kt-portlet kt-inbox__aside pb-0 scroll-y aside-scrolly" style=" border: 1px solid #e4e4e4; ">
             <button type="button" class="btn btn-primary kt-inbox__compose mx-0 btn-memo1" style="width: 100%;" (click)="workflow_create()">
                 <span class="mr-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="51" height="57" viewBox="0 0 51 57" fill="none">

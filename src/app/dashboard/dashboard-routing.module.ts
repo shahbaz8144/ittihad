@@ -3,9 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from '../_helpers/auth.guard';
 import { PendingFromReceiverComponent } from '../communication/pending-from-receiver/pending-from-receiver.component';
+import { NewDashboardComponent } from './new-dashboard/new-dashboard.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent, canActivate: [AuthGuard]},
+  // { path: '', component: DashboardComponent, canActivate: [AuthGuard]},
+  { path: '', component: NewDashboardComponent, canActivate: [AuthGuard]},
   
   // {
   //   path: '',
