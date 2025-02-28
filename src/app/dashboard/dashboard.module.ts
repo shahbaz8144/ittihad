@@ -21,10 +21,12 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from 'src/environments/environment';
+import { NewDashboardComponent } from './new-dashboard/new-dashboard.component';
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    NewDashboardComponent
     // HeaderComponent,
     // LeftSectionComponent,
     // FooterComponent,

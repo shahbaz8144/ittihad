@@ -1866,3 +1866,6 @@ span.css-w0pj6f {
         max-height: calc(100vh - 48px);
     }
 }
+.kt-grid__item.kt-grid__item--fluid.kt-portlet.kt-inbox__list.kt-inbox__list--shown {
+    border: 1px solid #e4e4e4!important;
+}

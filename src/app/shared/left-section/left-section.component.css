@@ -2,9 +2,9 @@
     display: none;
 }
 
-/* ::ng-deep body {
+::ng-deep body {
     background: #ffffff;
-} */
+}
 
 @media (min-width: 1025px) {
     ::ng-deep .kt-subheader--enabled:not(.kt-subheader--fixed) .kt-content {
