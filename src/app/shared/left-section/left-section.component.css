@@ -1,3 +1,18 @@
+::ng-deep div#kt_header {
+    display: none;
+}
+
+/* ::ng-deep body {
+    background: #ffffff;
+} */
+
+@media (min-width: 1025px) {
+    ::ng-deep .kt-subheader--enabled:not(.kt-subheader--fixed) .kt-content {
+        padding-top: 0px;
+    }
+}
+
+
 .kt-menu__nav .kt-menu__item.kt-menu__item--active>.kt-menu__link,
 .kt-menu__nav .kt-menu__item.active>.kt-menu__link,
 .kt-menu__nav .kt-menu__item>.kt-menu__link:hover,
@@ -63,9 +78,9 @@
 }
 
 .kt-menu__nav__scroll {
-    /* max-height: calc(100vh - 210px); */
-    /* overflow: auto;
-    overflow-x: hidden; */
+    max-height: calc(100vh - 210px);
+    overflow: auto;
+    overflow-x: hidden;
 }
 
 .hover-scroll-overlay-y {
@@ -337,9 +352,3 @@ svg.toggle-arrow-svg {
     right: 0px !important;
 }
 
-.kt-menu__nav__scroll {
-    /* max-height: calc(100vh - 210px); */
-    max-height: calc(100vh - 60px);
-    /* overflow: auto;
-    overflow-x: hidden; */
-}

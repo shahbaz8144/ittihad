@@ -115,11 +115,11 @@
     max-width: 100%;
 }
 
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
     .scroll-y.aside-scrolly {
         height: calc(100vh - 85px);
     }
-}
+} */
 
 .backbtn {
     display: flex;
@@ -532,8 +532,8 @@ li.modal-workflow-user-list-item {
 }
 
 .workflow-preview-body {
-    min-height: calc(100vh - 160px);
-    max-height: calc(100vh - 160px);
+    min-height: calc(100vh - 120px);
+    max-height: calc(100vh - 120px);
     overflow: auto;
     padding: 1rem;
 }
