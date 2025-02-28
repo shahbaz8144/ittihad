@@ -12,51 +12,14 @@
                     </div>
                 </div>
                 <div class="flex-shrink-0">
-                    <button class="btn btn-sm btn-info" style="display: block;" id="cabinet_add">
+                    <button class="btn btn-sm btn-info" style="display: block;" (click)="template_cabin_map_open()">
                         <i class="material-icons fs-4">add</i>
                         Add
                     </button>
                 </div>
             </div>
-            <div class="d-flex flex-wrap justify-content-start align-items-baseline form-m">
-                <div class="form-cus">
-                    <label class="form-label">Cabinet:</label>
-                    <span class="text-danger ml-1">*</span>
-                    <ng-select [(ngModel)]="_CabinetArray" placeholder="Select Cabinet" >
-                        <ng-option *ngFor="let item of _CabinetJson"  [value]="item.CabinetId" > {{item.CabinetName}} </ng-option>
-                    </ng-select>
-                    <div class="kt-error" *ngIf="Cabineterrormessage && !_CabinetArray">
-                        <span class="kt-error-msg">
-                           Please Select Cabinet</span>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex flex-wrap justify-content-start align-items-baseline form-m">
-                <div class="form-cus">
-                    <label class="form-label">Template</label>
-                    <span class="text-danger ml-1">*</span>
-                    <ng-select [(ngModel)]="_TemplateArray" placeholder ="Select Template"  class="TEST-CLASS">
-                        <ng-option *ngFor="let temp of _TemplateJson"  [value]="temp.TemplateId"> {{temp.TemplateName}} </ng-option>
-                    </ng-select>
-                    <div class="kt-error" *ngIf="Templateerrormessage && !_TemplateArray">
-                        <span class="kt-error-msg">
-                           Please Select Template</span>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex flex-wrap justify-content-start align-items-baseline form-m">
-                <div class="form-cus">
-                    <label class="form-label">Barcode sequence:</label>
-                    <span class="text-danger ml-1">*</span>
-                   <input type="text" [(ngModel)]="Barcodesequence"  placeholder="Enter Barcode sequence">
-                   <div class="kt-error" *ngIf="Barcodeerrormessage && !Barcodesequence">
-                    <span class="kt-error-msg">
-                       Enter Barcode sequence</span>
-                </div>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-sm btn-info px-3" (click)="AddMapTemplate()" >Submit</button><br>
-            <button type="submit" class="btn btn-sm btn-secondary px-3" (click)="ClearTemplate()" >Cancel</button>
+            
+
             <div class="card-body p-0">
                 <div class="mb-0 table-responsive">
                     <table class="table b-table">
@@ -99,14 +62,75 @@
                                             <div class="svgs-1 kt-blank-msg">
                                                 <img src="assets/media/Img/No Racks.png">
                                             </div>
-                                            <h3 class="kt-blank-ttl"> NoDataCompany </h3>
-                                            <p class="kt-blank-msg"> NotfoundCabinet</p> 
+                                            <h3 class="kt-blank-ttl"> Data Not Available. </h3>
+                                            <p class="kt-blank-msg"> No data found in Map Template To Cabinet list.</p> 
                                         </div>
                                     </div>
                                 </ng-container>
                             </ng-container>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="kt-aside-menu-overlay" ></div>
+
+<div id="template_cabin_map" class="wc-75 kt-quick-panel kt-quick-panel1 scroll-div">
+    <a id="kt_quick_panel_close_btn" class="kt-quick-panel__close" (click)="template_cabin_map_close()">
+        <i class="flaticon2-delete"></i>
+    </a>
+    <div id="kt_chat_content" class="kt-grid__item kt-grid__item--fluid kt-app__content">
+        <div class="kt-chat">
+            <div class="kt-portlet kt-portlet--head-lg kt-portlet--last">
+                <div class="kt-portlet__head">
+                    <div class="kt-chat__head">
+                        <div>
+                            <div class="kt-chat__label">
+                                <h4 class="mb-0 text-dark"> Map cabin to template </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__body template_cabin_map_body">
+                        <div class="form-group">
+                            <label class="form-label">Cabinet:</label>
+                            <span class="text-danger ml-1">*</span>
+                            <ng-select [(ngModel)]="_CabinetArray" placeholder="Select Cabinet" >
+                                <ng-option *ngFor="let item of _CabinetJson"  [value]="item.CabinetId" > {{item.CabinetName}} </ng-option>
+                            </ng-select>
+                            <div class="kt-error" *ngIf="Cabineterrormessage && !_CabinetArray">
+                                <span class="kt-error-msg">
+                                   Please Select Cabinet</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Template</label>
+                            <span class="text-danger ml-1">*</span>
+                            <ng-select [(ngModel)]="_TemplateArray" placeholder ="Select Template"  class="TEST-CLASS">
+                                <ng-option *ngFor="let temp of _TemplateJson"  [value]="temp.TemplateId"> {{temp.TemplateName}} </ng-option>
+                            </ng-select>
+                            <div class="kt-error" *ngIf="Templateerrormessage && !_TemplateArray">
+                                <span class="kt-error-msg">
+                                   Please Select Template</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Barcode sequence:</label>
+                            <span class="text-danger ml-1">*</span>
+                           <input type="text" class="form-control" [(ngModel)]="Barcodesequence"  placeholder="Enter Barcode sequence">
+                           <div class="kt-error" *ngIf="Barcodeerrormessage && !Barcodesequence">
+                            <span class="kt-error-msg">
+                               Enter Barcode sequence</span>
+                        </div>
+                        </div>
+                </div>
+                <div class="kt-portlet__footer">
+                    <button type="submit" class="btn btn-sm btn-info px-3" (click)="AddMapTemplate()" >Submit</button>
+                    <button type="submit" class="btn btn-sm btn-secondary px-3" (click)="template_cabin_map_close()" >Cancel</button>
                 </div>
             </div>
         </div>

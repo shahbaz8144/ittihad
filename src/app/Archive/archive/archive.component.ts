@@ -340,9 +340,13 @@ export class ArchiveComponent implements OnInit {
 
 
 
-
+  selectedCabinet:string = "";
 
   async ngOnInit(): Promise<void> {
+    this.route.queryParams.subscribe(params => {
+      this.selectedCabinet = params['cabinet'] || 'DefaultCabinet';
+      console.log('Received Cabinet:', this.selectedCabinet);
+    });
     const lang: any = localStorage.getItem('language')
     this.translate.use(lang);
     this.SelectCompany = lang === 'en' ? 'Company' : 'اختر الشركة';

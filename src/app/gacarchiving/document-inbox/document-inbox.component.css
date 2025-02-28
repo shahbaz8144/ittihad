@@ -2771,10 +2771,10 @@ svg.doc_attachment_img {
 }
 
 span.cabinet-count {
-    background-color: #f4d9b9;
-    color: #ff8900;
+    background-color: #e0e0e0;
+    color: #2d2d2c;
     border-radius: 4px;
-    padding: 0px 2px;
+    padding: 0px 4px;
     font-size: 12px;
     font-weight: 500;
 }

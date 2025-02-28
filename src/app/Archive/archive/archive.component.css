@@ -2831,77 +2831,11 @@ ul.schedule-select-user-list li .slect-close svg {
     background-color: #fff5ea;
 }
 .backBtn {
-    width: 100px;
-    top: -12px;
-    background-color: #f4f4f4;
     transition: all 0.4s ease;
     position: relative;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
-span.line {
-    bottom: auto;
-    right: auto;
-    top: auto;
-    left: auto;
-    background-color: #333;
-    border-radius: 10px;
-    width: 100%;
-    left: 0px;
-    height: 2px;
-    display: block;
-    position: absolute;
-    transition: width 0.2s ease 0.1s, left 0.2s ease, transform 0.2s ease 0.3s, background-color 0.2s ease;
-}
-
-span.tLine {
-    top: 0px;
-}
-
-span.mLine {
-    top: 13px;
-    opacity: 0;
-}
-
-span.bLine {
-    top: 26px;
-}
-
-.label {
-    position: absolute;
-    left: 0px;
-    top: 4px;
-    width: 100%;
-    text-align: center;
-    transition: all 0.4s ease;
-    font-size: 1em;
-}
-
-.backBtn span.label {
-    left: 0px
-}
-
-.backBtn span.line {
-    left: -10px;
-    height: 2px;
-    background-color: #ff8900;
-}
-
-.backBtn span.tLine {
-    width: 16px;
-    transform: rotate(-45deg);
-    left: -12px;
-    top: 8px;
-}
-
-.backBtn span.mLine {
-    opacity: 1;
-    width: 30px;
-}
-
-.backBtn span.bLine {
-    width: 16px;
-    transform: rotate(45deg);
-    left: -12px;
-    top: 18px;
-}

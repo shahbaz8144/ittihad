@@ -108,7 +108,7 @@ export class MaptemplatetocabinetComponent implements OnInit {
             verticalPosition: 'bottom',
             horizontalPosition: 'right',
           });
-          this.ClearTemplate();
+          this.template_cabin_map_close();
           this.GetMappedTemplatesList();
           break;
         case '2':
@@ -130,12 +130,33 @@ export class MaptemplatetocabinetComponent implements OnInit {
     this.MapTemplateSearch = "";
   }
 
-  ClearTemplate(){
+  // ClearTemplate(){
+  //   this._TemplateArray = null;
+  //   this._CabinetArray = null;
+  //   this.Barcodesequence = "";
+  //   this.Cabineterrormessage = false;
+  //   this.Templateerrormessage = false;
+  //   this.Barcodeerrormessage = false;
+  //   document.getElementById("template_cabin_map").classList.remove("kt-quick-panel--on");
+  //   document.getElementsByClassName("side_view")[0].classList.remove("position-fixed");
+  //   document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");
+  // }
+
+
+  template_cabin_map_open() {
+    document.getElementById("template_cabin_map").classList.add("kt-quick-panel--on");
+    document.getElementsByClassName("side_view")[0].classList.add("position-fixed");
+    document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.add("d-block");
+  }
+  template_cabin_map_close() {
     this._TemplateArray = null;
     this._CabinetArray = null;
     this.Barcodesequence = "";
     this.Cabineterrormessage = false;
     this.Templateerrormessage = false;
     this.Barcodeerrormessage = false;
+    document.getElementById("template_cabin_map").classList.remove("kt-quick-panel--on");
+    document.getElementsByClassName("side_view")[0].classList.remove("position-fixed");
+    document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");
   }
 }

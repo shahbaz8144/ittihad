@@ -77,3 +77,7 @@
     display: block;
     width: 100%;
 }
+
+.kt-blank-msg img {
+    width: 70%;
+}
