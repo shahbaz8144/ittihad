@@ -591,7 +591,7 @@ export class CustomTemplateComponent implements AfterViewInit {
 
     console.log(this.elements , "Check the value");
     console.log("🚀 Parent JSON:", JSON.stringify(workspaceData));
-
+    this.obj.TemplateName = this.templateName;
     this.obj.TemplateData  = JSON.stringify(workspaceData);
     this.service.AddDynamicTemplateAPI(this.obj).subscribe(data =>{
      console.log(data ,"Save Temple Data");
