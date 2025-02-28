@@ -71,6 +71,7 @@ export class GACFileService {
     this._ObjGac.DocumentInfoJson = ObjGac.DocumentInfoJson;
     this._ObjGac.VersionName  = ObjGac.VersionName;
     this._ObjGac.ParentId = ObjGac.ParentId;
+    this._ObjGac.CabinetId = ObjGac.CabinetId;
    
     return this.http.post(this.rootUrlII + "ArchiveAPI/NewDocument", this._ObjGac);
   }

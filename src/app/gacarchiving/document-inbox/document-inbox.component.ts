@@ -31,6 +31,7 @@ export class DocumentInboxComponent implements OnInit {
   Select:any;
   toggle:any;
   selectedCabinet: string = "All Documents"; // Default selection
+  selectedCabinetId:number;
   currentRoute:any;
   private currentUserSubject: BehaviorSubject<UserDTO>;
   public currentUser: Observable<UserDTO>;
@@ -78,8 +79,9 @@ export class DocumentInboxComponent implements OnInit {
  
 
   // Function to change the selected cabinet
-  selectCabinet(cabinetName: string) {
+  selectCabinet(cabinetName: string,CabinetId:number) {
     this.selectedCabinet = cabinetName;
+    this.selectedCabinetId = CabinetId;
   }
 
   // Function to check if "New Document" should be disabled

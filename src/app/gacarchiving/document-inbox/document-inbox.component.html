@@ -25,7 +25,7 @@
             <!-- routerLink="/backend/masterforms/GacFileUpload" -->
             <button type="button" class="btn btn-primary kt-inbox__compose mx-0 btn-memo1" style="width: 100%;" 
             routerLink="/backend/NewArchive"
-            [queryParams]="{ cabinet: selectedCabinet }"
+            [queryParams]="{ cabinet: selectedCabinet,selectedCabinetId: selectedCabinetId }"
              [disabled]="isNewDocumentDisabled()">
             <span class="mr-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" version="1.1" class="svg-icon" style="width: 1.2em; height: 1.2em; vertical-align: middle; fill: currentColor; overflow: hidden;"><path d="M960 448H576V64a64 64 0 0 0-128 0v384H64a64 64 0 0 0 0 128h384v384a64 64 0 0 0 128 0V576h384a64 64 0 0 0 0-128z"></path></svg></span>
             {{ "Archive.NewDocument" | translate }}
@@ -35,7 +35,7 @@
                     <ng-container *ngFor="let item of _CabinetList">
                     <li class="kt-nav__item" [class.active]="selectedCabinet === item.CabinetName" >
                         <a class="kt-nav__link"  
-                        (click)="selectCabinet(item.CabinetName)">
+                        (click)="selectCabinet(item.CabinetName,item.CabinetId)">
                             <span class="svg-icon svg-icon-2x">
                                 <svg xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px" width="54" height="47" viewBox="0 0 54 47" fill="none">
                                     <g>

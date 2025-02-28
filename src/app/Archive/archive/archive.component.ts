@@ -341,11 +341,13 @@ export class ArchiveComponent implements OnInit {
 
 
   selectedCabinet:string = "";
-
+  selectedCabinetId:number;
   async ngOnInit(): Promise<void> {
     this.route.queryParams.subscribe(params => {
       this.selectedCabinet = params['cabinet'] || 'DefaultCabinet';
       console.log('Received Cabinet:', this.selectedCabinet);
+      this.selectedCabinetId = params['selectedCabinetId'] || null;
+      console.log('Received Cabinet ID:', this.selectedCabinetId);
     });
     const lang: any = localStorage.getItem('language')
     this.translate.use(lang);
@@ -410,8 +412,11 @@ export class ArchiveComponent implements OnInit {
 
   Back() {
     if (this._VersionId === undefined) {
-      this.router.navigate(['/backend/Archive/Documents']);
-      queryParams: { cabinet: this.selectedCabinet } 
+      this.router.navigate(['/backend/Archive/Documents'],
+        {
+          queryParams: { cabinet: this.selectedCabinet, selectedCabinetId: this.selectedCabinetId }
+        });
+    
     } else {
       // Check if any of the variables used in navigation are undefined
       if (this._DocumentId === undefined || this._referenceId === undefined || this.ShareId === undefined) {
@@ -865,6 +870,7 @@ export class ArchiveComponent implements OnInit {
     } else {
       this._obj.ParentId = this._DocumentId;
     }
+    this._obj.CabinetId = this.selectedCabinetId;
     console.log(WorkflowJson, "Workflow json");
     this.service.NewDocument(this._obj).subscribe(data => {
       console.log(data, "Add Document API Data");
@@ -1933,7 +1939,9 @@ export class ArchiveComponent implements OnInit {
   }
 
   onInput() {
-    this.DocumentNameRequired = !this.DocumentName || this.DocumentName.trim() === '';
+    this.DocumentNameRequired = !this.FirstFileDocumentName || this.FirstFileDocumentName.trim() === '';
+
+    // this.DocumentNameRequired = !this.DocumentName || this.DocumentName.trim() === '';
     this.InfoValidation = false;
   }
 
@@ -2308,7 +2316,7 @@ export class ArchiveComponent implements OnInit {
         this.MainDocumentCheckBox(0);
       }
 
-      this.FirstFileDocumentName = this._GacAttachmentFileuplod[0].FileName;
+      // this.FirstFileDocumentName = this._GacAttachmentFileuplod[0].FileName;
       this._GacAttachmentFileuplod.forEach(element => {
         this.UploadingFiles = element.Uploading;
       });
@@ -2413,6 +2421,7 @@ export class ArchiveComponent implements OnInit {
 
 
   MainDocumentCheckBox(index: number,) {
+    
     // Set the selectedIndex to the selected file index
     this.selectedIndex = index;
     // Update Ismain property for all files
@@ -2420,12 +2429,25 @@ export class ArchiveComponent implements OnInit {
       file.Ismain = (i === this.selectedIndex);
     });
 
-    this.FirstFileDocumentName = this._GacAttachmentFileuplod[this.selectedIndex].FileName;
+    // this.FirstFileDocumentName = this._GacAttachmentFileuplod[this.selectedIndex].FileName;
 
+    // if(this.FirstFileDocumentName != ""){
+    //   this.FirstFileDocumentName = this._GacAttachmentFileuplod[this.selectedIndex].FileName;
+    // }
+    // if (!this.FirstFileDocumentName) { 
+    //   this.FirstFileDocumentName = this._GacAttachmentFileuplod[this.selectedIndex]?.FileName || '';
+    // }
+
+    // Ensure FirstFileDocumentName updates only if it's empty or undefined
+if (!this.FirstFileDocumentName || this.FirstFileDocumentName.trim() === '') {
+  this.FirstFileDocumentName = this._GacAttachmentFileuplod[this.selectedIndex]?.FileName || '';
+}
+    
     console.log(this._GacAttachmentFileuplod, "Selected File");
   }
 
   RemoveGacFiles(uniqueId: string, index: number) {
+    this.FirstFileDocumentName = "";
     // Check if the file to be deleted has Ismain set to true
     if (this._GacAttachmentFileuplod[index].Ismain) {
       // Remove the file from the array
