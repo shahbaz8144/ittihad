@@ -1716,14 +1716,19 @@ span.item-icon svg {
     font-weight: 400;
 }
 
+.bar-code-dynamic {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: -1 !important;
+}
+
 .bar-code {
     text-align: center;
     line-height: 0;
 }
 
 .bar-code img {
-    /* width: 164px;
-    height: 50px; */
     width: 114px;
     height: 48px;
 }
@@ -4939,7 +4944,7 @@ ul.schedule-select-user-list li .slect-close svg {
 .workspace {
     border: 2px solid #ccc;
     background-color: #f3f3f3;
-    /* position: relative; */
+    position: relative;
     overflow: hidden;
     /* Prevents overflow */
 }

@@ -1,43 +1,3 @@
-<div class="workspace" #workspaceContainer [style.width.px]="workspaceWidth" [style.height.px]="workspaceHeight" [style.background-color]="workspaceBgColor" [style.border]="workspaceBorderWidth + 'px solid ' + workspaceBorderColor" [style.border-radius.px]="workspaceBorderRadius"
-    (contextmenu)="openWorkspaceContextMenu($event)">
-    <div *ngFor="let element of workspaceData.elements; let i = index" class="resizable-draggable" [style.width.px]="element.width" [style.height.px]="element.height" [style.fontSize.px]="element.fontSize" [style.background-color]="element.backgroundColor || '#ffffff'"
-        [style.transform]="'translate(' + element.x + 'px, ' + element.y + 'px)'" (contextmenu)="openContextMenu($event, i)">
-        <span *ngIf="element.valueType === 'userDefined'">
-                     {{ element.staticText }}
-                </span>
-
-        <img *ngIf="element.type === 'image' && element.fileUrl" [src]="element.fileUrl" class="uploaded-file" />
-
-        <div *ngIf="element.type === 'barcode'" class="barcode-container">
-            <canvas [id]="'barcode-' + i" [style.width.px]="element.width" [style.height.px]="element.height"></canvas>
-        </div>
-
-        <svg *ngIf="element.type === 'systemDefined'" [attr.x]="element.x" [attr.y]="element.y" [attr.width]="element.width + 10" [attr.height]="element.height + 5">
-      
-      <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
-            [style.fill]="element.fontColor"
-            [style.font-size.px]="element.fontSize || 10"
-            [style.font-weight]="element.text === '{{code}}' ? 'bold' : element.fontWeight"
-            [style.font-style]="element.fontStyle">
-    
-        
-        <ng-container *ngIf="element.text === '{{code}}' && isTextTooLong(bindValue(element), element.width); else singleLineText">
-          <tspan x="50%" dy="-6">{{ getFirstLine(bindValue(element)) }}</tspan>
-          <tspan x="50%" dy="14">{{ getSecondLine(bindValue(element)) }}</tspan>
-        </ng-container>
-    
-         
-        <ng-template #singleLineText>
-          <tspan x="50%">{{ bindValue(element) }}</tspan>
-        </ng-template>
-    
-      </text>
-    </svg>
-
-
-    </div>
-</div>
-
 <div id="moredet" class="p-3 kt-grid__item kt-grid__item--fluid text-dark docu-info-page w-100">
     <div class="row" *ngFor="let doc of DocumentList">
         <div class="col-md-5">
@@ -123,16 +83,53 @@
                                     </div>
                                     <div class="bar-code">
                                         <img src="assets/media/Img/pngwing.com.png" alt="Barcode">
-                                        <div> {{_documentId}} </div>
+                                        <div> {{barcode}} </div>
+                                    </div>
+                                    <div class="bar-code-dynamic">
+                                        <div class="workspace" #workspaceContainer [style.width.px]="workspaceWidth" [style.height.px]="workspaceHeight" [style.background-color]="workspaceBgColor" [style.border]="workspaceBorderWidth + 'px solid ' + workspaceBorderColor" [style.border-radius.px]="workspaceBorderRadius"
+                                            (contextmenu)="openWorkspaceContextMenu($event)">
+                                            <div *ngFor="let element of workspaceData.elements; let i = index" class="resizable-draggable" [style.width.px]="element.width" [style.height.px]="element.height" [style.fontSize.px]="element.fontSize" [style.background-color]="element.backgroundColor || '#ffffff'"
+                                                [style.transform]="'translate(' + element.x + 'px, ' + element.y + 'px)'" (contextmenu)="openContextMenu($event, i)">
+                                                <span *ngIf="element.valueType === 'userDefined'">
+                                                             {{ element.staticText }}
+                                                        </span>
+
+                                                <img *ngIf="element.type === 'image' && element.fileUrl" [src]="element.fileUrl" crossOrigin="anonymous" class="uploaded-file" />
+
+                                                <div *ngIf="element.type === 'barcode'" class="barcode-container">
+                                                    <canvas [id]="'barcode-' + i" [style.width.px]="element.width" [style.height.px]="element.height"></canvas>
+                                                </div>
+
+                                                <svg *ngIf="element.type === 'systemDefined'" [attr.x]="element.x" [attr.y]="element.y" [attr.width]="element.width + 10" [attr.height]="element.height + 5">
+                                              
+                                              <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+                                                    [style.fill]="element.fontColor"
+                                                    [style.font-size.px]="element.fontSize || 10"
+                                                    [style.font-weight]="element.text === '{{code}}' ? 'bold' : element.fontWeight"
+                                                    [style.font-style]="element.fontStyle">
+                                            
+                                                
+                                                <ng-container *ngIf="element.text === '{{code}}' && isTextTooLong(bindValue(element), element.width); else singleLineText">
+                                                  <tspan x="50%" dy="-6">{{ getFirstLine(bindValue(element)) }}</tspan>
+                                                  <tspan x="50%" dy="14">{{ getSecondLine(bindValue(element)) }}</tspan>
+                                                </ng-container>
+                                            
+                                                 
+                                                <ng-template #singleLineText>
+                                                  <tspan x="50%">{{ bindValue(element) }}</tspan>
+                                                </ng-template>
+                                            
+                                              </text>
+                                            </svg>
+
+
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="kt-doc-info">
                                     <div>
                                         <span class="doc-name">{{doc.DocumentName}}</span>
-                                        <!-- <span *ngIf="doc.DocumentStatus=='P'" class="pending-badge">
-                                            {{ "Masterform.Pending" | translate }}</span>
-                                        <span *ngIf="doc.DocumentStatus=='R'" class="reject-badge">
-                                            {{ "Masterform.Reject" | translate }}</span> -->
                                     </div>
                                     <div class="kt-doc-note">
                                         <p> {{doc.Description}} </p>
@@ -551,6 +548,7 @@
                         </div>
                     </ng-container>
                     <div class="kt-doc-refernce">
+
                         <nav>
 
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -1048,8 +1046,22 @@
                                         </svg>
                                     </div>
                                     <span class="kt-doc-title-name">{{ "Masterform.DocumentView" | translate }}</span>
+
                                 </div>
+
+
+
                                 <div class="d-flex justify-content-end kt-detail-link-option">
+
+                                    <div class="kt-detail-item" *ngIf="IsArchiveDownload==true  && viewer!=''">
+                                        <a class="kt-detail-link" (click)="generatePDF()">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1em;height: 1em;vertical-align: middle;fill: #144e18;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
+                                                <path
+                                                    d="M896 928c0 17.664-14.336 32-32 32l-704 0C142.336 960 128 945.664 128 928l0 0C128 910.336 142.336 896 160 896l704 0C881.664 896 896 910.336 896 928L896 928zM479.104 96.896l0 558.976-153.6-153.664c-12.8-12.8-33.6-12.8-46.464 0s-12.8 33.6 0 46.464l209.664 209.728c0.64 0.64 1.408 0.832 2.048 1.344 2.624 2.304 5.376 4.416 8.64 5.76 3.648 1.408 7.36 2.112 11.2 2.24C511.104 767.68 511.488 768 512 768c0.768 0 1.344-0.448 2.048-0.448 3.584-0.192 7.04-0.768 10.496-2.048 3.84-1.6 7.232-3.968 10.176-6.784 0 0 0.32-0.192 0.512-0.32l209.664-209.728c6.4-6.4 9.6-14.784 9.6-23.168 0-8.448-3.264-16.832-9.6-23.232-12.864-12.8-33.6-12.8-46.464 0l-153.664 153.664 0.32-558.976C545.152 78.72 530.432 64 512.32 64S479.104 78.72 479.104 96.896z" />
+                                            </svg>
+                                            <span class="kt-detail-iconname">download with barcode</span>
+                                        </a>
+                                    </div>
 
                                     <div class="kt-detail-item" *ngIf="IsArchiveDownload==true  && viewer!=''">
                                         <a class="kt-detail-link" (click)="DownloadFile()">
@@ -1077,9 +1089,12 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="pdf-main">
+
                                         <div class="pdf-div">
-                                            <div class="rendered-pdf-1">
+
+                                            <div class="rendered-pdf-1" #pdfContainer>
                                                 <pdf-viewer [src]="mainCatalogUrl" [(page)]="page" [rotation]="rotation" [original-size]="originalSize" (after-load-complete)="afterLoadComplete($event)" [zoom]="zoom" [zoom-scale]="zoomScale" [render-text]="renderText" [external-link-target]="'blank'"
                                                     (on-progress)="onProgress($event)" (page-rendered)="pageRendered($event)" (pages-initialized)="pageInitialized($event)" [show-borders]="false">
                                                 </pdf-viewer>
