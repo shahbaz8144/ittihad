@@ -6,9 +6,8 @@
             <div class="card-header align-items-center d-flex py-3">
                 <div class="flex-1">
                     <div class="search-bar">
-                        <input type="text" class="form-control" [(ngModel)]="MapTemplateSearch" placeholder="Search"
-                            aria-controls="example">
-                            <a class="close close-icn"><i *ngIf="MapTemplateSearch"  (click)="ClearSearch()" class="material-icons">close<i></i></i></a>
+                        <input type="text" class="form-control" [(ngModel)]="MapTemplateSearch" placeholder="Search" aria-controls="example">
+                        <a class="close close-icn"><i *ngIf="MapTemplateSearch"  (click)="ClearSearch()" class="material-icons">close<i></i></i></a>
                     </div>
                 </div>
                 <div class="flex-shrink-0">
@@ -18,7 +17,7 @@
                     </button>
                 </div>
             </div>
-            
+
 
             <div class="card-body p-0">
                 <div class="mb-0 table-responsive">
@@ -39,24 +38,22 @@
                                         <span *ngIf="item.CabinietName_Ar"> / {{ item.CabinietName_Ar }}</span>
                                     </td>
                                     <td>
-                                       {{item.TemplateName}}
+                                        {{item.TemplateName}}
                                     </td>
                                     <td>
                                         {{item.BarcodeSequence}}
                                     </td>
                                     <!-- [ngStyle]="{'color':item.Status=== true ? '#3f51b5' : 'red'}" -->
-                                        <td [ngStyle]="{'color':item.IsActive=== true ? '#3f51b5' : 'red'}" >
-                                        <div  *ngIf="item.IsActive"
-                                            class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-success curser-pointer w-min-70">
+                                    <td [ngStyle]="{'color':item.IsActive=== true ? '#3f51b5' : 'red'}">
+                                        <div *ngIf="item.IsActive" class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-success curser-pointer w-min-70">
                                             Active
                                         </div>
-                                        <div *ngIf="!item.IsActive"
-                                            class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-danger curser-pointer w-min-70">
+                                        <div *ngIf="!item.IsActive" class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-danger curser-pointer w-min-70">
                                             In-Active
                                         </div>
                                     </td>
-                                    
-                                </tr> 
+
+                                </tr>
                                 <ng-container *ngIf="_MapJson.length==0">
                                     <div class="d-flex-center kt-tb-error-box">
                                         <div class="m-auto text-center">
@@ -64,7 +61,7 @@
                                                 <img src="assets/media/Img/No Racks.png">
                                             </div>
                                             <h3 class="kt-blank-ttl"> Data Not Available. </h3>
-                                            <p class="kt-blank-msg"> No data found in Map Template To Cabinet list.</p> 
+                                            <p class="kt-blank-msg"> No data found in Map Template To Cabinet list.</p>
                                         </div>
                                     </div>
                                 </ng-container>
@@ -78,7 +75,7 @@
 </div>
 
 
-<div class="kt-aside-menu-overlay" ></div>
+<div class="kt-aside-menu-overlay"></div>
 
 <div id="template_cabin_map" class="wc-75 kt-quick-panel kt-quick-panel1 scroll-div">
     <a id="kt_quick_panel_close_btn" class="kt-quick-panel__close" (click)="template_cabin_map_close()">
@@ -107,20 +104,20 @@
                             <div class="kt-error" *ngIf="Cabineterrormessage && !_CabinetArray">
                                 <span class="kt-error-msg">
                                    Please Select Cabinet</span>
-                            </div>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">Template</label>
-                            <span class="text-danger ml-1">*</span>
-                            <ng-select [(ngModel)]="_TemplateArray" placeholder ="Select Template"  class="TEST-CLASS">
-                                <ng-option *ngFor="let temp of _TemplateJson"  [value]="temp.TemplateId"> {{temp.TemplateName}} </ng-option>
-                            </ng-select>
-                            <div class="kt-error" *ngIf="Templateerrormessage && !_TemplateArray">
-                                <span class="kt-error-msg">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Template</label>
+                        <span class="text-danger ml-1">*</span>
+                        <ng-select [(ngModel)]="_TemplateArray" placeholder="Select Template" class="TEST-CLASS">
+                            <ng-option *ngFor="let temp of _TemplateJson" [value]="temp.TemplateId"> {{temp.TemplateName}} </ng-option>
+                        </ng-select>
+                        <div class="kt-error" *ngIf="Templateerrormessage && !_TemplateArray">
+                            <span class="kt-error-msg">
                                    Please Select Template</span>
-                            </div>
                         </div>
-                        <div class="form-group">
+                    </div>
+                    <!-- <div class="form-group">
                             <label class="form-label">Barcode sequence:</label>
                             <span class="text-danger ml-1">*</span>
                            <input type="text" class="form-control" [(ngModel)]="Barcodesequence"  placeholder="Enter Barcode sequence">
@@ -128,11 +125,20 @@
                             <span class="kt-error-msg">
                                Enter Barcode sequence</span>
                         </div>
-                        </div>
+                        </div> -->
+                    <div class="form-group">
+                        <label>Prefix:</label>
+                        <input type="text" [(ngModel)]="prefix" class="form-control" placeholder="Enter prefix">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Auto-Increment:</label>
+                        <input type="number" [(ngModel)]="autoIncrementValue" class="form-control" readonly>
+                    </div>
                 </div>
                 <div class="kt-portlet__footer">
-                    <button type="submit" class="btn btn-sm btn-info px-3" (click)="AddMapTemplate()" >Submit</button>
-                    <button type="submit" class="btn btn-sm btn-secondary px-3" (click)="template_cabin_map_close()" >Cancel</button>
+                    <button type="submit" class="btn btn-sm btn-info px-3" (click)="AddMapTemplate()">Submit</button>
+                    <button type="submit" class="btn btn-sm btn-secondary px-3" (click)="template_cabin_map_close()">Cancel</button>
                 </div>
             </div>
         </div>

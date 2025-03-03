@@ -177,7 +177,6 @@
         right: -100.2%;
         left: auto;
     }
-
     .kt-quick-panel--right .kt-quick-panel {
         width: 100% !important;
     }
@@ -487,7 +486,6 @@ h6.phy-title {
         right: -100.2%;
         left: auto;
     }
-
     .kt-quick-panel--right .kt-quick-panel {
         width: 100% !important;
     }
@@ -509,7 +507,6 @@ h6.phy-title {
     .kt-quick-panel {
         width: 0% !important;
     }
-
     .kt-quick-panel.kt-quick-panel--on {
         width: 100% !important;
     }
@@ -1719,14 +1716,19 @@ span.item-icon svg {
     font-weight: 400;
 }
 
+.bar-code-dynamic {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: -1 !important;
+}
+
 .bar-code {
     text-align: center;
     line-height: 0;
 }
 
 .bar-code img {
-    /* width: 164px;
-    height: 50px; */
     width: 114px;
     height: 48px;
 }
@@ -2364,6 +2366,7 @@ span.file-icon svg {
     padding-left: 1px;
 }
 
+
 /* .btn-outline-ver {
     display: flex;
     align-items: center;
@@ -2375,6 +2378,7 @@ span.file-icon svg {
 .btn-outline-ver:hover {
     background-color: #f2f3f7;
 } */
+
 .btn-outline-ver {
     display: flex;
     align-items: center;
@@ -3161,7 +3165,6 @@ span.yes-icon {
     font-size: 11px;
     border-radius: 4px;
     color: #4f4e4e;
-
 }
 
 .checkbox {
@@ -3236,9 +3239,6 @@ span.yes-icon {
     border-style: solid;
 }
 
-
-
-
 .checkbox>span {
     height: 18px;
     width: 18px;
@@ -3249,8 +3249,6 @@ span.yes-icon {
     height: 10px;
 }
 
-
-
 .checkbox.checkbox-outline>span {
     height: 18px;
     width: 18px;
@@ -3260,7 +3258,6 @@ span.yes-icon {
     width: 5px;
     height: 10px;
 }
-
 
 .checkbox>span {
     background-color: #EBEDF3;
@@ -3554,7 +3551,6 @@ ul.fileupload-select-user-list {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-
 }
 
 ul.fileupload-select-user-list li {
@@ -3921,7 +3917,6 @@ textarea#txtnote {
         transform: scaleY(0);
         opacity: 0;
     }
-
     to {
         transform: scaleY(1);
         opacity: 1;
@@ -3968,7 +3963,6 @@ textarea#txtnote {
 
 .fileupload-notification {
     background-color: #f5f5f5;
-
 }
 
 .kt-detail-link {
@@ -4071,12 +4065,10 @@ textarea#txtnote {
     from {
         transform: translate(0, -50px);
     }
-
     to {
         transform: none;
     }
 }
-
 
 .approvecomments-modal .modal-header {
     padding: 1rem 24px;
@@ -4090,7 +4082,6 @@ textarea#txtnote {
     font-weight: 500;
     font-size: 22px;
 }
-
 
 .approvecomments-modal-close {
     width: 30px;
@@ -4125,7 +4116,6 @@ textarea#txtnote {
     font-weight: 500;
     font-size: 22px;
 }
-
 
 .rejectcomments-modal-close {
     width: 30px;
@@ -4198,6 +4188,7 @@ textarea#txtnote {
     display: inline;
     transition: all 0.15s ease-in-out;
 }
+
 .workflow-open-btn svg {
     width: 22px;
     height: 22px;
@@ -4218,6 +4209,7 @@ textarea#txtnote {
         margin: 1.75rem auto;
     }
 }
+
 .modal.show .modal-dialog {
     animation: fadeshowEffect 0.3s ease-out;
 }
@@ -4226,22 +4218,26 @@ textarea#txtnote {
     from {
         transform: translate(0, -50px);
     }
-
     to {
         transform: none;
     }
 }
+
+
 /* workflow design */
+
 .workflow-preview {
     background-color: #f6f6f6;
     border-radius: 5px;
     max-height: 330px;
     overflow: auto;
 }
+
 .gac-workflow-preview {
     background-color: #f6f6f6;
     border-radius: 5px;
 }
+
 .workflow-preview-body {
     padding: 1rem;
 }
@@ -4262,7 +4258,6 @@ textarea#txtnote {
     from {
         stroke-dashoffset: 0;
     }
-
     to {
         stroke-dashoffset: -5rem;
     }
@@ -4577,7 +4572,9 @@ textarea#txtnote {
     z-index: 9;
 }
 
+
 /* workflow design */
+
 .wn-badge {
     background-color: #00477f;
     position: absolute;
@@ -4682,7 +4679,6 @@ textarea#txtnote {
 .user-action-view-control {
     display: flex;
     align-items: center;
-
 }
 
 .user-action-view-li:first-child .user-action-view-label {
@@ -4810,11 +4806,11 @@ span.tab-count {
     transition-duration: .4s;
     transition-delay: .2s;
 }
+
 #useraction .kt-portlet .kt-portlet__body {
     height: calc(100vh - 120px);
     overflow: auto;
 }
-
 
 ul.schedule-select-user-list {
     padding-left: 0;
@@ -4898,6 +4894,437 @@ ul.schedule-select-user-list li .slect-close svg {
     border-radius: 0px 4px;
 }
 
-.refer-doc.active:hover::after{
+.refer-doc.active:hover::after {
     border-left-color: #ffe4c5;
+}
+
+
+/* ADDED CODE */
+
+
+/* .pdf-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+}
+
+.draggable-box {
+    position: absolute;
+    top: 100px;
+    left: 50px;
+    cursor: move;
+}
+
+.workspace {
+    position: absolute;
+    background: white;
+    padding: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.resizable-draggable {
+    position: absolute;
+    border: 1px solid #ddd;
+    padding: 5px;
+} */
+
+
+/* Selection Panel */
+
+.selection-panel {
+    padding: 10px;
+    background: #f3f3f3;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+
+/* Workspace */
+
+.workspace {
+    border: 2px solid #ccc;
+    background-color: #f3f3f3;
+    position: relative;
+    overflow: hidden;
+    /* Prevents overflow */
+}
+
+
+/* Draggable & Resizable Elements */
+
+.resizable-draggable:focus,
+.resizable-draggable:hover {
+    border: 2px solid blue;
+}
+
+
+/* Label Input */
+
+.label-input {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border: none;
+    background: transparent;
+}
+
+
+/* Uploaded Image */
+
+.uploaded-file {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+/* Resize Handle */
+
+.resizable-draggable::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+    /* background: black; */
+    /* ✅ Keep resize handles visible */
+    cursor: nwse-resize;
+}
+
+
+/* Barcode Container */
+
+.barcode-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: white;
+    transition: transform 0.3s ease;
+}
+
+
+/* Barcode Number (Sharp & Readable) */
+
+.barcode-number {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5px;
+    letter-spacing: 1px;
+}
+
+
+/* Ensure Barcode Stays Sharp */
+
+canvas {
+    border: none !important;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+}
+
+
+/* Context Menu */
+
+
+/* Context Menu */
+
+.context-menu {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+    z-index: 1000;
+}
+
+.context-menu li {
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.context-menu li:hover {
+    background: #f3f3f3;
+}
+
+
+/* Ensure Table Fits Inside the Draggable Div */
+
+.table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+
+/* Table Cells */
+
+.table td {
+    border: 1px solid #ccc;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+
+/* Table Inputs - Make Them Fit Inside Cells */
+
+.table input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+
+/* Resizable Draggable Element (Table Container) */
+
+.resizable-draggable {
+    position: absolute;
+    background: transparent !important;
+    /* ✅ Make background fully transparent */
+    border: none !important;
+    /* ✅ Remove unwanted borders */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: fit-content;
+    min-height: fit-content;
+}
+
+
+/* Modal */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+
+/* Display Workspace Dimensions */
+
+.workspace-dimensions {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    padding: 5px;
+    margin-bottom: 5px;
+    background: #f3f3f3;
+    border: 1px solid #ccc;
+    display: inline-block;
+}
+
+.workspace-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.workspace-controls label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.workspace-controls input {
+    width: 80px;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.workspace-controls button {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.workspace-controls button:hover {
+    background-color: #0056b3;
+}
+
+
+/* 🔹 Properties Panel */
+
+.properties-panel {
+    position: fixed;
+    top: 50px;
+    bottom: 0px;
+    right: 20px;
+    width: 250px;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    overflow: auto;
+}
+
+.properties-panel h3 {
+    margin-top: 0;
+    font-size: 16px;
+}
+
+.properties-panel label {
+    font-size: 14px;
+    display: block;
+    margin-top: 5px;
+}
+
+.properties-panel input {
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.properties-panel button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.properties-panel button:hover {
+    background-color: #0056b3;
+}
+
+.direct-text {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+    /* ✅ Keep text color visible */
+    white-space: nowrap;
+}
+
+.resizable-draggable span {
+    display: inline-block;
+    width: auto;
+    /* Adjusts to content */
+    height: auto;
+}
+
+svg {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.barcode {
+    font-family: 'Libre Barcode 39', sans-serif;
+    /* Example */
+    letter-spacing: 0;
+}
+
+
+/* Ensure text sharpness */
+
+.resizable-draggable,
+.barcode-container,
+.system-defined-text {
+    font-smooth: never;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    image-rendering: pixelated;
+}
+
+
+/* Improve font clarity */
+
+.system-defined-text {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+pdf-viewer {
+    width: 100% !important;
+    height: calc(100vh - 240px) !important;
+    flex-direction: column !important;
+}
+
+.rendered-pdf {
+    width: 100% !important;
+    height: calc(100vh - 240px) !important;
+    border: 1px solid #000000;
+}
+
+.rendered-pdf-1 {
+    width: 100% !important;
+    height: calc(100vh - 240px) !important;
+    border: 1px solid #000000;
+}
+
+.pdf-container {
+    position: relative;
+    width: 100% !important;
+    height: calc(100vh - 240px) !important;
+    border: 1px solid #ddd;
+    background-color: #f5f5f5;
+}
+
+.draggable-box {
+    position: absolute;
+    cursor: grab;
+}
+
+.position-display {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.drag-handle {
+    width: 100%;
+    background: #007bff;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    cursor: grab;
+    font-weight: bold;
+}
+
+.no-drag.cdk-drag {
+    touch-action: none;
+    pointer-events: none !important;
 }

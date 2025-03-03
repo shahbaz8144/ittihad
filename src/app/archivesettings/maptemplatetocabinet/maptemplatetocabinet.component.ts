@@ -20,7 +20,8 @@ export class MaptemplatetocabinetComponent implements OnInit {
   Templateerrormessage:boolean = false;
   Barcodeerrormessage:boolean = false;
   Barcodesequence:string = "";
-
+  prefix:string = "";
+  autoIncrementValue:string = "";
   constructor(private service:GACFileService,private _snackBar: MatSnackBar,) {
     this.obj = new GACFiledto();
    }
