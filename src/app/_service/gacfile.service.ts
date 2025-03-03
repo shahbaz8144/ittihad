@@ -457,6 +457,7 @@ export class GACFileService {
     this._ObjGac.TemplateId = ObjGac.TemplateId;
     this._ObjGac.CabinetId = ObjGac.CabinetId;
     this._ObjGac.BarcodeSequence = ObjGac.BarcodeSequence;
+    this._ObjGac.Prefix = ObjGac.Prefix;
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
     this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
      return this.http.post(this.rootUrlII + 'ArchiveAPI/NewAddMapTemplate', this._ObjGac);

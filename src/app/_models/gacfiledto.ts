@@ -101,7 +101,8 @@ export class GACFiledto {
   TemplateData:string;
   TemplateName:string;
   TemplateId:number;
-  BarcodeSequence:string;
+  BarcodeSequence:number;
+  Prefix:string;
   PositionX:string;
   PositionY:string;
   CabinetNameArabic:string;

@@ -21,7 +21,7 @@ export class MaptemplatetocabinetComponent implements OnInit {
   Barcodeerrormessage:boolean = false;
   Barcodesequence:string = "";
   prefix:string = "";
-  autoIncrementValue:string = "";
+  autoIncrementValue:number;
   constructor(private service:GACFileService,private _snackBar: MatSnackBar,) {
     this.obj = new GACFiledto();
    }
@@ -42,7 +42,7 @@ export class MaptemplatetocabinetComponent implements OnInit {
   GetMappedTemplatesList(){
     this.service.GetMappedTemplatesListAPI().subscribe(data =>{
       this._MapJson = data['Data'].MapJson;
-      console.log( this._MapJson,"GetMappedTemplatesList Data");
+      console.log(data,"GetMappedTemplatesList Data");
     })
   }
 
@@ -81,12 +81,13 @@ export class MaptemplatetocabinetComponent implements OnInit {
   //   }
    
   AddMapTemplate() {
-    if (!this._CabinetArray || !this._TemplateArray || !this.Barcodesequence) {
-      this.Cabineterrormessage = !this._CabinetArray;
-      this.Templateerrormessage = !this._TemplateArray;
-      this.Barcodeerrormessage = !this.Barcodesequence;
-      return; // Stop execution if validation fails
-    }
+    
+    // if (!this._CabinetArray || !this._TemplateArray || !this.Barcodesequence) {
+    //   this.Cabineterrormessage = !this._CabinetArray;
+    //   this.Templateerrormessage = !this._TemplateArray;
+    //   // this.Barcodeerrormessage = !this.autoIncrementValue;
+    //   return; // Stop execution if validation fails
+    // } 
   
     // Reset error messages
     this.Cabineterrormessage = false;
@@ -96,7 +97,8 @@ export class MaptemplatetocabinetComponent implements OnInit {
     // Prepare request object
     this.obj.TemplateId = this._TemplateArray.toString();
         this.obj.CabinetId = this._CabinetArray.toString();
-        this.obj.BarcodeSequence = this.Barcodesequence;
+        this.obj.BarcodeSequence = this.autoIncrementValue;
+        this.obj.Prefix = this.prefix;
   
     // Call API
     this.service.AddMapTemplateAPI(this.obj).subscribe(data => {
