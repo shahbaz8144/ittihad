@@ -1860,10 +1860,10 @@ span.css-w0pj6f {
     .scroll-y.kt-portlet__body--fit-x {
         position: relative;
         overflow-y: auto;
-        max-height: calc(100vh - 160px);
+        max-height: calc(100vh - 200px);
     }
     .scroll-y.aside-scrolly {
-        max-height: calc(100vh - 48px);
+        max-height: calc(100vh - 80px);
     }
 }
 .kt-grid__item.kt-grid__item--fluid.kt-portlet.kt-inbox__list.kt-inbox__list--shown {

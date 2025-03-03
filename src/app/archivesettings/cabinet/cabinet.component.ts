@@ -13,6 +13,7 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./cabinet.component.css']
 })
 export class CabinetComponent implements OnInit {
+
   CabinetName:string = "";
   Status:boolean = false;
   _Obj:GACFiledto;
@@ -24,6 +25,7 @@ export class CabinetComponent implements OnInit {
   Cabinet_search:string = "";
   Cabineterrormessage:boolean=false;
   Entercabinetname:string = "";
+  CabinetNameArabic:string = "";
   constructor(public service: GACFileService,
     private _snackBar: MatSnackBar,
     private dialog: MatDialog,
@@ -66,7 +68,8 @@ export class CabinetComponent implements OnInit {
   AddCabinet(){
     if(this.CabinetName == ""){
  this.Cabineterrormessage=true;
-    }else if(this.CabinetName != ""){
+    }
+    else if(this.CabinetName != ""){
       this.Cabineterrormessage=false;
       if (this._Obj.CabinetId == undefined || this._Obj.CabinetId == 0) {
         this._Obj.FlagId = 1;
@@ -75,6 +78,7 @@ export class CabinetComponent implements OnInit {
       }
       this._Obj.IsActive = this.Status;
       this._Obj.CabinetName = this.CabinetName;
+      this._Obj.CabinetNameArabic = this.CabinetNameArabic;
       this.service.CabinetInsertAndUpdate(this._Obj).subscribe((data: any) => { 
         console.log(data, "Add Cabinet");
         if (data && data.message == '1') { 
@@ -134,6 +138,7 @@ export class CabinetComponent implements OnInit {
   this.isShow = true;
   this._Obj.CabinetId = item.CabinetId;
   this.CabinetName = item.CabinetName;
+  this.CabinetNameArabic = item.CabinietName_Ar;
   this.Status = item.Status;
   const element = document.getElementById("editrck");
 

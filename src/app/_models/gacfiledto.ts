@@ -104,5 +104,6 @@ export class GACFiledto {
   BarcodeSequence:string;
   PositionX:string;
   PositionY:string;
+  CabinetNameArabic:string;
   
 }

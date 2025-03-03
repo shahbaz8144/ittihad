@@ -36,6 +36,7 @@
                                 <tr *ngFor="let item of _MapJson|filter:MapTemplateSearch">
                                     <td>
                                         {{item.CabinetName}}
+                                        <span *ngIf="item.CabinietName_Ar"> / {{ item.CabinietName_Ar }}</span>
                                     </td>
                                     <td>
                                        {{item.TemplateName}}
@@ -100,7 +101,8 @@
                             <label class="form-label">Cabinet:</label>
                             <span class="text-danger ml-1">*</span>
                             <ng-select [(ngModel)]="_CabinetArray" placeholder="Select Cabinet" >
-                                <ng-option *ngFor="let item of _CabinetJson"  [value]="item.CabinetId" > {{item.CabinetName}} </ng-option>
+                                <ng-option *ngFor="let item of _CabinetJson"  [value]="item.CabinetId" > {{item.CabinetName}}
+                                    <span *ngIf="item.CabinietName_Ar"> / {{ item.CabinietName_Ar }}</span> </ng-option>
                             </ng-select>
                             <div class="kt-error" *ngIf="Cabineterrormessage && !_CabinetArray">
                                 <span class="kt-error-msg">

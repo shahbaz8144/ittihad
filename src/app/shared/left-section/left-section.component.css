@@ -78,10 +78,11 @@
 }
 
 .kt-menu__nav__scroll {
-    max-height: calc(100vh - 210px);
+    max-height: calc(100vh - 160px);
     overflow: auto;
     overflow-x: hidden;
 }
+
 
 .hover-scroll-overlay-y {
     overflow-y: hidden;
@@ -350,5 +351,10 @@ svg.toggle-arrow-svg {
     transform: translate3d(0px, 120px, 0px) !important;
     left: 0 !important;
     right: 0px !important;
+}
+
+.left-sec__submenu__en__ar {
+    bottom: 10px !important;
+    width: 14rem !important;
 }
 

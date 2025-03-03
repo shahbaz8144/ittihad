@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild,EventEmitter,Renderer2} from '@angular/core';
+import { Component, OnInit,ViewChild,EventEmitter,Renderer2, Inject} from '@angular/core';
 import { UserDTO } from 'src/app/_models/user-dto';
 import { Router } from '@angular/router';
 //import { AuthenticationService } from 'src/app/_service/authentication.service';
@@ -9,6 +9,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment'
 import { DashboardComponent } from 'src/app/dashboard/dashboard/dashboard.component';
 import { TranslateService } from '@ngx-translate/core';
+import { HeaderComponent } from '../header/header.component';
+import { DOCUMENT } from '@angular/common';
 
 let users_db = new Localbase('pwa-database_users')
 @Component({
@@ -23,6 +25,17 @@ export class LeftSectionComponent implements OnInit {
   styleTag: HTMLStyleElement | undefined;
   // currentUser: UserDTO;
   _obj: MenuDTO;
+  UserName: string
+  DesignationName: string;
+  authenticationService: any;
+  UserProfile: string;
+  STREAM: string;
+  _isPolicy: boolean;
+  PolicyId: number;
+  PolicyHeader: string;
+  PolicyContent: string;
+  _userdto: UserDTO;
+  EmailId:string="";
   private currentUserSubject: BehaviorSubject<UserDTO>;
   public currentUser: Observable<UserDTO>;
   public static ArabicSide:EventEmitter<any>=new EventEmitter();
@@ -34,9 +47,14 @@ export class LeftSectionComponent implements OnInit {
     //, private authenticationService: AuthenticationService
     , private menuService: MenuService
     , private translate : TranslateService
+    ,@Inject(DOCUMENT) private document: Document,
     //, private dbService: NgxIndexedDBService
+    
   ) {
-   
+    this.currentUserSubject = new BehaviorSubject<UserDTO>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUser = this.currentUserSubject.asObservable();
+    const lang:any = localStorage.getItem('language');
+    this.translate.use(lang); 
     DashboardComponent.ArabicSide.subscribe((lang:any)=>{
       localStorage.setItem('language', lang);
       this.translate.use(lang); 
@@ -46,9 +64,35 @@ export class LeftSectionComponent implements OnInit {
         this.removeArabicStyles();
       }
   });
+  
+  HeaderComponent.languageChanged.subscribe((lang)=>{
+    localStorage.setItem('language',lang);
+    this.translate.use(lang);
+    this.currentLang = lang ? lang : 'en';
+  this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+  if (!lang) {
+    // Default language if not set in localStorage
+    lang = 'en';
+    localStorage.setItem('language', lang);
+  }
+  if(lang == 'ar'){
+    this.renderer.addClass(document.body, 'kt-body-arabic');
+  }else if (lang == 'en'){
+    this.renderer.removeClass(document.body, 'kt-body-arabic');
+  }
+     })
     //this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
+  currentLang:"ar"|"en"="ar";
+  storedLanguage:any
+  ChangelangTo(lang:any){
+    this.currentLang=lang;
+    this.translate.use(lang); 
+    localStorage.setItem('language', lang); 
+    DashboardComponent.ArabicSide.emit(lang);
+    HeaderComponent.languageChanged.emit(lang);
+  }
 //   arabicLeftSection() {
 //   //   const css = `
 //   //   body {
@@ -160,16 +204,51 @@ removeArabicStyles() {
 }
 
 
+public get currentUserValue(): UserDTO {
+  return this.currentUserSubject.value[0];
+}
 
 
 
+  // public get currentUserValue(): UserDTO {
+  //   this.currentUserSubject = new BehaviorSubject<UserDTO>(JSON.parse(localStorage.getItem('currentUser')));
+  //   this.currentUser = this.currentUserSubject.asObservable();
+  //   return this.currentUserSubject.value;
+  // }
 
-  public get currentUserValue(): UserDTO {
-    this.currentUserSubject = new BehaviorSubject<UserDTO>(JSON.parse(localStorage.getItem('currentUser')));
-    this.currentUser = this.currentUserSubject.asObservable();
-    return this.currentUserSubject.value;
-  }
   ngOnInit() {
+    HeaderComponent.languageChanged.subscribe((lang)=>{
+      localStorage.setItem('language',lang);
+      this.translate.use(lang);
+      this.currentLang = lang ? lang : 'en';
+    this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+    if (!lang) {
+      // Default language if not set in localStorage
+      lang = 'en';
+      localStorage.setItem('language', lang);
+    }
+    if(lang == 'ar'){
+      this.renderer.addClass(document.body, 'kt-body-arabic');
+    }else if (lang == 'en'){
+      this.renderer.removeClass(document.body, 'kt-body-arabic');
+    }
+       })
+    this.UserName = this.currentUserValue.FirstName + ' ' + this.currentUserValue.LastName;
+    // alert(this.currentUserValue.FirstName);
+    this.DesignationName = this.currentUserValue.DesignationName;
+    console.log(this.DesignationName,"DesignationName");
+    this.EmailId = this.currentUserValue.Email;
+    this.UserProfile = this.currentUserValue.UserProfile;
+    this.PolicyId = this.currentUserValue.PolicyId;
+    if (this.PolicyId == 0)
+      this._isPolicy = false;
+    else
+      this._isPolicy = true;
+    this.PolicyHeader = this.currentUserValue.PolicyHeader;
+    this.PolicyContent = this.currentUserValue.PolicyContent;
+    if (this.currentUserValue.Triggered < 2) {
+      // setTimeout(() => this.startTour(this.currentUserValue.TourId), 2000);
+    }
     const lang:any = localStorage.getItem('language');
     this.translate.use(lang); 
     this.Menubinding();

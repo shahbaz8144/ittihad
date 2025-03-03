@@ -24,7 +24,8 @@
                     <table class="table b-table">
                         <thead>
                             <tr>
-                                <th>{{"Masterform.Name" | translate }}</th>
+                                <th>{{"Masterform.NameEN" | translate }}</th>
+                                <th> {{"Masterform.NameAR" | translate }} </th>
                                 <th>{{"Masterform.Status" | translate }}</th>
                                 <th>{{"Masterform.Action"| translate }}</th>
                             </tr>
@@ -34,6 +35,9 @@
                                 <tr *ngFor="let item of NewCabinetList |filter:CabinetSerach">
                                     <td>
                                         {{item.CabinetName}}
+                                    </td>
+                                    <td>
+                                        {{item.CabinietName_Ar}}
                                     </td>
                                         <td [ngStyle]="{'color':item.Status=== true ? '#3f51b5' : 'red'}"
                                         (click)="UpdateStatus(item)">
@@ -101,20 +105,30 @@
                     </div>
                 </div>
                 <div class="kt-portlet__body" style="    height: calc(100vh - 120px);">
-                        <div class="form-cus mb-3">
-                                    <label>{{"Masterform.CabinetName" | translate }}</label>
-                                    <span class="text-danger ml-1">*</span>
-                                    <input type="text"  [(ngModel)]="CabinetName"
-                                         class="form-control" [placeholder]="Entercabinetname"
-                                         required minlength="3"
-                                        maxlength="50" />
-                                        <div class="kt-error" *ngIf="Cabineterrormessage && !CabinetName">
-                                            <span class="kt-error-msg">
-                                                {{"Masterform.errormsg" | translate }} </span>
+                            <div class="form-cus mb-3">
+                                        <label>{{"Masterform.CabinetName" | translate }} (English)</label>
+                                        <span class="text-danger ml-1">*</span>
+                                        <input type="text"  [(ngModel)]="CabinetName"
+                                            class="form-control" [placeholder]="Entercabinetname"
+                                            required minlength="3"
+                                            maxlength="50" />
+                                            <div class="kt-error" *ngIf="Cabineterrormessage && !CabinetName">
+                                                <span class="kt-error-msg">
+                                                    {{"Masterform.errormsg" | translate }} </span>
+                                            </div>
+                                        <div>
                                         </div>
-                                    <div>
                                     </div>
-                                </div>
+                                    <div class="form-cus mb-3">
+                                        <label style=" direction: rtl; width: 100%; text-align: right;" >{{"Masterform.CabinetName" | translate }} (عربي)</label>
+                                        <!-- <span class="text-danger ml-1">*</span> -->
+                                        <input type="text"  [(ngModel)]="CabinetNameArabic"
+                                            class="form-control" placeholder="أدخل اسم الخزانة"
+                                            required minlength="3" style=" direction: rtl;"
+                                            maxlength="50" />
+                                        <div>
+                                        </div>
+                                    </div>
                                 <div class="form-cus">
                                     <label class="form-label">{{"Masterform.Status" | translate }}</label>
                                     <div>

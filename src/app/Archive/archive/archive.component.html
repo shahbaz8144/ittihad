@@ -1,5 +1,5 @@
 <div *ngIf="_Previewshownandhide == false" class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
-    <h4 class="mb-3 pro-nm text-dark"> Archive </h4>
+    <h4 class="mb-3 pro-nm text-dark"> {{"Masterform.Archive" | translate }} </h4>
     <div class="kt-grid__item kt-grid__item--fluid kt-portlet kt-inbox__list kt-inbox__list--shown" style="min-height: calc(100vh - 80px);">
         <div class="kt-portlet__head border-0">
             <div class="d-flex align-items-center justify-content-between w-100">
@@ -12,7 +12,7 @@
                     <span>
                         <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M20.7457 3.32851C20.3552 2.93798 19.722 2.93798 19.3315 3.32851L12.0371 10.6229L4.74275 3.32851C4.35223 2.93798 3.71906 2.93798 3.32854 3.32851C2.93801 3.71903 2.93801 4.3522 3.32854 4.74272L10.6229 12.0371L3.32856 19.3314C2.93803 19.722 2.93803 20.3551 3.32856 20.7457C3.71908 21.1362 4.35225 21.1362 4.74277 20.7457L12.0371 13.4513L19.3315 20.7457C19.722 21.1362 20.3552 21.1362 20.7457 20.7457C21.1362 20.3551 21.1362 19.722 20.7457 19.3315L13.4513 12.0371L20.7457 4.74272C21.1362 4.3522 21.1362 3.71903 20.7457 3.32851Z" fill="currentColor"></path> </g></svg>
                     </span>
-                    <span class="label">Back</span>
+                    <span class="label">{{"Masterform.Back" | translate }}</span>
                 </div>
             </div>
         </div>
@@ -27,10 +27,10 @@
                                     <div class="main-form">
                                         <div class="w-100">
                                             <div class="version-label" *ngIf="openedDocname">
-                                                <span class="form-check-label" style="max-width: 75%">Document Name: <span style="font-weight: 400;">{{openedDocname}}</span></span>
+                                                <span class="form-check-label" style="max-width: 75%">{{"Masterform.DocumentName" | translate}}: <span style="font-weight: 400;">{{openedDocname}}</span></span>
                                                 <span style="color: #0977ff;">|</span>
                                                 <span *ngIf="_VersionId" class="form-check-label">
-                                                 Version: 
+                                                 {{"Masterform.Version" | translate}}: 
                                                  <span style="font-weight: 400;">
                                                          {{_VersionId}} 
                                                      </span>
@@ -49,19 +49,19 @@
 
                                             <div class="main-input-upload">
                                                 <!-- accept="application/pdf" -->
-                                                <input type="file" multiple id="fileUpload"  (change)="selectFile($event)">
+                                                <input type="file" multiple id="fileUpload" accept="application/pdf" (change)="selectFile($event)">
                                                 <div class="drag-browse">
                                                     <div class="drag-browse-icon">
                                                         <svg fill="#ff8900" width="24px" height="24px" viewBox="-64 0 512 512" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm65.18 216.01H224v80c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-80H94.82c-14.28 0-21.41-17.29-11.27-27.36l96.42-95.7c6.65-6.61 17.39-6.61 24.04 0l96.42 95.7c10.15 10.07 3.03 27.36-11.25 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z"></path></g></svg>
                                                     </div>
                                                     <div>
-                                                        <span>Drag & drop file here or </span><span class="browse">Browse</span>
+                                                        <span> {{"Masterform.Filenametext" | translate }} </span><span class="browse">{{"Masterform.Browse" | translate }}</span>
                                                     </div>
-                                                    <p class="support-format">Supported formats: JPEG, PNG, PDF, Word, Excel
+                                                    <p class="support-format"> {{"Masterform.supportpdf" | translate }}
                                                     </p>
                                                 </div>
                                             </div>
-                                            <p *ngIf="_GacAttachmentFileuplod.length>0" class="error-note" style="align-items: center;">
+                                            <!-- <p *ngIf="_GacAttachmentFileuplod.length>0" class="error-note" style="align-items: center;">
                                                 <span>
                                                 <svg fill="currentColor" width="64px" height="64px"
                                                     viewBox="0 0 1024 1024" version="1"
@@ -83,10 +83,10 @@
                                                 Note: The selected document is the main document, please upload
                                                 thumbnail
                                             </span>
-                                            </p>
+                                            </p> -->
                                             <div class="kt-error" *ngIf="FileUploadRequired">
                                                 <span class="kt-error-msg">
-                                                 Please Upload Document(s)</span>
+                                                {{"Masterform.Filevalidation" | translate }} </span>
                                             </div>
                                         </div>
                                     </div>
@@ -102,7 +102,7 @@
                                             <div *ngIf="FileUploadErrorlogs" class="dropzone-item dropzone-item-danger p-3 m-0 border-bottom">
                                                 <div class="dropzone-file">
                                                     <div class="dropzone-filename">
-                                                        <span>Upload failed - file is empty</span>
+                                                        <span> {{"Masterform.EmptyFiles" | translate }} </span>
                                                         <span class="dropzone-delete" (click)="ClosefileErrorlog()">
                                                             <i class="flaticon2-cross"  ></i>
                                                         </span>
@@ -122,7 +122,7 @@
                                                         </div>
                                                     </div>
                                                     <div *ngIf="data.Uploading" class="spinner-border actns-ldr" role="status" style="color:#5d76c3;">
-                                                        <span class="sr-only">Loading...</span>
+                                                        <span class="sr-only">{{"Masterform.Loading" | translate }}</span>
                                                     </div>
                                                     <span *ngIf="!data.Uploading" class="material-icons remove-icon" (click)="RemoveGacFiles(data.UniqueId, i)">delete</span>
                                                 </div>
@@ -156,7 +156,7 @@
                                             <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M11.2929 8.79289C11.6834 8.40237 12.3166 8.40237 12.7071 8.79289L17.7071 13.7929C18.0976 14.1834 18.0976 14.8166 17.7071 15.2071C17.3166 15.5976 16.6834 15.5976 16.2929 15.2071L12 10.9142L7.70711 15.2071C7.31658 15.5976 6.68342 15.5976 6.29289 15.2071C5.90237 14.8166 5.90237 14.1834 6.29289 13.7929L11.2929 8.79289Z" fill="currentColor"></path> </g></svg>
                                         </span>
                                         <span>
-                                            View More
+                                            {{"Masterform.ViewMore" | translate }}
                                         </span>
                                     </a>
                                 </div>
@@ -168,7 +168,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="un-heading">
-                                                        <h5>Document Actions</h5>
+                                                        <h5>{{ "Masterform.DocumentActions" | translate }}</h5>
                                                     </div>
                                                     <div class="inner-border">
                                                         <div class="mb-0">
@@ -182,7 +182,7 @@
                                                                         (change)="ToggleRequiredApproval($event.target.checked)">
                                                                     <span></span>
                                                                     <p class="form-check-label ml-2" for="sharedocCheck">
-                                                                        Select users who required approval </p>
+                                                                        {{"Masterform.ApprovalUser" | translate }} </p>
                                                                 </label>
                                                                 </div>
                                                                 <div class="mb-0 mr-4">
@@ -194,7 +194,7 @@
                                                                         (change)="toggleWorkflow($event.target.checked)">
                                                                     <span></span>
                                                                     <p class="form-check-label ml-2" for="optionalCheck">
-                                                                        Would you like to add workflow
+                                                                        {{"Masterform.AddWorkflow" | translate }}
                                                                     </p>
                                                                 </label>
                                                                 </div>
@@ -278,7 +278,7 @@
                                                                     </div>
                                                                     <div class="se-col-11">
                                                                         <div class="form-group mb-0">
-                                                                            <ng-select (change)="WorkFlowDetails($event)" placeholder="Select workflow" appendTo="body" [(ngModel)]="Workflow_drpvalue" [ngModelOptions]="{standalone: true}" required>
+                                                                            <ng-select (change)="WorkFlowDetails($event)" [placeholder]="Selectworkflow" appendTo="body" [(ngModel)]="Workflow_drpvalue" [ngModelOptions]="{standalone: true}" required>
                                                                                 <ng-option [value]="item.WorkFlowId" *ngFor="let item of WorkflowLeftsectionlist">
                                                                                     {{item.WorkFlowName}}
                                                                                 </ng-option>
@@ -288,10 +288,10 @@
                                                                                     <span class="icon">
                                                                                         <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g clip-path="url(#clip0_1251_98416)"> <path fill-rule="evenodd" clip-rule="evenodd" d="M9 0C5.96243 0 3.5 2.46243 3.5 5.5C3.5 8.53757 5.96243 11 9 11C12.0376 11 14.5 8.53757 14.5 5.5C14.5 2.46243 12.0376 0 9 0ZM5.5 5.5C5.5 3.567 7.067 2 9 2C10.933 2 12.5 3.567 12.5 5.5C12.5 7.433 10.933 9 9 9C7.067 9 5.5 7.433 5.5 5.5Z" fill="currentColor"></path> <path d="M15.5 0C14.9477 0 14.5 0.447715 14.5 1C14.5 1.55228 14.9477 2 15.5 2C17.433 2 19 3.567 19 5.5C19 7.433 17.433 9 15.5 9C14.9477 9 14.5 9.44771 14.5 10C14.5 10.5523 14.9477 11 15.5 11C18.5376 11 21 8.53757 21 5.5C21 2.46243 18.5376 0 15.5 0Z" fill="currentColor"></path> <path d="M19.0837 14.0157C19.3048 13.5096 19.8943 13.2786 20.4004 13.4997C22.5174 14.4246 24 16.538 24 19V21C24 21.5523 23.5523 22 23 22C22.4477 22 22 21.5523 22 21V19C22 17.3613 21.0145 15.9505 19.5996 15.3324C19.0935 15.1113 18.8625 14.5217 19.0837 14.0157Z" fill="currentColor"></path> <path d="M6 13C2.68629 13 0 15.6863 0 19V21C0 21.5523 0.447715 22 1 22C1.55228 22 2 21.5523 2 21V19C2 16.7909 3.79086 15 6 15H12C14.2091 15 16 16.7909 16 19V21C16 21.5523 16.4477 22 17 22C17.5523 22 18 21.5523 18 21V19C18 15.6863 15.3137 13 12 13H6Z" fill="currentColor"></path> </g> </g></svg>
                                                                                     </span>
-                                                                                    <span>{{Workflowdetails.length}} User(s)</span>
+                                                                                    <span>{{Workflowdetails.length}} {{"Masterform.Users" | translate }}</span>
                                                                                 </div>
                                                                                 <div class="workflow-preview" (click)="workflowmodal_open()">
-                                                                                    View Workflow
+                                                                                    {{"Masterform.ViewWorkflow" | translate }}
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -302,7 +302,6 @@
                                                                 <div class="row">
                                                                     <div class="col-lg-12">
                                                                         <div class="appr-comts">
-
                                                                             <p *ngIf="isArchiveApproval==true" class="error-note" style="align-items: center;">
                                                                                 <span>
                                                                                     <svg fill="currentColor" width="64px" height="64px" viewBox="0 0 1024 1024"
@@ -321,7 +320,7 @@
                                                                                     </svg>
                                                                                 </span>
                                                                                 <span>
-                                                                                    Note: The request will be sent to the reporting user, and only after their approval will the shared users be able to view the document.
+                                                                                   {{"Masterform.ReportingUserNote" | translate }}
                                                                                 </span>
                                                                             </p>
 
@@ -474,17 +473,13 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
                                                 </div>
-
                                             </div>
-
-
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="un-heading">
-                                                        <h5>Document Information</h5>
+                                                        <h5>{{"Masterform.DocumentInformation" | translate }}</h5>
                                                     </div>
                                                     <div class="inner-border">
                                                         <div class="mb-3">
@@ -1646,7 +1641,7 @@
                                                                                             }
                                                                                         </style>
                                                                                     </defs>
-                                                                                    <title>category</title>
+                                                                                    <title>{{"Masterform.category" | translate }}</title>
                                                                                     <path
                                                                                         d="M27,22.1414V18a2,2,0,0,0-2-2H17V12h2a2.0023,2.0023,0,0,0,2-2V4a2.0023,2.0023,0,0,0-2-2H13a2.002,2.002,0,0,0-2,2v6a2.002,2.002,0,0,0,2,2h2v4H7a2,2,0,0,0-2,2v4.1421a4,4,0,1,0,2,0V18h8v4.142a4,4,0,1,0,2,0V18h8v4.1414a4,4,0,1,0,2,0ZM13,4h6l.001,6H13ZM8,26a2,2,0,1,1-2-2A2.0023,2.0023,0,0,1,8,26Zm10,0a2,2,0,1,1-2-2A2.0027,2.0027,0,0,1,18,26Zm8,2a2,2,0,1,1,2-2A2.0023,2.0023,0,0,1,26,28Z">
                                                                                     </path>
@@ -1662,7 +1657,7 @@
                                                                         <div (click)="AddCategorys()" class="fileupload-select project" type="button" style="    padding-left: 24px;
                                                                             color: #999999;
                                                                             border-bottom: 1px solid #cccccc;">
-                                                                            <div class="title"> Add Category </div>
+                                                                            <div class="title"> {{"Masterform.AddCategory" | translate }} </div>
                                                                         </div>
                                                                         <ul class="schedule-select-user-list">
                                                                             <li class="" *ngFor="let item of SelectedCategory">
@@ -1681,7 +1676,6 @@
                                                                                 </div>
                                                                             </li>
                                                                         </ul>
-
                                                                         <!-- <div class="form-group mb-0">
                                                                             <div class="custom-file">
                                                                                 <mat-form-field appearance="fill" style="width: 99%;">
@@ -1700,9 +1694,7 @@
                                                                             </div>
                                                                         </div> -->
                                                                     </div>
-
                                                                 </div>
-
                                                             </div>
                                                         </div>
                                                         <div class="mb-0">
@@ -1800,7 +1792,7 @@
                         </svg>
                     </span>
                     <span>
-                        Note: Mandatory (*) Fields Are Required
+                       {{"Masterform.Mandatoryfileds" | translate }}
                     </span>
                 </p>
                 <div id="submitbutton_div" class="ml-2">
@@ -1826,7 +1818,7 @@
                     </path>
                 </svg>
 
-                <h5 class="modal-title  flex-grow-1" id="projectmodalLabel">Select Category(s)</h5>
+                <h5 class="modal-title  flex-grow-1" id="projectmodalLabel"> {{"Masterform.SelectCategory" | translate  }} </h5>
                 <button type="button" class="close d-none" (click)="close_projectmodal()" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -1874,7 +1866,7 @@
                     <div id="project-filter" class="project-filter">
                         filter comes here
                         <div class="project-filter-footer">
-                            <button type="button" class="btn btn-add-primary">Submit</button>
+                            <button type="button" class="btn btn-add-primary">{{"Masterform.Submit" | translate }}</button>
                             <button type="button" class="btn btn-close-secondary" (click)="close_project_filter()">Close</button>
                         </div>
                     </div>
@@ -1912,16 +1904,15 @@
                                         </path>
                                     </g>
                                 </svg>
-                                <span style="color:#757575" class="ml-2">No Category found.</span>
+                                <span style="color:#757575" class="ml-2"></span>
                             </div>
                         </ng-container>
                     </ul>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-add-primary" (click)="AddSelectCategory()">Add </button>
-
-                <button type="button" class="btn btn-close-secondary" (click)="close_category()">Close</button>
+                <button type="button" class="btn btn-add-primary" (click)="AddSelectCategory()">{{"Masterform.Add" | translate }} </button>
+                <button type="button" class="btn btn-close-secondary" (click)="close_category()">{{"Masterform.Close" | translate }}</button>
             </div>
         </div>
     </div>

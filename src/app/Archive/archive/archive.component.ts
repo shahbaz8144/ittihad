@@ -51,6 +51,7 @@ export class ArchiveComponent implements OnInit {
   _objII: GACFiledto;
   _obj1: InboxDTO;
   _GacAttachmentFileuplod: any = [];
+  Selectworkflow:string = "";
   objBlocksDTO: BlocksDTO;
   objracksDTO: RacksDTO;
   customObj: ShelvesDTO;
@@ -327,6 +328,7 @@ export class ArchiveComponent implements OnInit {
       this.Enterdocumnetlocation = lang === 'en' ? 'Enter documnet location' : 'أدخل موقع المستند';
       this.EnterText = lang === 'en' ? 'Enter Text' : 'أدخل النص';
       this.ReturnDates = lang === 'en' ? 'Return Date' : 'تاريخ العودة';
+      this.Selectworkflow = lang === 'en' ? 'Select workflow' : 'حدد سير العمل';
       this.currentLang = lang ? lang : 'en';
       this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
       if (lang == 'ar') {

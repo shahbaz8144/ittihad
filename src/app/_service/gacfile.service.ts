@@ -396,6 +396,7 @@ export class GACFileService {
     this._ObjGac.CabinetId = ObjGac.CabinetId;
     this._ObjGac.IsActive = ObjGac.IsActive;
     this._ObjGac.CabinetName = ObjGac.CabinetName;
+    this._ObjGac.CabinetNameArabic = ObjGac.CabinetNameArabic
     this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
   
