@@ -430,6 +430,8 @@
     },
     "Masterform": {
         "CreateTemplate" : "Create Template",
+        "Enterprefix" : "Enter prefix",
+        "EnterautoIncrement" : "Enter auto-Increment",
         "PDSD" : "Physical documnet/sample details",
         "UpdatePosition" : "Update Position",
         "StreamDocumentPreview" : "Stream Document Preview",

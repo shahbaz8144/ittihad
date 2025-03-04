@@ -59,6 +59,19 @@ export class TemplatesComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit(): void {
+    HeaderComponent.languageChanged.subscribe((lang)=>{
+      localStorage.setItem('language',lang);
+      this.translate.use(lang);
+      this.currentLang = lang ? lang : 'en';
+    this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+    this.TempSearch = lang === 'en' ? 'Search...' : 'يبحث...';
+    if(lang == 'ar'){
+      this.renderer.addClass(document.body, 'kt-body-arabic');
+    }else if (lang == 'en'){
+      this.renderer.removeClass(document.body, 'kt-body-arabic');
+    }
+    this.cdr.detectChanges();
+       });
     this.TemplatesList();
   }
     ngAfterViewInit(): void {
