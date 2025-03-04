@@ -1,19 +1,19 @@
 <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid side_view">
     <div class="col-lg-12">
-        <h4 class="mb-3 pro-nm">Map Template To Cabinet</h4>
+        <h4 class="mb-3 pro-nm">{{"Masterform.MapTemplateToCabinet" | translate}}</h4>
         <!-- Document View Component -->
         <div class="card ribbon-box">
             <div class="card-header align-items-center d-flex py-3">
                 <div class="flex-1">
                     <div class="search-bar">
-                        <input type="text" class="form-control" [(ngModel)]="MapTemplateSearch" placeholder="Search" aria-controls="example">
+                        <input type="text" class="form-control" [(ngModel)]="MapTemplateSearch" [placeholder]="SearchTemp" aria-controls="example">
                         <a class="close close-icn"><i *ngIf="MapTemplateSearch"  (click)="ClearSearch()" class="material-icons">close<i></i></i></a>
                     </div>
                 </div>
                 <div class="flex-shrink-0">
                     <button class="btn btn-sm btn-info" style="display: block;" (click)="template_cabin_map_open()">
                         <i class="material-icons fs-4">add</i>
-                        Add
+                        {{"Masterform.Add" | translate }}
                     </button>
                 </div>
             </div>
@@ -24,10 +24,10 @@
                     <table class="table b-table">
                         <thead>
                             <tr>
-                                <th>Cabinet Name</th>
-                                <th>Template Name </th>
-                                <th>Barcode sequence</th>
-                                <th>Action</th>
+                                <th>{{"Masterform.CabinetName" | translate }}</th>
+                                <th>{{"Masterform.TemplateName" | translate }} </th>
+                                <th>{{"Masterform.Barcodesequence" | translate }}</th>
+                                <th>{{"Masterform.Action" | translate }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,8 +60,8 @@
                                             <div class="svgs-1 kt-blank-msg">
                                                 <img src="assets/media/Img/No Racks.png">
                                             </div>
-                                            <h3 class="kt-blank-ttl"> Data Not Available. </h3>
-                                            <p class="kt-blank-msg"> No data found in Map Template To Cabinet list.</p>
+                                            <h3 class="kt-blank-ttl"> {{"Masterform.NoTempleData" | translate }} </h3>
+                                            <p class="kt-blank-msg"> {{"Masterform.NOtempleList" | translate }} </p>
                                         </div>
                                     </div>
                                 </ng-container>
@@ -88,33 +88,33 @@
                     <div class="kt-chat__head">
                         <div>
                             <div class="kt-chat__label">
-                                <h4 class="mb-0 text-dark"> Map cabin to template </h4>
+                                <h4 class="mb-0 text-dark"> {{"Masterform.Mapcabintotemplate" | translate  }} </h4>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="kt-portlet__body template_cabin_map_body">
                         <div class="form-group">
-                            <label class="form-label">Cabinet:</label>
+                            <label class="form-label">{{"Masterform.Cabinet" | translate }}:</label>
                             <span class="text-danger ml-1">*</span>
-                            <ng-select [(ngModel)]="_CabinetArray" placeholder="Select Cabinet" >
+                            <ng-select [(ngModel)]="_CabinetArray" [placeholder]="SelectCabinet" >
                                 <ng-option *ngFor="let item of _CabinetJson"  [value]="item.CabinetId" > {{item.CabinetName}}
                                     <span *ngIf="item.CabinietName_Ar"> / {{ item.CabinietName_Ar }}</span> </ng-option>
                             </ng-select>
                             <div class="kt-error" *ngIf="Cabineterrormessage && !_CabinetArray">
                                 <span class="kt-error-msg">
-                                   Please Select Cabinet</span>
+                                 {{"Masterform.Cabinetdropdownerror" | translate }} </span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Template</label>
+                        <label class="form-label">{{"Masterform.Template" | translate }}</label>
                         <span class="text-danger ml-1">*</span>
-                        <ng-select [(ngModel)]="_TemplateArray" placeholder="Select Template" class="TEST-CLASS">
+                        <ng-select [(ngModel)]="_TemplateArray" [placeholder]="SelectTemplate" class="TEST-CLASS">
                             <ng-option *ngFor="let temp of _TemplateJson" [value]="temp.TemplateId"> {{temp.TemplateName}} </ng-option>
                         </ng-select>
                         <div class="kt-error" *ngIf="Templateerrormessage && !_TemplateArray">
                             <span class="kt-error-msg">
-                                   Please Select Template</span>
+                                   {{"Masterform.Tempdropdownerror" | translate }}</span>
                         </div>
                     </div>
                     <!-- <div class="form-group">
@@ -127,21 +127,21 @@
                         </div>
                         </div> -->
                     <div class="barcode-seq-con">
-                        <div class="barcode-seq-legend">Barcode Sequence</div>
+                        <div class="barcode-seq-legend">{{"Masterform.BarcodeSequence" | translate}}</div>
                         <div class="form-group mb-3">
-                            <label>Prefix:</label>
-                            <input type="text" [(ngModel)]="prefix" class="form-control" placeholder="Enter prefix">
+                            <label>{{"Masterform.Prefix" | translate }}:</label>
+                            <input type="text" [(ngModel)]="prefix" class="form-control" [placeholder]="Enterprefix">
                         </div>
     
                         <div class="form-group mb-2">
-                            <label>Auto-Increment:</label>
-                            <input type="number" [(ngModel)]="autoIncrementValue" class="form-control" placeholder="Enter number.." >
+                            <label>{{"Masterform.AutoIncrement" | translate }}:</label>
+                            <input type="number" [(ngModel)]="autoIncrementValue" class="form-control" [placeholder]="Enternumber" >
                         </div>
                     </div>
                 </div>
                 <div class="kt-portlet__footer">
-                    <button type="submit" class="btn btn-sm btn-info px-3" (click)="AddMapTemplate()">Submit</button>
-                    <button type="submit" class="btn btn-sm btn-secondary px-3" (click)="template_cabin_map_close()">Cancel</button>
+                    <button type="submit" class="btn btn-sm btn-info px-3" (click)="AddMapTemplate()">{{"Masterform.Submit" | translate  }}</button>
+                    <button type="submit" class="btn btn-sm btn-secondary px-3" (click)="template_cabin_map_close()">{{"Masterform.Cancel" |translate }}</button>
                 </div>
             </div>
         </div>

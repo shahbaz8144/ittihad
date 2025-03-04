@@ -81,18 +81,45 @@ export class LeftSectionComponent implements OnInit {
     this.renderer.removeClass(document.body, 'kt-body-arabic');
   }
      })
+     this.currentLang = localStorage.getItem('language') || 'en';
     //this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
-  currentLang:"ar"|"en"="ar";
-  storedLanguage:any
-  ChangelangTo(lang:any){
-    this.currentLang=lang;
-    this.translate.use(lang); 
-    localStorage.setItem('language', lang); 
-    DashboardComponent.ArabicSide.emit(lang);
-    HeaderComponent.languageChanged.emit(lang);
+  // currentLang:"ar"|"en"="ar";
+  currentLang: string;
+  storedLanguage:any;
+
+  ChangelangTo(lang: any) {
+    if (this.currentLang == lang) {
+      // if (lang === 'ar') {
+     
+      // } else if(lang === 'en') {
+      //   this.removeArabicStyles();
+      //   this.currentLang = lang;
+      //   this.translate.use(lang); 
+      //   localStorage.setItem('language', lang); 
+      //   DashboardComponent.ArabicSide.emit(lang);
+      //   HeaderComponent.languageChanged.emit(lang);
+      // }
+    } else {
+      this.currentLang = lang;
+      this.translate.use(lang); 
+      localStorage.setItem('language', lang); 
+      DashboardComponent.ArabicSide.emit(lang);
+      HeaderComponent.languageChanged.emit(lang);
+    }
   }
+  
+  
+
+  // ChangelangTo(lang:any){
+  //   this.currentLang=lang;
+  //   this.translate.use(lang); 
+  //   localStorage.setItem('language', lang); 
+  //   DashboardComponent.ArabicSide.emit(lang);
+  //   HeaderComponent.languageChanged.emit(lang);
+  // }
+  
 //   arabicLeftSection() {
 //   //   const css = `
 //   //   body {
@@ -203,6 +230,9 @@ removeArabicStyles() {
   }
 }
 
+isActive(lang: string): boolean {
+  return this.currentLang === lang; // Check if the language matches
+}
 
 public get currentUserValue(): UserDTO {
   return this.currentUserSubject.value[0];
@@ -300,6 +330,7 @@ public get currentUserValue(): UserDTO {
     //this.authenticationService.logout();
     sessionStorage.clear();
     localStorage.clear();
+    location.reload();
     return this.router.navigate(['login']);
   }
 }

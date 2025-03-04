@@ -1,10 +1,13 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, Inject, Renderer2 } from '@angular/core';
 import { GACFileService } from '../../_service/gacfile.service';
 import { GACFiledto } from '../../_models/gacfiledto';
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
 import * as moment from 'moment-hijri';
 import * as JsBarcode from 'jsbarcode';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HeaderComponent } from 'src/app/shared/header/header.component';
+import { TranslateService } from '@ngx-translate/core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-templates',
@@ -31,8 +34,29 @@ export class TemplatesComponent implements OnInit,AfterViewInit {
     hj_date: "",
     barcode: "1234567890"
   };
-  constructor(private service: GACFileService,private _snackBar: MatSnackBar) {
+  currentLang:"ar"|"en"="ar";
+  constructor(private service: GACFileService,private _snackBar: MatSnackBar,
+      private translate:TranslateService,
+        @Inject(DOCUMENT) private document: Document,
+        private renderer: Renderer2,
+  ) {
     this.obj = new GACFiledto();
+    HeaderComponent.languageChanged.subscribe((lang)=>{
+              localStorage.setItem('language',lang);
+              this.translate.use(lang);
+              this.currentLang = lang ? lang : 'en';
+            this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+            this.TemplateSearch = lang === 'en' ? 'Search...' : 'يبحث...';
+            //  this.SelectCabinet = lang === 'en' ? 'Select Cabinet' : 'حدد الخزانة';
+            //   this.SelectTemplate = lang === 'en' ? 'Select Template' : 'حدد القالب';
+            //    this.Enterprefix = lang === 'en' ? 'Enter prefix' : 'أدخل البادئة';
+            //     this.Enternumber = lang === 'en' ? 'Enter number' : 'أدخل الرقم';
+            if(lang == 'ar'){
+              this.renderer.addClass(document.body, 'kt-body-arabic');
+            }else if (lang == 'en'){
+              this.renderer.removeClass(document.body, 'kt-body-arabic');
+            }
+               });
   }
 
   ngOnInit(): void {

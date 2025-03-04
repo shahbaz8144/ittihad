@@ -51,7 +51,7 @@
                         </a>
                     </li>
                 </ng-container>
-                    <li class="kt-nav__item" (click)="selectCabinet('All Documents')"
+                    <li class="kt-nav__item" 
                     [ngClass]="{'active': selectedCabinet === 'All Documents' || currentRoute === '/Documents'}"
                       routerLinkActive="active">
                         <a class="kt-nav__link" routerLink="Documents">
@@ -69,7 +69,7 @@
                         </a>
                     </li>
                     <!-- [ngClass]="{'active': currentRoute === 'Favorite'}"  -->
-                    <li class="kt-nav__item" (click)="selectCabinet('Favorite')" 
+                    <li class="kt-nav__item" 
                     [ngClass]="{'active': selectedCabinet === 'Favorite' || currentRoute === '/Favorite'}"
                     routerLinkActive="active">
                         <a class="kt-nav__link" routerLink="Favorite">
@@ -147,7 +147,7 @@
                     </a>
                 </li> -->
                 <!-- [ngClass]="{'active': currentRoute === 'Trash'}" -->
-                <li class="kt-nav__item" (click)="selectCabinet('Trash')" 
+                <li class="kt-nav__item" 
                      [ngClass]="{'active': selectedCabinet === 'Trash' || currentRoute === '/Trash'}" 
                      routerLinkActive="active">
                         <a class="kt-nav__link" routerLink="Trash">

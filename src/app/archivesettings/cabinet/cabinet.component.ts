@@ -41,15 +41,17 @@ export class CabinetComponent implements OnInit {
     this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
     this.Cabinet_search = lang === 'en' ? 'Search...' : 'يبحث...';
     this.Entercabinetname = lang === 'en' ? 'Enter cabinet name' : 'أدخل اسم الخزانة'
+
     if(lang == 'ar'){
       this.renderer.addClass(document.body, 'kt-body-arabic');
     }else if (lang == 'en'){
       this.renderer.removeClass(document.body, 'kt-body-arabic');
     }
-
-  
-
-       })
+    const editElement = document.getElementById("editrck");
+  if (editElement) {
+    editElement.textContent = lang === 'ar' ? "إضافة" : "Add";
+  }
+       });
    }
 
   ngOnInit(): void {
@@ -108,13 +110,14 @@ export class CabinetComponent implements OnInit {
 
   cabinet_add() {
     this.isShow = false;
-    // document.getElementById("editrck").innerHTML = "Add Cabinet";
     const element = document.getElementById("editrck");
 
     if (element) {
-      // Set the inner HTML content based on the selected language
-      element.innerHTML = this.translate.instant("Masterform.Add");
+      // Set text based on current language
+      element.textContent = this.currentLang === 'ar' ? "إضافة" : "Add";
     }
+    
+
     document.getElementsByClassName("addrck")[0].classList.add("kt-quick-panel--on");
     document.getElementsByClassName("side_view")[0].classList.add("position-fixed");
     document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.add("d-block");
@@ -129,6 +132,7 @@ export class CabinetComponent implements OnInit {
     this._Obj = new GACFiledto();
     this.CabinetName = "";
     this.Status = false;
+    this.Cabineterrormessage = false;
    document.getElementsByClassName("addrck")[0].classList.remove("kt-quick-panel--on");
    document.getElementsByClassName("side_view")[0].classList.remove("position-fixed");
    document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");

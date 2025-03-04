@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
 import { GACFileService } from '../../_service/gacfile.service';
 import { GACFiledto } from '../../_models/gacfiledto';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
+import { HeaderComponent } from 'src/app/shared/header/header.component';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-maptemplatetocabinet',
@@ -22,8 +25,34 @@ export class MaptemplatetocabinetComponent implements OnInit {
   Barcodesequence:string = "";
   prefix:string = "";
   autoIncrementValue:number;
-  constructor(private service:GACFileService,private _snackBar: MatSnackBar,) {
+  currentLang:"ar"|"en"="ar";
+  SearchTemp:string = "";
+  SelectCabinet:string = "";
+  SelectTemplate:string = "";
+  Enterprefix:string = "";
+  Enternumber:string = "";
+  constructor(private service:GACFileService,private _snackBar: MatSnackBar,
+    private translate:TranslateService,
+    @Inject(DOCUMENT) private document: Document,
+    private renderer: Renderer2,
+  ) {
     this.obj = new GACFiledto();
+       HeaderComponent.languageChanged.subscribe((lang)=>{
+          localStorage.setItem('language',lang);
+          this.translate.use(lang);
+          this.currentLang = lang ? lang : 'en';
+        this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+        this.SearchTemp = lang === 'en' ? 'Search...' : 'يبحث...';
+         this.SelectCabinet = lang === 'en' ? 'Select Cabinet' : 'حدد الخزانة';
+          this.SelectTemplate = lang === 'en' ? 'Select Template' : 'حدد القالب';
+           this.Enterprefix = lang === 'en' ? 'Enter prefix' : 'أدخل البادئة';
+            this.Enternumber = lang === 'en' ? 'Enter number' : 'أدخل الرقم';
+        if(lang == 'ar'){
+          this.renderer.addClass(document.body, 'kt-body-arabic');
+        }else if (lang == 'en'){
+          this.renderer.removeClass(document.body, 'kt-body-arabic');
+        }
+           });
    }
 
   ngOnInit(): void {
@@ -82,12 +111,11 @@ export class MaptemplatetocabinetComponent implements OnInit {
    
   AddMapTemplate() {
     
-    // if (!this._CabinetArray || !this._TemplateArray || !this.Barcodesequence) {
-    //   this.Cabineterrormessage = !this._CabinetArray;
-    //   this.Templateerrormessage = !this._TemplateArray;
-    //   // this.Barcodeerrormessage = !this.autoIncrementValue;
-    //   return; // Stop execution if validation fails
-    // } 
+    if (!this._CabinetArray || !this._TemplateArray || !this.Barcodesequence) {
+      this.Cabineterrormessage = !this._CabinetArray;
+      this.Templateerrormessage = !this._TemplateArray;
+      return; // Stop execution if validation fails
+    } 
   
     // Reset error messages
     this.Cabineterrormessage = false;
@@ -154,7 +182,9 @@ export class MaptemplatetocabinetComponent implements OnInit {
   template_cabin_map_close() {
     this._TemplateArray = null;
     this._CabinetArray = null;
-    this.Barcodesequence = "";
+    // this.Barcodesequence = "";
+    this.prefix = "";
+    this.autoIncrementValue = null;
     this.Cabineterrormessage = false;
     this.Templateerrormessage = false;
     this.Barcodeerrormessage = false;

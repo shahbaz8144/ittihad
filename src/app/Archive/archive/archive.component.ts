@@ -28,7 +28,6 @@ import { ApiurlService } from 'src/app/_service/apiurl.service';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AzureUploadService } from 'src/app/_service/azure-upload.service';
-
 declare var $: any;
 @Component({
   selector: 'app-archive',
@@ -694,18 +693,37 @@ export class ArchiveComponent implements OnInit {
     // console.log('Formatted Return Date:', this.formattedTemporaryDate);
   }
 
-  onDateSelectFE(event: any): void {
-    this.DateRequired = false
-    // Parse the selected date and set specific hours, minutes, and seconds
-    this.FoodExpiryDate = new Date(event.value);
-    this.FoodExpiryDate.setHours(6);
-    this.FoodExpiryDate.setMinutes(45);
-    this.FoodExpiryDate.setSeconds(0);
+  // onDateSelectFE(event: any): void {
+  //   this.DateRequired = false
+  //   // Parse the selected date and set specific hours, minutes, and seconds
+  //   this.FoodExpiryDate = new Date(event.value);
+  //   this.FoodExpiryDate.setHours(6);
+  //   this.FoodExpiryDate.setMinutes(45);
+  //   this.FoodExpiryDate.setSeconds(0);
 
-    // Format the date as "DD-MM-YYYY hh:mm:ss A"
-    this.formattedFoodExpiryDate = moment(this.FoodExpiryDate).format('MM/DD/YYYY hh:mm:ss A');
-    // console.log('Formatted Return Date:', this.formattedFoodExpiryDate);
-  }
+  //   // Format the date as "DD-MM-YYYY hh:mm:ss A"
+  //   this.formattedFoodExpiryDate = moment(this.FoodExpiryDate).format('MM/DD/YYYY hh:mm:ss A');
+  //   console.log('Formatted Return Date:', this.formattedFoodExpiryDate);
+  // }
+
+ 
+
+onDateSelectFE(event: any): void {
+  this.DateRequired = false;
+
+  // Parse the selected date
+  this.FoodExpiryDate = new Date(event.value);
+  this.FoodExpiryDate.setHours(6, 45, 0); // Set hours, minutes, and seconds
+
+  // Force English locale formatting
+  moment.locale('en');  
+
+  // Format the date as "MM/DD/YYYY hh:mm:ss A"
+  this.formattedFoodExpiryDate = moment(this.FoodExpiryDate).format('MM/DD/YYYY hh:mm:ss A');
+
+  console.log('Formatted Return Date:', this.formattedFoodExpiryDate);
+}
+
   _SubCategoryName: any;
   DropdownList() {
     this._obj.OrganizationId = this.currentUserValue.organizationid;
@@ -1198,6 +1216,7 @@ export class ArchiveComponent implements OnInit {
   }
 
   DocumentDataClear() {
+    this.SelectedCategory = []
     this.FirstFileDocumentName = "";
     this.SelectedRequiredapprovalUsers = [];
     this.ToggleRequiredApproval(!this.IsRequiredApproval);
