@@ -663,7 +663,6 @@ export class CustomTemplateComponent implements AfterViewInit, OnInit {
       borderRadius: this.workspaceBorderRadius,
       elements: this.elements // Nested elements inside the workspace
     };
-
     console.log(this.elements, "Check the value");
     console.log("🚀 Parent JSON:", JSON.stringify(workspaceData));
     this.obj.TemplateId = this.templateId;

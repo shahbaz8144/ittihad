@@ -1,5 +1,4 @@
-<!-- Selection Panel -->
-<div class="selection-panel">
+<!-- <div class="selection-panel">
     <h3>Add Elements</h3>
     <label>Template Name:</label>
     <input type="text" placeholder="Enter Template Name" [(ngModel)]="Template_Name">
@@ -39,30 +38,18 @@
 
     <button (click)="updateWorkspaceStyles(workspaceWidth, workspaceHeight, workspaceBgColor, workspaceBorderColor, workspaceBorderWidth, workspaceBorderRadius)">Apply</button>
 </div>
-<!-- Workspace (Resizable) -->
 <div class="workspace" [(ngModel)]="TextValues" #workspaceContainer [style.width.px]="workspaceWidth" [style.height.px]="workspaceHeight" [style.background-color]="workspaceBgColor" [style.border]="workspaceBorderWidth + 'px solid ' + workspaceBorderColor" [style.border-radius.px]="workspaceBorderRadius"
     (contextmenu)="openWorkspaceContextMenu($event)">
 
-    <!-- Draggable & Resizable Elements -->
     <div *ngFor="let element of elements; let i = index" class="resizable-draggable" [style.fontSize.px]="element.fontSize" [style.width.px]="element.width" [style.height.px]="element.height" [style.background-color]="element.backgroundColor || '#ffffff'"
         cdkDrag [cdkDragBoundary]="'.workspace'" [cdkDragFreeDragPosition]="{x: element.x, y: element.y}" (cdkDragEnded)="onDragEnd($event, i)" (contextmenu)="openContextMenu($event, i)">
-
-
-
-        <!-- If user-defined, display as normal -->
         <span *ngIf="element.valueType === 'userDefined'">
             {{ element.staticText }} {{ element.userValue }}
         </span>
-
-        <!-- Uploaded Image -->
         <img *ngIf="element.type === 'image' && element.fileUrl" [src]="element.fileUrl" class="uploaded-file" />
-
-        <!-- Barcode -->
         <div *ngIf="element.type === 'barcode'" class="barcode-container">
             <canvas [id]="'barcode-' + i" [style.width.px]="element.width" [style.height.px]="element.height"></canvas>
         </div>
-
-        <!-- If it's a system-defined element, print its value -->
         <svg *ngIf="element.type === 'systemDefined'" [attr.x]="element.x" [attr.y]="element.y" [attr.width]="element.width" [attr.height]="element.height">
        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
              [style.fill]="element.fontColor" 
@@ -82,7 +69,6 @@
     <li *ngIf="contextMenuTarget === 'element'" (click)="openPropertiesPanel()">Properties</li>
 </ul>
 
-<!-- Properties Panel -->
 <div class="properties-panel" *ngIf="showPropertiesPanel">
     <h3>Element Properties (ID: {{selectedElement?.id}})</h3>
 
@@ -145,4 +131,4 @@
         <button *ngIf="editLabelIndex !== null" (click)="saveEditedLabel()">Save</button>
         <button (click)="showLabelDialog = false">Cancel</button>
     </div>
-</div>
+</div> -->

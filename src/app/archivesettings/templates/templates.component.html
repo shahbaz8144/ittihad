@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="flex-shrink-0">
-                   
+
                     <button class="btn btn-sm btn-info" [routerLink]="['/backend/ArchiveSettings/customtemplate']"> <i class="material-icons fs-4">add</i> {{"Masterform.CreateTemplate" | translate }} </button>
                 </div>
             </div>
@@ -91,7 +91,7 @@
         </div>
     </div>
 </div>
-<div class="kt-aside-menu-overlay" (click)="closeInfo()"></div>
+<div class="kt-aside-menu-overlay"></div>
 <div id="template_preview" class="wc-75 kt-quick-panel kt-quick-panel1 scroll-div">
     <a id="kt_quick_panel_close_btn" class="kt-quick-panel__close" (click)="template_close()">
         <i class="flaticon2-delete"></i>
@@ -131,10 +131,9 @@
                         </div> -->
                         <div class="pdf-container" #pdfContainer>
                             <div class="draggable-box" cdkDrag cdkDragBoundary=".pdf-container" (cdkDragEnded)="onDragEnd($event)">
-                                <div class="workspace" #workspaceContainer [style.width.px]="workspaceWidth" [style.height.px]="workspaceHeight" [style.background-color]="workspaceBgColor" [style.border]="workspaceBorderWidth + 'px solid ' + workspaceBorderColor" [style.border-radius.px]="workspaceBorderRadius"
-                                    (contextmenu)="openWorkspaceContextMenu($event)">
+                                <div class="workspace" #workspaceContainer [style.width.px]="workspaceWidth" [style.height.px]="workspaceHeight" [style.background-color]="workspaceBgColor" [style.border]="workspaceBorderWidth + 'px solid ' + workspaceBorderColor" [style.border-radius.px]="workspaceBorderRadius">
                                     <div *ngFor="let element of workspaceData?.elements; let i = index" class="resizable-draggable" [style.width.px]="element.width" [style.height.px]="element.height" [style.fontSize.px]="element.fontSize" [style.background-color]="element.backgroundColor || '#ffffff'"
-                                        [style.transform]="'translate(' + element.x + 'px, ' + element.y + 'px)'" (contextmenu)="openContextMenu($event, i)">
+                                        [style.transform]="'translate(' + element.x + 'px, ' + element.y + 'px)'">
 
                                         <span *ngIf="element.valueType === 'userDefined'">
                                             {{ element.staticText }}
