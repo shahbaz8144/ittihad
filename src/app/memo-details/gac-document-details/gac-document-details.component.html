@@ -86,10 +86,9 @@
                                         <div> {{prefix}} {{barcode}} </div>
                                     </div>
                                     <div class="bar-code-dynamic">
-                                        <div class="workspace" #workspaceContainer [style.width.px]="workspaceWidth" [style.height.px]="workspaceHeight" [style.background-color]="workspaceBgColor" [style.border]="workspaceBorderWidth + 'px solid ' + workspaceBorderColor" [style.border-radius.px]="workspaceBorderRadius"
-                                            (contextmenu)="openWorkspaceContextMenu($event)">
+                                        <div class="workspace" #workspaceContainer [style.width.px]="workspaceWidth" [style.height.px]="workspaceHeight" [style.background-color]="workspaceBgColor" [style.border]="workspaceBorderWidth + 'px solid ' + workspaceBorderColor" [style.border-radius.px]="workspaceBorderRadius">
                                             <div *ngFor="let element of workspaceData.elements; let i = index" class="resizable-draggable" [style.width.px]="element.width" [style.height.px]="element.height" [style.fontSize.px]="element.fontSize" [style.background-color]="element.backgroundColor || '#ffffff'"
-                                                [style.transform]="'translate(' + element.x + 'px, ' + element.y + 'px)'" (contextmenu)="openContextMenu($event, i)">
+                                                [style.transform]="'translate(' + element.x + 'px, ' + element.y + 'px)'">
                                                 <span *ngIf="element.valueType === 'userDefined'">
                                                              {{ element.staticText }}
                                                         </span>

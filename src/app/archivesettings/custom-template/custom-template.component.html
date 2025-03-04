@@ -5,7 +5,8 @@
             <div class="template-left">
                 <div class="template-left-header">
                     <h5 class="mb-0" id="template_name">{{ templateName || 'Template Name' }}</h5>
-                    <button class="btn btn-save-template" (click)="saveTemplate()">Save Template</button>
+                    <button class="btn btn-save-template" *ngIf="templateId == 0" (click)="saveTemplate()">Save Template</button>
+                    <button class="btn btn-save-template" *ngIf="templateId != 0" (click)="UpdateTemplate()">Update Template</button>
                 </div>
                 <div class="template-inner">
                     <!-- Workspace (Resizable) -->
@@ -234,15 +235,15 @@
                 <div class="modal-body">
                     <div class="form-group mb-3">
                         <label>Static Text</label>
-                        <input *ngIf="editLabelIndex === null" class="form-control"   type="text" [(ngModel)]="newLabelStaticText" />
+                        <input *ngIf="editLabelIndex === null" class="form-control" type="text" [(ngModel)]="newLabelStaticText" />
                         <input *ngIf="editLabelIndex !== null" class="form-control" type="text" [(ngModel)]="editLabelStaticText" />
                     </div>
 
-                    <div class="form-check">
+                    <!-- <div class="form-check">
                         <input *ngIf="editLabelIndex === null" type="checkbox" class="form-check-input" id="dynamicvalue" [(ngModel)]="newLabelHasPlaceholder" />
                         <input *ngIf="editLabelIndex !== null" type="checkbox" class="form-check-input" id="dynamicvalue" [(ngModel)]="editLabelHasPlaceholder" />
                         <label class="form-check-label" for="dynamicvalue">Dynamic Value?</label>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="modal-footer">
                     <button *ngIf="editLabelIndex === null" (click)="addLabel()" class="btn btn-primary" type="button">Add</button>

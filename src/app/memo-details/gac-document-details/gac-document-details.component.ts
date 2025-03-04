@@ -894,7 +894,6 @@ export class GacDocumentDetailsComponent implements OnInit {
         // this.workspaceBorderColor = this.workspaceData.borderColor;
         // this.workspaceBorderWidth = this.workspaceData.borderWidth;
         // this.workspaceBorderRadius = this.workspaceData.borderRadius;
-
         const templateDataString = this.DocumentList[0].TemplateData;
         const templateData = JSON.parse(templateDataString);
         // Now, you can access width and height

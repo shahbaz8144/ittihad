@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'Maptemplatetocabinet', component: MaptemplatetocabinetComponent, canActivate: [AuthGuard]},
   { path: 'template', component: TemplatesComponent, canActivate: [AuthGuard]},
   { path: 'customtemplate', component: CustomTemplateComponent, canActivate: [AuthGuard]},
+  { path: 'edittemplate/:id', component: CustomTemplateComponent, canActivate: [AuthGuard]},
 
   //Dummy Url for testing
   { path: 'barcode', component: BarcodeComponent, canActivate: [AuthGuard]},
