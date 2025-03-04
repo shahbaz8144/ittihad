@@ -24,6 +24,7 @@ export class CabinetComponent implements OnInit {
   currentLang:"ar"|"en"="ar";
   Cabinet_search:string = "";
   Cabineterrormessage:boolean=false;
+  Cabineterrormessagear:boolean = false;
   Entercabinetname:string = "";
   CabinetNameArabic:string = "";
   constructor(public service: GACFileService,
@@ -68,11 +69,13 @@ export class CabinetComponent implements OnInit {
 
 
   AddCabinet(){
-    if(this.CabinetName == ""){
+    if(this.CabinetName == "" || this.CabinetNameArabic == ""){
  this.Cabineterrormessage=true;
+ this.Cabineterrormessagear=true;
     }
     else if(this.CabinetName != ""){
       this.Cabineterrormessage=false;
+      this.Cabineterrormessagear=false;
       if (this._Obj.CabinetId == undefined || this._Obj.CabinetId == 0) {
         this._Obj.FlagId = 1;
       } else if (this._Obj.CabinetId != 0) {
@@ -133,6 +136,7 @@ export class CabinetComponent implements OnInit {
     this.CabinetName = "";
     this.Status = false;
     this.Cabineterrormessage = false;
+    this.Cabineterrormessagear = false;
    document.getElementsByClassName("addrck")[0].classList.remove("kt-quick-panel--on");
    document.getElementsByClassName("side_view")[0].classList.remove("position-fixed");
    document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");

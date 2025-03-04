@@ -3,7 +3,12 @@
         <div class="card  radius-xl mx-2">
             <div class="card-body">
                 <div class="d-flex-center">
-                    <h4 class="mb-0 pro-nm"> {{ "Administration.Banners" | translate }} </h4>
+                    <div class="component-main-header">
+                        <div class="component-main-header-title">
+                            {{ "Administration.Banners" | translate }}
+                        </div>
+                    </div>
+                    <!-- <h4 class="mb-0 pro-nm"> {{ "Administration.Banners" | translate }} </h4> -->
                     <div class="d-flex-cen gap-2">
                         <div class="search-bar"><input type="text" [(ngModel)]="BannerSearch" [placeholder]="BannerSearchs" aria-controls="example" class="form-control"></div>
                         <a *ngIf="BannerSearch" class="close banner-close-icn"><i (click)="ReBindData()" class="material-icons">close<i></i></i></a>

@@ -53,6 +53,7 @@
         "DMSNote1": "© شركة الحلول الإبداعية المحدودة، جميع الحقوق محفوظة"
     },
     "Communication": {
+        "SMail" : "بريد اس",
         "Announcements": "التصريحات ",
         "Close": "إغلاق",
         "NoAnnouncements": "لا إعلانات",
@@ -597,7 +598,7 @@
         "shuffeldocumentsNote": "حدد المستند والرف المفضل من طريقة عرض الشجرة",
         "Shelve": "الرف",
         "Dept": "قسم",
-        "RegisteredUsers": "المستخدمون المسجلون",
+        "RegisteredUsers": "المستخدم (المستخدمون)",
         "UserFilters": "مرشحات المستخدم",
         "NewUserRegistration": "تسجيل مستخدم جديد",
         "EmpID": "معرف الموظف",
@@ -836,6 +837,7 @@
         "Filter": "مرشح"
     },
     "Archive": {
+        "Archive" :"أرشيف",
         "NewDocument": "مستند جديد",
         "Documents": "جميع المستندات",
         "Favorite": "المفضلة",

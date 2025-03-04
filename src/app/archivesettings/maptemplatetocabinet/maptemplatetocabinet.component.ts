@@ -21,6 +21,7 @@ export class MaptemplatetocabinetComponent implements OnInit {
   obj:GACFiledto;
   Cabineterrormessage:boolean=false;
   Templateerrormessage:boolean = false;
+  prefixerrormessage:boolean = false;
   Barcodeerrormessage:boolean = false;
   Barcodesequence:string = "";
   prefix:string = "";
@@ -111,16 +112,17 @@ export class MaptemplatetocabinetComponent implements OnInit {
    
   AddMapTemplate() {
     
-    if (!this._CabinetArray || !this._TemplateArray || !this.Barcodesequence) {
+    if (!this._CabinetArray || !this._TemplateArray || !this.prefix) {
       this.Cabineterrormessage = !this._CabinetArray;
       this.Templateerrormessage = !this._TemplateArray;
+       this.prefixerrormessage = !this.prefix
       return; // Stop execution if validation fails
     } 
   
     // Reset error messages
     this.Cabineterrormessage = false;
     this.Templateerrormessage = false;
-    this.Barcodeerrormessage = false;
+    this.prefixerrormessage = false;
   
     // Prepare request object
     this.obj.TemplateId = this._TemplateArray.toString();

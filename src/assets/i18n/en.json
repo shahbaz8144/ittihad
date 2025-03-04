@@ -52,6 +52,7 @@
         "DMSNote1": "© Creative Solutions Co. Ltd, All Rights Reserved"
     },
     "Communication": {
+        "SMail" : "S Mail",
         "Announcements": "Announcement(s)",
         "DeleteDraft": "Delete Draft",
         "Close": "Close",
@@ -478,7 +479,7 @@
         "CabinetName" : "Cabinet Name",
         "NameEN" : "Cabinet Name English",
         "NameAR" : "Cabinet Name Arabic",
-        "errormsg" : "Please Enter Cabinet Name",
+        "errormsg" : "Enter Cabinet Name",
         "ArchiveSettings" : "Archive Settings",
         "products" : "Products",
         "Quantity" : "Quantity",
@@ -610,7 +611,7 @@
         "shuffeldocumentsNote": "Select Document and preferred Shelve from Tree View",
         "Shelve": "Shelve",
         "Dept": "Dept",
-        "RegisteredUsers": "Registered Users",
+        "RegisteredUsers": "User(s)",
         "UserFilters": "User Filters",
         "NewUserRegistration": "New User Registration",
         "EmpID": "Emp ID",
@@ -840,6 +841,7 @@
         "Filter": "Filter"
     },
     "Archive": {
+        "Archive" : "Archive",
         "NewDocument": "New Document",
         "Documents": "All Documents",
         "Favorite": "Favorite",
