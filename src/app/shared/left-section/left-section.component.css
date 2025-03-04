@@ -286,7 +286,7 @@ hr.left-sec-hr {
 
 ::ng-deep .kt-aside__brand-logo img {
     margin-left: 0px !important;
-    width: 40px !important;
+    width: 36px !important;
 }
 
 .side-open-close {
@@ -366,4 +366,10 @@ svg.toggle-arrow-svg {
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 1rem;
+}
+
+::ng-deep .kt-body-arabic .side-open-close {
+    right: auto!important;
+    left: -40px!important;
+    transform: rotate(270deg)!important;
 }

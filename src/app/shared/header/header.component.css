@@ -97,7 +97,7 @@
 }
 
 .strm {
-    display: none;
+    font-family: AvenirNextCyr-Bold, sans-serif;
 }
 
 .btn-noti {
@@ -328,12 +328,16 @@
         opacity: 1
     }
 }
-
+@media (min-width: 1025px) {
+    ::ng-deep .kt-aside--minimize .strm {
+        display: none;
+    }
+}
 @media (max-width: 1024px) {
-    .kt-aside.kt-aside--on .strm {
+    /* .kt-aside.kt-aside--on .strm {
         display: flex;
         align-items: center;
-    }
+    } */
 
     .kt-aside--on .kt-aside__brand-logo img {
         width: 35px;

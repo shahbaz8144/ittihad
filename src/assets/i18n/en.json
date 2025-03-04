@@ -430,6 +430,7 @@
     },
     "Masterform": {
         "CreateTemplate" : "Create Template",
+        "ITTIHADCLUB" : "ITTIHAD CLUB",
         "Enterprefix" : "Enter prefix",
         "EnterautoIncrement" : "Enter auto-Increment",
         "PDSD" : "Physical documnet/sample details",
