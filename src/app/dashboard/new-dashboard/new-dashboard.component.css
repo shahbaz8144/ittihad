@@ -551,3 +551,33 @@
         max-height: calc(100vh - 480px);
     }
 }
+
+::ng-deep .kt-body-arabic .dashboard-docs-tiles-li-control {
+    text-align: justify;
+}
+
+::ng-deep .kt-body-arabic .dashboard-item-control {
+    text-align: justify;
+}
+
+::ng-deep .kt-body-arabic .dashboard-smail-tiles-li-control {
+    text-align: justify;
+}
+
+::ng-deep .kt-body-arabic .dashboard-item.activity {
+    text-align: right;
+}
+
+::ng-deep .kt-body-arabic .dashboard-activity-li:before {
+    right: 20px!important;
+    left: auto!important;
+}
+.no-dashboard-activity-li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.no-dashboard-activity-li img{
+    width: 190px;
+}

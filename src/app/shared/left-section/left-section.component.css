@@ -286,7 +286,7 @@ hr.left-sec-hr {
 
 ::ng-deep .kt-aside__brand-logo img {
     margin-left: 0px !important;
-    width: 34px !important;
+    width: 40px !important;
 }
 
 .side-open-close {
@@ -358,3 +358,12 @@ svg.toggle-arrow-svg {
     width: 14rem !important;
 }
 
+::ng-deep .component-main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #868686;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+}

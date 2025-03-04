@@ -233,10 +233,10 @@ span.kt-nav__link-text.textoverflow {
     padding: 0.9rem 0 !important;
 }
 }
-.kt-container {
+/* .kt-container {
     padding-top: 10px !important;
     align-items: center;
-}
+} */
 @media (max-width: 1024px){
     ::ng-deep .kt-content {
         align-items: center;
