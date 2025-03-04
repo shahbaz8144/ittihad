@@ -1,13 +1,14 @@
 <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid side_view">
     <div class="col-lg-12">
-        <h4 class="mb-3 pro-nm text-dark"> {{"Masterform.TemplateList" |translate }} </h4>
+        <h4 class="mb-3 pro-nm text-dark"> TemplateList </h4>
+        <!-- {{"Masterform." |translate }}  -->
         <!-- Document View Component -->
         <div class="card ribbon-box">
             <div class="card-header align-items-center d-flex py-3">
                 <div class="flex-1">
                     <div class="search-bar">
-                        <input type="text" [(ngModel)]="TemplateSearch" class="form-control" placeholder="Search" aria-controls="example">
-                        <!-- <a class="close close-icn"><i class="material-icons">close</i></a> -->
+                        <input type="text" [(ngModel)]="TemplateSearch" class="form-control" [placeholder]="TempSearch" aria-controls="example">
+                        <a class="close close-icn" *ngIf="TemplateSearch" ><i class="material-icons">close</i></a>
                     </div>
                 </div>
                 <div class="flex-shrink-0">
@@ -86,7 +87,7 @@
                     <div class="kt-chat__head">
                         <div>
                             <div class="kt-chat__label">
-                                <h4 class="mb-0 text-dark"> Template name :{{SelectedTemplateName}}</h4>
+                                <h4 class="mb-0 text-dark"> {{"Masterform.Templatename" | translate }} :{{SelectedTemplateName}}</h4>
                             </div>
                         </div>
                     </div>
@@ -107,7 +108,7 @@
                                 </div>
                                 <div class="template-card-position-item-value">{{ position.y }} px</div>
                             </div>
-                            <button type="button" class="btn btn-update-position" (click)="UpdatePosition(position.x, position.y)">Update Position</button>
+                            <button type="button" class="btn btn-update-position" (click)="UpdatePosition(position.x, position.y)">{{"Masterform.UpdatePosition" | translate }}</button>
                         </div>
                         <!-- <div class="template-card-adjust">
 
@@ -161,3 +162,4 @@
         </div>
     </div>
 </div>
+

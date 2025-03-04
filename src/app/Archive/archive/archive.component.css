@@ -2838,4 +2838,29 @@ ul.schedule-select-user-list li .slect-close svg {
     align-items: center;
     gap: 4px;
 }
+::ng-deep .kt-body-arabic .add-div .add_btn {
+    right: auto !important;
+    left: 0 !important;
+}
+
+::ng-deep .kt-body-arabic .complete-form .ng-select .ng-clear-wrapper {
+    margin-left: 0px !important;
+    margin-right: 4px !important;
+    left: auto !important;
+    right: 0 !important;
+}
+
+::ng-deep .kt-body-arabic .complete-form .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input {
+    padding-left: 0px !important;
+    padding-right: 24px !important;
+}
+
+::ng-deep .kt-body-arabic .complete-form .ng-select.ng-select-single .ng-select-container .ng-value-container {
+    padding-right: 24px !important;
+}
+
+::ng-deep .kt-body-arabic .complete-form .ng-select .ng-arrow-wrapper {
+    right: auto !important;
+    left: 12px !important;
+}
 

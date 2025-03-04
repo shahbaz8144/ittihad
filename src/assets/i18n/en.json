@@ -416,6 +416,7 @@
     "Masterform": {
         "CreateTemplate" : "Create Template",
         "PDSD" : "Physical documnet/sample details",
+        "UpdatePosition" : "Update Position",
         "StreamDocumentPreview" : "Stream Document Preview",
         "RequiredApprovaluser" : "Required Approval user",
         "Workflowuser" : "Workflow user",

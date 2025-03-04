@@ -414,6 +414,7 @@
     "Masterform": {
         "CreateTemplate" : "إنشاء قالب",
         "PDSD" : "تفاصيل الوثيقة/العينة المادية",
+        "UpdatePosition" : "تحديث الموقف",
         "RequiredApprovaluser" : "مطلوب موافقة المستخدم",
         "StreamDocumentPreview" :"دفق معاينة المستند",
         "Workflowuser" : "مستخدم سير العمل",
