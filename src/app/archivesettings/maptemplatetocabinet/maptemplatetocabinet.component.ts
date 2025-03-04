@@ -23,6 +23,7 @@ export class MaptemplatetocabinetComponent implements OnInit {
   Templateerrormessage:boolean = false;
   prefixerrormessage:boolean = false;
   Barcodeerrormessage:boolean = false;
+  autoIncrementerrormessage:boolean = false;
   Barcodesequence:string = "";
   prefix:string = "";
   autoIncrementValue:number;
@@ -57,6 +58,22 @@ export class MaptemplatetocabinetComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    HeaderComponent.languageChanged.subscribe((lang)=>{
+      localStorage.setItem('language',lang);
+      this.translate.use(lang);
+      this.currentLang = lang ? lang : 'en';
+    this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+    this.SearchTemp = lang === 'en' ? 'Search...' : 'يبحث...';
+     this.SelectCabinet = lang === 'en' ? 'Select Cabinet' : 'حدد الخزانة';
+      this.SelectTemplate = lang === 'en' ? 'Select Template' : 'حدد القالب';
+       this.Enterprefix = lang === 'en' ? 'Enter prefix' : 'أدخل البادئة';
+        this.Enternumber = lang === 'en' ? 'Enter number' : 'أدخل الرقم';
+    if(lang == 'ar'){
+      this.renderer.addClass(document.body, 'kt-body-arabic');
+    }else if (lang == 'en'){
+      this.renderer.removeClass(document.body, 'kt-body-arabic');
+    }
+       });
     this.CabinetAndTemplateList();
     this.GetMappedTemplatesList();
   }
@@ -112,10 +129,11 @@ export class MaptemplatetocabinetComponent implements OnInit {
    
   AddMapTemplate() {
     
-    if (!this._CabinetArray || !this._TemplateArray || !this.prefix) {
+    if (!this._CabinetArray || !this._TemplateArray || !this.prefix || !this.autoIncrementValue) {
       this.Cabineterrormessage = !this._CabinetArray;
       this.Templateerrormessage = !this._TemplateArray;
-       this.prefixerrormessage = !this.prefix
+       this.prefixerrormessage = !this.prefix;
+       this.autoIncrementerrormessage = !this.autoIncrementValue;
       return; // Stop execution if validation fails
     } 
   
@@ -123,6 +141,7 @@ export class MaptemplatetocabinetComponent implements OnInit {
     this.Cabineterrormessage = false;
     this.Templateerrormessage = false;
     this.prefixerrormessage = false;
+    this.autoIncrementerrormessage = false;
   
     // Prepare request object
     this.obj.TemplateId = this._TemplateArray.toString();
@@ -189,6 +208,8 @@ export class MaptemplatetocabinetComponent implements OnInit {
     this.autoIncrementValue = null;
     this.Cabineterrormessage = false;
     this.Templateerrormessage = false;
+    this.prefixerrormessage = false;
+    this.autoIncrementerrormessage = false;
     this.Barcodeerrormessage = false;
     document.getElementById("template_cabin_map").classList.remove("kt-quick-panel--on");
     document.getElementsByClassName("side_view")[0].classList.remove("position-fixed");

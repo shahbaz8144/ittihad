@@ -1320,7 +1320,9 @@
                                                                         <label class="form-label">{{"Masterform.Cabinet" | translate }}</label>
                                                                         <span class="text-danger ml-1">*</span>
                                                                         <ng-select [(ngModel)]="_CabinetArray" [placeholder]="SelectCabinet" appendTo="body" multiple="true" [closeOnSelect]="false" class="TEST-CLASS">
-                                                                            <ng-option *ngFor="let _user of CanbinetList" [value]="_user.CabinetId"> {{_user.CabinetName}}</ng-option>
+                                                                            <ng-option *ngFor="let _user of CanbinetList" [value]="_user.CabinetId"> {{_user.CabinetName}}
+                                                                                <span *ngIf="_user.CabinietName_Ar"> / {{ _user.CabinietName_Ar }}</span>
+                                                                            </ng-option>
                                                                         </ng-select>
                                                                     </div>
                                                                 </div>

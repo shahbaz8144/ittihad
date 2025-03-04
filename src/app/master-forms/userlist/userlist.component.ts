@@ -487,6 +487,7 @@ export class UserlistComponent implements OnInit {
         this.ObjgetReportingUser = this._obj.Data["ReportingUsers"];
         this.GlobalUsers = this._obj.Data["GlobalUsers"];
         this.CanbinetList = this._obj.Data["Cabinet"];
+        console.log(this.CanbinetList , "CanbinetList");
         this.ObjgetcountryList = this._obj.Data["Country"];
         this.lstCities = this._obj.Data["City"];
         this.Fname = this._obj.Data["UserDetails"][0].FirstName;

@@ -56,6 +56,24 @@ export class CabinetComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    HeaderComponent.languageChanged.subscribe((lang)=>{
+      localStorage.setItem('language',lang);
+      this.translate.use(lang);
+      this.currentLang = lang ? lang : 'en';
+    this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+    this.Cabinet_search = lang === 'en' ? 'Search...' : 'يبحث...';
+    this.Entercabinetname = lang === 'en' ? 'Enter cabinet name' : 'أدخل اسم الخزانة'
+
+    if(lang == 'ar'){
+      this.renderer.addClass(document.body, 'kt-body-arabic');
+    }else if (lang == 'en'){
+      this.renderer.removeClass(document.body, 'kt-body-arabic');
+    }
+    const editElement = document.getElementById("editrck");
+  if (editElement) {
+    editElement.textContent = lang === 'ar' ? "إضافة" : "Add";
+  }
+       });
    this.CabinetList(); 
   }
 
@@ -113,12 +131,12 @@ export class CabinetComponent implements OnInit {
 
   cabinet_add() {
     this.isShow = false;
-    const element = document.getElementById("editrck");
+    // const element = document.getElementById("editrck");
 
-    if (element) {
-      // Set text based on current language
-      element.textContent = this.currentLang === 'ar' ? "إضافة" : "Add";
-    }
+    // if (element) {
+    //   // Set text based on current language
+    //   element.textContent = this.currentLang === 'ar' ? "إضافة" : "Add";
+    // }
     
 
     document.getElementsByClassName("addrck")[0].classList.add("kt-quick-panel--on");

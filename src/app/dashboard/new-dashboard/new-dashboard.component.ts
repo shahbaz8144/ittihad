@@ -46,6 +46,28 @@ export class NewDashboardComponent implements OnInit {
        }
 
   ngOnInit(): void {
+    const today = new Date();
+        const formattedDate = today.toISOString().split('T')[0];
+        this.today = formattedDate;
+        HeaderComponent.languageChanged.subscribe((lang)=>{
+          localStorage.setItem('language',lang);
+          this.translate.use(lang);
+          this.currentLang = lang ? lang : 'en';
+        this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+        if(lang == 'ar'){
+          this.renderer.addClass(document.body, 'kt-body-arabic');
+          this.today = this.getIslamicDate(this.today);
+        }else if (lang == 'en'){
+          const today = new Date();
+          const formattedDate = today.toISOString().split('T')[0];
+          this.today = formattedDate;
+          this.renderer.removeClass(document.body, 'kt-body-arabic');
+        }
+        const editElement = document.getElementById("editrck");
+      if (editElement) {
+        editElement.textContent = lang === 'ar' ? "إضافة" : "Add";
+      }
+           });
   }
 
   getIslamicDate(gregorianDate: string): string {
