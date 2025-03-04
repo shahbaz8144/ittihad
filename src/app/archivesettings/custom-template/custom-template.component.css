@@ -402,7 +402,7 @@ canvas {
     position: absolute;
     background: transparent !important;
     /* ✅ Make background fully transparent */
-    border: none !important;
+    /* border: none !important; */
     /* ✅ Remove unwanted borders */
     text-align: center;
     display: flex;
@@ -411,6 +411,10 @@ canvas {
     box-sizing: border-box;
     min-width: fit-content;
     min-height: fit-content;
+}
+
+.resizable-draggable svg {
+    border: 1px solid #e2e5ec;
 }
 
 

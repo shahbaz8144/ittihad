@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, AfterViewInit, HostListener } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, HostListener, OnInit } from '@angular/core';
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
 import { ResizeEvent } from 'angular-resizable-element';
 import { HttpClient } from '@angular/common/http';
@@ -6,6 +6,8 @@ import * as JsBarcode from 'jsbarcode';
 import { GACFileService } from 'src/app/_service/gacfile.service';
 import { GACFiledto } from 'src/app/_models/gacfiledto';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
+
 interface ElementData {
   id?: number;
   type: string;
@@ -30,13 +32,14 @@ interface ElementData {
   valueType?: 'userDefined' | 'systemDefined';
 }
 
+
 @Component({
   selector: 'app-custom-template',
   templateUrl: './custom-template.component.html',
   styleUrls: ['./custom-template.component.css']
 })
-export class CustomTemplateComponent implements AfterViewInit {
-
+export class CustomTemplateComponent implements AfterViewInit, OnInit {
+  templateId: number = 0;
   @ViewChild('workspaceContainer') workspaceRef!: ElementRef;
   elements: ElementData[] = [];
   elementIdCounter = 1;
@@ -75,20 +78,55 @@ export class CustomTemplateComponent implements AfterViewInit {
   };
   systemDefinedValues = ['{{code}}', '{{type}}', '{{date}}', '{{hj_date}}'];
   fontSize: number = 10.6;
-  obj:GACFiledto;
-  TextValues:string;
-  constructor(private http: HttpClient,private service:GACFileService,
-     private _snackBar: MatSnackBar,
+  obj: GACFiledto;
+  TextValues: string;
+  constructor(private http: HttpClient, private service: GACFileService,
+    private _snackBar: MatSnackBar,
+    private route: ActivatedRoute
   ) {
     this.obj = new GACFiledto();
   }
 
- 
+
   ngAfterViewInit() {
     if (this.workspaceRef) {
       this.workspaceWidth = this.workspaceRef.nativeElement.clientWidth;
       this.workspaceHeight = this.workspaceRef.nativeElement.clientHeight;
     }
+  }
+
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.templateId = Number(params.get('id'));
+      if (this.templateId) {
+        this.loadTemplateData(this.templateId);
+      }
+    });
+  }
+
+  loadTemplateData(templateId: number) {
+    this.obj.TemplateId = templateId;
+
+    this.service.GetTemplateByIdAPI(this.obj).subscribe(data => {
+      // Extract the TemplateData string
+
+      const templateDataString = data['Data'].TemplateDetailsJson[0].TemplateData;
+      const templateData = JSON.parse(templateDataString);
+      // Now, you can access width and height
+
+      this.workspaceWidth = templateData.width;
+      this.workspaceHeight = templateData.height;
+      this.workspaceBgColor = templateData.backgroundColor;
+      this.workspaceBorderColor = templateData.borderColor;
+      this.workspaceBorderWidth = templateData.borderWidth;
+      this.workspaceBorderRadius = templateData.borderRadius;
+
+      this.elements = templateData.elements;
+      this.templateName = data['Data'].TemplateDetailsJson[0].TemplateName;
+      //this.renderAllBarcodes();
+      this.generateBarcode('1234567890', this.elements.length - 1); // Dummy Barcode
+    });
+
   }
 
   // Open Properties Panel
@@ -597,25 +635,51 @@ export class CustomTemplateComponent implements AfterViewInit {
       elements: this.elements // Nested elements inside the workspace
     };
 
-    console.log(this.elements , "Check the value");
+    console.log(this.elements, "Check the value");
     console.log("🚀 Parent JSON:", JSON.stringify(workspaceData));
     this.obj.TemplateName = this.templateName;
-    this.obj.TemplateData  = JSON.stringify(workspaceData);
-    this.service.AddDynamicTemplateAPI(this.obj).subscribe(data =>{
-     console.log(data ,"Save Temple Data");
-     this._snackBar.open(('Added Successfully'), 'End now', {
-      duration: 5000,
-      verticalPosition: 'bottom',
-      horizontalPosition: 'right',
-    });
-     this.clearAllElements();
+    this.obj.TemplateData = JSON.stringify(workspaceData);
+    this.service.AddDynamicTemplateAPI(this.obj).subscribe(data => {
+      console.log(data, "Save Temple Data");
+      this._snackBar.open(('Added Successfully'), 'End now', {
+        duration: 5000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'right',
+      });
+      this.clearAllElements();
     })
     // this.http.post(this.apiUrl, this.elements).subscribe(response => {
     //   console.log('Elements saved!', response);
     // });
   }
 
- 
-  
+  UpdateTemplate() {
+    const workspaceData = {
+      width: this.workspaceWidth,
+      height: this.workspaceHeight,
+      backgroundColor: this.workspaceBgColor,
+      borderColor: this.workspaceBorderColor,
+      borderWidth: this.workspaceBorderWidth,
+      borderRadius: this.workspaceBorderRadius,
+      elements: this.elements // Nested elements inside the workspace
+    };
 
+    console.log(this.elements, "Check the value");
+    console.log("🚀 Parent JSON:", JSON.stringify(workspaceData));
+    this.obj.TemplateId = this.templateId;
+    this.obj.TemplateName = this.templateName;
+    this.obj.TemplateData = JSON.stringify(workspaceData);
+    this.service.UpdateDynamicTemplateAPI(this.obj).subscribe(data => {
+      console.log(data, "Save Temple Data");
+      this._snackBar.open(('Added Successfully'), 'End now', {
+        duration: 5000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'right',
+      });
+      this.clearAllElements();
+    })
+    // this.http.post(this.apiUrl, this.elements).subscribe(response => {
+    //   console.log('Elements saved!', response);
+    // });
+  }
 }
