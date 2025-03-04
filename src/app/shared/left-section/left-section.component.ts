@@ -88,27 +88,37 @@ export class LeftSectionComponent implements OnInit {
   // currentLang:"ar"|"en"="ar";
   currentLang: string;
   storedLanguage:any;
-
   ChangelangTo(lang: any) {
-    if (this.currentLang == lang) {
-      // if (lang === 'ar') {
-     
-      // } else if(lang === 'en') {
-      //   this.removeArabicStyles();
-      //   this.currentLang = lang;
-      //   this.translate.use(lang); 
-      //   localStorage.setItem('language', lang); 
-      //   DashboardComponent.ArabicSide.emit(lang);
-      //   HeaderComponent.languageChanged.emit(lang);
-      // }
-    } else {
-      this.currentLang = lang;
-      this.translate.use(lang); 
-      localStorage.setItem('language', lang); 
-      DashboardComponent.ArabicSide.emit(lang);
-      HeaderComponent.languageChanged.emit(lang);
+    if (this.currentLang !== lang) {  
+        this.currentLang = lang;
+        this.translate.use(lang); 
+        localStorage.setItem('language', lang); 
+        DashboardComponent.ArabicSide.emit(lang);
+        HeaderComponent.languageChanged.emit(lang);
     }
-  }
+}
+
+
+  // ChangelangTo(lang: any) {
+  //   if (this.currentLang == lang) {
+  //     // if (lang === 'ar') {
+     
+  //     // } else if(lang === 'en') {
+  //     //   this.removeArabicStyles();
+  //     //   this.currentLang = lang;
+  //     //   this.translate.use(lang); 
+  //     //   localStorage.setItem('language', lang); 
+  //     //   DashboardComponent.ArabicSide.emit(lang);
+  //     //   HeaderComponent.languageChanged.emit(lang);
+  //     // }
+  //   } else {
+  //     this.currentLang = lang;
+  //     this.translate.use(lang); 
+  //     localStorage.setItem('language', lang); 
+  //     DashboardComponent.ArabicSide.emit(lang);
+  //     HeaderComponent.languageChanged.emit(lang);
+  //   }
+  // }
   
   
 
