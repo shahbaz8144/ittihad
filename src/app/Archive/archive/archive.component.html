@@ -1,5 +1,10 @@
 <div *ngIf="_Previewshownandhide == false" class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
-    <h4 class="mb-3 pro-nm text-dark"> {{"Masterform.Archive" | translate }} </h4>
+    <!-- <h4 class="mb-3 pro-nm text-dark"> {{"Masterform.Archive" | translate }} </h4> -->
+    <div class="component-main-header">
+        <div class="component-main-header-title">
+            {{ "Masterform.UploadArchive" | translate }}
+        </div>
+    </div>
     <div class="kt-grid__item kt-grid__item--fluid kt-portlet kt-inbox__list kt-inbox__list--shown" style="min-height: calc(100vh - 80px);">
         <div class="kt-portlet__head border-0">
             <div class="d-flex align-items-center justify-content-between w-100">
