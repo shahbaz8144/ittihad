@@ -76,9 +76,11 @@
 .kt-aside--minimize .kt-aside-menu .kt-menu__nav>.kt-menu__item>.kt-menu__link>.kt-menu__link-icon {
     color: #b8bac3;
 }
-
+::ng-deep .kt-aside--minimize .kt-menu__nav__scroll{
+    max-height: calc(100vh - 160px)!important;
+}
 .kt-menu__nav__scroll {
-    max-height: calc(100vh - 160px);
+    max-height: calc(100vh - 180px);
     overflow: auto;
     overflow-x: hidden;
 }
@@ -253,10 +255,11 @@ span.lang-bg svg {
 }
 
 .left-sec-img {
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
     object-fit: cover;
     border-radius: 6px;
+    margin: 0px 4px;
 }
 
 hr.left-sec-hr {

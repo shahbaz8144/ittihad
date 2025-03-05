@@ -37,6 +37,7 @@ export class UserPolicyComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // alert(1);
     const lang:any = localStorage.getItem('language');
     this.translate.use(lang);
   this.currentLang = lang ? lang : 'en';
