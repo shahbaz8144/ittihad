@@ -502,7 +502,6 @@ export class GacDocumentDetailsComponent implements OnInit {
 
 
   incrementVersion() {
-    alert(1);
     if (!this.DocumentList || !Array.isArray(this.DocumentList)) {
       // console.error('DocumentList is not initialized or not an array');
       return;
@@ -525,16 +524,19 @@ export class GacDocumentDetailsComponent implements OnInit {
           // Optional: Uncomment alerts for debugging
           // alert(this.lastVersionName);
           // alert(newVersionString);
-
           this.router.navigate(['/backend/NewArchive'], {
             queryParams: {
               docname: this._DocumentName,
               docid: this._documentId,
               Versionid: this._Versiondropdownvalue,
               ReferenceId: this._referenceId,
-              ShareId: this.ShareId
+              ShareId: this.ShareId,
+              CabinetName: this.selectedCabinet,
+              CabinetId:this.selectedCabinetId
+            
             }
           });
+          
         } else {
           // console.warn('Last version or VersionName is missing');
         }
@@ -867,6 +869,8 @@ export class GacDocumentDetailsComponent implements OnInit {
   selected_SortIds: number[] = [];
   barcode: string;
   prefix: string;
+  selectedCabinet:string;
+  selectedCabinetId:number
   ArchiveDetailsInfo(documentid, ShareId) {
     this._obj.DocumentId = parseInt(documentid);
     this._obj.ShareId = parseInt(ShareId);
@@ -909,6 +913,8 @@ export class GacDocumentDetailsComponent implements OnInit {
         this.ReferenceList = this.DocumentList[0]['ReferenceJson'];
         console.log(this.ReferenceList, "ReferenceList");
         this._DocumentName = this.DocumentList[0].DocumentName;
+        this.selectedCabinet = this.DocumentList[0].CabinetName;
+        this.selectedCabinetId = this.DocumentList[0].CabinetId;
         this._LabelCount = this.DocumentList[0].LabelCount;
         this.SelectLabelArray = this.DocumentList[0].LabelIds.split(',');
         console.log(this.SelectLabelArray, "SelectLabelArray");
@@ -1122,7 +1128,7 @@ export class GacDocumentDetailsComponent implements OnInit {
   }
 
   DownloadFile() {
-    debugger
+    
     if (this.isMainDocumentActive) {
       this.download(this.DocumentList[0].Url, this._DocumentName);
     }

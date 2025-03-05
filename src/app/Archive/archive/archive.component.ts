@@ -343,13 +343,35 @@ export class ArchiveComponent implements OnInit {
 
   selectedCabinet:string = "";
   selectedCabinetId:number;
+  gacdetetailsCabinetname:string;
+  gacdetetailsCabinetId:number;
   async ngOnInit(): Promise<void> {
-    this.route.queryParams.subscribe(params => {
-      this.selectedCabinet = params['cabinet'] || 'DefaultCabinet';
+    this.route.queryParams.subscribe((params: any) => {
+      // Extract parameters safely
+      this.selectedCabinet = params.CabinetName || params['cabinet'] || 'DefaultCabinet';
+      this.selectedCabinetId = params.CabinetId || params['selectedCabinetId'] || null;
+    
+      // Debugging: Log values
       console.log('Received Cabinet:', this.selectedCabinet);
-      this.selectedCabinetId = params['selectedCabinetId'] || null;
       console.log('Received Cabinet ID:', this.selectedCabinetId);
+    
     });
+    
+    // this.route.queryParams.subscribe(params => {
+    //   this.selectedCabinet = params['cabinet'] || 'DefaultCabinet';
+    //   alert(this.selectedCabinet);
+    //   console.log('Received Cabinet:', this.selectedCabinet);
+    //   this.selectedCabinetId = params['selectedCabinetId'] || null;
+    //   console.log('Received Cabinet ID:', this.selectedCabinetId);
+    // });
+
+    //   this.route.queryParams.subscribe((params: any) => {
+    //   this.selectedCabinet = params.CabinetName;
+    //   alert(this.selectedCabinet);
+    // })
+    // this.route.queryParams.subscribe((params: any) => {
+    //   this.selectedCabinetId = params.CabinetId;
+    // })
     const lang: any = localStorage.getItem('language')
     this.translate.use(lang);
     this.SelectCompany = lang === 'en' ? 'Company' : 'اختر الشركة';
@@ -408,6 +430,13 @@ export class ArchiveComponent implements OnInit {
       this.ShareId = params.ShareId;
     })
 
+    this.route.queryParams.subscribe((params: any) => {
+      this.gacdetetailsCabinetname = params.CabinetName;
+    })
+    this.route.queryParams.subscribe((params: any) => {
+      this.gacdetetailsCabinetId = params.CabinetId;
+    })
+ console.log(this.gacdetetailsCabinetname, "Cabinetname123");
   }
 
 
