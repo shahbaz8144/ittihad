@@ -106,5 +106,4 @@ export class GACFiledto {
   PositionX:string;
   PositionY:string;
   CabinetNameArabic:string;
-  
 }

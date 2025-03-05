@@ -244,6 +244,7 @@ export class DocumentsComponent implements OnInit {
     this._obj.PageNumber = this.activePage == 0 ? 1 : this.activePage;
     this._obj.DocumentStatus = DocumentStatus;
     this._obj.IsAll = IsAll;
+    this._obj.CabinetId = 0;
     this.service.GACDocumentsSearch(this._obj)
       .subscribe(data => {
         // this.getContentType("https://yrglobaldocuments.blob.core.windows.net/documents/Archive/2/1737994985611Ramesh Neelapala Medical Certificate 4-12-2024.pdf");
