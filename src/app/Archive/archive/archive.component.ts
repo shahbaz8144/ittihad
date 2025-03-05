@@ -441,7 +441,6 @@ export class ArchiveComponent implements OnInit {
 
 
   Back() {
-     
     if (this._VersionId === undefined) {
       this.router.navigate(['/backend/Archive/Documents',this.selectedCabinetId]);
     
