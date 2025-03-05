@@ -17,7 +17,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
     , children: [
       {
-        path: 'Documents',
+        path: 'Documents/:cabinetid',
         component: DocumentsComponent,
         canActivate: [AuthGuard]
       },

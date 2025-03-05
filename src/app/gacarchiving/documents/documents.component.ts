@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 import { HeaderComponent } from 'src/app/shared/header/header.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-documents',
   templateUrl: './documents.component.html',
@@ -96,6 +97,7 @@ export class DocumentsComponent implements OnInit {
   txt22: any;
   tooltipContentFilters: any;
   tooltipContent: any;
+  cabinetId : number = 0;
   public get currentUserValue(): UserDTO {
     return this.currentUserSubject.value[0];
   }
@@ -106,7 +108,8 @@ export class DocumentsComponent implements OnInit {
     private cd: ChangeDetectorRef,
     private translate: TranslateService,
     private renderer: Renderer2,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private route: ActivatedRoute
   ) {
     this.initializeLanguageSettings();
     this._obj = new GACFiledto();
@@ -120,7 +123,10 @@ export class DocumentsComponent implements OnInit {
     this.subscribeToLanguageChanges();
     this.activePage = 1;
     this.GetLables();
-    this.AllDocuments();
+    this.route.paramMap.subscribe(params => {
+      this.cabinetId = Number(params.get('cabinetid')); // Convert to number if needed
+      this.AllDocuments();
+    });
     this.LoginUserId = this.currentUserValue.createdby;
     this.CategoryList = this.CategoryList || [];
     this.SourceList = this.SourceList || [];
@@ -244,7 +250,7 @@ export class DocumentsComponent implements OnInit {
     this._obj.PageNumber = this.activePage == 0 ? 1 : this.activePage;
     this._obj.DocumentStatus = DocumentStatus;
     this._obj.IsAll = IsAll;
-    this._obj.CabinetId = 0;
+    this._obj.CabinetId = this.cabinetId;
     this.service.GACDocumentsSearch(this._obj)
       .subscribe(data => {
         // this.getContentType("https://yrglobaldocuments.blob.core.windows.net/documents/Archive/2/1737994985611Ramesh Neelapala Medical Certificate 4-12-2024.pdf");
