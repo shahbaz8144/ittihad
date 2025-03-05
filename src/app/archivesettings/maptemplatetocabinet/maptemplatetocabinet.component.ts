@@ -58,7 +58,8 @@ export class MaptemplatetocabinetComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    HeaderComponent.languageChanged.subscribe((lang)=>{
+    // HeaderComponent.languageChanged.subscribe((lang)=>{
+      const lang: any = localStorage.getItem('language');
       localStorage.setItem('language',lang);
       this.translate.use(lang);
       this.currentLang = lang ? lang : 'en';
@@ -73,7 +74,7 @@ export class MaptemplatetocabinetComponent implements OnInit {
     }else if (lang == 'en'){
       this.renderer.removeClass(document.body, 'kt-body-arabic');
     }
-       });
+      //  });
     this.CabinetAndTemplateList();
     this.GetMappedTemplatesList();
   }
