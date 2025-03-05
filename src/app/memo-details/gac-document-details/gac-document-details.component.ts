@@ -394,7 +394,7 @@ export class GacDocumentDetailsComponent implements OnInit {
         //   element['barcodeNumber'] = element['systemValue']['startValue'];
         //   element['systemValue']['startValue'] = element['systemValue']['startValue'] + 1;
         // }
-        JsBarcode(barcodeCanvas, this.barcode, {
+        JsBarcode(barcodeCanvas, this.prefix + '-' + this.barcode, {
           format: 'CODE128',
           displayValue: false,
           lineColor: "#000",
@@ -878,7 +878,7 @@ export class GacDocumentDetailsComponent implements OnInit {
         this.DocumentList = this._obj.Data["ArchiveJson"];
         this.barcode = this.DocumentList[0].Barcode;
         this.prefix = this.DocumentList[0].Prefix;
-        
+
         this.data = {
           code: this.DocumentList[0].Prefix + "-" + this.DocumentList[0].Barcode,
           type: this.DocumentList[0].CabinetName,
@@ -1122,7 +1122,7 @@ export class GacDocumentDetailsComponent implements OnInit {
   }
 
   DownloadFile() {
-debugger
+    debugger
     if (this.isMainDocumentActive) {
       this.download(this.DocumentList[0].Url, this._DocumentName);
     }
@@ -1134,8 +1134,8 @@ debugger
   }
 
   download(url, filename) {
-    console.log(url,"url path");
-    console.log(filename,"url path");
+    console.log(url, "url path");
+    console.log(filename, "url path");
     // this.ImgUrl = "https://yrglobaldocuments.blob.core.windows.net/documents/" + url;
     this._obj.MailId = 0;
     this._obj.MailDocId = parseInt(this._documentId);
