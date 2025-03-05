@@ -52,7 +52,7 @@
                     </a>
                 </ng-container>
                 <ng-container *ngIf="menu.MenuCategoryId == 3">
-                    <a *ngIf="menu.HasChild==false" [routerLink]="[menu.SPARouteUrl, 0]" class="kt-menu__link kt-menu__toggle">
+                    <a *ngIf="menu.HasChild==false" [routerLink]="[menu.SPARouteUrl, cabinetid]" class="kt-menu__link kt-menu__toggle">
                         <i class="material-icons kt-menu__link-icon">{{menu.Icon}}</i>
                         <span class="kt-menu__link-text">{{menu.MenuCategory}}</span>
                     </a>

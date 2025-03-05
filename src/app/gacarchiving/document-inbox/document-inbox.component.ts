@@ -65,7 +65,7 @@ export class DocumentInboxComponent implements OnInit {
     });
   }
 
-   ngOnInit():void {
+  ngOnInit(): void {
     const lang: any = localStorage.getItem('language');
     this.translate.use(lang);
     if (lang == 'ar') {
@@ -73,11 +73,9 @@ export class DocumentInboxComponent implements OnInit {
     } else if (lang == 'en') {
       this.renderer.removeClass(document.body, 'kt-body-arabic');
     }
-   this.CabinetList();
+    this.CabinetList();
 
     this.GetLables();
-
-   
   }
 
 
@@ -115,14 +113,14 @@ export class DocumentInboxComponent implements OnInit {
       });
   }
 
-    CabinetList() {
-     this.service.AssignedCabinetAPI().subscribe(data => {
+  CabinetList() {
+    this.service.AssignedCabinetAPI().subscribe(data => {
       this._CabinetList = data['Data'].CabinetJson;
       console.log(data['Data'], "CabinetList");
       this.AllDocumentsCount = data['Data'].DocumentsCount;
-      this.route.paramMap.subscribe(params => {
+      this.route.firstChild?.paramMap.subscribe(params => {
         this.cabinetId = Number(params.get('cabinetid')); // Convert to number if needed
-        debugger
+         
         if (this.cabinetId == 0) {
           this.selectedCabinet = "All Documents";
         }
@@ -133,7 +131,6 @@ export class DocumentInboxComponent implements OnInit {
             }
           });
         }
-        alert(this.selectedCabinet);
       });
       this.cd.detectChanges();
     })

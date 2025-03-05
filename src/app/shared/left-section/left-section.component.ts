@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild,EventEmitter,Renderer2, Inject} from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Renderer2, Inject } from '@angular/core';
 import { UserDTO } from 'src/app/_models/user-dto';
 import { Router } from '@angular/router';
 //import { AuthenticationService } from 'src/app/_service/authentication.service';
@@ -35,74 +35,75 @@ export class LeftSectionComponent implements OnInit {
   PolicyHeader: string;
   PolicyContent: string;
   _userdto: UserDTO;
-  EmailId:string="";
+  EmailId: string = "";
+  cabinetid: number = 0;
   private currentUserSubject: BehaviorSubject<UserDTO>;
   public currentUser: Observable<UserDTO>;
-  public static ArabicSide:EventEmitter<any>=new EventEmitter();
-  
+  public static ArabicSide: EventEmitter<any> = new EventEmitter();
+
   arabicCssPath: string | undefined;
   constructor(
     private renderer: Renderer2,
     private router: Router
     //, private authenticationService: AuthenticationService
     , private menuService: MenuService
-    , private translate : TranslateService
-    ,@Inject(DOCUMENT) private document: Document,
+    , private translate: TranslateService
+    , @Inject(DOCUMENT) private document: Document,
     //, private dbService: NgxIndexedDBService
-    
+
   ) {
     this.currentUserSubject = new BehaviorSubject<UserDTO>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
-    const lang:any = localStorage.getItem('language');
-    this.translate.use(lang); 
-    DashboardComponent.ArabicSide.subscribe((lang:any)=>{
+    const lang: any = localStorage.getItem('language');
+    this.translate.use(lang);
+    DashboardComponent.ArabicSide.subscribe((lang: any) => {
       localStorage.setItem('language', lang);
-      this.translate.use(lang); 
+      this.translate.use(lang);
       if (lang === 'ar') {
         this.arabicLeftSection();
       } else {
         this.removeArabicStyles();
       }
-  });
-  
-  HeaderComponent.languageChanged.subscribe((lang)=>{
-    localStorage.setItem('language',lang);
-    this.translate.use(lang);
-    this.currentLang = lang ? lang : 'en';
-  this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
-  if (!lang) {
-    // Default language if not set in localStorage
-    lang = 'en';
-    localStorage.setItem('language', lang);
-  }
-  if(lang == 'ar'){
-    this.renderer.addClass(document.body, 'kt-body-arabic');
-  }else if (lang == 'en'){
-    this.renderer.removeClass(document.body, 'kt-body-arabic');
-  }
-     })
-     this.currentLang = localStorage.getItem('language') || 'en';
+    });
+
+    HeaderComponent.languageChanged.subscribe((lang) => {
+      localStorage.setItem('language', lang);
+      this.translate.use(lang);
+      this.currentLang = lang ? lang : 'en';
+      this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+      if (!lang) {
+        // Default language if not set in localStorage
+        lang = 'en';
+        localStorage.setItem('language', lang);
+      }
+      if (lang == 'ar') {
+        this.renderer.addClass(document.body, 'kt-body-arabic');
+      } else if (lang == 'en') {
+        this.renderer.removeClass(document.body, 'kt-body-arabic');
+      }
+    })
+    this.currentLang = localStorage.getItem('language') || 'en';
     //this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
   // currentLang:"ar"|"en"="ar";
   currentLang: string;
-  storedLanguage:any;
+  storedLanguage: any;
   ChangelangTo(lang: any) {
-    if (this.currentLang !== lang) {  
-        this.currentLang = lang;
-        this.translate.use(lang); 
-        localStorage.setItem('language', lang); 
-        DashboardComponent.ArabicSide.emit(lang);
-        HeaderComponent.languageChanged.emit(lang);
+    if (this.currentLang !== lang) {
+      this.currentLang = lang;
+      this.translate.use(lang);
+      localStorage.setItem('language', lang);
+      DashboardComponent.ArabicSide.emit(lang);
+      HeaderComponent.languageChanged.emit(lang);
     }
-}
+  }
 
 
   // ChangelangTo(lang: any) {
   //   if (this.currentLang == lang) {
   //     // if (lang === 'ar') {
-     
+
   //     // } else if(lang === 'en') {
   //     //   this.removeArabicStyles();
   //     //   this.currentLang = lang;
@@ -119,8 +120,8 @@ export class LeftSectionComponent implements OnInit {
   //     HeaderComponent.languageChanged.emit(lang);
   //   }
   // }
-  
-  
+
+
 
   // ChangelangTo(lang:any){
   //   this.currentLang=lang;
@@ -129,124 +130,124 @@ export class LeftSectionComponent implements OnInit {
   //   DashboardComponent.ArabicSide.emit(lang);
   //   HeaderComponent.languageChanged.emit(lang);
   // }
-  
-//   arabicLeftSection() {
-//   //   const css = `
-//   //   body {
-//   //     margin: 0;
-//   //     font-family: var(--font-family-sans-serif)!important;
-//   //     line-height: 1.5 !important;
-//   //     direction: rtl!important;
-//   //   }
 
-//   //   .kt-aside--minimize #kt_aside_brand {
-//   //     display: flex;
-//   //     height: auto;
-//   //     padding-top: 10px;
-//   //     align-items: center;
-//   //     justify-content: center;
-//   //   }
+  //   arabicLeftSection() {
+  //   //   const css = `
+  //   //   body {
+  //   //     margin: 0;
+  //   //     font-family: var(--font-family-sans-serif)!important;
+  //   //     line-height: 1.5 !important;
+  //   //     direction: rtl!important;
+  //   //   }
 
-//   //   .kt-aside__brand-logo img {
-//   //     vertical-align: middle;
-//   //     border-style: none;
-//   //     margin-left: 0!important;
-//   //   }
+  //   //   .kt-aside--minimize #kt_aside_brand {
+  //   //     display: flex;
+  //   //     height: auto;
+  //   //     padding-top: 10px;
+  //   //     align-items: center;
+  //   //     justify-content: center;
+  //   //   }
 
-//   //   .kt-header--fixed.kt-aside--minimize .kt-header {
-//   //     left: 0!important;
-//   //     transition: all 0.3s ease;
-//   //     right: 56px!important;
-//   //   }
+  //   //   .kt-aside__brand-logo img {
+  //   //     vertical-align: middle;
+  //   //     border-style: none;
+  //   //     margin-left: 0!important;
+  //   //   }
 
-//   //   .header-title {
-//   //     text-align: right!important;
-//   //   }
+  //   //   .kt-header--fixed.kt-aside--minimize .kt-header {
+  //   //     left: 0!important;
+  //   //     transition: all 0.3s ease;
+  //   //     right: 56px!important;
+  //   //   }
 
-//   //   .wc h2 {
-//   //     text-align: right!important;
-//   //   }
+  //   //   .header-title {
+  //   //     text-align: right!important;
+  //   //   }
 
-//   //   @media (min-width: 1025px) {
-//   //     .kt-aside--fixed .kt-aside {
-//   //       position: fixed;
-//   //       top: 0;
-//   //       bottom: 0;
-//   //       left: 0!important;
-//   //       z-index: 99;
-//   //       right: 0!important;
-//   //     }
+  //   //   .wc h2 {
+  //   //     text-align: right!important;
+  //   //   }
 
-//   //     .kt-aside--fixed.kt-aside--minimize .kt-wrapper {
-//   //       padding-right: 74px!important;
-//   //       padding-left: 0!important;
-//   //       transition: all 0.3s ease;
-//   //     }
-//   //   }
-//   // `;
+  //   //   @media (min-width: 1025px) {
+  //   //     .kt-aside--fixed .kt-aside {
+  //   //       position: fixed;
+  //   //       top: 0;
+  //   //       bottom: 0;
+  //   //       left: 0!important;
+  //   //       z-index: 99;
+  //   //       right: 0!important;
+  //   //     }
 
-//   //   this.styleTag = this.renderer.createElement('style');
-//   //   this.styleTag.type = 'text/css';
-//   //   this.styleTag.appendChild(this.renderer.createText(css));
+  //   //     .kt-aside--fixed.kt-aside--minimize .kt-wrapper {
+  //   //       padding-right: 74px!important;
+  //   //       padding-left: 0!important;
+  //   //       transition: all 0.3s ease;
+  //   //     }
+  //   //   }
+  //   // `;
 
-//   //   // Append the <style> tag to the <head> element
-//   //   this.renderer.appendChild(document.head, this.styleTag);
-  
-//  // Assuming you have the path to your Arabic CSS file
-//  const cssFilePath = 'assets/i18n/arabic.css';
+  //   //   this.styleTag = this.renderer.createElement('style');
+  //   //   this.styleTag.type = 'text/css';
+  //   //   this.styleTag.appendChild(this.renderer.createText(css));
 
-//  // Create a link element for the CSS file
-//  const link = this.renderer.createElement('link');
-//  link.rel = 'stylesheet';
-//  link.type = 'text/css';
-//  link.href = cssFilePath;
+  //   //   // Append the <style> tag to the <head> element
+  //   //   this.renderer.appendChild(document.head, this.styleTag);
 
-//  // Append the link element to the document head
-//  this.renderer.appendChild(document.head, link);
-// }
-// removeArabicStyles() {
-//   // Remove the dynamically added style tag
-//   if (this.styleTag && this.styleTag.parentNode) {
-//     this.renderer.removeChild(document.head, this.styleTag);
-//     this.styleTag = undefined;
-//   }
-// }
+  //  // Assuming you have the path to your Arabic CSS file
+  //  const cssFilePath = 'assets/i18n/arabic.css';
 
-arabicLeftSection() {
-  // Assuming you have the path to your Arabic CSS file
-  const cssFilePath = 'assets/i18n/arabic.css';
+  //  // Create a link element for the CSS file
+  //  const link = this.renderer.createElement('link');
+  //  link.rel = 'stylesheet';
+  //  link.type = 'text/css';
+  //  link.href = cssFilePath;
 
-  // Create a link element for the CSS file
-  const link = this.renderer.createElement('link');
-  link.rel = 'stylesheet';
-  link.type = 'text/css';
-  link.href = cssFilePath;
+  //  // Append the link element to the document head
+  //  this.renderer.appendChild(document.head, link);
+  // }
+  // removeArabicStyles() {
+  //   // Remove the dynamically added style tag
+  //   if (this.styleTag && this.styleTag.parentNode) {
+  //     this.renderer.removeChild(document.head, this.styleTag);
+  //     this.styleTag = undefined;
+  //   }
+  // }
 
-  // Set an id attribute to identify the link element
-  link.id = 'arabicCssLink';
+  arabicLeftSection() {
+    // Assuming you have the path to your Arabic CSS file
+    const cssFilePath = 'assets/i18n/arabic.css';
 
-  // Append the link element to the document head
-  this.renderer.appendChild(document.head, link);
-}
+    // Create a link element for the CSS file
+    const link = this.renderer.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = cssFilePath;
 
-removeArabicStyles() {
-  // Remove the dynamically added link element
-  const linkElement = document.getElementById('arabicCssLink');
-  if (linkElement && linkElement.parentNode) {
-    // console.log('Removing Arabic styles');
-    this.renderer.removeChild(document.head, linkElement);
-  } else {
-    // console.log('Link element not found or already removed');
+    // Set an id attribute to identify the link element
+    link.id = 'arabicCssLink';
+
+    // Append the link element to the document head
+    this.renderer.appendChild(document.head, link);
   }
-}
 
-isActive(lang: string): boolean {
-  return this.currentLang === lang; // Check if the language matches
-}
+  removeArabicStyles() {
+    // Remove the dynamically added link element
+    const linkElement = document.getElementById('arabicCssLink');
+    if (linkElement && linkElement.parentNode) {
+      // console.log('Removing Arabic styles');
+      this.renderer.removeChild(document.head, linkElement);
+    } else {
+      // console.log('Link element not found or already removed');
+    }
+  }
 
-public get currentUserValue(): UserDTO {
-  return this.currentUserSubject.value[0];
-}
+  isActive(lang: string): boolean {
+    return this.currentLang === lang; // Check if the language matches
+  }
+
+  public get currentUserValue(): UserDTO {
+    return this.currentUserSubject.value[0];
+  }
 
 
 
@@ -257,26 +258,26 @@ public get currentUserValue(): UserDTO {
   // }
 
   ngOnInit() {
-    HeaderComponent.languageChanged.subscribe((lang)=>{
-      localStorage.setItem('language',lang);
+    HeaderComponent.languageChanged.subscribe((lang) => {
+      localStorage.setItem('language', lang);
       this.translate.use(lang);
       this.currentLang = lang ? lang : 'en';
-    this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
-    if (!lang) {
-      // Default language if not set in localStorage
-      lang = 'en';
-      localStorage.setItem('language', lang);
-    }
-    if(lang == 'ar'){
-      this.renderer.addClass(document.body, 'kt-body-arabic');
-    }else if (lang == 'en'){
-      this.renderer.removeClass(document.body, 'kt-body-arabic');
-    }
-       })
+      this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+      if (!lang) {
+        // Default language if not set in localStorage
+        lang = 'en';
+        localStorage.setItem('language', lang);
+      }
+      if (lang == 'ar') {
+        this.renderer.addClass(document.body, 'kt-body-arabic');
+      } else if (lang == 'en') {
+        this.renderer.removeClass(document.body, 'kt-body-arabic');
+      }
+    })
     this.UserName = this.currentUserValue.FirstName + ' ' + this.currentUserValue.LastName;
     // alert(this.currentUserValue.FirstName);
     this.DesignationName = this.currentUserValue.DesignationName;
-    console.log(this.DesignationName,"DesignationName");
+    console.log(this.DesignationName, "DesignationName");
     this.EmailId = this.currentUserValue.Email;
     this.UserProfile = this.currentUserValue.UserProfile;
     this.PolicyId = this.currentUserValue.PolicyId;
@@ -289,8 +290,8 @@ public get currentUserValue(): UserDTO {
     if (this.currentUserValue.Triggered < 2) {
       // setTimeout(() => this.startTour(this.currentUserValue.TourId), 2000);
     }
-    const lang:any = localStorage.getItem('language');
-    this.translate.use(lang); 
+    const lang: any = localStorage.getItem('language');
+    this.translate.use(lang);
     this.Menubinding();
   }
   // ngAfterViewInit() {
@@ -301,8 +302,8 @@ public get currentUserValue(): UserDTO {
         this._obj = data as MenuDTO;
         this._MenuCategoryList = JSON.parse(this._obj.MenuCategoryJson);
         this._MenuList = JSON.parse(this._obj.MenusJson);
-         
-        var dynamicScripts = [ environment.assetsurl+"assets/js/scripts.bundle.js"];
+
+        var dynamicScripts = [environment.assetsurl + "assets/js/scripts.bundle.js"];
         //  var dynamicScripts = ["../../../assets/js/scripts.bundle.js"];
         for (var i = 0; i < dynamicScripts.length; i++) {
           let node = document.createElement('script');
@@ -313,7 +314,7 @@ public get currentUserValue(): UserDTO {
           document.getElementsByTagName('head')[0].appendChild(node);
         }
         //import('../../../assets/js/scripts.bundle.js');
-        
+
       })
   }
   //   menuopen1(){
@@ -336,7 +337,7 @@ public get currentUserValue(): UserDTO {
     // );
     // users_db.collection('users').delete();
     //users_db.delete()
-     
+
     //this.authenticationService.logout();
     sessionStorage.clear();
     localStorage.clear();
