@@ -33,6 +33,7 @@ export class DocumentInboxComponent implements OnInit {
   selectedCabinet: string = "All Documents"; // Default selection
   selectedCabinetId:number;
   currentRoute:any;
+  cabinetId : number = 0; 
   private currentUserSubject: BehaviorSubject<UserDTO>;
   public currentUser: Observable<UserDTO>;
   public get currentUserValue(): UserDTO {
@@ -74,14 +75,19 @@ export class DocumentInboxComponent implements OnInit {
    
     this.GetLables();
     this.selectedCabinet === "All Documents";
+
+   
   } 
 
  
 
   // Function to change the selected cabinet
-  selectCabinet(cabinetName: string,CabinetId:number) {
+  selectCabinet(cabinetName: string,cabinetid:number) {
     this.selectedCabinet = cabinetName;
-    this.selectedCabinetId = CabinetId;
+    this.selectedCabinetId = cabinetid;
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'backend/Archive/Documents';
+    var myurl = `${this.returnUrl}/${cabinetid}`;
+    this.router.navigate([myurl]);
   }
 
   // Function to check if "New Document" should be disabled

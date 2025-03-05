@@ -24,23 +24,18 @@
         </div>
     </div> -->
     <div id="kt_inbox" class="kt-grid kt-grid--desktop kt-grid--ver-desktop kt-inbox">
-        <div id="kt_inbox_aside"
-         class="kt-grid__item kt-portlet kt-inbox__aside pb-0 scroll-y aside-scrolly"  style=" border: 1px solid #e4e4e4; ">
+        <div id="kt_inbox_aside" class="kt-grid__item kt-portlet kt-inbox__aside pb-0 scroll-y aside-scrolly" style=" border: 1px solid #e4e4e4; ">
             <!-- routerLink="/backend/masterforms/GacFileUpload" -->
-            <button type="button" class="btn btn-primary kt-inbox__compose mx-0 btn-memo1" style="width: 100%;" 
-            routerLink="/backend/NewArchive"
-            [queryParams]="{ cabinet: selectedCabinet,selectedCabinetId: selectedCabinetId }"
-             [disabled]="isNewDocumentDisabled()">
+            <button type="button" class="btn btn-primary kt-inbox__compose mx-0 btn-memo1" style="width: 100%;" routerLink="/backend/NewArchive" [queryParams]="{ cabinet: selectedCabinet,selectedCabinetId: selectedCabinetId }" [disabled]="isNewDocumentDisabled()">
             <span class="mr-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" version="1.1" class="svg-icon" style="width: 1.2em; height: 1.2em; vertical-align: middle; fill: currentColor; overflow: hidden;"><path d="M960 448H576V64a64 64 0 0 0-128 0v384H64a64 64 0 0 0 0 128h384v384a64 64 0 0 0 128 0V576h384a64 64 0 0 0 0-128z"></path></svg></span>
             {{ "Archive.NewDocument" | translate }}
         </button>
-         <div class="kt-inbox__nav mt-2">
+            <div class="kt-inbox__nav mt-2">
                 <ul class="kt-nav">
                     <ng-container *ngFor="let item of _CabinetList">
-                    <li class="kt-nav__item" [class.active]="selectedCabinet === item.CabinetName" >
-                        <a class="kt-nav__link"  
-                        (click)="selectCabinet(item.CabinetName,item.CabinetId)">
-                            <span class="svg-icon svg-icon-2x">
+                        <li class="kt-nav__item" [class.active]="selectedCabinet === item.CabinetName">
+                            <a class="kt-nav__link" (click)="selectCabinet(item.CabinetName,item.CabinetId)">
+                                <span class="svg-icon svg-icon-2x">
                                 <svg xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px" width="54" height="47" viewBox="0 0 54 47" fill="none">
                                     <g>
                                     <path d="M53.6387 27.9021L44.7457 1.06081C44.6843 0.875759 44.5717 0.715737 44.4232 0.602603C44.2747 0.489469 44.0976 0.42874 43.9161 0.428711H41.6926C41.4588 0.428711 41.2345 0.529309 41.0692 0.708376C40.9039 0.887442 40.811 1.13031 40.811 1.38354C40.811 1.63678 40.9039 1.87965 41.0692 2.05871C41.2345 2.23778 41.4588 2.33838 41.6926 2.33838H43.2954L51.521 27.1641H34.7004C34.5128 27.1641 34.3301 27.2289 34.1788 27.3491C34.0275 27.4693 33.9156 27.6386 33.8594 27.8324C33.3736 29.3125 32.4767 30.5934 31.2919 31.4992C30.107 32.4051 28.6922 32.8914 27.2419 32.8914C25.7915 32.8914 24.3768 32.4051 23.1919 31.4992C22.007 30.5934 21.1101 29.3125 20.6244 27.8324C20.5681 27.6386 20.4562 27.4693 20.3049 27.3491C20.1536 27.2289 19.9709 27.1641 19.7833 27.1641H2.96269L11.1883 2.33838H12.7911C13.0249 2.33838 13.2492 2.23778 13.4145 2.05871C13.5799 1.87965 13.6727 1.63678 13.6727 1.38354C13.6727 1.13031 13.5799 0.887442 13.4145 0.708376C13.2492 0.529309 13.0249 0.428711 12.7911 0.428711H10.5676C10.3861 0.42874 10.209 0.489469 10.0605 0.602603C9.91197 0.715737 9.79936 0.875759 9.73799 1.06081L0.845018 27.9021C0.810641 28.0057 0.793044 28.1149 0.793002 28.2249V41.646C0.788544 42.8631 1.22998 44.0325 2.02049 44.8976C2.811 45.7627 3.88604 46.2529 5.00983 46.2607H49.4738C50.5976 46.2529 51.6727 45.7627 52.4632 44.8976C53.2537 44.0325 53.6951 42.8631 53.6907 41.646V28.2249C53.6906 28.1149 53.673 28.0057 53.6387 27.9021ZM49.4738 44.3511H5.00983C4.35354 44.3438 3.72671 44.0549 3.26678 43.5478C2.80684 43.0407 2.55132 42.3568 2.55626 41.646V29.0737H19.1635C19.8502 30.7753 20.9801 32.2231 22.415 33.2398C23.8498 34.2565 25.5272 34.798 27.2419 34.798C28.9565 34.798 30.6339 34.2565 32.0687 33.2398C33.5036 32.2231 34.6335 30.7753 35.3202 29.0737H51.9274V41.646C51.9324 42.3568 51.6768 43.0407 51.2169 43.5478C50.757 44.0549 50.1301 44.3438 49.4738 44.3511Z" fill="currentColor" stroke="currentColor"/>
@@ -50,15 +45,13 @@
                                     </g>
                                     </svg>
                     </span>
-                    <span style="margin-left: 10px;" class="kt-nav__link-text ">{{item.CabinetName}} </span>
-                    <span class="cabinet-count" >5</span>
-                        </a>
-                    </li>
-                </ng-container>
-                    <li class="kt-nav__item" 
-                    [ngClass]="{'active': selectedCabinet === 'All Documents' || currentRoute === '/Documents'}"
-                      routerLinkActive="active">
-                        <a class="kt-nav__link" routerLink="Documents">
+                                <span style="margin-left: 10px;" class="kt-nav__link-text ">{{item.CabinetName}} </span>
+                                <span class="cabinet-count">5</span>
+                            </a>
+                        </li>
+                    </ng-container>
+                    <li class="kt-nav__item" [ngClass]="{'active': selectedCabinet === 'All Documents' || currentRoute === '/Documents'}" routerLinkActive="active">
+                        <a class="kt-nav__link" (click)="selectCabinet('All Documents',0)">
                             <span class="svg-icon svg-icon-2x">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -69,13 +62,11 @@
                             </g>
                         </svg></span>
                             <span style="margin-left: 10px;" class="kt-nav__link-text">{{"Archive.Documents" | translate }}</span>
-                            <span class="cabinet-count" >5</span>
+                            <span class="cabinet-count">5</span>
                         </a>
                     </li>
                     <!-- [ngClass]="{'active': currentRoute === 'Favorite'}"  -->
-                    <li class="kt-nav__item" 
-                    [ngClass]="{'active': selectedCabinet === 'Favorite' || currentRoute === '/Favorite'}"
-                    routerLinkActive="active">
+                    <li class="kt-nav__item" [ngClass]="{'active': selectedCabinet === 'Favorite' || currentRoute === '/Favorite'}" routerLinkActive="active">
                         <a class="kt-nav__link" routerLink="Favorite">
                             <span class="svg-icon svg-icon-2x">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -150,10 +141,8 @@
                         <span style="margin-left: 10px;" class="kt-nav__link-text">Rejected</span>
                     </a>
                 </li> -->
-                <!-- [ngClass]="{'active': currentRoute === 'Trash'}" -->
-                <li class="kt-nav__item" 
-                     [ngClass]="{'active': selectedCabinet === 'Trash' || currentRoute === '/Trash'}" 
-                     routerLinkActive="active">
+                    <!-- [ngClass]="{'active': currentRoute === 'Trash'}" -->
+                    <li class="kt-nav__item" [ngClass]="{'active': selectedCabinet === 'Trash' || currentRoute === '/Trash'}" routerLinkActive="active">
                         <a class="kt-nav__link" routerLink="Trash">
                             <span class="svg-icon svg-icon-2x">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -168,11 +157,11 @@
                             <span style="margin-left: 10px;" class="kt-nav__link-text">{{"Archive.Trash" | translate }}</span>
                         </a>
                     </li>
-                    
+
                     <li class="kt-nav__item mt-3"><strong>{{ "Archive.Shared" | translate }}</strong></li>
                     <li class="kt-nav__separator"></li>
                     <li class="kt-nav__item" [ngClass]="{'active': currentRoute === 'Sharedwithme'}" routerLinkActive="active">
-                        <a class="kt-nav__link" routerLink="Sharedwithme" >
+                        <a class="kt-nav__link" routerLink="Sharedwithme">
                             <span class="svg-icon svg-icon-2x">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                             width="24px" height="24px" viewBox="0 0 24 24" version="1.1" >
@@ -188,7 +177,7 @@
                         </a>
                     </li>
                     <li class="kt-nav__item" (click)="Labelcolorremove()" [ngClass]="{'active': currentRoute === 'Sharedbyme'}" routerLinkActive="active">
-                        <a class="kt-nav__link"  routerLink="Sharedbyme">
+                        <a class="kt-nav__link" routerLink="Sharedbyme">
                             <span class="svg-icon svg-icon-2x">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                             width="24px" height="24px" viewBox="0 0 24 24" version="1.1" >
@@ -257,7 +246,7 @@
                         <!-- (click)="focustextbox()" -->
                     </li>
                     <div class="label-height" id="div_labels">
-                        <li *ngFor="let ss of _Lstlabels" class="kt-nav__item LabelsClass" id="li_{{ss.LabelId}}" >
+                        <li *ngFor="let ss of _Lstlabels" class="kt-nav__item LabelsClass" id="li_{{ss.LabelId}}">
                             <a class="kt-nav__link pr-2">
                                 <small class="kt-lab-tag"></small>
                                 <span (click)="LoadLabelMemos(ss.LabelId)" class="kt-nav__link-text curser-pointer"> {{ss.LabelName}} </span>
@@ -390,7 +379,7 @@
     </div>
 </div>
 
-<div class="btn-nav text-right text-info curser-pointer" >
+<div class="btn-nav text-right text-info curser-pointer">
     <span class="material-icons fs-2 ver-m">navigation</span>
 </div>
 <button class="btn-prim btn-addb d-none" routerLink="/backend/masterforms/GacFileUpload">
@@ -407,4 +396,3 @@
 <button class="btn-addb btn-info btn-sm btn d-none">
     <span class="material-icons fs-2 ver-m">add</span>
 </button>
-
