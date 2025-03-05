@@ -61,7 +61,8 @@ export class TemplatesComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    HeaderComponent.languageChanged.subscribe((lang)=>{
+    // HeaderComponent.languageChanged.subscribe((lang)=>{
+      const lang: any = localStorage.getItem('language');
       localStorage.setItem('language',lang);
       this.translate.use(lang);
       this.currentLang = lang ? lang : 'en';
@@ -73,7 +74,7 @@ export class TemplatesComponent implements OnInit, AfterViewInit {
       this.renderer.removeClass(document.body, 'kt-body-arabic');
     }
     this.cdr.detectChanges();
-       });
+      //  });
     this.TemplatesList();
   }
   ngAfterViewInit(): void {

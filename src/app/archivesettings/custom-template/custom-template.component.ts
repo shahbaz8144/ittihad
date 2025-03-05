@@ -121,7 +121,8 @@ export class CustomTemplateComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-    HeaderComponent.languageChanged.subscribe((lang)=>{
+    // HeaderComponent.languageChanged.subscribe((lang)=>{
+      const lang: any = localStorage.getItem('language');
       localStorage.setItem('language',lang);
       this.translate.use(lang);
       this.currentLang = lang ? lang : 'en';
@@ -137,7 +138,7 @@ export class CustomTemplateComponent implements AfterViewInit, OnInit {
   if (editElement) {
     editElement.textContent = lang === 'ar' ? "إضافة" : "Add";
   }
-       });
+      //  });
     this.route.paramMap.subscribe(params => {
       this.templateId = Number(params.get('id'));
       if (this.templateId) {
