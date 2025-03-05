@@ -447,6 +447,7 @@ export class ArchiveComponent implements OnInit {
       const returnUrl = 'backend/Archive/Documents';
       var myurl = `${returnUrl}/${cabinetid}`;
       this.router.navigate([myurl]);
+      alert(this.selectedCabinetId);
     } else {
       // Check if any of the variables used in navigation are undefined
       if (this._DocumentId === undefined || this._referenceId === undefined || this.ShareId === undefined) {
@@ -461,6 +462,7 @@ export class ArchiveComponent implements OnInit {
 
   BackInbox() {
     this.router.navigate(['/backend/Archive/Documents', this.selectedCabinetId]);
+   
   }
   async SignalRMethods() {
     //Creation Connection of Progress bar for file upload

@@ -115,6 +115,8 @@ export class DocumentInboxComponent implements OnInit {
       });
   }
 
+ 
+  
     CabinetList() {
      this.service.AssignedCabinetAPI().subscribe(data => {
       this._CabinetList = data['Data'].CabinetJson;
