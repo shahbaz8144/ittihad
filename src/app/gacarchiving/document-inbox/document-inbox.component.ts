@@ -77,19 +77,7 @@ export class DocumentInboxComponent implements OnInit {
 
     this.GetLables();
 
-    this.route.paramMap.subscribe(params => {
-      this.cabinetId = Number(params.get('cabinetid')); // Convert to number if needed
-      if (this.cabinetId == 0) {
-        this.selectedCabinet = "All Documents";
-      }
-      else {
-        this._CabinetList.forEach(element => {
-          if (element.CabinetId == this.cabinetId) {
-            this.selectedCabinet = element.CabinetName;
-          }
-        });
-      }
-    });
+   
   }
 
 
@@ -132,6 +120,21 @@ export class DocumentInboxComponent implements OnInit {
       this._CabinetList = data['Data'].CabinetJson;
       console.log(data['Data'], "CabinetList");
       this.AllDocumentsCount = data['Data'].DocumentsCount;
+      this.route.paramMap.subscribe(params => {
+        this.cabinetId = Number(params.get('cabinetid')); // Convert to number if needed
+        debugger
+        if (this.cabinetId == 0) {
+          this.selectedCabinet = "All Documents";
+        }
+        else {
+          this._CabinetList.forEach(element => {
+            if (element.CabinetId == this.cabinetId) {
+              this.selectedCabinet = element.CabinetName;
+            }
+          });
+        }
+        alert(this.selectedCabinet);
+      });
       this.cd.detectChanges();
     })
   }
