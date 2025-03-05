@@ -887,26 +887,23 @@ export class GacDocumentDetailsComponent implements OnInit {
         };
         this.position.x = this.DocumentList[0].PositionX;
         this.position.y = this.DocumentList[0].PositionY;
-        // this.workspaceData = this.DocumentList[0].TemplateData;
-        // this.workspaceWidth = this.workspaceData.width;
-        // this.workspaceHeight = this.workspaceData.height;
-        // this.workspaceBgColor = this.workspaceData.backgroundColor;
-        // this.workspaceBorderColor = this.workspaceData.borderColor;
-        // this.workspaceBorderWidth = this.workspaceData.borderWidth;
-        // this.workspaceBorderRadius = this.workspaceData.borderRadius;
+       
         const templateDataString = this.DocumentList[0].TemplateData;
-        const templateData = JSON.parse(templateDataString);
-        // Now, you can access width and height
-
-        this.workspaceWidth = templateData.width;
-        this.workspaceHeight = templateData.height;
-        this.workspaceBgColor = templateData.backgroundColor;
-        this.workspaceBorderColor = templateData.borderColor;
-        this.workspaceBorderWidth = templateData.borderWidth;
-        this.workspaceBorderRadius = templateData.borderRadius;
-        this.workspaceData = templateData;
-
-        this.renderAllBarcodes();
+        if(templateDataString != "[]"){
+          const templateData = JSON.parse(templateDataString);
+          // Now, you can access width and height
+  
+          this.workspaceWidth = templateData.width;
+          this.workspaceHeight = templateData.height;
+          this.workspaceBgColor = templateData.backgroundColor;
+          this.workspaceBorderColor = templateData.borderColor;
+          this.workspaceBorderWidth = templateData.borderWidth;
+          this.workspaceBorderRadius = templateData.borderRadius;
+          this.workspaceData = templateData;
+  
+          this.renderAllBarcodes();
+        }
+       
         console.log(this.DocumentList, "DocumentList")
         this.ReferenceList = this.DocumentList[0]['ReferenceJson'];
         console.log(this.ReferenceList, "ReferenceList");
