@@ -5,6 +5,7 @@ import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 import { UserDTO } from '../_models/user-dto';
 import { GACFiledto } from '../_models/gacfiledto';
 import { LabelDTO } from '../_models/label-dto';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -412,11 +413,22 @@ export class GACFileService {
   }
 
   AssignedCabinetAPI() {
-
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
-
     return this.http.post(this.rootUrlII + 'ArchiveAPI/NewGetAssignedCabinet', this._ObjGac);
   }
+  // async AssignedCabinetAPI() {
+  //   this._ObjGac.CreatedBy = this.currentUserValue.createdby;
+  
+  //   try {
+  //     const response = await lastValueFrom(
+  //       this.http.post(this.rootUrlII + 'ArchiveAPI/NewGetAssignedCabinet', this._ObjGac)
+  //     );
+  //     return response;
+  //   } catch (error) {
+  //     console.error("❌ API Request Failed:", error);
+  //     throw error; // Ensure errors propagate properly
+  //   }
+  // }
 
   AddDynamicTemplateAPI(ObjGac: GACFiledto) {
     this._ObjGac.TemplateName = ObjGac.TemplateName

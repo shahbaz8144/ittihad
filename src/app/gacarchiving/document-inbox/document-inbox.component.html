@@ -46,7 +46,7 @@
                                     </svg>
                     </span>
                                 <span style="margin-left: 10px;" class="kt-nav__link-text ">{{item.CabinetName}} </span>
-                                <span class="cabinet-count">5</span>
+                                <span class="cabinet-count" *ngIf="item.ArchiveCount != 0">{{item.ArchiveCount}}</span>
                             </a>
                         </li>
                     </ng-container>
@@ -62,7 +62,7 @@
                             </g>
                         </svg></span>
                             <span style="margin-left: 10px;" class="kt-nav__link-text">{{"Archive.Documents" | translate }}</span>
-                            <span class="cabinet-count">5</span>
+                            <span class="cabinet-count" *ngIf="AllDocumentsCount!=0">{{AllDocumentsCount}}</span>
                         </a>
                     </li>
                     <!-- [ngClass]="{'active': currentRoute === 'Favorite'}"  -->
