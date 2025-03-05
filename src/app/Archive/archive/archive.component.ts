@@ -461,6 +461,7 @@ export class ArchiveComponent implements OnInit {
 
   BackInbox() {
     this.router.navigate(['/backend/Archive/Documents', this.selectedCabinetId]);
+   
   }
   async SignalRMethods() {
     //Creation Connection of Progress bar for file upload
