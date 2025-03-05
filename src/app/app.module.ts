@@ -38,7 +38,7 @@ import { LoaderInterceptor } from './_service/loader.interceptor';
 // import { AngMusicPlayerModule } from  'ang-music-player';
 // import { NgPlyrModule } from 'ng-plyr';
 // import { ServiceWorkerModule } from '@angular/service-worker';
-import { ArchivesettingsModule } from './archivesettings/archivesettings.module';
+// import { ArchivesettingsModule } from './archivesettings/archivesettings.module';
 
 
 @NgModule({
@@ -52,7 +52,7 @@ import { ArchivesettingsModule } from './archivesettings/archivesettings.module'
   imports: [
     BrowserModule,
     HttpClientModule,
-    ArchivesettingsModule,
+    // ArchivesettingsModule,
     SharedModule,
     AppRoutingModule,
     // ServiceWorkerModule,

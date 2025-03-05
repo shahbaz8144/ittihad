@@ -14,86 +14,89 @@ import { DOCUMENT } from '@angular/common';
 })
 export class CabinetComponent implements OnInit {
 
-  CabinetName:string = "";
-  Status:boolean = false;
-  _Obj:GACFiledto;
+  CabinetName: string = "";
+  Status: boolean = false;
+  _Obj: GACFiledto;
   isShow: boolean;
   String_status: string;
-  CabinetSerach:string = "";
-  NewCabinetList:any[]=[];
-  currentLang:"ar"|"en"="ar";
-  Cabinet_search:string = "";
-  Cabineterrormessage:boolean=false;
-  Cabineterrormessagear:boolean = false;
-  Entercabinetname:string = "";
-  CabinetNameArabic:string = "";
+  CabinetSerach: string = "";
+  NewCabinetList: any[] = [];
+  currentLang: "ar" | "en" = "ar";
+  Cabinet_search: string = "";
+  Cabineterrormessage: boolean = false;
+  Cabineterrormessagear: boolean = false;
+  Entercabinetname: string = "";
+  CabinetNameArabic: string = "";
   constructor(public service: GACFileService,
     private _snackBar: MatSnackBar,
     private dialog: MatDialog,
-    private translate:TranslateService,
+    private translate: TranslateService,
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
   ) {
     this._Obj = new GACFiledto();
-    HeaderComponent.languageChanged.subscribe((lang)=>{
-      localStorage.setItem('language',lang);
+    HeaderComponent.languageChanged.subscribe((lang) => {
+      localStorage.setItem('language', lang);
       this.translate.use(lang);
       this.currentLang = lang ? lang : 'en';
-    this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
-    this.Cabinet_search = lang === 'en' ? 'Search...' : 'يبحث...';
-    this.Entercabinetname = lang === 'en' ? 'Enter cabinet name' : 'أدخل اسم الخزانة'
+      this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+      this.Cabinet_search = lang === 'en' ? 'Search...' : 'يبحث...';
+      this.Entercabinetname = lang === 'en' ? 'Enter cabinet name' : 'أدخل اسم الخزانة'
 
-    if(lang == 'ar'){
-      this.renderer.addClass(document.body, 'kt-body-arabic');
-    }else if (lang == 'en'){
-      this.renderer.removeClass(document.body, 'kt-body-arabic');
-    }
-    const editElement = document.getElementById("editrck");
-  if (editElement) {
-    editElement.textContent = lang === 'ar' ? "إضافة" : "Add";
+      if (lang == 'ar') {
+        this.renderer.addClass(document.body, 'kt-body-arabic');
+      } else if (lang == 'en') {
+        this.renderer.removeClass(document.body, 'kt-body-arabic');
+      }
+      const editElement = document.getElementById("editrck");
+      if (editElement) {
+        editElement.textContent = lang === 'ar' ? "إضافة" : "Add";
+      }
+    });
   }
-       });
-   }
 
   ngOnInit(): void {
-    HeaderComponent.languageChanged.subscribe((lang)=>{
-      localStorage.setItem('language',lang);
-      this.translate.use(lang);
-      this.currentLang = lang ? lang : 'en';
+
+    // HeaderComponent.languageChanged.subscribe((lang) => {
+    const lang: any = localStorage.getItem('language');
+    this.translate.use(lang);
+    localStorage.setItem('language', lang);
+    this.translate.use(lang);
+    this.currentLang = lang ? lang : 'en';
     this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
     this.Cabinet_search = lang === 'en' ? 'Search...' : 'يبحث...';
     this.Entercabinetname = lang === 'en' ? 'Enter cabinet name' : 'أدخل اسم الخزانة'
 
-    if(lang == 'ar'){
+    if (lang == 'ar') {
       this.renderer.addClass(document.body, 'kt-body-arabic');
-    }else if (lang == 'en'){
+    } else if (lang == 'en') {
       this.renderer.removeClass(document.body, 'kt-body-arabic');
     }
     const editElement = document.getElementById("editrck");
-  if (editElement) {
-    editElement.textContent = lang === 'ar' ? "إضافة" : "Add";
-  }
-       });
-   this.CabinetList(); 
+    if (editElement) {
+      editElement.textContent = lang === 'ar' ? "إضافة" : "Add";
+    }
+    // });
+    this.CabinetList();
   }
 
- 
-  CabinetList(){
-    this.service.CabinetListAPI().subscribe(data =>{
+
+  CabinetList() {
+    this.service.CabinetListAPI().subscribe(data => {
       this.NewCabinetList = data['Data']["CabinetListJSON"];
-      console.log(this.NewCabinetList , "Cabinet List Array");
+      console.log(this.NewCabinetList, "Cabinet List Array");
     })
   }
 
 
-  AddCabinet(){
-    if(this.CabinetName == "" || this.CabinetNameArabic == ""){
- this.Cabineterrormessage=true;
- this.Cabineterrormessagear=true;
+  AddCabinet() {
+    if (this.CabinetName == "" || this.CabinetNameArabic == "") {
+      this.Cabineterrormessage = true;
+      this.Cabineterrormessagear = true;
     }
-    else if(this.CabinetName != ""){
-      this.Cabineterrormessage=false;
-      this.Cabineterrormessagear=false;
+    else if (this.CabinetName != "") {
+      this.Cabineterrormessage = false;
+      this.Cabineterrormessagear = false;
       if (this._Obj.CabinetId == undefined || this._Obj.CabinetId == 0) {
         this._Obj.FlagId = 1;
       } else if (this._Obj.CabinetId != 0) {
@@ -102,31 +105,31 @@ export class CabinetComponent implements OnInit {
       this._Obj.IsActive = this.Status;
       this._Obj.CabinetName = this.CabinetName;
       this._Obj.CabinetNameArabic = this.CabinetNameArabic;
-      this.service.CabinetInsertAndUpdate(this._Obj).subscribe((data: any) => { 
+      this.service.CabinetInsertAndUpdate(this._Obj).subscribe((data: any) => {
         console.log(data, "Add Cabinet");
-        if (data && data.message == '1') { 
-           this._snackBar.open(('Added Successfully'), 'End now', {
+        if (data && data.message == '1') {
+          this._snackBar.open(('Added Successfully'), 'End now', {
             duration: 5000,
             verticalPosition: 'bottom',
             horizontalPosition: 'right',
           });
-           this.CabinetList();
-           this.closeInfo();
-        }else if(data && data.message == '2'){
+          this.CabinetList();
+          this.closeInfo();
+        } else if (data && data.message == '2') {
           this._snackBar.open(('Updated Successfully'), 'End now', {
             duration: 5000,
             verticalPosition: 'bottom',
-            horizontalPosition:'right',
+            horizontalPosition: 'right',
           });
           this.CabinetList();
           this.closeInfo();
           this.isShow = false;
-        }else if(data && data.message == '0'){
+        } else if (data && data.message == '0') {
           alert("Same name already exists!");
           // this.SameNameClearfileds();
         }
-     });
-    } 
+      });
+    }
   }
 
   cabinet_add() {
@@ -137,15 +140,15 @@ export class CabinetComponent implements OnInit {
     //   // Set text based on current language
     //   element.textContent = this.currentLang === 'ar' ? "إضافة" : "Add";
     // }
-    
+
 
     document.getElementsByClassName("addrck")[0].classList.add("kt-quick-panel--on");
     document.getElementsByClassName("side_view")[0].classList.add("position-fixed");
     document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.add("d-block");
   }
 
-  SameNameClearfileds(){
-     this.CabinetName = "";
+  SameNameClearfileds() {
+    this.CabinetName = "";
     this.Status = false;
   }
 
@@ -155,52 +158,52 @@ export class CabinetComponent implements OnInit {
     this.Status = false;
     this.Cabineterrormessage = false;
     this.Cabineterrormessagear = false;
-   document.getElementsByClassName("addrck")[0].classList.remove("kt-quick-panel--on");
-   document.getElementsByClassName("side_view")[0].classList.remove("position-fixed");
-   document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");
- }
-
- EditCabinet(item){
-  this.isShow = true;
-  this._Obj.CabinetId = item.CabinetId;
-  this.CabinetName = item.CabinetName;
-  this.CabinetNameArabic = item.CabinietName_Ar;
-  this.Status = item.Status;
-  const element = document.getElementById("editrck");
-
-  if (element) {
-    // Set the inner HTML content based on the selected language
-    element.innerHTML = this.translate.instant("Masterform.Edit");
+    document.getElementsByClassName("addrck")[0].classList.remove("kt-quick-panel--on");
+    document.getElementsByClassName("side_view")[0].classList.remove("position-fixed");
+    document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");
   }
-  document.getElementsByClassName("addrck")[0].classList.add("kt-quick-panel--on");
+
+  EditCabinet(item) {
+    this.isShow = true;
+    this._Obj.CabinetId = item.CabinetId;
+    this.CabinetName = item.CabinetName;
+    this.CabinetNameArabic = item.CabinietName_Ar;
+    this.Status = item.Status;
+    const element = document.getElementById("editrck");
+
+    if (element) {
+      // Set the inner HTML content based on the selected language
+      element.innerHTML = this.translate.instant("Masterform.Edit");
+    }
+    document.getElementsByClassName("addrck")[0].classList.add("kt-quick-panel--on");
     document.getElementsByClassName("side_view")[0].classList.add("position-fixed");
     document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.add("d-block");
- }
+  }
 
- UpdateStatus(item) {
-  this.String_status = item.Status ? "In-Active" : "Active";
-  const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-    data: {
-      title: 'Confirm',
-      message: this.String_status
-    }
-  });
-  confirmDialog.afterClosed().subscribe(result => {
-    if (result === true) {
-      item.IsActive = !item.Status; 
-      this._Obj.FlagId = 3;
-      this._Obj.CabinetId = item.CabinetId;
-      this._Obj.IsActive =  this.String_status === "Active" ? true : false;
-      this._Obj.CabinetName = "";
-      this.service.CabinetInsertAndUpdate(this._Obj).subscribe((data: any) => {
-        console.log('Status updated successfully');
-        this.CabinetList();
-      });
-    }
-  });
-}
+  UpdateStatus(item) {
+    this.String_status = item.Status ? "In-Active" : "Active";
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Confirm',
+        message: this.String_status
+      }
+    });
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result === true) {
+        item.IsActive = !item.Status;
+        this._Obj.FlagId = 3;
+        this._Obj.CabinetId = item.CabinetId;
+        this._Obj.IsActive = this.String_status === "Active" ? true : false;
+        this._Obj.CabinetName = "";
+        this.service.CabinetInsertAndUpdate(this._Obj).subscribe((data: any) => {
+          console.log('Status updated successfully');
+          this.CabinetList();
+        });
+      }
+    });
+  }
 
-ClearSearch(){
-  this.CabinetSerach = "";
-}
+  ClearSearch() {
+    this.CabinetSerach = "";
+  }
 }

@@ -342,36 +342,15 @@ export class ArchiveComponent implements OnInit {
 
 
   selectedCabinet: string = "";
-  selectedCabinetId: number;
-  gacdetetailsCabinetname: string;
-  gacdetetailsCabinetId: number;
+  selectedCabinetId: number = 0;
+ 
   async ngOnInit(): Promise<void> {
     this.route.queryParams.subscribe((params: any) => {
       // Extract parameters safely
       this.selectedCabinet = params.CabinetName || params['cabinet'] || 'DefaultCabinet';
-      this.selectedCabinetId = params.CabinetId || params['selectedCabinetId'] || null;
-
-      // Debugging: Log values
-      console.log('Received Cabinet:', this.selectedCabinet);
-      console.log('Received Cabinet ID:', this.selectedCabinetId);
-
+      this.selectedCabinetId = params.CabinetId || params['selectedCabinetId'] || 0;
     });
-
-    // this.route.queryParams.subscribe(params => {
-    //   this.selectedCabinet = params['cabinet'] || 'DefaultCabinet';
-    //   alert(this.selectedCabinet);
-    //   console.log('Received Cabinet:', this.selectedCabinet);
-    //   this.selectedCabinetId = params['selectedCabinetId'] || null;
-    //   console.log('Received Cabinet ID:', this.selectedCabinetId);
-    // });
-
-    //   this.route.queryParams.subscribe((params: any) => {
-    //   this.selectedCabinet = params.CabinetName;
-    //   alert(this.selectedCabinet);
-    // })
-    // this.route.queryParams.subscribe((params: any) => {
-    //   this.selectedCabinetId = params.CabinetId;
-    // })
+    
     const lang: any = localStorage.getItem('language')
     this.translate.use(lang);
     this.SelectCompany = lang === 'en' ? 'Company' : 'اختر الشركة';
@@ -429,24 +408,16 @@ export class ArchiveComponent implements OnInit {
     this.route.queryParams.subscribe((params: any) => {
       this.ShareId = params.ShareId;
     })
-
-    this.route.queryParams.subscribe((params: any) => {
-      this.gacdetetailsCabinetname = params.CabinetName;
-    })
-    this.route.queryParams.subscribe((params: any) => {
-      this.gacdetetailsCabinetId = params.CabinetId;
-    })
-    console.log(this.gacdetetailsCabinetname, "Cabinetname123");
   }
 
 
   Back() {
     if (this._VersionId === undefined) {
-      this.router.navigate(['/backend/Archive/Documents', this.selectedCabinetId]);
-      // const cabinetid = this.selectedCabinetId;
-      // const returnUrl = 'backend/Archive/Documents';
-      // var myurl = `${returnUrl}/${cabinetid}`;
-      // this.router.navigate([myurl]);
+      // this.router.navigate(['/backend/Archive/Documents', this.selectedCabinetId]);
+      const cabinetid = this.selectedCabinetId;
+      const returnUrl = 'backend/Archive/Documents';
+      var myurl = `${returnUrl}/${cabinetid}`;
+      this.router.navigate([myurl]);
     } else {
       // Check if any of the variables used in navigation are undefined
       if (this._DocumentId === undefined || this._referenceId === undefined || this.ShareId === undefined) {

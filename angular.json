@@ -20,7 +20,7 @@
                             "lodash"
                         ],
                         "serviceWorker": true,
-                        "outputPath": "dist/DMS-WEB",
+                        "outputPath": "dist/ittihadclub",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
@@ -101,8 +101,8 @@
                             "buildOptimizer": true,
                             "budgets": [{
                                     "type": "initial",
-                                    "maximumWarning": "3mb",
-                                    "maximumError": "8mb"
+                                    "maximumWarning": "10mb",
+                                    "maximumError": "10mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",

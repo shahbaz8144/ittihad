@@ -20,7 +20,7 @@ import { ActivatedRoute } from '@angular/router';
 export class DocumentsComponent implements OnInit {
   _Search: string = '';
   status: string = '';
-  activePage: number;
+  activePage: number = 1;
   GACDocumentList: any = [];
   GACDocumentPinList: any = [];
   _DocumentId: number;
@@ -268,7 +268,7 @@ export class DocumentsComponent implements OnInit {
         // this.TotalRecords = this.TotalrecordsList[0].TotalRecords;
         if (this.GACDocumentList.length == 0) {
           this._CurrentpageRecords = 0;
-          this.activePage = 0;
+          this.activePage = 1;
         } else {
           this._CurrentpageRecords = this.GACDocumentList.length;
         }
@@ -299,7 +299,7 @@ export class DocumentsComponent implements OnInit {
         this.TotalRecords = this.TotalrecordsList[0].TotalRecords;
         if (this.GACDocumentList.length == 0) {
           this._CurrentpageRecords = 0;
-          this.activePage = 0;
+          this.activePage = 1;
         } else {
           this._CurrentpageRecords = this.GACDocumentList.length;
         }

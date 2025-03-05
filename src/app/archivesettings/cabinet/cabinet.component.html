@@ -11,14 +11,12 @@
             <div class="card-header align-items-center d-flex py-3">
                 <div class="flex-1">
                     <div class="search-bar">
-                        <input type="text" class="form-control" [(ngModel)]="CabinetSerach" [placeholder]="Cabinet_search"
-                            aria-controls="example">
-                            <a class="close close-icn"><i *ngIf="CabinetSerach"  (click)="ClearSearch()" class="material-icons">close<i></i></i></a>
+                        <input type="text" class="form-control" [(ngModel)]="CabinetSerach" [placeholder]="Cabinet_search" aria-controls="example">
+                        <a class="close close-icn"><i *ngIf="CabinetSerach"  (click)="ClearSearch()" class="material-icons">close<i></i></i></a>
                     </div>
                 </div>
                 <div class="flex-shrink-0">
-                    <button class="btn btn-sm btn-info" style="display: block;" id="cabinet_add"
-                        (click)="cabinet_add()">
+                    <button class="btn btn-sm btn-info" style="display: block;" id="cabinet_add" (click)="cabinet_add()">
                         <i class="material-icons fs-4">add</i>
                         {{"Masterform.AddCabinet" | translate }}
                     </button>
@@ -44,19 +42,16 @@
                                     <td>
                                         {{item.CabinietName_Ar}}
                                     </td>
-                                        <td [ngStyle]="{'color':item.Status=== true ? '#3f51b5' : 'red'}"
-                                        (click)="UpdateStatus(item)">
-                                        <div *ngIf="item.Status"
-                                            class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-success curser-pointer w-min-70">
+                                    <td [ngStyle]="{'color':item.Status=== true ? '#3f51b5' : 'red'}" (click)="UpdateStatus(item)">
+                                        <div *ngIf="item.Status" class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-success curser-pointer w-min-70">
                                             Active
                                         </div>
-                                        <div *ngIf="!item.Status"
-                                            class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-danger curser-pointer w-min-70">
+                                        <div *ngIf="!item.Status" class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-danger curser-pointer w-min-70">
                                             In-Active
                                         </div>
                                     </td>
                                     <td>
-                                       <a (click)="EditCabinet(item)" class="btn btn-outline btn-circle fs-5 btn-sm text-info px-0">
+                                        <a (click)="EditCabinet(item)" class="btn btn-outline btn-circle fs-5 btn-sm text-info px-0">
                                             <span class="mr-2">
                                                 <svg data-v-9a6e255c="" xmlns="http://www.w3.org/2000/svg" width="14px"
                                                     height="14px" viewBox="0 0 24 24" fill="none" stroke="#2786fb"
@@ -72,7 +67,7 @@
                                             </span><span class="align-middle">{{"Masterform.Edit" | translate }}</span>
                                         </a>
                                     </td>
-                                </tr> 
+                                </tr>
                                 <ng-container *ngIf="NewCabinetList==0">
                                     <div class="d-flex-center kt-tb-error-box">
                                         <div class="m-auto text-center">
@@ -80,7 +75,7 @@
                                                 <img src="assets/media/Img/No Racks.png">
                                             </div>
                                             <h3 class="kt-blank-ttl"> {{ "Masterform.NoDataCompany" |translate }} </h3>
-                                            <p class="kt-blank-msg"> {{ "Masterform.NotfoundCabinet" | translate }} </p> 
+                                            <p class="kt-blank-msg"> {{ "Masterform.NotfoundCabinet" | translate }} </p>
                                         </div>
                                     </div>
                                 </ng-container>
@@ -110,49 +105,42 @@
                     </div>
                 </div>
                 <div class="kt-portlet__body" style="    height: calc(100vh - 120px);">
-                            <div class="form-cus mb-3">
-                                        <label >{{"Masterform.CabinetName" | translate }} <span style="font-weight: bold;">[English]</span> </label>
-                                        <span class="text-danger ml-1">*</span>
-                                        <input type="text"  [(ngModel)]="CabinetName"
-                                            class="form-control" [placeholder]="Entercabinetname"
-                                            required minlength="3"
-                                            maxlength="50" />
-                                            <div class="kt-error" *ngIf="Cabineterrormessage && !CabinetName">
-                                                <span class="kt-error-msg">
+                    <div class="form-cus mb-3">
+                        <label>{{"Masterform.CabinetName" | translate }} <span style="font-weight: bold;">[English]</span> </label>
+                        <span class="text-danger ml-1">*</span>
+                        <input type="text" [(ngModel)]="CabinetName" class="form-control" [placeholder]="Entercabinetname" required minlength="3" maxlength="50" />
+                        <div class="kt-error" *ngIf="Cabineterrormessage && !CabinetName">
+                            <span class="kt-error-msg">
                                                     {{"Masterform.errormsg" | translate }} </span>
-                                            </div>
-                                        <div>
-                                        </div>
-                                    </div>
-                                    <div class="form-cus mb-3">
-                                        <label style=" direction: rtl; width: 100%; text-align: right;" >{{"Masterform.CabinetName" | translate }} <span style="font-weight: bold;">[عربي]</span></label>
-                                        <!-- <span class="text-danger ml-1">*</span> -->
-                                        <input type="text"  [(ngModel)]="CabinetNameArabic"
-                                            class="form-control" placeholder="أدخل اسم الخزانة"
-                                            required minlength="3" style=" direction: rtl;"
-                                            maxlength="50" />
-                                            <div  style=" direction: rtl; width: 100%; text-align: right;" class="kt-error" *ngIf="Cabineterrormessagear && !CabinetNameArabic">
-                                                <span class="kt-error-msg">
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                    <div class="form-cus mb-3">
+                        <label style=" direction: rtl; width: 100%; text-align: right;">{{"Masterform.CabinetName" | translate }} <span style="font-weight: bold;">[عربي]</span></label>
+                        <!-- <span class="text-danger ml-1">*</span> -->
+                        <input type="text" [(ngModel)]="CabinetNameArabic" class="form-control" placeholder="أدخل اسم الخزانة" required minlength="3" style=" direction: rtl;" maxlength="50" />
+                        <div style=" direction: rtl; width: 100%; text-align: right;" class="kt-error" *ngIf="Cabineterrormessagear && !CabinetNameArabic">
+                            <span class="kt-error-msg">
                                                     أدخل اسم الخزانة</span>
-                                            </div>
-                                        <div>
-                                        </div>
-                                    </div>
-                                <div class="form-cus">
-                                    <label class="form-label">{{"Masterform.Status" | translate }}</label>
-                                    <div>
-                                        <mat-slide-toggle color="primary" [(ngModel)]="Status">
-                                        </mat-slide-toggle>
-                                    </div>
-                                </div>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                    <div class="form-cus">
+                        <label class="form-label">{{"Masterform.Status" | translate }}</label>
+                        <div>
+                            <mat-slide-toggle color="primary" [(ngModel)]="Status">
+                            </mat-slide-toggle>
+                        </div>
+                    </div>
                 </div>
                 <div class="kt-portlet__footer">
-                    <button  *ngIf='!isShow' class="btn btn-sm btn-info px-3" (click)="AddCabinet()" >
+                    <button *ngIf='!isShow' class="btn btn-sm btn-info px-3" (click)="AddCabinet()">
                         {{"Masterform.Add" | translate }}
                     </button>
-                    <button type="submit" *ngIf='isShow' class="btn btn-sm btn-info px-3 mt-2 mr-2"
-                    (click)="AddCabinet()">{{"Masterform.Update" | translate }} </button>
-                    <button class="btn btn-sm btn-secondary px-3" (click)="closeInfo()" >
+                    <button type="submit" *ngIf='isShow' class="btn btn-sm btn-info px-3 mt-2 mr-2" (click)="AddCabinet()">{{"Masterform.Update" | translate }} </button>
+                    <button class="btn btn-sm btn-secondary px-3" (click)="closeInfo()">
                         {{"Masterform.Cancel" | translate }}
                     </button>
                 </div>

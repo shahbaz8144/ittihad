@@ -32,16 +32,16 @@ export class CompanyComponent implements OnInit {
   Email: any;
   checkemail: any;
   Fax: any;
-  CountryCode:string;
+  CountryCode: string;
   latitude: any;
   longitude: any;
   Code: any;
   index: any;
   isShow: boolean;
   objCompanyDTO: CompanyDTO
-  ObjCountryCode:string;
+  ObjCountryCode: string;
   companyformGroup: UntypedFormGroup;
-  displayedColumns = ['Company', 'Address', 'Phone','phonecode', 'Fax', 'Country', 'actions', 'action'];
+  displayedColumns = ['Company', 'Address', 'Phone', 'phonecode', 'Fax', 'Country', 'actions', 'action'];
   companyNameMinLength: boolean
   CodeMinLength: boolean
   // FaxMinLength: boolean
@@ -50,30 +50,30 @@ export class CompanyComponent implements OnInit {
   LongitudeMinLength: boolean
   PhoneNoMinLength: boolean
   activePage: number;
-  LastPage:number;
-  NextPage:Boolean= false;
+  LastPage: number;
+  NextPage: Boolean = false;
   TotalRecords: number;
   PageSize: number;
-  _selectedcountrytxt:string;
-  Comysearch:string = '';
+  _selectedcountrytxt: string;
+  Comysearch: string = '';
   _CurrentpageRecords: number;
   TotalrecordsList: any;
-  PageNumber:number;
+  PageNumber: number;
   _Search: string;
-  lastPagerecords:number;
-  currentLang:"ar"|"en"="ar";
-  CompanySearch:string;
-  EnterCompanyName:string;
-  EnterCompanyCode:string;
-  EnterPhoneNumber:string;
-  EnterFaxNumber:string;
-  EnterEmailAddress:string;
-  EnterFullAddress:string;
-  EnterLatitude:string;
-  EnterLongitude:string;
-  SelectCountry:string;
-  SelectCity:string;
- 
+  lastPagerecords: number;
+  currentLang: "ar" | "en" = "ar";
+  CompanySearch: string;
+  EnterCompanyName: string;
+  EnterCompanyCode: string;
+  EnterPhoneNumber: string;
+  EnterFaxNumber: string;
+  EnterEmailAddress: string;
+  EnterFullAddress: string;
+  EnterLatitude: string;
+  EnterLongitude: string;
+  SelectCountry: string;
+  SelectCity: string;
+
   // audioList = [
   //   {
   //     url: "https://yrglobaldocuments.blob.core.windows.net/documents/DMS/226081/460848_[iSongs.info]%2001%20-%20Jai%20Balayya%20Mass%20Anthem.mp3",
@@ -81,14 +81,14 @@ export class CompanyComponent implements OnInit {
   //     cover: "https://i1.sndcdn.com/artworks-000249294066-uow7s0-t500x500.jpg"
   //   },
   // ];
-  
-  constructor(public services: CompanyService, private objFormBuilder: UntypedFormBuilder, 
-    private dialog: MatDialog, 
+
+  constructor(public services: CompanyService, private objFormBuilder: UntypedFormBuilder,
+    private dialog: MatDialog,
     private _snackBar: MatSnackBar,
-    private translate:TranslateService,
+    private translate: TranslateService,
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: Document,
-  
+
   ) {
     this.lstPrdcts = [];
     this.PageSize = 10;
@@ -97,75 +97,75 @@ export class CompanyComponent implements OnInit {
     this.objCompanyDTO = new CompanyDTO();
     this.objCompanyDTO.CompanyId = 0
     this._Search = "";
-    HeaderComponent.languageChanged.subscribe((lang)=>{
-      localStorage.setItem('language',lang);
+    HeaderComponent.languageChanged.subscribe((lang) => {
+      localStorage.setItem('language', lang);
       this.translate.use(lang);
       this.currentLang = lang ? lang : 'en';
-    this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
-    this.CompanySearch = lang === 'en' ? 'Search' : 'يبحث';
-    this.EnterCompanyName = lang === 'en' ? 'Enter CompanyName' : 'أدخل اسم الشركة';
-    this.EnterCompanyCode = lang === 'en' ? 'Enter CompanyCode' : 'أدخل رمز الشركة';
-    this.EnterPhoneNumber = lang === 'en' ? 'Enter PhoneNumber' : 'أدخل رقم الهاتف';
-    this.EnterFaxNumber = lang === 'en' ? 'Enter FaxNumber' : 'أدخل رقم الفاكس';
-    this.EnterEmailAddress = lang === 'en' ? 'Enter EmailAddress' : 'أدخل عنوان البريد الالكتروني';
-    this.EnterFullAddress = lang === 'en' ? 'Enter FullAddress' : 'أدخل العنوان الكامل';
-    this.EnterLatitude = lang === 'en' ? 'Enter Latitude Ex:15.000000' : 'أدخل خط العرض مثال: 15.000000';
-    this.EnterLongitude = lang === 'en' ? 'Enter Longitude Ex:15.000000' : 'أدخل خط الطول مثال: 15.000000';
-    this.SelectCountry = lang === 'en' ? 'Select Country' : 'حدد الدولة';
-    this.SelectCity = lang === 'en' ? 'Select City' : 'اختر مدينة';
-    if (!lang) {
-      // Default language if not set in localStorage
-      lang = 'en';
-      localStorage.setItem('language', lang);
-    }
-    if(lang == 'ar'){
-      this.renderer.addClass(document.body, 'kt-body-arabic');
-    }else if (lang == 'en'){
-      this.renderer.removeClass(document.body, 'kt-body-arabic');
-    }
-    this.translate.getTranslation(lang).subscribe(translations => {
-      // Initialize Tippy.js with translated content
-      const companyNameTippy = translations.Masterform.companyName;
-      tippy('#myButton', {
-        content: companyNameTippy,
-        arrow: true,
-        animation: 'scale-extreme',
-        animateFill: true,
-        inertia: true,
-        hideOnClick: true
+      this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+      this.CompanySearch = lang === 'en' ? 'Search' : 'يبحث';
+      this.EnterCompanyName = lang === 'en' ? 'Enter CompanyName' : 'أدخل اسم الشركة';
+      this.EnterCompanyCode = lang === 'en' ? 'Enter CompanyCode' : 'أدخل رمز الشركة';
+      this.EnterPhoneNumber = lang === 'en' ? 'Enter PhoneNumber' : 'أدخل رقم الهاتف';
+      this.EnterFaxNumber = lang === 'en' ? 'Enter FaxNumber' : 'أدخل رقم الفاكس';
+      this.EnterEmailAddress = lang === 'en' ? 'Enter EmailAddress' : 'أدخل عنوان البريد الالكتروني';
+      this.EnterFullAddress = lang === 'en' ? 'Enter FullAddress' : 'أدخل العنوان الكامل';
+      this.EnterLatitude = lang === 'en' ? 'Enter Latitude Ex:15.000000' : 'أدخل خط العرض مثال: 15.000000';
+      this.EnterLongitude = lang === 'en' ? 'Enter Longitude Ex:15.000000' : 'أدخل خط الطول مثال: 15.000000';
+      this.SelectCountry = lang === 'en' ? 'Select Country' : 'حدد الدولة';
+      this.SelectCity = lang === 'en' ? 'Select City' : 'اختر مدينة';
+      if (!lang) {
+        // Default language if not set in localStorage
+        lang = 'en';
+        localStorage.setItem('language', lang);
+      }
+      if (lang == 'ar') {
+        this.renderer.addClass(document.body, 'kt-body-arabic');
+      } else if (lang == 'en') {
+        this.renderer.removeClass(document.body, 'kt-body-arabic');
+      }
+      this.translate.getTranslation(lang).subscribe(translations => {
+        // Initialize Tippy.js with translated content
+        const companyNameTippy = translations.Masterform.companyName;
+        tippy('#myButton', {
+          content: companyNameTippy,
+          arrow: true,
+          animation: 'scale-extreme',
+          animateFill: true,
+          inertia: true,
+          hideOnClick: true
+        });
       });
-    });
 
-    this.translate.getTranslation(lang).subscribe(translations => {
-      const companyCodeTippy = translations.Masterform.companycode;
-    tippy('#myButton1', {
-      content: companyCodeTippy,
-      arrow: true,
-      animation: 'scale-extreme',
-      //animation: 'tada',
-      //theme: 'tomato',
-      animateFill: true,
-      inertia: true,
-    });
-  });
+      this.translate.getTranslation(lang).subscribe(translations => {
+        const companyCodeTippy = translations.Masterform.companycode;
+        tippy('#myButton1', {
+          content: companyCodeTippy,
+          arrow: true,
+          animation: 'scale-extreme',
+          //animation: 'tada',
+          //theme: 'tomato',
+          animateFill: true,
+          inertia: true,
+        });
+      });
 
-  this.translate.getTranslation(lang).subscribe(translations => {
-    const CompanyGeographic = translations.Masterform.CompanyGeographic;
-  tippy('#myButton3', {
-    content: CompanyGeographic,
-    arrow: true,
-    animation: 'scale-extreme',
-    //animation: 'tada',
-    //theme: 'tomato',
-    animateFill: true,
-    inertia: true,
-  });
-})
+      this.translate.getTranslation(lang).subscribe(translations => {
+        const CompanyGeographic = translations.Masterform.CompanyGeographic;
+        tippy('#myButton3', {
+          content: CompanyGeographic,
+          arrow: true,
+          animation: 'scale-extreme',
+          //animation: 'tada',
+          //theme: 'tomato',
+          animateFill: true,
+          inertia: true,
+        });
+      })
 
-       })
+    })
   }
 
-  
+
   getcompanydetails() { // To view list
     this._obj.Search = this.Comysearch;
     this._obj.PageSize = this.PageSize;
@@ -174,12 +174,12 @@ export class CompanyComponent implements OnInit {
       // console.log(data,"company");
       this._objCompany = data as [];
       this._obj = new CompanyDTO();
-      this.TotalrecordsList = data as  [];
+      this.TotalrecordsList = data as [];
       this.TotalRecords = this._objCompany[0].TotalRecords
       this._CurrentpageRecords = this._objCompany.length;
-      if(this.activePage == this.LastPage){
-        this.lastPagerecords=10;
-      } 
+      if (this.activePage == this.LastPage) {
+        this.lastPagerecords = 10;
+      }
       let _vl = this.TotalRecords / this.PageSize;
       let _vl1 = _vl % 1;
       if (_vl1 > 0.000) {
@@ -190,14 +190,14 @@ export class CompanyComponent implements OnInit {
       }
     })
   }
-  
+
   onClickPage(pageNumber: number) {
     this.activePage = pageNumber;
-   if(this.activePage == 1){
-     this.NextPage = false;
-    } else{
-    this.NextPage = true;
-    }  
+    if (this.activePage == 1) {
+      this.NextPage = false;
+    } else {
+      this.NextPage = true;
+    }
     this.getcompanydetails();
   }
   Search() {
@@ -219,7 +219,7 @@ export class CompanyComponent implements OnInit {
   }
 
   keyPress(event: any) {
-    const pattern =  /[0-9\+\-\ ]/;
+    const pattern = /[0-9\+\-\ ]/;
     let inputChar = String.fromCharCode(event.charCode);
     if (event.keyCode != 8 && !pattern.test(inputChar)) {
       event.preventDefault();
@@ -227,11 +227,11 @@ export class CompanyComponent implements OnInit {
   }
   dtOptions: any = {};
   ngOnInit(): void {
-    const lang:any = localStorage.getItem('language');
+    const lang: any = localStorage.getItem('language');
     this.translate.use(lang);
-  this.currentLang = lang ? lang : 'en';
-  this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
-  this.CompanySearch = lang === 'en' ? 'Search' : 'يبحث';
+    this.currentLang = lang ? lang : 'en';
+    this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+    this.CompanySearch = lang === 'en' ? 'Search' : 'يبحث';
     this.EnterCompanyName = lang === 'en' ? 'Enter CompanyName' : 'أدخل اسم الشركة';
     this.EnterCompanyCode = lang === 'en' ? 'Enter CompanyCode' : 'أدخل رمز الشركة';
     this.EnterPhoneNumber = lang === 'en' ? 'Enter PhoneNumber' : 'أدخل رقم الهاتف';
@@ -242,14 +242,14 @@ export class CompanyComponent implements OnInit {
     this.EnterLongitude = lang === 'en' ? 'Enter Longitude Ex:15.000000' : 'أدخل خط الطول مثال: 15.000000';
     this.SelectCountry = lang === 'en' ? 'Select Country' : 'حدد الدولة';
     this.SelectCity = lang === 'en' ? 'Select City' : 'اختر مدينة';
-  if(lang == 'ar'){
-    this.renderer.addClass(document.body, 'kt-body-arabic');
-  }else if (lang == 'en'){
-    this.renderer.removeClass(document.body, 'kt-body-arabic');
-  }
+    if (lang == 'ar') {
+      this.renderer.addClass(document.body, 'kt-body-arabic');
+    } else if (lang == 'en') {
+      this.renderer.removeClass(document.body, 'kt-body-arabic');
+    }
     // setTimeout(function() { $("#hideDiv").fadeOut(1500); }, 3000);
-    this.services._obj.CountryCode="+966";
-    this._selectedcountrytxt="SA";
+    this.services._obj.CountryCode = "+966";
+    this._selectedcountrytxt = "SA";
     this.activePage = 1;
     this._CurrentpageRecords = 0;
     this.companyNameMinLength = true;
@@ -311,16 +311,16 @@ export class CompanyComponent implements OnInit {
 
     this.translate.getTranslation(lang).subscribe(translations => {
       const companyCodeTippy = translations.Masterform.companycode;
-    tippy('#myButton1', {
-      content: companyCodeTippy,
-      arrow: true,
-      animation: 'scale-extreme',
-      //animation: 'tada',
-      //theme: 'tomato',
-      animateFill: true,
-      inertia: true,
+      tippy('#myButton1', {
+        content: companyCodeTippy,
+        arrow: true,
+        animation: 'scale-extreme',
+        //animation: 'tada',
+        //theme: 'tomato',
+        animateFill: true,
+        inertia: true,
+      });
     });
-  });
     // tippy('#myButton2', {
     //   content: "Enter Company Geographic coordinate",
     //   arrow: true,
@@ -332,20 +332,20 @@ export class CompanyComponent implements OnInit {
     // });
     this.translate.getTranslation(lang).subscribe(translations => {
       const CompanyGeographic = translations.Masterform.CompanyGeographic;
-    tippy('#myButton3', {
-      content: CompanyGeographic,
-      arrow: true,
-      animation: 'scale-extreme',
-      //animation: 'tada',
-      //theme: 'tomato',
-      animateFill: true,
-      inertia: true,
-    });
-  })
+      tippy('#myButton3', {
+        content: CompanyGeographic,
+        arrow: true,
+        animation: 'scale-extreme',
+        //animation: 'tada',
+        //theme: 'tomato',
+        animateFill: true,
+        inertia: true,
+      });
+    })
   }
 
 
-  
+
   checkcompanyemailExist() {
     this._obj.Email = (<HTMLInputElement>document.getElementById("txtEmail")).value;
 
@@ -360,18 +360,18 @@ export class CompanyComponent implements OnInit {
             this._snackBar.open('البريد الإلكتروني يخرج بالفعل  ', 'تنتهي الآن', {
               duration: 5000,
               verticalPosition: 'bottom',
-              horizontalPosition:'right',
+              horizontalPosition: 'right',
               panelClass: ['red-snackbar']
             });
           } else {
             this._snackBar.open('Email Already Exits', 'End now', {
               duration: 5000,
               verticalPosition: 'bottom',
-              horizontalPosition:'right',
+              horizontalPosition: 'right',
               panelClass: ['red-snackbar']
             });
           }
-         
+
           this.services._obj.Email = '';
         }
       })
@@ -383,18 +383,18 @@ export class CompanyComponent implements OnInit {
         this._snackBar.open('يجب أن يكون البريد الإلكتروني عنوان بريد إلكتروني صالحًا', 'تنتهي الآن', {
           duration: 5000,
           verticalPosition: 'bottom',
-          horizontalPosition:'right',
+          horizontalPosition: 'right',
           panelClass: ['red-snackbar']
         });
       } else {
         this._snackBar.open('Email must be a valid email address', 'End now', {
           duration: 5000,
           verticalPosition: 'bottom',
-          horizontalPosition:'right',
+          horizontalPosition: 'right',
           panelClass: ['red-snackbar']
         });
       }
-      
+
       this.services._obj.Email = '';
     }
   }
@@ -423,10 +423,10 @@ export class CompanyComponent implements OnInit {
     }
   }
   onCountryChange(event) {
- 
-    this.ObjCountryCode ="+"+ event.dialCode;
-    this.services._obj.CountryCode =  this.ObjCountryCode.toString();
-   
+
+    this.ObjCountryCode = "+" + event.dialCode;
+    this.services._obj.CountryCode = this.ObjCountryCode.toString();
+
   }
   checklongitudeExist() {
     this._obj.longitude = (<HTMLInputElement>document.getElementById("txtlongitude")).value;
@@ -470,18 +470,18 @@ export class CompanyComponent implements OnInit {
           this._snackBar.open('اسم الشركة يخرج بالفعل', 'تنتهي الآن', {
             duration: 5000,
             verticalPosition: 'bottom',
-            horizontalPosition:'right',
+            horizontalPosition: 'right',
             panelClass: ['red-snackbar']
           });
         } else {
           this._snackBar.open('Company Name Already Exits', 'End now', {
             duration: 5000,
             verticalPosition: 'bottom',
-            horizontalPosition:'right',
+            horizontalPosition: 'right',
             panelClass: ['red-snackbar']
           });
         }
-        
+
         this.services._obj.CompanyName = '';
       }
     })
@@ -497,7 +497,7 @@ export class CompanyComponent implements OnInit {
     return this.companyformGroup.controls;
   }
   OnCreate() {
-    
+
     try {
       if (this.companyformGroup.invalid) {
         return;
@@ -505,8 +505,8 @@ export class CompanyComponent implements OnInit {
       this._obj.CompanyId = this.CompanyId;
       this._obj.CompanyName = this.companyformGroup.get('CName').value;
       this._obj.Address = this.companyformGroup.get('Address').value;
-      if(this._obj.Address==null){
-        this._obj.Address="";
+      if (this._obj.Address == null) {
+        this._obj.Address = "";
       }
       this._obj.Phone = this.companyformGroup.get('phone').value;
       this._obj.CountryCode = this.companyformGroup.get('phonecode').value;
@@ -517,27 +517,27 @@ export class CompanyComponent implements OnInit {
       this._obj.Email = this.companyformGroup.get('Email').value;
       this._obj.Fax = this.companyformGroup.get('Fax').value;
       if (this._obj.Fax == null) {
-        this._obj.Fax = ""; 
+        this._obj.Fax = "";
       }
       this._obj.CountryId = this.companyformGroup.get('Country').value;
-      if(this._obj.CountryId==null){
-        this._obj.CountryId=0;
+      if (this._obj.CountryId == null) {
+        this._obj.CountryId = 0;
       }
       this._obj.CityId = this.companyformGroup.get('city').value;
-      if(this._obj.CityId==null){
-        this._obj.CityId=0;
+      if (this._obj.CityId == null) {
+        this._obj.CityId = 0;
       }
       this._obj.latitude = this.companyformGroup.get('latitude').value;
-      if(this._obj.latitude==null){
-        this._obj.latitude="0.0";
+      if (this._obj.latitude == null) {
+        this._obj.latitude = "0.0";
       }
       this._obj.longitude = this.companyformGroup.get('longitude').value;
-      if(this._obj.longitude==null){
-        this._obj.longitude="0.0";
+      if (this._obj.longitude == null) {
+        this._obj.longitude = "0.0";
       }
       this._obj.Code = this.companyformGroup.get('Code').value;
-      if(this._obj.Code==null){
-        this._obj.Code="";
+      if (this._obj.Code == null) {
+        this._obj.Code = "";
       }
       if (this.companyformGroup.get('status').value == undefined) {
         this._obj.IsActive = false;
@@ -558,15 +558,15 @@ export class CompanyComponent implements OnInit {
             // Set translations based on language preference
             if (language === 'ar') {
               this._snackBar.open('اضيف بنجاح', 'تنتهي الآن', {
-                duration: 5000,            
+                duration: 5000,
                 verticalPosition: 'bottom',
-                horizontalPosition:'right',
+                horizontalPosition: 'right',
               });
             } else {
               this._snackBar.open('Added Successfully', 'End now', {
-                duration: 5000,            
+                duration: 5000,
                 verticalPosition: 'bottom',
-                horizontalPosition:'right',
+                horizontalPosition: 'right',
               });
             }
           }
@@ -599,7 +599,7 @@ export class CompanyComponent implements OnInit {
           this.companyformGroup.patchValue({
             phonecode: "+1"
           })
-          this.services._obj.CountryCode="+1";
+          this.services._obj.CountryCode = "+1";
         }
       );
     } catch (error) {
@@ -637,7 +637,7 @@ export class CompanyComponent implements OnInit {
       }
     });
   }
-  
+
   company_add() {
     // document.getElementById("addrck").style.display = "block";
     // document.getElementById("company_add").style.display = "none";
@@ -649,7 +649,7 @@ export class CompanyComponent implements OnInit {
       element.innerHTML = this.translate.instant("Masterform.Add");
     }
     this.isShow = false;
-    this.LatitudeMinLength  = true;
+    this.LatitudeMinLength = true;
     this.LongitudeMinLength = true;
     document.getElementById("addrck").classList.add("kt-quick-panel--on");
     document.getElementsByClassName("side_view")[0].classList.add("position-fixed");
