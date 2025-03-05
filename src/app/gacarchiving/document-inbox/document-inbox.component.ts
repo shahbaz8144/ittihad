@@ -27,19 +27,21 @@ export class DocumentInboxComponent implements OnInit {
   _checkedLabelIds: any = [];
   SelectLabel: any[];
   returnUrl: string;
-  Expired:any;
-  Select:any;
-  toggle:any;
+  Expired: any;
+  Select: any;
+  toggle: any;
   selectedCabinet: string = "All Documents"; // Default selection
-  selectedCabinetId:number;
-  currentRoute:any;
-  cabinetId : number = 0; 
+  selectedCabinetId: number;
+  currentRoute: any;
+  cabinetId: number = 0;
+  _CabinetList: any[] = [];
+  AllDocumentsCount: number = 0;
   private currentUserSubject: BehaviorSubject<UserDTO>;
   public currentUser: Observable<UserDTO>;
   public get currentUserValue(): UserDTO {
     return this.currentUserSubject.value[0];
   }
-  
+
   constructor(public service: GACFileService,
     public serviceL: InboxService,
     private translate: TranslateService,
@@ -62,8 +64,8 @@ export class DocumentInboxComponent implements OnInit {
       }
     });
   }
-   
-  ngOnInit(): void {
+
+   ngOnInit():void {
     const lang: any = localStorage.getItem('language');
     this.translate.use(lang);
     if (lang == 'ar') {
@@ -71,30 +73,41 @@ export class DocumentInboxComponent implements OnInit {
     } else if (lang == 'en') {
       this.renderer.removeClass(document.body, 'kt-body-arabic');
     }
-    this.CabinetList();
-   
+   this.CabinetList();
+
     this.GetLables();
-    this.selectedCabinet === "All Documents";
 
-   
-  } 
+    this.route.paramMap.subscribe(params => {
+      this.cabinetId = Number(params.get('cabinetid')); // Convert to number if needed
+      if (this.cabinetId == 0) {
+        this.selectedCabinet = "All Documents";
+      }
+      else {
+        this._CabinetList.forEach(element => {
+          if (element.CabinetId == this.cabinetId) {
+            this.selectedCabinet = element.CabinetName;
+          }
+        });
+      }
+    });
+  }
 
- 
+
 
   // Function to change the selected cabinet
-  selectCabinet(cabinetName: string,cabinetid:number) {
+  selectCabinet(cabinetName: string, cabinetid: number) {
     this.selectedCabinet = cabinetName;
     this.selectedCabinetId = cabinetid;
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'backend/Archive/Documents';
+    this.returnUrl = 'backend/Archive/Documents';
     var myurl = `${this.returnUrl}/${cabinetid}`;
     this.router.navigate([myurl]);
   }
 
   // Function to check if "New Document" should be disabled
   isNewDocumentDisabled(): boolean {
-    return this.selectedCabinet === "All Documents" || 
-    this.selectedCabinet === "Favorite" || 
-    this.selectedCabinet === "Trash";;
+    return this.selectedCabinet === "All Documents" ||
+      this.selectedCabinet === "Favorite" ||
+      this.selectedCabinet === "Trash";;
   }
 
   oncolor() {
@@ -102,24 +115,42 @@ export class DocumentInboxComponent implements OnInit {
     $('#myelement').removeClass('.fil-selected');
   }
 
-  
+
   GetLables() {
     this._obj1.UserId = this.currentUserValue.createdby;
     this.serviceL.UserLabels(this._obj1)
       .subscribe(data => {
         this._Lstlabels = data["Data"].LablesJson;
-        console.log(this._Lstlabels,"Labels");
+        console.log(this._Lstlabels, "Labels");
         this.LabelCount = this._Lstlabels.length;
         this.cd.detectChanges();
       });
   }
-  _CabinetList:any[] = [];
-  CabinetList(){
-    this.service.AssignedCabinetAPI().subscribe(data => {
-      this._CabinetList  = data['Data'].CabinetJson;
-      console.log(this._CabinetList , "CabinetList");
+
+    CabinetList() {
+     this.service.AssignedCabinetAPI().subscribe(data => {
+      this._CabinetList = data['Data'].CabinetJson;
+      console.log(data['Data'], "CabinetList");
+      this.AllDocumentsCount = data['Data'].DocumentsCount;
+      this.cd.detectChanges();
     })
   }
+
+  // async CabinetList() {
+  //   try {
+  //     const data: any = await this.service.AssignedCabinetAPI(); // Convert Observable to Promise
+  //     debugger
+  //     if (data && data['Data']) {
+  //       this._CabinetList = data['Data'].CabinetJson;
+  //       console.log(data['Data'], "CabinetList");
+  //       this.AllDocumentsCount = data['Data'].DocumentsCount;
+  //       // Trigger change detection if necessary
+  //       this.cd.detectChanges();
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching cabinet list:", error);
+  //   }
+  // }
 
   labelchange(LabelId) {
     let _value = $("#lbl_" + LabelId).prop('checked');
@@ -138,7 +169,7 @@ export class DocumentInboxComponent implements OnInit {
       });
     });
   }
-  
+
   AddLabels() {
     var __labelname = (<HTMLInputElement>document.getElementById("txtlabels")).value;
     if (__labelname == "") {
@@ -257,10 +288,10 @@ export class DocumentInboxComponent implements OnInit {
     $('.kt-cnt-v').addClass('d-none');
     $('.label-height').addClass('active');
   }
- Labelcolorremove(){
-  $(".LabelsClass").removeClass("active")
-  // document.getElementById("li_" + labelid).classList.remove("active");
- }
+  Labelcolorremove() {
+    $(".LabelsClass").removeClass("active")
+    // document.getElementById("li_" + labelid).classList.remove("active");
+  }
 
   LoadLabelMemos(labelid: number) {
     $(".LabelsClass").removeClass("active")
@@ -269,5 +300,5 @@ export class DocumentInboxComponent implements OnInit {
     var myurl = `${this.returnUrl}/${labelid}`;
     this.router.navigate([myurl]);
   }
- 
+
 }
