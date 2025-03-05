@@ -442,7 +442,10 @@ export class ArchiveComponent implements OnInit {
 
   Back() {
     if (this._VersionId === undefined) {
-      this.router.navigate(['/backend/Archive/Documents',this.selectedCabinetId]);
+      this.router.navigate(['/backend/Archive/Documents'],
+        {
+          queryParams: { cabinet: this.selectedCabinet, selectedCabinetId: this.selectedCabinetId }
+        });
     
     } else {
       // Check if any of the variables used in navigation are undefined
@@ -457,13 +460,7 @@ export class ArchiveComponent implements OnInit {
   }
 
   AllDcoument(){
-    if (this._VersionId === undefined) {
-      this.router.navigate(['/backend/Archive/Documents'],
-        {
-          queryParams: { cabinet: this.selectedCabinet, selectedCabinetId: this.selectedCabinetId }
-        });
     
-    }
   }
   async SignalRMethods() {
     //Creation Connection of Progress bar for file upload
