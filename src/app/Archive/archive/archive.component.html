@@ -2821,10 +2821,10 @@
                                 {{ "Masterform.NewDocument" | translate }}
                                 
                             </button>
-                            <button type="submit" class="btn btn-doc-in" routerLink="/backend/Archive/Documents"><i
+                            <!-- routerLink="/backend/Archive/Documents" -->
+                            <button type="submit" class="btn btn-doc-in" (click)="AllDcoument()" ><i
                                     class="material-icons-outlined fs-4">description</i>
                                      {{ "Masterform.DocumentInbox" |translate }}
-                                     
                                     </button>
                         </div>
                     </div>
