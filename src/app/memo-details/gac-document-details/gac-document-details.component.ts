@@ -877,7 +877,7 @@ export class GacDocumentDetailsComponent implements OnInit {
         this.DocumentList = this._obj.Data["ArchiveJson"];
         this.barcode = this.DocumentList[0].Barcode;
         this.prefix = this.DocumentList[0].Prefix;
-        debugger
+        
         this.data = {
           code: this.DocumentList[0].Prefix + "-" + this.DocumentList[0].Barcode,
           type: this.DocumentList[0].CabinetName,
@@ -1122,9 +1122,9 @@ export class GacDocumentDetailsComponent implements OnInit {
   }
 
   DownloadFile() {
-
+debugger
     if (this.isMainDocumentActive) {
-      this.download(this.DocumentList[0].MainCatelogUrl, this._DocumentName);
+      this.download(this.DocumentList[0].Url, this._DocumentName);
     }
     else if (this.selectedReferenceId) {
       const selecteddoc: any = this.ReferenceList.find((item: any) => item.ReferenceId == this.selectedReferenceId);
@@ -1132,8 +1132,11 @@ export class GacDocumentDetailsComponent implements OnInit {
     }
 
   }
+
   download(url, filename) {
-    this.ImgUrl = "https://yrglobaldocuments.blob.core.windows.net/documents/" + url;
+    console.log(url,"url path");
+    console.log(filename,"url path");
+    // this.ImgUrl = "https://yrglobaldocuments.blob.core.windows.net/documents/" + url;
     this._obj.MailId = 0;
     this._obj.MailDocId = parseInt(this._documentId);
     this._obj.CreatedBy = this.LoginUserId;
@@ -1142,7 +1145,7 @@ export class GacDocumentDetailsComponent implements OnInit {
       data => {
         this._obj = data as GACFiledto;
         console.log(this._obj, "Download Data");
-        fetch(this.ImgUrl).then(function (t) {
+        fetch(url).then(function (t) {
           return t.blob().then((b) => {
             var a = document.createElement("a");
             a.href = URL.createObjectURL(b);
