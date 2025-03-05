@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, AfterViewInit, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, HostListener, OnInit, Inject, Renderer2 } from '@angular/core';
 import { CdkDragEnd } from '@angular/cdk/drag-drop';
 import { ResizeEvent } from 'angular-resizable-element';
 import { HttpClient } from '@angular/common/http';
@@ -7,6 +7,9 @@ import { GACFileService } from 'src/app/_service/gacfile.service';
 import { GACFiledto } from 'src/app/_models/gacfiledto';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { DOCUMENT } from '@angular/common';
+import { HeaderComponent } from 'src/app/shared/header/header.component';
 
 interface ElementData {
   id?: number;
@@ -80,11 +83,33 @@ export class CustomTemplateComponent implements AfterViewInit, OnInit {
   fontSize: number = 10.6;
   obj: GACFiledto;
   TextValues: string;
+  EnterTemplateName:string = "";
+  currentLang:"ar"|"en"="ar";
   constructor(private http: HttpClient, private service: GACFileService,
     private _snackBar: MatSnackBar,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private translate:TranslateService,
+        @Inject(DOCUMENT) private document: Document,
+        private renderer: Renderer2,
   ) {
     this.obj = new GACFiledto();
+     HeaderComponent.languageChanged.subscribe((lang)=>{
+          localStorage.setItem('language',lang);
+          this.translate.use(lang);
+          this.currentLang = lang ? lang : 'en';
+        this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+        this.EnterTemplateName = lang === 'en' ? 'Enter Template Name' : 'أدخل اسم القالب';
+        // this.Entercabinetname = lang === 'en' ? 'Enter cabinet name' : 'أدخل اسم الخزانة'
+        if(lang == 'ar'){
+          this.renderer.addClass(document.body, 'kt-body-arabic');
+        }else if (lang == 'en'){
+          this.renderer.removeClass(document.body, 'kt-body-arabic');
+        }
+        const editElement = document.getElementById("editrck");
+      if (editElement) {
+        editElement.textContent = lang === 'ar' ? "إضافة" : "Add";
+      }
+           });
   }
 
 
@@ -96,6 +121,23 @@ export class CustomTemplateComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
+    HeaderComponent.languageChanged.subscribe((lang)=>{
+      localStorage.setItem('language',lang);
+      this.translate.use(lang);
+      this.currentLang = lang ? lang : 'en';
+    this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+    // this.Cabinet_search = lang === 'en' ? 'Search...' : 'يبحث...';
+    // this.Entercabinetname = lang === 'en' ? 'Enter cabinet name' : 'أدخل اسم الخزانة'
+    if(lang == 'ar'){
+      this.renderer.addClass(document.body, 'kt-body-arabic');
+    }else if (lang == 'en'){
+      this.renderer.removeClass(document.body, 'kt-body-arabic');
+    }
+    const editElement = document.getElementById("editrck");
+  if (editElement) {
+    editElement.textContent = lang === 'ar' ? "إضافة" : "Add";
+  }
+       });
     this.route.paramMap.subscribe(params => {
       this.templateId = Number(params.get('id'));
       if (this.templateId) {

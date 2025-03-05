@@ -565,3 +565,41 @@ canvas {
     font-weight: bold;
     letter-spacing: 0.5px;
 }
+
+.properties-panel-head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.properties-panel-head-close{
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    color: #8b8b8b;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+}
+.properties-panel-head-close svg{
+    width: 20px;
+    height: 20px;
+}
+.properties-panel-head-close:hover{
+    background-color: #f4f6f8;
+    color: #454545;
+}
+
+::ng-deep .kt-body-arabic .properties-panel {
+    text-align: justify;
+}
+
+::ng-deep .kt-body-arabic .workspace-controls-ul {
+    text-align: justify;
+}
+
+::ng-deep .kt-body-arabic .selection-panel-ul {
+    text-align: justify;
+}
