@@ -442,11 +442,11 @@ export class ArchiveComponent implements OnInit {
 
   Back() {
     if (this._VersionId === undefined) {
-      // this.router.navigate(['/backend/Archive/Documents', this.selectedCabinetId]);
-      const cabinetid = this.selectedCabinetId;
-      const returnUrl = 'backend/Archive/Documents';
-      var myurl = `${returnUrl}/${cabinetid}`;
-      this.router.navigate([myurl]);
+      this.router.navigate(['/backend/Archive/Documents', this.selectedCabinetId]);
+      // const cabinetid = this.selectedCabinetId;
+      // const returnUrl = 'backend/Archive/Documents';
+      // var myurl = `${returnUrl}/${cabinetid}`;
+      // this.router.navigate([myurl]);
     } else {
       // Check if any of the variables used in navigation are undefined
       if (this._DocumentId === undefined || this._referenceId === undefined || this.ShareId === undefined) {
