@@ -50,7 +50,7 @@ export class ArchiveComponent implements OnInit {
   _objII: GACFiledto;
   _obj1: InboxDTO;
   _GacAttachmentFileuplod: any = [];
-  Selectworkflow:string = "";
+  Selectworkflow: string = "";
   objBlocksDTO: BlocksDTO;
   objracksDTO: RacksDTO;
   customObj: ShelvesDTO;
@@ -341,22 +341,22 @@ export class ArchiveComponent implements OnInit {
 
 
 
-  selectedCabinet:string = "";
-  selectedCabinetId:number;
-  gacdetetailsCabinetname:string;
-  gacdetetailsCabinetId:number;
+  selectedCabinet: string = "";
+  selectedCabinetId: number;
+  gacdetetailsCabinetname: string;
+  gacdetetailsCabinetId: number;
   async ngOnInit(): Promise<void> {
     this.route.queryParams.subscribe((params: any) => {
       // Extract parameters safely
       this.selectedCabinet = params.CabinetName || params['cabinet'] || 'DefaultCabinet';
       this.selectedCabinetId = params.CabinetId || params['selectedCabinetId'] || null;
-    
+
       // Debugging: Log values
       console.log('Received Cabinet:', this.selectedCabinet);
       console.log('Received Cabinet ID:', this.selectedCabinetId);
-    
+
     });
-    
+
     // this.route.queryParams.subscribe(params => {
     //   this.selectedCabinet = params['cabinet'] || 'DefaultCabinet';
     //   alert(this.selectedCabinet);
@@ -436,13 +436,17 @@ export class ArchiveComponent implements OnInit {
     this.route.queryParams.subscribe((params: any) => {
       this.gacdetetailsCabinetId = params.CabinetId;
     })
- console.log(this.gacdetetailsCabinetname, "Cabinetname123");
+    console.log(this.gacdetetailsCabinetname, "Cabinetname123");
   }
 
 
   Back() {
     if (this._VersionId === undefined) {
-      this.router.navigate(['/backend/Archive/Documents',this.selectedCabinetId]);
+      // this.router.navigate(['/backend/Archive/Documents', this.selectedCabinetId]);
+      const cabinetid = this.selectedCabinetId;
+      const returnUrl = 'backend/Archive/Documents';
+      var myurl = `${returnUrl}/${cabinetid}`;
+      this.router.navigate([myurl]);
     } else {
       // Check if any of the variables used in navigation are undefined
       if (this._DocumentId === undefined || this._referenceId === undefined || this.ShareId === undefined) {
@@ -455,8 +459,8 @@ export class ArchiveComponent implements OnInit {
     }
   }
 
-  BackInbox(){
-    this.router.navigate(['/backend/Archive/Documents',this.selectedCabinetId]);
+  BackInbox() {
+    this.router.navigate(['/backend/Archive/Documents', this.selectedCabinetId]);
   }
   async SignalRMethods() {
     //Creation Connection of Progress bar for file upload
@@ -734,23 +738,23 @@ export class ArchiveComponent implements OnInit {
   //   console.log('Formatted Return Date:', this.formattedFoodExpiryDate);
   // }
 
- 
 
-onDateSelectFE(event: any): void {
-  this.DateRequired = false;
 
-  // Parse the selected date
-  this.FoodExpiryDate = new Date(event.value);
-  this.FoodExpiryDate.setHours(6, 45, 0); // Set hours, minutes, and seconds
+  onDateSelectFE(event: any): void {
+    this.DateRequired = false;
 
-  // Force English locale formatting
-  moment.locale('en');  
+    // Parse the selected date
+    this.FoodExpiryDate = new Date(event.value);
+    this.FoodExpiryDate.setHours(6, 45, 0); // Set hours, minutes, and seconds
 
-  // Format the date as "MM/DD/YYYY hh:mm:ss A"
-  this.formattedFoodExpiryDate = moment(this.FoodExpiryDate).format('MM/DD/YYYY hh:mm:ss A');
+    // Force English locale formatting
+    moment.locale('en');
 
-  console.log('Formatted Return Date:', this.formattedFoodExpiryDate);
-}
+    // Format the date as "MM/DD/YYYY hh:mm:ss A"
+    this.formattedFoodExpiryDate = moment(this.FoodExpiryDate).format('MM/DD/YYYY hh:mm:ss A');
+
+    console.log('Formatted Return Date:', this.formattedFoodExpiryDate);
+  }
 
   _SubCategoryName: any;
   DropdownList() {
@@ -2286,7 +2290,7 @@ onDateSelectFE(event: any): void {
   FirstFileDocumentName: string = "";
   UploadingFiles: boolean = false;
   async selectFile(event: any): Promise<void> {
-     
+
     const files = Array.from(event.target.files) as File[]; // Convert FileList to File[]
     let folderPath = "Draft/" + this.currentUserValue.createdby;
     if (files.length > 0) {
@@ -2337,7 +2341,7 @@ onDateSelectFE(event: any): void {
           // Call the Azure upload service to upload the file
           try {
             const _displayname = this.currentUserValue.FirstName + " " + this.currentUserValue.LastName;
-            const { fileUrl, thumbnailUrl } = await this.azureUploadService.uploadFile(file, progressSubject, folderPath, uniqueId,_displayname); // Upload file
+            const { fileUrl, thumbnailUrl } = await this.azureUploadService.uploadFile(file, progressSubject, folderPath, uniqueId, _displayname); // Upload file
             const uploadedFile = this._GacAttachmentFileuplod.find(
               (item) => item.UniqueId === uniqueId
             );
@@ -2470,7 +2474,7 @@ onDateSelectFE(event: any): void {
 
 
   MainDocumentCheckBox(index: number,) {
-    
+
     // Set the selectedIndex to the selected file index
     this.selectedIndex = index;
     // Update Ismain property for all files
@@ -2488,10 +2492,10 @@ onDateSelectFE(event: any): void {
     // }
 
     // Ensure FirstFileDocumentName updates only if it's empty or undefined
-if (!this.FirstFileDocumentName || this.FirstFileDocumentName.trim() === '') {
-  this.FirstFileDocumentName = this._GacAttachmentFileuplod[this.selectedIndex]?.FileName || '';
-}
-    
+    if (!this.FirstFileDocumentName || this.FirstFileDocumentName.trim() === '') {
+      this.FirstFileDocumentName = this._GacAttachmentFileuplod[this.selectedIndex]?.FileName || '';
+    }
+
     console.log(this._GacAttachmentFileuplod, "Selected File");
   }
 
