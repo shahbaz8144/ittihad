@@ -18,7 +18,7 @@
                                         <span class="kt-doc-title-name">{{ "Masterform.DocumnetDetails" | translate
                                             }}</span>
                                         <div class="dropdown btn-group dropright">
-                                            <a class="btn btn-version dropdown-toggle" href="javascript(void:0)" role="button" data-toggle="dropdown" aria-expanded="false">
+                                            <a class="btn btn-version dropdown-toggle d-flex" href="javascript(void:0)" role="button" data-toggle="dropdown" aria-expanded="false">
                                                 <span style="    margin-right: 4px;">
                                                     <svg width="64px" height="64px" viewBox="0 0 21 21"
                                                         xmlns="http://www.w3.org/2000/svg" fill="currentColor" style=" width: 20px; height: 20px; line-height: 1;">
@@ -36,8 +36,9 @@
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                    V_{{doc.VersionName}}
+                                                   
                                                 </span>
+                                                <span> V_{{doc.VersionName}}</span>
                                             </a>
                                             <div class="dropdown-menu version-dropdown-menu">
                                                 <a class="dropdown-item" *ngFor="let item of _VersionJsonResault" [ngClass]="{ 'disabled': item.Status === 'In Active', 'active': item.VersionName === _Versiondropdownvalue }" (click)="VersionDropdown('Gac/DocumentDetails',item.VersionName,item.DocumentId,item.ShareId)">
@@ -127,6 +128,9 @@
                                     </div>
                                 </div>
                                 <div class="kt-doc-info">
+                                    <div>
+                                        <b>Cabinet Name : </b><span class="doc-name">efdfds fdvfv </span>
+                                    </div>
                                     <div>
                                         <span class="doc-name">{{doc.DocumentName}}</span>
                                     </div>

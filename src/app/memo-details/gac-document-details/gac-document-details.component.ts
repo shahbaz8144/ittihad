@@ -502,6 +502,7 @@ export class GacDocumentDetailsComponent implements OnInit {
 
 
   incrementVersion() {
+    alert(1);
     if (!this.DocumentList || !Array.isArray(this.DocumentList)) {
       // console.error('DocumentList is not initialized or not an array');
       return;
