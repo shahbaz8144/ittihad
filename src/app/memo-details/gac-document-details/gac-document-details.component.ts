@@ -887,12 +887,12 @@ export class GacDocumentDetailsComponent implements OnInit {
         };
         this.position.x = this.DocumentList[0].PositionX;
         this.position.y = this.DocumentList[0].PositionY;
-       
+
         const templateDataString = this.DocumentList[0].TemplateData;
-        if(templateDataString != "[]"){
+        if (templateDataString != "[]") {
           const templateData = JSON.parse(templateDataString);
           // Now, you can access width and height
-  
+
           this.workspaceWidth = templateData.width;
           this.workspaceHeight = templateData.height;
           this.workspaceBgColor = templateData.backgroundColor;
@@ -900,10 +900,10 @@ export class GacDocumentDetailsComponent implements OnInit {
           this.workspaceBorderWidth = templateData.borderWidth;
           this.workspaceBorderRadius = templateData.borderRadius;
           this.workspaceData = templateData;
-  
+
           this.renderAllBarcodes();
         }
-       
+
         console.log(this.DocumentList, "DocumentList")
         this.ReferenceList = this.DocumentList[0]['ReferenceJson'];
         console.log(this.ReferenceList, "ReferenceList");
@@ -1049,7 +1049,6 @@ export class GacDocumentDetailsComponent implements OnInit {
         this.IsActionUserActive = false;
         this.selectedNewActionId = null;
       });
-
   }
 
   MainDocumentView(Url) {

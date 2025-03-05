@@ -218,6 +218,7 @@ export class GACFileService {
     this._ObjGac.EndDate = ObjGac.EndDate;
     this._ObjGac.DocumentStatus = ObjGac.DocumentStatus;
     this._ObjGac.IsAll = ObjGac.IsAll;
+    this._ObjGac.CabinetId = ObjGac.CabinetId;
 
     return this.http.post(this.rootUrlII + "ArchiveAPI/ArchiveDocumentList", this._ObjGac);
   }
