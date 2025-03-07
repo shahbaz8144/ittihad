@@ -2856,6 +2856,7 @@ svg.doc_attachment_img {
     .btn.btn-hvr {
         padding: 4px !important;
     }
+ 
    .overlay-mbl-sidemenu{
     content: "";
     position: absolute;
@@ -2867,5 +2868,9 @@ svg.doc_attachment_img {
     z-index: 998;
     display: none;
     }
-
+    .iconify--mdi {
+        font-size: 17px;
+        height: 18px;
+        width: 18px;
+    }
     }
