@@ -2783,3 +2783,14 @@ span.cabinet-count {
     transition: fill .3s ease;
     fill: currentColor;
 }
+
+/*=========== Mobile resposnvie =============*/
+@media only screen and (max-width: 560px) {
+div#kt_inbox_aside {
+    position: absolute;
+    left: -325px;
+    max-height: 100vh;
+    z-index: 999;
+}
+
+}
