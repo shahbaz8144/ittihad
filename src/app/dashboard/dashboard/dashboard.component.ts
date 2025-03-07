@@ -758,6 +758,7 @@ export class DashboardComponent implements OnInit {
     localStorage.setItem('Dashboard_FilterValue', val);
     this.router.navigateByUrl('backend/Inbox/Memos');
   }
+  
   UrlRedirectPendingfromOthers(val: string) {
     //alert(val);
 

@@ -61,6 +61,7 @@ export class TemplatesComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    
     // HeaderComponent.languageChanged.subscribe((lang)=>{
       const lang: any = localStorage.getItem('language');
       localStorage.setItem('language',lang);
