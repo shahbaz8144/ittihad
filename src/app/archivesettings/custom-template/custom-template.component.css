@@ -603,3 +603,7 @@ canvas {
 ::ng-deep .kt-body-arabic .selection-panel-ul {
     text-align: justify;
 }
+/*--------- 70-2-3-25--------------*/
+::ng-deep .kt-body-arabic .workspace {
+    direction: ltr !important;
+}

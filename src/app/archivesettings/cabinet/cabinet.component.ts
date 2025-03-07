@@ -149,12 +149,14 @@ export class CabinetComponent implements OnInit {
 
   SameNameClearfileds() {
     this.CabinetName = "";
+    this.CabinetNameArabic = "";
     this.Status = false;
   }
 
   closeInfo() {
     this._Obj = new GACFiledto();
     this.CabinetName = "";
+    this.CabinetNameArabic = "";
     this.Status = false;
     this.Cabineterrormessage = false;
     this.Cabineterrormessagear = false;
