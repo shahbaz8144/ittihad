@@ -2778,3 +2778,19 @@ span.cabinet-count {
     font-size: 12px;
     font-weight: 500;
 }
+
+.svg-icon svg [fill]:not(.permanent):not(g) {
+    transition: fill .3s ease;
+    fill: currentColor;
+}
+
+/*=========== Mobile resposnvie =============*/
+@media only screen and (max-width: 560px) {
+div#kt_inbox_aside {
+    position: absolute;
+    left: -325px;
+    max-height: 100vh;
+    z-index: 999;
+}
+
+}

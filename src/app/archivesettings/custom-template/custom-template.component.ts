@@ -122,24 +122,23 @@ export class CustomTemplateComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     // HeaderComponent.languageChanged.subscribe((lang)=>{
-      const lang: any = localStorage.getItem('language');
-      localStorage.setItem('language',lang);
-      this.translate.use(lang);
-      this.currentLang = lang ? lang : 'en';
+    const lang: any = localStorage.getItem('language');
+    localStorage.setItem('language', lang);
+    this.translate.use(lang);
+    this.currentLang = lang ? lang : 'en';
     this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
-    this.EnterTemplateName = lang === 'en' ? 'Enter Template Name' : 'أدخل اسم القالب';
     // this.Cabinet_search = lang === 'en' ? 'Search...' : 'يبحث...';
     // this.Entercabinetname = lang === 'en' ? 'Enter cabinet name' : 'أدخل اسم الخزانة'
-    if(lang == 'ar'){
+    if (lang == 'ar') {
       this.renderer.addClass(document.body, 'kt-body-arabic');
-    }else if (lang == 'en'){
+    } else if (lang == 'en') {
       this.renderer.removeClass(document.body, 'kt-body-arabic');
     }
     const editElement = document.getElementById("editrck");
-  if (editElement) {
-    editElement.textContent = lang === 'ar' ? "إضافة" : "Add";
-  }
-      //  });
+    if (editElement) {
+      editElement.textContent = lang === 'ar' ? "إضافة" : "Add";
+    }
+    //  });
     this.route.paramMap.subscribe(params => {
       this.templateId = Number(params.get('id'));
       if (this.templateId) {
@@ -171,7 +170,7 @@ export class CustomTemplateComponent implements AfterViewInit, OnInit {
       //this.renderAllBarcodes();
       setTimeout(() => {
         this.elements.forEach(element => {
-          if(element.type=="barcode"){
+          if (element.type == "barcode") {
             this.generateBarcode('1234567890', element.id - 1); // Dummy Barcode
           }
         });

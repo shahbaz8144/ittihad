@@ -42,7 +42,7 @@
                                                 </span>
                                             </div>
                                             <div class="form-group">
-                                                <input class="form-control" type="text" id="txtdocumentname" name="Archive"
+                                                <input class="form-control mbl-view" type="text" id="txtdocumentname" name="Archive"
                                                  [(ngModel)]="FirstFileDocumentName" [value]="FirstFileDocumentName" 
                                                  [ngModelOptions]="{standalone: true}" (input)="onInput()"
                                                   [placeholder]="EnterArchiveName" autocomplete="off">
@@ -177,10 +177,10 @@
                                                     </div>
                                                     <div class="inner-border">
                                                         <div class="mb-0">
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="mb-0 mr-4">
+                                                            <div class="d-flex align-items-center mbl-v-flex-warap">
+                                                                <div class="mb-0 mr-4 mbl-w-100">
                                                                     <label class="checkbox checkbox-outline mb-0">
-                                                                    <input type="checkbox" id="sharedocCheck"
+                                                                    <input type="checkbox" id="sharedocCheck" class="mbl-check"
                                                                         [(ngModel)]="IsRequiredApproval"
                                                                         [ngModelOptions]="{standalone: true}"
                                                                         [disabled]="IsRequiredApprovaldisable"
@@ -190,9 +190,9 @@
                                                                         {{"Masterform.ApprovalUser" | translate }} </p>
                                                                 </label>
                                                                 </div>
-                                                                <div class="mb-0 mr-4">
+                                                                <div class="mb-0 mr-4 mbl-w-100">
                                                                     <label class="checkbox checkbox-outline mb-0">
-                                                                    <input type="checkbox" id="workflowCheck" 
+                                                                    <input type="checkbox" id="workflowCheck" class="mbl-check"
                                                                     [(ngModel)]="Isworkflow"
                                                                     [ngModelOptions]="{standalone: true}"
                                                                     [disabled]="Isworkflowdisable"
@@ -203,9 +203,9 @@
                                                                     </p>
                                                                 </label>
                                                                 </div>
-                                                                <div class="mb-0">
+                                                                <div class="mb-0 mbl-w-100">
                                                                     <label class="checkbox checkbox-outline mb-0">
-                                                                        <input type="checkbox" id="sharedocCheck"
+                                                                        <input type="checkbox" id="sharedocCheck" class="mbl-check"
                                                                             [(ngModel)]="Issharedoc"
                                                                             [ngModelOptions]="{standalone: true}"
                                                                             [disabled]="IsShareUserdisable"

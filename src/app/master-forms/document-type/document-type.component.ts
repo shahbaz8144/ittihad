@@ -51,6 +51,10 @@ export class DocumentTypeComponent implements OnInit {
   DocumentTypeSearchs:string;
   EnterDocumentTypeName:string;
   EnterDescription:string;
+  DocumenttypeName:string = "";
+  DocStatus:boolean;
+  DocNote:string = "";
+  DocumentTypeerrormessage:boolean;
   constructor(public service: DocumentTypeService, private objFormBuilder: UntypedFormBuilder,
     public alertService: AlertService, private cdr: ChangeDetectorRef,
     private _snackBar: MatSnackBar,
@@ -119,11 +123,12 @@ this.EnterDescription = lang === 'en' ? 'Enter Description' : 'أدخل الوص
       order: []
     };
     this.DocumentTypeNameMinLength = true;
-    this.DocTypeFormgroup = this.objFormBuilder.group({
-      'docName': new UntypedFormControl('', [Validators.required]),
-      'note': new UntypedFormControl,
-      'status': new UntypedFormControl
-    });
+    // this.DocTypeFormgroup = this.objFormBuilder.group({
+    //   'docName': new UntypedFormControl('', [Validators.required]),
+    //   'DocNameKey':new UntypedFormControl(null),
+    //   'note': new UntypedFormControl,
+    //   'status': new UntypedFormControl
+    // });
     // tippy('#myButton', {
     //   content: "Enter Document Type Name",
     //   arrow: true,
@@ -151,18 +156,8 @@ this.EnterDescription = lang === 'en' ? 'Enter Description' : 'أدخل الوص
     });
   }
 
-  Documenttypekeys:string = "";
-  documentTypeList: string[] = [];
+ 
 
-  addDocumentType(event: KeyboardEvent) {
-    if (event.key === 'Enter' && this.Documenttypekeys.trim().length >= 3) {
-      // Split the input by spaces and add each word separately
-      const words = this.Documenttypekeys.trim().split(/\s+/);
-      this.documentTypeList.push(...words);
-   console.log(this.documentTypeList , "Key Array");
-      this.Documenttypekeys = ""; // Clear input field after adding
-    }
-  }
 
   get f() {
     return this.DocTypeFormgroup.controls;
@@ -175,31 +170,89 @@ this.EnterDescription = lang === 'en' ? 'Enter Description' : 'أدخل الوص
       this.DocumentTypeNameMinLength = true;
     }
   }
+
+  // OnCreate() {
+  //   // this.loadComponent = false;
+  //   try {
+  //     if (this.DocTypeFormgroup.invalid) {
+  //       return;
+  //     }
+  //     this.objvalues_DocTypeDto.DocumentTypeId = this.service.objDocTypeDTO.DocumentTypeId;
+  //     this.objvalues_DocTypeDto.DocumentTypeName = this.DocTypeFormgroup.get('docName').value;
+  //     this.objvalues_DocTypeDto.Description = this.DocTypeFormgroup.get('note').value;
+  //     if (this.objvalues_DocTypeDto.Description == null) {
+  //       this.objvalues_DocTypeDto.Description = "";
+  //     }
+  //     if (this.DocTypeFormgroup.get('status').value == undefined) {
+  //       this.objvalues_DocTypeDto.IsActive = false;
+  //     }
+  //     else {
+  //       this.objvalues_DocTypeDto.IsActive = this.DocTypeFormgroup.get('status').value;
+  //     }
+  //     if (this.objvalues_DocTypeDto.DocumentTypeId == undefined || this.objvalues_DocTypeDto.DocumentTypeId == 0) {
+  //       this.objvalues_DocTypeDto.FlagId = 1;
+  //     } else if (this.objvalues_DocTypeDto.DocumentTypeId != 0) {
+  //       this.objvalues_DocTypeDto.FlagId = 2;
+  //     }
+  //     this.service.sendDocTypedata(this.objvalues_DocTypeDto).subscribe(
+  //       data => {
+  //         if (data["message"] == "1") {
+  //           this._snackBar.open('Added Successfully', 'End now', {
+  //             duration: 5000,
+  //             verticalPosition: 'bottom',
+  //             horizontalPosition:'right',
+  //           });
+  //         }
+  //         else if (data["message"] == "2") {
+  //           this._snackBar.open('Updated Successfully', 'End now', {
+  //             duration: 5000,
+  //             verticalPosition: 'bottom',
+  //             horizontalPosition:'right',
+  //           });
+  //         }
+  //         // document.getElementById("addrck").style.display = "none";
+  //         // document.getElementById("document_add").style.display = "block";
+  //         document.getElementById("addrck").classList.remove("kt-quick-panel--on");
+  //         document.getElementsByClassName("side_view")[0].classList.remove("position-fixed");
+  //         document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");
+  //         this.GetDocTypeList();
+  //         // this.reloadComponent();
+  //         this.DocTypeFormgroup.reset();
+  //         this.service.objDocTypeDTO.DocumentTypeId = 0;
+  //         this.documentTypeList = [];
+  //       });
+  //   } catch (error) {
+  //     alert(error)
+  //   }
+  //   this.isShow = false;
+  // }
+
   OnCreate() {
-    // this.loadComponent = false;
     try {
-      if (this.DocTypeFormgroup.invalid) {
+      if (this.DocumenttypeName == "") {
+       this.DocumentTypeerrormessage = true;
         return;
       }
-      this.objvalues_DocTypeDto.DocumentTypeId = this.service.objDocTypeDTO.DocumentTypeId;
-      this.objvalues_DocTypeDto.DocumentTypeName = this.DocTypeFormgroup.get('docName').value;
-      this.objvalues_DocTypeDto.Description = this.DocTypeFormgroup.get('note').value;
-      if (this.objvalues_DocTypeDto.Description == null) {
-        this.objvalues_DocTypeDto.Description = "";
-      }
-      if (this.DocTypeFormgroup.get('status').value == undefined) {
-        this.objvalues_DocTypeDto.IsActive = false;
-      }
-      else {
-        this.objvalues_DocTypeDto.IsActive = this.DocTypeFormgroup.get('status').value;
-      }
+      
+      this.DocumentTypeerrormessage = false;
+      // this.objvalues_DocTypeDto.DocumentTypeId = this.service.objDocTypeDTO.DocumentTypeId;
+      this.objvalues_DocTypeDto.DocumentTypeName = this.DocumenttypeName;
+      this.objvalues_DocTypeDto.Description = this.DocNote;
+      this.objvalues_DocTypeDto.IsActive = this.DocStatus;
+      
       if (this.objvalues_DocTypeDto.DocumentTypeId == undefined || this.objvalues_DocTypeDto.DocumentTypeId == 0) {
         this.objvalues_DocTypeDto.FlagId = 1;
       } else if (this.objvalues_DocTypeDto.DocumentTypeId != 0) {
         this.objvalues_DocTypeDto.FlagId = 2;
       }
+      // this.objvalues_DocTypeDto.FlagId = this.objvalues_DocTypeDto.DocumentTypeId ? 2 : 1;
+  
+      // **Debugging: Log the object**
+      console.log("Submitting Data:", this.objvalues_DocTypeDto);
+  
       this.service.sendDocTypedata(this.objvalues_DocTypeDto).subscribe(
         data => {
+          console.log("Response Data:", data);
           if (data["message"] == "1") {
             this._snackBar.open('Added Successfully', 'End now', {
               duration: 5000,
@@ -214,21 +267,26 @@ this.EnterDescription = lang === 'en' ? 'Enter Description' : 'أدخل الوص
               horizontalPosition:'right',
             });
           }
-          // document.getElementById("addrck").style.display = "none";
-          // document.getElementById("document_add").style.display = "block";
           document.getElementById("addrck").classList.remove("kt-quick-panel--on");
           document.getElementsByClassName("side_view")[0].classList.remove("position-fixed");
           document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");
+          
           this.GetDocTypeList();
-          // this.reloadComponent();
-          this.DocTypeFormgroup.reset();
+          this.document_cl()
+          // this.DocTypeFormgroup.reset();
           this.service.objDocTypeDTO.DocumentTypeId = 0;
-        });
+          this.documentTypeList = [];
+        },
+        error => {
+          console.error("API Error:", error);
+        }
+      );
     } catch (error) {
-      alert(error)
+      console.error("Caught Error:", error);
     }
     this.isShow = false;
   }
+  
   ResetForm() {
     this.DocTypeFormgroup.reset();
     this.service.objDocTypeDTO.DocumentTypeId = 0;
@@ -272,6 +330,12 @@ this.EnterDescription = lang === 'en' ? 'Enter Description' : 'أدخل الوص
     }
     this.isShow = false;
     this.DocumentTypeNameMinLength = true;
+    this.DocumenttypeName = "";
+    this.DocNote = "";
+    this.DocStatus = false;
+    this.DocumentTypeerrormessage = false;
+    this.service.objDocTypeDTO.DocumentTypeId = 0;
+    this.documentTypeList = [];
     document.getElementById("addrck").classList.add("kt-quick-panel--on");
     document.getElementsByClassName("side_view")[0].classList.add("position-fixed");
     document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.add("d-block");
@@ -286,11 +350,16 @@ this.EnterDescription = lang === 'en' ? 'Enter Description' : 'أدخل الوص
       // Set the inner HTML content based on the selected language
       element.innerHTML = this.translate.instant("Masterform.EditDocument");
     }
+    this.objvalues_DocTypeDto.DocumentTypeId = f1.DocumentTypeId;
+    this.DocumenttypeName = f1.DocumentTypeName;
+    this.DocStatus = f1.IsActive;
+    this.DocNote = f1.Description;
+    this.isShow = true;
     document.getElementById("addrck").classList.add("kt-quick-panel--on");
     document.getElementsByClassName("side_view")[0].classList.add("position-fixed");
     document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.add("d-block");
-    this.service.objDocTypeDTO = Object.assign({}, f1);
-    this.isShow = true;
+    // this.service.objDocTypeDTO = Object.assign({}, f1);
+    
   }
   document_cl() {
     document.getElementById("addrck").classList.remove("kt-quick-panel--on");
@@ -299,9 +368,15 @@ this.EnterDescription = lang === 'en' ? 'Enter Description' : 'أدخل الوص
 
     // document.getElementById("addrck").style.display = "none";
     // document.getElementById("document_add").style.display = "block";
-    this.DocTypeFormgroup.reset();
+    // this.DocTypeFormgroup.reset();
+     this.objvalues_DocTypeDto = new DocumentTypeDTO();
+    this.DocumenttypeName = "";
+    this.DocNote = "";
+    this.DocStatus = false;
+    this.DocumentTypeerrormessage = false;
     this.service.objDocTypeDTO.DocumentTypeId = 0;
     this.isShow = false;
+    this.documentTypeList = [];
   }
   
   UpdateStatus(Obj_Status: DocumentTypeDTO) {
@@ -333,10 +408,38 @@ this.EnterDescription = lang === 'en' ? 'Enter Description' : 'أدخل الوص
 
   
   closeInfo() {
-     this.DocTypeFormgroup.reset();
+    //  this.DocTypeFormgroup.reset();
+    this.objvalues_DocTypeDto = new DocumentTypeDTO();
+    this.DocumenttypeName = "";
+    this.DocNote = "";
+    this.DocStatus = false;
+    this.DocumentTypeerrormessage = false;
     document.getElementById("addrck").classList.remove("kt-quick-panel--on");
     document.getElementsByClassName("side_view")[0].classList.remove("position-fixed");
     document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");
     document.getElementById("company_add").style.display = "block";
   }
+
+
+  docNameKey: string = '';
+  documentTypeList: string[] = [];
+
+  addDocumentTypes(inputElement: HTMLInputElement) {
+    const inputValue = this.docNameKey.trim();
+    
+    if (inputValue.length > 0) { 
+      const words = inputValue.split(/\s+/); // Split input by spaces
+      this.documentTypeList.push(...words); // Add each word separately
+      console.log(this.documentTypeList, "Key Array");
+
+      // Clear input field
+      this.docNameKey = '';
+      inputElement.value = '';
+    }
+  }
+
+  removeKey(index: number) {
+    this.documentTypeList.splice(index, 1);
+  }
+ 
 }

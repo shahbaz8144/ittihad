@@ -1,6 +1,5 @@
 body {
   margin: 0;
-  font-family: var(--font-family-sans-serif) !important;
   line-height: 1.5 !important;
   direction: rtl !important;
 }
@@ -1364,4 +1363,9 @@ h4.text-teal.text-hover-primary.font-sp-bold.p-3.ml-3 .svg-icon svg {
     margin-left: 0px !important;
     margin-right: 70px !important;
   }
+}
+
+/*--------- 70-2-3-25--------------*/
+::ng-deep .kt-body-arabic .workspace {
+  direction: ltr !important;
 }

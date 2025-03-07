@@ -5328,3 +5328,7 @@ pdf-viewer {
     touch-action: none;
     pointer-events: none !important;
 }
+
+::ng-deep .kt-body-arabic .workspace {
+    direction: ltr !important;
+  }
