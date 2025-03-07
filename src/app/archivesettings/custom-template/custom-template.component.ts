@@ -127,6 +127,7 @@ export class CustomTemplateComponent implements AfterViewInit, OnInit {
       this.translate.use(lang);
       this.currentLang = lang ? lang : 'en';
     this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+    this.EnterTemplateName = lang === 'en' ? 'Enter Template Name' : 'أدخل اسم القالب';
     // this.Cabinet_search = lang === 'en' ? 'Search...' : 'يبحث...';
     // this.Entercabinetname = lang === 'en' ? 'Enter cabinet name' : 'أدخل اسم الخزانة'
     if(lang == 'ar'){
