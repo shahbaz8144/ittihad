@@ -43,7 +43,7 @@
                         <!-- <button type="button" [ngClass]="(FiltersSelected==true)?'kt-inbox__icon filter-dot':'kt-inbox__icon'" class="" data-toggle="dropdown">
                             <i class="flaticon-more"></i>
                         </button> -->
-                        <div id="div_filters" class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-width-700">
+                        <div id="div_filters" class="dropdown-menu dropdown-menu-right dropdown-menu-fit dropdown-width-700 mobile-dropdown-menu">
                             <ul class="kt-nav">
                                 <li class="kt-nav__head d-flex justify-content-between">
                                     <div>{{ "Masterform.UserFilters" | translate }}</div>
@@ -52,109 +52,113 @@
                                 <li class="kt-nav__item px-3 mb-2">
                                     <input autoFocus type="search" [(ngModel)]="txtSearch" [ngModelOptions]="{standalone: true}" autocomplete="off" name="Search" class="form-control" [placeholder]="FilterSearch">
                                 </li>
-                                <li (click)="$event.stopPropagation();" class="kt-nav__item px-4 pt-2">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <h6 class="mb-0">{{ "Masterform.Company" | translate }}</h6>
-
-                                            <div class="kt-nav__separator"></div>
-                                            <div class="height-scroll">
-                                                <label *ngFor="let ss of CompanyDropdownList|filter:txtSearch" class="kt-checkbox kt-checkbox--info">
-                                                    <input type="checkbox" name="companychk" value="{{ss.CompanyId}}"
-                                                        [checked]="ss.isChecked" (change)="oncompanycheck($event)">
-                                                    {{ss.CompanyName}}
-                                                    <span></span>
-                                                </label>
-                                            </div>
-
-
-                                            <div class="opts-flx">
-                                                <ng-container *ngFor="let ss of CompanyDropdownList">
-                                                    <div class="selectd-opts" *ngIf="(ss.isChecked == true)">
-                                                        <div class="slt-div">
-                                                            <div class="opt-txt">
-                                                                {{ss.CompanyName}}
-                                                            </div>
-                                                        </div>
-                                                        <div (click)="removeCompany(ss.CompanyId)" class="removeButton" aria-hidden="true">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="rmv-icn w-6 h-6">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    d="M6 18L18 6M6 6l12 12">
-                                                                </path>
-                                                            </svg>
-                                                        </div>
+                                <li>
+                                    <ul class="mobile-filter-scroll">
+                                        <li (click)="$event.stopPropagation();" class="kt-nav__item px-4 pt-2">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-lg-4 mobile-filter-bottom-3">
+                                                    <h6 class="mb-0">{{ "Masterform.Company" | translate }}</h6>
+        
+                                                    <div class="kt-nav__separator"></div>
+                                                    <div class="height-scroll">
+                                                        <label *ngFor="let ss of CompanyDropdownList|filter:txtSearch" class="kt-checkbox kt-checkbox--info">
+                                                            <input type="checkbox" name="companychk" value="{{ss.CompanyId}}"
+                                                                [checked]="ss.isChecked" (change)="oncompanycheck($event)">
+                                                            {{ss.CompanyName}}
+                                                            <span></span>
+                                                        </label>
                                                     </div>
-                                                </ng-container>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-lg-4">
-                                            <h6 class="mb-0">{{ "Masterform.Department" | translate }}</h6>
-
-                                            <div class="kt-nav__separator"></div>
-                                            <div class="height-scroll">
-                                                <label *ngFor="let ss of DepartmentDropdownList|filter:txtSearch" class="kt-checkbox kt-checkbox--info">
-                                                    <input type="checkbox" name="userschk" value="{{ss.DepartmentId}}"
-                                                        [checked]="ss.isChecked" (change)="onDepartmentcheck($event)">
-                                                    {{ss.DepartmentName}}
-                                                    <span></span>
-                                                </label>
-                                            </div>
-
-
-                                            <div class="opts-flx">
-                                                <ng-container *ngFor="let ss of DepartmentDropdownList">
-                                                    <div class="selectd-opts" *ngIf="(ss.isChecked == true)">
-                                                        <div class="slt-div">
-                                                            <div class="opt-txt">
-                                                                {{ss.DepartmentName}}
+        
+        
+                                                    <div class="opts-flx">
+                                                        <ng-container *ngFor="let ss of CompanyDropdownList">
+                                                            <div class="selectd-opts" *ngIf="(ss.isChecked == true)">
+                                                                <div class="slt-div">
+                                                                    <div class="opt-txt">
+                                                                        {{ss.CompanyName}}
+                                                                    </div>
+                                                                </div>
+                                                                <div (click)="removeCompany(ss.CompanyId)" class="removeButton" aria-hidden="true">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="rmv-icn w-6 h-6">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                                            d="M6 18L18 6M6 6l12 12">
+                                                                        </path>
+                                                                    </svg>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div (click)="removeDepartment(ss.DepartmentId)" class="removeButton" aria-hidden="true">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="rmv-icn w-6 h-6">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    d="M6 18L18 6M6 6l12 12">
-                                                                </path>
-                                                            </svg>
-                                                        </div>
+                                                        </ng-container>
                                                     </div>
-                                                </ng-container>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <h6 class="mb-0">{{ "Masterform.Designation" | translate }} </h6>
-                                            <div class="kt-nav__separator"></div>
-                                            <div class="height-scroll">
-                                                <label *ngFor="let ss of DesignationDropdownList|filter:txtSearch" class="kt-checkbox kt-checkbox--info">
-                                                    <input type="checkbox" name="userschk" value="{{ss.DesignationId}}"
-                                                        [checked]="ss.isChecked" (change)="onDesignation($event)">
-                                                    {{ss.DesignationName}}
-                                                    <span></span>
-                                                </label>
-                                            </div>
-
-
-                                            <div class="opts-flx">
-                                                <ng-container *ngFor="let ss of DesignationDropdownList">
-                                                    <div class="selectd-opts" *ngIf="(ss.isChecked == true)">
-                                                        <div class="slt-div">
-                                                            <div class="opt-txt">
-                                                                {{ss.DesignationName}}
+                                                </div>
+        
+        
+                                                <div class="col-sm-12 col-lg-4 mobile-filter-bottom-3">
+                                                    <h6 class="mb-0">{{ "Masterform.Department" | translate }}</h6>
+        
+                                                    <div class="kt-nav__separator"></div>
+                                                    <div class="height-scroll">
+                                                        <label *ngFor="let ss of DepartmentDropdownList|filter:txtSearch" class="kt-checkbox kt-checkbox--info">
+                                                            <input type="checkbox" name="userschk" value="{{ss.DepartmentId}}"
+                                                                [checked]="ss.isChecked" (change)="onDepartmentcheck($event)">
+                                                            {{ss.DepartmentName}}
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+        
+        
+                                                    <div class="opts-flx">
+                                                        <ng-container *ngFor="let ss of DepartmentDropdownList">
+                                                            <div class="selectd-opts" *ngIf="(ss.isChecked == true)">
+                                                                <div class="slt-div">
+                                                                    <div class="opt-txt">
+                                                                        {{ss.DepartmentName}}
+                                                                    </div>
+                                                                </div>
+                                                                <div (click)="removeDepartment(ss.DepartmentId)" class="removeButton" aria-hidden="true">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="rmv-icn w-6 h-6">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                                            d="M6 18L18 6M6 6l12 12">
+                                                                        </path>
+                                                                    </svg>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div (click)="RemoveDesignation(ss.DesignationId)" class="removeButton" aria-hidden="true">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="rmv-icn w-6 h-6">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    d="M6 18L18 6M6 6l12 12">
-                                                                </path>
-                                                            </svg>
-                                                        </div>
+                                                        </ng-container>
                                                     </div>
-                                                </ng-container>
+                                                </div>
+                                                <div class="col-sm-12 col-lg-4 mobile-filter-bottom-3">
+                                                    <h6 class="mb-0">{{ "Masterform.Designation" | translate }} </h6>
+                                                    <div class="kt-nav__separator"></div>
+                                                    <div class="height-scroll">
+                                                        <label *ngFor="let ss of DesignationDropdownList|filter:txtSearch" class="kt-checkbox kt-checkbox--info">
+                                                            <input type="checkbox" name="userschk" value="{{ss.DesignationId}}"
+                                                                [checked]="ss.isChecked" (change)="onDesignation($event)">
+                                                            {{ss.DesignationName}}
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+        
+        
+                                                    <div class="opts-flx">
+                                                        <ng-container *ngFor="let ss of DesignationDropdownList">
+                                                            <div class="selectd-opts" *ngIf="(ss.isChecked == true)">
+                                                                <div class="slt-div">
+                                                                    <div class="opt-txt">
+                                                                        {{ss.DesignationName}}
+                                                                    </div>
+                                                                </div>
+                                                                <div (click)="RemoveDesignation(ss.DesignationId)" class="removeButton" aria-hidden="true">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="rmv-icn w-6 h-6">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                                            d="M6 18L18 6M6 6l12 12">
+                                                                        </path>
+                                                                    </svg>
+                                                                </div>
+                                                            </div>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li class="kt-nav__separator"></li>
                                 <li class="px-4">
@@ -172,7 +176,8 @@
                     </ng-container>
 
                     <button type="button" class="btn btn-info btn-sm" routerLink="/backend/masterforms/UserRegistration">
-                        <i class="material-icons fs-4">add</i> {{ "Masterform.NewUserRegistration" | translate }}
+                        <i class="material-icons fs-4">add</i> 
+                        <span class="btn-mobile-name">{{ "Masterform.NewUserRegistration" | translate }}</span>
                     </button>
                 </div>
             </div>
@@ -807,7 +812,7 @@
                                             <div class="add_rck" id="addrck">
                                                 <div class="px-3 edit_options">
 
-                                                    <ul class="nav nav-pills align-items-center">
+                                                    <ul class="nav nav-pills align-items-center mobile-nav">
                                                         <li class="tabs_li" id="ver0">
                                                             <a href="#homeee" data-toggle="tab" class="tab_link p-3 active">{{ "Masterform.PersonalInfo" | translate }}</a>
                                                         </li>

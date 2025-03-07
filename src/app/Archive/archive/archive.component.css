@@ -2875,10 +2875,11 @@ ul.schedule-select-user-list li .slect-close svg {
     .label-icon {
         width: 15px;
     }
+    .tabs-ies .btn-tabbie {
+       
+        padding: 4px 8px !important;
+       
+    }
     }
     
-    @media only screen and (max-width: 900px) {
-
-
-
-    }
+   

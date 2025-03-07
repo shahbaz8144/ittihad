@@ -376,3 +376,63 @@ svg.toggle-arrow-svg {
     left: -40px!important;
     transform: rotate(270deg)!important;
 }
+
+
+.kt-menu__link-icon.mobile {
+    display: none !important;
+}
+
+@media only screen and (max-width: 767px) {
+    ::ng-deep .kt-aside {
+        overflow-y: unset !important;
+    }
+
+    ::ng-deep #kt_header_mobile_topbar_toggler {
+        display: none !important;
+    }
+
+    ::ng-deep .side-open-close {
+        display: none !important;
+    }
+
+    ::ng-deep .kt-header-mobile__logo h3 {
+        margin-bottom: 0px !important;
+    }
+
+    .kt-menu__link-icon.web {
+        display: none !important;
+    }
+
+    .kt-menu__link-icon.mobile {
+        display: block !important;
+    }
+
+    ::ng-deep .search-bar {
+        padding-left: 0px !important;
+        padding-right: 10px !important;
+    }
+
+    ::ng-deep .btn {
+        white-space: nowrap;
+    }
+
+
+    ::ng-deep .btn.btn-sm i {
+        margin-right: 0rem;
+    }
+    ::ng-deep .rings-bg {
+        display: none !important;
+    }
+    ::ng-deep .banner-head::before {
+        display: none !important;
+    }
+    ::ng-deep .banner-head::after {
+        display: none !important;
+    }
+    ::ng-deep .kt-aside--minimize .kt-aside .new-menu_submenu {
+        position: relative !important;
+        transform: none !important;
+        top: auto !important;
+        left: auto !important;
+    }
+}

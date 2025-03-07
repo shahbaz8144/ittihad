@@ -355,3 +355,11 @@ svg {
     touch-action: none;
     pointer-events: none !important;
 }
+
+@media only screen and (max-width: 767px) {
+    .template-card-position {
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+}
