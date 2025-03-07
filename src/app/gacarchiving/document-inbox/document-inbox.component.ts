@@ -1,23 +1,25 @@
-import { ChangeDetectorRef, Component, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { GACFileService } from 'src/app/_service/gacfile.service';
 import { GACFiledto } from 'src/app/_models/gacfiledto';
 import { UserDTO } from 'src/app/_models/user-dto';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import * as moment from 'moment';
 import { DatePipe } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InboxService } from 'src/app/_service/inbox.service';
+import { MessageService } from 'src/app/_service/message.service';
 import { InboxDTO } from 'src/app/_models/inboxdto';
 import { HeaderComponent } from 'src/app/shared/header/header.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DocumentsComponent } from '../documents/documents.component';
 
 @Component({
   selector: 'app-document-inbox',
   templateUrl: './document-inbox.component.html',
   styleUrls: ['./document-inbox.component.css']
 })
-export class DocumentInboxComponent implements OnInit {
+export class DocumentInboxComponent implements OnInit, AfterViewInit {
   _obj1: InboxDTO;
   _Lstlabels: any = [];
   labelid: number;
@@ -41,7 +43,7 @@ export class DocumentInboxComponent implements OnInit {
   public get currentUserValue(): UserDTO {
     return this.currentUserSubject.value[0];
   }
-
+  private subscription!: Subscription;
   constructor(public service: GACFileService,
     public serviceL: InboxService,
     private translate: TranslateService,
@@ -49,7 +51,8 @@ export class DocumentInboxComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private cd: ChangeDetectorRef,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {
     this._obj1 = new InboxDTO();
     this.currentUserSubject = new BehaviorSubject<UserDTO>(JSON.parse(localStorage.getItem('currentUser')));
@@ -64,7 +67,8 @@ export class DocumentInboxComponent implements OnInit {
       }
     });
   }
-
+  ngAfterViewInit() {
+  }
   ngOnInit(): void {
     const lang: any = localStorage.getItem('language');
     this.translate.use(lang);
@@ -76,6 +80,14 @@ export class DocumentInboxComponent implements OnInit {
     this.CabinetList();
 
     this.GetLables();
+
+    // Listen for actions from the shared service
+    this.subscription = this.messageService.action$.subscribe(action => {
+      console.log('Received action:', action);
+      if (action === 'menu_close') {
+        $('#kt_inbox_aside').removeClass('mbl-left-zero');
+      }
+    });
   }
 
 
@@ -120,7 +132,7 @@ export class DocumentInboxComponent implements OnInit {
       this.AllDocumentsCount = data['Data'].DocumentsCount;
       this.route.firstChild?.paramMap.subscribe(params => {
         this.cabinetId = Number(params.get('cabinetid')); // Convert to number if needed
-         
+
         if (this.cabinetId == 0) {
           this.selectedCabinet = "All Documents";
         }
@@ -299,6 +311,11 @@ export class DocumentInboxComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'backend/Archive/Label';
     var myurl = `${this.returnUrl}/${labelid}`;
     this.router.navigate([myurl]);
+  }
+
+  opentoggle() {
+    $('#kt_inbox_aside').addClass('mbl-left-zero');
+    this.messageService.sendMessage('menu_open');
   }
 
 }

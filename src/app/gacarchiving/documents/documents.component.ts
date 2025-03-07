@@ -4,7 +4,7 @@ import { InboxDTO } from 'src/app/_models/inboxdto';
 import { GACFileService } from 'src/app/_service/gacfile.service';
 import { GACFiledto } from 'src/app/_models/gacfiledto';
 import { UserDTO } from 'src/app/_models/user-dto';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import * as moment from 'moment';
 import { TranslateService } from '@ngx-translate/core';
@@ -12,6 +12,8 @@ import Swal from 'sweetalert2';
 import { HeaderComponent } from 'src/app/shared/header/header.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { MessageService } from 'src/app/_service/message.service';
+
 @Component({
   selector: 'app-documents',
   templateUrl: './documents.component.html',
@@ -103,13 +105,15 @@ export class DocumentsComponent implements OnInit {
   }
   private currentUserSubject: BehaviorSubject<UserDTO>;
   public currentUser: Observable<UserDTO>;
+  private subscription!: Subscription;
   constructor(public service: GACFileService,
     public serviceInbox: InboxService,
     private cd: ChangeDetectorRef,
     private translate: TranslateService,
     private renderer: Renderer2,
     private _snackBar: MatSnackBar,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private messageService: MessageService
   ) {
     this.initializeLanguageSettings();
     this._obj = new GACFiledto();
@@ -132,6 +136,18 @@ export class DocumentsComponent implements OnInit {
     this.SourceList = this.SourceList || [];
     this.DocumentTypeList = this.DocumentTypeList || [];
     this.ManufactureList = this.ManufactureList || [];
+
+    // Listen for actions from the shared service
+    this.subscription = this.messageService.action$.subscribe(action => {
+      console.log('Received action:', action);
+      if (action === 'menu_open') {
+        $('.overlay-mbl-sidemenu').addClass('d-block');
+      }
+    });
+  }
+  closeoverlay(){
+    $('.overlay-mbl-sidemenu').removeClass('d-block');
+    this.messageService.sendMessage('menu_close');
   }
 
   initializeLanguageSettings(): void {
@@ -1170,4 +1186,5 @@ export class DocumentsComponent implements OnInit {
     // this.GACDocuments('', '', '', '', '', '', '', '', '');
     this.GACDocumentsArchive('', '', '', '', '', '', '', true);
   }
+  
 }
