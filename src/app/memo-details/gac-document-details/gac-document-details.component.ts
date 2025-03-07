@@ -532,11 +532,11 @@ export class GacDocumentDetailsComponent implements OnInit {
               ReferenceId: this._referenceId,
               ShareId: this.ShareId,
               CabinetName: this.selectedCabinet,
-              CabinetId:this.selectedCabinetId
-            
+              CabinetId: this.selectedCabinetId
+
             }
           });
-          
+
         } else {
           // console.warn('Last version or VersionName is missing');
         }
@@ -869,14 +869,15 @@ export class GacDocumentDetailsComponent implements OnInit {
   selected_SortIds: number[] = [];
   barcode: string;
   prefix: string;
-  selectedCabinet:string;
-  selectedCabinetId:number
+  selectedCabinet: string;
+  selectedCabinetId: number
   ArchiveDetailsInfo(documentid, ShareId) {
     this._obj.DocumentId = parseInt(documentid);
     this._obj.ShareId = parseInt(ShareId);
     this._obj.CreatedBy = this.LoginUserId;
     this.service.ArchiveDocumentDetails(this._obj)
       .subscribe(data => {
+        debugger
         console.log(data, "Document details API Data");
         this._obj = data as GACFiledto;
         this.DocumentList = this._obj.Data["ArchiveJson"];
@@ -907,6 +908,9 @@ export class GacDocumentDetailsComponent implements OnInit {
           this.workspaceData = templateData;
 
           this.renderAllBarcodes();
+        }
+        else {
+          this.workspaceData = '[]';
         }
 
         console.log(this.DocumentList, "DocumentList")
@@ -1128,7 +1132,7 @@ export class GacDocumentDetailsComponent implements OnInit {
   }
 
   DownloadFile() {
-    
+
     if (this.isMainDocumentActive) {
       this.download(this.DocumentList[0].Url, this._DocumentName);
     }
