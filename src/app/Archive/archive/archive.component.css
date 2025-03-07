@@ -2864,3 +2864,8 @@ ul.schedule-select-user-list li .slect-close svg {
     left: 12px !important;
 }
 
+/* For Mobile Phones Portrait or Landscape View */
+@media screen and (max-device-width: 640px) {
+   
+  }
+  

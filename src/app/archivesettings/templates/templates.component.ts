@@ -61,7 +61,7 @@ export class TemplatesComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    
+
     // HeaderComponent.languageChanged.subscribe((lang)=>{
       const lang: any = localStorage.getItem('language');
       localStorage.setItem('language',lang);
@@ -161,11 +161,17 @@ export class TemplatesComponent implements OnInit, AfterViewInit {
     document.getElementsByClassName("side_view")[0].classList.add("position-fixed");
     document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.add("d-block");
   }
+
+  
+
+
+
   template_close() {
     document.getElementById("template_preview").classList.remove("kt-quick-panel--on");
     document.getElementsByClassName("side_view")[0].classList.remove("position-fixed");
     document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");
   }
+
   onDragEnd(event: CdkDragEnd) {
     this.position = event.source.getFreeDragPosition();
     this.position.x = event.source.getFreeDragPosition().x;

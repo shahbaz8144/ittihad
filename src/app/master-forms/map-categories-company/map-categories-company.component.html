@@ -1,10 +1,10 @@
-<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid px-4">
     <div class="row">
         <div class="col-lg-12">
             <div class="d-flex justify-content-between align-items-center mb-1">
                 <div class="component-main-header">
                     <div class="component-main-header-title">
-                        <h4 class="mb-0">{{ "Masterform.MapCategoriesToCompany" | translate }} </h4>
+                        <div class="mb-0">{{ "Masterform.MapCategoriesToCompany" | translate }} </div>
                     </div>
                 </div>
                 <!-- <h4 class="mb-3"> {{ "Masterform.MapCategoriesToCompany" | translate }} </h4> -->
@@ -109,14 +109,11 @@
                                         </ul>
                                     </li>
                                 </ul>  
-                                <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-                                    <!-- This is the tree node template for leaf nodes -->
+                                <!-- <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
                                     <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
-                                      <!-- use a disabled button to provide padding for tree leaf -->
                                       <button mat-icon-button disabled></button>
                                       {{node.name}}
                                     </mat-tree-node>
-                                    <!-- This is the tree node template for expandable nodes -->
                                     <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding matTreeNodeToggle
                                                    [cdkTreeNodeTypeaheadLabel]="node.name">
                                       <button mat-icon-button matTreeNodeToggle
@@ -127,7 +124,7 @@
                                       </button>
                                       {{node.name}}
                                     </mat-tree-node>
-                                  </mat-tree>
+                                  </mat-tree> -->
                             </div>
                         </div>
                         <span>

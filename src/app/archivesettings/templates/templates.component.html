@@ -1,9 +1,9 @@
-<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid side_view">
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid side_view px-4">
     <div class="col-lg-12">
         <!-- <h4 class="mb-3 pro-nm text-dark"> TemplateList </h4> -->
         <div class="component-main-header">
             <div class="component-main-header-title">
-                <h4 class="mb-0">{{ "Masterform.TemplateList" | translate }} </h4>
+                <div class="mb-0">{{ "Masterform.TemplateList" | translate }} </div>
             </div>
         </div>
         <!-- {{"Masterform." |translate }}  -->
@@ -140,11 +140,11 @@
                         <!-- <div class="template-card-adjust">
 
                         </div> -->
-                        <div class="pdf-container" #pdfContainer>
+                         <div class="pdf-container" #pdfContainer>
                             <div class="draggable-box" cdkDrag cdkDragBoundary=".pdf-container" (cdkDragEnded)="onDragEnd($event)">
                                 <div class="workspace" #workspaceContainer [style.width.px]="workspaceWidth" [style.height.px]="workspaceHeight" [style.background-color]="workspaceBgColor" [style.border]="workspaceBorderWidth + 'px solid ' + workspaceBorderColor" [style.border-radius.px]="workspaceBorderRadius">
                                     <div *ngFor="let element of workspaceData?.elements; let i = index" class="resizable-draggable" [style.width.px]="element.width" [style.height.px]="element.height" [style.fontSize.px]="element.fontSize" [style.background-color]="element.backgroundColor || '#ffffff'"
-                                        [style.transform]="'translate(' + element.x + 'px, ' + element.y + 'px)'">
+                                        [style.transform]="'translate(' + position.x + 'px, ' + position.y + 'px)'">
 
                                         <span *ngIf="element.valueType === 'userDefined'">
                                             {{ element.staticText }}
@@ -170,16 +170,14 @@
                                                     <ng-template #singleLineText>
                                                     <tspan x="50%">{{ bindValue(element) }}</tspan>
                                                     </ng-template>
-                                                
                                                 </text>
                                         </svg>
-
-
                                     </div>
                                 </div>
                             </div>
                             <div id="pdfViewer" class="rendered-pdf"></div>
-                        </div>
+                        </div> 
+                        
                     </div>
                 </div>
             </div>
