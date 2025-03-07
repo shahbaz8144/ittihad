@@ -83,33 +83,33 @@ export class CustomTemplateComponent implements AfterViewInit, OnInit {
   fontSize: number = 10.6;
   obj: GACFiledto;
   TextValues: string;
-  EnterTemplateName:string = "";
-  currentLang:"ar"|"en"="ar";
+  EnterTemplateName: string = "";
+  currentLang: "ar" | "en" = "ar";
   constructor(private http: HttpClient, private service: GACFileService,
     private _snackBar: MatSnackBar,
     private route: ActivatedRoute,
-    private translate:TranslateService,
-        @Inject(DOCUMENT) private document: Document,
-        private renderer: Renderer2,
+    private translate: TranslateService,
+    @Inject(DOCUMENT) private document: Document,
+    private renderer: Renderer2,
   ) {
     this.obj = new GACFiledto();
-     HeaderComponent.languageChanged.subscribe((lang)=>{
-          localStorage.setItem('language',lang);
-          this.translate.use(lang);
-          this.currentLang = lang ? lang : 'en';
-        this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
-        this.EnterTemplateName = lang === 'en' ? 'Enter Template Name' : 'أدخل اسم القالب';
-        // this.Entercabinetname = lang === 'en' ? 'Enter cabinet name' : 'أدخل اسم الخزانة'
-        if(lang == 'ar'){
-          this.renderer.addClass(document.body, 'kt-body-arabic');
-        }else if (lang == 'en'){
-          this.renderer.removeClass(document.body, 'kt-body-arabic');
-        }
-        const editElement = document.getElementById("editrck");
+    HeaderComponent.languageChanged.subscribe((lang) => {
+      localStorage.setItem('language', lang);
+      this.translate.use(lang);
+      this.currentLang = lang ? lang : 'en';
+      this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+      this.EnterTemplateName = lang === 'en' ? 'Enter Template Name' : 'أدخل اسم القالب';
+      // this.Entercabinetname = lang === 'en' ? 'Enter cabinet name' : 'أدخل اسم الخزانة'
+      if (lang == 'ar') {
+        this.renderer.addClass(document.body, 'kt-body-arabic');
+      } else if (lang == 'en') {
+        this.renderer.removeClass(document.body, 'kt-body-arabic');
+      }
+      const editElement = document.getElementById("editrck");
       if (editElement) {
         editElement.textContent = lang === 'ar' ? "إضافة" : "Add";
       }
-           });
+    });
   }
 
 
@@ -167,8 +167,15 @@ export class CustomTemplateComponent implements AfterViewInit, OnInit {
 
       this.elements = templateData.elements;
       this.templateName = data['Data'].TemplateDetailsJson[0].TemplateName;
+      debugger
       //this.renderAllBarcodes();
-      this.generateBarcode('1234567890', this.elements.length - 1); // Dummy Barcode
+      setTimeout(() => {
+        this.elements.forEach(element => {
+          if(element.type=="barcode"){
+            this.generateBarcode('1234567890', element.id - 1); // Dummy Barcode
+          }
+        });
+      }, 2000);
     });
 
   }
@@ -582,6 +589,7 @@ export class CustomTemplateComponent implements AfterViewInit, OnInit {
   generateBarcode(barcodeNumber: string, index: number) {
     setTimeout(() => {
       const barcodeCanvas = document.getElementById(`barcode-${index}`) as HTMLCanvasElement;
+      debugger
       if (barcodeCanvas) {
         const element = this.elements[index];
         const ctx = barcodeCanvas.getContext('2d');
