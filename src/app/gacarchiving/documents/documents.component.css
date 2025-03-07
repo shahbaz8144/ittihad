@@ -558,7 +558,6 @@ i.fa.search-chld {
         right: -100.2%;
         left: auto;
     }
-
     .kt-quick-panel {
         width: 100% !important;
     }
@@ -568,7 +567,6 @@ i.fa.search-chld {
     .d-md-flex {
         flex-direction: column;
     }
-
     .card2 {
         margin-left: 0px;
     }
@@ -1276,7 +1274,6 @@ input.form-control.filt {
         flex: 0 0 31%;
         max-width: 31%;
     }
-
     .cards {
         flex: 0 0 31.7%;
         max-width: 31.7%;
@@ -1585,7 +1582,6 @@ svg.rmv-icn:hover {
         overflow-y: auto;
         height: calc(100vh - 150px);
     }
-
     .scroll-y.aside-scrolly {
         height: calc(100vh - 85px);
     }
@@ -1966,10 +1962,12 @@ span.s-label {
     font-weight: 500;
     padding: 0px 3px;
     border-radius: 0px 0px 0px 3px;
-    position: absolute; 
+    position: absolute;
     top: 0;
     right: 0;
 }
+
+
 /*----Document View----*/
 
 
@@ -2814,9 +2812,63 @@ svg.doc_attachment_img {
     background-color: #df7800;
     border-color: #df7800;
 }
+
 .tabs-ies .btn-tabbie.btn-active {
     color: #ff8900;
 }
+
 .tabs-ies .btn-active::before {
     background-color: #ff8900;
+}
+
+
+/*=========== Mobile resposnvie =============*/
+
+@media only screen and (max-width: 560px) {
+    .left-click-side {
+        display: block;
+    }
+    .kt-inbox__info label {
+        width: 100% !important;
+        margin-bottom: 6px !important;
+    }
+    .doc-detls .kt-inbox__info {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        width: 20px;
+    }
+    .kt-inbox__icon.kt-inbox__icon--off.kt-inbox__icon--light {
+        width: 100%;
+        display: block;
+        padding: 0px !important;
+        height: auto !important;
+    }
+    span.kt-pin-v {
+        padding: 0px !important;
+    }
+    .doc-date {
+        margin-left: 100px;
+    }
+    .doc-username {
+        max-width: 165px;
+    }
+    .kt-portlet__head.filter-head {
+        padding: 0px !important;
+    }
+    .btn.btn-hvr {
+        padding: 4px !important;
+    }
+    .overlay-mbl-sidemenu {
+        content: "";
+        position: absolute;
+        background-color: #000000ba;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        z-index: 998;
+        display: none;
+        cursor: pointer;
+    }
 }

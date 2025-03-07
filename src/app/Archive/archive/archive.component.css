@@ -2864,8 +2864,21 @@ ul.schedule-select-user-list li .slect-close svg {
     left: 12px !important;
 }
 
-/* For Mobile Phones Portrait or Landscape View */
-@media screen and (max-device-width: 640px) {
-   
-  }
-  
+/*============ mobile responsive ===============*/
+
+@media only screen and (max-width: 800px) {
+    .d-flex.align-items-center.mbl-v-flex-warap {
+        flex-wrap: wrap;
+        margin-bottom: 0px;
+        gap: 10px;
+    }
+    .label-icon {
+        width: 15px;
+    }
+    }
+    
+    @media only screen and (max-width: 900px) {
+
+
+
+    }
