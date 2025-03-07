@@ -1,8 +1,8 @@
-<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid side_view">
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid side_view px-4">
     <div class="col-lg-12">
         <div class="component-main-header">
             <div class="component-main-header-title">
-                <h4 class="mb-0">{{ "Masterform.DocumentType" | translate }} </h4>
+                <div class="mb-0">{{ "Masterform.DocumentType" | translate }} </div>
             </div>
         </div>
         <!-- <h4 class="mb-3 pro-nm"> {{ "Masterform.DocumentType" | translate }} </h4> -->
@@ -185,7 +185,7 @@
                 </div>
                 <div class="kt-portlet__body py-1">
 
-                    <form [formGroup]="DocTypeFormgroup" (ngSubmit)="OnCreate()">
+                    
                         <div class="tab-content">
                             <div class="tab-pane d-flex flex-wrap justify-content-start align-items-baseline form-m">
                                 <div class="form-cus">
@@ -194,11 +194,15 @@
                                     <span id="TippyDocumentTypeName" class="material-icons fs-4 float-right">
                                         info_outline
                                     </span>
-                                    <input type="text" id="txtdocumentname" formControlName="docName"
-                                        (change)="checkDocumentExits()" class="form-control"
+                                    <input type="text" id="txtdocumentname" [(ngModel)]="DocumenttypeName"
+                                         class="form-control"
                                         [placeholder]="EnterDocumentTypeName"
-                                        [(ngModel)]="service.objDocTypeDTO.DocumentTypeName" required minlength="3"
+                                         required minlength="3"
                                         maxlength="50" />
+                                        <div class="kt-error" *ngIf="DocumentTypeerrormessage && !DocumenttypeName">
+                                            <span class="kt-error-msg">
+                                                                    {{"Masterform.EnetrDocumentTypeName" | translate }} </span>
+                                        </div>
                                     <div>
                                         <span style="color:red" [hidden]="DocumentTypeNameMinLength">
                                             {{ "Masterform.fieldsalertmessage" | translate }} </span>
@@ -206,65 +210,68 @@
                                 </div>
                                 <div class="form-cus">
                                     <label>Add Document Type Keys</label>
-                                    <span class="text-danger ml-1">*</span>
-                                    <span id="TippyDocumentTypeName" class="material-icons fs-4 float-right">
-                                        info_outline
-                                    </span>
-                                    <input type="text" id="txtdocumentname" formControlName="docName"
+                                    <span class="material-icons fs-4 float-right">info_outline</span>
+                                    
+                                    <input type="text"
                                         class="form-control"
                                         placeholder="Enter Document Type Keys...."
-                                        [(ngModel)]="Documenttypekeys" 
-                                        (keydown.enter)="addDocumentType($event)"
+                                        [(ngModel)]="docNameKey"
+                                        #docInput
+                                        (keydown.enter)="addDocumentTypes(docInput)"
                                         required minlength="3"
                                         maxlength="50" />
-
-                                        <table class="table mt-3" *ngIf="documentTypeList.length > 0">
-                                            <thead>
-                                              <tr>
+                                    
+                                    <table class="table mt-3" *ngIf="documentTypeList.length > 0">
+                                        <thead>
+                                            <tr>
                                                 <th>S.No</th>
                                                 <th>Key Name</th>
-                                              </tr>
-                                            </thead>
-                                            <tbody>
-                                              <tr *ngFor="let key of documentTypeList; index as i">
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let key of documentTypeList; index as i">
                                                 <td>{{ i + 1 }}</td>
                                                 <td>{{ key }}</td>
-                                              </tr>
-                                            </tbody>
-                                          </table>
-                                    <div>
-                                    </div>
+                                                <td>
+                                                    <button class="btn btn-danger btn-sm" (click)="removeKey(i)">Remove</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
+                                
+                             
                                 <div class="form-cus">
                                     <label class="form-label">{{ "Masterform.Status" | translate }}</label>
                                     <div>
-                                        <mat-slide-toggle color="primary" formControlName="status"
-                                            [(ngModel)]="service.objDocTypeDTO.IsActive">
+                                        <mat-slide-toggle color="primary" [(ngModel)]="DocStatus">
                                         </mat-slide-toggle>
                                     </div>
                                 </div>
                                 <div class="form-cus">
                                     <label class="form-label">{{ "Masterform.Note" | translate }}</label>
-                                    <textarea formControlName="note" class="form-control"
-                                        [placeholder]="EnterDescription" [(ngModel)]="service.objDocTypeDTO.Description"
+                                    <textarea [(ngModel)]="DocNote" class="form-control"
+                                        [placeholder]="EnterDescription" 
                                         class="form-control"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="task_act form-m">
                             <div class="form-cus">
-                                <button class="btn btn-sm btn-info px-3 mt-2" [disabled]="DocTypeFormgroup.invalid"
+                                <button class="btn btn-sm btn-info px-3 mt-2" 
+                                (click)="OnCreate()"
                                     *ngIf='!isShow'>
                                     {{ "Masterform.Save" | translate }}
                                 </button>
                                 <button type="submit" class="btn btn-sm btn-info px-3 mt-2"
+                                (click)="OnCreate()"
                                     *ngIf='isShow'>{{ "Masterform.Update" | translate }}</button>
                                 <button class="btn btn-sm btn-secondary px-3 ml-2 mt-2" (click)="document_cl()">
                                     {{ "Masterform.Cancel" | translate }}
                                 </button>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>

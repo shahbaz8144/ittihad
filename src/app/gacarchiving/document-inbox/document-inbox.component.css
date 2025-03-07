@@ -2763,7 +2763,6 @@ svg.doc_attachment_img {
     background: #ff8900 !important;
 }
 
-
 .btn-memo1:disabled {
     border-color: #ffe2a2;
     box-shadow: 0 3px 10px -3px #fbc69c;
@@ -2777,4 +2776,32 @@ span.cabinet-count {
     padding: 0px 4px;
     font-size: 12px;
     font-weight: 500;
+}
+
+.svg-icon svg [fill]:not(.permanent):not(g) {
+    transition: fill .3s ease;
+    fill: currentColor;
+}
+
+.right-slide-menu-mbl {
+    display: none;
+}
+
+
+/*=========== Mobile resposnvie =============*/
+
+@media only screen and (max-width: 560px) {
+    div#kt_inbox_aside {
+        position: absolute;
+        left: -325px;
+        max-height: 100vh;
+        z-index: 999;
+    }
+    .mbl-left-zero {
+        left: 0px !important;
+    }
+    .right-slide-menu-mbl {
+        display: block;
+        cursor: pointer;
+    }
 }

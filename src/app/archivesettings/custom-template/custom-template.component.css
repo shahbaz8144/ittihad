@@ -636,3 +636,7 @@ canvas {
         padding: 10px;
     }
   }
+/*--------- 70-2-3-25--------------*/
+::ng-deep .kt-body-arabic .workspace {
+    direction: ltr !important;
+}

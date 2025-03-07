@@ -28,14 +28,12 @@
                                               <path class="circle-bg"
                                                 d="M18 2.0845
                                                   a 15.9155 15.9155 0 0 1 0 31.831
-                                                  a 15.9155 15.9155 0 0 1 0 -31.831"
-                                              />
+                                                  a 15.9155 15.9155 0 0 1 0 -31.831"/>
                                               <path class="circle"
                                                 stroke-dasharray="90, 100"
                                                 d="M18 2.0845
                                                   a 15.9155 15.9155 0 0 1 0 31.831
-                                                  a 15.9155 15.9155 0 0 1 0 -31.831"
-                                              />
+                                                  a 15.9155 15.9155 0 0 1 0 -31.831"/>
                                               <text x="18" y="21.35" class="percentage">0%</text>
                                             </svg>
                                         </div>
@@ -44,7 +42,7 @@
                             </div>
                             <div class="dashboard-item-body">
                                 <div class="dashboard-smail-tiles-ul">
-                                    <div class="dashboard-smail-tiles-li">
+                                    <div class="dashboard-smail-tiles-li" (click)="UrlRedirect('Approval Pending')" >
                                         <div class="dashboard-smail-tiles-li-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M6.09082 0.894531C5.36147 0.894531 4.662 1.18426 4.14628 1.69999C3.63055 2.21571 3.34082 2.91519 3.34082 3.64453V5.20241L2.04695 5.89266C1.60706 6.12721 1.2392 6.47692 0.982715 6.90439C0.726231 7.33187 0.59077 7.82102 0.59082 8.31953V20.1445C0.59082 20.8739 0.880552 21.5733 1.39628 22.0891C1.912 22.6048 2.61147 22.8945 3.34082 22.8945H19.8408C20.5702 22.8945 21.2696 22.6048 21.7854 22.0891C22.3011 21.5733 22.5908 20.8739 22.5908 20.1445V8.31953C22.5909 7.82102 22.4554 7.33187 22.1989 6.90439C21.9424 6.47692 21.5746 6.12721 21.1347 5.89266L19.8408 5.20241V3.64453C19.8408 2.91519 19.5511 2.21571 19.0354 1.69999C18.5196 1.18426 17.8202 0.894531 17.0908 0.894531L6.09082 0.894531ZM19.8408 6.76166V10.2679L21.2158 9.44291V8.31953C21.2157 8.07032 21.1478 7.82584 21.0194 7.61223C20.891 7.39862 20.707 7.22391 20.4871 7.10678L19.8408 6.76166ZM18.4658 11.0929V3.64453C18.4658 3.27986 18.321 2.93012 18.0631 2.67226C17.8052 2.4144 17.4555 2.26953 17.0908 2.26953H6.09082C5.72615 2.26953 5.37641 2.4144 5.11855 2.67226C4.86069 2.93012 4.71582 3.27986 4.71582 3.64453V11.0929L9.87207 14.1867L11.5908 13.1554L13.3096 14.1867L18.4658 11.0929ZM3.34082 10.2679V6.76166L2.69457 7.10541C2.47439 7.22265 2.29026 7.39757 2.16189 7.61144C2.03351 7.82532 1.96574 8.07009 1.96582 8.31953V9.44291L3.34082 10.2679ZM21.2158 11.0462L14.6461 14.9883L21.2158 18.9304V11.0462ZM21.1677 20.5062L11.5908 14.7573L2.01395 20.5048C2.09304 20.7961 2.26582 21.0533 2.50563 21.2367C2.74543 21.4201 3.03893 21.5195 3.34082 21.5195H19.8408C20.1427 21.5195 20.4362 21.4201 20.676 21.2367C20.9158 21.0533 21.0886 20.7975 21.1677 20.5062ZM1.96582 18.929L8.53557 14.9869L1.96582 11.0462V18.929Z" fill="url(#paint0_linear_2394_218)"/>
@@ -57,11 +55,11 @@
                                             </svg>
                                         </div>
                                         <div class="dashboard-smail-tiles-li-control">
-                                            <div class="dashboard-smail-tiles-li-count">0</div>
+                                            <div class="dashboard-smail-tiles-li-count"> {{_ApprovalMemos}} </div>
                                             <div class="dashboard-smail-tiles-li-title">{{"Dashboard.ApprovalPending" | translate }}</div>
                                         </div>
                                     </div>
-                                    <div class="dashboard-smail-tiles-li">
+                                    <div class="dashboard-smail-tiles-li" (click)="UrlRedirect('Reply Required')" >
                                         <div class="dashboard-smail-tiles-li-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
                                                 <path d="M12.2371 2.43206C12.0381 2.32613 11.8162 2.27072 11.5908 2.27072C11.3654 2.27072 11.1435 2.32613 10.9446 2.43206L2.69457 6.83206C2.4746 6.94919 2.2906 7.12389 2.16224 7.3375C2.03388 7.55112 1.96599 7.7956 1.96582 8.04481V9.16818L9.87207 13.9119L11.5908 12.8807L13.3096 13.9119L21.2158 9.16818V8.04481C21.2157 7.7956 21.1478 7.55112 21.0194 7.3375C20.891 7.12389 20.707 6.94919 20.4871 6.83206L12.2371 2.43206ZM21.2158 10.7714L14.6461 14.7136L21.2158 18.6557V10.7714ZM21.1677 20.2314L11.5908 14.4826L2.01395 20.2301C2.09304 20.5214 2.26582 20.7786 2.50563 20.962C2.74543 21.1454 3.03893 21.2448 3.34082 21.2448H19.8408C20.1427 21.2448 20.4362 21.1454 20.676 20.962C20.9158 20.7786 21.0886 20.5228 21.1677 20.2314ZM1.96582 18.6543L8.53557 14.7122L1.96582 10.7714V18.6543ZM10.2969 1.21793C10.6952 1.0056 11.1395 0.894531 11.5908 0.894531C12.0421 0.894531 12.4865 1.0056 12.8847 1.21793L21.1347 5.61793C21.5746 5.85248 21.9424 6.2022 22.1989 6.62967C22.4554 7.05714 22.5909 7.54629 22.5908 8.04481V19.8698C22.5908 20.5992 22.3011 21.2986 21.7854 21.8144C21.2696 22.3301 20.5702 22.6198 19.8408 22.6198H3.34082C2.61147 22.6198 1.912 22.3301 1.39628 21.8144C0.880552 21.2986 0.59082 20.5992 0.59082 19.8698V8.04481C0.59077 7.54629 0.726231 7.05714 0.982715 6.62967C1.2392 6.2022 1.60706 5.85248 2.04695 5.61793L10.2969 1.21793Z" fill="url(#paint0_linear_2394_228)"/>
@@ -74,7 +72,7 @@
                                                 </svg>
                                         </div>
                                         <div class="dashboard-smail-tiles-li-control">
-                                            <div class="dashboard-smail-tiles-li-count">0</div>
+                                            <div class="dashboard-smail-tiles-li-count"> {{_ReplyRequired}} </div>
                                             <div class="dashboard-smail-tiles-li-title">{{"Dashboard.ReplyRequired" | translate }}</div>
                                         </div>
                                     </div>
@@ -96,11 +94,11 @@
                                                 </svg>
                                         </div>
                                         <div class="dashboard-smail-tiles-li-control">
-                                            <div class="dashboard-smail-tiles-li-count">0</div>
+                                            <div class="dashboard-smail-tiles-li-count"> {{_ExpiryMemos}} </div>
                                             <div class="dashboard-smail-tiles-li-title">{{"Dashboard.ExpiredMemos" | translate }}</div>
                                         </div>
                                     </div>
-                                    <div class="dashboard-smail-tiles-li">
+                                    <div class="dashboard-smail-tiles-li" (click)="UrlRedirectPendingfromOthers('PendingFromReceiver')" >
                                         <div class="dashboard-smail-tiles-li-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
                                                 <g clip-path="url(#clip0_2394_250)">
@@ -133,11 +131,11 @@
                                                 </svg>
                                         </div>
                                         <div class="dashboard-smail-tiles-li-control">
-                                            <div class="dashboard-smail-tiles-li-count">0</div>
+                                            <div class="dashboard-smail-tiles-li-count"> {{_PendingFromOthersCount}} </div>
                                             <div class="dashboard-smail-tiles-li-title">{{"Dashboard.PendingFromOthers" | translate }}</div>
                                         </div>
                                     </div>
-                                    <div class="dashboard-smail-tiles-li">
+                                    <div class="dashboard-smail-tiles-li" (click)="UrlRedirect('UnRead')" >
                                         <div class="dashboard-smail-tiles-li-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="23" height="18" viewBox="0 0 23 18" fill="none">
                                                 <path d="M0.59082 3.39453C0.59082 2.66519 0.880552 1.96571 1.39628 1.44999C1.912 0.934262 2.61147 0.644531 3.34082 0.644531H19.8408C20.5702 0.644531 21.2696 0.934262 21.7854 1.44999C22.3011 1.96571 22.5908 2.66519 22.5908 3.39453V14.3945C22.5908 15.1239 22.3011 15.8233 21.7854 16.3391C21.2696 16.8548 20.5702 17.1445 19.8408 17.1445H3.34082C2.61147 17.1445 1.912 16.8548 1.39628 16.3391C0.880552 15.8233 0.59082 15.1239 0.59082 14.3945V3.39453ZM3.34082 2.01953C2.97615 2.01953 2.62641 2.1644 2.36855 2.42226C2.11069 2.68012 1.96582 3.02986 1.96582 3.39453V3.69291L11.5908 9.46791L21.2158 3.69291V3.39453C21.2158 3.02986 21.071 2.68012 20.8131 2.42226C20.5552 2.1644 20.2055 2.01953 19.8408 2.01953H3.34082ZM21.2158 5.29616L14.7423 9.18053L21.2158 13.1639V5.29616ZM21.1691 14.7507L13.4141 9.97803L11.5908 11.0712L9.76757 9.97803L2.01257 14.7493C2.09071 15.0419 2.26326 15.3005 2.50343 15.485C2.74361 15.6695 3.03797 15.7695 3.34082 15.7695H19.8408C20.1435 15.7696 20.4377 15.6697 20.6779 15.4855C20.918 15.3013 21.0907 15.043 21.1691 14.7507ZM1.96582 13.1639L8.43932 9.18053L1.96582 5.29616V13.1639Z" fill="url(#paint0_linear_2394_267)"/>
@@ -151,7 +149,7 @@
                                                 </svg>
                                         </div>
                                         <div class="dashboard-smail-tiles-li-control">
-                                            <div class="dashboard-smail-tiles-li-count">0</div>
+                                            <div class="dashboard-smail-tiles-li-count"> {{_NewMemos}} </div>
                                             <div class="dashboard-smail-tiles-li-title">{{"Dashboard.UnreadMemos" | translate }}</div>
                                         </div>
                                     </div>
@@ -318,27 +316,89 @@
                     <div class="dashboard-body-container-3">
                         <div class="dashboard-item-banner-activity">
                             <div class="dashboard-item banner">
-                                <div class="banner-media">
-                                    <!-- <img src="../../../../assets/media/bg/bg-10.PNG"> -->
-                                    <ngb-carousel [showNavigationArrows]="false" interval="5000">
-                                        <ng-template *ngFor="let item of images" ngbSlide>
-                                            <div class="banner-media-img-wrapper">
-                                                <img src="{{item.path}}" class="h-auto">
+                                <!-- <div class="banner-media-vote">
+                                    <h5>What are frontend technologies?</h5>
+                                    <div class="banner-media-vote-poll-ul">
+                                        <div class="banner-media-vote-poll-li">
+                                            <div class="banner-media-vote-poll-radio">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                                  </div>
                                             </div>
-                                        </ng-template>
-                                    </ngb-carousel>
+                                            <div class="banner-media-vote-poll-bar">
+                                                <div class="poll-answer">Html</div>
+                                                <div class="progress">
+                                                    <div class="progress-bar poll-high" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                            <div class="banner-media-vote-poll-percentage">75%</div>
+                                        </div>
+                                        <div class="banner-media-vote-poll-li">
+                                            <div class="banner-media-vote-poll-radio">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                                  </div>
+                                            </div>
+                                            <div class="banner-media-vote-poll-bar">
+                                                <div class="poll-answer">mysql</div>
+                                                <div class="progress">
+                                                    <div class="progress-bar poll-medium" role="progressbar" style="width: 48%" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                            <div class="banner-media-vote-poll-percentage">48%</div>
+                                        </div>
+                                        <div class="banner-media-vote-poll-li">
+                                            <div class="banner-media-vote-poll-radio">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                                  </div>
+                                            </div>
+                                            <div class="banner-media-vote-poll-bar">
+                                                <div class="poll-answer">php</div>
+                                                <div class="progress">
+                                                    <div class="progress-bar poll-low" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                            <div class="banner-media-vote-poll-percentage">25%</div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="banner-media">
+                                    <ng-container *ngIf="this._LstToBanner.length > 0">
+                                                <ngb-carousel [showNavigationArrows]="false" interval="3000">
+                                                    <ng-template *ngFor="let item of images" ngbSlide>
+                                                        <div class="picsum-img-wrapper cr-img mh-25">
+                                                            <img src="{{item.path}}" alt="Angular Carousel 1" class="h-auto">
+                                                        </div>
+                                                    </ng-template>
+                                                </ngb-carousel>
+                                    </ng-container>
+                                    <ng-container *ngIf="this._LstToBanner.length == 0">
+                                        <img src="assets/media/bg/cp-robot.png">
+                                    </ng-container>
                                 </div>
                             </div>
                             <div class="dashboard-item activity">
                                 <div class="dashboard-activity-head">
                                     {{"Dashboard.Today" | translate }}
                                 </div>
-                                 <div class="dashboard-activity-ul">
-                                    <div class="no-dashboard-activity-li">
+                                  <div class="dashboard-activity-ul">
+                                    <div class="timeline-item d-flex align-items-start" *ngFor="let ss of DailyActivity">
+                                        <div class="timeline-badge">
+                                            <i class="fa fa-genderless icon-xl" [ngClass]="{'text-info': ss.PageName=='Memo Reply',                                  
+                                                         'text-coral': ss.PageName=='New Memo',
+                                                         'text-primary': ss.PageName=='Memo Action',
+                                                         'text-success': ss.PageName=='Document'}"></i>
+                                        </div>
+                                        <div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3">
+                                            {{ss.Activity}}</div>
+                                    </div>
+                                      <div *ngIf="DailyActivity.length == 0" class="no-dashboard-activity-li">
                                         <img src="assets/media/Img/No_Actions.png">
                                         <span  >{{"Dashboard.NoResultsFound" | translate }}.</span>
                                     </div>
-                                    <!-- <div class="dashboard-activity-li">
+                                </div>  
+                                 <!-- <div class="dashboard-activity-li">
                                         <div class="dashboard-activity-li-time">12:30PM</div>
                                         <div class="dashboard-activity-li-icon">
                                             <svg fill="currentColor" width="64px" height="64px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M 5 5 L 5 27 L 27 27 L 27 5 Z M 7 7 L 25 7 L 25 25 L 7 25 Z M 10.71875 12.78125 L 9.28125 14.21875 L 15.28125 20.21875 L 16 20.90625 L 16.71875 20.21875 L 22.71875 14.21875 L 21.28125 12.78125 L 16 18.0625 Z"></path></g></svg>
@@ -423,7 +483,6 @@
                                             </div>
                                         </div>
                                     </div> -->
-                                </div> 
                             </div>
                         </div>
                     </div>

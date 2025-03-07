@@ -2864,3 +2864,22 @@ ul.schedule-select-user-list li .slect-close svg {
     left: 12px !important;
 }
 
+/*============ mobile responsive ===============*/
+
+@media only screen and (max-width: 800px) {
+    .d-flex.align-items-center.mbl-v-flex-warap {
+        flex-wrap: wrap;
+        margin-bottom: 0px;
+        gap: 10px;
+    }
+    .label-icon {
+        width: 15px;
+    }
+    .tabs-ies .btn-tabbie {
+       
+        padding: 4px 8px !important;
+       
+    }
+    }
+    
+   

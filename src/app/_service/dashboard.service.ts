@@ -21,6 +21,7 @@ export class DashboardService {
   }
   //fetch API Url from APIUrl Service
   readonly rootUrl = this.commonUrl.apiurl;
+  readonly rootUrlII = this.commonUrl.apiurlNew;
   public get currentUserValue(): UserDTO {
     //alert('000');
     return this.currentUserSubject.value[0];
@@ -40,6 +41,19 @@ export class DashboardService {
     //Using Parameters
     //obj.UserId
     return this.http.post(this.rootUrl + "/DashboardAPI/NewUsersDashboard", this._obj);
+  }
+
+  NewDashboardAPI(){
+    this.currentUserSubject = new BehaviorSubject<UserDTO>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUser = this.currentUserSubject.asObservable();
+    // this._obj.UserId = this.currentUserValue.createdby;
+    this.currentUser.subscribe(data=>{
+      if(data[0].createdby != null){
+        this._obj.UserId=data[0].createdby;
+      }
+   })
+    
+    return this.http.post(this.rootUrlII + "ArchiveAPI/NewDashboard", this._obj);
   }
    
 
