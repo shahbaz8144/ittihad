@@ -1055,13 +1055,64 @@ img.ep-ic-dw {
     width: 43px;
     height: 43px;
 }
+
 .close-icn {
     position: absolute;
     left: 290px;
     top: 22px;
     font-size: 8px !important;
 }
+
 /*-----------------------------*/
 .kt-body-arabic .card1 {
     margin-right: 0px !important;
+}
+
+@media only screen and (max-width: 767px) {
+    .btn {
+        white-space: nowrap;
+    }
+
+    .btn-mobile-name {
+        display: none;
+    }
+
+    .mobile-dropdown-menu {
+        width: 320px;
+    }
+
+    ul.mobile-filter-scroll {
+        padding-left: 0px;
+        height: 260px;
+        overflow: auto;
+    }
+
+    .height-scroll {
+        height: 100%;
+        overflow-y: unset;
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 6px;
+    }
+
+    .height-scroll .kt-checkbox--info {
+        width: auto;
+    }
+
+    .mobile-filter-bottom-3 {
+        margin-bottom: 3rem;
+    }
+
+    .kt-border-right {
+        border-right: 0px solid #edf0f7;
+    }
+
+    .mobile-nav {
+        flex-wrap: nowrap;
+    }
+
+    .mobile-nav li a {
+        padding: 0rem 4px !important;
+        display: flex;
+    }
 }

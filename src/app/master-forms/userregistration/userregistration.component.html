@@ -3,7 +3,7 @@
         <div class="d-flex-center">
             <div class="component-main-header">
                 <div class="component-main-header-title">
-                    <h4 class="mb-0">{{ "Masterform.UserRegistration" | translate }} </h4>
+                    {{ "Masterform.UserRegistration" | translate }} 
                 </div>
             </div>
             <!-- <h4 class="mb-3"> {{ "Masterform.UserRegistration" | translate }} </h4> -->
@@ -201,7 +201,7 @@
                                 <!-- <h6  class="txtm-cus mb-1 ml-3 pt-1"> <span>Note:  </span> <span class="text-danger">*</span>  This Symbol fields are Mandatory</h6> -->
                                 <!-- <form [formGroup]="UserRegistrationFrmGfroup" (ngSubmit)="OnCreate()"> -->
                                 <div class="d-flex flex-wrap justify-content-start align-items-baseline form-m">
-                                    <div class="col-6 kt-border-right">
+                                    <div class="col-md-6 kt-border-right">
                                         <div class="form-cus">
                                             <label class="form-label">{{ "Masterform.FirstName" | translate }}</label><span class="text-danger">*</span>
                                             <div class="more_text1"></div>
@@ -274,7 +274,7 @@
                                     <input (keypress)="keyPress($event)" class="form-control" id="" name="Fax" [(ngModel)]="phnnum" placeholder="Enter Mobile Number" minlength="8" maxlength="14" type="text" (keyup)="PhoneLengthValidation()">
                                     <span style="color:red" [hidden]="MinPhoneLength"> Min Length 8</span>
                                 </div> -->
-                                    <div class="col-6">
+                                    <div class="col-md-6">
 
 
                                         <div class="form-cus">
@@ -352,7 +352,7 @@
                             <div class="card-body mb-2">
 
                                 <div class="d-flex flex-wrap justify-content-start align-items-start form-m">
-                                    <div class="col-7">
+                                    <div class="col-sm-12 col-md-7">
 
                                         <div class="form-cus">
                                             <label class="form-label">{{ "Masterform.Positions" | translate }}</label><span class="text-danger">*</span>
@@ -433,7 +433,7 @@
 
 
                                     </div>
-                                    <div class="col-5">
+                                    <div class="col-sm-12 col-md-5">
                                         <div class="kt-user-rd-card">
                                             <h3 class="Kt-user-title"> <span class="user-acc-svg-icon"> <svg
                                                         xmlns="http://www.w3.org/2000/svg" width="30px" height="30px"

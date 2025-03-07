@@ -715,3 +715,10 @@ button.kt-new-label {
 ::ng-deep .kt-body-arabic .kt-inbox .kt-inbox__aside .kt-inbox__nav .svg-icon svg {
     transform: scaleX(-1);
 }
+
+@media only screen and (max-width: 767px) {
+    .component-main-header.mobile-none{
+        display: none;
+    }
+
+}

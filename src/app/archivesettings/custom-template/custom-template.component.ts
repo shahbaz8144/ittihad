@@ -732,4 +732,7 @@ export class CustomTemplateComponent implements AfterViewInit, OnInit {
     //   console.log('Elements saved!', response);
     // });
   }
+  template_right(){
+    document.getElementById("template-right").classList.toggle("active");
+  }
 }

@@ -581,3 +581,8 @@
 .no-dashboard-activity-li img{
     width: 190px;
 }
+@media only screen and (max-width: 767px) {
+    .dashboard-body-container {
+        grid-template-columns: 1fr;
+    }
+}

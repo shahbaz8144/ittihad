@@ -1,6 +1,6 @@
 <div id="moredet" class="p-3 kt-grid__item kt-grid__item--fluid text-dark docu-info-page w-100">
     <div class="row" *ngFor="let doc of DocumentList">
-        <div class="col-md-5">
+        <div class="col-md-5 mobile-col">
             <div class="card left-div">
                 <div class="card-body p-3">
                     <ng-container>
@@ -550,7 +550,15 @@
                             </div>
                         </div>
                     </ng-container>
-                    <div class="kt-doc-refernce">
+                    <div class="btn-end">
+                        <a class="btn btn-viewmore" data-toggle="collapse" href="#collapsedocref" role="button" aria-expanded="false" aria-controls="collapsedocref">
+                            <span>View (Refernces & Actions)</span>
+                            <span class="acc-icon">
+                                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M6.29289 8.79289C6.68342 8.40237 7.31658 8.40237 7.70711 8.79289L12 13.0858L16.2929 8.79289C16.6834 8.40237 17.3166 8.40237 17.7071 8.79289C18.0976 9.18342 18.0976 9.81658 17.7071 10.2071L12.7071 15.2071C12.3166 15.5976 11.6834 15.5976 11.2929 15.2071L6.29289 10.2071C5.90237 9.81658 5.90237 9.18342 6.29289 8.79289Z" fill="currentColor"></path> </g></svg>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="kt-doc-refernce collapse" id="collapsedocref">
 
                         <nav>
 
