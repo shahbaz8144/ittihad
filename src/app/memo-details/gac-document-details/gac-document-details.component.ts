@@ -2255,7 +2255,7 @@ export class GacDocumentDetailsComponent implements OnInit {
   FileUploadErrorlogs: boolean = false;
   UploadingFiles: boolean = false;
   async onFileChange(event): Promise<void> {
-
+alert(1);
     let folderPath = "Draft/" + this.currentUserValue.createdby;
     if (event.target.files.length > 0) {
       var length = event.target.files.length;
