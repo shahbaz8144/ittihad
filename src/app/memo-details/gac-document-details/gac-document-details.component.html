@@ -1064,7 +1064,7 @@
 
                                 <div class="d-flex justify-content-end kt-detail-link-option">
 
-                                    <div class="kt-detail-item" *ngIf="IsArchiveDownload==true  && viewer!='' && Contenttype?.toLowerCase().includes('pdf')" >
+                                    <div class="kt-detail-item" *ngIf="IsArchiveDownload==true  && viewer!='' && Contenttype?.toLowerCase().includes('pdf')">
                                         <a class="kt-detail-link" (click)="generatePDF()">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1em;height: 1em;vertical-align: middle;fill: #144e18;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
                                                 <path
@@ -1488,6 +1488,12 @@
                                     <div class="col-md-12 checked-rad pl-1" id="closewindow">
                                         <div class="appr-comts">
                                             <div class="form-group">
+                                                <!-- <div>
+                                                    <h2>Upload Excel File</h2>
+                                                    <input type="file" (change)="onFileChangeII($event)" accept=".xls,.xlsx" />
+                                                    <h3>JSON Output:</h3>
+                                                    <pre>{{ jsonData | json }}</pre>
+                                                </div> -->
                                                 <!-- <label class="mb-2"> {{ "Masterform.FileUpload" | translate }}</label> -->
                                                 <div class="custom-file  optional-input-upload">
                                                     <input type="file" (change)="onFileChange($event)" id="customFile" multiple>
