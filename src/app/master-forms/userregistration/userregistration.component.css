@@ -125,8 +125,7 @@ span.icon-edit svg {
     background-color: #edf0f7;
     padding: 10px 14px;
     border-radius: 6px;
-    min-height: 85ch;
-    margin-top: 35px;
+    height: 100%;
 }
 
 h3.Kt-user-title {
@@ -562,6 +561,113 @@ img.ep-ic-dw {
     color: #545151;
 }
 
+
+/* new csss */
+
+.user-reg-action {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    position: relative;
+    margin-bottom: -1px;
+}
+
+.user-reg-action-item {
+    display: flex;
+    padding: 16px;
+    gap: 10px;
+    cursor: default;
+    border-radius: 6px 6px 0px 0px;
+    transition: all 0.15s ease-in-out;
+    position: relative;
+}
+
+
+/* .user-reg-action-item:hover {
+  background-color: #f0f0f0;
+} */
+
+.user-reg-action-item.active {
+    border: 1px solid #e8e8e8;
+    border-bottom: 1px solid #fff;
+}
+
+
+/* .user-reg-action-item.active:before {
+  content: "";
+  height: 3px;
+  background-color: #2196f3;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+} */
+
+.user-reg-action-item-icon {
+    height: 26px;
+    width: 26px;
+    color: #fff;
+    background-color: #b2b2b2;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 26px;
+    font-weight: 400;
+    font-size: 14px;
+    transition: all 0.15s ease-in-out;
+}
+
+.user-reg-action-item.active .user-reg-action-item-icon {
+    background-color: #2196f3;
+}
+
+.user-reg-action-item-control {
+    line-height: 1.4;
+}
+
+.user-reg-action-item-value {
+    color: #4a4a4a;
+}
+
+.user-reg-action-item-small {
+    font-size: 11px;
+    color: #737373;
+}
+
+.user-reg-action-content-card {
+    border: 1px solid #e8e8e8;
+    border-radius: 0px 6px 6px 6px;
+}
+
+.user-reg-action-content-card-body {
+    padding: 1.5rem;
+    height: calc(100vh - 216px);
+    overflow: auto;
+}
+
+.user-reg-action-buttons {
+    border-top: 1px solid #e8e8e8;
+    padding: 16px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 8px;
+}
+
+
+/* new csss */
+
+::ng-deep .kt-body-arabic .user-reg-action-item-control {
+    text-align: justify;
+}
+
+::ng-deep .kt-body-arabic .kt-user-rd-card {
+    text-align: justify;
+}
+
 @media only screen and (max-width: 767px) {
     .kt-border-right {
         border-right: 0px solid #edf0f7;
@@ -579,14 +685,53 @@ img.ep-ic-dw {
     }
 }
 
-@media only screen and (min-width: 420px) {
-     ::ng-deep ul.stepper.horizontal .step .step-content .step-actions {
-        position: relative !important;
-        bottom: unset !important;
-        left: unset !important;
-        width: 100%;
-        /* padding: 20px; */
-        /* background-color: transparent; */
-        flex-direction: row-reverse;
-    }
+.step-content {
+    display: none !important;
+}
+
+.step.active .step-content {
+    display: block !important;
+}
+
+ul.stepper.horizontal {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-mobile-name {
+    display: none;
+}
+
+.user-reg-action-item {
+    padding: 8px;
+    flex: 1 1 auto;
+    justify-content: center;
+}
+
+.user-reg-action-content-card {
+    border-radius: 0px 0px 6px 6px;
+}
+
+.user-reg-action-item-icon {
+    height: 22px;
+    min-width: 22px;
+    width: 22px;
+    line-height: 22px;
+    font-size: 11px;
+}
+
+.user-reg-action-item-small {
+    font-size: 10px;
+}
+
+.user-reg-action-item-value {
+    font-size: 11px;
+}
+
+.user-reg-action-content-card-body {
+    height: calc(100vh - 250px);
+}
+
+
 }
