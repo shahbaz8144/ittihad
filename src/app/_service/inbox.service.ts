@@ -675,6 +675,7 @@ export class InboxService {
   PathExtention(url: string) {
     this._obj = new InboxDTO();
     this._obj.url = url;
+    // alert(url);
     // this._obj.uniqueid=uniqueid;
     return this.http.post(this.rootUrlII + 'FileUploadAPI/NewFileDetails', this._obj);
   }

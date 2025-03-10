@@ -52,7 +52,7 @@ export class DashboardService {
         this._obj.UserId=data[0].createdby;
       }
    })
-    
+  //  this._obj.UserId
     return this.http.post(this.rootUrlII + "ArchiveAPI/NewDashboard", this._obj);
   }
    

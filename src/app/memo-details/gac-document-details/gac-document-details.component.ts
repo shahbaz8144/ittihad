@@ -870,14 +870,14 @@ export class GacDocumentDetailsComponent implements OnInit {
   barcode: string;
   prefix: string;
   selectedCabinet: string;
-  selectedCabinetId: number
+  selectedCabinetId: number;
+  Contenttype:any;
   ArchiveDetailsInfo(documentid, ShareId) {
     this._obj.DocumentId = parseInt(documentid);
     this._obj.ShareId = parseInt(ShareId);
     this._obj.CreatedBy = this.LoginUserId;
     this.service.ArchiveDocumentDetails(this._obj)
       .subscribe(data => {
-        debugger
         console.log(data, "Document details API Data");
         this._obj = data as GACFiledto;
         this.DocumentList = this._obj.Data["ArchiveJson"];
@@ -930,6 +930,8 @@ export class GacDocumentDetailsComponent implements OnInit {
         this.SenderNamedesgin = this.DocumentList[0].DesignationName;
         this._WorkFlowId = this.DocumentList[0].WorkFlowId;
         this._WorkFlowName = this.DocumentList[0].WorkFlowName;
+        this.Contenttype = this.DocumentList[0].Url;
+        // alert(this.Contenttype);
         this._IsFullAccess = this.DocumentList[0].IsFullAccess;
         this.ShareDocumentDetailsList = this.DocumentList[0]["UserListJsonSorted"];
         console.log(this.ShareDocumentDetailsList, "ShareDocumentDetailsList");
@@ -1014,6 +1016,7 @@ export class GacDocumentDetailsComponent implements OnInit {
 
 
   ReferenceView(ImageUrl, DocumentName, index: number) {
+    // alert(ImageUrl);
     this.selectedReferenceId = index;
     this.RefDocumentName = DocumentName;
     this._ImageUrl = ImageUrl;
@@ -1021,6 +1024,16 @@ export class GacDocumentDetailsComponent implements OnInit {
     let scontenttype = '';
     this.inboxService.PathExtention(ImageUrl).subscribe(
       da => {
+        console.log(da ,"ReferenceList");
+        // this.Contenttype = da[][0].url;
+        if (Array.isArray(da) && da.length > 0) {
+          this.Contenttype = da[0].contentType; // Assigning 'url' from the first object
+          alert(this.Contenttype);
+        } else {
+          console.error("Invalid response: Expected an array with at least one object");
+        }
+      
+
         // console.log(da,"Pdf Data")
         scontenttype = da["contentType"];
         let contenttype = scontenttype;//decoder.decode(new Uint8Array(arrct));
@@ -2242,7 +2255,7 @@ export class GacDocumentDetailsComponent implements OnInit {
   FileUploadErrorlogs: boolean = false;
   UploadingFiles: boolean = false;
   async onFileChange(event): Promise<void> {
-
+alert(1);
     let folderPath = "Draft/" + this.currentUserValue.createdby;
     if (event.target.files.length > 0) {
       var length = event.target.files.length;

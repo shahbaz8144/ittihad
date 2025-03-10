@@ -1064,7 +1064,7 @@
 
                                 <div class="d-flex justify-content-end kt-detail-link-option">
 
-                                    <div class="kt-detail-item" *ngIf="IsArchiveDownload==true  && viewer!=''">
+                                    <div class="kt-detail-item" *ngIf="IsArchiveDownload==true  && viewer!='' && Contenttype?.toLowerCase().includes('pdf')" >
                                         <a class="kt-detail-link" (click)="generatePDF()">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1em;height: 1em;vertical-align: middle;fill: #144e18;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
                                                 <path
