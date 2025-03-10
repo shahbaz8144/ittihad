@@ -35,7 +35,7 @@ export class UserregistrationComponent implements OnInit {
     PinCode: '',
     Telephone1: '',
     Telephone2: '',
-    Status: '',
+    Status: true,
     PositionId: '',
     CompanyId: '',
     DepartmentId: '',
@@ -88,7 +88,7 @@ _customerregistration:boolean=false;
   code: number;
   tele1: number;
   tele2: number;
-  status: boolean;
+  status: boolean = true;
   Position: number;
   Comp: number;
   dept: number;
@@ -189,6 +189,7 @@ _customerregistration:boolean=false;
     this.ObjgetDesignationList = [];
     this.ObjgetGlobalusersList = [];
     this.ObjgetReportingUser = [];
+    this.status = true;
     this._obj = new UserRegistrationDTO();
     this._userdto = new UserDTO();
     this.loadAPI = new Promise((resolve) => {
@@ -624,7 +625,8 @@ _customerregistration:boolean=false;
       // this._obj.ToUserIdsStr = this._Globaluser?.toString();
       // alert(this._Globaluser.toString());
       // alert(this.global);
-      this._obj.UserIsActive = true;
+      // this._obj.UserIsActive = true;
+      this._obj.UserIsActive =  this.status !== undefined ? this.status : true;
 
       const fd = new FormData();
       if (this.mname == null) {
@@ -683,11 +685,19 @@ _customerregistration:boolean=false;
     if (this.addrs.trim().length < 3) this.MinAddressLength = false;
     else this.MinAddressLength = true;
   }
+  // PinLengthValidation() {
+  //   if (this.code.toString().trim().length < 3)
+  //     this.MinPinLength = false;
+  //   else this.MinPinLength = true;
+  // }
   PinLengthValidation() {
-    if (this.code.toString().trim().length < 3)
+    if (!this.code || this.code.toString().length < 3) {
       this.MinPinLength = false;
-    else this.MinPinLength = true;
+    } else {
+      this.MinPinLength = true;
+    }
   }
+  
   LoginLengthValidation() {
     if (this.login.trim().length < 3) this.MinLoginLength = false;
     else this.MinLoginLength = true;

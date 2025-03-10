@@ -38,6 +38,7 @@ export class DocumentInboxComponent implements OnInit, AfterViewInit {
   cabinetId: number = 0;
   _CabinetList: any[] = [];
   AllDocumentsCount: number = 0;
+  languageValues:any;
   private currentUserSubject: BehaviorSubject<UserDTO>;
   public currentUser: Observable<UserDTO>;
   public get currentUserValue(): UserDTO {
@@ -59,6 +60,7 @@ export class DocumentInboxComponent implements OnInit, AfterViewInit {
     this.currentUser = this.currentUserSubject.asObservable();
     HeaderComponent.languageChanged.subscribe((lang) => {
       localStorage.setItem('language', lang);
+      this.languageValues  = lang;
       this.translate.use(lang);
       if (lang == 'ar') {
         this.renderer.addClass(document.body, 'kt-body-arabic');
@@ -69,8 +71,10 @@ export class DocumentInboxComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit() {
   }
+ 
   ngOnInit(): void {
     const lang: any = localStorage.getItem('language');
+      this.languageValues  = lang;
     this.translate.use(lang);
     if (lang == 'ar') {
       this.renderer.addClass(document.body, 'kt-body-arabic');

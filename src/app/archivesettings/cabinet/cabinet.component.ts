@@ -15,7 +15,7 @@ import { DOCUMENT } from '@angular/common';
 export class CabinetComponent implements OnInit {
 
   CabinetName: string = "";
-  Status: boolean = false;
+  Status: boolean = true;
   _Obj: GACFiledto;
   isShow: boolean;
   String_status: string;
@@ -102,7 +102,8 @@ export class CabinetComponent implements OnInit {
       } else if (this._Obj.CabinetId != 0) {
         this._Obj.FlagId = 2;
       }
-      this._Obj.IsActive = this.Status;
+      // this._Obj.IsActive = this.Status;
+      this._Obj.IsActive = this.Status !== undefined ? this.Status : true; 
       this._Obj.CabinetName = this.CabinetName;
       this._Obj.CabinetNameArabic = this.CabinetNameArabic;
       this.service.CabinetInsertAndUpdate(this._Obj).subscribe((data: any) => {
@@ -150,14 +151,14 @@ export class CabinetComponent implements OnInit {
   SameNameClearfileds() {
     this.CabinetName = "";
     this.CabinetNameArabic = "";
-    this.Status = false;
+    this.Status = true;
   }
 
   closeInfo() {
     this._Obj = new GACFiledto();
     this.CabinetName = "";
     this.CabinetNameArabic = "";
-    this.Status = false;
+    this.Status = true;
     this.Cabineterrormessage = false;
     this.Cabineterrormessagear = false;
     document.getElementsByClassName("addrck")[0].classList.remove("kt-quick-panel--on");
