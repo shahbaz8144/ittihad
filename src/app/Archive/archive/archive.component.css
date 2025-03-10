@@ -11,7 +11,6 @@
     .w-lg-500px {
         width: 500px !important;
     }
-
     .w-lg-300px {
         width: 300px !important;
     }
@@ -236,7 +235,6 @@
     display: none
 }
 
-
 @media (min-width:992px) {
     .sidebar {
         position: fixed;
@@ -247,7 +245,6 @@
         z-index: 98;
         transition: right .3s
     }
-
     [data-sidebar=on] .sidebar {
         transition: right .3s ease;
         right: 0
@@ -277,7 +274,6 @@
         padding: 0 !important;
         background: 0 0 !important
     }
-
     .print-content-only .container,
     .print-content-only .container-fluid,
     .print-content-only .container-lg,
@@ -292,7 +288,6 @@
         padding: 0 !important;
         margin: 0 !important
     }
-
     .print-content-only .btn,
     .print-content-only .docs-aside,
     .print-content-only .docs-header,
@@ -307,7 +302,6 @@
 }
 
 @media (min-width:992px) {
-
     .container,
     .container-fluid,
     .container-lg,
@@ -317,14 +311,12 @@
     .container-xxl {
         padding: 0 30px
     }
-
     .docs-wrapper {
         padding-left: 265px
     }
 }
 
 @media (max-width:991.98px) {
-
     .container,
     .container-fluid,
     .container-lg,
@@ -351,7 +343,6 @@
         justify-content: space-between;
         align-items: center
     }
-
     .docs-header .docs-page-title[data-kt-swapper=true] {
         display: none !important
     }
@@ -375,14 +366,12 @@
         overflow: hidden;
         width: 265px
     }
-
     .docs-aside .docs-aside-logo {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 0 25px
     }
-
     .docs-aside .docs-aside-menu {
         width: 265px
     }
@@ -392,7 +381,6 @@
     .docs-aside {
         display: none
     }
-
     .docs-aside .docs-aside-logo {
         display: none
     }
@@ -657,7 +645,9 @@ pdf-viewer {
     height: calc(1.7em + 1.3rem + 2px);
 }
 
+
 /* width */
+
 pdf-viewer::-webkit-scrollbar {
     background-color: #fff;
     width: 16px;
@@ -669,6 +659,7 @@ pdf-viewer::-webkit-scrollbar {
     width: 6px;
     border-radius: 5px;
 }
+
 
 /* Track */
 
@@ -917,9 +908,6 @@ pdf-viewer::-webkit-scrollbar-thumb:hover {
     border-style: solid;
 }
 
-
-
-
 .checkbox>span {
     height: 18px;
     width: 18px;
@@ -930,8 +918,6 @@ pdf-viewer::-webkit-scrollbar-thumb:hover {
     height: 10px;
 }
 
-
-
 .checkbox.checkbox-outline>span {
     height: 18px;
     width: 18px;
@@ -941,7 +927,6 @@ pdf-viewer::-webkit-scrollbar-thumb:hover {
     width: 5px;
     height: 10px;
 }
-
 
 .checkbox>span {
     background-color: #EBEDF3;
@@ -1353,7 +1338,6 @@ ul.fileupload-select-user-list {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-
 }
 
 ul.fileupload-select-user-list li {
@@ -1765,13 +1749,11 @@ li.modal-project-list-item {
     font-size: 11px;
 }
 
-
 .sharedoc-toggle-container input {
     visibility: hidden;
     position: absolute;
     top: 0;
 }
-
 
 .sharedoc-toggle-container label {
     width: 50%;
@@ -1782,7 +1764,6 @@ li.modal-project-list-item {
     color: white;
 }
 
-
 .sharedoc-toggle-container .sharedoc-toggle-wrapper {
     position: absolute;
     top: 0;
@@ -1791,16 +1772,13 @@ li.modal-project-list-item {
     padding: 0.15rem;
     z-index: 3;
     transition: transform .5s cubic-bezier(.77, 0, .175, 1);
-
 }
-
 
 .sharedoc-toggle-container .sharedoc-toggle {
     border-radius: 1rem;
     background: white;
     height: 100%;
 }
-
 
 .sharedoc-toggle-container .sharedoc-toggle div {
     width: 100%;
@@ -1815,21 +1793,17 @@ li.modal-project-list-item {
     left: 0;
 }
 
-
 .sharedoc-toggle-container input:nth-of-type(1):checked~.sharedoc-toggle-wrapper {
     transform: translateX(0%);
 }
-
 
 .sharedoc-toggle-container input:nth-of-type(2):checked~.sharedoc-toggle-wrapper {
     transform: translateX(100%);
 }
 
-
 .sharedoc-toggle-container input:nth-of-type(1):checked~.sharedoc-toggle-wrapper .sharedoc-toggle div:nth-of-type(1) {
     opacity: 1;
 }
-
 
 .sharedoc-toggle-container input:nth-of-type(2):checked~.sharedoc-toggle-wrapper .sharedoc-toggle div:nth-of-type(2) {
     opacity: 1;
@@ -2141,7 +2115,6 @@ p.shelve-note {
 
 ::ng-deep .form-check-input:checked[type=radio] {
     background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='-4%20-4%208%208'%3E%3Ccircle%20r='2'%20fill='%23fff'/%3E%3C/svg%3E");
-
 }
 
 .form-check-input:checked {
@@ -2151,7 +2124,6 @@ p.shelve-note {
 
 .form-check-input:checked[type=checkbox] {
     background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2020%2020'%3E%3Cpath%20fill='none'%20stroke='%23fff'%20stroke-linecap='round'%20stroke-linejoin='round'%20stroke-width='3'%20d='M6%2010l3%203l6-6'/%3E%3C/svg%3E");
-
 }
 
 .custom-control-label {
@@ -2197,6 +2169,7 @@ p.shelve-note {
     border-radius: 50%;
 }
 
+
 /* .row.complete-form {
     height: 69vh;
     overflow: auto;
@@ -2211,7 +2184,6 @@ p.shelve-note {
     from {
         transform: translate(0, -50px);
     }
-
     to {
         transform: none;
     }
@@ -2270,7 +2242,9 @@ p.shelve-note {
     }
 }
 
+
 /* workflow design */
+
 .gac-workflow-preview {
     background-color: #f6f6f6;
     border-radius: 5px;
@@ -2296,7 +2270,6 @@ p.shelve-note {
     from {
         stroke-dashoffset: 0;
     }
-
     to {
         stroke-dashoffset: -5rem;
     }
@@ -2607,6 +2580,7 @@ p.shelve-note {
     color: #ffffff;
 }
 
+
 /* workflow design */
 
 .dropzone-item.dropzone-item-danger {
@@ -2726,7 +2700,7 @@ ul.schedule-select-user-list li .slect-close svg {
     display: block;
 }
 
-.checkbox.checkbox-outline input:disabled ~ span {
+.checkbox.checkbox-outline input:disabled~span {
     background-color: #dbdbdb !important;
     cursor: default;
 }
@@ -2815,6 +2789,7 @@ ul.schedule-select-user-list li .slect-close svg {
 .thumbnail-input-upload {
     margin-bottom: 1rem;
 }
+
 .spinner-border {
     display: inline-block;
     min-width: 1.5rem;
@@ -2827,9 +2802,11 @@ ul.schedule-select-user-list li .slect-close svg {
     border-radius: 50%;
     animation: spinner-border .75s linear infinite;
 }
+
 .isphysical-selected {
     background-color: #fff5ea;
 }
+
 .backBtn {
     transition: all 0.4s ease;
     position: relative;
@@ -2838,6 +2815,7 @@ ul.schedule-select-user-list li .slect-close svg {
     align-items: center;
     gap: 4px;
 }
+
 ::ng-deep .kt-body-arabic .add-div .add_btn {
     right: auto !important;
     left: 0 !important;
@@ -2864,7 +2842,23 @@ ul.schedule-select-user-list li .slect-close svg {
     left: 12px !important;
 }
 
+
 /*============ mobile responsive ===============*/
+
+@media only screen and (max-width: 768px) {
+    .main-form-con {
+        display: block !important;
+    }
+    .selected-files-con {
+        max-width: 100%;
+    }
+    button.btn.btn-doc-in {
+        padding: 6px;
+    }
+    button.btn.btn-info.mr-2 {
+        padding: 6px;
+    }
+}
 
 @media only screen and (max-width: 800px) {
     .d-flex.align-items-center.mbl-v-flex-warap {
@@ -2876,10 +2870,6 @@ ul.schedule-select-user-list li .slect-close svg {
         width: 15px;
     }
     .tabs-ies .btn-tabbie {
-       
         padding: 4px 8px !important;
-       
     }
-    }
-    
-   
+}

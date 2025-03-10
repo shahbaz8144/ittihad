@@ -835,7 +835,18 @@ _customerregistration:boolean=false;
         }
       });
   }
-
+  user_reg_personal(){
+    document.getElementById("personal_info").classList.add("active");
+    document.getElementById("company_info").classList.remove("active");
+    document.getElementById("personal_info_content").style.display = 'block';
+    document.getElementById("company_info_content").style.display = 'none';
+  }
+  user_reg_company(){
+    document.getElementById("personal_info").classList.remove("active");
+    document.getElementById("company_info").classList.add("active");
+    document.getElementById("personal_info_content").style.display = 'none';
+    document.getElementById("company_info_content").style.display = 'block';
+  }
   // ECRStorevalue:number;
   // ChangeTabs(_val){
   //   this.ECRStorevalue = _val;

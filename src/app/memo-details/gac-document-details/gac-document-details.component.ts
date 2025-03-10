@@ -32,6 +32,7 @@ import { AzureUploadService } from 'src/app/_service/azure-upload.service';
 import * as pdfjsLib from 'pdfjs-dist';
 import { PDFDocument, rgb } from 'pdf-lib';
 import html2canvas from 'html2canvas';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-gac-document-details',
@@ -2255,7 +2256,7 @@ export class GacDocumentDetailsComponent implements OnInit {
   FileUploadErrorlogs: boolean = false;
   UploadingFiles: boolean = false;
   async onFileChange(event): Promise<void> {
-
+// alert(1);
     let folderPath = "Draft/" + this.currentUserValue.createdby;
     if (event.target.files.length > 0) {
       var length = event.target.files.length;
@@ -2272,6 +2273,7 @@ export class GacDocumentDetailsComponent implements OnInit {
           (item) => item.FileName === file.name && item.Size === file.size
         );
         if (!existingFile) {
+          
           const uniqueId = new Date().valueOf() + index;
 
           // Add the file details to the array with initial states
@@ -2296,13 +2298,17 @@ export class GacDocumentDetailsComponent implements OnInit {
           const progressSubject = new BehaviorSubject<number>(0);
           try {
             const _displayname = this.currentUserValue.FirstName + " " + this.currentUserValue.LastName;
-            const uploadUrl = await this.azureUploadService.uploadFile(file, progressSubject, folderPath, uniqueId, _displayname); // Upload file
+            const { fileUrl, thumbnailUrl } = await this.azureUploadService.uploadFile(file, progressSubject, folderPath, uniqueId, _displayname); // Upload file
             const uploadedFile = this._lstMultipleFiles.find(
               (item) => item.UniqueId === uniqueId
             );
+            
             if (uploadedFile) {
-              uploadedFile.Url = "https://yrglobaldocuments.blob.core.windows.net/documents/" + uploadUrl; // Save the uploaded URL
-              uploadedFile.CloudName = uniqueId + file.name;
+              // uploadedFile.Url = "https://yrglobaldocuments.blob.core.windows.net/documents/" + uploadUrl; // Save the uploaded URL
+              // uploadedFile.CloudName = uniqueId + file.name;
+              uploadedFile.Url = "https://yrglobaldocuments.blob.core.windows.net/documents/" + fileUrl; // Save the uploaded URL
+              uploadedFile.ThumbnailUrl = thumbnailUrl || '';
+              uploadedFile.CloudName = uniqueId + '_' + file.name;
             }
           } catch (error) {
             console.error(`Error uploading file: ${file.name}`, error);
@@ -2317,6 +2323,7 @@ export class GacDocumentDetailsComponent implements OnInit {
           }
         }
         this._lstMultipleFiles.forEach(element => {
+          
           this.UploadingFiles = element.Uploading;
           console.log(this.UploadingFiles, "Uploading Files Test");
         });
@@ -2354,7 +2361,64 @@ export class GacDocumentDetailsComponent implements OnInit {
     var removeIndex = this._lstMultipleFiles.map(function (item) { return item.UniqueId; }).indexOf(_id);
     this._lstMultipleFiles.splice(removeIndex, 1);
   }
+  // jsonData: any[] = [];
 
+  // onFileChangeII(event: any): void {
+  //   const target: DataTransfer = <DataTransfer>event.target;
+  //   if (target.files.length !== 1) {
+  //     alert('Please select a single Excel file.');
+  //     return;
+  //   }
+
+  //   const file: File = target.files[0];
+  //   const reader: FileReader = new FileReader();
+
+  //   reader.onload = (e: any) => {
+  //     const binaryStr: string = e.target.result;
+  //     const workbook: XLSX.WorkBook = XLSX.read(binaryStr, { type: 'binary' });
+
+  //     const sheetName: string = workbook.SheetNames[0]; // Read first sheet
+  //     const worksheet: XLSX.WorkSheet = workbook.Sheets[sheetName];
+
+  //     // Convert the sheet data to JSON
+  //     const rawData: any[] = XLSX.utils.sheet_to_json(worksheet);
+
+  //     // Convert to key-value pair where ID is the key and Arabic is the value
+  //     this.jsonData = rawData.reduce((acc, row) => {
+  //       if (row.ID && row.Arabic) {
+  //         acc[row.ID] = row.Arabic;
+  //       }
+  //       return acc;
+  //     }, {} as { [key: string]: string });
+
+  //     console.log(this.jsonData); // Output formatted JSON data to console
+  //   };
+
+  //   reader.readAsBinaryString(file);
+
+  //   this.updateNestedJson(this.json1, this.json2);
+  //   console.log("Updated JSON1:", this.json1);
+  //   const jsonString = JSON.stringify(this.json1, null, 2); // Convert JSON to a formatted string
+  //   const blob = new Blob([jsonString], { type: 'application/json' });
+  //   const url = URL.createObjectURL(blob);
+  //   const a = document.createElement('a');
+  //   a.href = url;
+  //   a.download = 'updated_json1.json'; // File name
+  //   a.click();
+  //   URL.revokeObjectURL(url);
+  // }
+  // json1: any = {}
+  // json2: any = {};
+  // // ✅ Recursive function to update JSON1 using JSON2
+  // private updateNestedJson(target: any, source: any): void {
+  //   Object.keys(target).forEach(key => {
+  //     if (target[key] instanceof Object) {
+  //       this.updateNestedJson(target[key], source); // Recursively update nested objects
+  //     } else if (source[key]) {
+  //       target[key] = source[key]; // Update value if key exists in JSON2
+  //     }
+  //   });
+  // }
   ClosefileErrorlog() {
     this.FileUploadErrorlogs = false;
   }
