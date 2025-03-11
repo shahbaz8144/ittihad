@@ -337,12 +337,10 @@ export class ArchiveComponent implements OnInit {
       }
     });
     this.route.queryParams.subscribe((params: any) => {
-      debugger
       // Extract parameters safely
       this.selectedCabinet = params.CabinetName || params['cabinet'] || 'DefaultCabinet';
       this.selectedCabinetId = params.CabinetId || params['selectedCabinetId'] || 0;
     });
-    alert(this.selectedCabinetId);
   }
 
 
@@ -417,7 +415,6 @@ export class ArchiveComponent implements OnInit {
     if (this._VersionId === undefined) {
       // this.router.navigate(['/backend/Archive/Documents', this.selectedCabinetId]);
       const cabinetid = this.selectedCabinetId;
-      alert(this.selectedCabinetId);
       const returnUrl = 'backend/Archive/Documents';
       var myurl = `${returnUrl}/${cabinetid}`;
       this.router.navigate([myurl]);
