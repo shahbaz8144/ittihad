@@ -44,7 +44,7 @@ export class RacksComponent implements OnInit {
   rows: Number;
   col: Number;
   note: string;
-  status: boolean;
+  status: boolean=true;
   ObjBlocks:RacksDTO;
   TopRackSearch:string;
   EnterRackName:string;
@@ -266,7 +266,7 @@ this.blockssdrp=[]
       this.rows = null;
       this.col = null;
       this.note = "";
-      this.status = false;
+      this.status = true;
   }
 
   OnBlocks(WareHouseId) {
@@ -302,12 +302,13 @@ this.blockssdrp=[]
       this.objracksDTO.Rows = this.rows
       this.objracksDTO.Columns = this.col
       this.objracksDTO.Description = this.note
-      if (this.status == undefined) {
-        this.objracksDTO.IsActive = false;
-      }
-      else{
-        this.objracksDTO.IsActive = this.status;
-      }
+      this.objracksDTO.IsActive = this.status !== undefined ? this.status : true;
+      // if (this.status == undefined) {
+      //   this.objracksDTO.IsActive = false;
+      // }
+      // else{
+      //   this.objracksDTO.IsActive = this.status;
+      // }
       if (this.objracksDTO.RackId == undefined || this.objracksDTO.RackId == 0) {
         this.objracksDTO.flagid = 1;
       } else if (this.objracksDTO.RackId != 0) {

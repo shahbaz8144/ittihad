@@ -66,7 +66,7 @@ export class BlocksComponent implements OnInit {
   BName: string;
   note: string;
   IsActive: boolean;
-  status: any;
+  status: boolean = true;
   BlockId: number;
   activePage: number;
   LastPage:number;
@@ -211,13 +211,13 @@ export class BlocksComponent implements OnInit {
       this.objBlocksDTO.WareHouseId = this.WareHouseId;
       this.objBlocksDTO.BlockName = this.BName
       this.objBlocksDTO.Description = this.note
-
-      if (this.status == undefined) {
-        this.objBlocksDTO.IsActive = false;
-      }
-      else {
-        this.objBlocksDTO.IsActive = this.status;
-      }
+      this.objBlocksDTO.IsActive = this.status !== undefined ? this.status : true;
+      // if (this.status == undefined) {
+      //   this.objBlocksDTO.IsActive = false;
+      // }
+      // else {
+       
+      // }
 
       if (this.objBlocksDTO.BlockId == undefined || this.objBlocksDTO.BlockId == 0) {
         this.objBlocksDTO.FlagId = 1;
@@ -257,7 +257,7 @@ export class BlocksComponent implements OnInit {
     this.objBlocksDTO.BlockId=0
     this.BName = "";
     this.note = "";
-    this.status = false;
+    this.status = true;
     this.isShow = false;
     document.getElementById("kt_wrapper122").classList.remove("kt-quick-panel--on");
     document.getElementsByClassName("side_view")[0].classList.remove("position-fixed");

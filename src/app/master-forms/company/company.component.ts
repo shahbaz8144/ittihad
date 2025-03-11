@@ -272,7 +272,7 @@ export class CompanyComponent implements OnInit {
       'longitude': new UntypedFormControl,
       'Country': new UntypedFormControl,
       'city': new UntypedFormControl,
-      'status': new UntypedFormControl,
+      'status': new UntypedFormControl(true),
     })
     this.services.GetCountries().subscribe(a => {
       this.lstPrdcts = a;
@@ -344,7 +344,11 @@ export class CompanyComponent implements OnInit {
     })
   }
 
-
+  ngAfterViewInit() {
+    console.log("Form Controls:", this.companyformGroup.controls); 
+    console.log("Status Value:", this.companyformGroup.get('status')?.value); 
+  }
+  
 
   checkcompanyemailExist() {
     this._obj.Email = (<HTMLInputElement>document.getElementById("txtEmail")).value;
@@ -539,12 +543,13 @@ export class CompanyComponent implements OnInit {
       if (this._obj.Code == null) {
         this._obj.Code = "";
       }
-      if (this.companyformGroup.get('status').value == undefined) {
-        this._obj.IsActive = false;
-      }
-      else {
-        this._obj.IsActive = this.companyformGroup.get('status').value;
-      }
+      this._obj.IsActive = this.companyformGroup.get('status').value;  
+      // if (this.companyformGroup.get('status').value == undefined) {
+      //   this._obj.IsActive = false;
+      // }
+      // else {
+      //   this._obj.IsActive = this.companyformGroup.get('status').value;
+      // }
       if (this._obj.CompanyId == undefined || this._obj.CompanyId == 0) {
         this._obj.FlagId = 1;
       } else if (this._obj.CompanyId != 0) {
@@ -597,8 +602,10 @@ export class CompanyComponent implements OnInit {
           this.companyformGroup.reset()
           this.CompanyId = 0;
           this.companyformGroup.patchValue({
-            phonecode: "+1"
+            phonecode: "+1",
+            status:true
           })
+
           this.services._obj.CountryCode = "+1";
         }
       );
@@ -639,6 +646,9 @@ export class CompanyComponent implements OnInit {
   }
 
   company_add() {
+    this.companyformGroup.patchValue({
+      status:true
+    })
     // document.getElementById("addrck").style.display = "block";
     // document.getElementById("company_add").style.display = "none";
     // document.getElementById("editrck").innerHTML = "Add";
@@ -689,7 +699,10 @@ export class CompanyComponent implements OnInit {
     this.services._obj.CityId = C1.CityId;
     this.services._obj.Phone = C1.Phone;
     this.services._obj.CountryCode = C1.CountryCode;
-    this.services._obj.IsActive = C1.IsActive;
+    // this.services._obj.IsActive = C1.IsActive;
+    this.companyformGroup.patchValue({
+      status: C1.IsActive
+    });
     this.isShow = true;
   }
   company_cl() {

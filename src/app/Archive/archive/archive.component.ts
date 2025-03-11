@@ -335,7 +335,14 @@ export class ArchiveComponent implements OnInit {
       } else if (lang == 'en') {
         this.renderer.removeClass(document.body, 'kt-body-arabic');
       }
-    })
+    });
+    this.route.queryParams.subscribe((params: any) => {
+      debugger
+      // Extract parameters safely
+      this.selectedCabinet = params.CabinetName || params['cabinet'] || 'DefaultCabinet';
+      this.selectedCabinetId = params.CabinetId || params['selectedCabinetId'] || 0;
+    });
+    alert(this.selectedCabinetId);
   }
 
 
@@ -345,12 +352,7 @@ export class ArchiveComponent implements OnInit {
   selectedCabinetId: number = 0;
  
   async ngOnInit(): Promise<void> {
-    this.route.queryParams.subscribe((params: any) => {
-      // Extract parameters safely
-      this.selectedCabinet = params.CabinetName || params['cabinet'] || 'DefaultCabinet';
-      this.selectedCabinetId = params.CabinetId || params['selectedCabinetId'] || 0;
-    });
-    
+   
     const lang: any = localStorage.getItem('language')
     this.translate.use(lang);
     this.SelectCompany = lang === 'en' ? 'Company' : 'اختر الشركة';
@@ -415,6 +417,7 @@ export class ArchiveComponent implements OnInit {
     if (this._VersionId === undefined) {
       // this.router.navigate(['/backend/Archive/Documents', this.selectedCabinetId]);
       const cabinetid = this.selectedCabinetId;
+      alert(this.selectedCabinetId);
       const returnUrl = 'backend/Archive/Documents';
       var myurl = `${returnUrl}/${cabinetid}`;
       this.router.navigate([myurl]);

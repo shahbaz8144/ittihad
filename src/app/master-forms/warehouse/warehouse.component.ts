@@ -67,7 +67,7 @@ export class WarehouseComponent implements OnInit {
   countrycode: string = "";
   address: string;
   CountryId: number;
-  status: boolean;
+  status: boolean=true;
   MinPhoneLength: boolean;
   activePage: number;
   LastPage:number;
@@ -267,12 +267,13 @@ export class WarehouseComponent implements OnInit {
       this.objwareDTO.Address = this.Address;
       this.objwareDTO.CountryId = this.Count;
       this.objwareDTO.CityId = this.town;
-      if (this.status == undefined) {
-        this.objwareDTO.IsActive = false;
-      }
-      else {
-        this.objwareDTO.IsActive = this.status;
-      }
+      this.objwareDTO.IsActive = this.status !== undefined ? this.status : true;
+      // if (this.status == undefined) {
+      //   this.objwareDTO.IsActive = false;
+      // }
+      // else {
+        
+      // }
       if (this.objwareDTO.WareHouseId == undefined || this.objwareDTO.WareHouseId == 0) {
         this.objwareDTO.FlagId = 1;
       } else if (this.objwareDTO.WareHouseId != 0) {
@@ -320,7 +321,7 @@ export class WarehouseComponent implements OnInit {
     this.town = null;
     this.phone = null;
     this.countrycode= "+1";
-    this.status = false;
+    this.status = true;
     this.isShow = false;
     // (<HTMLInputElement>document.getElementById("ware")).style.display="none";
     // (<HTMLInputElement>document.getElementById("ware_add")).style.display="block";

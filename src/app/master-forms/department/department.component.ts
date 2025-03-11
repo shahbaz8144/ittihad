@@ -246,7 +246,7 @@ export class DepartmentComponent implements OnInit {
     this.departmentformGroup = this.objFormBuilder.group({
       'DName': new UntypedFormControl('', [Validators.required]),
       'note': new UntypedFormControl,
-      'status': new UntypedFormControl,
+      'status': new UntypedFormControl(true),
       'IsMandatory': new UntypedFormControl
     })
     //this.getPage(1);
@@ -341,12 +341,14 @@ export class DepartmentComponent implements OnInit {
       } else {
         this._obj.IsMandatory = this.departmentformGroup.get('IsMandatory').value;
       }
-      if (this.departmentformGroup.get('status').value == undefined) {
-        this._obj.IsActive = false;
-      }
-      else {
-        this._obj.IsActive = this.departmentformGroup.get('status').value;
-      }
+      this._obj.IsActive = this.departmentformGroup.get('status').value;
+      // if (this.departmentformGroup.get('status').value == undefined) {
+      //   this._obj.IsActive = false;
+      // }
+      // else {
+      //   this._obj.IsActive = this.departmentformGroup.get('status').value;
+      // }
+
       if (this._obj.DepartmentId == undefined || this._obj.DepartmentId == 0) {
         this._obj.FlagId = 1;
       } else if (this._obj.DepartmentId != 0) {
@@ -398,6 +400,9 @@ export class DepartmentComponent implements OnInit {
           this.getdepartmentdetails();
           this.departmentformGroup.reset()
           this.DepartmentId = 0;
+          this.departmentformGroup.patchValue({
+            status:true
+          })
         }
       );
     } catch (error) {
@@ -469,6 +474,9 @@ export class DepartmentComponent implements OnInit {
     });
   }
   department_add() {
+    this.departmentformGroup.patchValue({
+      status:true
+    })
     // document.getElementById("addrck").style.display = "block";
     // document.getElementById("department_add").style.display = "none";
     document.getElementById("addrck").classList.add("kt-quick-panel--on");
@@ -501,7 +509,10 @@ export class DepartmentComponent implements OnInit {
     this.services._obj.DepartmentName = D1.DepartmentName;
     this.services._obj.Description = D1.Description;
     this.services._obj.IsMandatory = D1.IsMandatory;
-    this.services._obj.IsActive = D1.IsActive;
+    // this.services._obj.IsActive = D1.IsActive;
+    this.departmentformGroup.patchValue({
+      status:D1.IsActive
+    })
     this.isShow = true
   }
   department_cl() {
