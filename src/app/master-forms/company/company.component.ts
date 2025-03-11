@@ -602,8 +602,10 @@ export class CompanyComponent implements OnInit {
           this.companyformGroup.reset()
           this.CompanyId = 0;
           this.companyformGroup.patchValue({
-            phonecode: "+1"
+            phonecode: "+1",
+            status:true
           })
+
           this.services._obj.CountryCode = "+1";
         }
       );
@@ -644,6 +646,9 @@ export class CompanyComponent implements OnInit {
   }
 
   company_add() {
+    this.companyformGroup.patchValue({
+      status:true
+    })
     // document.getElementById("addrck").style.display = "block";
     // document.getElementById("company_add").style.display = "none";
     // document.getElementById("editrck").innerHTML = "Add";
@@ -694,7 +699,10 @@ export class CompanyComponent implements OnInit {
     this.services._obj.CityId = C1.CityId;
     this.services._obj.Phone = C1.Phone;
     this.services._obj.CountryCode = C1.CountryCode;
-    this.services._obj.IsActive = C1.IsActive;
+    // this.services._obj.IsActive = C1.IsActive;
+    this.companyformGroup.patchValue({
+      status: C1.IsActive
+    });
     this.isShow = true;
   }
   company_cl() {

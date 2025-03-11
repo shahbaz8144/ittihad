@@ -117,8 +117,8 @@
                         </div>
                     </div>
                     <div class="form-cus mb-3">
-                        <label style=" direction: rtl; width: 100%; text-align: right;">{{"Masterform.CabinetName" | translate }} <span style="font-weight: bold;">[عربي]</span></label>
-                        <!-- <span class="text-danger ml-1">*</span> -->
+                        <label style="direction: rtl; width: 100%; text-align: right;">{{"Masterform.CabinetName" | translate }} <span style="font-weight: bold;">[عربي]</span><span  class="text-danger ml-1">*</span></label>
+                        <!-- <span  class="text-danger ml-1">*</span> -->
                         <input type="text" [(ngModel)]="CabinetNameArabic" class="form-control" placeholder="أدخل اسم الخزانة" required minlength="3" style=" direction: rtl;" maxlength="50" />
                         <div style=" direction: rtl; width: 100%; text-align: right;" class="kt-error" *ngIf="Cabineterrormessagear && !CabinetNameArabic">
                             <span class="kt-error-msg">

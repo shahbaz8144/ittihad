@@ -201,7 +201,7 @@ export class DistributorManufactureComponent implements OnInit {
       phone: new UntypedFormControl('', [Validators.required]),
       fax: new UntypedFormControl,
       note: new UntypedFormControl,
-      status: new UntypedFormControl,
+      status: new UntypedFormControl(true),
       phonecode:new UntypedFormControl('', [Validators.required])
     });
   
@@ -412,12 +412,13 @@ export class DistributorManufactureComponent implements OnInit {
       if (this.ObjDM.Description == null) {
         this.ObjDM.Description = "";
       }
-      if (this.DMformGroup.get('status').value == undefined) {
-        this.ObjDM.IsActive = false;
-      }
-      else {
-        this.ObjDM.IsActive = this.DMformGroup.get('status').value;
-      }
+      this.ObjDM.IsActive = this.DMformGroup.get('status').value;
+      // if (this.DMformGroup.get('status').value == undefined) {
+      //   this.ObjDM.IsActive = false;
+      // }
+      // else {
+      //   this.ObjDM.IsActive = this.DMformGroup.get('status').value;
+      // }
       if (this.ObjDM.DMId == undefined || this.ObjDM.DMId == 0) {
         this.ObjDM.FlagId = 1;
       } else if (this.ObjDM.DMId != 0) {
@@ -454,7 +455,8 @@ export class DistributorManufactureComponent implements OnInit {
           this.DMformGroup.reset();
           this.DMId = 0;
           this.DMformGroup.patchValue({
-            phonecode: "+1"
+            phonecode: "+1",
+            status:true
           })
           this.service.Obj_DMs.CountryCode='+1'
           this.GetUsersListDrp();
@@ -526,7 +528,10 @@ export class DistributorManufactureComponent implements OnInit {
     this.service.Obj_DMs.CountryCode = f1.CountryCode;
     this.service.Obj_DMs.Fax = f1.Fax
     this.service.Obj_DMs.Description = f1.Description
-    this.service.Obj_DMs.IsActive = f1.IsActive
+    // this.service.Obj_DMs.IsActive = f1.IsActive
+    this.DMformGroup.patchValue({
+      status:f1.IsActive
+    })
     this.isShow = true
     this.GetUsersListDrp();
   }
@@ -561,7 +566,9 @@ export class DistributorManufactureComponent implements OnInit {
     });
   }
   distributor_add() {
-    
+    this.DMformGroup.patchValue({
+      status:true
+    })
     document.getElementById("addrck").classList.add("kt-quick-panel--on");
     document.getElementsByClassName("side_view")[0].classList.add("position-fixed");
     document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.add("d-block");

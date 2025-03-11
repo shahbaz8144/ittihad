@@ -105,7 +105,7 @@ export class RoleComponent implements OnInit {
     this.roleformGroup = this.objFormBuilder.group({
       'roleName': new UntypedFormControl('', [Validators.required]),
       'note': new UntypedFormControl,
-      'status': new UntypedFormControl,
+      'status': new UntypedFormControl(true),
       'sharing': new UntypedFormControl
     })
     this.getRoleDetails();
@@ -266,12 +266,13 @@ export class RoleComponent implements OnInit {
         this._obj.Description = "";
       }
       this._obj.Sharing = this.roleformGroup.get('sharing').value;
-      if (this.roleformGroup.get('status').value == undefined) {
-        this._obj.IsActive = false;
-      }
-      else {
-        this._obj.IsActive = this.roleformGroup.get('status').value;
-      }
+      this._obj.IsActive = this.roleformGroup.get('status').value;
+      // if (this.roleformGroup.get('status').value == undefined) {
+      //   this._obj.IsActive = false;
+      // }
+      // else {
+       
+      // }
       if (this._obj.RoleId == undefined || this._obj.RoleId == 0) {
         this._obj.FlagId = 1;
       } else if (this._obj.RoleId != 0) {
@@ -326,6 +327,9 @@ export class RoleComponent implements OnInit {
       
           this.roleformGroup.reset();
           this.RoleId = 0;
+          this.roleformGroup.patchValue({
+            status:true
+          })
         }
       );
     } catch (error) {
@@ -334,6 +338,9 @@ export class RoleComponent implements OnInit {
     this.isShow = false;
   }
   role_add() {
+    this.roleformGroup.patchValue({
+      status:true
+    })
     // document.getElementById("addrck").style.display = "block";
     // document.getElementById("role_add").style.display = "none";
     document.getElementById("addrck").classList.add("kt-quick-panel--on");
@@ -366,7 +373,10 @@ export class RoleComponent implements OnInit {
     this.services._obj.RoleName = R1.RoleName;
     this.services._obj.Description = R1.Description;
     this.services._obj.Sharing = R1.Sharing;
-    this.services._obj.IsActive = R1.IsActive;
+    // this.services._obj.IsActive = R1.IsActive;
+    this.roleformGroup.patchValue({
+      status:R1.IsActive
+    })
     this.isShow = true
   }
   role_cl() {

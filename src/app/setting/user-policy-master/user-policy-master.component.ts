@@ -34,7 +34,7 @@ export class UserPolicyMasterComponent implements OnInit, AfterViewInit {
   loadAPI: Promise<any>;
   UserPolicyList: any[];
   _obj: UserPolicyMasterDTO
-  status: any;
+  status:boolean = true;
   IsActive: boolean;
   String_status: string;
   InActive = false;
@@ -391,12 +391,13 @@ export class UserPolicyMasterComponent implements OnInit, AfterViewInit {
       this._obj.PolicyId = this.PolicyId;
       this._obj.PolicyHeader = this.PolicyHeader;
       this._obj.PolicyContent = this.PolicyContent;
-      if (this.status == undefined) {
-        this._obj.IsActive = false;
-      }
-      else {
-        this._obj.IsActive = this.status;
-      }
+      this._obj.IsActive = this.status !== undefined ? this.status : true; 
+      // if (this.status == undefined) {
+      //   this._obj.IsActive = false;
+      // }
+      // else {
+      //   this._obj.IsActive = this.status;
+      // }
       this._obj.IsAll = this.IsAll;
       this._obj.IsCompany = this.IsCompany;
       this._obj.IsDepartment = this.IsDepartment;
@@ -574,7 +575,7 @@ export class UserPolicyMasterComponent implements OnInit, AfterViewInit {
   onRest() { // To Field Clear
     this.PolicyHeader = "";
     this.PolicyContent = "";
-    this.status = "";
+    this.status = true;
     this.isShow = false;
     this.Company = [];
     this.Department = [];
