@@ -3,7 +3,7 @@
         <div class="d-flex-center">
             <div class="component-main-header">
                 <div class="component-main-header-title">
-                    {{ "Masterform.UserRegistration" | translate }} 
+                    {{ "Masterform.UserRegistration" | translate }}
                 </div>
             </div>
             <!-- <h4 class="mb-3"> {{ "Masterform.UserRegistration" | translate }} </h4> -->
@@ -194,7 +194,7 @@
                 </div> -->
             </div>
         </div>
-        
+
         <div id="stppr">
             <div class="user-reg-card">
                 <div class="user-reg-action">
@@ -218,74 +218,74 @@
                         <div class="user-reg-action-content-inner">
                             <!-- <h6 class="txtm-cus kt-mandatory-lable"> <span>{{ "Masterform.Note" | translate }}: </span> <span class="text-danger">*</span> {{ "Masterform.UserfileldMandatory" | translate }}</h6> -->
                             <div class="user-reg-action-content-card">
-                                    <!-- <h6  class="txtm-cus mb-1 ml-3 pt-1"> <span>Note:  </span> <span class="text-danger">*</span>  This Symbol fields are Mandatory</h6> -->
-                                    <!-- <form [formGroup]="UserRegistrationFrmGfroup" (ngSubmit)="OnCreate()"> -->
-                                        <div class="user-reg-action-content-card-body">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="form-label">{{ "Masterform.FirstName" | translate }}</label><span class="text-danger">*</span>
-                                                        <div class="more_text1"></div>
-                                                        <input type="text" [(ngModel)]="Fname" name="Fname" class="form-control" [placeholder]="EnterFirstName" minlength="1" maxlength="50" (keyup)="TriggerLengthValidation()" autocomplete="off">
-                                                        <!-- <span style="color:red" [hidden]="MinFirstNameLength"> Min Length 1</span> -->
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">{{ "Masterform.MiddleName" | translate }}</label>
-                                                        <input type="text" [(ngModel)]="mname" name="mname" class="form-control" [placeholder]="EnterMiddleName" autocomplete="off">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">{{ "Masterform.LastName" | translate }}</label><span class="text-danger">*</span>
-                                                        <div class="more_text1"></div>
-                                                        <input type="text" [(ngModel)]="lname" name="lname" class="form-control" [placeholder]="EnterLastName" minlength="1" maxlength="50" (keyup)="LastLengthValidation()" autocomplete="off">
-                                                        <!-- <span style="color:red" [hidden]="MinLastNameLength"> Min Length 3</span> -->
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">{{ "Masterform.DisplayName" | translate }}</label><span class="text-danger">*</span>
-                                                        <div class="more_text1"></div>
-                                                        <input type="text" [(ngModel)]="Display" name="Display" class="form-control" [placeholder]="EnterDisplayName" minlength="1" maxlength="50" (keyup)="LastLengthValidation11()" autocomplete="off">
-                                                        <!-- <span style="color:red" [hidden]="MinLastNameLength"> Min Length 3</span> -->
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">{{ "Masterform.Email" | translate }}</label><span class="text-danger">*</span>
-                                                        <div class="more_text1"></div>
-                                                        <span id="myEmail" class="material-icons fs-4 float-right">
+                                <!-- <h6  class="txtm-cus mb-1 ml-3 pt-1"> <span>Note:  </span> <span class="text-danger">*</span>  This Symbol fields are Mandatory</h6> -->
+                                <!-- <form [formGroup]="UserRegistrationFrmGfroup" (ngSubmit)="OnCreate()"> -->
+                                <div class="user-reg-action-content-card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label">{{ "Masterform.FirstName" | translate }}</label><span class="text-danger">*</span>
+                                                <div class="more_text1"></div>
+                                                <input type="text" [(ngModel)]="Fname" name="Fname" class="form-control" [placeholder]="EnterFirstName" minlength="1" maxlength="50" (keyup)="TriggerLengthValidation()" autocomplete="off">
+                                                <!-- <span style="color:red" [hidden]="MinFirstNameLength"> Min Length 1</span> -->
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">{{ "Masterform.MiddleName" | translate }}</label>
+                                                <input type="text" [(ngModel)]="mname" name="mname" class="form-control" [placeholder]="EnterMiddleName" autocomplete="off">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">{{ "Masterform.LastName" | translate }}</label><span class="text-danger">*</span>
+                                                <div class="more_text1"></div>
+                                                <input type="text" [(ngModel)]="lname" name="lname" class="form-control" [placeholder]="EnterLastName" minlength="1" maxlength="50" (keyup)="LastLengthValidation()" autocomplete="off">
+                                                <!-- <span style="color:red" [hidden]="MinLastNameLength"> Min Length 3</span> -->
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">{{ "Masterform.DisplayName" | translate }}</label><span class="text-danger">*</span>
+                                                <div class="more_text1"></div>
+                                                <input type="text" [(ngModel)]="Display" name="Display" class="form-control" [placeholder]="EnterDisplayName" minlength="1" maxlength="50" (keyup)="LastLengthValidation11()" autocomplete="off">
+                                                <!-- <span style="color:red" [hidden]="MinLastNameLength"> Min Length 3</span> -->
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">{{ "Masterform.Email" | translate }}</label><span class="text-danger">*</span>
+                                                <div class="more_text1"></div>
+                                                <span id="myEmail" class="material-icons fs-4 float-right">
                                                             info_outline
                                                         </span>
-                                                        <!-- <i class="fas fa-info-circle mr-1"></i>Add Valid Email Here</div> -->
-                                                        <input class="form-control" id="txtemail" name="Email" [(ngModel)]="email" [placeholder]="EnterEmailAddress" type="email" (change)="CheckEmailExist()" autocomplete="off">
-                                                        <span style="color:red" [hidden]="InvalidEmailFormat">{{ "Masterform.InvalidEmailFormat" | translate }}</span>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-form-label ">{{ "Masterform.Phone" | translate }}
+                                                <!-- <i class="fas fa-info-circle mr-1"></i>Add Valid Email Here</div> -->
+                                                <input class="form-control" id="txtemail" name="Email" [(ngModel)]="email" [placeholder]="EnterEmailAddress" type="email" (change)="CheckEmailExist()" autocomplete="off">
+                                                <span style="color:red" [hidden]="InvalidEmailFormat">{{ "Masterform.InvalidEmailFormat" | translate }}</span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label ">{{ "Masterform.Phone" | translate }}
                                                         </label><span class="text-danger ml-1">*</span>
-                                                        <div class="">
-                                                            <div class="input-group">
-            
-                                                                <input type="text" ng2TelInput (countryChange)="onCountryChange($event)" class="form-control inputgrp-first" style="width: 90px;" [(ngModel)]="countrycode" required maxlength="50" />
-                                                                <input (keypress)="keyPress($event)" type="text" class="form-control" id="" name="Fax" [placeholder]="EnterPhoneNumber" [(ngModel)]="phnnum" />
-                                                                <!-- (keyup)="PhoneLengthValidation()" -->
-                                                                <div>
-                                                                    <span style="color:red">
+                                                <div class="">
+                                                    <div class="input-group">
+
+                                                        <input type="text" ng2TelInput (countryChange)="onCountryChange($event)" class="form-control inputgrp-first" style="width: 90px;" [(ngModel)]="countrycode" required maxlength="50" />
+                                                        <input (keypress)="keyPress($event)" type="text" class="form-control" id="" name="Fax" [placeholder]="EnterPhoneNumber" [(ngModel)]="phnnum" />
+                                                        <!-- (keyup)="PhoneLengthValidation()" -->
+                                                        <div>
+                                                            <span style="color:red">
                                                                     </span>
-            
-                                                                </div>
-                                                            </div>
+
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">{{ "Masterform.Address" | translate }}</label><span class="text-danger">*</span>
-                                                        <div class="more_text1"></div>
-                                                        <span id="myAddress" class="material-icons fs-4 float-right">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">{{ "Masterform.Address" | translate }}</label><span class="text-danger">*</span>
+                                                <div class="more_text1"></div>
+                                                <span id="myAddress" class="material-icons fs-4 float-right">
                                                             info_outline
                                                         </span>
-                                                        <!-- <i class="fas fa-info-circle mr-1"></i>Add Valid Address Here</div> -->
-                                                        <input class="form-control" id="txtaddress" name="Address" [(ngModel)]="addrs" [placeholder]="EnterFullAddress" minlength="3" maxlength="50" type="text" (keyup)="AddressLengthValidation()">
-                                                        <!-- <span style="color:red" [hidden]="MinAddressLength"> MinAddressLength
+                                                <!-- <i class="fas fa-info-circle mr-1"></i>Add Valid Address Here</div> -->
+                                                <input class="form-control" id="txtaddress" name="Address" [(ngModel)]="addrs" [placeholder]="EnterFullAddress" minlength="3" maxlength="50" type="text" (keyup)="AddressLengthValidation()">
+                                                <!-- <span style="color:red" [hidden]="MinAddressLength"> MinAddressLength
                                                         3</span> -->
-                                                    </div>
-                                                </div>
-            
-                                                <!-- <div class="form-group">
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="form-group">
                                                 <label class="form-label">Phone</label><span class="text-danger">*</span>
                                                 <div class="more_text1"></div>
                                                 <span id="myPhone" class="material-icons fs-4 float-right">
@@ -295,61 +295,61 @@
                                                 <input (keypress)="keyPress($event)" class="form-control" id="" name="Fax" [(ngModel)]="phnnum" placeholder="Enter Mobile Number" minlength="8" maxlength="14" type="text" (keyup)="PhoneLengthValidation()">
                                                 <span style="color:red" [hidden]="MinPhoneLength"> Min Length 8</span>
                                             </div> -->
-                                                <div class="col-md-6">
-            
-            
-                                                    <div class="form-group">
-                                                        <label class="form-label">{{ "Masterform.Country" | translate }}</label><span class="text-danger">*</span>
-                                                        <ng-select (change)="getcities($event)" [(ngModel)]="cunname" [placeholder]="SelectCountry">
-                                                            <ng-option *ngFor="let obj of ObjgetcountryList" [value]="obj.CountryId">
-                                                                {{obj.Country}}
-                                                            </ng-option>
-                                                        </ng-select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">{{ "Masterform.City" | translate }}</label><span class="text-danger">*</span>
-                                                        <ng-select [(ngModel)]="cty" [placeholder]="SelectCity">
-                                                            <!-- <div *ngIf="submitted && f.town.errors" class="invalid-feedback">
+                                        <div class="col-md-6">
+
+
+                                            <div class="form-group">
+                                                <label class="form-label">{{ "Masterform.Country" | translate }}</label><span class="text-danger">*</span>
+                                                <ng-select (change)="getcities($event)" [(ngModel)]="cunname" [placeholder]="SelectCountry">
+                                                    <ng-option *ngFor="let obj of ObjgetcountryList" [value]="obj.CountryId">
+                                                        {{obj.Country}}
+                                                    </ng-option>
+                                                </ng-select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">{{ "Masterform.City" | translate }}</label><span class="text-danger">*</span>
+                                                <ng-select [(ngModel)]="cty" [placeholder]="SelectCity">
+                                                    <!-- <div *ngIf="submitted && f.town.errors" class="invalid-feedback">
                                                         <div *ngIf="f.town.errors.required">City is Required</div>
                                                     </div> -->
-                                                            <ng-option [value]="cc.CityId" *ngFor="let cc of lstCities">
-                                                                {{cc.City}}
-                                                            </ng-option>
-                                                        </ng-select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">{{ "Masterform.PinCode" | translate }}</label><span class="text-danger">*</span>
-                                                        <div class="more_text1"></div>
-                                                        <span id="EnterCompanyArea" class="material-icons fs-4 float-right">
+                                                    <ng-option [value]="cc.CityId" *ngFor="let cc of lstCities">
+                                                        {{cc.City}}
+                                                    </ng-option>
+                                                </ng-select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">{{ "Masterform.PinCode" | translate }}</label><span class="text-danger">*</span>
+                                                <div class="more_text1"></div>
+                                                <span id="EnterCompanyArea" class="material-icons fs-4 float-right">
                                                             info_outline
                                                         </span>
-                                                        <!-- <i class="fas fa-info-circle mr-1"></i>Add Company Area Pincode/Zipcode Here</div> -->
-                                                        <input (keypress)="keyPress($event)" class="form-control" id="" name="code" [(ngModel)]="code" [placeholder]="EnterPinCode" minlength="3" maxlength="12" type="number" (keyup)="PinLengthValidation()">
-                                                        <!-- <span style="color:red" [hidden]="MinPinLength"> Min Length 3</span> -->
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">{{ "Masterform.Telephone1" | translate }}</label>
-                                                        <input (keypress)="keyPress($event)" class="form-control" id="" name="" [(ngModel)]="tele1" [placeholder]="EnterTelephone1" minlength="3" maxlength="14" type="number">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">{{ "Telephone2" | translate }}</label>
-                                                        <input (keypress)="keyPress($event)" class="form-control" id="" name="" [(ngModel)]="tele2" [placeholder]="EnterTelephone2" minlength="3" maxlength="14" type="number">
-                                                    </div>
-            
-                                                    <div class="form-group">
-                                                        <label>{{ "Masterform.Status" | translate }}</label><br>
-                                                        <mat-slide-toggle color="primary" [(ngModel)]="status" id="status">
-                                                        </mat-slide-toggle>
-                                                    </div>
-                                                </div>
-                                               
+                                                <!-- <i class="fas fa-info-circle mr-1"></i>Add Company Area Pincode/Zipcode Here</div> -->
+                                                <input (keypress)="keyPress($event)" class="form-control" id="" name="code" [(ngModel)]="code" [placeholder]="EnterPinCode" minlength="3" maxlength="12" type="number" (keyup)="PinLengthValidation()">
+                                                <!-- <span style="color:red" [hidden]="MinPinLength"> Min Length 3</span> -->
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">{{ "Masterform.Telephone1" | translate }}</label>
+                                                <input (keypress)="keyPress($event)" class="form-control" id="" name="" [(ngModel)]="tele1" [placeholder]="EnterTelephone1" minlength="3" maxlength="14" type="number">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">{{ "Telephone2" | translate }}</label>
+                                                <input (keypress)="keyPress($event)" class="form-control" id="" name="" [(ngModel)]="tele2" [placeholder]="EnterTelephone2" minlength="3" maxlength="14" type="number">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>{{ "Masterform.Status" | translate }}</label><br>
+                                                <mat-slide-toggle color="primary" [(ngModel)]="status" id="status">
+                                                </mat-slide-toggle>
                                             </div>
                                         </div>
-                                    
-    
-    
+
+                                    </div>
+                                </div>
+
+
+
                                 <div class="user-reg-action-buttons">
-                                    <button [disabled]="!Fname || !lname ||!Display || !cunname || !email || !code || !cty || !addrs || !phnnum" class="btn btn-sm btn-info next-step"  (click)="user_reg_company()">{{ "Masterform.Next" | translate }}</button>
+                                    <button [disabled]="!Fname || !lname ||!Display || !cunname || !email || !code || !cty || !addrs || !phnnum" class="btn btn-sm btn-info next-step" (click)="user_reg_company()">{{ "Masterform.Next" | translate }}</button>
                                     <a (click)="reset()" class="btn btn-sm btn-secondary">{{ "Masterform.Cancel" | translate }}</a>
                                 </div>
                             </div>
@@ -358,12 +358,12 @@
                     <div class="user-reg-action-content" id="company_info_content" style="display: none;">
                         <div class="user-reg-action-content-inner">
                             <!-- <h6 class="txtm-cus kt-mandatory-lable"> <span>{{ "Masterform.Note" | translate  }}: </span> <span class="text-danger">*</span> {{ "Masterform.UserfileldMandatory" | translate }}</h6> -->
-                            <div class="user-reg-action-content-card" *ngIf="_customerregistration== false" >
-                               
+                            <div class="user-reg-action-content-card" *ngIf="_customerregistration== false">
+
                                 <div class="user-reg-action-content-card-body">
                                     <div class="row">
                                         <div class="col-sm-12 col-md-7">
-    
+
                                             <div class="form-group">
                                                 <label class="form-label">{{ "Masterform.Positions" | translate }}</label><span class="text-danger">*</span>
                                                 <ng-select [(ngModel)]="Position" [placeholder]="selectPosition">
@@ -393,7 +393,7 @@
                                                         {{obj.DepartmentName}}
                                                     </ng-option>
                                                 </ng-select>
-    
+
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label">{{ "Masterform.Role" | translate }}</label><span class="text-danger">*</span>
@@ -405,7 +405,7 @@
                                                         {{obj.RoleName}}
                                                     </ng-option>
                                                 </ng-select>
-    
+
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label">{{ "Masterform.Designation" | translate }}</label><span class="text-danger">*</span>
@@ -438,10 +438,10 @@
                                                         {{obj.ContactName}}
                                                     </ng-option>
                                                 </ng-select>
-    
+
                                             </div>
-    
-    
+
+
                                         </div>
                                         <div class="col-sm-12 col-md-5">
                                             <div class="kt-user-rd-card">
@@ -493,7 +493,7 @@
                                                             </g>
     
                                                         </svg></span>{{ "Masterform.UserAccessControls" | translate }}</h3>
-    
+
                                                 <div class="kt-crd-acc-v">
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <div class="kt-rc-us-ic">
@@ -541,7 +541,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-    
+
                                                 <div class="kt-crd-acc-v">
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <div class="kt-rc-us-ic">
@@ -595,7 +595,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-    
+
                                                 <div class="kt-crd-acc-v">
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <div class="kt-rc-us-ic kt-archvie-ic">
@@ -632,8 +632,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-    
-    
+
+
                                                 <div class="kt-crd-acc-v">
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <div class="kt-rc-us-ic kt-archvie-ic">
@@ -712,7 +712,7 @@
                                                 </div>
                                             </div>
                                         </div>
-    
+
                                         <!-- <div class="d-flex-center w-100 d-none">
                                             <div class="form-group">
                                                 <label class="form-label tips" data-tippy-content="Is Global User">Is Global
@@ -754,9 +754,9 @@
                                         </div> -->
                                     </div>
                                 </div>
-                                    
-                                 
-    
+
+
+
                                 <div class="user-reg-action-buttons">
                                     <!-- Here goes your actions buttons -->
                                     <button (click)="OnCreate()" class="btn next-step btn btn-sm btn-success" [disabled]="!Comp || !Position || !dept ||!role || !desig || !login || !Empid || !Repuser">{{ "Masterform.Submit" | translate }}</button>
@@ -765,13 +765,13 @@
                                     <a (click)="exportAsXLSX()" style="display: none;" class="btn btn-sm btn-secondary next-step">{{ "Masterform.exportexcel" | translate }}</a>
                                 </div>
                             </div>
-                            <div class="user-reg-action-content-card" *ngIf="_customerregistration== true" >
-                                
+                            <div class="user-reg-action-content-card" *ngIf="_customerregistration== true">
+
                                 <div class="user-reg-action-content-card-body">
                                     <div class="row">
                                         <div class="col-md-6">
-    
-    
+
+
                                             <div class="form-group">
                                                 <label class="form-label">{{ "Masterform.Company" | translate }}</label><span class="text-danger">*</span>
                                                 <ng-select (change)="getReportingDropDown($event)" [(ngModel)]="Comp" [placeholder]="Companyselect">
@@ -793,7 +793,7 @@
                                                         {{obj.DepartmentName}}
                                                     </ng-option>
                                                 </ng-select>
-    
+
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label">{{ "Masterform.Role" | translate }}</label><span class="text-danger">*</span>
@@ -805,7 +805,7 @@
                                                         {{obj.RoleName}}
                                                     </ng-option>
                                                 </ng-select>
-    
+
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label">{{ "Masterform.Designation" | translate }}</label><span class="text-danger">*</span>
@@ -818,13 +818,13 @@
                                                     </ng-option>
                                                 </ng-select>
                                             </div>
-                                           
-    
-    
+
+
+
                                         </div>
                                         <div class="col-md-6">
-    
-    
+
+
                                             <div class="form-group">
                                                 <label class="form-label">{{ "Masterform.LoginID" | translate }}</label><span class="text-danger">*</span>
                                                 <input class="form-control" id="txtloginid" [(ngModel)]="login" name="Address" [placeholder]="EnterLoginId " type="text" minlength="3" (change)="ChecLoginIdExist()" (keyup)="LoginLengthValidation()">
@@ -845,12 +845,12 @@
                                                         {{obj.ContactName}}
                                                     </ng-option>
                                                 </ng-select>
-    
+
                                             </div>
-    
-    
+
+
                                         </div>
-    
+
                                         <!-- <div class="d-flex-center w-100 d-none">
                                             <div class="form-group">
                                                 <label class="form-label tips" data-tippy-content="Is Global User">Is Global
@@ -892,14 +892,14 @@
                                         </div> -->
                                     </div>
                                 </div>
-                                    
-                                 
-                              
-    
+
+
+
+
                                 <div class="user-reg-action-buttons">
                                     <!-- Here goes your actions buttons -->
                                     <button (click)="OnCreate()" class="btn next-step btn btn-sm btn-success" [disabled]="!Comp || !Position || !dept ||!role || !desig || !login || !Empid || !Repuser">{{ "Masterform.Submit" | translate }}</button>
-                                    <button class="btn btn-sm previous-step btn-info" (click)="user_reg_previous()">{{ "Masterform.Previous" | translate }}</button>
+                                    <button class="btn btn-sm previous-step btn-info" (click)="user_reg_personal()">{{ "Masterform.Previous" | translate }}</button>
                                     <a (click)="reset()" class="btn btn-sm btn-secondary next-step">{{ "Masterform.Cancel" | translate }}</a>
                                     <a (click)="exportAsXLSX()" style="display: none;" class="btn btn-sm btn-secondary next-step">{{ "Masterform.exportexcel" | translate }}</a>
                                 </div>
@@ -909,6 +909,6 @@
                 </div>
             </div>
         </div>
-       
+
     </div>
 </div>
