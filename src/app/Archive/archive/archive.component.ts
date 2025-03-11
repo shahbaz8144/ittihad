@@ -56,6 +56,8 @@ export class ArchiveComponent implements OnInit {
   customObj: ShelvesDTO;
   selectedValues: string = '';
   SubmitDocumentDocumentId: number;
+  DocumentBarcode:any;
+  DocumentPrefix:any;
   _selectedValues: Array<{
     UserId: number;
     ContactName: string;
@@ -899,7 +901,8 @@ export class ArchiveComponent implements OnInit {
     this.service.NewDocument(this._obj).subscribe(data => {
       console.log(data, "Add Document API Data");
       this.SubmitDocumentDocumentId = data["documentId"];
-
+      this.DocumentBarcode = data['barcode'];
+      this.DocumentPrefix  = data['prefix'];
       if (data["message"] == '1') {
         this._Previewshownandhide = true;
       } else {
