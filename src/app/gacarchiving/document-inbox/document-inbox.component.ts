@@ -70,10 +70,10 @@ export class DocumentInboxComponent implements OnInit, AfterViewInit {
     });
 
     this.route.paramMap.subscribe((params: any) => {
-      debugger
+// debugger
       this.selectedCabinetId = params.get('cabinetid')!;
       
-      alert(this.selectedCabinetId);
+      // alert(this.selectedCabinetId);
     });
   }
   ngAfterViewInit() {
