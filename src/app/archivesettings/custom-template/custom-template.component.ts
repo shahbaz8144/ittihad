@@ -721,11 +721,12 @@ export class CustomTemplateComponent implements AfterViewInit, OnInit {
     this.obj.TemplateData = JSON.stringify(workspaceData);
     this.service.UpdateDynamicTemplateAPI(this.obj).subscribe(data => {
       console.log(data, "Save Temple Data");
-      this._snackBar.open(('Added Successfully'), 'End now', {
+      this._snackBar.open(('Update Successfully'), 'End now', {
         duration: 5000,
         verticalPosition: 'bottom',
         horizontalPosition: 'right',
       });
+
       this.clearAllElements();
     })
     // this.http.post(this.apiUrl, this.elements).subscribe(response => {

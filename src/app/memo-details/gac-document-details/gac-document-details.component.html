@@ -579,7 +579,7 @@
                                         </svg>
                                     </div>
                                     <span class="kt-doc-title-name">{{ "Masterform.ReferenceDocumnets" | translate}}</span>
-                                    <span class="tab-count"> {{ReferenceList.length}}</span>
+                                    <span class="tab-count" *ngIf="ReferenceList.length>0">{{ReferenceList.length}}</span>
                                 </div>
                               </button>
                                 <button class="flex-sm-fill nav-link" id="nav-useraction-tab" (click)="BindUserSection()" data-toggle="tab" data-target="#nav-useraction" type="button" role="tab" aria-controls="nav-useraction" aria-selected="false">
@@ -686,6 +686,17 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <ng-container *ngIf="_BindUserSection.length==0">
+                                            <div class="d-flex-center">
+                                                <div class="m-auto text-center kt-error-img">
+                                                    <img src="assets/media/Img/no meeting Icons 01.png">
+                                                    <div class="bnk-txt">
+                                                        <p class="kt-blank-msg fs-4"> {{ "Masterform.NoReferencemessage" | translate }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-container>
                                     </div>
                                 </div>
                             </div>
@@ -1064,7 +1075,7 @@
 
                                 <div class="d-flex justify-content-end kt-detail-link-option">
 
-                                    <div class="kt-detail-item" *ngIf="IsArchiveDownload==true  && viewer!='' && Contenttype?.toLowerCase().includes('pdf')">
+                                    <div class="kt-detail-item" *ngIf="IsArchiveDownload==true  && viewer!='' &&  Contenttype">
                                         <a class="kt-detail-link" (click)="generatePDF()">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1em;height: 1em;vertical-align: middle;fill: #144e18;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
                                                 <path

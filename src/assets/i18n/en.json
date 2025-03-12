@@ -715,6 +715,7 @@
         "ReferenceDocuments": "Reference Documents",
         "SharedDocumentDetails": "Shared Document Details",
         "NoReferencemessage": "Sorry, we could't find any Reference Document.",
+        "NoUsermessage": "Sorry, we could't find any User Actions.",
         "NoSharedMessage": "Sorry, we could't find any Shared document.",
         "FullName": "FullName",
         "DisplayName": "Display Name",

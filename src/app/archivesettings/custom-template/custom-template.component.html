@@ -26,7 +26,7 @@
                     <h5 class="mb-0" id="template_name">{{ templateName ? templateName : ("Masterform.TemplateName" | translate) }}
                     </h5>
                     <button class="btn btn-save-template" *ngIf="templateId == 0" (click)="saveTemplate()">{{"Masterform.SaveTemplate" | translate }}</button>
-                    <button class="btn btn-save-template" *ngIf="templateId != 0" (click)="UpdateTemplate()">{{"Masterform.UpdateTemplate" | translate }}</button>
+                    <button  [routerLink]="['/backend/ArchiveSettings/template']"  class="btn btn-save-template" *ngIf="templateId != 0" (click)="UpdateTemplate()">{{"Masterform.UpdateTemplate" | translate }}</button>
                 </div>
                 <div class="template-inner">
                     <!-- Workspace (Resizable) -->

@@ -702,6 +702,7 @@
         "ReferenceDocuments": "ملفات مرجعية",
         "SharedDocumentDetails": "تفاصيل الوثيقة المشتركة",
         "NoReferencemessage": "عذرًا، لم نتمكن من العثور على أي مستند مرجعي.",
+        "NoUsermessage" : "عذراً، لم نتمكن من العثور على أي إجراءات للمستخدم.",
         "NoSharedMessage": "عذرًا، لم نتمكن من العثور على أي مستند مشترك.",
         "FullName": "الاسم الكامل",
         "DisplayName": "اسم العرض",
