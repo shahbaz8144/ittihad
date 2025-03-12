@@ -2614,9 +2614,10 @@ export class GacDocumentDetailsComponent implements OnInit {
           verticalPosition: "bottom",
           panelClass: ['blue-snackbar']
         });
-
       }
+      // this.ReferenceView(this.mainCatalogUrl,this.RefDocumentName, this.selectedReferenceId);
       this.ArchiveDetailsInfo(this._documentId, this.ShareId);
+      document.getElementById("moredet").classList.remove("position-fixed");
       document.getElementById("addref").classList.remove("kt-quick-panel--on");
       document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");
       // Reset the list of files after the upload
