@@ -871,7 +871,7 @@
         "Type": "النوع",
         "Pending": "قيد الانتظار",
         "Filter": "مرشح",
-        "downloadwithbarcode": "تحميل مع القالب"
+        "Downloadwithtemplate": "تحميل مع القالب"
     },
     "Archive": {
         "Archive": "أرشيف",

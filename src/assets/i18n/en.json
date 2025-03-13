@@ -876,7 +876,7 @@
         "DeleteDraft": "Delete Draft",
         "More": "More",
         "Filter": "Filter",
-        "downloadwithbarcode" : "Download with template"
+        "Downloadwithtemplate" : "Download with template"
     },
     "Archive": {
         "Archive": "Archive",

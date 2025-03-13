@@ -879,6 +879,8 @@ export class GacDocumentDetailsComponent implements OnInit {
     this._obj.CreatedBy = this.LoginUserId;
     this.service.ArchiveDocumentDetails(this._obj)
       .subscribe(data => {
+        this.isMainDocumentActive = true;
+        this.IsRefrenceDocumentActive = false;
         console.log(data, "Document details API Data");
         this._obj = data as GACFiledto;
         this.DocumentList = this._obj.Data["ArchiveJson"];
@@ -1156,13 +1158,14 @@ export class GacDocumentDetailsComponent implements OnInit {
   }
 
   DownloadFile() {
-
+    debugger
     if (this.isMainDocumentActive) {
       this.download(this.DocumentList[0].Url, this._DocumentName);
     }
     else if (this.selectedReferenceId) {
+      console.log(this.ReferenceList,"Download Reference List");
       const selecteddoc: any = this.ReferenceList.find((item: any) => item.ReferenceId == this.selectedReferenceId);
-      this.download(selecteddoc.ImageUrl, selecteddoc.DocumentName);
+      this.download(selecteddoc.Url, selecteddoc.FileName);
     }
 
   }
@@ -2621,7 +2624,6 @@ export class GacDocumentDetailsComponent implements OnInit {
       document.getElementById("addref").classList.remove("kt-quick-panel--on");
       document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");
       // Reset the list of files after the upload
-
     } catch (error) {
       console.error('Error uploading reference document:', error);
       // Optionally, show an error snackbar or handle the error further
@@ -3810,9 +3812,9 @@ export class GacDocumentDetailsComponent implements OnInit {
     this._obj1.DocumentId = parseInt(this._documentId);
     this.inboxService.UserActionListArchive(this._obj1)
       .subscribe(data => {
-        console.log(data["userActionJson"], "get user action details");
+        // console.log(data["userActionJson"], "get user action details");
         this._BindUserSection = JSON.parse(data["userActionJson"]);
-        console.log(this._BindUserSection, "BindUserSection");
+        // console.log(this._BindUserSection, "BindUserSection");
       })
   }
 
