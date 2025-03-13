@@ -876,7 +876,9 @@
         "DeleteDraft": "Delete Draft",
         "More": "More",
         "Filter": "Filter",
-        "Downloadwithtemplate" : "Download with template"
+        "Downloadwithtemplate" : "Download with template",
+        "UserActions" :"User Actions",
+        "EntertemplateName" : "Enter Template Name"
     },
     "Archive": {
         "Archive": "Archive",

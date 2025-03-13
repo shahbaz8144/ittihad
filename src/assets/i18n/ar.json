@@ -871,7 +871,9 @@
         "Type": "النوع",
         "Pending": "قيد الانتظار",
         "Filter": "مرشح",
-        "Downloadwithtemplate": "تحميل مع القالب"
+        "Downloadwithtemplate": "تحميل مع القالب",
+        "UserActions" : "إجراءات المستخدم",
+        "EntertemplateName" : "أدخل اسم القالب"
     },
     "Archive": {
         "Archive": "أرشيف",

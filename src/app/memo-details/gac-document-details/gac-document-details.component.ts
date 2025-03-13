@@ -879,8 +879,6 @@ export class GacDocumentDetailsComponent implements OnInit {
     this._obj.CreatedBy = this.LoginUserId;
     this.service.ArchiveDocumentDetails(this._obj)
       .subscribe(data => {
-        this.isMainDocumentActive = true;
-        this.IsRefrenceDocumentActive = false;
         console.log(data, "Document details API Data");
         this._obj = data as GACFiledto;
         this.DocumentList = this._obj.Data["ArchiveJson"];
@@ -1157,18 +1155,47 @@ export class GacDocumentDetailsComponent implements OnInit {
       })
   }
 
-  DownloadFile() {
-    debugger
-    if (this.isMainDocumentActive) {
-      this.download(this.DocumentList[0].Url, this._DocumentName);
-    }
-    else if (this.selectedReferenceId) {
-      console.log(this.ReferenceList,"Download Reference List");
-      const selecteddoc: any = this.ReferenceList.find((item: any) => item.ReferenceId == this.selectedReferenceId);
-      this.download(selecteddoc.Url, selecteddoc.FileName);
-    }
 
-  }
+  DownloadFile() {
+   
+
+    if (this.isMainDocumentActive) {
+        if (this.DocumentList?.length > 0 && this.DocumentList[0]?.Url) {
+            this.download(this.DocumentList[0].Url, this._DocumentName);
+        } else {
+            console.error("Main document is not available for download.");
+        }
+    } else if (this.selectedReferenceId !== null && this.selectedReferenceId !== undefined) {
+        // console.log("Download Reference List:", this.ReferenceList);
+        // console.log("Selected Reference Index:", this.selectedReferenceId);
+
+        // Fetch document by index instead of searching by AttachmentId
+        const selecteddoc = this.ReferenceList[this.selectedReferenceId];
+
+        if (selecteddoc && selecteddoc.Url && selecteddoc.FileName) {
+            this.download(selecteddoc.Url, selecteddoc.FileName);
+        } else {
+            console.error(`No document found at index: ${this.selectedReferenceId}`);
+            console.log("Available ReferenceList:", this.ReferenceList);
+        }
+    } else {
+        console.error("Either ReferenceList is empty or selectedReferenceId is invalid.");
+    }
+}
+
+  // DownloadFile() {
+  //   debugger
+    
+  //   if (this.isMainDocumentActive) {
+  //     this.download(this.DocumentList[0].Url, this._DocumentName);
+  //   }
+  //   else if (this.selectedReferenceId) {
+  //     console.log(this.ReferenceList,"Download Reference List");
+  //     const selecteddoc: any = this.ReferenceList.find((item: any) => item.AttachmentId == this.selectedReferenceId);
+  //     this.download(selecteddoc.Url, selecteddoc.FileName);
+  //   }
+
+  // }
 
   download(url, filename) {
     console.log(url, "url path");
