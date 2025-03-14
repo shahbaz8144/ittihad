@@ -873,7 +873,21 @@
         "Filter": "مرشح",
         "Downloadwithtemplate": "تحميل مع القالب",
         "UserActions" : "إجراءات المستخدم",
-        "EntertemplateName" : "أدخل اسم القالب"
+        "EntertemplateName" : "أدخل اسم القالب",
+        "EnterFirstName" : "أدخل الاسم الأول",
+        "EnterLastName" : "أدخل الاسم الأخير",
+        "EnterDisplayName" : "أدخل اسم العرض",
+        "EnterEmail" : "أدخل البريد الإلكتروني",
+        "PositionsErrorlogMessage" : "حدد المناصب",
+        "CompanyErrorlogMessage" : "اختر الشركة",
+        "DepartmentErrorlogMessage" :"اختر الأقسام",
+        "RoleErrorlogMessage" : "حدد الدور",
+        "DesignationErrorlogMessage" : "حدد التعيين",
+        "LoginIDErrorlogMessage" : "أدخل معرف تسجيل الدخول",
+        "EmployeeIdErrorlogMessage" : "أدخل معرف الموظف",
+        "ReportingUserErrorlogMessage" : "حدد الإبلاغ عن المستخدم",
+        "AddUserPersonalDetails" : "إضافة التفاصيل الشخصية للمستخدم",
+        "AssignRoleposition" : "تعيين منصب الدور"
     },
     "Archive": {
         "Archive": "أرشيف",
