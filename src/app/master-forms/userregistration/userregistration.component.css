@@ -713,3 +713,13 @@ img.ep-ic-dw {
         overflow: auto;
     }
 }
+.kt-error-msg {
+    color: #ff5d5d;
+    font-weight: 400;
+    font-size: 13px;
+    text-transform: capitalize;
+    margin-top: 3px;
+    display: block;
+    padding-left: 1px;
+  
+}

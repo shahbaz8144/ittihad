@@ -936,10 +936,15 @@ export class GacDocumentDetailsComponent implements OnInit {
         this._IsFullAccess = this.DocumentList[0].IsFullAccess;
         this.ShareDocumentDetailsList = this.DocumentList[0]["UserListJsonSorted"];
         console.log(this.ShareDocumentDetailsList, "ShareDocumentDetailsList");
+        // this.subCategoryNames = this.DocumentList.flatMap(doc =>
+        //   doc.SubCategoryJson?.map(item => item.SubCategoryName) || []
+        // );
         this.subCategoryNames = this.DocumentList.flatMap(doc =>
-          doc.SubCategoryJson?.map(item => item.SubCategoryName) || []
+          (doc.SubCategoryJson || [])
+            .filter(item => Object.keys(item).length > 0) // Remove empty objects
+            .map(item => item.SubCategoryName)
         );
-        console.log(this.subCategoryNames, "SubCategory Names");
+      //  alert(this.subCategoryNames.length);
         this._VersionJsonResault = this.DocumentList[0].VersionJsonSorted;
         console.log(this._VersionJsonResault, "VersionJsonSorted");
         this.DocumentList.forEach((element) => {
@@ -1017,22 +1022,23 @@ export class GacDocumentDetailsComponent implements OnInit {
 
 
   ReferenceView(ImageUrl, DocumentName, index: number) {
-    // alert(ImageUrl);
     this.selectedReferenceId = index;
     this.RefDocumentName = DocumentName;
     this._ImageUrl = ImageUrl;
     this.mainCatalogUrl = ImageUrl;
     let scontenttype = '';
+    // Check if the ImageUrl contains a PDF
+    this.Contenttype = ImageUrl.toLowerCase().endsWith('.pdf');
     this.inboxService.PathExtention(ImageUrl).subscribe(
       da => {
         console.log(da ,"ReferenceList");
         // this.Contenttype = da[][0].url;
-        if (Array.isArray(da) && da.length > 0) {
-          this.Contenttype = da[0].contentType; // Assigning 'url' from the first object
-          alert(this.Contenttype);
-        } else {
-          console.error("Invalid response: Expected an array with at least one object");
-        }
+        // if (Array.isArray(da) && da.length > 0) {
+        //   this.Contenttype = da[0].contentType; // Assigning 'url' from the first object
+        //   alert(this.Contenttype);
+        // } else {
+        //   console.error("Invalid response: Expected an array with at least one object");
+        // }
       
 
         // console.log(da,"Pdf Data")
@@ -1081,7 +1087,11 @@ export class GacDocumentDetailsComponent implements OnInit {
     this._MainCatelogUrl = Url;
     this.mainCatalogUrl = Url;
     console.log(this.mainCatalogUrl, "URL");
+    this.ShowProgress = false;
+    this.progress = 0;
     let scontenttype = '';
+    // Check if the ImageUrl contains a PDF
+    this.Contenttype = Url.toLowerCase().endsWith('.pdf');
     this.inboxService.PathExtention(Url).subscribe(
       da => {
         // console.log(da,"Pdf Data")
@@ -1145,17 +1155,47 @@ export class GacDocumentDetailsComponent implements OnInit {
       })
   }
 
+
   DownloadFile() {
+   
 
     if (this.isMainDocumentActive) {
-      this.download(this.DocumentList[0].Url, this._DocumentName);
-    }
-    else if (this.selectedReferenceId) {
-      const selecteddoc: any = this.ReferenceList.find((item: any) => item.ReferenceId == this.selectedReferenceId);
-      this.download(selecteddoc.ImageUrl, selecteddoc.DocumentName);
-    }
+        if (this.DocumentList?.length > 0 && this.DocumentList[0]?.Url) {
+            this.download(this.DocumentList[0].Url, this._DocumentName);
+        } else {
+            console.error("Main document is not available for download.");
+        }
+    } else if (this.selectedReferenceId !== null && this.selectedReferenceId !== undefined) {
+        // console.log("Download Reference List:", this.ReferenceList);
+        // console.log("Selected Reference Index:", this.selectedReferenceId);
 
-  }
+        // Fetch document by index instead of searching by AttachmentId
+        const selecteddoc = this.ReferenceList[this.selectedReferenceId];
+
+        if (selecteddoc && selecteddoc.Url && selecteddoc.FileName) {
+            this.download(selecteddoc.Url, selecteddoc.FileName);
+        } else {
+            console.error(`No document found at index: ${this.selectedReferenceId}`);
+            console.log("Available ReferenceList:", this.ReferenceList);
+        }
+    } else {
+        console.error("Either ReferenceList is empty or selectedReferenceId is invalid.");
+    }
+}
+
+  // DownloadFile() {
+  //   debugger
+    
+  //   if (this.isMainDocumentActive) {
+  //     this.download(this.DocumentList[0].Url, this._DocumentName);
+  //   }
+  //   else if (this.selectedReferenceId) {
+  //     console.log(this.ReferenceList,"Download Reference List");
+  //     const selecteddoc: any = this.ReferenceList.find((item: any) => item.AttachmentId == this.selectedReferenceId);
+  //     this.download(selecteddoc.Url, selecteddoc.FileName);
+  //   }
+
+  // }
 
   download(url, filename) {
     console.log(url, "url path");
@@ -1657,12 +1697,35 @@ export class GacDocumentDetailsComponent implements OnInit {
 
     this.DocumentType = this.DocumentList[0].DocumentTypeName ? this.DocumentList[0].DocumentTypeName : null;
     this.DocumentTypeId = this.DocumentList[0].DocumentTypeId;
-    this._SourceId = this.DocumentList[0].SourceId;
-    this.Source = this.DocumentList[0].SourceName;
-    this._ManufactureandDistributorId = this.DocumentList[0].DMId;
-    this.Manufacture = this.DocumentList[0].DMName;
+    if (this.DocumentList.length > 0) {
+      const newSourceId = this.DocumentList[0]?.SourceId || 0;
+      const newSourceName = this.DocumentList[0]?.SourceName?.trim() || ''; 
+  
+      const newDMId = this.DocumentList[0]?.DMId || 0;
+      const newDMName = this.DocumentList[0]?.DMName?.trim() || '';
+  
+      // ✅ Only update Source if new value is NOT empty
+      if (newSourceName) {
+          this._SourceId = newSourceId;
+          this.Source = newSourceName;
+      }
+  
+      // ✅ Only update Manufacture if new value is NOT empty
+      if (newDMName) {
+          this._ManufactureandDistributorId = newDMId;
+          this.Manufacture = newDMName;
+      }
+  }
+  
+  this.SelectedCategory = this.DocumentList[0]?.SubCategoryJson?.filter(item => Object.keys(item).length > 0) || [];
 
-    this.SelectedCategory = [...this.DocumentList[0].SubCategoryJson];
+  
+    // this._SourceId = this.DocumentList[0].SourceId;
+    // this.Source = this.DocumentList[0].SourceName;
+    // this._ManufactureandDistributorId = this.DocumentList[0].DMId;
+    // this.Manufacture = this.DocumentList[0].DMName;
+
+    // this.SelectedCategory = [...this.DocumentList[0].SubCategoryJson];
 
 
 
@@ -2581,13 +2644,13 @@ export class GacDocumentDetailsComponent implements OnInit {
           verticalPosition: "bottom",
           panelClass: ['blue-snackbar']
         });
-
       }
+      // this.ReferenceView(this.mainCatalogUrl,this.RefDocumentName, this.selectedReferenceId);
       this.ArchiveDetailsInfo(this._documentId, this.ShareId);
+      document.getElementById("moredet").classList.remove("position-fixed");
       document.getElementById("addref").classList.remove("kt-quick-panel--on");
       document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");
       // Reset the list of files after the upload
-
     } catch (error) {
       console.error('Error uploading reference document:', error);
       // Optionally, show an error snackbar or handle the error further
@@ -3776,9 +3839,9 @@ export class GacDocumentDetailsComponent implements OnInit {
     this._obj1.DocumentId = parseInt(this._documentId);
     this.inboxService.UserActionListArchive(this._obj1)
       .subscribe(data => {
-        console.log(data["userActionJson"], "get user action details");
+        // console.log(data["userActionJson"], "get user action details");
         this._BindUserSection = JSON.parse(data["userActionJson"]);
-        console.log(this._BindUserSection, "BindUserSection");
+        // console.log(this._BindUserSection, "BindUserSection");
       })
   }
 

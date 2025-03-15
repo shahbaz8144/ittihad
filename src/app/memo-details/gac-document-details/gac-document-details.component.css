@@ -5296,11 +5296,11 @@ pdf-viewer {
     border: 1px solid #000000;
 }
 
-.rendered-pdf-1 {
+/* .rendered-pdf-1 {
     width: 100% !important;
     height: calc(100vh - 240px) !important;
     border: 1px solid #000000;
-}
+} */
 
 .pdf-container {
     position: relative;
