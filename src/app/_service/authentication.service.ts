@@ -34,7 +34,14 @@ export class AuthenticationService {
   public get currentUserValue(): UserDTO {
     return this.currentUserSubject.value;
   }
-
+  async getSasUrl(filePath: string, expiryTime: Date): Promise<string> {
+    const expiryTimeString = expiryTime.toISOString(); // Convert to UTC string
+    const response = await this.http.get<{ sasUrl: string }>(
+      `${this.rootUrlII}FileUploadAPI/NewGenerateSASTokenUrl?filePath=${encodeURIComponent(filePath)}&expiryTime=${expiryTimeString}`
+    ).toPromise();
+    
+    return response.sasUrl;
+  }
   //Login Service
   login(username: string, password: string) {
     this._userobj.userId = username;

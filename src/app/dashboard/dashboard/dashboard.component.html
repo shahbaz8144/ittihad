@@ -239,7 +239,7 @@
                 </div>
                 <div class="dash-vr"></div>
                 <div class="dash-tiles-item" (click)="UrlRedirectPendingfromOthers('PendingFromReceiver')">
-                    
+
                     <div class="card h-lg-100  cursor-pointer d-cards">
                         <div class="card-body d-flex justify-content-between align-items-start flex-column pd-fx">
                             <div class="m-0">
@@ -262,7 +262,7 @@
                                 </div>
                             </div>
                             <!-- <ng-container routerLink="backend/Inbox/PendingFromReceiver"> -->
-                            <div class="d-flex flex-column my-7" >
+                            <div class="d-flex flex-column my-7">
                                 <h2 class="fw-semibold fs-3x text-white2 memo-v5 lh-1 ls-n2">{{Pendingformothercount}}</h2>
                                 <div class="m-0">
                                     <span class="fw-semibold fs-6 text-gray-800">Pending from others</span>
@@ -281,7 +281,7 @@
                                     </svg>
                                 </span> {{'Dashboard.ViewMemos' | translate }}
                             </span>
-                        <!-- </ng-container> -->
+                            <!-- </ng-container> -->
                         </div>
                         <!--end::Body-->
                     </div>
@@ -297,7 +297,7 @@
                     <ngb-carousel [showNavigationArrows]="false" interval="3000">
                         <ng-template *ngFor="let item of images" ngbSlide>
                             <div class="picsum-img-wrapper cr-img mh-25">
-                                <img src="{{item.path}}" alt="Angular Carousel 1" class="h-auto">
+                                <img src="{{item.sasUrl}}" alt="Angular Carousel 1" class="h-auto">
                             </div>
                         </ng-template>
                     </ngb-carousel>

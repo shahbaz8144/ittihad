@@ -76,6 +76,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authenticationService.login(this.f.username.value, this.f.password.value)
       .subscribe(data => {
+         
         // console.log(data, "LoginData");
         if (data["Data"]["UserId"].length > 0) {
           // this._lstUserDetails = data[0] as UserDTO[];

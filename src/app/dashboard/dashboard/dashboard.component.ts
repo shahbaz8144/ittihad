@@ -26,6 +26,7 @@ import { Direction } from '@angular/cdk/bidi';
 import { DOCUMENT } from '@angular/common';
 import { Inject } from '@angular/core';
 import { HeaderComponent } from 'src/app/shared/header/header.component';
+import { AuthenticationService } from 'src/app/_service/authentication.service';
 
 am4core.useTheme(am4themes_animated);
 let chart;
@@ -37,45 +38,20 @@ let yAxis;
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css', '../../../assets/css/tourguide.css'],
-  // imports: [RoundProgressModule]
 })
 
 
 export class DashboardComponent implements OnInit {
 
-  // image="https://yrglobaldocuments.blob.core.windows.net/documents/Banner{{src.FileUrl}}"
-
-  // Test1 = [
-  //   {
-  //     Filtertype: "F",
-  //     FilterId: "0",
-  //   }, 
-  // ];
-  // Test2 = [
-  //   {
-  //     Filtertype: "P",
-  //     FilterId: "0",
-  //   }, 
-  // ];
-  // Test3 = [
-  //   {
-  //     Filtertype: "L",
-  //     FilterId: "10",
-  //   }, 
-  // ];
-  //readonly VAPID_PUBLIC_KEY = "BJapMS78IwkXEUwfTF7svvikW6ZnrCndS1swtevRQ_RmN_LZSGTlDxMPlgOBilUDmEsQFF159qfNGJNmsY8lEfQ";
   DailyActivity: any = [];
   current = 27;
   max = 50;
   images: any = [];
-  // textDirection: Direction | 'auto' = 'auto'; // Default to 'auto'
   textDirection: string = 'ltr';
   bntStyle: string = '';
   lang: string = "en"; // Default language
   arabicButton: any;
   englishButton: any;
-  // letters = '0123456789ABCDEF';
-  //private chart: AmChart;
   _obj: DashboardDto;
   _LstCounts: DashboardDto[];
   _lstBarJson: [];
@@ -99,7 +75,6 @@ export class DashboardComponent implements OnInit {
   IsPolicy: boolean
   chart: any;
   chart1: AmChart; // Assuming chart1 is defined in the component
-
   chartpie: any;
   widthPer: any;
   color: any = "green";
@@ -141,7 +116,7 @@ export class DashboardComponent implements OnInit {
     , private _PushNotificationService: PushNotificationService
     , private translate: TranslateService
     , private AmCharts: AmChartsService,
-
+    private blobService: AuthenticationService
     // ,private swPush: SwPush
   ) {
     // var letters = "0123456789ABCDEF";
@@ -211,175 +186,177 @@ export class DashboardComponent implements OnInit {
 
   _LstToSuggestion = [];
   _LstToBanner = [];
-  Counts() {
-    this.dashboardService.DashboardCount()
-      .subscribe((data) => {
-        console.log(data, "Dashboard count");
-        this._obj = data as DashboardDto;
-        var _dashboardJson = JSON.parse(this._obj.DashboardJson);
-        this.DailyActivity = _dashboardJson[0].DailyActivityJson;
-        this._LstCounts = _dashboardJson;
-        this.ExpiredMemos = this._LstCounts[0].ExpiredMemos;
-        this.Pendingformothercount = this._LstCounts[0].PendingFromOthersCount;
-        this.NewMemos = this._LstCounts[0].NewMemos;
-        this.ReplyRequiredMemos = this._LstCounts[0].ReplyRequiredMemos;
-        this.ApprovalMemos = this._LstCounts[0].ApprovalMemos;
-        this.TotalApprovalMemos = this._LstCounts[0].TotalApprovalMemos;
-        this.ActionTaken = this._LstCounts[0].ActionTaken;
-        this.Pending = this._LstCounts[0].Pending;
-        this.ActionMemoPercentage = this._LstCounts[0].ActionMemoPercentage;
-        this.TotalGeneralMemos = this._LstCounts[0].TotalGeneralMemos;
-        this.ActionTakenGeneral = this._LstCounts[0].ActionTakenGeneral;
-        this.PendingGeneral = this._LstCounts[0].PendingGeneral;
-        this.GeneralMemoPercentage = this._LstCounts[0].GeneralMemoPercentage;
-        this.TotalPercentage = this._LstCounts[0].TotalPercentage;
-        this.FullName = this._LstCounts[0].FullName;
-        this._LstToSuggestion = JSON.parse(this._LstCounts[0].SuggestionJson);
-        // this._LstToSuggestion.forEach(element => {
-        //   element.OptionJson = JSON.parse(element.OptionJson);
-        // });
-        this._LstToBanner = JSON.parse(this._LstCounts[0].BannerJson);
-        console.log(this._LstToBanner, "Dashboard banner");
-        // var _Obj = {};
-        // //../../../
-        //   _Obj["path"] = "assets/media/Img/No_Banner.png";
-        //   this.images.push(_Obj);
+  async Counts(userid) {
+    // this.dashboardService.DashboardCount()
+    //   .subscribe((data) => {
+    const data = await this.dashboardService.DashboardCount(userid);
+    console.log(data, "Dashboard count");
+    this._obj = data as DashboardDto;
+    var _dashboardJson = JSON.parse(this._obj.DashboardJson);
+    this.DailyActivity = _dashboardJson[0].DailyActivityJson;
+    this._LstCounts = _dashboardJson;
+    this.ExpiredMemos = this._LstCounts[0].ExpiredMemos;
+    this.Pendingformothercount = this._LstCounts[0].PendingFromOthersCount;
+    this.NewMemos = this._LstCounts[0].NewMemos;
+    this.ReplyRequiredMemos = this._LstCounts[0].ReplyRequiredMemos;
+    this.ApprovalMemos = this._LstCounts[0].ApprovalMemos;
+    this.TotalApprovalMemos = this._LstCounts[0].TotalApprovalMemos;
+    this.ActionTaken = this._LstCounts[0].ActionTaken;
+    this.Pending = this._LstCounts[0].Pending;
+    this.ActionMemoPercentage = this._LstCounts[0].ActionMemoPercentage;
+    this.TotalGeneralMemos = this._LstCounts[0].TotalGeneralMemos;
+    this.ActionTakenGeneral = this._LstCounts[0].ActionTakenGeneral;
+    this.PendingGeneral = this._LstCounts[0].PendingGeneral;
+    this.GeneralMemoPercentage = this._LstCounts[0].GeneralMemoPercentage;
+    this.TotalPercentage = this._LstCounts[0].TotalPercentage;
+    this.FullName = this._LstCounts[0].FullName;
+    this._LstToSuggestion = JSON.parse(this._LstCounts[0].SuggestionJson);
+    // this._LstToSuggestion.forEach(element => {
+    //   element.OptionJson = JSON.parse(element.OptionJson);
+    // });
+    this._LstToBanner = JSON.parse(this._LstCounts[0].BannerJson);
+    console.log(this._LstToBanner, "Dashboard banner");
+    // var _Obj = {};
+    // //../../../
+    //   _Obj["path"] = "assets/media/Img/No_Banner.png";
+    //   this.images.push(_Obj);
 
-        // alert(this.images.length);
-        // alert(this._LstToBanner.length);
-        // if (this._LstToBanner.length != 0) {
-        //   this.images = [];
-        // }
-        // this._LstToBanner.forEach(element => {
-        //   element.AttachmentJson.forEach(Attch => {
-        //     var _Obj = {};
-        //     _Obj["path"] = Attch.FileUrl;
-        //     _Obj["type"] = 'image';
-        //     this.images.push(_Obj);
-        //   });
-        // });
-        if (this._LstToBanner && Array.isArray(this._LstToBanner)) {
-          this._LstToBanner.forEach(element => {
-            if (element.AttachmentJson && Array.isArray(element.AttachmentJson)) {
-              element.AttachmentJson.forEach(Attch => {
-                var _Obj = {};
-                _Obj["path"] = Attch.FileUrl;
-                _Obj["type"] = 'image';
-                this.images.push(_Obj);
-              });
-            }
+    // alert(this.images.length);
+    // alert(this._LstToBanner.length);
+    // if (this._LstToBanner.length != 0) {
+    //   this.images = [];
+    // }
+    // this._LstToBanner.forEach(element => {
+    //   element.AttachmentJson.forEach(Attch => {
+    //     var _Obj = {};
+    //     _Obj["path"] = Attch.FileUrl;
+    //     _Obj["type"] = 'image';
+    //     this.images.push(_Obj);
+    //   });
+    // });
+    if (this._LstToBanner && Array.isArray(this._LstToBanner)) {
+      this._LstToBanner.forEach(element => {
+        if (element.AttachmentJson && Array.isArray(element.AttachmentJson)) {
+          element.AttachmentJson.forEach(Attch => {
+            var _Obj = {};
+            _Obj["path"] = Attch.FileUrl;
+            _Obj["type"] = 'image';
+            _Obj["sasUrl"] = '';
+            this.images.push(_Obj);
           });
         }
-
-        // this._LstToBanner.forEach(element => {
-        //   alert(element.AttachmentJson.length)
-        //   element.AttachmentJson = element.AttachmentJson;
-        // });
-        chart = am4core.create('chartdiv', am4charts.XYChart)
-        xAxis = chart.xAxes.push(new am4charts.CategoryAxis())
-        yAxis = chart.yAxes.push(new am4charts.ValueAxis());
-        chart.language.locale = "ar";
-        //chart.colors.step = 2;
-        chart.legend = new am4charts.Legend()
-        chart.legend.position = 'top'
-        chart.legend.paddingBottom = 10
-        xAxis.dataFields.category = 'Status'
-        xAxis.renderer.cellStartLocation = 0.1
-        xAxis.renderer.cellEndLocation = 0.9
-        xAxis.renderer.grid.template.location = 0;
-        yAxis.min = 20;
-        chart.data = this._LstCounts[0].BarJson;
-        //chartpie
-        chart1 = am4core.create("chartdiv1", am4charts.PieChart);
-        chart1.data = JSON.parse(this._LstCounts[0].GacChartJson);
-        chart1.language.locale = "ar"; // Set direction to RTL for Arabic
-
-        chart1.legend = new am4charts.Legend();
-        chart1.legend.valueLabels.template.disabled = true;
-        chart1.legend.itemContainers.template.togglable = false;
-        chart1.legend.itemContainers.template.events.on("hit", function (ev) {
-          var slice = ev.target.dataItem.dataContext.slice;
-          slice.isActive = !slice.isActive;
-        });
-
-        // legend.data.setAll(series.dataItems);
-
-        // chart1.data = [{
-        //   "Documents": "Pending",
-        //   "Count": 1,
-        //   // "color": am4core.color("coral")
-        // }, {
-        //   "Documents": "Approved",
-        //   "Count": 2
-        // }, {
-        //   "Documents": "Rejected",
-        //   "Count": 3
-        // }, {
-        //   "Documents": "Shared With Me",
-        //   "Count": 0
-        // }, {
-        //   "Documents": "Shared By me",
-        //   "Count": 0
-        // }];
-
-        var pieSeries = chart1.series.push(new am4charts.PieSeries());
-        pieSeries.dataFields.value = "Count";
-        pieSeries.dataFields.category = "Documents";
-        pieSeries.slices.template.propertyFields.fill = "color";
-
-
-        //   labels
-        pieSeries.ticks.template.disabled = true;
-        pieSeries.alignLabels = false;
-        pieSeries.labels.template.text = "{value.percent.formatNumber('#.0')}%";
-        pieSeries.labels.template.radius = am4core.percent(-40);
-        pieSeries.labels.template.fill = am4core.color("white");
-
-        //   chart.data = [
-        //     {
-        //       Status: 'Total',
-        //       Total: 80,
-        //       Done: 55 
-        //     },
-        //     {
-        //       Status: 'General',
-        //       Total: 90,
-        //       Done: 78 
-        //     },
-        //     {
-        //       Status: 'Approval',
-        //       Total: 50,
-        //       Done: 40 
-        //     } 
-        // ]
-
-        // var gradient = new am4core.LinearGradient();
-        // gradient.addColor(am4core.color("red"));
-        // gradient.addColor(am4core.color("blue"));
-        // gradient.rotation = 90;
-        //series.columns.template.fill = gradient;
-        createSeries('Total', 'Total', "#67b7dc", "#6794dc");
-        createSeries('Done', 'Done', "#00cc99", "#1affc6");
-        if (this.TotalPercentage < 95) {
-          this.toastr.warning('Improve your performance by keep focusing on Pending Status',
-            '', {
-            timeOut: 6000,
-            positionClass: 'toast-bottom-right',
-          });
-        }
-        this.toastr.info('Your overall performance is ' + this.TotalPercentage + '%',
-          'Hello  ' + this.FullName, {
-          timeOut: 15000,
-          positionClass: 'toast-bottom-right',
-        });
-        // this.DailyActivity.forEach(item => {
-        //   let color = "#";
-        //   for (var i = 0; i < 6; i++) {
-        //     color += this.letters[Math.floor(Math.random() * 16)];
-        //   }
-        //   item.color = color;
-        // });
       });
+    }
+
+    // this._LstToBanner.forEach(element => {
+    //   alert(element.AttachmentJson.length)
+    //   element.AttachmentJson = element.AttachmentJson;
+    // });
+    chart = am4core.create('chartdiv', am4charts.XYChart)
+    xAxis = chart.xAxes.push(new am4charts.CategoryAxis())
+    yAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    chart.language.locale = "ar";
+    //chart.colors.step = 2;
+    chart.legend = new am4charts.Legend()
+    chart.legend.position = 'top'
+    chart.legend.paddingBottom = 10
+    xAxis.dataFields.category = 'Status'
+    xAxis.renderer.cellStartLocation = 0.1
+    xAxis.renderer.cellEndLocation = 0.9
+    xAxis.renderer.grid.template.location = 0;
+    yAxis.min = 20;
+    chart.data = this._LstCounts[0].BarJson;
+    //chartpie
+    chart1 = am4core.create("chartdiv1", am4charts.PieChart);
+    chart1.data = JSON.parse(this._LstCounts[0].GacChartJson);
+    chart1.language.locale = "ar"; // Set direction to RTL for Arabic
+
+    chart1.legend = new am4charts.Legend();
+    chart1.legend.valueLabels.template.disabled = true;
+    chart1.legend.itemContainers.template.togglable = false;
+    chart1.legend.itemContainers.template.events.on("hit", function (ev) {
+      var slice = ev.target.dataItem.dataContext.slice;
+      slice.isActive = !slice.isActive;
+    });
+
+    // legend.data.setAll(series.dataItems);
+
+    // chart1.data = [{
+    //   "Documents": "Pending",
+    //   "Count": 1,
+    //   // "color": am4core.color("coral")
+    // }, {
+    //   "Documents": "Approved",
+    //   "Count": 2
+    // }, {
+    //   "Documents": "Rejected",
+    //   "Count": 3
+    // }, {
+    //   "Documents": "Shared With Me",
+    //   "Count": 0
+    // }, {
+    //   "Documents": "Shared By me",
+    //   "Count": 0
+    // }];
+
+    var pieSeries = chart1.series.push(new am4charts.PieSeries());
+    pieSeries.dataFields.value = "Count";
+    pieSeries.dataFields.category = "Documents";
+    pieSeries.slices.template.propertyFields.fill = "color";
+
+
+    //   labels
+    pieSeries.ticks.template.disabled = true;
+    pieSeries.alignLabels = false;
+    pieSeries.labels.template.text = "{value.percent.formatNumber('#.0')}%";
+    pieSeries.labels.template.radius = am4core.percent(-40);
+    pieSeries.labels.template.fill = am4core.color("white");
+
+    //   chart.data = [
+    //     {
+    //       Status: 'Total',
+    //       Total: 80,
+    //       Done: 55 
+    //     },
+    //     {
+    //       Status: 'General',
+    //       Total: 90,
+    //       Done: 78 
+    //     },
+    //     {
+    //       Status: 'Approval',
+    //       Total: 50,
+    //       Done: 40 
+    //     } 
+    // ]
+
+    // var gradient = new am4core.LinearGradient();
+    // gradient.addColor(am4core.color("red"));
+    // gradient.addColor(am4core.color("blue"));
+    // gradient.rotation = 90;
+    //series.columns.template.fill = gradient;
+    createSeries('Total', 'Total', "#67b7dc", "#6794dc");
+    createSeries('Done', 'Done', "#00cc99", "#1affc6");
+    if (this.TotalPercentage < 95) {
+      this.toastr.warning('Improve your performance by keep focusing on Pending Status',
+        '', {
+        timeOut: 6000,
+        positionClass: 'toast-bottom-right',
+      });
+    }
+    this.toastr.info('Your overall performance is ' + this.TotalPercentage + '%',
+      'Hello  ' + this.FullName, {
+      timeOut: 15000,
+      positionClass: 'toast-bottom-right',
+    });
+    // this.DailyActivity.forEach(item => {
+    //   let color = "#";
+    //   for (var i = 0; i < 6; i++) {
+    //     color += this.letters[Math.floor(Math.random() * 16)];
+    //   }
+    //   item.color = color;
+    // });
+    // });
   }
 
   useLanguage(lang: any) {
@@ -430,7 +407,7 @@ export class DashboardComponent implements OnInit {
     // });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
 
     // this.translate.get('Dashboard.ApprovalPending').subscribe((res: string) => {
     //   console.log(res); // Output: 'Approval Pending' (in English)
@@ -466,21 +443,12 @@ export class DashboardComponent implements OnInit {
     // }
     this.ActionMemoPercentage = 100;
     this.GeneralMemoPercentage = 100;
-    this.currentUser.subscribe(data => {
+    this.currentUser.subscribe(async data => {
       console.log(data, "Current Value");
       this.CurrentRoleId = data[0].RoleId;
       if (data[0].createdby != null) {
-
-        // new Promise(resolve => {
-        //   setTimeout(() => {
-        //     this.Counts();
-        //   }, 2000);
-        // });
-        // setTimeout(() => {
-        //   this.Counts();
-        // }, 2000);
-
-        this.Counts();
+        await this.Counts(data[0].createdby);
+        await this.loadSasUrlsForImages();
       }
     });
     // this.GeneralMemoPercentage=0;
@@ -523,7 +491,18 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  async loadSasUrlsForImages() {
+    for (let image of this.images) {
+      const expiryTime = new Date();
+      expiryTime.setMinutes(expiryTime.getMinutes() + 5); // 5 minutes expiry
 
+      try {
+        image.sasUrl = await this.blobService.getSasUrl(image.path, expiryTime);
+      } catch (error) {
+        console.error(`Error fetching SAS URL for ${image.path}`, error);
+      }
+    }
+  }
 
   FavMemos() {  // To view My Favorite
     // this.NameSeletecForFilter = "My Favorite";
@@ -758,7 +737,7 @@ export class DashboardComponent implements OnInit {
     localStorage.setItem('Dashboard_FilterValue', val);
     this.router.navigateByUrl('backend/Inbox/Memos');
   }
-  
+
   UrlRedirectPendingfromOthers(val: string) {
     //alert(val);
 
