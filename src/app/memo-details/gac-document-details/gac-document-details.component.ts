@@ -470,7 +470,7 @@ export class GacDocumentDetailsComponent implements OnInit {
         const parsedData = JSON.parse(userData);
         // Access IsArchiveDownload value
         this.isArchiveApproval = parsedData[0]?.IsArchiveApproval ?? false;
-        alert(this.isArchiveApproval);
+        // alert(this.isArchiveApproval);
         console.log('IsArchiveApproval:', this.isArchiveApproval);
       } catch (error) {
         console.error('Error parsing currentUser data from localStorage:', error);
