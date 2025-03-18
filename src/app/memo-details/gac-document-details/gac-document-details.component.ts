@@ -33,6 +33,7 @@ import * as pdfjsLib from 'pdfjs-dist';
 import { PDFDocument, rgb } from 'pdf-lib';
 import html2canvas from 'html2canvas';
 import * as XLSX from 'xlsx';
+import { AuthenticationService } from 'src/app/_service/authentication.service';
 
 @Component({
   selector: 'app-gac-document-details',
@@ -284,6 +285,7 @@ export class GacDocumentDetailsComponent implements OnInit {
     private commonUrl: ApiurlService,
     private router: Router,
     private azureUploadService: AzureUploadService,
+    private blobService: AuthenticationService
     // private http: HttpClient
   ) {
     // Set workerSrc using pdf.worker.entry
@@ -963,6 +965,7 @@ export class GacDocumentDetailsComponent implements OnInit {
         });
         if (this.DocumentList && this.DocumentList.length > 0) {
           this.mainCatalogUrl = this.DocumentList[0].Url;
+          this.getTemporaryUrl(this.mainCatalogUrl);
         }
         let scontenttype = '';
 
@@ -1020,12 +1023,27 @@ export class GacDocumentDetailsComponent implements OnInit {
       });
   }
 
+  expiryMinutes: number = 1; 
+
+  async getTemporaryUrl(filePath) {
+    // const filePath = 'DMS/307591/191629578_572616.pdf';  // Update with your actual file path
+    const expiryTime = new Date();
+    expiryTime.setMinutes(expiryTime.getMinutes() + this.expiryMinutes); // Set expiry time
+
+    try {
+      this.mainCatalogUrl = await this.blobService.getSasUrl(filePath, expiryTime);
+      console.log(this.mainCatalogUrl)
+    } catch (error) {
+      console.error("Error fetching SAS URL", error);
+    }
+  }
 
   ReferenceView(ImageUrl, DocumentName, index: number) {
     this.selectedReferenceId = index;
     this.RefDocumentName = DocumentName;
     this._ImageUrl = ImageUrl;
     this.mainCatalogUrl = ImageUrl;
+    this.getTemporaryUrl(this.mainCatalogUrl);
     let scontenttype = '';
     // Check if the ImageUrl contains a PDF
     this.Contenttype = ImageUrl.toLowerCase().endsWith('.pdf');
@@ -1086,7 +1104,7 @@ export class GacDocumentDetailsComponent implements OnInit {
 
     this._MainCatelogUrl = Url;
     this.mainCatalogUrl = Url;
-    console.log(this.mainCatalogUrl, "URL");
+    this.getTemporaryUrl(this.mainCatalogUrl);
     this.ShowProgress = false;
     this.progress = 0;
     let scontenttype = '';

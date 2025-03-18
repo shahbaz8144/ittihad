@@ -40,7 +40,6 @@ import { LoaderInterceptor } from './_service/loader.interceptor';
 // import { ServiceWorkerModule } from '@angular/service-worker';
 // import { ArchivesettingsModule } from './archivesettings/archivesettings.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -294,14 +294,14 @@
                 </div>
                 <div class="left-click-side" (click)="sideviw('Gac/DocumentDetails',item.DocumentId,'0',item.ShareId)">
                     <div class="d-flex-center-start">
-
-                        <div class="leftdiv">
+                        <!-- <img *ngIf="item.ThumbnailUrl==''" src="assets/media/Img/filethumb.png" class="" alt=""> -->
+                        <!-- <img alt="img" [src]="item.Url" class=""> -->
+                        <!-- <div class="leftdiv">
+                            
                             <div class="img-divv">
-                                <!-- <img *ngIf="item.ThumbnailUrl==''" src="assets/media/Img/filethumb.png" class="" alt=""> -->
-                                <!-- <img alt="img" [src]="item.Url" class=""> -->
                                 <img [src]="getImageSource(item)" class="">
                             </div>
-                        </div>
+                        </div> -->
                         <div class="w-100">
                             <div class="main-doc-name">
                                 <span class="doc-username">{{item.DocumentName}}</span>
@@ -460,14 +460,15 @@
                 </div>
                 <div class="left-click-side" (click)="sideviw('Gac/DocumentDetails',item.DocumentId,'0',item.ShareId)">
                     <div class="d-flex-center-start">
-                        <div class="leftdiv">
-                            <div class="img-divv">
-                                <!-- <img *ngIf="contentType!== 'image/png' && contentType !== 'image/jpeg'" src="assets/media/Img/filethumb.png" class="" alt="">
+                        <!-- <img *ngIf="contentType!== 'image/png' && contentType !== 'image/jpeg'" src="assets/media/Img/filethumb.png" class="" alt="">
                                 <img alt="img" *ngIf="contentType === 'image/png' || contentType === 'image/jpeg'"   [src]="item.Url" class=""> -->
+                        <!-- <div class="leftdiv">
+                            <div class="img-divv">
+                                
                                 <img [src]="getImageSource(item)" class="">
 
                             </div>
-                        </div>
+                        </div> -->
                         <div class="w-100">
                             <div class="main-doc-name">
                                 <div>{{ item.contentType }}</div>

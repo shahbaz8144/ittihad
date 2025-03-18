@@ -12,6 +12,7 @@ import { MemoDetailsComponent } from '../memo-details/memo-details.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DOCUMENT } from '@angular/common';
 import tippy from 'node_modules/tippy.js';
+import { AuthenticationService } from 'src/app/_service/authentication.service';
 @Component({
   selector: 'app-fileview',
   templateUrl: './fileview.component.html',
@@ -75,22 +76,13 @@ export class FileviewComponent implements OnInit {
     private translate: TranslateService,
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
-    private router: Router
+    private router: Router,
+    private blobService: AuthenticationService
   ) {
     this._LoginUserId = this.currentUserValue.createdby;
     this._obj = new InboxDTO();
-
-    // this._MemoIds = JSON.parse(localStorage.getItem('MemoIds_' + this._mailid));
-
-
-
-
-
-    console.log(this._CurrentpageNo, "_CurrentpageNo");
   }
 
-  // @ViewChild(PdfViewerComponent)
-  // private pdfComponent: PdfViewerComponent;
   public get currentUserValue(): UserDTO {
     this.currentUserSubject = new BehaviorSubject<UserDTO>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
@@ -99,8 +91,24 @@ export class FileviewComponent implements OnInit {
 
   url: string;
   _AttachmentCount: number;
+  fileUrl: string | null = null;
+  expiryMinutes: number = 1;
+
+  async getTemporaryUrl(filePath) {
+    // const filePath = 'DMS/307591/191629578_572616.pdf';  // Update with your actual file path
+    const expiryTime = new Date();
+    expiryTime.setMinutes(expiryTime.getMinutes() + this.expiryMinutes); // Set expiry time
+
+    try {
+      this.src = await this.blobService.getSasUrl(filePath, expiryTime);
+
+    } catch (error) {
+      console.error("Error fetching SAS URL", error);
+    }
+  }
+  _originalUrl: string;
   // _attachmentUrls: any;
-  ngOnInit(): void {
+  async ngOnInit() {
     const lang: any = localStorage.getItem('language');
     this.translate.use(lang);
     this.currentLang = lang ? lang : 'en';
@@ -127,7 +135,6 @@ export class FileviewComponent implements OnInit {
       // alert(lang);
       const linkElement = document.getElementById('arabicCssLink');
       if (linkElement && linkElement.parentNode) {
-        console.log('Removing Arabic styles');
         this.renderer.removeChild(document.head, linkElement);
       } else {
         console.log('Link element not found or already removed');
@@ -142,15 +149,16 @@ export class FileviewComponent implements OnInit {
 
     var decoder = new TextDecoder();
     //let surl = this.route.snapshot.params['url'];
-    this.route.queryParams.subscribe(params => {
-      
+    this.route.queryParams.subscribe(async params => {
+
       let surl = params['url'];
-      // alert(surl)
       const arr = surl.split(',').map(element => {
         return Number(element);
       });
       this.src = decoder.decode(new Uint8Array(arr));
-      // alert(this.src);
+      this._originalUrl = decoder.decode(new Uint8Array(arr));
+      await this.getTemporaryUrl(this.src);
+
       let uid = params['uid'];
       const arruid = uid.split(',').map(element => {
         return Number(element);
@@ -161,12 +169,10 @@ export class FileviewComponent implements OnInit {
       }
       let type = params['type'];
       this.DocumentSource = type;
-      // alert(this.DocumentSource);
 
       let Maildocid = params['MailDocId'];
       if (Maildocid == undefined) Maildocid = 0
       this.MailDocId = Maildocid;
-      //  alert(this.MailDocId);
 
       let MailId = params['MailId'];
       this._mailid = MailId;
@@ -174,9 +180,9 @@ export class FileviewComponent implements OnInit {
       let ReplyId = params['ReplyId'];
       this._ReplyId = ReplyId;
 
-
       let AnnouncementDocId = params['AnnouncementDocId'];
       this._AnnouncementDocId = AnnouncementDocId;
+
       let loginuserid = params['LoginUserId'];
       this.createdBy = loginuserid;
 
@@ -193,10 +199,9 @@ export class FileviewComponent implements OnInit {
 
       this._AttachmentUrls = JSON.parse(localStorage.getItem('AttachmentMemoId_' + this._mailid) ?? '[]');
       this._TotalRecords = this._AttachmentUrls.length;
-      // alert(this._TotalRecords)
+
       if (this._AttachmentUrls != null) {
         var l = this._TotalRecords;
-        // this._TotalRecords = l;
         this._AttachmentUrls[-1] = this._AttachmentUrls[l - 1]; // this is legal
         this._AttachmentUrls[l] = this._AttachmentUrls[0];
         var current = "";
@@ -229,25 +234,20 @@ export class FileviewComponent implements OnInit {
       // alert(this.IsCommunicarionMemoDownload);
       // alert(this._NoIsCommunicarionMemoDownloadUser);
       let scontenttype = '';
-     debugger
+
       this.filename = params['filename'];
       const arrfilename = this.filename.split(',').map(element => {
         return Number(element);
       });
       this.filename = decoder.decode(new Uint8Array(arrfilename));
-      // console.log(this.filename,"streambox");
-      this.filename = this.filename.replace(/%26/g, "&");
-      // console.log(this.filename, "Sending Path");
-      // alert(this.filename)
 
-     
-      this.inboxService.PathExtention(this.src).subscribe(
+      this.filename = this.filename.replace(/%26/g, "&");
+
+      this.inboxService.PathExtention(this._originalUrl).subscribe(
         da => {
-          
-          console.log(da, "Pdf Data")
+
           scontenttype = da["contentType"];
           let contenttype = scontenttype;//decoder.decode(new Uint8Array(arrct));
-          console.log(contenttype, "File type");
           let officetext = ".ppt, .pptx, .doc, .docx, .xls, .xlsx";
           let office = officetext.includes(contenttype.toLowerCase());
 
@@ -275,7 +275,6 @@ export class FileviewComponent implements OnInit {
           else if (pdf) {
             this.viewer = "pdf";
             this.ShowProgress = true;
-            // this.progress=75;
           }
           else if (Image) {
             this.viewer = "image";
@@ -294,17 +293,10 @@ export class FileviewComponent implements OnInit {
         // alert(this.MailDocId);
         this.inboxService.AttachmentData(this.MailDocId)
           .subscribe(data => {
-            // console.log(data, "Attachmemtdata");
+
             this._obj = data as InboxDTO;
             this._attachmentLst = data["Data"]["AttachmentData"];
-            // this._attachmentLst = JSON.parse(this._obj.AttachmentData);
-            // this._attachmentLst = Attachmentpreview;
-            // console.log(Attachmentpreview,"Name");
-            // if (this._obj.AttachmentData) {
-            //   this._attachmentLst = JSON.parse(this._obj.AttachmentData);
-            // } else {
-            //   this._attachmentLst = []; // or handle it as needed
-            // }
+
 
           });
       }
@@ -331,23 +323,23 @@ export class FileviewComponent implements OnInit {
 
   }
   LoadDocument(url1: string, filename: string, MailDocId: number) {
-     
+
     let name = "Memo/ArchiveView";
     var rurl = document.baseURI + name;
     var encoder = new TextEncoder();
     let url = encoder.encode(url1);
-  
+
     let encodeduserid = encoder.encode(this.currentUserValue.createdby.toString());
     filename = filename.replace(/%/g, "%25")
-                       .replace(/#/g, "%23")
-                       .replace(/&/g, "%26");
-  
+      .replace(/#/g, "%23")
+      .replace(/&/g, "%26");
+
     var myurl = `${rurl}/url?url=${url}&uid=${encodeduserid}&filename=${encoder.encode(filename)}&type=1&MailDocId=${MailDocId}&MailId=${this._mailid}&ReplyId=${this._ReplyId}&LoginUserId=${this._LoginUserId}&IsConfidential=${this._IsConfidential}&AnnouncementDocId=0`;
-    
+
     // Open the URL in the same window
     window.location.href = myurl;
   }
-  
+
 
   ngAfterViewInit() {
     setTimeout(() => {
@@ -552,7 +544,7 @@ export class FileviewComponent implements OnInit {
   }
 
   download(url, filename) {
-    
+
     if (this.DocumentSource == 1) {
       this._obj.MailId = this._mailid;
       this._obj.MailDocId = this.MailDocId;
@@ -607,5 +599,3 @@ export class FileviewComponent implements OnInit {
     this.HistorySearch = "";
   }
 }
-
-
