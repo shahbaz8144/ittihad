@@ -95,6 +95,7 @@ DailyActivity:any [] = [];
       this._ReplyRequired = data['Data'].ReplyRequired
       this.DailyActivity = data['Data'].DailyActivityJson;
       this._LstToBanner = data['Data'].BannerJson; 
+      console.log(this._LstToBanner,"Banner List");
   if (this._LstToBanner && Array.isArray(this._LstToBanner)) {
   this._LstToBanner.forEach(element => {
     if (element.AttachmentJson && Array.isArray(element.AttachmentJson)) {
