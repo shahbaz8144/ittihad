@@ -30,11 +30,16 @@ import * as  Editor from 'ckeditor5-custom-build/build/ckeditor';
 import { CKEditorComponent } from '@ckeditor/ckeditor5-angular'
 import { AzureUploadService } from 'src/app/_service/azure-upload.service';
 import * as pdfjsLib from 'pdfjs-dist';
-import { PDFDocument, rgb } from 'pdf-lib';
+import { PDFDocument, PDFName, PDFString, PDFNumber, PDFArray, rgb, AnnotationFlags, PDFRef } from 'pdf-lib';
 import html2canvas from 'html2canvas';
 import * as XLSX from 'xlsx';
 import { AuthenticationService } from 'src/app/_service/authentication.service';
 import domtoimage from 'dom-to-image';
+import axios from 'axios';
+// import * as pdfjsLib from "pdfjs-dist/build/pdf";
+import fetch from 'node-fetch';
+// import * as fs from 'fs';
+import { Buffer } from 'buffer';
 
 @Component({
   selector: 'app-gac-document-details',
@@ -294,7 +299,7 @@ export class GacDocumentDetailsComponent implements OnInit {
     //  (pdfjsLib as any).GlobalWorkerOptions.workerSrc = '../assets/pdf.worker.min.js';
     // pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
     // Set the worker source (from CDN or local file)
-    //(pdfjsLib as any).GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+    (pdfjsLib as any).GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 
     this.currentUserSubject = new BehaviorSubject<UserDTO>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
@@ -430,8 +435,8 @@ export class GacDocumentDetailsComponent implements OnInit {
     const pdfWidth = viewport.width;  // Actual PDF width in points
     const pdfHeight = viewport.height; // Actual PDF height in points
 
-    console.log(`Viewport Width: ${viewport.width}, Height: ${viewport.height}`);
-    console.log(`Rendered Canvas Width: ${pdfCanvas.width}, Height: ${pdfCanvas.height}`);
+    // console.log(`Viewport Width: ${viewport.width}, Height: ${viewport.height}`);
+    // console.log(`Rendered Canvas Width: ${pdfCanvas.width}, Height: ${pdfCanvas.height}`);
 
 
     return { canvas: pdfCanvas, width: pdfCanvas.width, height: pdfCanvas.height, pdfWidth, pdfHeight };
@@ -472,7 +477,7 @@ export class GacDocumentDetailsComponent implements OnInit {
         // Access IsArchiveDownload value
         this.isArchiveApproval = parsedData[0]?.IsArchiveApproval ?? false;
         // alert(this.isArchiveApproval);
-        console.log('IsArchiveApproval:', this.isArchiveApproval);
+        // console.log('IsArchiveApproval:', this.isArchiveApproval);
       } catch (error) {
         console.error('Error parsing currentUser data from localStorage:', error);
       }
@@ -734,7 +739,7 @@ export class GacDocumentDetailsComponent implements OnInit {
     this._obj.CreatedBy = this.LoginUserId;
     this.service.GACDocumentDetails(this._obj)
       .subscribe(data => {
-        console.log(data, "Document details API Data");
+        // console.log(data, "Document details API Data");
         this._obj = data as GACFiledto;
         this.DocumentList = this._obj.Data["DocumentList"];
 
@@ -746,7 +751,7 @@ export class GacDocumentDetailsComponent implements OnInit {
 
             if (matchedVersion) {
               this._Versiondropdownvalue = matchedVersion.VersionName;
-              console.log(this._Versiondropdownvalue, "VersionName for DocumentId:", element.DocumentId);
+              // console.log(this._Versiondropdownvalue, "VersionName for DocumentId:", element.DocumentId);
             } else {
               console.log("No matching VersionName found for DocumentId:", element.DocumentId);
             }
@@ -765,7 +770,7 @@ export class GacDocumentDetailsComponent implements OnInit {
 
               this.lastVersionName = newVersionString;
 
-              console.log('Last Version Name:', this.lastVersionName);
+              // console.log('Last Version Name:', this.lastVersionName);
 
 
             }
@@ -883,7 +888,7 @@ export class GacDocumentDetailsComponent implements OnInit {
     this._obj.CreatedBy = this.LoginUserId;
     this.service.ArchiveDocumentDetails(this._obj)
       .subscribe(data => {
-        console.log(data, "Document details API Data");
+        // console.log(data, "Document details API Data");
         this._obj = data as GACFiledto;
         this.DocumentList = this._obj.Data["ArchiveJson"];
         this.barcode = this.DocumentList[0].Barcode;
@@ -918,15 +923,15 @@ export class GacDocumentDetailsComponent implements OnInit {
           this.workspaceData = '[]';
         }
 
-        console.log(this.DocumentList, "DocumentList")
+        // console.log(this.DocumentList, "DocumentList")
         this.ReferenceList = this.DocumentList[0]['ReferenceJson'];
-        console.log(this.ReferenceList, "ReferenceList");
+        // console.log(this.ReferenceList, "ReferenceList");
         this._DocumentName = this.DocumentList[0].DocumentName;
         this.selectedCabinet = this.DocumentList[0].CabinetName;
         this.selectedCabinetId = this.DocumentList[0].CabinetId;
         this._LabelCount = this.DocumentList[0].LabelCount;
         this.SelectLabelArray = this.DocumentList[0].LabelIds.split(',');
-        console.log(this.SelectLabelArray, "SelectLabelArray");
+        // console.log(this.SelectLabelArray, "SelectLabelArray");
         this._IsFavorite = this.DocumentList[0].IsFavorite;
         this._IsTrash = this.DocumentList[0].IsDeleted;
         this._IsPin = this.DocumentList[0].IsPin;
@@ -939,7 +944,7 @@ export class GacDocumentDetailsComponent implements OnInit {
         // alert(this.Contenttype);
         this._IsFullAccess = this.DocumentList[0].IsFullAccess;
         this.ShareDocumentDetailsList = this.DocumentList[0]["UserListJsonSorted"];
-        console.log(this.ShareDocumentDetailsList, "ShareDocumentDetailsList");
+        // console.log(this.ShareDocumentDetailsList, "ShareDocumentDetailsList");
         // this.subCategoryNames = this.DocumentList.flatMap(doc =>
         //   doc.SubCategoryJson?.map(item => item.SubCategoryName) || []
         // );
@@ -950,7 +955,7 @@ export class GacDocumentDetailsComponent implements OnInit {
         );
         //  alert(this.subCategoryNames.length);
         this._VersionJsonResault = this.DocumentList[0].VersionJsonSorted;
-        console.log(this._VersionJsonResault, "VersionJsonSorted");
+        // console.log(this._VersionJsonResault, "VersionJsonSorted");
         this.DocumentList.forEach((element) => {
           if (element.VersionJsonSorted && Array.isArray(element.VersionJsonSorted)) {
             let lastVersion = element.VersionJsonSorted[element.VersionJsonSorted.length - 1];
@@ -961,7 +966,7 @@ export class GacDocumentDetailsComponent implements OnInit {
 
               this.lastVersionName = newVersionString;
 
-              console.log('Last Version Name:', this.lastVersionName);
+              // console.log('Last Version Name:', this.lastVersionName);
             }
           }
         });
@@ -1025,7 +1030,7 @@ export class GacDocumentDetailsComponent implements OnInit {
       });
   }
 
-  expiryMinutes: number = 1;
+  expiryMinutes: number = 1440;
 
   async getTemporaryUrl(filePath) {
     // const filePath = 'DMS/307591/191629578_572616.pdf';  // Update with your actual file path
@@ -1034,7 +1039,7 @@ export class GacDocumentDetailsComponent implements OnInit {
 
     try {
       this.mainCatalogUrl = await this.blobService.getSasUrl(filePath, expiryTime);
-      console.log(this.mainCatalogUrl)
+      // console.log(this.mainCatalogUrl)
     } catch (error) {
       console.error("Error fetching SAS URL", error);
     }
@@ -1051,7 +1056,7 @@ export class GacDocumentDetailsComponent implements OnInit {
     this.Contenttype = ImageUrl.toLowerCase().endsWith('.pdf');
     this.inboxService.PathExtention(ImageUrl).subscribe(
       da => {
-        console.log(da, "ReferenceList");
+        // console.log(da, "ReferenceList");
         // this.Contenttype = da[][0].url;
         // if (Array.isArray(da) && da.length > 0) {
         //   this.Contenttype = da[0].contentType; // Assigning 'url' from the first object
@@ -1165,9 +1170,9 @@ export class GacDocumentDetailsComponent implements OnInit {
     this._obj1.ShareId = ShareId;
     this.inboxService.UserActionListArchiveDetailsAPI(this._obj1)
       .subscribe(data => {
-        console.log(data, "NewActionUser Details");
+        // console.log(data, "NewActionUser Details");
         this._UserActionsDetails = JSON.parse(data['userActionDetails']);
-        console.log(this._UserActionsDetails, "UserActions details List");
+        // console.log(this._UserActionsDetails, "UserActions details List");
         this.isMainDocumentActive = false;
         this.IsActionUserActive = true;
         this.selectedReferenceId = null;
@@ -1196,7 +1201,7 @@ export class GacDocumentDetailsComponent implements OnInit {
         this.download(selecteddoc.Url, selecteddoc.FileName);
       } else {
         console.error(`No document found at index: ${this.selectedReferenceId}`);
-        console.log("Available ReferenceList:", this.ReferenceList);
+        // console.log("Available ReferenceList:", this.ReferenceList);
       }
     } else {
       console.error("Either ReferenceList is empty or selectedReferenceId is invalid.");
@@ -1216,81 +1221,284 @@ export class GacDocumentDetailsComponent implements OnInit {
   //   }
 
   // }
-
-  download(url, filename) {
-    console.log(url, "url path");
-    console.log(filename, "url path");
-    // this.ImgUrl = "https://yrglobaldocuments.blob.core.windows.net/documents/" + url;
-    this._obj.MailId = 0;
-    this._obj.MailDocId = parseInt(this._documentId);
-    this._obj.CreatedBy = this.LoginUserId;
-    this._obj.AnnouncementDocId = 0;
-    this.newmemoService.DownloadAttachment(this._obj1).subscribe(
-      data => {
-        this._obj = data as GACFiledto;
-        console.log(this._obj, "Download Data");
-        fetch(url).then(function (t) {
-          return t.blob().then((b) => {
-            var a = document.createElement("a");
-            a.href = URL.createObjectURL(b);
-            a.setAttribute("download", filename);
-            a.click();
-          }
-          );
-        });
-      })
+  async download(url: string, filename: string) {
+    try {
+      this._obj1.MailId = 0;
+      this._obj1.MailDocId = parseInt(this._documentId);
+      this._obj1.CreatedBy = this.LoginUserId;
+      this._obj1.AnnouncementDocId = 0;
+  
+      // Step 1: Call API to get file details
+      const data = await this.newmemoService.DownloadAttachment(this._obj1).toPromise();  
+  
+      // Step 2: Download the actual document from the URL
+      const modifiedPdfBlob = await this.service.DownloadDocument(this.mainCatalogUrl);
+  
+      // Step 3: Create a downloadable link and trigger download
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(modifiedPdfBlob);
+      link.download = filename || 'modified-pdf.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Error downloading file:", error);
+    }
   }
+  
+
+//  async download(url, filename) {
+
+//     this._obj.MailId = 0;
+//     this._obj.MailDocId = parseInt(this._documentId);
+//     this._obj.CreatedBy = this.LoginUserId;
+//     this._obj.AnnouncementDocId = 0;
+//     this.newmemoService.DownloadAttachment(this._obj1).subscribe(
+//       data => {
+//         this._obj = data as GACFiledto;
+//         const modifiedPdfBlob = await this.service.DownloadDocument(
+//           this.mainCatalogUrl
+//         );
+    
+//         //  Download the modified PDF
+//         const link = document.createElement('a');
+//         link.href = URL.createObjectURL(modifiedPdfBlob);
+//         link.download = 'modified-pdf.pdf';
+//         link.click();
+//       })
+//   }
 
   @ViewChild('pdfContainer') pdfContainer!: ElementRef;
   @ViewChild('workspaceContainer') workspaceContainer!: ElementRef;
+  // async generatePDF() {
+  //   debugger
+  //   try {
+
+
+  //     const existingPdf = await fetch(this.mainCatalogUrl);
+  //     const arrayBuffer = await existingPdf.arrayBuffer();
+  //     const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+
+  //     // Get first page dimensions
+  //     const firstPage = pdfDoc.getPage(0);
+  //     const { width: pdfWidth, height: pdfHeight } = firstPage.getSize(); // Get actual PDF size in points
+
+  //     // Capture overlay image
+  //     const overlayImage = await this.captureOverlay();
+  //     if (!overlayImage) {
+  //       console.warn('Overlay image is null, skipping overlay embedding.');
+  //     } else {
+  //       const embeddedOverlay = await pdfDoc.embedPng(overlayImage);
+
+  //       // Convert overlay size from px to PDF points (1px ≈ 0.75pt)
+  //       let overlayWidth = this.workspaceData.width * 0.75;
+  //       let overlayHeight = this.workspaceData.height * 0.75;
+
+  //       // Convert X and Y from px to PDF points
+  //       let posX = (this.position.x / this.pdfContainer.nativeElement.clientWidth) * pdfWidth;
+  //       let posY = pdfHeight - (this.position.y / this.pdfContainer.nativeElement.clientHeight) * pdfHeight;
+  //       // PDF Y starts from bottom, so invert Y
+
+  //       // Prevent overlay from going outside the page
+  //       const margin = 5;
+  //       posX = Math.max(margin, Math.min(posX, pdfWidth - overlayWidth - margin));
+  //       posY = Math.max(margin, Math.min(posY, pdfHeight - overlayHeight - margin));
+
+  //       firstPage.drawImage(embeddedOverlay, {
+  //         x: posX,
+  //         y: posY,
+  //         width: overlayWidth,
+  //         height: overlayHeight,
+  //       });
+  //     }
+
+  //     // Save and download PDF
+  //     const modifiedPdfBytes = await pdfDoc.save();
+  //     const blob = new Blob([modifiedPdfBytes], { type: 'application/pdf' });
+
+  //     const link = document.createElement('a');
+  //     link.href = URL.createObjectURL(blob);
+  //     link.download = 'modified-pdf.pdf';
+  //     link.click();
+  //   } catch (error) {
+  //     console.log("Download error",error)
+  //   }
+  // }
+  // async generatePDF() {
+  //   try {
+
+  //     const existingPdf = await fetch(this.mainCatalogUrl);
+  //     const arrayBuffer = await existingPdf.arrayBuffer();
+  //     const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+
+  //     if (!pdfDoc) {
+  //       console.error('Failed to load PDF document.');
+  //       return;
+  //     }
+
+  //     const firstPage = pdfDoc.getPage(0);
+  //     const { width: pdfWidth, height: pdfHeight } = firstPage.getSize();
+
+  //     const overlayImage = await this.captureOverlay();
+  //     if (overlayImage) {
+  //       const embeddedOverlay = await pdfDoc.embedPng(overlayImage);
+  //       let overlayWidth = this.workspaceData.width * 0.75;
+  //       let overlayHeight = this.workspaceData.height * 0.75;
+  //       let posX = (this.position.x / this.pdfContainer.nativeElement.clientWidth) * pdfWidth;
+  //       let posY = pdfHeight - (this.position.y / this.pdfContainer.nativeElement.clientHeight) * pdfHeight;
+  //       posX = Math.max(5, Math.min(posX, pdfWidth - overlayWidth - 5));
+  //       posY = Math.max(5, Math.min(posY, pdfHeight - overlayHeight - 5));
+
+  //       firstPage.drawImage(embeddedOverlay, { x: posX, y: posY, width: overlayWidth, height: overlayHeight });
+  //     }
+
+
+
+  //     // Save the modified PDF with safe options
+  //     const modifiedPdfBytes = await pdfDoc.save({ useObjectStreams: false });
+  //     console.log("Modified PDF Size:", modifiedPdfBytes.length);
+  //     if (modifiedPdfBytes.length === 0) {
+  //       console.error("Error: Modified PDF is empty.");
+  //       return;
+  //     }
+
+  //     // Convert to Blob correctly
+  //     const blob = new Blob([new Uint8Array(modifiedPdfBytes)], { type: 'application/pdf' });
+  //     const link = document.createElement('a');
+  //     link.href = URL.createObjectURL(blob);
+  //     link.download = 'modified-pdf.pdf';
+  //     link.click();
+  //   } catch (error) {
+  //     console.error("Download error:", error);
+  //   }
+  // }
+
+
+  // async generatePDF() {
+  //   try {
+  //     // Load the signed PDF
+  //     const existingPdfBytes = await fetch(this.mainCatalogUrl).then((res) => res.arrayBuffer());
+  //     const loadingTask = pdfjsLib.getDocument({ data: existingPdfBytes });
+
+  //     const pdf = await loadingTask.promise;
+  //     const pageNumber = 1; // First page
+  //     const page = await pdf.getPage(pageNumber);
+
+  //     // Extract existing annotations
+  //     const annotations = await page.getAnnotations();
+
+  //     const overlayImage = await this.captureOverlay();
+
+  //     // Define annotation (Image Stamp)
+  //     const annotation = {
+  //       subtype: "Stamp",
+  //       rect: [100, 100, 300, 200], // [x1, y1, x2, y2] (position & size)
+  //       contents: "Overlay Image",
+  //       image: overlayImage, // Base64 image or external image URL
+  //     };
+
+  //     annotations.push(annotation);
+
+  //     console.log("Annotation added successfully!");
+
+  //     // Convert the updated PDF into a new file (using pdf-lib)
+  //     const modifiedPdf = await PDFDocument.load(existingPdfBytes);
+  //     const newPdfBytes = await modifiedPdf.save();
+
+  //     // Create a Blob for download
+  //     const blob = new Blob([new Uint8Array(newPdfBytes)], { type: "application/pdf" });
+  //     const link = document.createElement("a");
+  //     link.href = URL.createObjectURL(blob);
+  //     link.download = "annotated_signed_pdf.pdf";
+  //     link.click();
+
+  //     console.log("File downloaded successfully!");
+  //   } catch (error) {
+  //     console.error("Error adding annotation and downloading PDF:", error);
+  //   }
+  // }
+  // pdfUrl: string = ''; // Input field for PDF URL
+  // overlayBase64: string = ''; // Overlay Base64 string
+
+  // async generatePDF() {
+  //   debugger
+  //   const overlayImage = await this.captureOverlay();
+  //   this.overlayBase64 = overlayImage;
+  //   this.pdfUrl = this.mainCatalogUrl;
+  //   if (!this.pdfUrl || !this.overlayBase64) {
+  //     alert('Please enter a PDF URL and Base64 overlay data!');
+  //     return;
+  //   }
+
+  //   try {
+  //     const response = await axios.post('http://localhost:5000/process-pdf', {
+  //       pdfUrl: this.pdfUrl,
+  //       overlayBase64: this.overlayBase64
+  //     }, { responseType: 'blob' });
+
+  //     // Create download link for the processed PDF
+  //     const url = window.URL.createObjectURL(new Blob([response.data]));
+  //     const a = document.createElement('a');
+  //     a.href = url;
+  //     a.download = 'modified-signed.pdf';
+  //     document.body.appendChild(a);
+  //     a.click();
+  //     document.body.removeChild(a);
+  //   } catch (error) {
+  //     console.error('Error processing PDF:', error);
+  //     alert('Failed to process PDF');
+  //   }
+  // }
+
   async generatePDF() {
-    debugger
-    const existingPdf = await fetch(this.mainCatalogUrl);
-    const arrayBuffer = await existingPdf.arrayBuffer();
-    const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
-
-    // Get first page dimensions
-    const firstPage = pdfDoc.getPage(0);
-    const { width: pdfWidth, height: pdfHeight } = firstPage.getSize(); // Get actual PDF size in points
-
-    // Capture overlay image
-    const overlayImage = await this.captureOverlay();
-    if (!overlayImage) {
-      console.warn('Overlay image is null, skipping overlay embedding.');
-    } else {
-      const embeddedOverlay = await pdfDoc.embedPng(overlayImage);
-
-      // Convert overlay size from px to PDF points (1px ≈ 0.75pt)
+    try {
+      //  Fetch the existing PDF from URL
+      const existingPdf = await fetch(this.mainCatalogUrl);
+      const arrayBuffer = await existingPdf.arrayBuffer();
+      const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+  
+      if (!pdfDoc) {
+        console.error('Failed to load PDF document.');
+        return;
+      }
+  
+      //  Capture the image in Base64 format
+      const overlayImage = await this.captureOverlay();
+      if (!overlayImage) {
+        console.error("Error: No overlay image.");
+        return;
+      }
+  
       let overlayWidth = this.workspaceData.width * 0.75;
       let overlayHeight = this.workspaceData.height * 0.75;
-
-      // Convert X and Y from px to PDF points
-      let posX = (this.position.x / this.pdfContainer.nativeElement.clientWidth) * pdfWidth;
-      let posY = pdfHeight - (this.position.y / this.pdfContainer.nativeElement.clientHeight) * pdfHeight;
-      // PDF Y starts from bottom, so invert Y
-
-      // Prevent overlay from going outside the page
-      const margin = 5;
-      posX = Math.max(margin, Math.min(posX, pdfWidth - overlayWidth - margin));
-      posY = Math.max(margin, Math.min(posY, pdfHeight - overlayHeight - margin));
-
-      firstPage.drawImage(embeddedOverlay, {
-        x: posX,
-        y: posY,
-        width: overlayWidth,
-        height: overlayHeight,
-      });
+      let posX = (this.position.x / this.pdfContainer.nativeElement.clientWidth) * pdfDoc.getPage(0).getWidth();
+      let posY = pdfDoc.getPage(0).getHeight() - (this.position.y / this.pdfContainer.nativeElement.clientHeight) * pdfDoc.getPage(0).getHeight();
+  
+      posX = Math.max(5, Math.min(posX, pdfDoc.getPage(0).getWidth() - overlayWidth - 5));
+      posY = Math.max(5, Math.min(posY, pdfDoc.getPage(0).getHeight() - overlayHeight - 5));
+  
+      //  Send request to API
+      const modifiedPdfBlob = await this.service.uploadPdfWithImage(
+        this.mainCatalogUrl, overlayImage, posX, posY, overlayWidth, overlayHeight,
+        this.pdfContainer.nativeElement.clientWidth,
+        this.pdfContainer.nativeElement.clientHeight,
+        this.workspaceData.width,
+        this.workspaceData.height
+      );
+  
+      //  Download the modified PDF
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(modifiedPdfBlob);
+      link.download = 'modified-pdf.pdf';
+      link.click();
+  
+    } catch (error) {
+      console.error("Error generating PDF:", error);
     }
-
-    // Save and download PDF
-    const modifiedPdfBytes = await pdfDoc.save();
-    const blob = new Blob([modifiedPdfBytes], { type: 'application/pdf' });
-
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'modified-pdf.pdf';
-    link.click();
   }
+  
+  
+
 
   // private async captureOverlay(): Promise<string | null> {
 
@@ -1310,8 +1518,8 @@ export class GacDocumentDetailsComponent implements OnInit {
   // }
   private async captureOverlay(): Promise<string | null> {
     if (!this.workspaceContainer) {
-        console.error('Workspace div not found.');
-        return null;
+      console.error('Workspace div not found.');
+      return null;
     }
 
     await document.fonts.ready; // Ensure fonts are fully loaded
@@ -1320,21 +1528,21 @@ export class GacDocumentDetailsComponent implements OnInit {
     const scale = 3; // Increase the resolution
 
     return domtoimage.toPng(node, {
-        quality: 1, // Set highest quality
-        width: node.clientWidth * scale,
-        height: node.clientHeight * scale,
-        style: {
-            transform: `scale(${scale})`,
-            transformOrigin: 'top left',
-            width: `${node.clientWidth}px`,
-            height: `${node.clientHeight}px`
-        }
+      quality: 1, // Set highest quality
+      width: node.clientWidth * scale,
+      height: node.clientHeight * scale,
+      style: {
+        transform: `scale(${scale})`,
+        transformOrigin: 'top left',
+        width: `${node.clientWidth}px`,
+        height: `${node.clientHeight}px`
+      }
     }).then((dataUrl) => dataUrl)
       .catch((error) => {
         console.error('Error capturing overlay:', error);
         return null;
-    });
-}
+      });
+  }
   // private async captureOverlay(): Promise<string | null> {
   //   if (!this.workspaceContainer) {
   //     console.error('Workspace div not found.');
@@ -1457,7 +1665,7 @@ export class GacDocumentDetailsComponent implements OnInit {
         destinationContainer: destinationContainer,
         destinationFolder: 'Archive/', //mention gac folder path
       };
-      console.log(JSON.stringify(jsonResult), "CopyFiles");
+      // console.log(JSON.stringify(jsonResult), "CopyFiles");
 
       const DeletedJson = extractedValues.map(file => ({
         fullPath: file.Url,
@@ -1465,9 +1673,9 @@ export class GacDocumentDetailsComponent implements OnInit {
 
       // Convert the resulting array to a JSON string
       const jsonString = JSON.stringify(DeletedJson);
-      console.log(jsonString, "DeletedJson");
+      // console.log(jsonString, "DeletedJson");
       const extractedValuesJson = JSON.stringify(extractedValues);
-      console.log(extractedValuesJson, "extractedValuesJson");
+      // console.log(extractedValuesJson, "extractedValuesJson");
 
       this._obj.createdBy = this.currentUserValue.createdby;
       this._obj.DocumentId = parseInt(this._documentId);
@@ -1478,7 +1686,7 @@ export class GacDocumentDetailsComponent implements OnInit {
       this._obj.extractedValuesJson = extractedValuesJson;
 
       const data = await this.service.NewReferenceDocument(this._obj);
-      console.log(data, "Add Reference Document API Data");
+      // console.log(data, "Add Reference Document API Data");
 
       if (data["message"] === '1') {
         this._snackBar.open('Document Uploaded Successfully', 'End now', {
@@ -1625,7 +1833,7 @@ export class GacDocumentDetailsComponent implements OnInit {
     this._obj1.DocumentId = parseInt(this._documentId);
     this.inboxService.ShareUserList(this._obj1)
       .subscribe(data => {
-        console.log(data, "add Users");
+        // console.log(data, "add Users");
         var _UsersLst = data["Data"].UserJson;
         this._LstToUsers = _UsersLst;
         this._LstToUsers.forEach(element => {
@@ -1667,7 +1875,7 @@ export class GacDocumentDetailsComponent implements OnInit {
   OnWarehouse() {
     this.services.GetwarehouseData().subscribe(data => {
       this.Objwarehousedrp = data as [];
-      console.log(this.Objwarehousedrp, "warehouse data");
+      // console.log(this.Objwarehousedrp, "warehouse data");
     })
   }
 
@@ -1681,7 +1889,7 @@ export class GacDocumentDetailsComponent implements OnInit {
   SubCategoryLists: any[] = []
   SubCategoryAPI() {
     this.service.GetSubCategory(this.currentUserValue.organizationid).subscribe(data => {
-      console.log(data, "GetSubCategory API Data");
+      // console.log(data, "GetSubCategory API Data");
       this._SubCategoryJson = data["Data"].SubCategoryJson;
       this._SubCategoryJson.forEach(element => {
         this.SubCategoryLists.push({
@@ -1692,7 +1900,7 @@ export class GacDocumentDetailsComponent implements OnInit {
         });
 
       });
-      console.log(this.SubCategoryLists, "Sub category List");
+      // console.log(this.SubCategoryLists, "Sub category List");
     });
   }
 
@@ -1742,7 +1950,7 @@ export class GacDocumentDetailsComponent implements OnInit {
     this._objFilters.CreatedBy = this.currentUserValue.createdby;
     this.service.GetDropdownList(this._objFilters)
       .subscribe(data => {
-        console.log(data, "CJ and DJ and DTJ and DMJ and CJ");
+        // console.log(data, "CJ and DJ and DTJ and DMJ and CJ");
         this._obj = data as GACFiledto;
         this.DocumentTypeList = this._obj.Data["DocumentTypeJson"];
         this.ManufactureList = this._obj.Data["DistributorAndManufactureJson"];
@@ -1756,7 +1964,7 @@ export class GacDocumentDetailsComponent implements OnInit {
     // this._DocumentWith = this.DocumentList[0].DocumentWith;
     // this._DocumentWithII = this.DocumentList[0].DocumentWith;
     // this.FoodExpiryDate = this.DocumentList[0].Expiry;
-    console.log(this.DocumentList, "DocumentList");
+    // console.log(this.DocumentList, "DocumentList");
     // this.DocumentList.forEach(element => {
     //   element.DocumentLocationJson.forEach(element1 => {
     //     this._WarehouseName = element1.WareHouseName;
@@ -1788,13 +1996,13 @@ export class GacDocumentDetailsComponent implements OnInit {
       const newDMId = this.DocumentList[0]?.DMId || 0;
       const newDMName = this.DocumentList[0]?.DMName?.trim() || '';
 
-      // ✅ Only update Source if new value is NOT empty
+      //  Only update Source if new value is NOT empty
       if (newSourceName) {
         this._SourceId = newSourceId;
         this.Source = newSourceName;
       }
 
-      // ✅ Only update Manufacture if new value is NOT empty
+      //  Only update Manufacture if new value is NOT empty
       if (newDMName) {
         this._ManufactureandDistributorId = newDMId;
         this.Manufacture = newDMName;
@@ -1989,7 +2197,7 @@ export class GacDocumentDetailsComponent implements OnInit {
     // Convert to JSON
     if (this._AdditionalDocument) {
       this._AdditionalDocumentJSON = JSON.stringify(this._AdditionalDocument, null, 2);
-      console.log(this._AdditionalDocumentJSON, "Additional DocumentJSON Json");
+      // console.log(this._AdditionalDocumentJSON, "Additional DocumentJSON Json");
     } else {
       console.log("Additional Document is not defined.");
     }
@@ -1997,7 +2205,7 @@ export class GacDocumentDetailsComponent implements OnInit {
     this._obj.DocumentId = parseInt(this._documentId);
     this.service.UpdateDocument(this._obj).subscribe(
       data => {
-        console.log(data, "Update Documents")
+        // console.log(data, "Update Documents")
         if (data["Message"] == "1") {
           this._snackBar.open('Update Document Successfully', 'End now', {
             duration: 2000,
@@ -2440,7 +2648,7 @@ export class GacDocumentDetailsComponent implements OnInit {
           this._lstMultipleFiles.push(fileRecord);
           this._lstMultipleFiles.forEach(element => {
             this.UploadingFiles = element.Uploading;
-            console.log(this.UploadingFiles, "Uploading Files Test");
+            // console.log(this.UploadingFiles, "Uploading Files Test");
           });
           const progressSubject = new BehaviorSubject<number>(0);
           try {
@@ -2472,7 +2680,7 @@ export class GacDocumentDetailsComponent implements OnInit {
         this._lstMultipleFiles.forEach(element => {
 
           this.UploadingFiles = element.Uploading;
-          console.log(this.UploadingFiles, "Uploading Files Test");
+          // console.log(this.UploadingFiles, "Uploading Files Test");
         });
         // var contentType = file.type;
         // if (contentType === "application/pdf") {
@@ -2556,7 +2764,7 @@ export class GacDocumentDetailsComponent implements OnInit {
   // }
   // json1: any = {}
   // json2: any = {};
-  // // ✅ Recursive function to update JSON1 using JSON2
+  // //  Recursive function to update JSON1 using JSON2
   // private updateNestedJson(target: any, source: any): void {
   //   Object.keys(target).forEach(key => {
   //     if (target[key] instanceof Object) {
@@ -2573,7 +2781,7 @@ export class GacDocumentDetailsComponent implements OnInit {
   async onFileChangeApproveandreject(event): Promise<void> {
     let folderPath = "Draft/" + this.currentUserValue.createdby;
 
-    // ✅ Ensure the array is initialized before use
+    //  Ensure the array is initialized before use
     if (!this._lstMultipleFilesAprandrej) {
       this._lstMultipleFilesAprandrej = [];
     }
@@ -2609,10 +2817,10 @@ export class GacDocumentDetailsComponent implements OnInit {
           };
 
           this._lstMultipleFilesAprandrej.push(fileRecord);
-          console.log(this._lstMultipleFilesAprandrej, "approve file");
+          // console.log(this._lstMultipleFilesAprandrej, "approve file");
           this._lstMultipleFilesAprandrej.forEach(element => {
             this.UploadingFiles = element.Uploading;
-            console.log(this.UploadingFiles, "Uploading Files Test");
+            // console.log(this.UploadingFiles, "Uploading Files Test");
           });
           const progressSubject = new BehaviorSubject<number>(0);
 
@@ -2642,7 +2850,7 @@ export class GacDocumentDetailsComponent implements OnInit {
 
         this._lstMultipleFilesAprandrej.forEach(element => {
           this.UploadingFiles = element.Uploading;
-          console.log(this.UploadingFiles, "Uploading Files Test");
+          // console.log(this.UploadingFiles, "Uploading Files Test");
         });
         // var contentType = file.type;
         // if (contentType === "application/pdf") {
@@ -2698,7 +2906,7 @@ export class GacDocumentDetailsComponent implements OnInit {
         destinationContainer: destinationContainer,
         destinationFolder: 'Archive/', //mention gac folder path
       };
-      console.log(JSON.stringify(jsonResult), "CopyFiles");
+      // console.log(JSON.stringify(jsonResult), "CopyFiles");
 
       const DeletedJson = extractedValues.map(file => ({
         fullPath: file.Url,
@@ -2706,9 +2914,9 @@ export class GacDocumentDetailsComponent implements OnInit {
 
       // Convert the resulting array to a JSON string
       const jsonString = JSON.stringify(DeletedJson);
-      console.log(jsonString, "DeletedJson");
+      // console.log(jsonString, "DeletedJson");
       const extractedValuesJson = JSON.stringify(extractedValues);
-      console.log(extractedValuesJson, "extractedValuesJson");
+      // console.log(extractedValuesJson, "extractedValuesJson");
 
       this._obj.createdBy = this.currentUserValue.createdby;
       this._obj.DocumentId = parseInt(this._documentId);
@@ -2719,7 +2927,7 @@ export class GacDocumentDetailsComponent implements OnInit {
       this._obj.extractedValuesJson = extractedValuesJson;
 
       const data = await this.service.NewReferenceDocument(this._obj);
-      console.log(data, "Add Reference Document API Data");
+      // console.log(data, "Add Reference Document API Data");
 
       if (data["message"] === '1') {
         this._snackBar.open('Document Uploaded Successfully', 'End now', {
@@ -3280,9 +3488,9 @@ export class GacDocumentDetailsComponent implements OnInit {
     this._obj1.UserId = this.currentUserValue.createdby;
     this.inboxService.UserLabels(this._obj1)
       .subscribe(data => {
-        console.log(data, "getlabel");
+        // console.log(data, "getlabel");
         this._Lstlabels = data["Data"].LablesJson;
-        console.log(this._Lstlabels, "Label");
+        // console.log(this._Lstlabels, "Label");
         this.LabelCount = this._Lstlabels.length;
         this.SubLabelList = this._Lstlabels
         this.cd.detectChanges();
@@ -3308,10 +3516,10 @@ export class GacDocumentDetailsComponent implements OnInit {
     this._obj1.IsActive = true;
     this.inboxService.AddLabels(this._obj1)
       .subscribe(data => {
-        console.log(data, "Insert Label")
+        // console.log(data, "Insert Label")
         if (data['Message'] == true) {
           this._Lstlabels = data['Data'].LablesJson;
-          console.log(this._Lstlabels, "Label List");
+          // console.log(this._Lstlabels, "Label List");
           const language = localStorage.getItem('language');
           // Display message based on language preference
           if (language === 'ar') {
@@ -3364,7 +3572,7 @@ export class GacDocumentDetailsComponent implements OnInit {
     this.LabelUserErrorLog = false;
     this.inboxService.AddLabelToArchive(this.SelectedLabelIds.toString(), this._documentId.toString(), this.currentUserValue.createdby).subscribe(
       data => {
-        console.log(data, "Add Label Data");
+        // console.log(data, "Add Label Data");
         this._LabelCount = data["Data"].labelcount;
         this.SelectLabelArray = data["Data"].SelectedLabels.split(',');
         if (data["Message"] == "1") {
@@ -3634,7 +3842,7 @@ export class GacDocumentDetailsComponent implements OnInit {
     });
     // If you need it as a JSON string
     const approvalUsersJson = JSON.stringify(approvalUsers);
-    console.log('New Actions Users JSON:', approvalUsersJson);
+    // console.log('New Actions Users JSON:', approvalUsersJson);
     this._obj.DocumentId = parseInt(this._documentId);
     this._obj.CreatedBy = this.currentUserValue.createdby;
     this._obj.ApprovalUserJson = approvalUsersJson;
@@ -3664,7 +3872,7 @@ export class GacDocumentDetailsComponent implements OnInit {
       return false;
     });
     this.SelectUserErrlog = false;
-    console.log(this.SelectedUsers, "Selected User");
+    // console.log(this.SelectedUsers, "Selected User");
     document.getElementById("fileupload-event-modal-backdrop").style.display = "none";
     document.getElementById("SharedocumentModel").style.display = "none";
   }
@@ -3713,7 +3921,7 @@ export class GacDocumentDetailsComponent implements OnInit {
 
     // Format the date as "DD-MM-YYYY hh:mm:ss A"
     this.formattedTemporaryDate = moment(this.TemporaryDate).format('MM/DD/YYYY hh:mm:ss A');
-    console.log('Formatted Return Date:', this.formattedTemporaryDate);
+    // console.log('Formatted Return Date:', this.formattedTemporaryDate);
 
     this.ExpiryDateRequired = false;
   }
@@ -3738,7 +3946,7 @@ export class GacDocumentDetailsComponent implements OnInit {
     this._obj1.DocumentId = parseInt(this._documentId);
     this.inboxService.ShareUserList(this._obj1)
       .subscribe(data => {
-        console.log(data, "add Users");
+        // console.log(data, "add Users");
         var _UsersLst = data["Data"].UserJson;
         this._LstToUsers = _UsersLst;
         this._LstToUsers.forEach(element => {
@@ -3824,7 +4032,7 @@ export class GacDocumentDetailsComponent implements OnInit {
 
     // Convert JSON object to string
     this._SharedocumentJSON = JSON.stringify(_Sharedocument, null, 2);
-    console.log(this._SharedocumentJSON, "Share Document");
+    // console.log(this._SharedocumentJSON, "Share Document");
 
 
 
@@ -3872,13 +4080,13 @@ export class GacDocumentDetailsComponent implements OnInit {
     this._obj1.DocumentId = parseInt(this._documentId);
     this.inboxService.WorkFlowDetailsOfArchiveAPI(this._obj1)
       .subscribe(data => {
-        console.log(data, "get workflow details");
+        // console.log(data, "get workflow details");
         this.Workflowdetails = data["Data"]["WorkFlowDetails"];
         this.Workflowdetails = this.Workflowdetails.sort((a, b) => a.SortId - b.SortId);
         this.WorkFlowName = this.Workflowdetails[0].WorkFlowName;
         // this._ActionType = this.Workflowdetails[0].ActionType;
         // this._CreatedDate = this.Workflowdetails[0].CreatedDate;
-        console.log(this.Workflowdetails, "Selected workflow data");
+        // console.log(this.Workflowdetails, "Selected workflow data");
       })
     document.getElementById("workflowmodal-modal-backdrop").style.display = "block";
     document.getElementById("workflowmodal").style.display = "block";
