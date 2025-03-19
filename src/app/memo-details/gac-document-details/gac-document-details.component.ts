@@ -34,6 +34,7 @@ import { PDFDocument, rgb } from 'pdf-lib';
 import html2canvas from 'html2canvas';
 import * as XLSX from 'xlsx';
 import { AuthenticationService } from 'src/app/_service/authentication.service';
+import domtoimage from 'dom-to-image';
 
 @Component({
   selector: 'app-gac-document-details',
@@ -874,7 +875,7 @@ export class GacDocumentDetailsComponent implements OnInit {
   prefix: string;
   selectedCabinet: string;
   selectedCabinetId: number;
-  Contenttype:any;
+  Contenttype: any;
   ArchiveDetailsInfo(documentid, ShareId) {
     this._obj.DocumentId = parseInt(documentid);
     this._obj.ShareId = parseInt(ShareId);
@@ -946,7 +947,7 @@ export class GacDocumentDetailsComponent implements OnInit {
             .filter(item => Object.keys(item).length > 0) // Remove empty objects
             .map(item => item.SubCategoryName)
         );
-      //  alert(this.subCategoryNames.length);
+        //  alert(this.subCategoryNames.length);
         this._VersionJsonResault = this.DocumentList[0].VersionJsonSorted;
         console.log(this._VersionJsonResault, "VersionJsonSorted");
         this.DocumentList.forEach((element) => {
@@ -1023,7 +1024,7 @@ export class GacDocumentDetailsComponent implements OnInit {
       });
   }
 
-  expiryMinutes: number = 1; 
+  expiryMinutes: number = 1;
 
   async getTemporaryUrl(filePath) {
     // const filePath = 'DMS/307591/191629578_572616.pdf';  // Update with your actual file path
@@ -1049,7 +1050,7 @@ export class GacDocumentDetailsComponent implements OnInit {
     this.Contenttype = ImageUrl.toLowerCase().endsWith('.pdf');
     this.inboxService.PathExtention(ImageUrl).subscribe(
       da => {
-        console.log(da ,"ReferenceList");
+        console.log(da, "ReferenceList");
         // this.Contenttype = da[][0].url;
         // if (Array.isArray(da) && da.length > 0) {
         //   this.Contenttype = da[0].contentType; // Assigning 'url' from the first object
@@ -1057,7 +1058,7 @@ export class GacDocumentDetailsComponent implements OnInit {
         // } else {
         //   console.error("Invalid response: Expected an array with at least one object");
         // }
-      
+
 
         // console.log(da,"Pdf Data")
         scontenttype = da["contentType"];
@@ -1175,35 +1176,35 @@ export class GacDocumentDetailsComponent implements OnInit {
 
 
   DownloadFile() {
-   
+
 
     if (this.isMainDocumentActive) {
-        if (this.DocumentList?.length > 0 && this.DocumentList[0]?.Url) {
-            this.download(this.DocumentList[0].Url, this._DocumentName);
-        } else {
-            console.error("Main document is not available for download.");
-        }
+      if (this.DocumentList?.length > 0 && this.DocumentList[0]?.Url) {
+        this.download(this.DocumentList[0].Url, this._DocumentName);
+      } else {
+        console.error("Main document is not available for download.");
+      }
     } else if (this.selectedReferenceId !== null && this.selectedReferenceId !== undefined) {
-        // console.log("Download Reference List:", this.ReferenceList);
-        // console.log("Selected Reference Index:", this.selectedReferenceId);
+      // console.log("Download Reference List:", this.ReferenceList);
+      // console.log("Selected Reference Index:", this.selectedReferenceId);
 
-        // Fetch document by index instead of searching by AttachmentId
-        const selecteddoc = this.ReferenceList[this.selectedReferenceId];
+      // Fetch document by index instead of searching by AttachmentId
+      const selecteddoc = this.ReferenceList[this.selectedReferenceId];
 
-        if (selecteddoc && selecteddoc.Url && selecteddoc.FileName) {
-            this.download(selecteddoc.Url, selecteddoc.FileName);
-        } else {
-            console.error(`No document found at index: ${this.selectedReferenceId}`);
-            console.log("Available ReferenceList:", this.ReferenceList);
-        }
+      if (selecteddoc && selecteddoc.Url && selecteddoc.FileName) {
+        this.download(selecteddoc.Url, selecteddoc.FileName);
+      } else {
+        console.error(`No document found at index: ${this.selectedReferenceId}`);
+        console.log("Available ReferenceList:", this.ReferenceList);
+      }
     } else {
-        console.error("Either ReferenceList is empty or selectedReferenceId is invalid.");
+      console.error("Either ReferenceList is empty or selectedReferenceId is invalid.");
     }
-}
+  }
 
   // DownloadFile() {
   //   debugger
-    
+
   //   if (this.isMainDocumentActive) {
   //     this.download(this.DocumentList[0].Url, this._DocumentName);
   //   }
@@ -1242,9 +1243,10 @@ export class GacDocumentDetailsComponent implements OnInit {
   @ViewChild('pdfContainer') pdfContainer!: ElementRef;
   @ViewChild('workspaceContainer') workspaceContainer!: ElementRef;
   async generatePDF() {
+    debugger
     const existingPdf = await fetch(this.mainCatalogUrl);
     const arrayBuffer = await existingPdf.arrayBuffer();
-    const pdfDoc = await PDFDocument.load(arrayBuffer);
+    const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
 
     // Get first page dimensions
     const firstPage = pdfDoc.getPage(0);
@@ -1289,22 +1291,85 @@ export class GacDocumentDetailsComponent implements OnInit {
     link.click();
   }
 
-  private async captureOverlay(): Promise<string | null> {
+  // private async captureOverlay(): Promise<string | null> {
 
+  //   if (!this.workspaceContainer) {
+  //     console.error('Workspace div not found.');
+  //     return null;
+  //   }
+
+  //   const scaleFactor = 2; // Increase resolution (Higher value = better quality)
+  //   const canvas = await html2canvas(this.workspaceContainer.nativeElement, {
+  //     scale: scaleFactor, // Increase capture resolution
+  //     useCORS: true, // Handle cross-origin images correctly
+  //     logging: false
+  //   });
+
+  //   return canvas.toDataURL('image/png', 2.0); // Save as high-quality PNG
+  // }
+  private async captureOverlay(): Promise<string | null> {
     if (!this.workspaceContainer) {
-      console.error('Workspace div not found.');
-      return null;
+        console.error('Workspace div not found.');
+        return null;
     }
 
-    const scaleFactor = 2; // Increase resolution (Higher value = better quality)
-    const canvas = await html2canvas(this.workspaceContainer.nativeElement, {
-      scale: scaleFactor, // Increase capture resolution
-      useCORS: true, // Handle cross-origin images correctly
-      logging: false
-    });
+    await document.fonts.ready; // Ensure fonts are fully loaded
 
-    return canvas.toDataURL('image/png', 2.0); // Save as high-quality PNG
+    const node = this.workspaceContainer.nativeElement;
+    const scale = 3; // Increase the resolution
+
+    return domtoimage.toPng(node, {
+        quality: 1, // Set highest quality
+        width: node.clientWidth * scale,
+        height: node.clientHeight * scale,
+        style: {
+            transform: `scale(${scale})`,
+            transformOrigin: 'top left',
+            width: `${node.clientWidth}px`,
+            height: `${node.clientHeight}px`
+        }
+    }).then((dataUrl) => dataUrl)
+      .catch((error) => {
+        console.error('Error capturing overlay:', error);
+        return null;
+    });
+}
+  // private async captureOverlay(): Promise<string | null> {
+  //   if (!this.workspaceContainer) {
+  //     console.error('Workspace div not found.');
+  //     return null;
+  //   }
+
+  //   await this.loadFonts(); // Ensure fonts are fully loaded
+
+  //   const scaleFactor = 3; // Increase resolution
+  //   const canvas = await html2canvas(this.workspaceContainer.nativeElement, {
+  //     scale: scaleFactor,
+  //     useCORS: true,
+  //     backgroundColor: null, // Keep transparency
+  //     logging: false
+  //   });
+
+  //   return canvas.toDataURL('image/png', 1.0);
+  // }
+  private async loadFonts() {
+    // Define font URLs manually
+    const fontList = [
+      // { family: 'Roboto', url: 'https://fonts.gstatic.com/s/roboto/v29/KFOmCnqEu92Fr1Me5Q.ttf' },
+      { family: 'Roboto', url: '/assets/fonts/familyroboto300400500600.tff' }
+    ];
+
+    // Load each font
+    const fontPromises = fontList.map(font =>
+      new FontFace(font.family, `url(${font.url})`).load()
+        .then(loadedFont => (document.fonts as any).add(loadedFont))
+        .catch(error => console.warn(`Failed to load font: ${font.family}`, error))
+    );
+
+    await Promise.all(fontPromises); // Wait for all fonts to load
+    console.log('All fonts loaded!');
   }
+
 
   isTextTooLong(text: string, width: number): boolean {
     const approxCharWidth = 6; // Adjust based on font size
@@ -1717,27 +1782,27 @@ export class GacDocumentDetailsComponent implements OnInit {
     this.DocumentTypeId = this.DocumentList[0].DocumentTypeId;
     if (this.DocumentList.length > 0) {
       const newSourceId = this.DocumentList[0]?.SourceId || 0;
-      const newSourceName = this.DocumentList[0]?.SourceName?.trim() || ''; 
-  
+      const newSourceName = this.DocumentList[0]?.SourceName?.trim() || '';
+
       const newDMId = this.DocumentList[0]?.DMId || 0;
       const newDMName = this.DocumentList[0]?.DMName?.trim() || '';
-  
+
       // ✅ Only update Source if new value is NOT empty
       if (newSourceName) {
-          this._SourceId = newSourceId;
-          this.Source = newSourceName;
+        this._SourceId = newSourceId;
+        this.Source = newSourceName;
       }
-  
+
       // ✅ Only update Manufacture if new value is NOT empty
       if (newDMName) {
-          this._ManufactureandDistributorId = newDMId;
-          this.Manufacture = newDMName;
+        this._ManufactureandDistributorId = newDMId;
+        this.Manufacture = newDMName;
       }
-  }
-  
-  this.SelectedCategory = this.DocumentList[0]?.SubCategoryJson?.filter(item => Object.keys(item).length > 0) || [];
+    }
 
-  
+    this.SelectedCategory = this.DocumentList[0]?.SubCategoryJson?.filter(item => Object.keys(item).length > 0) || [];
+
+
     // this._SourceId = this.DocumentList[0].SourceId;
     // this.Source = this.DocumentList[0].SourceName;
     // this._ManufactureandDistributorId = this.DocumentList[0].DMId;
@@ -2337,7 +2402,7 @@ export class GacDocumentDetailsComponent implements OnInit {
   FileUploadErrorlogs: boolean = false;
   UploadingFiles: boolean = false;
   async onFileChange(event): Promise<void> {
-// alert(1);
+    // alert(1);
     let folderPath = "Draft/" + this.currentUserValue.createdby;
     if (event.target.files.length > 0) {
       var length = event.target.files.length;
@@ -2354,7 +2419,7 @@ export class GacDocumentDetailsComponent implements OnInit {
           (item) => item.FileName === file.name && item.Size === file.size
         );
         if (!existingFile) {
-          
+
           const uniqueId = new Date().valueOf() + index;
 
           // Add the file details to the array with initial states
@@ -2383,7 +2448,7 @@ export class GacDocumentDetailsComponent implements OnInit {
             const uploadedFile = this._lstMultipleFiles.find(
               (item) => item.UniqueId === uniqueId
             );
-            
+
             if (uploadedFile) {
               // uploadedFile.Url = "https://yrglobaldocuments.blob.core.windows.net/documents/" + uploadUrl; // Save the uploaded URL
               // uploadedFile.CloudName = uniqueId + file.name;
@@ -2404,7 +2469,7 @@ export class GacDocumentDetailsComponent implements OnInit {
           }
         }
         this._lstMultipleFiles.forEach(element => {
-          
+
           this.UploadingFiles = element.Uploading;
           console.log(this.UploadingFiles, "Uploading Files Test");
         });

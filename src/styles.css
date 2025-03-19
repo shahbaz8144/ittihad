@@ -130,8 +130,10 @@ body {
     font-family: "Schibsted Grotesk", serif;
     line-height: 1.5 !important;
 }
-.mat-checkbox, mat-label{
-    font-family: "Schibsted Grotesk", serif; 
+
+.mat-checkbox,
+mat-label {
+    font-family: "Schibsted Grotesk", serif;
 }
 
 .mat-simple-snackbar-action {
@@ -2544,31 +2546,40 @@ svg.rmv-icn:hover {
         opacity: 1;
     }
 }
+
+
 /*----------- errror msg -------*/
+
 p.kt-blank-msg {
     font-size: 14px;
     padding: 0px 15px;
     color: #aba9a9;
     font-weight: 400;
 }
+
 .kt-error-img img {
     width: 80%;
 }
+
 h3.kt-blank-ttl {
     color: #979797;
     text-transform: capitalize;
     font-size: 20px;
 }
+
 .kt-tb-error-box {
     position: absolute;
     text-align: center;
     width: 100%;
-    background-color: #fff;padding-bottom: 4rem;
+    background-color: #fff;
+    padding-bottom: 4rem;
 }
-.p-relative{
+
+.p-relative {
     position: relative;
 }
-button.clear-icon.kt-search-clr-ic{
+
+button.clear-icon.kt-search-clr-ic {
     border: 0;
     color: #ccc;
     padding: 6px 13px;
@@ -2577,14 +2588,16 @@ button.clear-icon.kt-search-clr-ic{
     right: -1px;
     border-left: 1px solid #cdcdcd;
 }
- .input-group .form-control {
+
+.input-group .form-control {
     height: 36px;
     border: none;
     background-color: #f2f3f7;
     background-color: #F3F6F9;
     border-radius: 0.42rem 0 0 0.42rem;
 }
- .input-group .input-group-text {
+
+.input-group .input-group-text {
     border: none;
     background-color: #f2f3f7;
     padding: 0 0.65rem 0 1rem;
@@ -2592,9 +2605,11 @@ button.clear-icon.kt-search-clr-ic{
     padding: 0 0.65rem 0 1rem;
     border-radius: 0 0.42rem 0.42rem 0;
 }
- .input-group .input-group-prepend .input-group-text {
+
+.input-group .input-group-prepend .input-group-text {
     border-radius: 0.42rem 0 0 0.42rem;
 }
+
 .srch-btns {
     background: none;
     border: none;
@@ -2603,10 +2618,12 @@ button.clear-icon.kt-search-clr-ic{
     padding: 0 5px;
     line-height: 0;
 }
+
 .srch-btns svg {
     color: #444746;
 }
-.group-active{
+
+.group-active {
     background: #ffffff;
     border: 1px solid transparent;
     box-shadow: 0 1px 1px 0 rgba(65, 69, 73, .3), 0 1px 3px 1px rgba(65, 69, 73, .15);
@@ -2614,16 +2631,20 @@ button.clear-icon.kt-search-clr-ic{
     transition: background 100ms ease-in, width 100ms ease-out;
     fill: #2786fb !important;
 }
+
 .group-active #txtSearch {
     background: #ffffff;
     transition: background 100ms ease-in, width 100ms ease-out;
 }
-.group-active .input-group-text{
+
+.group-active .input-group-text {
     background: #ffffff !important;
     transition: background 100ms ease-in, width 100ms ease-out;
 }
 
+
 /*--------memos css ----------------*/
+
 span.kt-inbox__user_name {
     font-size: 11px;
     line-height: 15px;
@@ -2632,6 +2653,7 @@ span.kt-inbox__user_name {
     letter-spacing: .5px;
     margin-bottom: 1px;
 }
+
 .kt_inde_memo_msg {
     font-size: 12px;
     font-weight: 400;
@@ -2639,9 +2661,10 @@ span.kt-inbox__user_name {
     -webkit-line-clamp: 1;
     color: #9f9f9f;
     -webkit-box-orient: vertical;
-    max-width:600px;
+    max-width: 600px;
     overflow: hidden;
 }
+
 @media (min-width: 1050px) and (max-width: 1150px) {
     .kt_inde_memo_msg {
         max-width: 315px;
@@ -2652,8 +2675,9 @@ span.kt-inbox__user_name {
     .kt-inbox__details {
         overflow: hidden;
     }
-  }
-  @media (min-width: 1150px) and (max-width: 1189px) {
+}
+
+@media (min-width: 1150px) and (max-width: 1189px) {
     .kt_inde_memo_msg {
         max-width: 325px;
     }
@@ -2663,36 +2687,40 @@ span.kt-inbox__user_name {
     .kt-inbox__details {
         overflow: hidden;
     }
-  }
+}
+
 @media (min-width: 1190px) and (max-width: 1300px) {
     .kt_inde_memo_msg {
         max-width: 459px;
     }
-  }
-  @media (min-width: 1300px) and (max-width: 1400px) {
+}
+
+@media (min-width: 1300px) and (max-width: 1400px) {
     .kt_inde_memo_msg {
         max-width: 520px;
     }
-   
-  }
-  @media (min-width: 1400px) and (max-width: 1500px) {
+}
+
+@media (min-width: 1400px) and (max-width: 1500px) {
     .kt_inde_memo_msg {
         max-width: 640px;
     }
-   
-  }
-  @media (min-width: 1600px) and (max-width: 1800px) {
+}
+
+@media (min-width: 1600px) and (max-width: 1800px) {
     .kt_inde_memo_msg {
         max-width: 790px !important;
     }
-  }
+}
+
 .kt-inbox__subject {
     font-size: 12px !important;
-    color:#878787 !important;
+    color: #878787 !important;
     font-weight: 700;
     letter-spacing: unset !important;
     line-height: 15px;
 }
+
 .kt-inbox .kt-inbox__list .kt-inbox__items .kt-inbox__item.kt-inbox__item--unread .kt-inbox__details .kt-inbox__message .kt-inbox__user_name {
     font-size: 11px;
     line-height: 15px;
@@ -2701,23 +2729,24 @@ span.kt-inbox__user_name {
     letter-spacing: .5px;
     margin-bottom: 1px;
 }
+
 .kt-inbox .kt-inbox__list .kt-inbox__items .kt-inbox__item.kt-inbox__item--unread .kt-inbox__details .kt-inbox__message .kt-inbox__subject {
-  
     font-size: 12px;
     color: #005ac9 !important;
     font-weight: 700;
     letter-spacing: unset;
     line-height: 14px;
 }
+
 .kt-inbox .kt-inbox__list .kt-inbox__items .kt-inbox__item.kt-inbox__item--unread .kt-inbox__details .kt-inbox__message .kt-inbox__subject {
-  
     font-size: 12px;
     color: #005ac9 !important;
     font-weight: 700;
     letter-spacing: unset;
     line-height: 14px;
 }
-.kt-inbox .kt-inbox__list .kt-inbox__items .kt-inbox__item.kt-inbox__item--unread .kt-inbox__details .kt_inde_memo_msg{
+
+.kt-inbox .kt-inbox__list .kt-inbox__items .kt-inbox__item.kt-inbox__item--unread .kt-inbox__details .kt_inde_memo_msg {
     font-size: 12px;
     font-weight: 400;
     display: -webkit-box;
@@ -2726,15 +2755,18 @@ span.kt-inbox__user_name {
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
-.kt-inbox .kt-inbox__list .kt-inbox__items .kt-inbox__item.kt-inbox__item--unread .kt-inbox__details .kt_inde_memo_msg *{
+
+.kt-inbox .kt-inbox__list .kt-inbox__items .kt-inbox__item.kt-inbox__item--unread .kt-inbox__details .kt_inde_memo_msg * {
     color: #487fc3 !important;
- }
-.kt_inde_memo_msg *{
+}
+
+.kt_inde_memo_msg * {
     font-size: 12px !important;
     font-weight: 400 !important;
     color: #9f9f9f !important;
     display: contents;
 }
+
 small.kt-confidential {
     border-left: 1px solid #ccc;
     padding-left: 5px;
@@ -2744,6 +2776,7 @@ small.kt-confidential {
     color: #7b68ee;
     font-weight: 500;
 }
+
 small.kt-confidential svg {
     display: inline-block;
     height: 16px;
@@ -2751,15 +2784,20 @@ small.kt-confidential svg {
     width: 16px;
     top: -1px;
 }
+
 small.kt-confidential svg [fill]:not(.permanent):not(g) {
     transition: fill .3s ease;
     fill: #7b68ee;
 }
+
 .kt-inbox .kt-inbox__list .kt-inbox__items .kt-inbox__item .kt-inbox__datetime {
     min-width: 130px;
-}a.kt-blank-msg u:hover {
+}
+
+a.kt-blank-msg u:hover {
     color: #2196F3;
 }
+
 .kt-search-cross-i {
     position: absolute;
     top: 0;
@@ -2768,11 +2806,14 @@ small.kt-confidential svg [fill]:not(.permanent):not(g) {
     height: 100%;
     align-items: center;
     color: #ccc;
-}.close-icnb.kt-search-cross-i i {
+}
+
+.close-icnb.kt-search-cross-i i {
     color: #ccc;
     font-size: 20px;
 }
-.kt-search-cross-i:hover i{
+
+.kt-search-cross-i:hover i {
     color: #000;
 }
 

@@ -157,7 +157,7 @@ export class FileviewComponent implements OnInit {
       });
       this.src = decoder.decode(new Uint8Array(arr));
       this._originalUrl = decoder.decode(new Uint8Array(arr));
-      await this.getTemporaryUrl(this.src);
+      await this.getTemporaryUrl("https://yrglobaldocuments.blob.core.windows.net/documents/DMS/202316/434234317_088179.pdf");
 
       let uid = params['uid'];
       const arruid = uid.split(',').map(element => {
