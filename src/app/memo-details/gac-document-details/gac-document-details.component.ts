@@ -356,6 +356,7 @@ export class GacDocumentDetailsComponent implements OnInit {
     if (this.currentUserValue.RoleId == 502) {
       this.IsArchiveDownload = true;
     }
+    this.getIsArchiveDownload()
     this.languageValuesAssign();
     this.isMainDocumentActive = true;
     this.SubCategoryAPI();

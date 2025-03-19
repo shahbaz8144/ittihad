@@ -469,32 +469,67 @@ export class UserregistrationComponent implements OnInit {
       })
   }
   
-  CheckEmailExist() {
+  // CheckEmailExist() {
 
-    let email = (<HTMLInputElement>document.getElementById("txtemail")).value;
-    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (email.match(mailformat)) {
-      this.InvalidEmailFormat = true;
-      this.services.CheckUserEmailExist(email)
-        .subscribe(data => {
+  //   let email = (<HTMLInputElement>document.getElementById("txtemail")).value;
+  //   var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  //   if (email.match(mailformat)) {
+  //     this.InvalidEmailFormat = true;
+  //     this.services.CheckUserEmailExist(email)
+  //       .subscribe(data => {
+  //         this._obj = data as UserRegistrationDTO;
+  //         if (this._obj.message != "1") {
+  //         // Email already exists, so mark InvalidEmailFormat as false
+  //       this.InvalidEmailFormat = false;
+  //       this.email = "";
+  //           (<HTMLInputElement>document.getElementById("txtemail")).value = "";
+  //           this._snackBar.open('Email Id Already Exits', 'End now', {
+  //             duration: 5000,
+  //             verticalPosition: 'bottom',
+  //             horizontalPosition: 'right',
+  //             panelClass: ['red-snackbar']
+  //           });
+  //         }
+  //       })
+  //   }
+  //   else {
+  //     this.InvalidEmailFormat = false;
+  //     (<HTMLInputElement>document.getElementById("txtemail")).value = "";
+  //   }
+  // }
+  CheckEmailExist(): Promise<boolean> {
+    return new Promise((resolve) => {
+      let email = (<HTMLInputElement>document.getElementById("txtemail")).value;
+      var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  
+      if (email.match(mailformat)) {
+        this.InvalidEmailFormat = true; // Assume email format is valid
+        this.services.CheckUserEmailExist(email).subscribe(data => {
           this._obj = data as UserRegistrationDTO;
+  
           if (this._obj.message != "1") {
+            // Email already exists → Mark as invalid
+            this.InvalidEmailFormat = false;
+            this.email = "";
             (<HTMLInputElement>document.getElementById("txtemail")).value = "";
-            this._snackBar.open('Email Id Already Exits', 'End now', {
+            this._snackBar.open('Email Id Already Exists', 'Close', {
               duration: 5000,
               verticalPosition: 'bottom',
               horizontalPosition: 'right',
               panelClass: ['red-snackbar']
             });
-            this.email = "";
           }
-        })
-    }
-    else {
-      this.InvalidEmailFormat = false;
-      (<HTMLInputElement>document.getElementById("txtemail")).value = "";
-    }
+          resolve(this.InvalidEmailFormat);
+        });
+      } else {
+        // Invalid email format
+        this.InvalidEmailFormat = false;
+        (<HTMLInputElement>document.getElementById("txtemail")).value = "";
+        resolve(false);
+      }
+    });
   }
+  
   getDropdown() {
     this._obj.CreatedBy = this.currentUserValue.createdby;
     this._obj.OrganizationId = this.currentUserValue.organizationid;
@@ -662,88 +697,88 @@ if (hasError) {
   return;
 }
 
-    alert("API Call");
+    
 
-    // try {
-    //   this._obj.FirstName = this.Fname;
-    //   this._obj.lastName = this.lname;
-    //   this._obj.DisplayName = this.Display;
-    //   this._obj.UserEmail = this.email;
-    //   this._obj.UserPhone = this.phnnum;
-    //   this._obj.CountryCode = this.countrycode;
-    //   // if (this.ObjCountryCode == null) {
-    //   //   this.ObjCountryCode = "0";
-    //   // }
-    //   this._obj.UserAddress = this.addrs;
-    //   this._obj.CityId = this.cty;
-    //   this._obj.CountryId = this.cunname;
-    //   this._obj.UserPincode = this.code;
-    //   this._obj.UserName = this.login;
-    //   this._obj.CompanyId = this.Comp;
-    //   this._obj.DepartmentId = this.dept;
-    //   this._obj.RoleId = this.role;
-    //   this._obj.UserId = this.UserId;
-    //   this._obj.ReportingUserId = this.Repuser;
-    //   this._obj.EmployeeId = this.Empid;
-    //   this._obj.DesignationId = this.desig;
-    //   // if(this.ECRStorevalue ==1){
-    //   //   this._obj.PositionId = this.Position;
-    //   // }else if(this.ECRStorevalue ==2){
-    //   //   this._obj.PositionId = 1;
-    //   // }
-    //   this._obj.PositionId = this.Position;
-    //   this._obj.IsInterCompany = this.iner;
-    //   this._obj.IsArchiveApproval = this.IsArchiveApproval;
-    //   this._obj.IsCommunicationDownload = this.IsCommunication
-    //   this._obj.IsGlobalUser = this.global;
-    //   this._obj.IsArchiveDownload = this.ArchiveDownload
-    //   this._obj.IsStreamDownload = this.StreamPlanner;
-    //   this._obj.ToUserIdsStr = this._Globaluser ? this._Globaluser.toString() : "";
-    //   // this._obj.ToUserIdsStr = this._Globaluser.toString();
-    //   // console.log(this._Globaluser.toString(),"drpvalue");
-    //   // this._obj.ToUserIdsStr = this._Globaluser?.toString();
-    //   // alert(this._Globaluser.toString());
-    //   // alert(this.global);
-    //   // this._obj.UserIsActive = true;
-    //   this._obj.UserIsActive =  this.status !== undefined ? this.status : true;
+    try {
+      this._obj.FirstName = this.Fname;
+      this._obj.lastName = this.lname;
+      this._obj.DisplayName = this.Display;
+      this._obj.UserEmail = this.email;
+      this._obj.UserPhone = this.phnnum;
+      this._obj.CountryCode = this.countrycode;
+      // if (this.ObjCountryCode == null) {
+      //   this.ObjCountryCode = "0";
+      // }
+      this._obj.UserAddress = this.addrs;
+      this._obj.CityId = this.cty;
+      this._obj.CountryId = this.cunname;
+      this._obj.UserPincode = this.code;
+      this._obj.UserName = this.login;
+      this._obj.CompanyId = this.Comp;
+      this._obj.DepartmentId = this.dept;
+      this._obj.RoleId = this.role;
+      this._obj.UserId = this.UserId;
+      this._obj.ReportingUserId = this.Repuser;
+      this._obj.EmployeeId = this.Empid;
+      this._obj.DesignationId = this.desig;
+      // if(this.ECRStorevalue ==1){
+      //   this._obj.PositionId = this.Position;
+      // }else if(this.ECRStorevalue ==2){
+      //   this._obj.PositionId = 1;
+      // }
+      this._obj.PositionId = this.Position;
+      this._obj.IsInterCompany = this.iner;
+      this._obj.IsArchiveApproval = this.IsArchiveApproval;
+      this._obj.IsCommunicationDownload = this.IsCommunication
+      this._obj.IsGlobalUser = this.global;
+      this._obj.IsArchiveDownload = this.ArchiveDownload
+      this._obj.IsStreamDownload = this.StreamPlanner;
+      this._obj.ToUserIdsStr = this._Globaluser ? this._Globaluser.toString() : "";
+      // this._obj.ToUserIdsStr = this._Globaluser.toString();
+      // console.log(this._Globaluser.toString(),"drpvalue");
+      // this._obj.ToUserIdsStr = this._Globaluser?.toString();
+      // alert(this._Globaluser.toString());
+      // alert(this.global);
+      // this._obj.UserIsActive = true;
+      this._obj.UserIsActive =  this.status !== undefined ? this.status : true;
 
-    //   const fd = new FormData();
-    //   if (this.mname == null) {
-    //     this.mname = "";
-    //   }
-    //   if (this.tele1 == null) {
-    //     this.tele1 = 0;
-    //   }
-    //   if (this.tele2 == null) {
-    //     this.tele2 = 0;
-    //   }
-    //   this._obj.MiddleName = this.mname;
-    //   this._obj.Telephone1 = this.tele1;
-    //   this._obj.Telephone2 = this.tele2;
+      const fd = new FormData();
+      if (this.mname == null) {
+        this.mname = "";
+      }
+      if (this.tele1 == null) {
+        this.tele1 = 0;
+      }
+      if (this.tele2 == null) {
+        this.tele2 = 0;
+      }
+      this._obj.MiddleName = this.mname;
+      this._obj.Telephone1 = this.tele1;
+      this._obj.Telephone2 = this.tele2;
 
-    //   this.services.InsertUpdateUserRegistration(this._obj)
-    //     .subscribe(data => {
-    //       // console.log(data, 'userregistration')
-    //       this._obj = data as UserRegistrationDTO;
+      this.services.InsertUpdateUserRegistration(this._obj)
+        .subscribe(data => {
+          // console.log(data, 'userregistration')
+          this._obj = data as UserRegistrationDTO;
 
-    //       if (this._obj.message == "1") {
-    //         (<HTMLInputElement>document.getElementById("txtloginid")).value = "";
-    //         this._snackBar.open('User Registered SucessFully', 'End now', {
-    //           duration: 5000,
-    //           verticalPosition: 'bottom',
-    //           horizontalPosition: 'right',
-    //           panelClass: ['blue-snackbar']
-    //         });
-    //       }
-    //       this.reset();
-    //       document.getElementById("personal_info").classList.add("active");
-    // document.getElementById("company_info").classList.remove("active");
-    // document.getElementById("personal_info_content").style.display = 'block';
-    // document.getElementById("company_info_content").style.display = 'none';
-    //     })
-    // } catch (error) {
-    //   alert(error)
-    // }
+          if (this._obj.message == "1") {
+            (<HTMLInputElement>document.getElementById("txtloginid")).value = "";
+            this._snackBar.open('User Registered SucessFully', 'End now', {
+              duration: 5000,
+              verticalPosition: 'bottom',
+              horizontalPosition: 'right',
+              panelClass: ['blue-snackbar']
+            });
+          }
+          this.reset();
+          document.getElementById("personal_info").classList.add("active");
+    document.getElementById("company_info").classList.remove("active");
+    document.getElementById("personal_info_content").style.display = 'block';
+    document.getElementById("company_info_content").style.display = 'none';
+        })
+    } catch (error) {
+      alert(error)
+    }
   }
   TriggerLengthValidation() {
     if (this.Fname.trim().length < 1)
@@ -794,7 +829,7 @@ if (hasError) {
     this.lname = "";
     this.Display = "";
     this.phnnum = null;
-    this.code = +966;
+    this.code = null;
     this.cunname = null;
     this.cty = null;
     this.addrs = "";
@@ -942,7 +977,7 @@ ErrorlogSecondName: boolean = false;
 ErrorlogDisplayName: boolean = false;
 ErrorlogEmailName: boolean = false;
 
-user_reg_company() {
+async user_reg_company() {
   debugger;
 
   // Check if fields are empty
@@ -962,11 +997,15 @@ user_reg_company() {
     return;
   }
 
-  // Stop if email format is invalid
-  if (!this.InvalidEmailFormat) {
+  // // Stop if email format is invalid
+  // if (!this.InvalidEmailFormat) {
+  //   return;
+  // }
+
+  const isValidEmail = await this.CheckEmailExist(); // Wait for email validation
+  if (!isValidEmail) {
     return;
   }
-
   // Move to the next step
   this.moveToCompanyInfo();
 }
