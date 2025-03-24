@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false
-  // ,baseUrl:'http://localhost:9562/api/'
-  // ,NewbaseUrl:'http://localhost:5049/api/'
-  ,baseUrl:'https://cswebapps.com/dmsapi/api/'
-  ,NewbaseUrl:'https://cswebapps.com/dmscoretestapi/api/'
+  ,baseUrl:'http://localhost:9562/api/'
+  ,NewbaseUrl:'http://localhost:5049/api/'
+  // ,baseUrl:'https://cswebapps.com/dmsapi/api/'
+  // ,NewbaseUrl:'https://cswebapps.com/dmscoretestapi/api/'
   // ,SignalRUrl:'http://localhost:5049/'
   ,SignalRUrl:'https://cswebapps.com/dmsapitest/'
   ,assetsurl:'../../../'
@@ -15,6 +15,7 @@ export const environment = {
   ,BrowserNotificationUrl:'http://localhost:5093/api/'
   ,VAPID_PUBLIC_KEY:'BKPl7SUq8hqc1BMnJmlHZadQxhR27tBRXGiqiSf9hORpCAnsiwb3TtRlrIME3KU6W-egyqzXoAs7pUPSEcE-Pmo'
   ,Language_file_url:'',
+  // ,Language_file_url:'https://cswebapps.com/dmsweb/assets/i18n/',
   Container_Name :"documents"
 };
 /*

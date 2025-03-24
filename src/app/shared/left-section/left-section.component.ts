@@ -277,9 +277,10 @@ export class LeftSectionComponent implements OnInit {
     this.UserName = this.currentUserValue.FirstName + ' ' + this.currentUserValue.LastName;
     // alert(this.currentUserValue.FirstName);
     this.DesignationName = this.currentUserValue.DesignationName;
-    console.log(this.DesignationName, "DesignationName");
+    // console.log(this.DesignationName, "DesignationName");
     this.EmailId = this.currentUserValue.Email;
     this.UserProfile = this.currentUserValue.UserProfile;
+    // alert(this.UserProfile)
     this.PolicyId = this.currentUserValue.PolicyId;
     if (this.PolicyId == 0)
       this._isPolicy = false;

@@ -674,58 +674,57 @@ img.ep-ic-dw {
 }
 
 @media only screen and (max-width: 767px) {
-  .kt-border-right {
-    border-right: 0px solid #edf0f7;
-  }
-
-  .step-content {
-    display: none !important;
-  }
-
-  .step.active .step-content {
-    display: block !important;
-  }
-
-  ul.stepper.horizontal {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-
-  }
-
-  .btn-mobile-name {
-    display: none;
-  }
-
-  .user-reg-action-item {
-    padding: 8px;
-    flex: 1 1 auto;
-    justify-content: center;
-  }
-
-  .user-reg-action-content-card {
-    border-radius: 0px 0px 6px 6px;
-  }
-
-  .user-reg-action-item-icon {
-    height: 22px;
-    min-width: 22px;
-    width: 22px;
-    line-height: 22px;
-    font-size: 11px;
-  }
-
-  .user-reg-action-item-small {
-    font-size: 10px;
-  }
-
-  .user-reg-action-item-value {
-    font-size: 11px;
-  }
-
-  .user-reg-action-content-card-body {
-    padding: 1.5rem;
-    height: calc(100vh - 250px);
-    overflow: auto;
-  }
+    .kt-border-right {
+        border-right: 0px solid #edf0f7;
+    }
+    .step-content {
+        display: none !important;
+    }
+    .step.active .step-content {
+        display: block !important;
+    }
+    ul.stepper.horizontal {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+    }
+    .btn-mobile-name {
+        display: none;
+    }
+    .user-reg-action-item {
+        padding: 8px;
+        flex: 1 1 auto;
+        justify-content: center;
+    }
+    .user-reg-action-content-card {
+        border-radius: 0px 0px 6px 6px;
+    }
+    .user-reg-action-item-icon {
+        height: 22px;
+        min-width: 22px;
+        width: 22px;
+        line-height: 22px;
+        font-size: 11px;
+    }
+    .user-reg-action-item-small {
+        font-size: 10px;
+    }
+    .user-reg-action-item-value {
+        font-size: 11px;
+    }
+    .user-reg-action-content-card-body {
+        padding: 1.5rem;
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+}
+.kt-error-msg {
+    color: #ff5d5d;
+    font-weight: 400;
+    font-size: 13px;
+    text-transform: capitalize;
+    margin-top: 3px;
+    display: block;
+    padding-left: 1px;
+  
 }

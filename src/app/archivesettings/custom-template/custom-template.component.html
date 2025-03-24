@@ -26,7 +26,7 @@
                     <h5 class="mb-0" id="template_name">{{ templateName ? templateName : ("Masterform.TemplateName" | translate) }}
                     </h5>
                     <button class="btn btn-save-template" *ngIf="templateId == 0" (click)="saveTemplate()">{{"Masterform.SaveTemplate" | translate }}</button>
-                    <button class="btn btn-save-template" *ngIf="templateId != 0" (click)="UpdateTemplate()">{{"Masterform.UpdateTemplate" | translate }}</button>
+                    <button  [routerLink]="['/backend/ArchiveSettings/template']"  class="btn btn-save-template" *ngIf="templateId != 0" (click)="UpdateTemplate()">{{"Masterform.UpdateTemplate" | translate }}</button>
                 </div>
                 <div class="template-inner">
                     <!-- Workspace (Resizable) -->
@@ -71,8 +71,12 @@
                             </div>
                             <div class="selection-panel-li-control">
                                 <input type="text" class="form-control" [placeholder]="EnterTemplateName" [(ngModel)]="templateName">
+                                <div class="kt-error" *ngIf="Templeerrormessage && !templateName">
+                                    <span class="kt-error-msg">{{"Masterform.EntertemplateName" | translate }} </span>
+                                </div>
                             </div>
                         </div>
+                        
                         <div class="tab-content" id="v-pills-tabContent">
                             <div class="tab-pane fade show active" id="v-pills-elements" role="tabpanel" aria-labelledby="v-pills-elements-tab">
                                 <div class="selection-panel">

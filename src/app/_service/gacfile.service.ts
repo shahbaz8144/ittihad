@@ -418,7 +418,7 @@ export class GACFileService {
   }
   // async AssignedCabinetAPI() {
   //   this._ObjGac.CreatedBy = this.currentUserValue.createdby;
-  
+
   //   try {
   //     const response = await lastValueFrom(
   //       this.http.post(this.rootUrlII + 'ArchiveAPI/NewGetAssignedCabinet', this._ObjGac)
@@ -491,6 +491,64 @@ export class GACFileService {
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
 
     return this.http.post(this.rootUrlII + 'ArchiveAPI/NewAddTemplatePositions', this._ObjGac);
+  }
+
+  // async uploadPdfWithImage(pdfFile: File, imageFile: File, positionX: number, positionY: number, width: number, height: number) {
+  //   const formData = new FormData();
+  //   formData.append('pdfFile', pdfFile);
+  //   formData.append('imageFile', imageFile);
+  //   formData.append('positionX', positionX.toString());
+  //   formData.append('positionY', positionY.toString());
+  //   formData.append('overlayWidth', width.toString());
+  //   formData.append('overlayHeight', height.toString());
+
+  //   return this.http.post(this.rootUrlII + 'ArchiveAPI/addimagetopdf', formData, {
+  //     responseType: 'blob'
+  //   }).toPromise();
+  // }
+
+  uploadPdfWithImage(pdfUrl: string, imageBase64: string, positionX: number, positionY: number, width: number, height: number,
+    pdfContainerWidth: number,
+    pdfContainerHeight: number,
+    workspaceDataWidth:number,
+    workspaceDataHeight:number
+  ) {
+    const requestBody = {
+      pdfUrl: pdfUrl,
+      imageBase64: imageBase64,
+      positionX: positionX,
+      positionY: positionY,
+      overlayWidth: width,
+      overlayHeight: height,
+      pdfContainerWidth: pdfContainerWidth, 
+      pdfContainerHeight: pdfContainerHeight,
+      workspaceDataWidth: workspaceDataWidth, 
+      workspaceDataHeight: workspaceDataHeight
+    };
+
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/AddImageToSignedPdf', requestBody, {
+      responseType: 'blob'
+    }).toPromise();
+  }
+
+  DownloadDocument(pdfUrl: string
+  ) {
+    const requestBody = {
+      pdfUrl: pdfUrl,
+      imageBase64: 'dummy data',
+      positionX: 0,
+      positionY: 0,
+      overlayWidth: 0,
+      overlayHeight: 0,
+      pdfContainerWidth: 0, 
+      pdfContainerHeight: 0,
+      workspaceDataWidth: 0, 
+      workspaceDataHeight: 0
+    };
+    
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/Download', requestBody, {
+      responseType: 'blob'
+    }).toPromise();
   }
 
 }

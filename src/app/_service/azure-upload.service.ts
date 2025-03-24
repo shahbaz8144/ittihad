@@ -570,6 +570,7 @@ export class AzureUploadService {
       reader.readAsArrayBuffer(file);
     });
   }
+  
 }
 
 

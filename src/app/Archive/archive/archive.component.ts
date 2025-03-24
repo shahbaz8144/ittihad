@@ -56,6 +56,8 @@ export class ArchiveComponent implements OnInit {
   customObj: ShelvesDTO;
   selectedValues: string = '';
   SubmitDocumentDocumentId: number;
+  DocumentBarcode:any;
+  DocumentPrefix:any;
   _selectedValues: Array<{
     UserId: number;
     ContactName: string;
@@ -335,7 +337,12 @@ export class ArchiveComponent implements OnInit {
       } else if (lang == 'en') {
         this.renderer.removeClass(document.body, 'kt-body-arabic');
       }
-    })
+    });
+    this.route.queryParams.subscribe((params: any) => {
+      // Extract parameters safely
+      this.selectedCabinet = params.CabinetName || params['cabinet'] || 'DefaultCabinet';
+      this.selectedCabinetId = params.CabinetId || params['selectedCabinetId'] || 0;
+    });
   }
 
 
@@ -345,12 +352,7 @@ export class ArchiveComponent implements OnInit {
   selectedCabinetId: number = 0;
  
   async ngOnInit(): Promise<void> {
-    this.route.queryParams.subscribe((params: any) => {
-      // Extract parameters safely
-      this.selectedCabinet = params.CabinetName || params['cabinet'] || 'DefaultCabinet';
-      this.selectedCabinetId = params.CabinetId || params['selectedCabinetId'] || 0;
-    });
-    
+   
     const lang: any = localStorage.getItem('language')
     this.translate.use(lang);
     this.SelectCompany = lang === 'en' ? 'Company' : 'اختر الشركة';
@@ -899,7 +901,8 @@ export class ArchiveComponent implements OnInit {
     this.service.NewDocument(this._obj).subscribe(data => {
       console.log(data, "Add Document API Data");
       this.SubmitDocumentDocumentId = data["documentId"];
-
+      this.DocumentBarcode = data['barcode'];
+      this.DocumentPrefix  = data['prefix'];
       if (data["message"] == '1') {
         this._Previewshownandhide = true;
       } else {

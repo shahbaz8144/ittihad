@@ -31,7 +31,7 @@ export class SpecializationComponent implements OnInit {
   String_status: string;
   specilization: string;
   note: string;
-  InActive: boolean;
+  InActive: boolean=true;
   objSpecialization: SpecializationDTO
   _obj: SpecializationDTO;
   ObjSpecialization_data: [];
@@ -190,7 +190,7 @@ export class SpecializationComponent implements OnInit {
     // this.isShow = false;
     this.specilization = "";
     this.note = "";
-    this.InActive = false;
+    this.InActive = true;
     this.isShow = false
 
   }
@@ -220,19 +220,19 @@ export class SpecializationComponent implements OnInit {
       this.objSpecialization.SpecializationId = this.SpecializationId
       this.objSpecialization.Specialization = this.specilization;
       this.objSpecialization.Description = this.note;
-      this.objSpecialization.IsActive = this.InActive;
+      this.objSpecialization.IsActive = this.InActive !== undefined ? this.InActive : true;
       if (this._obj.Description == null) {
         this._obj.Description = "";
       }
       else {
         this.objSpecialization.Description = this.note;
       }
-      if (this._obj.IsActive == undefined) {
-        this._obj.IsActive = false;
-      }
-      else {
-        this._obj.IsActive = this.InActive;
-      }
+      // if (this._obj.IsActive == undefined) {
+      //   this._obj.IsActive = false;
+      // }
+      // else {
+      //   this._obj.IsActive = this.InActive;
+      // }
 
       if (this.SpecializationId == undefined || this.SpecializationId == 0) {
         this.objSpecialization.FlagId = 1;
@@ -293,7 +293,7 @@ export class SpecializationComponent implements OnInit {
   Reset() {
     this.specilization = "";
     this.note = "";
-    this.InActive = false;
+    this.InActive = true;
     this.isShow = false
   }
   UpdateStatus(Obj_Status: SpecializationDTO) {

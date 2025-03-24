@@ -129,7 +129,7 @@
                                 </div>
                                 <div class="kt-doc-info">
                                     <div>
-                                        <b>{{"Masterform.CabinetName" | translate }} : </b><span class="doc-name">{{doc.CabinetName}} </span>
+                                        <b>{{"Masterform.CabinetName" | translate }} : </b><span class="doc-name">{{doc.CabinetName}}/{{doc.CabinietName_Ar}} </span>
                                     </div>
                                     <div>
                                         <span class="doc-name">{{doc.DocumentName}}</span>
@@ -579,7 +579,7 @@
                                         </svg>
                                     </div>
                                     <span class="kt-doc-title-name">{{ "Masterform.ReferenceDocumnets" | translate}}</span>
-                                    <span class="tab-count"> {{ReferenceList.length}}</span>
+                                    <span class="tab-count" *ngIf="ReferenceList.length>0">{{ReferenceList.length}}</span>
                                 </div>
                               </button>
                                 <button class="flex-sm-fill nav-link" id="nav-useraction-tab" (click)="BindUserSection()" data-toggle="tab" data-target="#nav-useraction" type="button" role="tab" aria-controls="nav-useraction" aria-selected="false">
@@ -587,7 +587,7 @@
                                     <div class="kt-doc-title-icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1.3em;height: 1.3em;vertical-align: middle;fill: rgb(255 255 255);overflow: hidden;" viewBox="0 0 1024 1024" version="1.1"><path d="M843.282963 870.115556c-8.438519-140.515556-104.296296-257.422222-233.908148-297.14963C687.881481 536.272593 742.4 456.533333 742.4 364.088889c0-127.241481-103.158519-230.4-230.4-230.4S281.6 236.847407 281.6 364.088889c0 92.444444 54.518519 172.183704 133.12 208.877037-129.611852 39.727407-225.46963 156.634074-233.908148 297.14963-0.663704 10.903704 7.964444 20.195556 18.962963 20.195556l0 0c9.955556 0 18.299259-7.774815 18.962963-17.73037C227.745185 718.506667 355.65037 596.385185 512 596.385185s284.254815 122.121481 293.357037 276.195556c0.568889 9.955556 8.912593 17.73037 18.962963 17.73037C835.318519 890.311111 843.946667 881.019259 843.282963 870.115556zM319.525926 364.088889c0-106.287407 86.186667-192.474074 192.474074-192.474074s192.474074 86.186667 192.474074 192.474074c0 106.287407-86.186667 192.474074-192.474074 192.474074S319.525926 470.376296 319.525926 364.088889z"></path></svg>
                                     </div>
-                                    <span class="kt-doc-title-name">User Actions</span>
+                                    <span class="kt-doc-title-name">{{"Masterform.UserActions" | translate }}</span>
                                     <span class="tab-count" *ngIf="_BindUserSection.length >0"> {{_BindUserSection.length}} </span>
                                 </div>
                               </button>
@@ -686,6 +686,17 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <ng-container *ngIf="_BindUserSection.length==0">
+                                            <div class="d-flex-center">
+                                                <div class="m-auto text-center kt-error-img">
+                                                    <img src="assets/media/Img/no meeting Icons 01.png">
+                                                    <div class="bnk-txt">
+                                                        <p class="kt-blank-msg fs-4"> {{ "Masterform.NoUsermessage" | translate }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-container>
                                     </div>
                                 </div>
                             </div>
@@ -704,7 +715,7 @@
                             </a>
                             <div class="br-line"></div>
                             <a title="labels Title" *ngIf="this._LabelCount!=0" (click)="Openlabels()" class="kt-inbox__icon kt-w-40" style="width: auto;">
-                                <span>
+                            
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                         aria-hidden="true" role="img" font-size="1.5rem" width="1em" height="1em"
                                         viewBox="0 0 24 24" class="iconify iconify--mdi label-rotate">
@@ -712,9 +723,8 @@
                                         <path
                                             d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z" />
                                     </svg>
-                                    <span class="kt-lb-cnt"> {{_LabelCount}}</span>
+                                    <span class="kt-lb-cnt ml-1"> {{_LabelCount}}</span>
 
-                                </span>
                             </a>
                             <a title="labels Title" *ngIf="this._LabelCount==0" (click)="Openlabels()" class="kt-inbox__icon kt-w-40" style="width: auto;">
                                 <span>
@@ -1057,20 +1067,16 @@
                                         </svg>
                                     </div>
                                     <span class="kt-doc-title-name">{{ "Masterform.DocumentView" | translate }}</span>
-
                                 </div>
-
-
-
                                 <div class="d-flex justify-content-end kt-detail-link-option">
 
-                                    <div class="kt-detail-item" *ngIf="IsArchiveDownload==true  && viewer!='' && Contenttype?.toLowerCase().includes('pdf')">
+                                    <div class="kt-detail-item" *ngIf="IsArchiveDownload==true  && viewer!='' && isMainDocumentActive">
                                         <a class="kt-detail-link" (click)="generatePDF()">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1em;height: 1em;vertical-align: middle;fill: #144e18;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
                                                 <path
                                                     d="M896 928c0 17.664-14.336 32-32 32l-704 0C142.336 960 128 945.664 128 928l0 0C128 910.336 142.336 896 160 896l704 0C881.664 896 896 910.336 896 928L896 928zM479.104 96.896l0 558.976-153.6-153.664c-12.8-12.8-33.6-12.8-46.464 0s-12.8 33.6 0 46.464l209.664 209.728c0.64 0.64 1.408 0.832 2.048 1.344 2.624 2.304 5.376 4.416 8.64 5.76 3.648 1.408 7.36 2.112 11.2 2.24C511.104 767.68 511.488 768 512 768c0.768 0 1.344-0.448 2.048-0.448 3.584-0.192 7.04-0.768 10.496-2.048 3.84-1.6 7.232-3.968 10.176-6.784 0 0 0.32-0.192 0.512-0.32l209.664-209.728c6.4-6.4 9.6-14.784 9.6-23.168 0-8.448-3.264-16.832-9.6-23.232-12.864-12.8-33.6-12.8-46.464 0l-153.664 153.664 0.32-558.976C545.152 78.72 530.432 64 512.32 64S479.104 78.72 479.104 96.896z" />
                                             </svg>
-                                            <span class="kt-detail-iconname">{{"Masterform.downloadwithbarcode" | translate }}</span>
+                                            <span class="kt-detail-iconname">{{ "Masterform.Downloadwithtemplate" | translate }}</span>
                                         </a>
                                     </div>
 
@@ -1496,7 +1502,7 @@
                                                 </div> -->
                                                 <!-- <label class="mb-2"> {{ "Masterform.FileUpload" | translate }}</label> -->
                                                 <div class="custom-file  optional-input-upload">
-                                                    <input type="file" (change)="onFileChange($event)" id="customFile" multiple>
+                                                    <input type="file" (change)="onFileChange($event)" id="customFile" accept="application/pdf"  multiple>
                                                     <div class="drag-browse">
                                                         <div>
                                                             <span>Drag & drop files here or </span><span class="browse">Browse</span>

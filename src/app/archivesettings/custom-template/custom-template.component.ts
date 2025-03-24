@@ -85,6 +85,7 @@ export class CustomTemplateComponent implements AfterViewInit, OnInit {
   TextValues: string;
   EnterTemplateName: string = "";
   currentLang: "ar" | "en" = "ar";
+  Templeerrormessage:boolean = false;
   constructor(private http: HttpClient, private service: GACFileService,
     private _snackBar: MatSnackBar,
     private route: ActivatedRoute,
@@ -127,8 +128,7 @@ export class CustomTemplateComponent implements AfterViewInit, OnInit {
     this.translate.use(lang);
     this.currentLang = lang ? lang : 'en';
     this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
-    // this.Cabinet_search = lang === 'en' ? 'Search...' : 'يبحث...';
-    // this.Entercabinetname = lang === 'en' ? 'Enter cabinet name' : 'أدخل اسم الخزانة'
+    this.EnterTemplateName = lang === 'en' ? 'Enter Template Name' : 'أدخل اسم القالب';
     if (lang == 'ar') {
       this.renderer.addClass(document.body, 'kt-body-arabic');
     } else if (lang == 'en') {
@@ -676,6 +676,11 @@ export class CustomTemplateComponent implements AfterViewInit, OnInit {
 
   // Save the current template (elements) to the backend.
   saveTemplate() {
+    if(this.templateName ! == ""){
+      this.Templeerrormessage = true;
+      return
+    }
+    this.Templeerrormessage = false;
     const workspaceData = {
       width: this.workspaceWidth,
       height: this.workspaceHeight,
@@ -721,11 +726,12 @@ export class CustomTemplateComponent implements AfterViewInit, OnInit {
     this.obj.TemplateData = JSON.stringify(workspaceData);
     this.service.UpdateDynamicTemplateAPI(this.obj).subscribe(data => {
       console.log(data, "Save Temple Data");
-      this._snackBar.open(('Added Successfully'), 'End now', {
+      this._snackBar.open(('Update Successfully'), 'End now', {
         duration: 5000,
         verticalPosition: 'bottom',
         horizontalPosition: 'right',
       });
+
       this.clearAllElements();
     })
     // this.http.post(this.apiUrl, this.elements).subscribe(response => {

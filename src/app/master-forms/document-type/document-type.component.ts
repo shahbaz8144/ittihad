@@ -52,7 +52,7 @@ export class DocumentTypeComponent implements OnInit {
   EnterDocumentTypeName:string;
   EnterDescription:string;
   DocumenttypeName:string = "";
-  DocStatus:boolean;
+  DocStatus:boolean=true;
   DocNote:string = "";
   DocumentTypeerrormessage:boolean;
   constructor(public service: DocumentTypeService, private objFormBuilder: UntypedFormBuilder,
@@ -238,7 +238,7 @@ this.EnterDescription = lang === 'en' ? 'Enter Description' : 'أدخل الوص
       // this.objvalues_DocTypeDto.DocumentTypeId = this.service.objDocTypeDTO.DocumentTypeId;
       this.objvalues_DocTypeDto.DocumentTypeName = this.DocumenttypeName;
       this.objvalues_DocTypeDto.Description = this.DocNote;
-      this.objvalues_DocTypeDto.IsActive = this.DocStatus;
+      this.objvalues_DocTypeDto.IsActive = this.DocStatus !== undefined ? this.DocStatus : true;
       
       if (this.objvalues_DocTypeDto.DocumentTypeId == undefined || this.objvalues_DocTypeDto.DocumentTypeId == 0) {
         this.objvalues_DocTypeDto.FlagId = 1;
@@ -332,7 +332,7 @@ this.EnterDescription = lang === 'en' ? 'Enter Description' : 'أدخل الوص
     this.DocumentTypeNameMinLength = true;
     this.DocumenttypeName = "";
     this.DocNote = "";
-    this.DocStatus = false;
+    this.DocStatus = true;
     this.DocumentTypeerrormessage = false;
     this.service.objDocTypeDTO.DocumentTypeId = 0;
     this.documentTypeList = [];
@@ -372,7 +372,7 @@ this.EnterDescription = lang === 'en' ? 'Enter Description' : 'أدخل الوص
      this.objvalues_DocTypeDto = new DocumentTypeDTO();
     this.DocumenttypeName = "";
     this.DocNote = "";
-    this.DocStatus = false;
+    this.DocStatus = true;
     this.DocumentTypeerrormessage = false;
     this.service.objDocTypeDTO.DocumentTypeId = 0;
     this.isShow = false;
@@ -412,7 +412,7 @@ this.EnterDescription = lang === 'en' ? 'Enter Description' : 'أدخل الوص
     this.objvalues_DocTypeDto = new DocumentTypeDTO();
     this.DocumenttypeName = "";
     this.DocNote = "";
-    this.DocStatus = false;
+    this.DocStatus = true;
     this.DocumentTypeerrormessage = false;
     document.getElementById("addrck").classList.remove("kt-quick-panel--on");
     document.getElementsByClassName("side_view")[0].classList.remove("position-fixed");

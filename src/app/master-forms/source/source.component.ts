@@ -189,7 +189,7 @@ this.userlist=true;
       'UsersList': new UntypedFormControl,
       'Country': new UntypedFormControl,
       'city': new UntypedFormControl,
-      'status': new UntypedFormControl,
+      'status': new UntypedFormControl(true),
       'countrycode': new UntypedFormControl('', [Validators.required])
     })
     this.services.GetCountries().subscribe(a => {
@@ -351,12 +351,13 @@ this.userlist=true;
       else{
         this._obj.AccessUsers ="";
       }
-      if (this.sourceformGroup.get('status').value == undefined) {
-        this._obj.IsActive = false;
-      }
-      else {
-        this._obj.IsActive = this.sourceformGroup.get('status').value;
-      }
+      this._obj.IsActive = this.sourceformGroup.get('status').value;
+      // if (this.sourceformGroup.get('status').value == undefined) {
+      //   this._obj.IsActive = false;
+      // }
+      // else {
+      //   this._obj.IsActive = this.sourceformGroup.get('status').value;
+      // }
       if (this._obj.SourceId == undefined || this._obj.SourceId == 0) {
         this._obj.FlagId = 1;
       } else if (this._obj.SourceId != 0) {
@@ -390,7 +391,8 @@ this.userlist=true;
           this.sourceformGroup.reset();
           this.SourceId = 0;
           this.sourceformGroup.patchValue({
-            countrycode: "+1"
+            countrycode: "+1",
+            status:true
           })
           this.services._obj.CountryCode = "+1";
           this.GetUsersListDrp();
@@ -487,6 +489,10 @@ this.userlist=true;
 
   }
   source_add() {
+
+    this.sourceformGroup.patchValue({
+      status:true
+    })
     // document.getElementById("addrck").style.display = "block";
     // document.getElementById("source_add").style.display = "none";
     // document.getElementById("editrck").innerHTML = "Add";
@@ -544,7 +550,10 @@ this.AccessUsers = _ary;
         this.services._obj.CityId = source.CityId
       })
     this.services._obj.CityId = source.CityId;
-    this.services._obj.IsActive = source.IsActive;
+    // this.services._obj.IsActive = source.IsActive;
+    this.sourceformGroup.patchValue({
+      status:source.IsActive
+    })
     this.GetUsersListDrp();
     this.isShow = true;
     this.userlist = false;

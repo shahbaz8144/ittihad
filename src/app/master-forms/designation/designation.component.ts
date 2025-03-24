@@ -40,7 +40,7 @@ export class DesignationComponent implements OnInit {
   index: any;
   isShow: boolean;
   String_status: string;
-  InActive: boolean;
+  InActive: boolean=true;;
   activePage: number;
   LastPage:number;
   NextPage:Boolean= false;
@@ -174,7 +174,7 @@ export class DesignationComponent implements OnInit {
     document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");
     this.DesignationName = "";
     this.DesignationId = 0;
-    this.InActive = false;
+    this.InActive = true;
     this.isShow = false;
   }
   getdesignation() {
@@ -232,11 +232,11 @@ export class DesignationComponent implements OnInit {
   }
   OnCreate() {
     try {
-
-      if (this.InActive == undefined) {
-        this.InActive = false;
-      }
-      this.objDesignationDTO.IsActive = this.InActive;
+      this.objDesignationDTO.IsActive = this.InActive !== undefined ? this.InActive : true; 
+      // if (this.InActive == undefined) {
+      //   this.InActive = false;
+      // }
+      // this.objDesignationDTO.IsActive = this.InActive;
       // this.objDesignationDTO.Search = "";
       // this.objDesignationDTO.PageNumber = 1;
       // this.objDesignationDTO.PageSize = 10000;
@@ -364,7 +364,7 @@ export class DesignationComponent implements OnInit {
     document.getElementById("designation_add").style.display = "block";
     this.DesignationName = "";
     this.DesignationId = 0;
-    this.InActive = false;
+    this.InActive = true;
     this.isShow = false;
   }
 

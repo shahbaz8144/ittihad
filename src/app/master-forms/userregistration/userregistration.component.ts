@@ -35,7 +35,7 @@ export class UserregistrationComponent implements OnInit {
     PinCode: '',
     Telephone1: '',
     Telephone2: '',
-    Status: '',
+    Status: true,
     PositionId: '',
     CompanyId: '',
     DepartmentId: '',
@@ -63,7 +63,7 @@ export class UserregistrationComponent implements OnInit {
   },
 
   ]
-_customerregistration:boolean=false;
+  _customerregistration: boolean = false;
 
   RoleDrp: any;
   CompanyDrp: any;
@@ -88,7 +88,7 @@ _customerregistration:boolean=false;
   code: number;
   tele1: number;
   tele2: number;
-  status: boolean;
+  status: boolean = true;
   Position: number;
   Comp: number;
   dept: number;
@@ -139,30 +139,30 @@ _customerregistration:boolean=false;
   InvalidEmailFormat: boolean;
   loadAPI: Promise<any>;
   BlukFile: any;
-  currentLang:"ar"|"en"="ar";
-  EnterFirstName:string;
-  EnterMiddleName:string;
-  EnterLastName:string;
-  EnterDisplayName:string;
+  currentLang: "ar" | "en" = "ar";
+  EnterFirstName: string;
+  EnterMiddleName: string;
+  EnterLastName: string;
+  EnterDisplayName: string;
   private currentUserSubject: BehaviorSubject<UserDTO>;
   public currentUser: Observable<UserDTO>;
   _userdto: UserDTO;
-  EnterEmailAddress:string;
-  EnterPhoneNumber:string;
-  EnterFullAddress:string;
-  SelectCountry:string;
-  SelectCity:string;
-  EnterPinCode:string;
-  EnterTelephone1:string;
-  EnterTelephone2:string;
-  selectPosition:string;
-  Companyselect:string;
-  Departmentselect:string;
-  Roleselect:string;
-  Designationselect:string;
-  EnterLoginId:string;
-  EnterEmployeeId:string;
-  ReportingUserselect:string;
+  EnterEmailAddress: string;
+  EnterPhoneNumber: string;
+  EnterFullAddress: string;
+  SelectCountry: string;
+  SelectCity: string;
+  EnterPinCode: string;
+  EnterTelephone1: string;
+  EnterTelephone2: string;
+  selectPosition: string;
+  Companyselect: string;
+  Departmentselect: string;
+  Roleselect: string;
+  Designationselect: string;
+  EnterLoginId: string;
+  EnterEmployeeId: string;
+  ReportingUserselect: string;
   public get currentUserValue(): UserDTO {
     this.currentUserSubject = new BehaviorSubject<UserDTO>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
@@ -170,10 +170,10 @@ _customerregistration:boolean=false;
   }
 
   constructor(public services: UserRegistrationService,
-     private _snackBar: MatSnackBar,
-    private translate:TranslateService,
+    private _snackBar: MatSnackBar,
+    private translate: TranslateService,
     private renderer: Renderer2,
-   @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document
     // , private script: ScriptService
   ) {
     this.CompanyDrp = [];
@@ -189,116 +189,117 @@ _customerregistration:boolean=false;
     this.ObjgetDesignationList = [];
     this.ObjgetGlobalusersList = [];
     this.ObjgetReportingUser = [];
+    this.status = true;
     this._obj = new UserRegistrationDTO();
     this._userdto = new UserDTO();
     this.loadAPI = new Promise((resolve) => {
       this.loadScript();
       resolve(true);
     });
-    HeaderComponent.languageChanged.subscribe((lang)=>{
-      localStorage.setItem('language',lang);
+    HeaderComponent.languageChanged.subscribe((lang) => {
+      localStorage.setItem('language', lang);
       this.translate.use(lang);
       this.currentLang = lang ? lang : 'en';
-    this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
-    this.EnterFirstName  = lang === 'en' ? 'Enter First Name' : 'أدخل الاسم الأول';
-    this.EnterMiddleName = lang === 'en' ? 'Enter Middle Name' :  'أدخل الاسم الأوسط';
-    this.EnterLastName  = lang === 'en' ? 'Enter Last Name' : 'إدخال اسم آخر';
-    this.EnterDisplayName = lang  === 'en' ? 'Enter DisplayName' : 'أدخل اسم العرض';
-    this.EnterEmailAddress = lang === 'en' ? 'Enter Email Address' : 'أدخل عنوان البريد الالكتروني';
-    this.EnterPhoneNumber = lang === 'en' ? 'Enter Phone Number' : 'أدخل رقم الهاتف';
-    this.EnterFullAddress = lang === 'en' ? 'Enter Full Address' : 'أدخل العنوان الكامل';
-    this.SelectCountry = lang === 'en' ? 'Select Country' : 'حدد الدولة';
-    this.SelectCity = lang === 'en' ? 'Select City' : 'اختر مدينة';
-    this.EnterPinCode = lang === 'en' ? 'Enter PinCode' : 'أدخل الرمز السري';
-    this.EnterTelephone1 = lang === 'en' ? 'Enter Telephone1' : 'أدخل الهاتف1';
-    this.EnterTelephone2  = lang === 'en' ? 'Enter Telephone2' : 'أدخل الهاتف2';
-    this.selectPosition  = lang === 'en' ? 'select' : 'يختار';
-    this.Companyselect = lang === 'en' ? 'select' : 'يختار';
-    this.Departmentselect = lang === 'en' ? 'select' : 'يختار';
-    this.Roleselect = lang === 'en' ? 'select' : 'يختار'; 
-    this.Designationselect  = lang === 'en' ? 'select' : 'يختار'; 
-    this.EnterLoginId = lang === 'en' ? 'Enter Login Id' : 'أدخل معرف تسجيل الدخول';
-    this.EnterEmployeeId = lang === 'en' ? 'Enter Employee Id' : 'أدخل معرف الموظف';
-    this.ReportingUserselect = lang === 'en' ? 'select' : 'يختار';
-    let tooltipContent = '';
-    if (lang === 'en') {
-      tooltipContent = 'Enter Company Area Pincode/Zipcode';
-    } else if (lang === 'ar') {
-      tooltipContent = 'أدخل رمز المنطقة/الرمز البريدي للشركة';
-    }
+      this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+      this.EnterFirstName = lang === 'en' ? 'Enter First Name' : 'أدخل الاسم الأول';
+      this.EnterMiddleName = lang === 'en' ? 'Enter Middle Name' : 'أدخل الاسم الأوسط';
+      this.EnterLastName = lang === 'en' ? 'Enter Last Name' : 'إدخال اسم آخر';
+      this.EnterDisplayName = lang === 'en' ? 'Enter DisplayName' : 'أدخل اسم العرض';
+      this.EnterEmailAddress = lang === 'en' ? 'Enter Email Address' : 'أدخل عنوان البريد الالكتروني';
+      this.EnterPhoneNumber = lang === 'en' ? 'Enter Phone Number' : 'أدخل رقم الهاتف';
+      this.EnterFullAddress = lang === 'en' ? 'Enter Full Address' : 'أدخل العنوان الكامل';
+      this.SelectCountry = lang === 'en' ? 'Select Country' : 'حدد الدولة';
+      this.SelectCity = lang === 'en' ? 'Select City' : 'اختر مدينة';
+      this.EnterPinCode = lang === 'en' ? 'Enter PinCode' : 'أدخل الرمز السري';
+      this.EnterTelephone1 = lang === 'en' ? 'Enter Telephone1' : 'أدخل الهاتف1';
+      this.EnterTelephone2 = lang === 'en' ? 'Enter Telephone2' : 'أدخل الهاتف2';
+      this.selectPosition = lang === 'en' ? 'select' : 'يختار';
+      this.Companyselect = lang === 'en' ? 'select' : 'يختار';
+      this.Departmentselect = lang === 'en' ? 'select' : 'يختار';
+      this.Roleselect = lang === 'en' ? 'select' : 'يختار';
+      this.Designationselect = lang === 'en' ? 'select' : 'يختار';
+      this.EnterLoginId = lang === 'en' ? 'Enter Login Id' : 'أدخل معرف تسجيل الدخول';
+      this.EnterEmployeeId = lang === 'en' ? 'Enter Employee Id' : 'أدخل معرف الموظف';
+      this.ReportingUserselect = lang === 'en' ? 'select' : 'يختار';
+      let tooltipContent = '';
+      if (lang === 'en') {
+        tooltipContent = 'Enter Company Area Pincode/Zipcode';
+      } else if (lang === 'ar') {
+        tooltipContent = 'أدخل رمز المنطقة/الرمز البريدي للشركة';
+      }
 
-    if(lang == 'ar'){
-      this.renderer.addClass(document.body, 'kt-body-arabic');
-    }else if (lang == 'en'){
-      this.renderer.removeClass(document.body, 'kt-body-arabic');
-    }
-    // Initialize Tippy.js with the appropriate tooltip content
-    tippy('#EnterCompanyArea', {
-      content: tooltipContent,
-      arrow: true,
-      animation: 'scale-extreme',
-      animateFill: true,
-      inertia: true
-    });
-     
-    let tooltipContents = '';
-    if (lang === 'en') {
-      tooltipContents = 'Enter Valid Address';
-    } else if (lang === 'ar') {
-      tooltipContents = 'أدخل عنوانًا صالحًا';
-    }
+      if (lang == 'ar') {
+        this.renderer.addClass(document.body, 'kt-body-arabic');
+      } else if (lang == 'en') {
+        this.renderer.removeClass(document.body, 'kt-body-arabic');
+      }
+      // Initialize Tippy.js with the appropriate tooltip content
+      tippy('#EnterCompanyArea', {
+        content: tooltipContent,
+        arrow: true,
+        animation: 'scale-extreme',
+        animateFill: true,
+        inertia: true
+      });
 
-    // Initialize Tippy.js with the appropriate tooltip content
-    tippy('#myAddress', {
-      content: tooltipContents,
-      arrow: true,
-      animation: 'scale-extreme',
-      animateFill: true,
-      inertia: true
-    });
-    let tooltipContentss = '';
-    if (lang === 'en') {
-      tooltipContentss = 'Enter Valid Phone Number';
-    } else if (lang === 'ar') {
-      tooltipContentss = 'أدخل رقم هاتف صالح';
-    }
+      let tooltipContents = '';
+      if (lang === 'en') {
+        tooltipContents = 'Enter Valid Address';
+      } else if (lang === 'ar') {
+        tooltipContents = 'أدخل عنوانًا صالحًا';
+      }
 
-    // Initialize Tippy.js with the appropriate tooltip content
-    
+      // Initialize Tippy.js with the appropriate tooltip content
+      tippy('#myAddress', {
+        content: tooltipContents,
+        arrow: true,
+        animation: 'scale-extreme',
+        animateFill: true,
+        inertia: true
+      });
+      let tooltipContentss = '';
+      if (lang === 'en') {
+        tooltipContentss = 'Enter Valid Phone Number';
+      } else if (lang === 'ar') {
+        tooltipContentss = 'أدخل رقم هاتف صالح';
+      }
 
-    let tooltipContentn = '';
-    if (lang === 'en') {
-      tooltipContentn = 'Enter Valid Phone Number';
-    } else if (lang === 'ar') {
-      tooltipContentn = 'أدخل رقم هاتف صالح';
-    }
+      // Initialize Tippy.js with the appropriate tooltip content
 
-    // Initialize Tippy.js with the appropriate tooltip content
-    tippy('#myPhone', {
-      content: tooltipContentn,
-      arrow: true,
-      animation: 'scale-extreme',
-      animateFill: true,
-      inertia: true
-    });
 
-    let tooltipContentV = '';
-    if (lang === 'en') {
-      tooltipContentV = 'Enter Valid Email';
-    } else if (lang === 'ar') {
-      tooltipContentV = 'أدخل بريدًا إلكترونيًا صالحًا';
-    }
+      let tooltipContentn = '';
+      if (lang === 'en') {
+        tooltipContentn = 'Enter Valid Phone Number';
+      } else if (lang === 'ar') {
+        tooltipContentn = 'أدخل رقم هاتف صالح';
+      }
 
-    // Initialize Tippy.js with the appropriate tooltip content
-    tippy('#myEmail', {
-      content: tooltipContentV,
-      arrow: true,
-      animation: 'scale-extreme',
-      animateFill: true,
-      inertia: true
-    });
+      // Initialize Tippy.js with the appropriate tooltip content
+      tippy('#myPhone', {
+        content: tooltipContentn,
+        arrow: true,
+        animation: 'scale-extreme',
+        animateFill: true,
+        inertia: true
+      });
 
-    
+      let tooltipContentV = '';
+      if (lang === 'en') {
+        tooltipContentV = 'Enter Valid Email';
+      } else if (lang === 'ar') {
+        tooltipContentV = 'أدخل بريدًا إلكترونيًا صالحًا';
+      }
+
+      // Initialize Tippy.js with the appropriate tooltip content
+      tippy('#myEmail', {
+        content: tooltipContentV,
+        arrow: true,
+        animation: 'scale-extreme',
+        animateFill: true,
+        inertia: true
+      });
+
+
     })
   }
   public loadScript() {
@@ -339,13 +340,13 @@ _customerregistration:boolean=false;
 
 
   ngOnInit(): void {
-    const lang:any = localStorage.getItem('language');
+    const lang: any = localStorage.getItem('language');
     this.translate.use(lang)
     this.currentLang = lang ? lang : 'en';
-    this.EnterFirstName  = lang === 'en' ? 'Enter First Name' : 'أدخل الاسم الأول';
-    this.EnterMiddleName = lang === 'en' ? 'Enter Middle Name' :  'أدخل الاسم الأوسط';
-    this.EnterLastName  = lang === 'en' ? 'Enter Last Name' : 'إدخال اسم آخر';
-    this.EnterDisplayName = lang  === 'en' ? 'Enter DisplayName' : 'أدخل اسم العرض';
+    this.EnterFirstName = lang === 'en' ? 'Enter First Name' : 'أدخل الاسم الأول';
+    this.EnterMiddleName = lang === 'en' ? 'Enter Middle Name' : 'أدخل الاسم الأوسط';
+    this.EnterLastName = lang === 'en' ? 'Enter Last Name' : 'إدخال اسم آخر';
+    this.EnterDisplayName = lang === 'en' ? 'Enter Display Name' : 'أدخل اسم العرض';
     this.EnterEmailAddress = lang === 'en' ? 'Enter Email Address' : 'أدخل عنوان البريد الالكتروني';
     this.EnterPhoneNumber = lang === 'en' ? 'Enter Phone Number' : 'أدخل رقم الهاتف';
     this.EnterFullAddress = lang === 'en' ? 'Enter Full Address' : 'أدخل العنوان الكامل';
@@ -353,19 +354,19 @@ _customerregistration:boolean=false;
     this.SelectCity = lang === 'en' ? 'Select City' : 'اختر مدينة';
     this.EnterPinCode = lang === 'en' ? 'Enter PinCode' : 'أدخل الرمز السري';
     this.EnterTelephone1 = lang === 'en' ? 'Enter Telephone1' : 'أدخل الهاتف1';
-    this.EnterTelephone2  = lang === 'en' ? 'Enter Telephone2' : 'أدخل الهاتف2';
-    this.selectPosition  = lang === 'en' ? 'select' : 'يختار';
+    this.EnterTelephone2 = lang === 'en' ? 'Enter Telephone2' : 'أدخل الهاتف2';
+    this.selectPosition = lang === 'en' ? 'select' : 'يختار';
     this.Companyselect = lang === 'en' ? 'select' : 'يختار';
     this.Departmentselect = lang === 'en' ? 'select' : 'يختار';
-    this.Roleselect = lang === 'en' ? 'select' : 'يختار'; 
-    this.Designationselect  = lang === 'en' ? 'select' : 'يختار'; 
+    this.Roleselect = lang === 'en' ? 'select' : 'يختار';
+    this.Designationselect = lang === 'en' ? 'select' : 'يختار';
     this.EnterLoginId = lang === 'en' ? 'Enter Login Id' : 'أدخل معرف تسجيل الدخول';
     this.EnterEmployeeId = lang === 'en' ? 'Enter Employee Id' : 'أدخل معرف الموظف';
     this.ReportingUserselect = lang === 'en' ? 'select' : 'يختار'
     this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
-    if(lang == 'ar'){
+    if (lang == 'ar') {
       this.renderer.addClass(document.body, 'kt-body-arabic');
-    }else if (lang == 'en'){
+    } else if (lang == 'en') {
       this.renderer.removeClass(document.body, 'kt-body-arabic');
     }
     this.InvalidEmailFormat = true;
@@ -376,7 +377,7 @@ _customerregistration:boolean=false;
     this.MinPinLength = true;
     this.MinLoginLength = true;
     this.MinEmployeeLength = true;
-    this.countrycode = '+1';
+    this.countrycode = '+966';
     this.services.GetCountriesList()
       .subscribe(data => {
         this.ObjgetcountryList = data;
@@ -412,7 +413,7 @@ _customerregistration:boolean=false;
       animateFill: true,
       inertia: true
     });
- 
+
 
     // Initialize Tippy.js with the appropriate tooltip content
     let tooltipContentn = '';
@@ -430,7 +431,7 @@ _customerregistration:boolean=false;
       animateFill: true,
       inertia: true
     });
-  
+
     let tooltipContentV = '';
     if (lang === 'en') {
       tooltipContentV = 'Enter Valid Email';
@@ -467,32 +468,68 @@ _customerregistration:boolean=false;
         this.lstCities = data;
       })
   }
-  CheckEmailExist() {
+  
+  // CheckEmailExist() {
 
-    let email = (<HTMLInputElement>document.getElementById("txtemail")).value;
-    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (email.match(mailformat)) {
-      this.InvalidEmailFormat = true;
-      this.services.CheckUserEmailExist(email)
-        .subscribe(data => {
+  //   let email = (<HTMLInputElement>document.getElementById("txtemail")).value;
+  //   var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  //   if (email.match(mailformat)) {
+  //     this.InvalidEmailFormat = true;
+  //     this.services.CheckUserEmailExist(email)
+  //       .subscribe(data => {
+  //         this._obj = data as UserRegistrationDTO;
+  //         if (this._obj.message != "1") {
+  //         // Email already exists, so mark InvalidEmailFormat as false
+  //       this.InvalidEmailFormat = false;
+  //       this.email = "";
+  //           (<HTMLInputElement>document.getElementById("txtemail")).value = "";
+  //           this._snackBar.open('Email Id Already Exits', 'End now', {
+  //             duration: 5000,
+  //             verticalPosition: 'bottom',
+  //             horizontalPosition: 'right',
+  //             panelClass: ['red-snackbar']
+  //           });
+  //         }
+  //       })
+  //   }
+  //   else {
+  //     this.InvalidEmailFormat = false;
+  //     (<HTMLInputElement>document.getElementById("txtemail")).value = "";
+  //   }
+  // }
+  CheckEmailExist(): Promise<boolean> {
+    return new Promise((resolve) => {
+      let email = (<HTMLInputElement>document.getElementById("txtemail")).value;
+      var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  
+      if (email.match(mailformat)) {
+        this.InvalidEmailFormat = true; // Assume email format is valid
+        this.services.CheckUserEmailExist(email).subscribe(data => {
           this._obj = data as UserRegistrationDTO;
+  
           if (this._obj.message != "1") {
+            // Email already exists → Mark as invalid
+            this.InvalidEmailFormat = false;
+            this.email = "";
             (<HTMLInputElement>document.getElementById("txtemail")).value = "";
-            this._snackBar.open('Email Id Already Exits', 'End now', {
+            this._snackBar.open('Email Id Already Exists', 'Close', {
               duration: 5000,
               verticalPosition: 'bottom',
               horizontalPosition: 'right',
               panelClass: ['red-snackbar']
             });
-
           }
-        })
-    }
-    else {
-      this.InvalidEmailFormat = false;
-      (<HTMLInputElement>document.getElementById("txtemail")).value = "";
-    }
+          resolve(this.InvalidEmailFormat);
+        });
+      } else {
+        // Invalid email format
+        this.InvalidEmailFormat = false;
+        (<HTMLInputElement>document.getElementById("txtemail")).value = "";
+        resolve(false);
+      }
+    });
   }
+  
   getDropdown() {
     this._obj.CreatedBy = this.currentUserValue.createdby;
     this._obj.OrganizationId = this.currentUserValue.organizationid;
@@ -572,6 +609,7 @@ _customerregistration:boolean=false;
             horizontalPosition: 'right',
             panelClass: ['red-snackbar']
           });
+          this.login = "";
         }
       })
   }
@@ -582,9 +620,86 @@ _customerregistration:boolean=false;
   // GetCheckboxvalueStatus(e) {
   // }
 
-  OnCreate() {
-    try {
+  updateDisplayName() {
+    this.Display = `${this.Fname} ${this.lname}`.trim();
+  }
 
+  PositionsErrorlog: boolean = false;
+  CompanyErrorlog: boolean = false;
+  DepartmentErrorlog: boolean = false;
+  RoleErrorlog: boolean = false;
+  DesignationErrorlog: boolean = false;
+  LoginIDErrorlog: boolean = false;
+  EmployeeIdErrorlog: boolean = false;
+  ReportingUserErrorlog: boolean = false;
+  OnCreate() {
+    debugger
+    let hasError = false;
+
+if (this.Position === undefined || this.Position === null) {
+  this.PositionsErrorlog = true;
+  hasError = true;
+} else {
+  this.PositionsErrorlog = false;
+}
+
+if (this.Comp === undefined || this.Comp === null) {
+  this.CompanyErrorlog = true;
+  hasError = true;
+} else {
+  this.CompanyErrorlog = false;
+}
+
+if (this.dept === undefined || this.dept === null) {
+  this.DepartmentErrorlog = true;
+  hasError = true;
+} else {
+  this.DepartmentErrorlog = false;
+}
+
+if (this.role === undefined || this.role === null) {
+  this.RoleErrorlog = true;
+  hasError = true;
+} else {
+  this.RoleErrorlog = false;
+}
+
+if (this.desig === undefined || this.desig === null) {
+  this.DesignationErrorlog = true;
+  hasError = true;
+} else {
+  this.DesignationErrorlog = false;
+}
+
+if (!this.login || this.login.trim() === "") { // Checking empty string too
+  this.LoginIDErrorlog = true;
+  hasError = true;
+} else {
+  this.LoginIDErrorlog = false;
+}
+
+if (this.Empid === undefined || this.Empid === null) {
+  this.EmployeeIdErrorlog = true;
+  hasError = true;
+} else {
+  this.EmployeeIdErrorlog = false;
+}
+
+if (this.Repuser === undefined || this.Repuser === null) {
+  this.ReportingUserErrorlog = true;
+  hasError = true;
+} else {
+  this.ReportingUserErrorlog = false;
+}
+
+// Stop further execution if any field has an error
+if (hasError) {
+  return;
+}
+
+    
+
+    try {
       this._obj.FirstName = this.Fname;
       this._obj.lastName = this.lname;
       this._obj.DisplayName = this.Display;
@@ -624,7 +739,8 @@ _customerregistration:boolean=false;
       // this._obj.ToUserIdsStr = this._Globaluser?.toString();
       // alert(this._Globaluser.toString());
       // alert(this.global);
-      this._obj.UserIsActive = true;
+      // this._obj.UserIsActive = true;
+      this._obj.UserIsActive =  this.status !== undefined ? this.status : true;
 
       const fd = new FormData();
       if (this.mname == null) {
@@ -655,6 +771,10 @@ _customerregistration:boolean=false;
             });
           }
           this.reset();
+          document.getElementById("personal_info").classList.add("active");
+    document.getElementById("company_info").classList.remove("active");
+    document.getElementById("personal_info_content").style.display = 'block';
+    document.getElementById("company_info_content").style.display = 'none';
         })
     } catch (error) {
       alert(error)
@@ -683,11 +803,19 @@ _customerregistration:boolean=false;
     if (this.addrs.trim().length < 3) this.MinAddressLength = false;
     else this.MinAddressLength = true;
   }
+  // PinLengthValidation() {
+  //   if (this.code.toString().trim().length < 3)
+  //     this.MinPinLength = false;
+  //   else this.MinPinLength = true;
+  // }
   PinLengthValidation() {
-    if (this.code.toString().trim().length < 3)
+    if (!this.code || this.code.toString().length < 3) {
       this.MinPinLength = false;
-    else this.MinPinLength = true;
+    } else {
+      this.MinPinLength = true;
+    }
   }
+
   LoginLengthValidation() {
     if (this.login.trim().length < 3) this.MinLoginLength = false;
     else this.MinLoginLength = true;
@@ -716,21 +844,34 @@ _customerregistration:boolean=false;
     this.login = "";
     this.tele1 = null;
     this.tele2 = null;
-    this.countrycode = "";
+    this.countrycode = "+966";
     this.global = null;
     this.iner = null;
     this.IsArchiveApproval = null;
     this.IsCommunication = null;
     this.ArchiveDownload = null;
     this.StreamPlanner = null;
-    this._Globaluser = []
+    this._Globaluser = [];
+    this.PositionsErrorlog = false;
+    this.CompanyErrorlog = false;
+    this.DepartmentErrorlog = false;
+    this.RoleErrorlog = false;
+    this.DesignationErrorlog = false;
+    this.LoginIDErrorlog = false;
+    this.EmployeeIdErrorlog = false;
+    this.ReportingUserErrorlog = false;
+    this.ErrorlogFirstName = false;
+    this.ErrorlogSecondName = false;
+    this.ErrorlogDisplayName = false;
+    this.ErrorlogEmailName = false;
+
   }
   exportAsXLSX(): void {
     this.services.exportAsExcelFile(this.UserRegistration, this.Positions, this.ObjgetCompanyList, this.ObjgetDepartmentList, this.ObjgetRoleList, this.ObjgetDesignationList, 'UserRegistrationlist');
     document.getElementById("bulk-note").classList.add("view");
   }
   isLoading = false;
-  ReportingManager:boolean = true;
+  ReportingManager: boolean = true;
   progressPercentage = 0; // Track progress percentage
   onFileChange(ev) {
     // this.isLoading = true;
@@ -750,7 +891,7 @@ _customerregistration:boolean=false;
     // }
     // reader.readAsBinaryString(file);
     this.isLoading = true;
-    this.ReportingManager=false;
+    this.ReportingManager = false;
     const reader = new FileReader();
     const file = ev.target.files[0];
 
@@ -825,18 +966,106 @@ _customerregistration:boolean=false;
         }
       });
   }
-  user_reg_personal(){
+  user_reg_personal() {
     document.getElementById("personal_info").classList.add("active");
     document.getElementById("company_info").classList.remove("active");
     document.getElementById("personal_info_content").style.display = 'block';
     document.getElementById("company_info_content").style.display = 'none';
   }
-  user_reg_company(){
-    document.getElementById("personal_info").classList.remove("active");
-    document.getElementById("company_info").classList.add("active");
-    document.getElementById("personal_info_content").style.display = 'none';
-    document.getElementById("company_info_content").style.display = 'block';
+  ErrorlogFirstName: boolean = false;
+ErrorlogSecondName: boolean = false;
+ErrorlogDisplayName: boolean = false;
+ErrorlogEmailName: boolean = false;
+
+async user_reg_company() {
+  debugger;
+
+  // Check if fields are empty
+  const isFnameEmpty = !this.Fname || this.Fname.toString().trim() === "";
+  const isLnameEmpty = !this.lname || this.lname.toString().trim() === "";
+  const isDisplayEmpty = !this.Display || this.Display.toString().trim() === "";
+  const isEmailEmpty = !this.email || this.email.toString().trim() === "";
+
+  // Assign error state for UI feedback
+  this.ErrorlogFirstName = isFnameEmpty;
+  this.ErrorlogSecondName = isLnameEmpty;
+  this.ErrorlogDisplayName = isDisplayEmpty;
+  this.ErrorlogEmailName = isEmailEmpty;
+
+  // Stop if any required field is empty
+  if (isFnameEmpty || isLnameEmpty || isDisplayEmpty || isEmailEmpty) {
+    return;
   }
+
+  // // Stop if email format is invalid
+  // if (!this.InvalidEmailFormat) {
+  //   return;
+  // }
+
+  const isValidEmail = await this.CheckEmailExist(); // Wait for email validation
+  if (!isValidEmail) {
+    return;
+  }
+  // Move to the next step
+  this.moveToCompanyInfo();
+}
+
+// **Function to move to the next step**
+moveToCompanyInfo() {
+  document.getElementById("personal_info").classList.remove("active");
+  document.getElementById("company_info").classList.add("active");
+  document.getElementById("personal_info_content").style.display = 'none';
+  document.getElementById("company_info_content").style.display = 'block';
+}
+
+
+// user_reg_company() {
+// debugger
+//   const isFnameEmpty = !this.Fname || this.Fname.toString().trim() === "";
+//   const isLnameEmpty = !this.lname || this.lname.toString().trim() === "";
+//   const isDisplayEmpty = !this.Display || this.Display.toString().trim() === "";
+//   const isEmailEmpty = !this.email || this.email.toString().trim() === "";
+
+//   // Proper condition check
+//   if (isFnameEmpty || isLnameEmpty || isDisplayEmpty || isEmailEmpty) {
+//     this.ErrorlogFirstName = isFnameEmpty;
+//     this.ErrorlogSecondName = isLnameEmpty;
+//     this.ErrorlogDisplayName = isDisplayEmpty;
+//     this.ErrorlogEmailName = isEmailEmpty;
+//     return;
+//   }
+
+//   // **Check email format validation before proceeding**
+//   if (this.InvalidEmailFormat) {
+//     return; // Stop execution if email format is invalid
+//   }
+
+//   // Proceed with navigation if all values are valid
+//   document.getElementById("personal_info").classList.remove("active");
+//   document.getElementById("company_info").classList.add("active");
+//   document.getElementById("personal_info_content").style.display = 'none';
+//   document.getElementById("company_info_content").style.display = 'block';
+// }
+
+//   ErrorlogFirstName: boolean = false;
+//   ErrorlogSecondName: boolean = false;
+//   ErrorlogDisplayName: boolean = false;
+//   ErrorlogEmailName: boolean = false;
+//   user_reg_company() {
+// debugger
+//     if (!this.Fname || this.Fname.trim() === "" && !this.lname || this.lname.trim() === ""
+//       && !this.Display || this.Display.trim() === "" && !this.email || this.email.trim() === "") {
+//       this.ErrorlogFirstName = true;
+//       this.ErrorlogSecondName = true;
+//       this.ErrorlogDisplayName = true;
+//       this.ErrorlogEmailName = true;
+//       return;
+//     }
+//     document.getElementById("personal_info").classList.remove("active");
+//     document.getElementById("company_info").classList.add("active");
+//     document.getElementById("personal_info_content").style.display = 'none';
+//     document.getElementById("company_info_content").style.display = 'block';
+//   }
   // ECRStorevalue:number;
   // ChangeTabs(_val){
   //   this.ECRStorevalue = _val;
@@ -845,6 +1074,6 @@ _customerregistration:boolean=false;
   //  }else if(_val==1){
   //   this._customerregistration = false;
   //  }
-  
+
   // }
 }
