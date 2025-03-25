@@ -89,7 +89,7 @@
             <li class="kt-menu__item" routerLinkActive="active">
                 <a routerLink="/backend/Inbox/Memos" class="kt-menu__link kt-menu__toggle">
                     <i class="material-icons kt-menu__link-icon">drafts</i>
-                    <span class="kt-menu__link-text">Inbox</span>
+                    <span class="kt-menu__link-text">{{"Menu.Inbox" | translate }}</span>
                 </a>
             </li>
             <li class="kt-menu__item" routerLinkActive="active">
@@ -101,7 +101,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="kt-menu__link-icon mobile" style="width: 20px!important; height: 20px !important" width="24" height="24" viewBox="10 0 24 24" fill="none">
                             <path d="M12.938 8.23596V22.7089C12.938 22.8627 13.0918 22.9587 13.2263 22.8819L18.781 19.8643C18.8387 19.8258 18.8771 19.7681 18.8771 19.6913V11.4842C18.8771 11.4073 18.8387 11.3496 18.781 11.3112L13.2456 8.06295C13.111 7.98608 12.938 8.08216 12.938 8.23596ZM12.15 22.7666V2.20074C12.15 2.0662 12.0155 1.9701 11.8809 2.00854L5.13458 4.50719C5.05771 4.54563 5 4.60329 5 4.69939V20.3448C5 20.4216 5.05771 20.4985 5.13458 20.537L11.8809 22.9587C12.0155 22.9972 12.15 22.9011 12.15 22.7666Z" fill="currentColor"/>
                             </svg>
-                    <span class="kt-menu__link-text">Streambox</span>
+                    <span class="kt-menu__link-text">{{"Menu.Streambox" | translate  }}</span>
                 </a>
 
 
@@ -112,7 +112,7 @@
                     <!-- <svg width="26px" height="26px" class="kt-menu__link-icon" style="width: 24px !important; height: 24px !important;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="currentColor" fill-rule="evenodd" d="M16 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a1 1 0 1 1 2 0h2a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2a1 1 0 1 1-2 0zm1 5.001a1 1 0 0 0 1-1V8a1 1 0 1 0-2 0v.001a1 1 0 0 0 1 1zm1 3a1 1 0 1 1-2 0V12a1 1 0 1 1 2 0v.001zm-1 5a1 1 0 0 0 1-1V16a1 1 0 1 0-2 0v.001a1 1 0 0 0 1 1zM6 11a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H6zm0 4a1 1 0 1 0 0 2h3a1 1 0 1 0 0-2H6z" clip-rule="evenodd"></path></g></svg> -->
                     <svg fill="currentColor" class="kt-menu__link-icon web"  width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style=" width: 22px !important; height: 22px !important;"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" d="M1 3a2 2 0 012-2h6.5a2 2 0 012 2v6.5a2 2 0 01-2 2H7v4.063C7 16.355 7.644 17 8.438 17H12.5v-2.5a2 2 0 012-2H21a2 2 0 012 2V21a2 2 0 01-2 2h-6.5a2 2 0 01-2-2v-2.5H8.437A2.938 2.938 0 015.5 15.562V11.5H3a2 2 0 01-2-2V3zm2.5a.5.5 0 00-.5-.5H3zM14.5 0 a.5.5 a.5.5 0 00-.5-.5h-6.5z"></path></g></svg>
                     <svg fill="currentColor" class="kt-menu__link-icon mobile"  width="19px" height="19px" viewBox="8 0 24 24" xmlns="http://www.w3.org/2000/svg" style=" width: 19px !important; height: 19px !important;"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" d="M1 3a2 2 0 012-2h6.5a2 2 0 012 2v6.5a2 2 0 01-2 2H7v4.063C7 16.355 7.644 17 8.438 17H12.5v-2.5a2 2 0 012-2H21a2 2 0 012 2V21a2 2 0 01-2 2h-6.5a2 2 0 01-2-2v-2.5H8.437A2.938 2.938 0 015.5 15.562V11.5H3a2 2 0 01-2-2V3zm2.5a.5.5 0 00-.5-.5H3zM14.5 0 a.5.5 a.5.5 0 00-.5-.5h-6.5z"></path></g></svg>
-                    <span class="kt-menu__link-text">Work Flow</span>
+                    <span class="kt-menu__link-text">{{"Menu.WorkFlow" | translate }}</span>
                 </a>
             </li>
 
@@ -132,7 +132,7 @@
                     <!-- <img src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/31/672189_anounce1.jpg" class="left-sec-img"> -->
                     <img *ngIf="UserProfile =='NA'" class="left-sec-img" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png">
                     <img *ngIf="UserProfile !='NA'" class="left-sec-img" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{UserProfile}}">
-                    <span class="kt-menu__link-text">Account Settings</span>
+                    <span class="kt-menu__link-text">{{"Menu.AccountSettings" | translate }}</span>
                 </a>
                 <div class=" left-sec__submenu dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <div class="left-sec-profile-det">
@@ -153,8 +153,10 @@
                                 <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="User / User_Square"> <path id="Vector" d="M17 21C17 18.2386 14.7614 16 12 16C9.23858 16 7 18.2386 7 21M17 21H17.8031C18.921 21 19.48 21 19.9074 20.7822C20.2837 20.5905 20.5905 20.2837 20.7822 19.9074C21 19.48 21 18.921 21 17.8031V6.19691C21 5.07899 21 4.5192 20.7822 4.0918C20.5905 3.71547 20.2837 3.40973 19.9074 3.21799C19.4796 3 18.9203 3 17.8002 3H6.2002C5.08009 3 4.51962 3 4.0918 3.21799C3.71547 3.40973 3.40973 3.71547 3.21799 4.0918C3 4.51962 3 5.08009 3 6.2002V17.8002C3 18.9203 3 19.4796 3.21799 19.9074C3.40973 20.2837 3.71547 20.5905 4.0918 20.7822C4.5192 21 5.07899 21 6.19691 21H7M17 21H7M12 13C10.3431 13 9 11.6569 9 10C9 8.34315 10.3431 7 12 7C13.6569 7 15 8.34315 15 10C15 11.6569 13.6569 13 12 13Z" stroke="#1bc5bd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg>
                             </div>
                             <div routerLink="/backend/Setting/MyProfile" class="kt-notification__item-details" tabindex="0">
-                                <div class="kt-notification__item-title kt-font-bold"> My Profile </div>
-                                <div class="kt-notification__item-time"> Account settings and more </div>
+                                <div class="kt-notification__item-title kt-font-bold"> 
+                                    {{"Menu.MyProfile" | translate }} </div>
+                                <div class="kt-notification__item-time"> 
+                                    {{"Menu.Accountsettingsandmore" | translate }} </div>
                             </div>
                         </a>
                         <!-- <a class="kt-notification__item">
@@ -171,8 +173,10 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="fill: #ffa800;"><path d="M9 17C9 17 16 18 19 21H20C20.5523 21 21 20.5523 21 20V13.937C21.8626 13.715 22.5 12.9319 22.5 12C22.5 11.0681 21.8626 10.285 21 10.063V4C21 3.44772 20.5523 3 20 3H19C16 6 9 7 9 7H5C3.89543 7 3 7.89543 3 9V15C3 16.1046 3.89543 17 5 17H6L7 22H9V17ZM11 8.6612C11.6833 8.5146 12.5275 8.31193 13.4393 8.04373C15.1175 7.55014 17.25 6.77262 19 5.57458V18.4254C17.25 17.2274 15.1175 16.4499 13.4393 15.9563C12.5275 15.6881 11.6833 15.4854 11 15.3388V8.6612ZM5 9H9V15H5V9Z"></path></svg>
                             </div>
                             <div routerLink="/backend/Inbox/Announcement" class="kt-notification__item-details" tabindex="0">
-                                <div class="kt-notification__item-title kt-font-bold"> Announcements </div>
-                                <div class="kt-notification__item-time"> View Announcements </div>
+                                <div class="kt-notification__item-title kt-font-bold"> 
+                                    {{"Menu.Announcements" | translate }} </div>
+                                <div class="kt-notification__item-time">
+                                     {{"Menu.ViewAnnouncements" | translate }} </div>
                             </div>
                         </a>
                         <a class="kt-notification__item">
@@ -180,8 +184,9 @@
                                 <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 14.5V16.5M7 10.0288C7.47142 10 8.05259 10 8.8 10H15.2C15.9474 10 16.5286 10 17 10.0288M7 10.0288C6.41168 10.0647 5.99429 10.1455 5.63803 10.327C5.07354 10.6146 4.6146 11.0735 4.32698 11.638C4 12.2798 4 13.1198 4 14.8V16.2C4 17.8802 4 18.7202 4.32698 19.362C4.6146 19.9265 5.07354 20.3854 5.63803 20.673C6.27976 21 7.11984 21 8.8 21H15.2C16.8802 21 17.7202 21 18.362 20.673C18.9265 20.3854 19.3854 19.9265 19.673 19.362C20 18.7202 20 17.8802 20 16.2V14.8C20 13.1198 20 12.2798 19.673 11.638C19.3854 11.0735 18.9265 10.6146 18.362 10.327C18.0057 10.1455 17.5883 10.0647 17 10.0288M7 10.0288V8C7 5.23858 9.23858 3 12 3C14.7614 3 17 5.23858 17 8V10.0288" stroke="#f64e60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                             </div>
                             <div routerLink="/backend/Setting/ChangePassword" class="kt-notification__item-details" tabindex="0">
-                                <div class="kt-notification__item-title kt-font-bold"> Change Password </div>
-                                <div class="kt-notification__item-time"> Manage Password </div>
+                                <div class="kt-notification__item-title kt-font-bold"> 
+                                    {{"Menu.ChangePassword" | translate }} </div>
+                                <div class="kt-notification__item-time"> {{"Menu.ManagePassword" | translate }} </div>
                             </div>
                         </a>
                         <a class="kt-notification__item">
@@ -189,12 +194,14 @@
                                 <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M13 3H8.2C7.0799 3 6.51984 3 6.09202 3.21799C5.71569 3.40973 5.40973 3.71569 5.21799 4.09202C5 4.51984 5 5.0799 5 6.2V17.8C5 18.9201 5 19.4802 5.21799 19.908C5.40973 20.2843 5.71569 20.5903 6.09202 20.782C6.51984 21 7.0799 21 8.2 21H12M13 3L19 9M13 3V7.4C13 7.96005 13 8.24008 13.109 8.45399C13.2049 8.64215 13.3578 8.79513 13.546 8.89101C13.7599 9 14.0399 9 14.6 9H19M19 9V10M9 17H11M9 13H12M9 9H10M21 15.21C20.9318 15.2141 20.7357 15.21 20.6667 15.21C19.6422 15.21 18.7077 14.7524 18 14C17.2923 14.7524 16.3578 15.2099 15.3333 15.2099C15.2643 15.2099 15.0684 15.2141 15.0002 15.21C15.0002 15.21 15 15.9855 15 16.3979C15 18.6121 16.2748 20.4725 18 21C19.7252 20.4725 21 18.6121 21 16.3979C21 15.9855 21 15.21 21 15.21Z" stroke="#3699ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                             </div>
                             <div routerLink="/backend/Setting/UserPolicy" class="kt-notification__item-details" tabindex="0">
-                                <div class="kt-notification__item-title kt-font-bold"> User Policy </div>
-                                <div class="kt-notification__item-time"> List of policy </div>
+                                <div class="kt-notification__item-title kt-font-bold">
+                                     {{"Menu.UserPolicy" | translate }} </div>
+                                <div class="kt-notification__item-time"> 
+                                    {{"Menu.Listofpolicy" | translate }} </div>
                             </div>
                         </a>
                         <div class="kt-notification__custom kt-space-between" style="padding: 0.75rem 1rem 0rem 1rem;">
-                            <a (click)="logout()" target="_blank" class="btn btn-label btn-label-brand btn-sm btn-bold">Sign Out</a>
+                            <a (click)="logout()" target="_blank" class="btn btn-label btn-label-brand btn-sm btn-bold">{{"Menu.SignOut" | translate }}</a>
                         </div>
                     </div>
                     <!-- <hr class="w-100">
@@ -233,7 +240,7 @@
                         <path d="M42.7048 12C39.7461 12 37.3114 13.5603 37.3114 15.4562C37.3114 16.3746 37.897 17.214 38.8524 17.8361C36.4947 18.8236 35 20.5122 35 22.3687C35 25.3609 38.8062 27.8 43.4752 27.8C46.1873 27.8 48.8686 27.3457 51.18 26.4767L49.639 24.7684C47.7591 25.4596 45.6326 25.825 43.4752 25.825C40.4858 25.825 38.0819 24.2944 38.0819 22.3687C38.0792 21.6082 38.4691 20.8683 39.191 20.2646C39.913 19.6609 40.9262 19.2271 42.073 19.031L50.1013 17.6485L49.3 15.7426L42.4428 16.9375C41.2871 16.8387 40.3933 16.2265 40.3933 15.4562C40.3933 14.6267 41.4104 13.975 42.7048 13.975C43.1054 13.975 43.4752 14.0441 43.8605 14.1725L45.4014 12.4641C44.5847 12.158 43.6447 12 42.7048 12Z" fill="currentColor"/>
                         <path d="M42.7048 12C39.7461 12 37.3114 13.5603 37.3114 15.4562C37.3114 16.3746 37.897 17.214 38.8524 17.8361C36.4947 18.8236 35 20.5122 35 22.3687C35 25.3609 38.8062 27.8 43.4752 27.8C46.1873 27.8 48.8686 27.3457 51.18 26.4767L49.639 24.7684C47.7591 25.4596 45.6326 25.825 43.4752 25.825C40.4858 25.825 38.0819 24.2944 38.0819 22.3687C38.0792 21.6082 38.4691 20.8683 39.191 20.2646C39.913 19.6609 40.9262 19.2271 42.073 19.031L50.1013 17.6485L49.3 15.7426L42.4428 16.9375C41.2871 16.8387 40.3933 16.2265 40.3933 15.4562C40.3933 14.6267 41.4104 13.975 42.7048 13.975C43.1054 13.975 43.4752 14.0441 43.8605 14.1725L45.4014 12.4641C44.5847 12.158 43.6447 12 42.7048 12Z" stroke="currentColor"/>
                         </svg>
-                    <span class="kt-menu__link-text">Arabic</span>
+                    <span class="kt-menu__link-text">{{"Menu.Arabic" | translate }}</span>
                 </a>
                 <div class=" left-sec__submenu dropdown-menu left-sec__submenu__en__ar" aria-labelledby="dropdownMenuButton" style="bottom: 10px !important; width: 14rem !important;">
                     <div class="kt-language-dropdown">

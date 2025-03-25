@@ -282,7 +282,7 @@
         "ActionBy": "Action By",
         "EmailID": "Email ID",
         "Department": "Department",
-        "ReportingUser": "ReportingUser",
+        "ReportingUser": "Reporting User",
         "bookmark": "Bookmark",
         "reply": "Reply",
         "replyAll": "Reply All",
@@ -892,7 +892,8 @@
         "EmployeeIdErrorlogMessage" : "Enter EmployeeId",
         "ReportingUserErrorlogMessage" : "Select Reporting User",
         "AddUserPersonalDetails" : "Add User Personal Details",
-        "AssignRoleposition" : "Assign Role, Position"
+        "AssignRoleposition" : "Assign Role, Position",
+        "EnterCategoryName" : "Enter Category Name"
     },
     "Archive": {
         "Archive": "Archive",
@@ -942,5 +943,21 @@
         "RestoreTime": "Restore Time",
         "DownloadStreambox": "Download Streambox",
         "Datamodified": "Data modified"
+    },
+    "Menu" : {
+        "Inbox" : "Inbox",
+        "Streambox" : "Stream box",
+        "WorkFlow" : "Work Flow",
+        "AccountSettings" : "Account Settings",
+        "Arabic" : "Arabic",
+        "MyProfile" : "My Profile",
+        "Accountsettingsandmore" : "Account settings and more",
+        "Announcements" : "Announcement(s)",
+        "ViewAnnouncements" : "View Announcements",
+        "ChangePassword" : "Change Password",
+        "ManagePassword" : "Manage Password",
+        "UserPolicy" : "User Policy",
+        "Listofpolicy" : "List of policy",
+        "SignOut" :"Sign Out"
     }
 }

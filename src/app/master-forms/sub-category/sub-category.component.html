@@ -12,7 +12,7 @@
                         </div>
                         <!-- <h4 class="mb-0">{{ "Masterform.SubCategory" | translate }} </h4> -->
                         <button type="button" class="btn btn-info" (click)="open_addcategory_modal()">
-                            Add Category
+                            {{ "Masterform.AddCategory" | translate }}
                           </button>   
                     </div>
                 </div>
@@ -237,23 +237,24 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content" style="    border-radius: 14px;">
         <div class="modal-header border-0">
-          <h5 class="modal-title" id="addcategoryModalLabel">Add Category</h5>
+          <h5 class="modal-title" id="addcategoryModalLabel">
+            {{ "Masterform.AddCategory" | translate }}</h5>
         </div>
         <div class="modal-body">
           <div class="">
             <div>
-                <input type="text" class="form-control" [(ngModel)]="AddCategory"  placeholder="Add Category Name">
+                <input type="text" class="form-control" [(ngModel)]="AddCategory"  [placeholder]="AddCategoryName">
             </div>
         <div class="kt-error" *ngIf="AddCategoryerrormessage && !AddCategory">
             <span class="kt-error-msg">
-                Enter Category Name </span>
+                {{"Masterform.EnterCategoryName" | translate }} </span>
         </div>
   
         </div>
         </div>
         <div class="modal-footer  border-0">
-          <button type="button" class="btn btn-secondary" (click)="close_addcategory_modal()">Close</button>
-          <button  type="submit" (click)="AddCategorys()" class="btn btn-info">Add Category</button>
+          <button type="button" class="btn btn-secondary" (click)="close_addcategory_modal()">{{ "Masterform.Close" | translate }}</button>
+          <button  type="submit" (click)="AddCategorys()" class="btn btn-info">{{ "Masterform.AddCategory" | translate }}</button>
         </div>
       </div>
     </div>

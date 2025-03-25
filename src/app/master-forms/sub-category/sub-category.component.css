@@ -161,3 +161,7 @@ i.fa.fa-folder-open {
         transform: none;
     }
 }
+
+::ng-deep .kt-body-arabic .kt-error-msg{
+    text-align: justify;
+}
