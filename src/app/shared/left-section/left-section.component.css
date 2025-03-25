@@ -378,7 +378,7 @@ svg.toggle-arrow-svg {
 }
 
 
-.kt-menu__link-icon.mobile {
+.kt-menu__link-icon.mobile,.kt-menu__link-icon.ar-mobile {
     display: none !important;
 }
 
@@ -447,4 +447,14 @@ svg.toggle-arrow-svg {
         right: 249px !important;
         left: unset !important;
     } 
+    ::ng-deep .kt-body-arabic .kt-aside-menu .kt-menu__nav>.kt-menu__item>.kt-menu__link .kt-menu__link-icon {
+        align-items: flex-end;
+        justify-content: flex-end;
+    }
+    ::ng-deep .kt-body-arabic .kt-menu__link-icon.mobile {
+        display: none !important;
+    }
+    ::ng-deep .kt-body-arabic .kt-menu__link-icon.ar-mobile {
+        display: block !important;
+    }
 }
