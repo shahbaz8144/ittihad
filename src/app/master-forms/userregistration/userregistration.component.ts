@@ -634,7 +634,7 @@ export class UserregistrationComponent implements OnInit {
   EmployeeIdErrorlog: boolean = false;
   ReportingUserErrorlog: boolean = false;
   OnCreate() {
-    debugger
+    
     let hasError = false;
 
 if (this.Position === undefined || this.Position === null) {
