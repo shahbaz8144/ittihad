@@ -887,7 +887,8 @@
         "EmployeeIdErrorlogMessage" : "أدخل معرف الموظف",
         "ReportingUserErrorlogMessage" : "حدد الإبلاغ عن المستخدم",
         "AddUserPersonalDetails" : "إضافة التفاصيل الشخصية للمستخدم",
-        "AssignRoleposition" : "تعيين منصب الدور"
+        "AssignRoleposition" : "تعيين منصب الدور",
+        "EnterCategoryName" : "أدخل اسم الفئة"
     },
     "Archive": {
         "Archive": "أرشيف",
@@ -937,5 +938,21 @@
         "RestoreTime": "استعادة الوقت",
         "DownloadStreambox": "تحميل ستريم بوكس",
         "Datamodified": "تم تعديل البيانات"
+    },
+    "Menu" : {
+        "Inbox" : "التواصل",
+        "Streambox" : "صندوق البث",
+        "WorkFlow" : "سير العمل",
+        "AccountSettings" : "إعدادات الحساب",
+        "Arabic" : "العربية",
+        "MyProfile" : "ملفي الشخصي",
+        "Accountsettingsandmore" : "إعدادات الحساب والمزيد",
+        "Announcements" : "الإعلانات",
+        "ViewAnnouncements" : "عرض الإعلانات",
+        "ChangePassword" : "تغيير كلمة المرور",
+        "ManagePassword" : "إدارة كلمة المرور",
+        "UserPolicy" : "سياسة المستخدم",
+        "Listofpolicy" : "قائمة السياسات",
+        "SignOut" :"تسجيل الخروج"
     }
 }

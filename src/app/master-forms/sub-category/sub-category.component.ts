@@ -26,6 +26,7 @@ export class SubCategoryComponent implements OnInit {
   _obj:SubcategoriesDTO;
   txtSearch: string;
   currentLang:"ar"|"en"="ar";
+  AddCategoryName:string = "";
   private currentUserSubject: BehaviorSubject<UserDTO>;
   public currentUser: Observable<UserDTO>;
   public get currentUserValue(): UserDTO {
@@ -47,6 +48,7 @@ constructor(private subCategoryService: SubcategoriesService
       this.translate.use(lang);
       this.currentLang = lang ? lang : 'en';
     this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+    this.AddCategoryName = lang === 'en' ? 'Add Category Name' : 'أضف اسم الفئة';
     if(lang == 'ar'){
       this.renderer.addClass(document.body, 'kt-body-arabic');
     }else if (lang == 'en'){
@@ -59,6 +61,7 @@ ngOnInit(){
   this.translate.use(lang);
     this.currentLang = lang ? lang : 'en';
     this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+    this.AddCategoryName = lang === 'en' ? 'Add Category Name' : 'أضف اسم الفئة';
     if(lang == 'ar'){
       this.renderer.addClass(document.body, 'kt-body-arabic');
     }else if (lang == 'en'){
@@ -231,6 +234,7 @@ open_addcategory_modal() {
 }
 
 close_addcategory_modal() {
+  this.AddCategoryerrormessage = false;
   document.getElementById("addcategory-modal-backdrop").style.display = "none";
   document.getElementById("addcategoryModal").style.display = "none";
 }
