@@ -10776,3 +10776,29 @@ ol {
     text-overflow: ellipsis;
     margin-right: 0.5rem;
 }
+@media only screen and (max-width: 768px) {
+    ::ng-deep .scroll-chat {
+        height: 100%!important;
+    }
+    .memo-flex-wrap{
+        flex-wrap: wrap;
+    }
+    .memo-flex-wrap-reverse{
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+    .memo-tool-bar{
+        background-color: #f5f5f5;
+        padding: 10px 0px !important;
+    }
+    .memo-align-end{
+        align-items: end!important;
+    }
+    #light1.white_content {
+        top: 10px;
+        left: 10px;
+        width: 95%;
+    }
+}
+

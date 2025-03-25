@@ -609,6 +609,7 @@ export class UserregistrationComponent implements OnInit {
             horizontalPosition: 'right',
             panelClass: ['red-snackbar']
           });
+          this.LoginIDErrorlog = true;
           this.login = "";
         }
       })

@@ -7,18 +7,18 @@
         </div>
         <!-- <h4 class="mb-3 pro-nm"> {{ "Administration.Quotes" | translate }} </h4> -->
         <div class="card mb-3">
-            <div class="card-body">
+            <div class="card-body p-2">
                 <div>
-                    <h6 class="font-13 pl-2 ml-1">{{ "Administration.Quotes" | translate }}</h6>
-                    <div class="d-flex align-items-center col-md-6 col-lg-4 gap-3">
+                    <!-- <h6 class="font-13 pl-2 ml-1">{{ "Administration.Quotes" | translate }}</h6> -->
+                    <div class="d-flex align-items-center col-md-12 gap-3 p-0">
                         <div class="flex-1">
                             <input type="text" id="" [(ngModel)]="Quotes" name="quotes" [placeholder]="EnterQuote"
                                 class="form-control cust-form">
                         </div>
-                        <div class="">
+                        <div class="d-flex">
                             <a [class.disabled]="!Quotes" *ngIf='!isShow' class="btn btn-info btn-sm waves-effect waves-light mr-2 text-white"
                             (click)="AddQuotes()">{{ "Administration.Submit" | translate }}</a>
-                            <a type="submit" *ngIf='isShow' class="btn btn-sm btn-info px-3 mt-2 mr-2"
+                            <a type="submit" *ngIf='isShow' class="btn btn-sm btn-info px-3 mr-2"
                             (click)="AddQuotes()">{{ "Administration.Update" | translate }}</a>
                             <a class="btn btn-secondary btn-sm waves-effect waves-light" (click)="onclear()">{{ "Administration.Cancel" | translate }}</a>
                         </div>

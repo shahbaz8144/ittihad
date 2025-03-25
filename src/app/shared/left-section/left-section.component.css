@@ -435,4 +435,16 @@ svg.toggle-arrow-svg {
         top: auto !important;
         left: auto !important;
     }
+    ::ng-deep .kt-body-arabic .kt-aside {
+        left: unset !important;
+        right: -295px !important;
+    }
+    ::ng-deep .kt-body-arabic .kt-aside.kt-aside--on {
+        left: auto !important;
+        right: 0 !important;
+    }
+    ::ng-deep .kt-body-arabic.kt-aside--on .kt-aside-close {
+        right: 249px !important;
+        left: unset !important;
+    } 
 }

@@ -1956,3 +1956,59 @@ div#div_filters2 {
     border-radius: 4px;
     font-size: 13px;
 }
+
+/*=========== Mobile resposnvie =============*/
+
+@media only screen and (max-width: 560px) {
+
+    .fltrs-dropdown {
+        left: 10px !important;
+        right: 10px !important;
+        top: 54px !important;
+    }
+
+    .filter-border-right {
+        border-right: 0px solid #cccccc4f;
+        margin-bottom: 6px;
+    }
+
+    .datdiv {
+        margin-bottom: 6px !important;
+    }
+    /* .kt-inbox__details {
+        overflow: unset;
+    } */
+    .kt-media-group {
+        width: auto;
+        margin-right: 0px;
+    }
+    .to-memo-scroll{
+        max-height: calc(100vh - 250px);
+    }
+    .kt-inbox .kt-inbox__toolbar .kt-inbox__actions {
+        margin: 0px 0px!important;
+    }
+    .kt-inbox .kt-inbox__toolbar.kt-inbox__toolbar--extended .kt-inbox__actions {
+        margin-bottom: 0px!important;
+    }
+    .kt-inbox .kt-inbox__toolbar .kt-inbox__search {
+        margin: 0px 0px!important;
+    }
+    .kt-filterdetails {
+        margin-top: 0px;
+    }
+    .kt-pin-v {
+        padding: 0px;
+        width: auto;
+    }
+    .kt-checkbox {
+        padding-left: 0px;
+        margin-right: 0px !important;
+    }
+    ::ng-deep .kt-inbox .kt-inbox__toolbar {
+        flex-wrap: nowrap!important;
+    }
+    ::ng-deep .kt-inbox .kt-inbox__list .kt-inbox__items .kt-inbox__item .kt-inbox__info .kt-inbox__actions {
+        gap: 6px;
+    }
+}

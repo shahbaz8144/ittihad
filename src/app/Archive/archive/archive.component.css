@@ -2841,7 +2841,9 @@ ul.schedule-select-user-list li .slect-close svg {
     right: auto !important;
     left: 12px !important;
 }
-
+.uparc-portlet{
+    min-height: calc(100vh - 80px);
+}
 
 /*============ mobile responsive ===============*/
 
@@ -2857,6 +2859,22 @@ ul.schedule-select-user-list li .slect-close svg {
     }
     button.btn.btn-info.mr-2 {
         padding: 6px;
+    }
+    .checkbox.checkbox-outline > span {
+        min-width: 18px;
+    }
+    .form-label-svg svg {
+        min-width: 20px;
+    }
+    .main-input-upload .drag-browse {
+        font-size: 14px;
+    }
+    .uparc-portlet{
+        min-height: 100%;
+        margin-bottom: 0px!important;
+    }
+    .kt-archive-upload-scroll {
+        height: calc(100vh - 230px);
     }
 }
 

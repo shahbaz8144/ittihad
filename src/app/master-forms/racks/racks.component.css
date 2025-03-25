@@ -139,3 +139,8 @@ td.desc:hover {
     background-repeat: no-repeat;
     background-position: 12px 48%;
 }
+@media Screen and (max-width: 768px) {
+    .m-w-50 {
+        width: 100% !important;
+    }
+}

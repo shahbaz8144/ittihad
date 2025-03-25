@@ -21,9 +21,9 @@
                                     </a>
                                 </ng-container>
                             </div>
-                            <div class="col-md-8 col-xl-9 p-0">
-                                <div id="act-hdn" class="kt-inbox__controls px-3 m-0 bg-white">
-                                    <div class="d-flex flex-grow-1 align-items-center">
+                            <div class="col-md-8 col-xl-9 p-0 memo-tool-bar">
+                                <div id="act-hdn" class="kt-inbox__controls px-3 m-0 bg-white memo-align-end">
+                                    <div class="d-flex flex-grow-1 align-items-center memo-flex-wrap">
                                         <ng-container *ngIf="isEP == true">
                                             <a (click)="ViewEPDiv(this._MemoId)" class="kt-inbox__icon" id="ExecutionPlanner">
                                                 <img src="assets/icons/Ep_Logo.png" height="29" />
@@ -1921,7 +1921,7 @@
                                             <!-- <div class="forward" *ngIf="detail.IsForward==true">Forwarded</div> -->
                                             <div class="kt-chat__head mt-1">
                                                 <div class="kt-chat__label flex-grow-1">
-                                                    <div class="d-flex-center">
+                                                    <div class="d-flex-center memo-flex-wrap-reverse">
                                                         <span class="flex-1 user-detail dropdown">
                                                             <span class="kt-chat__title fs-4 user-detail-open "
                                                                 data-toggle="dropdown" aria-haspopup="true"
@@ -1965,9 +1965,10 @@
                                                                             <div class="user-i-label">Designation
                                                                             </div>
                                                                             <div class="user-i-form">
-                                                                               {{detail.SentUserDesignation}} </div>
+                                                                                DesignationName/DepartmentName</div>
                                                                         </div>
                                                                     </div>
+
                                                                     <div class="user-i">
                                                                         <div class="user-i-icon">
                                                                             <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1993,7 +1994,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="user-i">
+                                                                    <div class="user-i d-none">
                                                                         <div class="user-i-icon">
                                                                             <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                                     <g id="SVGRepo_bgCarrier"
@@ -2005,21 +2006,21 @@
                                                                                         <path
                                                                                             d="M12.1303 13C13.8203 13 15.1903 11.63 15.1903 9.94C15.1903 8.25001 13.8203 6.88 12.1303 6.88C10.4403 6.88 9.07031 8.25001 9.07031 9.94C9.07031 11.63 10.4403 13 12.1303 13Z"
                                                                                             stroke="currentColor"
-                                                                                            stroke-width="1.5"
+                                                                                            stroke-width="2"
                                                                                             stroke-linecap="round"
                                                                                             stroke-linejoin="round">
                                                                                         </path>
                                                                                         <path
                                                                                             d="M17 3H7C4.79086 3 3 4.79086 3 7V17C3 19.2091 4.79086 21 7 21H17C19.2091 21 21 19.2091 21 17V7C21 4.79086 19.2091 3 17 3Z"
                                                                                             stroke="currentColor"
-                                                                                            stroke-width="1.5"
+                                                                                            stroke-width="2"
                                                                                             stroke-linecap="round"
                                                                                             stroke-linejoin="round">
                                                                                         </path>
                                                                                         <path
                                                                                             d="M6.30969 20.52C6.27753 19.7534 6.40079 18.9882 6.67199 18.2704C6.94319 17.5526 7.35674 16.8971 7.88781 16.3433C8.41888 15.7894 9.05649 15.3488 9.76226 15.0477C10.468 14.7467 11.2274 14.5916 11.9947 14.5916C12.762 14.5916 13.5214 14.7467 14.2272 15.0477C14.9329 15.3488 15.5705 15.7894 16.1016 16.3433C16.6326 16.8971 17.0462 17.5526 17.3174 18.2704C17.5886 18.9882 17.7118 19.7534 17.6797 20.52"
                                                                                             stroke="currentColor"
-                                                                                            stroke-width="1.5"
+                                                                                            stroke-width="2"
                                                                                             stroke-linecap="round"
                                                                                             stroke-linejoin="round">
                                                                                         </path>
@@ -2074,524 +2075,526 @@
                                                             </div>
                                                         </div>
                                                         </span>
-                                                        <div class="d-flex justify-content-end mr-2" *ngIf="_IsExists == true && _UserActionIsActive == true">
-                                                            <ng-container *ngIf="AddUserReplyAdmin">
-                                                                <a id="AddUserhover" class="kt-detail-link" (click)="AddUsersInReply()">
-                                                                    <svg viewBox="0 0 16 16" fill="#181816" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z">
-                                                                        </path>
-                                                                    </svg>
-                                                                    <span class="kt-detail-iconname">Add user</span>
-                                                                </a>
-                                                            </ng-container>
-                                                            <a class="kt-detail-link user-msg-alert" id="Share">
-                                                                <div class="dropdown-share" data-toggle="dropdown" (click)="shareoptionModal()">
-                                                                    <svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                                                        <g id="SVGRepo_tracerCarrier"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round"></g>
-                                                                        <g id="SVGRepo_iconCarrier">
+                                                        <div class="d-flex justify-content-end memo-flex-wrap">
+                                                            <div class="d-flex justify-content-end mr-2" *ngIf="_IsExists == true && _UserActionIsActive == true">
+                                                                <ng-container *ngIf="AddUserReplyAdmin">
+                                                                    <a id="AddUserhover" class="kt-detail-link" (click)="AddUsersInReply()">
+                                                                        <svg viewBox="0 0 16 16" fill="#181816" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
                                                                             <path
-                                                                                d="M9 12C9 13.3807 7.88071 14.5 6.5 14.5C5.11929 14.5 4 13.3807 4 12C4 10.6193 5.11929 9.5 6.5 9.5C7.88071 9.5 9 10.6193 9 12Z"
-                                                                                stroke="currentColor"
-                                                                                stroke-width="1.5"></path>
-                                                                            <path d="M14 6.5L9 10" stroke="currentColor"
-                                                                                stroke-width="1.5"
-                                                                                stroke-linecap="round"></path>
-                                                                            <path d="M14 17.5L9 14"
-                                                                                stroke="currentColor" stroke-width="1.5"
-                                                                                stroke-linecap="round"></path>
-                                                                            <path
-                                                                                d="M19 18.5C19 19.8807 17.8807 21 16.5 21C15.1193 21 14 19.8807 14 18.5C14 17.1193 15.1193 16 16.5 16C17.8807 16 19 17.1193 19 18.5Z"
-                                                                                stroke="currentColor"
-                                                                                stroke-width="1.5"></path>
-                                                                            <path
-                                                                                d="M19 5.5C19 6.88071 17.8807 8 16.5 8C15.1193 8 14 6.88071 14 5.5C14 4.11929 15.1193 3 16.5 3C17.8807 3 19 4.11929 19 5.5Z"
-                                                                                stroke="currentColor"
-                                                                                stroke-width="1.5"></path>
-                                                                        </g>
-                                                                    </svg>
-                                                                    <span class="kt-detail-iconname">Share</span>
-                                                                    <div class="dropdown-menu dropdown-menu-fit copy-link-menu d-none">
-                                                                        <div class="copy-link">
-                                                                            <span class="copy-link-icon" title="Copy link">
-                                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                    viewBox="0 0 1024 1024"
-                                                                                    version="1.1">
-                                                                                    <path
-                                                                                        d="M949.4 195.15l-1.26-1.1c-82.44-82.46-216.6-82.44-299.06 0l-39.89 39.9c-16.66 16.67-16.66 43.68 0.01 60.34 16.67 16.65 43.68 16.66 60.34-0.01l39.88-39.89c49.19-49.18 129.21-49.18 179.69 1.24l1.26 1.1c23.72 23.73 36.78 55.44 36.78 89.3s-13.06 65.57-36.78 89.29L676.6 649.08c-49.19 49.19-129.2 49.17-178.45-0.06l-2.49-2.49c-49.24-49.24-49.24-129.36-0.33-178.28l9.81-9.6c16.84-16.48 17.14-43.49 0.65-60.33-16.47-16.83-43.49-17.11-60.33-0.65l-10.15 9.93c-82.49 82.51-82.49 216.76 0.07 299.33l2.5 2.49c41.22 41.23 95.38 61.84 149.52 61.84 54.16 0 108.31-20.61 149.53-61.84L950.7 495.67c39.84-39.83 61.78-92.98 61.78-149.64s-21.94-109.8-63.08-150.88z"
-                                                                                        fill="#2F3CF4" />
-                                                                                    <path
-                                                                                        d="M354.48 729.79l-39.9 39.9c-23.73 23.72-55.4 36.78-89.2 36.78-33.79 0-65.47-13.06-90.56-38.09l-1.19-1.03c-49.24-49.24-49.24-129.36 0-178.6L347.4 374.98c49.2-49.17 129.21-49.17 178.39 0l2.56 2.56c23.72 23.73 36.78 55.44 36.78 89.3s-13.06 65.57-36.46 88.97l-9.81 9.6c-16.84 16.48-17.14 43.49-0.65 60.33 16.49 16.86 43.51 17.14 60.33 0.65l10.14-9.92c39.84-39.83 61.78-92.98 61.78-149.64s-21.94-109.8-61.78-149.64l-2.56-2.56c-82.45-82.47-216.62-82.45-299.05 0L73.3 528.41c-82.51 82.51-82.51 216.76 1.38 300.58l1.18 1.03c39.83 39.84 92.94 61.78 149.53 61.78s109.7-21.94 149.53-61.78l39.9-39.9c16.67-16.66 16.67-43.68 0-60.33-16.65-16.67-43.7-16.67-60.34 0z"
-                                                                                        fill="#2F3CF4" />
-                                                                                </svg>
-                                                                            </span>
-                                                                            <span class="copy-link-label">Copy
-                                                                                link</span>
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- <div *ngIf="showPopup" class="user-msg-alert-body user-msg-open d-none">
-                                                                    <p class="user-msg-alert-title">Share now!</p>
-                                                                    <p class="user-msg-alert-content">
-                                                                        You can now share this memo with the user.</p>
-                                                                    <div class="user-msg-alert-close-btn">Got it!</div>
-                                                                </div> -->
-                                                            </a>
-                                                            <!-- <a class="kt-detail-link unread-div" id="MemoStatuss">
-                                                                <span class="unread-div-inner" >
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1.2em;height: 1.2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1"><path d="M974.507 201.387A85.333 85.333 0 0 0 896 149.333H128a85.333 85.333 0 0 0-85.333 85.334v554.666A85.333 85.333 0 0 0 128 874.667h768a85.333 85.333 0 0 0 85.333-85.334V234.667a85.333 85.333 0 0 0-6.826-33.28z m-102.4 11.946l-352.64 352.64a10.667 10.667 0 0 1-15.147 0l-352.427-352.64z m45.226 576A21.333 21.333 0 0 1 896 810.667H128a21.333 21.333 0 0 1-21.333-21.334V258.56l352.64 352.64a74.667 74.667 0 0 0 105.6 0l352.426-352.64z"/></svg>
-                                                                </span>
-                                                                </a>
-                                                                <a class="kt-detail-link unread-div" id="MemoStatuss">
-                                                                        <span class="unread-div-inner" >
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
-                                                                            role="img" font-size="1.5rem" class="iconify iconify--mdi" width="1em" height="1em"
-                                                                            viewBox="0 0 24 24">
-                                                                            <path fill="currentColor"
-                                                                                d="M21.03 6.29L12 .64L2.97 6.29C2.39 6.64 2 7.27 2 8v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-.73-.39-1.36-.97-1.71M20 18H4v-8l8 5l8-5v8m-8-5L4 8l8-5l8 5l-8 5Z">
+                                                                                d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z">
                                                                             </path>
                                                                         </svg>
-                                                                        </span>
-                                                                        </a> -->
-                                                            <!-- <a class="kt-detail-link unread-div" id="MemoStatuss" href="javascript:void(0)">
-                                                            <span class="unread-div-inner" onclick="document.getElementById('readunread').style.display='block';document.getElementById('fade').style.display='block'">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1.2em;height: 1.2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1"><path d="M974.507 201.387A85.333 85.333 0 0 0 896 149.333H128a85.333 85.333 0 0 0-85.333 85.334v554.666A85.333 85.333 0 0 0 128 874.667h768a85.333 85.333 0 0 0 85.333-85.334V234.667a85.333 85.333 0 0 0-6.826-33.28z m-102.4 11.946l-352.64 352.64a10.667 10.667 0 0 1-15.147 0l-352.427-352.64z m45.226 576A21.333 21.333 0 0 1 896 810.667H128a21.333 21.333 0 0 1-21.333-21.334V258.56l352.64 352.64a74.667 74.667 0 0 0 105.6 0l352.426-352.64z"/></svg>
-                                                            </span>
-
-                                                            <div id="readunread" class="Read_Unread_content Read_Unread_content-open">
-                                                                <ul class="kt-nav p-0">
-                                                                    <li class="">
-                                                                        {{ "Memodeatils.unreadbotton" | translate }}
-                                                                        <a class="fa fa-times read-unread-cancel-btn" href="javascript:void(0)"
-                                                                            onclick="document.getElementById('readunread').style.display='none';document.getElementById('fade').style.display='none'"></a>
-                                                                    </li>
-                                                                    <li class="kt-nav__foot p-0 pt-3">
-                                                                        <a (click)="gotoMemoDetailsV2('/Memo/Details',NextMemoId,NextReplyId)"
-                                                                            class="btn btn-label-success btn-bold btn-sm" data-toggle="kt-tooltip"
-                                                                            title="Unread & Move to next memo">
-                                                                            {{ "Memodeatils.ureadyesandnext" | translate }}
-                                                                        </a>
-                                                                        <a (click)="UnReadMemo(this._ReplyId)" class="btn btn-label-primary btn-bold btn-sm"
-                                                                            data-toggle="kt-tooltip" title="Unread & Close Window">
-                                                                            {{ "Memodeatils.YesandClose" | translate }}
-                                                                        </a>
-                                                                        <a class="btn btn-label-danger btn-bold btn-sm" data-toggle="kt-tooltip" title="Cancel"
-                                                                            href="javascript:void(0)"
-                                                                            onclick="document.getElementById('readunread').style.display='none';document.getElementById('fade').style.display='none'">
-                                                                            {{ "Memodeatils.NoandCancel" | translate }}
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </a> -->
-                                                            <a class="kt-detail-link" (click)="Bookmark()" *ngIf="this._Bookmark == false" id="Bookmark">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1em;height: 1em;vertical-align: middle;fill: #03347c;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
-                                                                    <path
-                                                                        d="M804.571 146.286H219.43V855.99L512 575.415l50.834 48.567L804.571 855.99V146.286z m6.876-73.143q13.166 0 25.161 5.12 18.87 7.46 29.989 23.406t11.117 35.4v736.55q0 19.455-11.117 35.4t-29.989 23.406q-10.825 4.535-25.161 4.535-27.429 0-47.397-18.286L512.073 676.352 260.096 918.674q-20.553 18.871-47.397 18.871-13.165 0-25.16-5.12-18.872-7.46-29.99-23.406t-11.117-35.4v-736.55q0-19.455 11.118-35.4t29.988-23.406q11.996-5.12 25.161-5.12H811.52z">
-                                                                    </path>
-                                                                </svg>
-                                                                <span class="kt-detail-iconname">{{'Memodeatils.bookmark'
-                                                                    | translate }}</span>
-                                                            </a>
-                                                            <a class="kt-detail-link" (click)="Bookmark()" *ngIf="this._Bookmark == true" id="Bookmark">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1em; height: 1em;vertical-align: middle;fill: #03347c;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
-                                                                    <path
-                                                                        d="M758.560512 68.191078 265.439488 68.191078c-54.490032 0-98.130971 44.134173-98.130971 98.624205l-0.493234 788.993638L512 807.872614l345.184717 147.936307L857.184717 166.815283C857.184717 112.325251 813.04952 68.191078 758.560512 68.191078z" />
-                                                                </svg>
-                                                                <span class="kt-detail-iconname">{{'Memodeatils.bookmark'
-                                                                    | translate }}</span>
-                                                            </a>
-
-                                                        </div>
-                                                        <div class="d-flex justify-content-end mr-2" *ngIf="_IsExists == true && _UserActionIsActive == true">
-                                                            <a (click)="ViewReplyDiv_Updated(this._MemoId,2)" class="kt-detail-link" id="Reply">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1em;height: 1em;vertical-align: middle;fill: #a846b2;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
-                                                                    <path
-                                                                        d="M356.6592 154.99264q17.32608 0 30.0032 12.4928t12.67712 30.16704-12.67712 30.33088l-198.67648 198.67648 409.33376 0q78.00832 0 149.17632 30.33088t122.49088 81.83808 81.83808 122.49088 30.49472 149.34016l0 42.65984q0 17.67424-12.4928 30.16704t-30.16704 12.4928q-17.32608 0-30.0032-12.67712t-12.67712-30.0032l0-42.65984q0-60.66176-23.67488-115.99872t-63.67232-95.3344-95.3344-63.67232-115.99872-23.67488l-409.33376 0 198.67648 199.00416q12.67712 12.67712 12.67712 30.0032 0 17.67424-12.4928 30.33088t-30.16704 12.67712-30.33088-12.67712l-271.33952-271.6672q-12.32896-12.32896-12.32896-30.33088 0-17.67424 12.32896-30.0032l271.33952-271.6672q12.67712-12.67712 30.33088-12.67712z">
-                                                                    </path>
-                                                                </svg>
-                                                                <span class="kt-detail-iconname">{{ 'Memodeatils.reply'|
-                                                                    translate }}</span>
-                                                            </a>
-                                                            <a class="kt-detail-link" (click)="ViewReplyDiv_Updated(this._MemoId,1)" id="ReplyAll">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1em;height: 1em;vertical-align: middle;fill: #a846b2;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
-                                                                    <path
-                                                                        d="M444.330667 512l183.168 183.168-60.330667 60.330667L281.002667 469.333333l286.165333-286.165333 60.330667 60.330667L444.330667 426.666667H469.333333c335.744 0 469.333333 138.922667 469.333334 469.333333h-85.333334c0-283.989333-96.170667-384-384-384h-25.002666z m-30.165334 183.168l-60.330666 60.330667L67.669333 469.333333l286.165334-286.165333 60.330666 60.330667L188.330667 469.333333l225.834666 225.834667z">
-                                                                    </path>
-                                                                </svg>
-                                                                <span class="kt-detail-iconname">{{
-                                                                    'Memodeatils.replyAll' | translate }}</span>
-                                                            </a>
-
-                                                            <a [ngClass]="{'kt-detail-link': true, 'disabled-link': IsConfidential}" (click)="!IsConfidential && ViewReplyDiv_Updated(this._MemoId, 3)" id="Forward">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="transform: scaleX(-1);width: 1em;height: 1em;vertical-align: middle;fill: #a846b2;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
-                                                                    <path
-                                                                        d="M356.6592 154.99264q17.32608 0 30.0032 12.4928t12.67712 30.16704-12.67712 30.33088l-198.67648 198.67648 409.33376 0q78.00832 0 149.17632 30.33088t122.49088 81.83808 81.83808 122.49088 30.49472 149.34016l0 42.65984q0 17.67424-12.4928 30.16704t-30.16704 12.4928q-17.32608 0-30.0032-12.67712t-12.67712-30.0032l0-42.65984q0-60.66176-23.67488-115.99872t-63.67232-95.3344-95.3344-63.67232-115.99872-23.67488l-409.33376 0 198.67648 199.00416q12.67712 12.67712 12.67712 30.0032 0 17.67424-12.4928 30.33088t-30.16704 12.67712-30.33088-12.67712l-271.33952-271.6672q-12.32896-12.32896-12.32896-30.33088 0-17.67424 12.32896-30.0032l271.33952-271.6672q12.67712-12.67712 30.33088-12.67712z">
-                                                                    </path>
-                                                                </svg>
-                                                                <span class="kt-detail-iconname">{{
-                                                                    'Memodeatils.forward' | translate }}</span>
-                                                            </a>
-                                                            <a class="kt-detail-link user-msg-alert">
-                                                                <div (click)="ViewReplyDiv_Updated(this._MemoId,5)" id="NewTopic">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1.2em;height: 1.2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
-                                                                        <path
-                                                                            d="M938.666667 256a170.666667 170.666667 0 0 0-170.666667-170.666667H256a170.666667 170.666667 0 0 0-170.666667 170.666667v661.333333a21.333333 21.333333 0 0 0 21.333334 21.333334 20.906667 20.906667 0 0 0 14.933333-6.4l128-128A128 128 0 0 1 341.333333 768h426.666667a170.666667 170.666667 0 0 0 170.666667-170.666667z m-170.666667 426.666667H341.333333a213.333333 213.333333 0 0 0-151.04 62.293333l-19.626666 17.92V256a85.333333 85.333333 0 0 1 85.333333-85.333333h512a85.333333 85.333333 0 0 1 85.333333 85.333333v341.333333a85.333333 85.333333 0 0 1-85.333333 85.333334z m-405.333333-213.333334H469.333333v106.666667a21.333333 21.333333 0 0 0 21.333334 21.333333h42.666666a21.333333 21.333333 0 0 0 21.333334-21.333333V469.333333h106.666666a21.333333 21.333333 0 0 0 21.333334-21.333333v-42.666667a21.333333 21.333333 0 0 0-21.333334-21.333333H554.666667V277.333333a21.333333 21.333333 0 0 0-21.333334-21.333333h-42.666666a21.333333 21.333333 0 0 0-21.333334 21.333333V384H362.666667a21.333333 21.333333 0 0 0-21.333334 21.333333v42.666667a21.333333 21.333333 0 0 0 21.333334 21.333333z">
-                                                                        </path>
-                                                                    </svg>
-                                                                    <span class="kt-detail-iconname">{{
-                                                                        'Memodeatils.NewTopic' | translate }}</span>
-                                                                </div>
-                                                                <div *ngIf="showPopup" class="user-msg-alert-body user-msg-open user-msg-newtopic">
-                                                                    <p class="user-msg-alert-title">New Topic! </p>
-                                                                    <p class="user-msg-alert-content">
-                                                                        Create a new topic for this communication.</p>
-                                                                    <div class="user-msg-alert-close-btn" (click)="Gotit()">Got it!</div>
-                                                                </div>
-                                                            </a>
-                                                            <a class="kt-detail-link" id="workflow" (click)="ViewReplyDiv_Updated(this._MemoId,6)">
-                                                                <svg fill="#007fe4" width="16px" height="16px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                                                        stroke-linejoin="round"></g>
-                                                                    <g id="SVGRepo_iconCarrier">
-                                                                        <path fill-rule="evenodd"
-                                                                            d="M1 3a2 2 0 012-2h6.5a2 2 0 012 2v6.5a2 2 0 01-2 2H7v4.063C7 16.355 7.644 17 8.438 17H12.5v-2.5a2 2 0 012-2H21a2 2 0 012 2V21a2 2 0 01-2 2h-6.5a2 2 0 01-2-2v-2.5H8.437A2.938 2.938 0 015.5 15.562V11.5H3a2 2 0 01-2-2V3zm2-.5a.5.5 0 00-.5.5v6.5a.5.5 0 00.5.5h6.5a.5.5 0 00.5-.5V3a.5.5 0 00-.5-.5H3zM14.5 14a.5.5 0 00-.5.5V21a.5.5 0 00.5.5H21a.5.5 0 00.5-.5v-6.5a.5.5 0 00-.5-.5h-6.5z">
-                                                                        </path>
-                                                                    </g>
-                                                                </svg>
-                                                                <span class="kt-detail-iconname">Workflow</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="d-flex justify-content-end mr-2" *ngIf="_IsExists == true && _UserActionIsActive == true">
-                                                            <ng-container *ngIf="detail.ApprovalStatus=='Pending'">
-                                                                <a class="kt-detail-link dropdown-toggle no-after" id="rjt-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="Reject">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1em;height: 1em;vertical-align: middle;fill: #c90013;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
-                                                                        <path
-                                                                            d="M174.08 940.8a32 32 0 0 1-22.4-54.4l704-704a32 32 0 0 1 45.44 0 32 32 0 0 1 0 44.8l-704 704a32.64 32.64 0 0 1-23.04 9.6z">
-                                                                        </path>
-                                                                        <path
-                                                                            d="M878.08 940.8a31.36 31.36 0 0 1-22.4-9.6l-704-704a30.72 30.72 0 0 1 0-44.8 32 32 0 0 1 45.44 0l704 704a32 32 0 0 1 0 44.8 32.64 32.64 0 0 1-23.04 9.6z">
-                                                                        </path>
-                                                                    </svg>
-                                                                    <span class="kt-detail-iconname">{{
-                                                                        'Memodeatils.reject' | translate }}</span>
-                                                                </a>
-                                                                <div class="dropdown-menu dropdown-menu-right sort-drop rjt-btn" aria-labelledby="rjt-btn">
-                                                                    <div>
-                                                                        <div class="" id="rjct-section">
-                                                                            <a (click)="UpdateApprovalStatus(_ApprovalMemoId,'Reject',_ApprovalReplyId)" class="dropdown-item">{{
-                                                                                'Memodeatils.reject' | translate
-                                                                                }}</a>
-                                                                            <a class="dropdown-item" (click)="rejectcommentsModal()" (click)="$event.stopPropagation();">{{
-                                                                                'Memodeatils.RejectwithComments' |
-                                                                                translate }}
-                                                                            </a>
+                                                                        <span class="kt-detail-iconname">Add user</span>
+                                                                    </a>
+                                                                </ng-container>
+                                                                <a class="kt-detail-link user-msg-alert" id="Share">
+                                                                    <div class="dropdown-share" data-toggle="dropdown" (click)="shareoptionModal()">
+                                                                        <svg width="1.3em" height="1.3em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                                            <g id="SVGRepo_tracerCarrier"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"></g>
+                                                                            <g id="SVGRepo_iconCarrier">
+                                                                                <path
+                                                                                    d="M9 12C9 13.3807 7.88071 14.5 6.5 14.5C5.11929 14.5 4 13.3807 4 12C4 10.6193 5.11929 9.5 6.5 9.5C7.88071 9.5 9 10.6193 9 12Z"
+                                                                                    stroke="currentColor"
+                                                                                    stroke-width="1.5"></path>
+                                                                                <path d="M14 6.5L9 10" stroke="currentColor"
+                                                                                    stroke-width="1.5"
+                                                                                    stroke-linecap="round"></path>
+                                                                                <path d="M14 17.5L9 14"
+                                                                                    stroke="currentColor" stroke-width="1.5"
+                                                                                    stroke-linecap="round"></path>
+                                                                                <path
+                                                                                    d="M19 18.5C19 19.8807 17.8807 21 16.5 21C15.1193 21 14 19.8807 14 18.5C14 17.1193 15.1193 16 16.5 16C17.8807 16 19 17.1193 19 18.5Z"
+                                                                                    stroke="currentColor"
+                                                                                    stroke-width="1.5"></path>
+                                                                                <path
+                                                                                    d="M19 5.5C19 6.88071 17.8807 8 16.5 8C15.1193 8 14 6.88071 14 5.5C14 4.11929 15.1193 3 16.5 3C17.8807 3 19 4.11929 19 5.5Z"
+                                                                                    stroke="currentColor"
+                                                                                    stroke-width="1.5"></path>
+                                                                            </g>
+                                                                        </svg>
+                                                                        <span class="kt-detail-iconname">Share</span>
+                                                                        <div class="dropdown-menu dropdown-menu-fit copy-link-menu d-none">
+                                                                            <div class="copy-link">
+                                                                                <span class="copy-link-icon" title="Copy link">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                        viewBox="0 0 1024 1024"
+                                                                                        version="1.1">
+                                                                                        <path
+                                                                                            d="M949.4 195.15l-1.26-1.1c-82.44-82.46-216.6-82.44-299.06 0l-39.89 39.9c-16.66 16.67-16.66 43.68 0.01 60.34 16.67 16.65 43.68 16.66 60.34-0.01l39.88-39.89c49.19-49.18 129.21-49.18 179.69 1.24l1.26 1.1c23.72 23.73 36.78 55.44 36.78 89.3s-13.06 65.57-36.78 89.29L676.6 649.08c-49.19 49.19-129.2 49.17-178.45-0.06l-2.49-2.49c-49.24-49.24-49.24-129.36-0.33-178.28l9.81-9.6c16.84-16.48 17.14-43.49 0.65-60.33-16.47-16.83-43.49-17.11-60.33-0.65l-10.15 9.93c-82.49 82.51-82.49 216.76 0.07 299.33l2.5 2.49c41.22 41.23 95.38 61.84 149.52 61.84 54.16 0 108.31-20.61 149.53-61.84L950.7 495.67c39.84-39.83 61.78-92.98 61.78-149.64s-21.94-109.8-63.08-150.88z"
+                                                                                            fill="#2F3CF4" />
+                                                                                        <path
+                                                                                            d="M354.48 729.79l-39.9 39.9c-23.73 23.72-55.4 36.78-89.2 36.78-33.79 0-65.47-13.06-90.56-38.09l-1.19-1.03c-49.24-49.24-49.24-129.36 0-178.6L347.4 374.98c49.2-49.17 129.21-49.17 178.39 0l2.56 2.56c23.72 23.73 36.78 55.44 36.78 89.3s-13.06 65.57-36.46 88.97l-9.81 9.6c-16.84 16.48-17.14 43.49-0.65 60.33 16.49 16.86 43.51 17.14 60.33 0.65l10.14-9.92c39.84-39.83 61.78-92.98 61.78-149.64s-21.94-109.8-61.78-149.64l-2.56-2.56c-82.45-82.47-216.62-82.45-299.05 0L73.3 528.41c-82.51 82.51-82.51 216.76 1.38 300.58l1.18 1.03c39.83 39.84 92.94 61.78 149.53 61.78s109.7-21.94 149.53-61.78l39.9-39.9c16.67-16.66 16.67-43.68 0-60.33-16.65-16.67-43.7-16.67-60.34 0z"
+                                                                                            fill="#2F3CF4" />
+                                                                                    </svg>
+                                                                                </span>
+                                                                                <span class="copy-link-label">Copy
+                                                                                    link</span>
+    
+                                                                            </div>
                                                                         </div>
-                                                                        <!-- <div class="px-3 pt-3 d-none" id="rjct-cmts">
-                                                                            <div (click)="$event.stopPropagation();">
-                                                                                <a class="sort-back pb-2" (click)="rjtcmnts()">
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                                                        <path stroke-linecap="round"
-                                                                                            stroke-linejoin="round"
-                                                                                            d="M15.75 19.5L8.25 12l7.5-7.5" />
-                                                                                    </svg> {{ 'Memodeatils.Back' | translate }}
-                                                                                </a>
-                                                                                <div class="mt-1 form-group">
-                                                                                    <label class="cus-lbl">{{
-                                                                                        'Memodeatils.Comments' |
-                                                                                        translate}}</label>
-                                                                                    <textarea name="comments" #Rejectcommentsfocus [(ngModel)]="Rejectcomments" class="form-control"></textarea>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="mt-3 mb-2">
-                                                                                <button class="btn btn-sm btn-danger" (click)="UpdateApprovalStatus(_ApprovalMemoId,'Reject',_ApprovalReplyId)">
-                                                                                    {{ 'Memodeatils.reject' |
-                                                                                    translate}} </button>
-                                                                                <button class="btn btn-sm btn-secondary ml-2" (click)="rjtcmnts()"> {{
-                                                                                    'Memodeatils.Cancel' | translate
-                                                                                    }}
-                                                                                </button>
-                                                                            </div>
-                                                                        </div> -->
                                                                     </div>
+                                                                    <!-- <div *ngIf="showPopup" class="user-msg-alert-body user-msg-open d-none">
+                                                                        <p class="user-msg-alert-title">Share now!</p>
+                                                                        <p class="user-msg-alert-content">
+                                                                            You can now share this memo with the user.</p>
+                                                                        <div class="user-msg-alert-close-btn">Got it!</div>
+                                                                    </div> -->
+                                                                </a>
+                                                                <!-- <a class="kt-detail-link unread-div" id="MemoStatuss">
+                                                                    <span class="unread-div-inner" >
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1.2em;height: 1.2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1"><path d="M974.507 201.387A85.333 85.333 0 0 0 896 149.333H128a85.333 85.333 0 0 0-85.333 85.334v554.666A85.333 85.333 0 0 0 128 874.667h768a85.333 85.333 0 0 0 85.333-85.334V234.667a85.333 85.333 0 0 0-6.826-33.28z m-102.4 11.946l-352.64 352.64a10.667 10.667 0 0 1-15.147 0l-352.427-352.64z m45.226 576A21.333 21.333 0 0 1 896 810.667H128a21.333 21.333 0 0 1-21.333-21.334V258.56l352.64 352.64a74.667 74.667 0 0 0 105.6 0l352.426-352.64z"/></svg>
+                                                                    </span>
+                                                                    </a>
+                                                                    <a class="kt-detail-link unread-div" id="MemoStatuss">
+                                                                            <span class="unread-div-inner" >
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                                                                                role="img" font-size="1.5rem" class="iconify iconify--mdi" width="1em" height="1em"
+                                                                                viewBox="0 0 24 24">
+                                                                                <path fill="currentColor"
+                                                                                    d="M21.03 6.29L12 .64L2.97 6.29C2.39 6.64 2 7.27 2 8v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-.73-.39-1.36-.97-1.71M20 18H4v-8l8 5l8-5v8m-8-5L4 8l8-5l8 5l-8 5Z">
+                                                                                </path>
+                                                                            </svg>
+                                                                            </span>
+                                                                            </a> -->
+                                                                <!-- <a class="kt-detail-link unread-div" id="MemoStatuss" href="javascript:void(0)">
+                                                                <span class="unread-div-inner" onclick="document.getElementById('readunread').style.display='block';document.getElementById('fade').style.display='block'">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1.2em;height: 1.2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1"><path d="M974.507 201.387A85.333 85.333 0 0 0 896 149.333H128a85.333 85.333 0 0 0-85.333 85.334v554.666A85.333 85.333 0 0 0 128 874.667h768a85.333 85.333 0 0 0 85.333-85.334V234.667a85.333 85.333 0 0 0-6.826-33.28z m-102.4 11.946l-352.64 352.64a10.667 10.667 0 0 1-15.147 0l-352.427-352.64z m45.226 576A21.333 21.333 0 0 1 896 810.667H128a21.333 21.333 0 0 1-21.333-21.334V258.56l352.64 352.64a74.667 74.667 0 0 0 105.6 0l352.426-352.64z"/></svg>
+                                                                </span>
+    
+                                                                <div id="readunread" class="Read_Unread_content Read_Unread_content-open">
+                                                                    <ul class="kt-nav p-0">
+                                                                        <li class="">
+                                                                            {{ "Memodeatils.unreadbotton" | translate }}
+                                                                            <a class="fa fa-times read-unread-cancel-btn" href="javascript:void(0)"
+                                                                                onclick="document.getElementById('readunread').style.display='none';document.getElementById('fade').style.display='none'"></a>
+                                                                        </li>
+                                                                        <li class="kt-nav__foot p-0 pt-3">
+                                                                            <a (click)="gotoMemoDetailsV2('/Memo/Details',NextMemoId,NextReplyId)"
+                                                                                class="btn btn-label-success btn-bold btn-sm" data-toggle="kt-tooltip"
+                                                                                title="Unread & Move to next memo">
+                                                                                {{ "Memodeatils.ureadyesandnext" | translate }}
+                                                                            </a>
+                                                                            <a (click)="UnReadMemo(this._ReplyId)" class="btn btn-label-primary btn-bold btn-sm"
+                                                                                data-toggle="kt-tooltip" title="Unread & Close Window">
+                                                                                {{ "Memodeatils.YesandClose" | translate }}
+                                                                            </a>
+                                                                            <a class="btn btn-label-danger btn-bold btn-sm" data-toggle="kt-tooltip" title="Cancel"
+                                                                                href="javascript:void(0)"
+                                                                                onclick="document.getElementById('readunread').style.display='none';document.getElementById('fade').style.display='none'">
+                                                                                {{ "Memodeatils.NoandCancel" | translate }}
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
                                                                 </div>
-                                                                <div class="dropdown">
-                                                                    <a class="kt-detail-link dropdown-toggle no-after" style="border-radius: 0px 4px 4px 0px;" id="apv-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="Approve">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1.0029296875em;height: 1em;vertical-align: middle;fill: #2786fb;overflow: hidden;" viewBox="0 0 1027 1024" version="1.1">
+                                                            </a> -->
+                                                                <a class="kt-detail-link" (click)="Bookmark()" *ngIf="this._Bookmark == false" id="Bookmark">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1em;height: 1em;vertical-align: middle;fill: #03347c;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
+                                                                        <path
+                                                                            d="M804.571 146.286H219.43V855.99L512 575.415l50.834 48.567L804.571 855.99V146.286z m6.876-73.143q13.166 0 25.161 5.12 18.87 7.46 29.989 23.406t11.117 35.4v736.55q0 19.455-11.117 35.4t-29.989 23.406q-10.825 4.535-25.161 4.535-27.429 0-47.397-18.286L512.073 676.352 260.096 918.674q-20.553 18.871-47.397 18.871-13.165 0-25.16-5.12-18.872-7.46-29.99-23.406t-11.117-35.4v-736.55q0-19.455 11.118-35.4t29.988-23.406q11.996-5.12 25.161-5.12H811.52z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    <span class="kt-detail-iconname">{{'Memodeatils.bookmark'
+                                                                        | translate }}</span>
+                                                                </a>
+                                                                <a class="kt-detail-link" (click)="Bookmark()" *ngIf="this._Bookmark == true" id="Bookmark">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1em; height: 1em;vertical-align: middle;fill: #03347c;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
+                                                                        <path
+                                                                            d="M758.560512 68.191078 265.439488 68.191078c-54.490032 0-98.130971 44.134173-98.130971 98.624205l-0.493234 788.993638L512 807.872614l345.184717 147.936307L857.184717 166.815283C857.184717 112.325251 813.04952 68.191078 758.560512 68.191078z" />
+                                                                    </svg>
+                                                                    <span class="kt-detail-iconname">{{'Memodeatils.bookmark'
+                                                                        | translate }}</span>
+                                                                </a>
+    
+                                                            </div>
+                                                            <div class="d-flex justify-content-end mr-2" *ngIf="_IsExists == true && _UserActionIsActive == true">
+                                                                <a (click)="ViewReplyDiv_Updated(this._MemoId,2)" class="kt-detail-link" id="Reply">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1em;height: 1em;vertical-align: middle;fill: #a846b2;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
+                                                                        <path
+                                                                            d="M356.6592 154.99264q17.32608 0 30.0032 12.4928t12.67712 30.16704-12.67712 30.33088l-198.67648 198.67648 409.33376 0q78.00832 0 149.17632 30.33088t122.49088 81.83808 81.83808 122.49088 30.49472 149.34016l0 42.65984q0 17.67424-12.4928 30.16704t-30.16704 12.4928q-17.32608 0-30.0032-12.67712t-12.67712-30.0032l0-42.65984q0-60.66176-23.67488-115.99872t-63.67232-95.3344-95.3344-63.67232-115.99872-23.67488l-409.33376 0 198.67648 199.00416q12.67712 12.67712 12.67712 30.0032 0 17.67424-12.4928 30.33088t-30.16704 12.67712-30.33088-12.67712l-271.33952-271.6672q-12.32896-12.32896-12.32896-30.33088 0-17.67424 12.32896-30.0032l271.33952-271.6672q12.67712-12.67712 30.33088-12.67712z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    <span class="kt-detail-iconname">{{ 'Memodeatils.reply'|
+                                                                        translate }}</span>
+                                                                </a>
+                                                                <a class="kt-detail-link" (click)="ViewReplyDiv_Updated(this._MemoId,1)" id="ReplyAll">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1em;height: 1em;vertical-align: middle;fill: #a846b2;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
+                                                                        <path
+                                                                            d="M444.330667 512l183.168 183.168-60.330667 60.330667L281.002667 469.333333l286.165333-286.165333 60.330667 60.330667L444.330667 426.666667H469.333333c335.744 0 469.333333 138.922667 469.333334 469.333333h-85.333334c0-283.989333-96.170667-384-384-384h-25.002666z m-30.165334 183.168l-60.330666 60.330667L67.669333 469.333333l286.165334-286.165333 60.330666 60.330667L188.330667 469.333333l225.834666 225.834667z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    <span class="kt-detail-iconname">{{
+                                                                        'Memodeatils.replyAll' | translate }}</span>
+                                                                </a>
+    
+                                                                <a [ngClass]="{'kt-detail-link': true, 'disabled-link': IsConfidential}" (click)="!IsConfidential && ViewReplyDiv_Updated(this._MemoId, 3)" id="Forward">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="transform: scaleX(-1);width: 1em;height: 1em;vertical-align: middle;fill: #a846b2;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
+                                                                        <path
+                                                                            d="M356.6592 154.99264q17.32608 0 30.0032 12.4928t12.67712 30.16704-12.67712 30.33088l-198.67648 198.67648 409.33376 0q78.00832 0 149.17632 30.33088t122.49088 81.83808 81.83808 122.49088 30.49472 149.34016l0 42.65984q0 17.67424-12.4928 30.16704t-30.16704 12.4928q-17.32608 0-30.0032-12.67712t-12.67712-30.0032l0-42.65984q0-60.66176-23.67488-115.99872t-63.67232-95.3344-95.3344-63.67232-115.99872-23.67488l-409.33376 0 198.67648 199.00416q12.67712 12.67712 12.67712 30.0032 0 17.67424-12.4928 30.33088t-30.16704 12.67712-30.33088-12.67712l-271.33952-271.6672q-12.32896-12.32896-12.32896-30.33088 0-17.67424 12.32896-30.0032l271.33952-271.6672q12.67712-12.67712 30.33088-12.67712z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    <span class="kt-detail-iconname">{{
+                                                                        'Memodeatils.forward' | translate }}</span>
+                                                                </a>
+                                                                <a class="kt-detail-link user-msg-alert">
+                                                                    <div (click)="ViewReplyDiv_Updated(this._MemoId,5)" id="NewTopic">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1.2em;height: 1.2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
                                                                             <path
-                                                                                d="M380.64 755.386L950.847 185.18c17.573-17.573 46.066-17.573 63.64 0 17.573 17.574 17.573 46.066 0 63.64l-582.59 582.59c-28.308 28.308-74.205 28.308-102.512 0L9.18 511.205c-17.573-17.573-17.573-46.066 0-63.64 17.574-17.573 46.066-17.573 63.64 0l307.82 307.821z">
+                                                                                d="M938.666667 256a170.666667 170.666667 0 0 0-170.666667-170.666667H256a170.666667 170.666667 0 0 0-170.666667 170.666667v661.333333a21.333333 21.333333 0 0 0 21.333334 21.333334 20.906667 20.906667 0 0 0 14.933333-6.4l128-128A128 128 0 0 1 341.333333 768h426.666667a170.666667 170.666667 0 0 0 170.666667-170.666667z m-170.666667 426.666667H341.333333a213.333333 213.333333 0 0 0-151.04 62.293333l-19.626666 17.92V256a85.333333 85.333333 0 0 1 85.333333-85.333333h512a85.333333 85.333333 0 0 1 85.333333 85.333333v341.333333a85.333333 85.333333 0 0 1-85.333333 85.333334z m-405.333333-213.333334H469.333333v106.666667a21.333333 21.333333 0 0 0 21.333334 21.333333h42.666666a21.333333 21.333333 0 0 0 21.333334-21.333333V469.333333h106.666666a21.333333 21.333333 0 0 0 21.333334-21.333333v-42.666667a21.333333 21.333333 0 0 0-21.333334-21.333333H554.666667V277.333333a21.333333 21.333333 0 0 0-21.333334-21.333333h-42.666666a21.333333 21.333333 0 0 0-21.333334 21.333333V384H362.666667a21.333333 21.333333 0 0 0-21.333334 21.333333v42.666667a21.333333 21.333333 0 0 0 21.333334 21.333333z">
                                                                             </path>
                                                                         </svg>
                                                                         <span class="kt-detail-iconname">{{
-                                                                            'Memodeatils.approve' | translate
-                                                                            }}</span>
+                                                                            'Memodeatils.NewTopic' | translate }}</span>
+                                                                    </div>
+                                                                    <div *ngIf="showPopup" class="user-msg-alert-body user-msg-open user-msg-newtopic">
+                                                                        <p class="user-msg-alert-title">New Topic! </p>
+                                                                        <p class="user-msg-alert-content">
+                                                                            Create a new topic for this communication.</p>
+                                                                        <div class="user-msg-alert-close-btn" (click)="Gotit()">Got it!</div>
+                                                                    </div>
+                                                                </a>
+                                                                <a class="kt-detail-link" id="workflow" (click)="ViewReplyDiv_Updated(this._MemoId,6)">
+                                                                    <svg fill="#007fe4" width="16px" height="16px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                            stroke-linejoin="round"></g>
+                                                                        <g id="SVGRepo_iconCarrier">
+                                                                            <path fill-rule="evenodd"
+                                                                                d="M1 3a2 2 0 012-2h6.5a2 2 0 012 2v6.5a2 2 0 01-2 2H7v4.063C7 16.355 7.644 17 8.438 17H12.5v-2.5a2 2 0 012-2H21a2 2 0 012 2V21a2 2 0 01-2 2h-6.5a2 2 0 01-2-2v-2.5H8.437A2.938 2.938 0 015.5 15.562V11.5H3a2 2 0 01-2-2V3zm2-.5a.5.5 0 00-.5.5v6.5a.5.5 0 00.5.5h6.5a.5.5 0 00.5-.5V3a.5.5 0 00-.5-.5H3zM14.5 14a.5.5 0 00-.5.5V21a.5.5 0 00.5.5H21a.5.5 0 00.5-.5v-6.5a.5.5 0 00-.5-.5h-6.5z">
+                                                                            </path>
+                                                                        </g>
+                                                                    </svg>
+                                                                    <span class="kt-detail-iconname">Workflow</span>
+                                                                </a>
+                                                            </div>
+                                                            <div class="d-flex justify-content-end mr-2" *ngIf="_IsExists == true && _UserActionIsActive == true">
+                                                                <ng-container *ngIf="detail.ApprovalStatus=='Pending'">
+                                                                    <a class="kt-detail-link dropdown-toggle no-after" id="rjt-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="Reject">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1em;height: 1em;vertical-align: middle;fill: #c90013;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
+                                                                            <path
+                                                                                d="M174.08 940.8a32 32 0 0 1-22.4-54.4l704-704a32 32 0 0 1 45.44 0 32 32 0 0 1 0 44.8l-704 704a32.64 32.64 0 0 1-23.04 9.6z">
+                                                                            </path>
+                                                                            <path
+                                                                                d="M878.08 940.8a31.36 31.36 0 0 1-22.4-9.6l-704-704a30.72 30.72 0 0 1 0-44.8 32 32 0 0 1 45.44 0l704 704a32 32 0 0 1 0 44.8 32.64 32.64 0 0 1-23.04 9.6z">
+                                                                            </path>
+                                                                        </svg>
+                                                                        <span class="kt-detail-iconname">{{
+                                                                            'Memodeatils.reject' | translate }}</span>
                                                                     </a>
-                                                                    <div class="dropdown-menu dropdown-menu-right sort-drop sort-hvr apv-btn" aria-labelledby="apv-btn">
+                                                                    <div class="dropdown-menu dropdown-menu-right sort-drop rjt-btn" aria-labelledby="rjt-btn">
                                                                         <div>
-                                                                            <div class="" id="main-section">
-                                                                                <a (click)="UpdateApprovalStatus(_ApprovalMemoId,'Approved',_ApprovalReplyId)" class="dropdown-item">{{'Memodeatils.approve'
-                                                                                    | translate }}</a>
-                                                                                <a class="dropdown-item" (click)="approvecommentsModal()" (click)="$event.stopPropagation();">{{'Memodeatils.ApprovewithComments'
-                                                                                    |translate }}</a>
+                                                                            <div class="" id="rjct-section">
+                                                                                <a (click)="UpdateApprovalStatus(_ApprovalMemoId,'Reject',_ApprovalReplyId)" class="dropdown-item">{{
+                                                                                    'Memodeatils.reject' | translate
+                                                                                    }}</a>
+                                                                                <a class="dropdown-item" (click)="rejectcommentsModal()" (click)="$event.stopPropagation();">{{
+                                                                                    'Memodeatils.RejectwithComments' |
+                                                                                    translate }}
+                                                                                </a>
                                                                             </div>
-                                                                            <!-- <div class="px-3 pt-3 d-none" id="appr-cmts">
+                                                                            <!-- <div class="px-3 pt-3 d-none" id="rjct-cmts">
                                                                                 <div (click)="$event.stopPropagation();">
-                                                                                    <a class="sort-back pb-2" (click)="viwcmnts()">
+                                                                                    <a class="sort-back pb-2" (click)="rjtcmnts()">
                                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                                                             <path stroke-linecap="round"
                                                                                                 stroke-linejoin="round"
                                                                                                 d="M15.75 19.5L8.25 12l7.5-7.5" />
-                                                                                        </svg>{{ 'Memodeatils.Back' | translate }}
+                                                                                        </svg> {{ 'Memodeatils.Back' | translate }}
                                                                                     </a>
                                                                                     <div class="mt-1 form-group">
-                                                                                        <label class="cus-lbl">{{'Memodeatils.Comments'
-                                                                                            |translate }}</label>
-                                                                                        <textarea name="comment" #Approvecommentsfocus [(ngModel)]="Approvecomments" class="form-control">
-                                                                                        </textarea>
+                                                                                        <label class="cus-lbl">{{
+                                                                                            'Memodeatils.Comments' |
+                                                                                            translate}}</label>
+                                                                                        <textarea name="comments" #Rejectcommentsfocus [(ngModel)]="Rejectcomments" class="form-control"></textarea>
                                                                                     </div>
                                                                                 </div>
-
                                                                                 <div class="mt-3 mb-2">
-                                                                                    <button class="btn btn-sm btn-info" (click)="UpdateApprovalStatus(_ApprovalMemoId,'Approved',_ApprovalReplyId)">
-                                                                                        {{ 'Memodeatils.approve'
-                                                                                        |translate }}
-                                                                                    </button>
-                                                                                    <button class="btn btn-sm btn-secondary ml-2" (click)="viwcmnts()">
-                                                                                        {{'Memodeatils.Cancel' |
-                                                                                        translate }}
+                                                                                    <button class="btn btn-sm btn-danger" (click)="UpdateApprovalStatus(_ApprovalMemoId,'Reject',_ApprovalReplyId)">
+                                                                                        {{ 'Memodeatils.reject' |
+                                                                                        translate}} </button>
+                                                                                    <button class="btn btn-sm btn-secondary ml-2" (click)="rjtcmnts()"> {{
+                                                                                        'Memodeatils.Cancel' | translate
+                                                                                        }}
                                                                                     </button>
                                                                                 </div>
                                                                             </div> -->
                                                                         </div>
                                                                     </div>
-                                                                </div>
-
-                                                            </ng-container>
-                                                        </div>
-                                                        <div id="EditReply" class="d-flex justify-content-end mr-2" *ngIf="_IsExists == true && _IsWorkFlow == false && _UserActionIsActive == true">
-                                                            <ng-container *ngIf="showButton">
-                                                                <a (click)="ViewReplyDiv_Updated(this._MemoId,4)" class="kt-detail-link">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px">
-                                                                        <path
-                                                                            d="M16.7574 2.99666L14.7574 4.99666H5V18.9967H19V9.2393L21 7.2393V19.9967C21 20.5489 20.5523 20.9967 20 20.9967H4C3.44772 20.9967 3 20.5489 3 19.9967V3.99666C3 3.44438 3.44772 2.99666 4 2.99666H16.7574ZM20.4853 2.09717L21.8995 3.51138L12.7071 12.7038L11.2954 12.7062L11.2929 11.2896L20.4853 2.09717Z"
-                                                                            fill="#00a558">
-                                                                        </path>
-                                                                    </svg>
-                                                                    <span class="kt-detail-iconname1">{{
-                                                                        formatTime(minutes)}}:{{formatTime(seconds)
-                                                                        }}</span>
-                                                                </a>
-                                                            </ng-container>
-                                                        </div>
-                                                        <div class="justify-content-end d-none" *ngIf="_IsExists == true && _UserActionIsActive == true">
-                                                            <div id="">
-                                                                <div class="kt-filter-three">
-                                                                    <a class="" data-toggle="dropdown">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon kt-filter-three-svg" viewBox="0 0 1024 1024" version="1.1">
-                                                                            <path
-                                                                                d="M512 256c70.4 0 128-57.6 128-128S582.4 0 512 0s-128 57.6-128 128 57.6 128 128 128z m0 128c-70.4 0-128 57.6-128 128s57.6 128 128 128 128-57.6 128-128-57.6-128-128-128z m0 384c-70.4 0-128 57.6-128 128s57.6 128 128 128 128-57.6 128-128-57.6-128-128-128z" />
-                                                                        </svg>
-                                                                    </a>
-                                                                    <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl dropdown-filter dropdown-left-28" id="dropd">
-                                                                        <ul class="drop-ul">
-                                                                            <li class="dropdown-header">
-                                                                                {{'Memodeatils.MoreOptions' | translate }}
-                                                                            </li>
-                                                                            <li>
-                                                                                <button class="btn btn-filtr" [ngClass]="{'btn-filtr': true, 'disabled-link': IsConfidential}" (click)="!IsConfidential && ViewReplyDiv_Updated(this._MemoId, 3)">
-                                                                                    <div
-                                                                                        class="d-flex align-items-center">
-
-                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                            viewBox="0 0 1024 1024"
-                                                                                            version="1.1"
-                                                                                            class="iconify iconify--mdi"
-                                                                                            fill="currentColor"
-                                                                                            height="20" width="20">
-                                                                                            <path
-                                                                                                d="M597.333333 170.666667q18.005333 0 30.336 12.330667l298.666667 298.666667q12.330667 12.330667 12.330667 30.336t-12.330667 30.336l-298.666667 298.666667q-12.330667 12.330667-30.336 12.330667-18.346667 0-30.506667-12.16t-12.16-30.506667q0-18.005333 12.330667-30.336l226.005333-225.664-665.002667 0q-17.664 0-30.165333-12.501333t-12.501333-30.165333 12.501333-30.165333 30.165333-12.501333l665.002667 0-226.005333-225.664q-12.330667-12.330667-12.330667-30.336 0-18.346667 12.16-30.506667t-30.506667-12.16z">
-                                                                                            </path>
-                                                                                        </svg>
-                                                                                        <div class="fil-lbl">{{
-                                                                                            'Memodeatils.forward' |
+                                                                    <div class="dropdown">
+                                                                        <a class="kt-detail-link dropdown-toggle no-after" style="border-radius: 0px 4px 4px 0px;" id="apv-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="Approve">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 1.0029296875em;height: 1em;vertical-align: middle;fill: #2786fb;overflow: hidden;" viewBox="0 0 1027 1024" version="1.1">
+                                                                                <path
+                                                                                    d="M380.64 755.386L950.847 185.18c17.573-17.573 46.066-17.573 63.64 0 17.573 17.574 17.573 46.066 0 63.64l-582.59 582.59c-28.308 28.308-74.205 28.308-102.512 0L9.18 511.205c-17.573-17.573-17.573-46.066 0-63.64 17.574-17.573 46.066-17.573 63.64 0l307.82 307.821z">
+                                                                                </path>
+                                                                            </svg>
+                                                                            <span class="kt-detail-iconname">{{
+                                                                                'Memodeatils.approve' | translate
+                                                                                }}</span>
+                                                                        </a>
+                                                                        <div class="dropdown-menu dropdown-menu-right sort-drop sort-hvr apv-btn" aria-labelledby="apv-btn">
+                                                                            <div>
+                                                                                <div class="" id="main-section">
+                                                                                    <a (click)="UpdateApprovalStatus(_ApprovalMemoId,'Approved',_ApprovalReplyId)" class="dropdown-item">{{'Memodeatils.approve'
+                                                                                        | translate }}</a>
+                                                                                    <a class="dropdown-item" (click)="approvecommentsModal()" (click)="$event.stopPropagation();">{{'Memodeatils.ApprovewithComments'
+                                                                                        |translate }}</a>
+                                                                                </div>
+                                                                                <!-- <div class="px-3 pt-3 d-none" id="appr-cmts">
+                                                                                    <div (click)="$event.stopPropagation();">
+                                                                                        <a class="sort-back pb-2" (click)="viwcmnts()">
+                                                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                                                                <path stroke-linecap="round"
+                                                                                                    stroke-linejoin="round"
+                                                                                                    d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                                                                            </svg>{{ 'Memodeatils.Back' | translate }}
+                                                                                        </a>
+                                                                                        <div class="mt-1 form-group">
+                                                                                            <label class="cus-lbl">{{'Memodeatils.Comments'
+                                                                                                |translate }}</label>
+                                                                                            <textarea name="comment" #Approvecommentsfocus [(ngModel)]="Approvecomments" class="form-control">
+                                                                                            </textarea>
+                                                                                        </div>
+                                                                                    </div>
+    
+                                                                                    <div class="mt-3 mb-2">
+                                                                                        <button class="btn btn-sm btn-info" (click)="UpdateApprovalStatus(_ApprovalMemoId,'Approved',_ApprovalReplyId)">
+                                                                                            {{ 'Memodeatils.approve'
+                                                                                            |translate }}
+                                                                                        </button>
+                                                                                        <button class="btn btn-sm btn-secondary ml-2" (click)="viwcmnts()">
+                                                                                            {{'Memodeatils.Cancel' |
                                                                                             translate }}
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </button>
-                                                                            </li>
-                                                                            <li *ngIf="AddUserReplyAdmin">
-                                                                                <button class="btn btn-filtr" (click)="AddUsersInReply()">
-                                                                                    <div
-                                                                                        class="d-flex align-items-center">
-                                                                                        <svg viewBox="0 0 16 16"
-                                                                                            class="iconify iconify--mdi"
-                                                                                            fill="currentColor"
-                                                                                            height="20" width="20"
-                                                                                            xmlns="http://www.w3.org/2000/svg">
-                                                                                            <path
-                                                                                                d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z">
-                                                                                            </path>
-                                                                                        </svg>
-                                                                                        <div class="fil-lbl">{{
-                                                                                            "Memodeatils.AddUsers" |
-                                                                                            translate }}
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </button>
-                                                                            </li>
-                                                                            <li *ngIf="showButton">
-                                                                                <button title="Edit" class="btn btn-filtr d-flex justify-content-between align-items-center" (click)="ViewReplyDiv_Updated(this._MemoId,4)">
-                                                                                    <div
-                                                                                        class="d-flex align-items-center">
-                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                            viewBox="0 0 24 24"
-                                                                                            width="19px" height="19px">
-                                                                                            <path
-                                                                                                d="M16.7574 2.99666L14.7574 4.99666H5V18.9967H19V9.2393L21 7.2393V19.9967C21 20.5489 20.5523 20.9967 20 20.9967H4C3.44772 20.9967 3 20.5489 3 19.9967V3.99666C3 3.44438 3.44772 2.99666 4 2.99666H16.7574ZM20.4853 2.09717L21.8995 3.51138L12.7071 12.7038L11.2954 12.7062L11.2929 11.2896L20.4853 2.09717Z"
-                                                                                                fill="currentColor">
-                                                                                            </path>
-                                                                                        </svg>
-
-                                                                                        <div class="fil-lbl">Edit
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="timer-v">
-                                                                                        <div>{{ formatTime(minutes)}}:{{
-                                                                                            formatTime(seconds) }}
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </button>
-                                                                            </li>
-                                                                            <li>
-                                                                                <div class="share-btn">
-                                                                                    <div class="text-share-btn">
-                                                                                        <button class="btn btn-filtr text-share-btn">
-                                                                                            <div
-                                                                                                class="d-flex align-items-center">
-                                                                                                <svg viewBox="0 0 24 24"
-                                                                                                    class="iconify iconify--mdi"
-                                                                                                    fill="currentColor"
-                                                                                                    height="20"
-                                                                                                    width="20"
-                                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                                    stroke="#292929">
-                                                                                                    <g id="SVGRepo_bgCarrier"
-                                                                                                        stroke-width="0">
-                                                                                                    </g>
-                                                                                                    <g id="SVGRepo_tracerCarrier"
-                                                                                                        stroke-linecap="round"
-                                                                                                        stroke-linejoin="round">
-                                                                                                    </g>
-                                                                                                    <g
-                                                                                                        id="SVGRepo_iconCarrier">
-                                                                                                        <path
-                                                                                                            d="M9 12C9 13.3807 7.88071 14.5 6.5 14.5C5.11929 14.5 4 13.3807 4 12C4 10.6193 5.11929 9.5 6.5 9.5C7.88071 9.5 9 10.6193 9 12Z"
-                                                                                                            stroke="#5c5c5c"
-                                                                                                            stroke-width="1.5">
-                                                                                                        </path>
-                                                                                                        <path
-                                                                                                            d="M14 6.5L9 10"
-                                                                                                            stroke="#5c5c5c"
-                                                                                                            stroke-width="1.5"
-                                                                                                            stroke-linecap="round">
-                                                                                                        </path>
-                                                                                                        <path
-                                                                                                            d="M14 17.5L9 14"
-                                                                                                            stroke="#5c5c5c"
-                                                                                                            stroke-width="1.5"
-                                                                                                            stroke-linecap="round">
-                                                                                                        </path>
-                                                                                                        <path
-                                                                                                            d="M19 18.5C19 19.8807 17.8807 21 16.5 21C15.1193 21 14 19.8807 14 18.5C14 17.1193 15.1193 16 16.5 16C17.8807 16 19 17.1193 19 18.5Z"
-                                                                                                            stroke="#5c5c5c"
-                                                                                                            stroke-width="1.5">
-                                                                                                        </path>
-                                                                                                        <path
-                                                                                                            d="M19 5.5C19 6.88071 17.8807 8 16.5 8C15.1193 8 14 6.88071 14 5.5C14 4.11929 15.1193 3 16.5 3C17.8807 3 19 4.11929 19 5.5Z"
-                                                                                                            stroke="#5c5c5c"
-                                                                                                            stroke-width="1.5">
-                                                                                                        </path>
-                                                                                                    </g>
-                                                                                                </svg>
-                                                                                                <div class="fil-lbl">
-                                                                                                    {{"Memodeatils.Share"
-                                                                                                    | translate }}
-                                                                                                </div>
-                                                                                            </div>
                                                                                         </button>
                                                                                     </div>
-                                                                                    <ul class="share-items">
-                                                                                        <li>
-                                                                                            <a (click)="shareOnFacebook()" title="Facebook">
-                                                                                                <svg xmlns:x="http://ns.adobe.com/Extensibility/1.0/" xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/" xmlns:graph="http://ns.adobe.com/Graphs/1.0/" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1"
-                                                                                                    x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve" width="20" height="20" fill="none">
-                                                                                                    <path fill="#6B6C6C"
-                                                                                                        stroke-width="0.8"
-                                                                                                        stroke="#6B6C6C"
-                                                                                                        d="M12.2,4.5h2c0.1,0,0.2-0.1,0.2-0.2V1.2c0-0.1-0.1-0.2-0.2-0.2h-2.7    c-1.3,0-2.3,0.3-3.1,1C7.7,2.6,7.4,3.4,7.4,4.6v2.2H5.9C5.7,6.8,5.6,6.9,5.6,7v3c0,0.1,0.1,0.2,0.2,0.2h1.6v8.6    c0,0.1,0.1,0.2,0.2,0.2h3.7c0.1,0,0.2-0.1,0.2-0.2v-8.6h2.2c0.1,0,0.2-0.1,0.2-0.2c0,0,0.2-1.5,0.3-3c0-0.1,0-0.1-0.1-0.2    c0-0.1-0.1-0.1-0.2-0.1h-2.6V5C11.6,4.8,11.9,4.5,12.2,4.5z M11.4,7.2h2.5c-0.1,1.1-0.2,2.1-0.3,2.5h-2.3c-0.1,0-0.2,0.1-0.2,0.2    v8.6H7.9V10c0-0.1-0.1-0.2-0.2-0.2H6.1V7.3h1.6c0.1,0,0.2-0.1,0.2-0.2V4.5c0-1,0.3-1.7,0.8-2.3c0.6-0.6,1.5-0.9,2.7-0.9h2.5V4    h-1.8c-0.5,0-1,0.5-1,0.9v2C11.1,7.1,11.2,7.2,11.4,7.2z" />
-                                                                                                </svg>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                        <li>
-                                                                                            <a (click)="shareOnTwitter()" title="Twitter"><svg
-                                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                                    width="20"
-                                                                                                    height="20"
-                                                                                                    viewBox="0 0 15 15"
-                                                                                                    fill="none">
-                                                                                                    <path
-                                                                                                        stroke-width="0.4"
-                                                                                                        stroke="#6B6C6C"
-                                                                                                        d="M0.410156 0.755859L5.81199 8.63086L0.524568 14.7559H1.69603L6.32936 9.38497L10.0136 14.7559H14.4397L8.79605 6.52899L13.7762 0.755859H12.6083L8.27796 5.77272L4.83625 0.755859H0.410156ZM1.80901 1.4927H4.4484L13.0408 14.019H10.4014L1.80901 1.4927Z"
-                                                                                                        fill="#6B6B6B" />
-                                                                                                </svg>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                        <li>
-                                                                                            <a (click)="shareOnWhatsApp()" title="Whatsapp"><svg
-                                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                                    width="20"
-                                                                                                    height="20"
-                                                                                                    viewBox="0 0 15 15"
-                                                                                                    fill="none">
-                                                                                                    <path
-                                                                                                        stroke-width="0.5"
-                                                                                                        stroke="#6B6C6C"
-                                                                                                        d="M7.07375 0.755859C5.84833 0.756177 4.64445 1.07812 3.58245 1.6895C2.52044 2.30089 1.6375 3.18031 1.02187 4.23986C0.406246 5.29942 0.079497 6.502 0.0742822 7.72741C0.0690673 8.95281 0.38557 10.1581 0.992156 11.2229L0.361891 13.4289C0.320748 13.5729 0.318868 13.7253 0.356446 13.8703C0.394024 14.0153 0.469693 14.1476 0.575611 14.2535C0.68153 14.3595 0.813844 14.4351 0.958843 14.4727C1.10384 14.5103 1.25625 14.5084 1.40027 14.4672L3.60628 13.837C4.53764 14.368 5.57851 14.6779 6.64862 14.743C7.71874 14.808 8.78949 14.6264 9.77829 14.2121C10.7671 13.7978 11.6475 13.1619 12.3517 12.3535C13.0558 11.5451 13.5649 10.5857 13.8396 9.54943C14.1143 8.51314 14.1473 7.42759 13.936 6.37652C13.7248 5.32546 13.2749 4.33696 12.6212 3.48727C11.9674 2.63758 11.1272 1.94941 10.1654 1.47583C9.20358 1.00226 8.14583 0.755932 7.07375 0.755859ZM7.07375 14.1949C5.9172 14.1957 4.78185 13.8846 3.78728 13.2943C3.7545 13.2748 3.71806 13.2622 3.68022 13.2573C3.64238 13.2523 3.60393 13.2552 3.56725 13.2657L1.2464 13.9288C1.19839 13.9426 1.14759 13.9432 1.09926 13.9307C1.05092 13.9181 1.00682 13.8929 0.971519 13.8576C0.936217 13.8223 0.911 13.7782 0.898481 13.7298C0.885962 13.6815 0.886598 13.6307 0.900321 13.5827L1.56336 11.2619C1.57384 11.2252 1.57671 11.1868 1.5718 11.1489C1.56688 11.1111 1.55429 11.0747 1.53479 11.0419C0.809472 9.8199 0.508668 8.39234 0.679238 6.98158C0.849808 5.57083 1.48217 4.25609 2.47782 3.24219C3.47348 2.22828 4.77651 1.57214 6.18393 1.37597C7.59136 1.17981 9.02414 1.45463 10.2591 2.15763C11.4941 2.86063 12.4618 3.95234 13.0117 5.26268C13.5615 6.57303 13.6625 8.02843 13.299 9.40218C12.9355 10.7759 12.1278 11.9909 11.0018 12.8578C9.87585 13.7246 8.49478 14.1948 7.07375 14.1949ZM10.6093 9.05331L9.17723 8.23496C9.04766 8.16101 8.90075 8.12287 8.75157 8.12446C8.60239 8.12605 8.45633 8.1673 8.32836 8.24399L7.36196 8.82384C6.77694 8.52743 6.30169 8.05217 6.00529 7.46713L6.58511 6.50074C6.66179 6.37277 6.70304 6.22671 6.70463 6.07754C6.70621 5.92837 6.66808 5.78147 6.59413 5.6519L5.77583 4.2198C5.70901 4.10321 5.61263 4.00631 5.4964 3.93886C5.38018 3.87142 5.24822 3.83581 5.11384 3.83565C4.52129 3.8358 3.95292 4.07068 3.53314 4.4889C3.11336 4.90712 2.87635 5.47461 2.874 6.06716C2.87291 6.83997 3.02418 7.60542 3.31917 8.31972C3.61416 9.03402 4.04706 9.68316 4.59314 10.23C5.13921 10.7769 5.78773 11.2107 6.50161 11.5067C7.21548 11.8027 7.98071 11.9551 8.75353 11.9551H8.76194C9.35449 11.9527 9.92197 11.7157 10.3402 11.296C10.7584 10.8762 10.9933 10.3078 10.9934 9.71525C10.9933 9.58088 10.9577 9.44892 10.8903 9.3327C10.8228 9.21648 10.7259 9.1201 10.6093 9.05331ZM8.76115 11.3951H8.75356C8.05435 11.3951 7.36199 11.2573 6.71609 10.9895C6.0702 10.7217 5.48344 10.3292 4.98937 9.83439C4.4953 9.33962 4.10361 8.7523 3.83672 8.10602C3.56983 7.45975 3.43297 6.7672 3.43396 6.06798C3.43589 5.62373 3.61374 5.19835 3.92857 4.88492C4.24341 4.57149 4.66959 4.39555 5.11384 4.39561C5.14953 4.39566 5.18457 4.40511 5.21543 4.42301C5.2463 4.44092 5.2719 4.46664 5.28965 4.4976L6.10796 5.92977C6.1326 5.97296 6.14531 6.02192 6.14478 6.07164C6.14425 6.12135 6.1305 6.17004 6.10495 6.21269L5.44775 7.30801C5.42452 7.34672 5.41099 7.39048 5.40833 7.43556C5.40567 7.48063 5.41395 7.52569 5.43248 7.56687C5.7979 8.38019 6.44895 9.03123 7.26227 9.39665C7.30345 9.41519 7.34851 9.42347 7.39359 9.42081C7.43868 9.41814 7.48245 9.4046 7.52116 9.38134L8.61641 8.72418C8.65907 8.69862 8.70776 8.68486 8.75749 8.68432C8.80721 8.68378 8.85619 8.69647 8.8994 8.7211L10.3315 9.53951C10.3625 9.55725 10.3882 9.58284 10.4061 9.61369C10.424 9.64455 10.4334 9.67958 10.4335 9.71525C10.4335 10.1595 10.2576 10.5857 9.94419 10.9005C9.63077 11.2153 9.20539 11.3932 8.76115 11.3951Z"
-                                                                                                        fill="#6B6B6B" />
-                                                                                                </svg>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                        <li class="d-none">
-                                                                                            <a (click)="copyLinkToClipboard()" title="Copy link">
-                                                                                                <svg xmlns:x="http://ns.adobe.com/Extensibility/1.0/" xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/" xmlns:graph="http://ns.adobe.com/Graphs/1.0/" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1"
-                                                                                                    x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve" width="20" height="20" fill="none">
-                                                                                                    <g>
-                                                                                                        <path
-                                                                                                            fill="none"
-                                                                                                            stroke="#6B6C6C"
+                                                                                </div> -->
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+    
+                                                                </ng-container>
+                                                            </div>
+                                                            <div id="EditReply" class="d-flex justify-content-end mr-2" *ngIf="_IsExists == true && _IsWorkFlow == false && _UserActionIsActive == true">
+                                                                <ng-container *ngIf="showButton">
+                                                                    <a (click)="ViewReplyDiv_Updated(this._MemoId,4)" class="kt-detail-link">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px">
+                                                                            <path
+                                                                                d="M16.7574 2.99666L14.7574 4.99666H5V18.9967H19V9.2393L21 7.2393V19.9967C21 20.5489 20.5523 20.9967 20 20.9967H4C3.44772 20.9967 3 20.5489 3 19.9967V3.99666C3 3.44438 3.44772 2.99666 4 2.99666H16.7574ZM20.4853 2.09717L21.8995 3.51138L12.7071 12.7038L11.2954 12.7062L11.2929 11.2896L20.4853 2.09717Z"
+                                                                                fill="#00a558">
+                                                                            </path>
+                                                                        </svg>
+                                                                        <span class="kt-detail-iconname1">{{
+                                                                            formatTime(minutes)}}:{{formatTime(seconds)
+                                                                            }}</span>
+                                                                    </a>
+                                                                </ng-container>
+                                                            </div>
+                                                            <div class="justify-content-end d-none" *ngIf="_IsExists == true && _UserActionIsActive == true">
+                                                                <div id="">
+                                                                    <div class="kt-filter-three">
+                                                                        <a class="" data-toggle="dropdown">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon kt-filter-three-svg" viewBox="0 0 1024 1024" version="1.1">
+                                                                                <path
+                                                                                    d="M512 256c70.4 0 128-57.6 128-128S582.4 0 512 0s-128 57.6-128 128 57.6 128 128 128z m0 128c-70.4 0-128 57.6-128 128s57.6 128 128 128 128-57.6 128-128-57.6-128-128-128z m0 384c-70.4 0-128 57.6-128 128s57.6 128 128 128 128-57.6 128-128-57.6-128-128-128z" />
+                                                                            </svg>
+                                                                        </a>
+                                                                        <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl dropdown-filter dropdown-left-28" id="dropd">
+                                                                            <ul class="drop-ul">
+                                                                                <li class="dropdown-header">
+                                                                                    {{'Memodeatils.MoreOptions' | translate }}
+                                                                                </li>
+                                                                                <li>
+                                                                                    <button class="btn btn-filtr" [ngClass]="{'btn-filtr': true, 'disabled-link': IsConfidential}" (click)="!IsConfidential && ViewReplyDiv_Updated(this._MemoId, 3)">
+                                                                                        <div
+                                                                                            class="d-flex align-items-center">
+    
+                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                viewBox="0 0 1024 1024"
+                                                                                                version="1.1"
+                                                                                                class="iconify iconify--mdi"
+                                                                                                fill="currentColor"
+                                                                                                height="20" width="20">
+                                                                                                <path
+                                                                                                    d="M597.333333 170.666667q18.005333 0 30.336 12.330667l298.666667 298.666667q12.330667 12.330667 12.330667 30.336t-12.330667 30.336l-298.666667 298.666667q-12.330667 12.330667-30.336 12.330667-18.346667 0-30.506667-12.16t-12.16-30.506667q0-18.005333 12.330667-30.336l226.005333-225.664-665.002667 0q-17.664 0-30.165333-12.501333t-12.501333-30.165333 12.501333-30.165333 30.165333-12.501333l665.002667 0-226.005333-225.664q-12.330667-12.330667-12.330667-30.336 0-18.346667 12.16-30.506667t-30.506667-12.16z">
+                                                                                                </path>
+                                                                                            </svg>
+                                                                                            <div class="fil-lbl">{{
+                                                                                                'Memodeatils.forward' |
+                                                                                                translate }}
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </button>
+                                                                                </li>
+                                                                                <li *ngIf="AddUserReplyAdmin">
+                                                                                    <button class="btn btn-filtr" (click)="AddUsersInReply()">
+                                                                                        <div
+                                                                                            class="d-flex align-items-center">
+                                                                                            <svg viewBox="0 0 16 16"
+                                                                                                class="iconify iconify--mdi"
+                                                                                                fill="currentColor"
+                                                                                                height="20" width="20"
+                                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                                <path
+                                                                                                    d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z">
+                                                                                                </path>
+                                                                                            </svg>
+                                                                                            <div class="fil-lbl">{{
+                                                                                                "Memodeatils.AddUsers" |
+                                                                                                translate }}
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </button>
+                                                                                </li>
+                                                                                <li *ngIf="showButton">
+                                                                                    <button title="Edit" class="btn btn-filtr d-flex justify-content-between align-items-center" (click)="ViewReplyDiv_Updated(this._MemoId,4)">
+                                                                                        <div
+                                                                                            class="d-flex align-items-center">
+                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                viewBox="0 0 24 24"
+                                                                                                width="19px" height="19px">
+                                                                                                <path
+                                                                                                    d="M16.7574 2.99666L14.7574 4.99666H5V18.9967H19V9.2393L21 7.2393V19.9967C21 20.5489 20.5523 20.9967 20 20.9967H4C3.44772 20.9967 3 20.5489 3 19.9967V3.99666C3 3.44438 3.44772 2.99666 4 2.99666H16.7574ZM20.4853 2.09717L21.8995 3.51138L12.7071 12.7038L11.2954 12.7062L11.2929 11.2896L20.4853 2.09717Z"
+                                                                                                    fill="currentColor">
+                                                                                                </path>
+                                                                                            </svg>
+    
+                                                                                            <div class="fil-lbl">Edit
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="timer-v">
+                                                                                            <div>{{ formatTime(minutes)}}:{{
+                                                                                                formatTime(seconds) }}
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </button>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <div class="share-btn">
+                                                                                        <div class="text-share-btn">
+                                                                                            <button class="btn btn-filtr text-share-btn">
+                                                                                                <div
+                                                                                                    class="d-flex align-items-center">
+                                                                                                    <svg viewBox="0 0 24 24"
+                                                                                                        class="iconify iconify--mdi"
+                                                                                                        fill="currentColor"
+                                                                                                        height="20"
+                                                                                                        width="20"
+                                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                                        stroke="#292929">
+                                                                                                        <g id="SVGRepo_bgCarrier"
+                                                                                                            stroke-width="0">
+                                                                                                        </g>
+                                                                                                        <g id="SVGRepo_tracerCarrier"
                                                                                                             stroke-linecap="round"
-                                                                                                            stroke-width="1.4px"
-                                                                                                            d="M13,3c1.4-1.4,3.5-1.5,4.8-0.3C19,4,18.9,6.2,17.5,7.6l-2,2      M8.7,11.8c-1.2-1.3-1.1-3.4,0.3-4.8l1.8-1.8" />
-                                                                                                        <path
-                                                                                                            fill="none"
+                                                                                                            stroke-linejoin="round">
+                                                                                                        </g>
+                                                                                                        <g
+                                                                                                            id="SVGRepo_iconCarrier">
+                                                                                                            <path
+                                                                                                                d="M9 12C9 13.3807 7.88071 14.5 6.5 14.5C5.11929 14.5 4 13.3807 4 12C4 10.6193 5.11929 9.5 6.5 9.5C7.88071 9.5 9 10.6193 9 12Z"
+                                                                                                                stroke="#5c5c5c"
+                                                                                                                stroke-width="1.5">
+                                                                                                            </path>
+                                                                                                            <path
+                                                                                                                d="M14 6.5L9 10"
+                                                                                                                stroke="#5c5c5c"
+                                                                                                                stroke-width="1.5"
+                                                                                                                stroke-linecap="round">
+                                                                                                            </path>
+                                                                                                            <path
+                                                                                                                d="M14 17.5L9 14"
+                                                                                                                stroke="#5c5c5c"
+                                                                                                                stroke-width="1.5"
+                                                                                                                stroke-linecap="round">
+                                                                                                            </path>
+                                                                                                            <path
+                                                                                                                d="M19 18.5C19 19.8807 17.8807 21 16.5 21C15.1193 21 14 19.8807 14 18.5C14 17.1193 15.1193 16 16.5 16C17.8807 16 19 17.1193 19 18.5Z"
+                                                                                                                stroke="#5c5c5c"
+                                                                                                                stroke-width="1.5">
+                                                                                                            </path>
+                                                                                                            <path
+                                                                                                                d="M19 5.5C19 6.88071 17.8807 8 16.5 8C15.1193 8 14 6.88071 14 5.5C14 4.11929 15.1193 3 16.5 3C17.8807 3 19 4.11929 19 5.5Z"
+                                                                                                                stroke="#5c5c5c"
+                                                                                                                stroke-width="1.5">
+                                                                                                            </path>
+                                                                                                        </g>
+                                                                                                    </svg>
+                                                                                                    <div class="fil-lbl">
+                                                                                                        {{"Memodeatils.Share"
+                                                                                                        | translate }}
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <ul class="share-items">
+                                                                                            <li>
+                                                                                                <a (click)="shareOnFacebook()" title="Facebook">
+                                                                                                    <svg xmlns:x="http://ns.adobe.com/Extensibility/1.0/" xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/" xmlns:graph="http://ns.adobe.com/Graphs/1.0/" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1"
+                                                                                                        x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve" width="20" height="20" fill="none">
+                                                                                                        <path fill="#6B6C6C"
+                                                                                                            stroke-width="0.8"
                                                                                                             stroke="#6B6C6C"
-                                                                                                            stroke-linecap="round"
-                                                                                                            stroke-width="1.4px"
-                                                                                                            d="M11.9,8.5c1.2,1.3,1.1,3.4-0.3,4.8l-2,2l-2,2     c-1.4,1.4-3.5,1.5-4.8,0.3c-1.2-1.3-1.1-3.4,0.3-4.8l2-2" />
-                                                                                                    </g>
-                                                                                                </svg>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </li>
-                                                                        </ul>
+                                                                                                            d="M12.2,4.5h2c0.1,0,0.2-0.1,0.2-0.2V1.2c0-0.1-0.1-0.2-0.2-0.2h-2.7    c-1.3,0-2.3,0.3-3.1,1C7.7,2.6,7.4,3.4,7.4,4.6v2.2H5.9C5.7,6.8,5.6,6.9,5.6,7v3c0,0.1,0.1,0.2,0.2,0.2h1.6v8.6    c0,0.1,0.1,0.2,0.2,0.2h3.7c0.1,0,0.2-0.1,0.2-0.2v-8.6h2.2c0.1,0,0.2-0.1,0.2-0.2c0,0,0.2-1.5,0.3-3c0-0.1,0-0.1-0.1-0.2    c0-0.1-0.1-0.1-0.2-0.1h-2.6V5C11.6,4.8,11.9,4.5,12.2,4.5z M11.4,7.2h2.5c-0.1,1.1-0.2,2.1-0.3,2.5h-2.3c-0.1,0-0.2,0.1-0.2,0.2    v8.6H7.9V10c0-0.1-0.1-0.2-0.2-0.2H6.1V7.3h1.6c0.1,0,0.2-0.1,0.2-0.2V4.5c0-1,0.3-1.7,0.8-2.3c0.6-0.6,1.5-0.9,2.7-0.9h2.5V4    h-1.8c-0.5,0-1,0.5-1,0.9v2C11.1,7.1,11.2,7.2,11.4,7.2z" />
+                                                                                                    </svg>
+                                                                                                </a>
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <a (click)="shareOnTwitter()" title="Twitter"><svg
+                                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                                        width="20"
+                                                                                                        height="20"
+                                                                                                        viewBox="0 0 15 15"
+                                                                                                        fill="none">
+                                                                                                        <path
+                                                                                                            stroke-width="0.4"
+                                                                                                            stroke="#6B6C6C"
+                                                                                                            d="M0.410156 0.755859L5.81199 8.63086L0.524568 14.7559H1.69603L6.32936 9.38497L10.0136 14.7559H14.4397L8.79605 6.52899L13.7762 0.755859H12.6083L8.27796 5.77272L4.83625 0.755859H0.410156ZM1.80901 1.4927H4.4484L13.0408 14.019H10.4014L1.80901 1.4927Z"
+                                                                                                            fill="#6B6B6B" />
+                                                                                                    </svg>
+                                                                                                </a>
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <a (click)="shareOnWhatsApp()" title="Whatsapp"><svg
+                                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                                        width="20"
+                                                                                                        height="20"
+                                                                                                        viewBox="0 0 15 15"
+                                                                                                        fill="none">
+                                                                                                        <path
+                                                                                                            stroke-width="0.5"
+                                                                                                            stroke="#6B6C6C"
+                                                                                                            d="M7.07375 0.755859C5.84833 0.756177 4.64445 1.07812 3.58245 1.6895C2.52044 2.30089 1.6375 3.18031 1.02187 4.23986C0.406246 5.29942 0.079497 6.502 0.0742822 7.72741C0.0690673 8.95281 0.38557 10.1581 0.992156 11.2229L0.361891 13.4289C0.320748 13.5729 0.318868 13.7253 0.356446 13.8703C0.394024 14.0153 0.469693 14.1476 0.575611 14.2535C0.68153 14.3595 0.813844 14.4351 0.958843 14.4727C1.10384 14.5103 1.25625 14.5084 1.40027 14.4672L3.60628 13.837C4.53764 14.368 5.57851 14.6779 6.64862 14.743C7.71874 14.808 8.78949 14.6264 9.77829 14.2121C10.7671 13.7978 11.6475 13.1619 12.3517 12.3535C13.0558 11.5451 13.5649 10.5857 13.8396 9.54943C14.1143 8.51314 14.1473 7.42759 13.936 6.37652C13.7248 5.32546 13.2749 4.33696 12.6212 3.48727C11.9674 2.63758 11.1272 1.94941 10.1654 1.47583C9.20358 1.00226 8.14583 0.755932 7.07375 0.755859ZM7.07375 14.1949C5.9172 14.1957 4.78185 13.8846 3.78728 13.2943C3.7545 13.2748 3.71806 13.2622 3.68022 13.2573C3.64238 13.2523 3.60393 13.2552 3.56725 13.2657L1.2464 13.9288C1.19839 13.9426 1.14759 13.9432 1.09926 13.9307C1.05092 13.9181 1.00682 13.8929 0.971519 13.8576C0.936217 13.8223 0.911 13.7782 0.898481 13.7298C0.885962 13.6815 0.886598 13.6307 0.900321 13.5827L1.56336 11.2619C1.57384 11.2252 1.57671 11.1868 1.5718 11.1489C1.56688 11.1111 1.55429 11.0747 1.53479 11.0419C0.809472 9.8199 0.508668 8.39234 0.679238 6.98158C0.849808 5.57083 1.48217 4.25609 2.47782 3.24219C3.47348 2.22828 4.77651 1.57214 6.18393 1.37597C7.59136 1.17981 9.02414 1.45463 10.2591 2.15763C11.4941 2.86063 12.4618 3.95234 13.0117 5.26268C13.5615 6.57303 13.6625 8.02843 13.299 9.40218C12.9355 10.7759 12.1278 11.9909 11.0018 12.8578C9.87585 13.7246 8.49478 14.1948 7.07375 14.1949ZM10.6093 9.05331L9.17723 8.23496C9.04766 8.16101 8.90075 8.12287 8.75157 8.12446C8.60239 8.12605 8.45633 8.1673 8.32836 8.24399L7.36196 8.82384C6.77694 8.52743 6.30169 8.05217 6.00529 7.46713L6.58511 6.50074C6.66179 6.37277 6.70304 6.22671 6.70463 6.07754C6.70621 5.92837 6.66808 5.78147 6.59413 5.6519L5.77583 4.2198C5.70901 4.10321 5.61263 4.00631 5.4964 3.93886C5.38018 3.87142 5.24822 3.83581 5.11384 3.83565C4.52129 3.8358 3.95292 4.07068 3.53314 4.4889C3.11336 4.90712 2.87635 5.47461 2.874 6.06716C2.87291 6.83997 3.02418 7.60542 3.31917 8.31972C3.61416 9.03402 4.04706 9.68316 4.59314 10.23C5.13921 10.7769 5.78773 11.2107 6.50161 11.5067C7.21548 11.8027 7.98071 11.9551 8.75353 11.9551H8.76194C9.35449 11.9527 9.92197 11.7157 10.3402 11.296C10.7584 10.8762 10.9933 10.3078 10.9934 9.71525C10.9933 9.58088 10.9577 9.44892 10.8903 9.3327C10.8228 9.21648 10.7259 9.1201 10.6093 9.05331ZM8.76115 11.3951H8.75356C8.05435 11.3951 7.36199 11.2573 6.71609 10.9895C6.0702 10.7217 5.48344 10.3292 4.98937 9.83439C4.4953 9.33962 4.10361 8.7523 3.83672 8.10602C3.56983 7.45975 3.43297 6.7672 3.43396 6.06798C3.43589 5.62373 3.61374 5.19835 3.92857 4.88492C4.24341 4.57149 4.66959 4.39555 5.11384 4.39561C5.14953 4.39566 5.18457 4.40511 5.21543 4.42301C5.2463 4.44092 5.2719 4.46664 5.28965 4.4976L6.10796 5.92977C6.1326 5.97296 6.14531 6.02192 6.14478 6.07164C6.14425 6.12135 6.1305 6.17004 6.10495 6.21269L5.44775 7.30801C5.42452 7.34672 5.41099 7.39048 5.40833 7.43556C5.40567 7.48063 5.41395 7.52569 5.43248 7.56687C5.7979 8.38019 6.44895 9.03123 7.26227 9.39665C7.30345 9.41519 7.34851 9.42347 7.39359 9.42081C7.43868 9.41814 7.48245 9.4046 7.52116 9.38134L8.61641 8.72418C8.65907 8.69862 8.70776 8.68486 8.75749 8.68432C8.80721 8.68378 8.85619 8.69647 8.8994 8.7211L10.3315 9.53951C10.3625 9.55725 10.3882 9.58284 10.4061 9.61369C10.424 9.64455 10.4334 9.67958 10.4335 9.71525C10.4335 10.1595 10.2576 10.5857 9.94419 10.9005C9.63077 11.2153 9.20539 11.3932 8.76115 11.3951Z"
+                                                                                                            fill="#6B6B6B" />
+                                                                                                    </svg>
+                                                                                                </a>
+                                                                                            </li>
+                                                                                            <li class="d-none">
+                                                                                                <a (click)="copyLinkToClipboard()" title="Copy link">
+                                                                                                    <svg xmlns:x="http://ns.adobe.com/Extensibility/1.0/" xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/" xmlns:graph="http://ns.adobe.com/Graphs/1.0/" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1"
+                                                                                                        x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve" width="20" height="20" fill="none">
+                                                                                                        <g>
+                                                                                                            <path
+                                                                                                                fill="none"
+                                                                                                                stroke="#6B6C6C"
+                                                                                                                stroke-linecap="round"
+                                                                                                                stroke-width="1.4px"
+                                                                                                                d="M13,3c1.4-1.4,3.5-1.5,4.8-0.3C19,4,18.9,6.2,17.5,7.6l-2,2      M8.7,11.8c-1.2-1.3-1.1-3.4,0.3-4.8l1.8-1.8" />
+                                                                                                            <path
+                                                                                                                fill="none"
+                                                                                                                stroke="#6B6C6C"
+                                                                                                                stroke-linecap="round"
+                                                                                                                stroke-width="1.4px"
+                                                                                                                d="M11.9,8.5c1.2,1.3,1.1,3.4-0.3,4.8l-2,2l-2,2     c-1.4,1.4-3.5,1.5-4.8,0.3c-1.2-1.3-1.1-3.4,0.3-4.8l2-2" />
+                                                                                                        </g>
+                                                                                                    </svg>
+                                                                                                </a>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -2658,7 +2661,7 @@
                                                                                     </div>
                                                                                     <div class="user-i">
                                                                                         <div class="user-i-icon">
-                                                                                            <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12.1303 13C13.8203 13 15.1903 11.63 15.1903 9.94C15.1903 8.25001 13.8203 6.88 12.1303 6.88C10.4403 6.88 9.07031 8.25001 9.07031 9.94C9.07031 11.63 10.4403 13 12.1303 13Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M17 3H7C4.79086 3 3 4.79086 3 7V17C3 19.2091 4.79086 21 7 21H17C19.2091 21 21 19.2091 21 17V7C21 4.79086 19.2091 3 17 3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6.30969 20.52C6.27753 19.7534 6.40079 18.9882 6.67199 18.2704C6.94319 17.5526 7.35674 16.8971 7.88781 16.3433C8.41888 15.7894 9.05649 15.3488 9.76226 15.0477C10.468 14.7467 11.2274 14.5916 11.9947 14.5916C12.762 14.5916 13.5214 14.7467 14.2272 15.0477C14.9329 15.3488 15.5705 15.7894 16.1016 16.3433C16.6326 16.8971 17.0462 17.5526 17.3174 18.2704C17.5886 18.9882 17.7118 19.7534 17.6797 20.52" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                                                                            <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12.1303 13C13.8203 13 15.1903 11.63 15.1903 9.94C15.1903 8.25001 13.8203 6.88 12.1303 6.88C10.4403 6.88 9.07031 8.25001 9.07031 9.94C9.07031 11.63 10.4403 13 12.1303 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M17 3H7C4.79086 3 3 4.79086 3 7V17C3 19.2091 4.79086 21 7 21H17C19.2091 21 21 19.2091 21 17V7C21 4.79086 19.2091 3 17 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6.30969 20.52C6.27753 19.7534 6.40079 18.9882 6.67199 18.2704C6.94319 17.5526 7.35674 16.8971 7.88781 16.3433C8.41888 15.7894 9.05649 15.3488 9.76226 15.0477C10.468 14.7467 11.2274 14.5916 11.9947 14.5916C12.762 14.5916 13.5214 14.7467 14.2272 15.0477C14.9329 15.3488 15.5705 15.7894 16.1016 16.3433C16.6326 16.8971 17.0462 17.5526 17.3174 18.2704C17.5886 18.9882 17.7118 19.7534 17.6797 20.52" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                                                                                         </div>
                                                                                         <div class="user-i-control">
                                                                                             <div class="user-i-label">Reporting user</div>
@@ -2744,7 +2747,7 @@
                                                                                         </div>
                                                                                         <div class="user-i">
                                                                                             <div class="user-i-icon">
-                                                                                                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12.1303 13C13.8203 13 15.1903 11.63 15.1903 9.94C15.1903 8.25001 13.8203 6.88 12.1303 6.88C10.4403 6.88 9.07031 8.25001 9.07031 9.94C9.07031 11.63 10.4403 13 12.1303 13Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M17 3H7C4.79086 3 3 4.79086 3 7V17C3 19.2091 4.79086 21 7 21H17C19.2091 21 21 19.2091 21 17V7C21 4.79086 19.2091 3 17 3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6.30969 20.52C6.27753 19.7534 6.40079 18.9882 6.67199 18.2704C6.94319 17.5526 7.35674 16.8971 7.88781 16.3433C8.41888 15.7894 9.05649 15.3488 9.76226 15.0477C10.468 14.7467 11.2274 14.5916 11.9947 14.5916C12.762 14.5916 13.5214 14.7467 14.2272 15.0477C14.9329 15.3488 15.5705 15.7894 16.1016 16.3433C16.6326 16.8971 17.0462 17.5526 17.3174 18.2704C17.5886 18.9882 17.7118 19.7534 17.6797 20.52" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                                                                                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12.1303 13C13.8203 13 15.1903 11.63 15.1903 9.94C15.1903 8.25001 13.8203 6.88 12.1303 6.88C10.4403 6.88 9.07031 8.25001 9.07031 9.94C9.07031 11.63 10.4403 13 12.1303 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M17 3H7C4.79086 3 3 4.79086 3 7V17C3 19.2091 4.79086 21 7 21H17C19.2091 21 21 19.2091 21 17V7C21 4.79086 19.2091 3 17 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6.30969 20.52C6.27753 19.7534 6.40079 18.9882 6.67199 18.2704C6.94319 17.5526 7.35674 16.8971 7.88781 16.3433C8.41888 15.7894 9.05649 15.3488 9.76226 15.0477C10.468 14.7467 11.2274 14.5916 11.9947 14.5916C12.762 14.5916 13.5214 14.7467 14.2272 15.0477C14.9329 15.3488 15.5705 15.7894 16.1016 16.3433C16.6326 16.8971 17.0462 17.5526 17.3174 18.2704C17.5886 18.9882 17.7118 19.7534 17.6797 20.52" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                                                                                             </div>
                                                                                             <div class="user-i-control">
                                                                                                 <div class="user-i-label">Reporting user</div>
@@ -4825,8 +4828,8 @@
                                         </i>
                                     </a>
                                 </div>
-                                <ng-container *ngIf="(AttachmentList|filter:History_Search) as AttachmentList">
-                                <div class="timeline-item" *ngFor="let _his of AttachmentList|filter:History_Search">
+                                <ng-container *ngIf="(AttachmentList | filter:History_Search) as AttachmentList">
+                                <div class="timeline-item" *ngFor="let _his of AttachmentList | filter:History_Search">
                                     <div class="timeline-line w-40px"></div>
                                     <div *ngIf="!_his.Attachment" class="timeline-icon symbol symbol-circle symbol-40px">
                                         <div class="symbol-label kt-bg-light-primary">
@@ -4858,6 +4861,7 @@
                                             </span>
                                         </div>
                                     </div>
+                                   
                                     <div class="timeline-content mb-10 mt-n2">
                                         <div class="overflow-auto pt-2 pr-3">
                                             <div class="fs-6 mb-1 txtm-def">{{_his.Title}}</div>
@@ -4902,12 +4906,12 @@
                                     </div>
                                 </div>
                                 <ng-container *ngIf="AttachmentList.length == 0">
-                                    <div class="d-flex align-items-center justify-content-between flex-column w-100">
-                                     <img style="    width: 60%; opacity: 0.6;"
-                                      src="assets/media/Img/search no memo image 04.png">
-                                    <p class="kt-blank-msg fs-4">No Activiy Found</p>
-                                    </div>
-                         </ng-container>
+                                           <div class="d-flex align-items-center justify-content-between flex-column w-100">
+                                            <img style="    width: 60%;
+    opacity: 0.6;" src="assets/media/Img/search no memo image 04.png">
+                                           <p class="kt-blank-msg fs-4">No Activiy Found</p>
+                                           </div>
+                                </ng-container>
                             </ng-container>
                             </div>
                         </div>
@@ -6685,7 +6689,7 @@
     </div>
     <!---Feature Model end-->
     <!-------- meetings view design start--------->
-    <div class="kt-quick-panel  sideInfobar animate-right" id="Meetings_SideBar">
+    <div class="kt-quick-panel" id="Meetings_SideBar">
         <div class="kt-portlet">
             <div class="kt-portlet__head">
                 <div class="offcanvas-header d-flex align-items-center justify-content-between pb-2">

@@ -582,7 +582,14 @@ export class InboxComponent implements OnInit {
         this.cd.detectChanges();
       });
   }
-
+  opentoggle() {
+    $('#kt_inbox_aside').addClass('mbl-left-zero');
+    $('.overlay-mbl-sidemenu').addClass('d-block');
+  }
+  closeoverlay(){
+    $('#kt_inbox_aside').removeClass('mbl-left-zero');
+    $('.overlay-mbl-sidemenu').removeClass('d-block');
+  }
   //   $('.kt-aside-menu-overlay').click(function() {
   //     $('#kt_inbox_aside').removeClass('menu--on');            
   //     $('.kt-aside-menu-overlay').removeClass('d-block');

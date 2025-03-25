@@ -82,3 +82,8 @@ h3.kt-blank-ttl {
 ::ng-deep .kt-body-arabic a.btn.btn-outline.btn-circle.fs-5.btn-sm.text-info.px-0 {
     display: flex;
 }
+@media Screen and (max-width: 768px) {
+    #addwarehouse_div.kt-quick-panel--on {
+        width: 100% !important;
+    }
+}

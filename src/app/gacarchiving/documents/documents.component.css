@@ -1,11 +1,5 @@
 /* searchdocument css */
 
-.kt-container,
-#kt-pdf {
-    font: 400 14px -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji !important;
-    /* color: #323338; */
-}
-
 .svg-inline--fa.fa-w-16 {
     width: 1em;
 }
@@ -558,6 +552,7 @@ i.fa.search-chld {
         right: -100.2%;
         left: auto;
     }
+
     .kt-quick-panel {
         width: 100% !important;
     }
@@ -567,6 +562,7 @@ i.fa.search-chld {
     .d-md-flex {
         flex-direction: column;
     }
+
     .card2 {
         margin-left: 0px;
     }
@@ -1274,6 +1270,7 @@ input.form-control.filt {
         flex: 0 0 31%;
         max-width: 31%;
     }
+
     .cards {
         flex: 0 0 31.7%;
         max-width: 31.7%;
@@ -1572,7 +1569,7 @@ svg.rmv-icn:hover {
 }
 
 .kt-container {
-    padding-top: 10px !important;
+    padding-top: 0px !important;
     align-items: center;
 }
 
@@ -1582,6 +1579,7 @@ svg.rmv-icn:hover {
         overflow-y: auto;
         height: calc(100vh - 150px);
     }
+
     .scroll-y.aside-scrolly {
         height: calc(100vh - 85px);
     }
@@ -2825,37 +2823,27 @@ svg.doc_attachment_img {
 /*=========== Mobile resposnvie =============*/
 
 @media only screen and (max-width: 560px) {
-    .left-click-side {
-        display: block;
+    .doc-list .doc-detls {
+        min-width: 600px;
     }
-    .kt-inbox__info label {
-        width: 100% !important;
-        margin-bottom: 6px !important;
-    }
-    .doc-detls .kt-inbox__info {
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        align-items: center;
-        width: 20px;
-    }
-    .kt-inbox__icon.kt-inbox__icon--off.kt-inbox__icon--light {
-        width: 100%;
-        display: block;
-        padding: 0px !important;
-        height: auto !important;
-    }
+
+
     span.kt-pin-v {
         padding: 0px !important;
     }
+
     .doc-date {
         margin-left: 100px;
     }
+
     .doc-username {
         max-width: 165px;
     }
+
     .kt-portlet__head.filter-head {
         padding: 0px !important;
     }
+
     .btn.btn-hvr {
         padding: 4px !important;
     }
@@ -2865,6 +2853,7 @@ svg.doc_attachment_img {
         height: 18px;
         width: 18px;
     }
+
     .overlay-mbl-sidemenu {
         content: "";
         position: absolute;
@@ -2876,5 +2865,20 @@ svg.doc_attachment_img {
         z-index: 998;
         display: none;
         cursor: pointer;
+    }
+
+    .filter-doc {
+        left: 10px;
+        right: 10px;
+    }
+
+    .kt-container {
+        padding-top: 0px !important;
+    }
+    .grid-scroll {
+        max-height: calc(100vh - 240px);
+    }
+    .kt-inbox__perpage.w-max {
+        margin-right: 0px;
     }
 }

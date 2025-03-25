@@ -1745,7 +1745,16 @@ h4.pro-nm {
     top: 20px;
     font-size: 8px !important;
 }
-
+.search-bar{
+    position: relative;
+}
+.close-icn {
+    position: absolute;
+    left: auto;
+    right: 4px;
+    top: 8px;
+    font-size: 8px !important;
+}
 a.close.close-icn i {
     font-size: 18px;
 }

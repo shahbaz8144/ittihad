@@ -2,33 +2,39 @@
     display: flex;
     padding-top: 8px;
 }
-.cards{
+
+.cards {
     min-width: 32%;
-    width: 32%;  
+    width: 32%;
     background: #F5F7FA;
     padding: 0;
     flex: 0 0 auto;
     border-radius: 4px;
     color: #0b0e1f;
     margin: 0px 8px;
-} 
-.desc{
+}
+
+.desc {
     color: #0b0e1f;
-    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1em;
     line-height: 1.42857;
     margin-bottom: 15px;
     margin-left: 5px;
 }
-.cards ul{
+
+.cards ul {
     padding-left: 5px;
 }
-li{
+
+li {
     list-style: none;
 }
-.menu_ul li{
+
+.menu_ul li {
     position: relative;
 }
+
 .list-item {
     display: flex;
     align-items: center;
@@ -36,7 +42,8 @@ li{
     padding: 8px 0 8px 10px;
     overflow: hidden;
 }
-.menu_li{
+
+.menu_li {
     background: #fff;
     border: 1px solid #E7EBF1;
     border-radius: 4px;
@@ -44,35 +51,43 @@ li{
     margin: 8px 0px;
     cursor: pointer;
 }
+
 .menu_li:hover {
     background: #fff;
     box-shadow: 0 0 2px #cfcfcf;
     border-radius: 4px;
 }
+
 .menu_text {
     flex: 1;
     color: #0b0e1f;
     padding-left: 10px;
 }
-.existcrd.menu_li{
+
+.existcrd.menu_li {
     border: 1px solid #26C281 !important;
     color: #ffffff;
     background: #26C281 !important;
 }
+
 .existcrd .menu_text {
     color: #ffffff;
 }
-.existcrd .icn{
+
+.existcrd .icn {
     font-weight: bold;
     color: #ffffff;
 }
-.icn{
+
+.icn {
     font-weight: bold;
     color: #646c9a;
 }
-.menu_toggle{
+
+.menu_toggle {
     margin: -1px 4px 2px 0;
 }
+
 .menu_checkbox {
     display: inline-flex;
     justify-content: flex-start;
@@ -81,10 +96,12 @@ li{
     line-height: normal;
     margin-bottom: 0;
 }
+
 .menu_checkbox input {
     opacity: 0;
     position: absolute;
 }
+
 .onoff-toggle {
     display: inline-block;
     cursor: pointer;
@@ -97,6 +114,7 @@ li{
     box-shadow: 0 1px 0 rgb(255 255 255 / 50%), inset 0 1px 1px rgb(0 0 0 / 10%);
     transition: background-color 210ms ease;
 }
+
 .onoff-toggle:before {
     content: "";
     display: inline-block;
@@ -110,29 +128,35 @@ li{
     top: 2px;
     transition: transform 120ms ease;
 }
-input:checked ~ .onoff-toggle {
+
+input:checked~.onoff-toggle {
     background-color: #59C894;
 }
-input:checked ~ .onoff-toggle:before {
+
+input:checked~.onoff-toggle:before {
     transform: translateX(100%);
 }
 
-.sub_text{
-    font-size: 13px;  
-    color: #969696;  
+.sub_text {
+    font-size: 13px;
+    color: #969696;
     color: #3d67f4;
     display: none;
 }
-.sub_title{
-    font-size: 13px;  
-    color: #969696;  
+
+.sub_title {
+    font-size: 13px;
+    color: #969696;
 }
-.menu_toggle .material-icons{
+
+.menu_toggle .material-icons {
     color: #969696;
     color: #4d70e5;
     vertical-align: middle;
 }
-.dragcrd .menu_li::before, .menu_li::after{
+
+.dragcrd .menu_li::before,
+.menu_li::after {
     content: "";
     width: 0;
     height: 2px;
@@ -140,26 +164,32 @@ input:checked ~ .onoff-toggle:before {
     transition: all 0.2s linear;
     background: #4d70e5;
 }
+
 .dragcrd .menu_li::before {
     right: 0;
     top: 0;
     transition-delay: 0.2s;
 }
+
 .dragcrd .menu_li::after {
     left: 0;
     bottom: 0;
     transition-delay: 0.6s;
 }
-.dragcrd .menu_li:hover::before, .dragcrd .menu_li:hover::after {
+
+.dragcrd .menu_li:hover::before,
+.dragcrd .menu_li:hover::after {
     width: 100%;
 }
 
 .dragcrd .menu_li:hover::before {
     transition-delay: 0.2s;
 }
+
 .dragcrd .menu_li:hover::after {
     transition-delay: 0s;
 }
+
 .kt-quick-panel.kt-quick-panel--on {
     width: 100% !important;
 }
@@ -206,28 +236,45 @@ input:checked ~ .onoff-toggle:before {
     margin: 4px 0px;
     color: #333;
 }
+
 .crd-sd {
     box-shadow: 0 2px 5px #00000026 !important;
 }
+
 .d-flex-center .kt-widget__item {
     width: 32.5%;
 }
-.ovlay-div{
+
+.ovlay-div {
     position: relative;
 }
-.ovlay{
+
+.ovlay {
     z-index: 99;
     position: absolute;
     width: 100%;
 }
+
 .ovlay .card {
     border: 1px solid #8d8dce;
     margin-right: 4px;
 }
 
-.selected-div{
+.selected-div {
     background-color: #d9f1ec;
 }
+
 ::ng-deep .kt-body-arabic #proview .kt-portlet {
     overflow-x: visible;
+}
+
+@media Screen and (max-width: 768px) {
+    .cards {
+        min-width: 100%;
+        width: 100%;
+    }
+
+    .menu_cards {
+        flex-wrap: wrap;
+    }
 }

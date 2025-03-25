@@ -118,7 +118,10 @@ h3.kt-blank-ttl {
     width: 100%;
     background-color: #fff;padding-bottom: 4rem;
 }
-  
-  
  
+@media Screen and (max-width: 768px) {
+    #kt_wrapper122.kt-quick-panel--on, .m-w-50 {
+        width: 100% !important;
+    }
+}
   

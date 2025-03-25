@@ -1832,3 +1832,33 @@ span.wf-bg.attach {
     text-overflow: ellipsis;
     margin-right: 0.5rem;
 }
+
+@media only screen and (max-width: 768px) {
+    div#Kt_reply_Memo_New.kt-quick-panel--on {
+        width: 100% !important;
+    }
+
+    .scroll-auto {
+        scrollbar-width: thin;
+    }
+
+    .newmemo-nav-div .nav-pills .nav-link {
+        padding: 4px 8px;
+        margin-right: 0px;
+    }
+
+    .newmemo-nav-div .nav-pills .nav-link:before,
+    .newmemo-nav-div .nav-pills .nav-link:after {
+        display: none;
+    }
+    .newmemo-nav-div .nav-pills {
+        padding-left: 0px;
+
+    }
+    .fd-cs-1 {
+        gap: 4px;
+    }
+    .promts-lists-column{
+        flex-direction: column;
+    }
+}

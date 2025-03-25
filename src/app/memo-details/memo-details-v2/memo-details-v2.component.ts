@@ -204,7 +204,6 @@ export class MemoDetailsV2Component implements OnInit, AfterViewInit {
 
   // Memo History start here
   AttachmentList: any[];
-  History_Search:string;
   //Memo History end here..
 
   //Attachment Section start here
@@ -245,6 +244,7 @@ export class MemoDetailsV2Component implements OnInit, AfterViewInit {
   _lstMultipleFiales: any;
   myFiles: string[] = [];
   isSelectionuser: boolean = false;
+  History_Search:string;
   // Attachment Section end here
 
   // Header Variable Values start here
@@ -2975,7 +2975,6 @@ export class MemoDetailsV2Component implements OnInit, AfterViewInit {
           } else {
             element.AttachmentJson = []; // Assign a fallback value if undefined
           }
-          this.History_Search = "";
         });
       });
   }
@@ -6057,7 +6056,7 @@ export class MemoDetailsV2Component implements OnInit, AfterViewInit {
   }
 
   openMeetingSidebar() {
-    document.getElementById("Meetings_SideBar").classList.add("kt-quick-Mettings--on");
+    document.getElementById("Meetings_SideBar").classList.add("kt-quick-panel--on");
     document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.add("d-block");
     // document.getElementById("newdetails").classList.add("position-fixed");
 
@@ -6069,7 +6068,7 @@ export class MemoDetailsV2Component implements OnInit, AfterViewInit {
 
 
   closeMeetingSidebar() {
-    document.getElementById("Meetings_SideBar").classList.remove("kt-quick-Mettings--on");
+    document.getElementById("Meetings_SideBar").classList.remove("kt-quick-panel--on");
     document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");
     document.getElementById("newdetails").classList.remove("position-fixed");
   }

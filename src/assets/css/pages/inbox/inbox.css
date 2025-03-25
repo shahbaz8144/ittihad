@@ -1869,3 +1869,37 @@ span.css-w0pj6f {
 .kt-grid__item.kt-grid__item--fluid.kt-portlet.kt-inbox__list.kt-inbox__list--shown {
     border: 1px solid #e4e4e4!important;
 }
+@media (min-width: 1024px) {
+    .scroll-y.kt-portlet__body--fit-x {
+        position: relative;
+        overflow-y: auto;
+        max-height: calc(100vh - 160px);
+    }
+    .scroll-y.aside-scrolly {
+        max-height: calc(100vh - 80px);
+    }
+}
+@media only screen and (max-width: 560px){
+    .kt-inbox .kt-inbox__toolbar .kt-inbox__actions {
+        margin: 0px 0px!important;
+    }
+    .kt-inbox .kt-inbox__toolbar.kt-inbox__toolbar--extended .kt-inbox__actions {
+        margin-bottom: 0px!important;
+    }
+    .kt-inbox .kt-inbox__toolbar .kt-inbox__search {
+        margin: 0px 0px!important;
+    }
+    .tabs-ies .btn-tabbie {
+        padding: 4px 2px;
+    }
+    .btn.btn-hvr {
+        padding: 0px;
+    }
+    .kt-inbox .kt-inbox__toolbar .kt-inbox__controls .kt-inbox__pages {
+        margin-left: 0px;
+        white-space: nowrap;
+    }
+    .kt-inbox .kt-inbox__toolbar .kt-inbox__controls .kt-inbox__pages .kt-inbox__perpage {
+        margin-right: 0px;
+    }
+}

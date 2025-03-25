@@ -51,3 +51,8 @@
     background-repeat: no-repeat;
     background-position: 12px 48%;
 }
+@media only screen and (max-width: 767px) {
+    .btn-mobile-name {
+        display: none;
+    }
+}

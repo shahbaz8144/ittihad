@@ -1,17 +1,19 @@
-<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid side_view">
-    <div class="col-lg-12 mt-3 px-0">
-        <div class="card  radius-xl mx-2">
-            <div class="card-body">
-                <div class="d-flex-center">
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid side_view px-4">
+    <div class="col-lg-12 px-0">
+        
+       
+            <div class="w-100">
+                <div class="d-flex-center mob-m-f">
                     <div class="component-main-header">
                         <div class="component-main-header-title">
-                            {{ "Administration.Banners" | translate }}
+                            <div class="mb-0">{{ "Administration.Banners" | translate }}</div>
                         </div>
                     </div>
                     <!-- <h4 class="mb-0 pro-nm"> {{ "Administration.Banners" | translate }} </h4> -->
                     <div class="d-flex-cen gap-2">
-                        <div class="search-bar"><input type="text" [(ngModel)]="BannerSearch" [placeholder]="BannerSearchs" aria-controls="example" class="form-control"></div>
-                        <a *ngIf="BannerSearch" class="close banner-close-icn"><i (click)="ReBindData()" class="material-icons">close<i></i></i></a>
+                        <div class="search-bar"><input type="text" [(ngModel)]="BannerSearch" [placeholder]="BannerSearchs" aria-controls="example" class="form-control">
+                            <a *ngIf="BannerSearch" class="close close-icn"><i (click)="ReBindData()" class="material-icons">close<i></i></i></a></div>
+                        
                         <button type="button" class="btn btn-info btn-sm" id="bnr_add" (click)="bnr_add()">
                             {{ "Administration.Addbanner" | translate }}
                         </button>
@@ -19,7 +21,7 @@
 
                 </div>
             </div>
-        </div>
+        
 
 
         <div class="banr-container">
@@ -39,41 +41,29 @@
                             <div class="bnr-details flex-1">
                                 <p class="bnr-nme">{{item.BannerName}}</p>
                                 <div class="bnr-dets my-1"> 
-                                    <div class="d-flex-cen">
-                                    <div class="user-img mr-1">
-                                            <img src="assets/media/icons/user3.png">
-                                    </div> {{item.DisplayName}}
-                                    </div> 
-
-                                    <p class="bnr-txt clamp-1 cmp-nams" title="Company Name">
+                                    <div class="dater">
+                                        <svg width="18px" height="18px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title></title> <g id="Complete"> <g id="user"> <g> <path d="M20,21V19a4,4,0,0,0-4-4H8a4,4,0,0,0-4,4v2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path> <circle cx="12" cy="7" fill="none" r="4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle> </g> </g> </g> </g></svg>
+                                        <span>{{item.DisplayName}}</span>
+                                    </div>
+                                    <p class="bnr-txt clamp-1 cmp-nams dater" title="Company Name">
+                                        <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M11 20H21V10C21 8.89543 20.1046 8 19 8H15M11 16H11.01M17 16H17.01M7 16H7.01M11 12H11.01M17 12H17.01M7 12H7.01M11 8H11.01M7 8H7.01M15 20V6C15 4.89543 14.1046 4 13 4H5C3.89543 4 3 4.89543 3 6V20H15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                                         <ng-container *ngIf="!item.IsAll">
-                                            {{item.CompanyNames}}
+                                            <span>{{item.CompanyNames}}</span>
                                         </ng-container>
                                         <ng-container *ngIf="item.IsAll">
-                                            All
+                                            <span>All</span>
                                         </ng-container>
-                                        </p>                                
+                                    </p>                                
                                 </div>
-                                <span class="dater">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="w-16 h-16">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
-                                    </svg>
-                                    {{item.StartDate}}
-                                </span>
-                                <span> &#8211; </span>
-                                <span class="dater">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="w-16 h-16">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
-                                    </svg>
-                                    {{item.EndDate}}
-                                </span>
+                                <div class="dater">
+                                    <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 10H21M7 3V5M17 3V5M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                    <span>{{item.StartDate}} - {{item.EndDate}}</span>
+                                </div>
+                               
                             </div>
-                            <div class="">
-                                <button type="button" id="bnr_edt" (click)="bnr_edit(item,i)" class="btn btn-info btn-sm"> {{ "Administration.Edit" | translate }} </button>
+                            <div class="curser-pointer" id="bnr_edt" (click)="bnr_edit(item,i)">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M21.1213 2.70705C19.9497 1.53548 18.0503 1.53547 16.8787 2.70705L15.1989 4.38685L7.29289 12.2928C7.16473 12.421 7.07382 12.5816 7.02986 12.7574L6.02986 16.7574C5.94466 17.0982 6.04451 17.4587 6.29289 17.707C6.54127 17.9554 6.90176 18.0553 7.24254 17.9701L11.2425 16.9701C11.4184 16.9261 11.5789 16.8352 11.7071 16.707L19.5556 8.85857L21.2929 7.12126C22.4645 5.94969 22.4645 4.05019 21.2929 2.87862L21.1213 2.70705ZM18.2929 4.12126C18.6834 3.73074 19.3166 3.73074 19.7071 4.12126L19.8787 4.29283C20.2692 4.68336 20.2692 5.31653 19.8787 5.70705L18.8622 6.72357L17.3068 5.10738L18.2929 4.12126ZM15.8923 6.52185L17.4477 8.13804L10.4888 15.097L8.37437 15.6256L8.90296 13.5112L15.8923 6.52185ZM4 7.99994C4 7.44766 4.44772 6.99994 5 6.99994H10C10.5523 6.99994 11 6.55223 11 5.99994C11 5.44766 10.5523 4.99994 10 4.99994H5C3.34315 4.99994 2 6.34309 2 7.99994V18.9999C2 20.6568 3.34315 21.9999 5 21.9999H16C17.6569 21.9999 19 20.6568 19 18.9999V13.9999C19 13.4477 18.5523 12.9999 18 12.9999C17.4477 12.9999 17 13.4477 17 13.9999V18.9999C17 19.5522 16.5523 19.9999 16 19.9999H5C4.44772 19.9999 4 19.5522 4 18.9999V7.99994Z" fill="#6b6b6b"></path> </g></svg>
+                                
                             </div>
 
                         </div>

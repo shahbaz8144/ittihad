@@ -159,7 +159,7 @@ button:hover {
 /* ::ng-deep body{
     background-color: #fff;
  } */
-.main-box {
+ .main-box {
     background: #ffffff;
     height: calc(100vh - 72px);
     overflow-x: hidden;
@@ -523,7 +523,12 @@ div#list-action button.back-btn svg {
     display: flex;
     padding: 2px 10px;
     width: 16%;
-    justify-content: flex-end;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
 }
 
 .list-view .item-label-icon {
@@ -1252,6 +1257,12 @@ span.de-icon {
     display: flex;
     width: 24%;
     padding: 2px 10px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
 }
 
 .file-explorer-container-footer {
@@ -1378,6 +1389,7 @@ span.breadcrum-stream-logo img {
     width: 18px;
     height: 18px;
 }
+
 .li-gri-btn.upload-btn {
     width: auto;
     padding: 0px 10px;
@@ -1385,6 +1397,7 @@ span.breadcrum-stream-logo img {
     gap: 6px;
     position: relative;
 }
+
 .li-gri-btn.recycle-btn {
     width: max-content;
     padding: 0px 6px;
@@ -1392,6 +1405,7 @@ span.breadcrum-stream-logo img {
     gap: 2px;
     position: relative;
 }
+
 input#fileUpload {
     /* position: absolute;
     top: 0;
@@ -1403,27 +1417,33 @@ input#fileUpload {
     cursor: pointer !important; */
     display: none;
 }
+
 .download-stream-btn {
     display: flex;
     align-items: center;
     gap: 6px;
     padding: 0.4rem 0.5rem;
 }
+
 .download-stream-btn svg {
     width: 20px;
     height: 20px;
 }
+
 .main-head {
     display: flex;
     align-items: center;
     font-size: 20px;
 }
+
 .main-head img {
     height: 26px;
 }
+
 .total-size {
     padding-left: 26px;
 }
+
 .fileupload-event.modal .modal-header {
     padding: 0.5rem 1.25rem;
     background-color: #ebebeb;
@@ -1459,7 +1479,7 @@ input#fileUpload {
     border-radius: 0.2rem;
     background-color: #7b68ee;
     border-color: #7b68ee;
-    color: #ffffff !important; 
+    color: #ffffff !important;
     /* background-color: #ff8900 !important;
     border-color: #ff8900 !important;
     */
@@ -1633,6 +1653,7 @@ li.modal-project-list-item {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 li.context-menu-li {
     display: flex;
     align-items: center;
@@ -1647,6 +1668,7 @@ li.context-menu-li {
     width: 20px;
     height: 20px;
 }
+
 li.de-li {
     display: flex;
     align-items: center;
@@ -1660,4 +1682,55 @@ li.de-li {
 .de-icon svg {
     width: 22px;
     height: 22px;
+}
+
+@media Screen and (max-width: 768px) {
+    .main-head-action .search-bar {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    .main-box-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .file-explorer-container {
+        min-height: calc(100vh - 230px);
+        max-height: calc(100vh - 230px);
+    }
+
+    .file-explorer.list-view .m-item {
+        width: 100%;
+    }
+
+    .list-action-table {
+        width: 100%;
+    }
+
+    .list-action-date {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 1;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+    }
+
+    .list-action-size {
+        border-right: 0px solid #f1f1f1;
+    }
+
+    .recycle-slide.kt-quick-panel.kt-quick-panel--on {
+        width: 100% !important;
+    }
+
+    .p-h-dtime,
+    .p-h-rtime {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 1;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+    }
 }

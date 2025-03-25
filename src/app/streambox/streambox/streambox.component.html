@@ -15,14 +15,14 @@
         <!-- <input type="file" id="fileUpload" (change)="onFileChange($event)" multiple> -->
         <div class="main-head-action">
             <div class="search-bar"><input type="text" [(ngModel)]="StreamSearch" (input)="SearchFileByName($event.target.value)" aria-controls="example" class="form-control  ng-touched" [placeholder]="Search"></div>
-            <div class="list-grid-btns">
-                <!-- <label class="li-gri-btn upload-btn " for="fileUpload" style="border-radius: 4px;">
+            <!-- <div class="list-grid-btns">
+                <label class="li-gri-btn upload-btn " for="fileUpload" style="border-radius: 4px;">
                     <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M17 17H17.01M15.6 14H18C18.9319 14 19.3978 14 19.7654 14.1522C20.2554 14.3552 20.6448 14.7446 20.8478 15.2346C21 15.6022 21 16.0681 21 17C21 17.9319 21 18.3978 20.8478 18.7654C20.6448 19.2554 20.2554 19.6448 19.7654 19.8478C19.3978 20 18.9319 20 18 20H6C5.06812 20 4.60218 20 4.23463 19.8478C3.74458 19.6448 3.35523 19.2554 3.15224 18.7654C3 18.3978 3 17.9319 3 17C3 16.0681 3 15.6022 3.15224 15.2346C3.35523 14.7446 3.74458 14.3552 4.23463 14.1522C4.60218 14 5.06812 14 6 14H8.4M12 15V4M12 4L15 7M12 4L9 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                     <span>Upload</span>
-                </label> -->
+                </label>
 
                 <input type="file" id="fileUpload" (change)="onFileChange($event)" multiple/>
-            </div>
+            </div> -->
             <div class="list-grid-btns">
                 <!-- <div class="li-gri-btn active" id="streambox-btn" (click)="streambox_btn()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 46 46" fill="none" style="width: 22px!important; height: 22px !important;"><path d="M25.0051 15.3141V40.92C25.0051 41.1921 25.2772 41.3621 25.5152 41.2261L35.3427 35.8873C35.4447 35.8192 35.5127 35.7172 35.5127 35.5812V21.061C35.5127 20.9249 35.4447 20.8229 35.3427 20.7549L25.5492 15.008C25.3112 14.872 25.0051 15.042 25.0051 15.3141ZM23.6109 41.0221V4.63641C23.6109 4.39838 23.3729 4.22835 23.1348 4.29636L11.199 8.71705C11.063 8.78506 10.9609 8.88707 10.9609 9.0571V36.7374C10.9609 36.8734 11.063 37.0094 11.199 37.0774L23.1348 41.3621C23.3729 41.4301 23.6109 41.2601 23.6109 41.0221Z" fill="currentColor"></path></svg>

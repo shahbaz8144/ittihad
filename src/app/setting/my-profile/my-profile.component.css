@@ -662,3 +662,8 @@ max-height: calc(100vh - 196px);
     color: #ffffff!important;
     border-bottom: 0px solid #22b9ff;
 }
+@media Screen and (max-width: 768px) {
+    .scrl-c {
+        max-height: 100%;
+    }
+}

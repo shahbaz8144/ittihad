@@ -483,4 +483,12 @@ export class WorkflowComponent implements OnInit {
       element.SystemActionReplied = "";
     });
   }
+  opentoggle() {
+    $('#kt_inbox_aside').addClass('mbl-left-zero');
+    $('.overlay-mbl-sidemenu').addClass('d-block');
+  }
+  closeoverlay(){
+    $('#kt_inbox_aside').removeClass('mbl-left-zero');
+    $('.overlay-mbl-sidemenu').removeClass('d-block');
+  }
 }
