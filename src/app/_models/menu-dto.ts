@@ -1,6 +1,6 @@
 export class MenuDTO {
     MenuId:number
-    MenuName:string
+    MenuName:'ar'
     MenuCategoryJson:string
     MenusJson:string
     UserId:number

@@ -20,7 +20,7 @@
                 <a routerLink="dashboard" class="kt-menu__link kt-menu__toggle">
                     <!-- <i class="kt-menu__link-icon  fas fa-tv"></i> -->
                     <i class="material-icons kt-menu__link-icon">space_dashboard</i>
-                    <span class="kt-menu__link-text">Dashboard</span>
+                    <span class="kt-menu__link-text">{{"Menu.Dashboard" | translate }}</span>
                 </a>
             </li>
             <!-- <li *ngFor="let menu of _MenuCategoryList" routerLinkActive="active" class="kt-menu__item  kt-menu__item--submenu dropdown menu-sub1" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
@@ -48,13 +48,15 @@
                 <ng-container *ngIf="menu.MenuCategoryId != 3">
                     <a *ngIf="menu.HasChild==false" routerLink="{{menu.SPARouteUrl}}" class="kt-menu__link kt-menu__toggle">
                         <i class="material-icons kt-menu__link-icon">{{menu.Icon}}</i>
-                        <span class="kt-menu__link-text">{{menu.MenuCategory}}</span>
+                        <span class="kt-menu__link-text" *ngIf="currentLang == 'en'" >{{menu.MenuCategory}}</span>
+                        <span class="kt-menu__link-text" *ngIf="currentLang == 'ar'" >{{menu.MenuCategoryAr}}</span>
                     </a>
                 </ng-container>
                 <ng-container *ngIf="menu.MenuCategoryId == 3">
                     <a *ngIf="menu.HasChild==false" [routerLink]="[menu.SPARouteUrl, cabinetid]" class="kt-menu__link kt-menu__toggle">
                         <i class="material-icons kt-menu__link-icon">{{menu.Icon}}</i>
-                        <span class="kt-menu__link-text">{{menu.MenuCategory}}</span>
+                        <span class="kt-menu__link-text" *ngIf="currentLang == 'en'" >{{menu.MenuCategory}}</span>
+                        <span class="kt-menu__link-text" *ngIf="currentLang == 'ar'" >{{menu.MenuCategoryAr}}</span>
                     </a>
                 </ng-container>
 
@@ -67,7 +69,8 @@
 
                 <a class="kt-menu__link kt-menu__toggleII" *ngIf="menu.HasChild==true" aria-haspopup="true" aria-expanded="false">
                     <i class="material-icons kt-menu__link-icon">{{menu.Icon}}</i>
-                    <span class="kt-menu__link-text">{{menu.MenuCategory}}</span>
+                    <span class="kt-menu__link-text" *ngIf="currentLang == 'en'" >{{menu.MenuCategory}}</span>
+                    <span class="kt-menu__link-text" *ngIf="currentLang == 'ar'" >{{menu.MenuCategoryAr}}</span>
                 </a>
                 <div *ngIf="menu.HasChild==true" class="kt-menu__submenu kt-menu__submenu--bottom new-menu_submenu">
                     <span class="kt-menu__arrow"></span>
@@ -76,9 +79,12 @@
 
                             <li *ngIf="(submenu.MenuCategoryId == menu.MenuCategoryId)" class="kt-menu__item" aria-haspopup="true">
                                 <a routerLink="{{submenu.SPARouteUrl}}" class="kt-menu__link">
-                                    <span class="kt-menu__link-text">
+                                    <span *ngIf="currentLang == 'en'"  class="kt-menu__link-text">
                                             {{submenu.MenuName}}
-                                        </span>
+                                    </span>
+                                    <span  *ngIf="currentLang == 'ar'"  class="kt-menu__link-text">
+                                        {{submenu.MenuNameAr}}
+                                </span>
                                 </a>
                             </li>
                         </ng-container>
