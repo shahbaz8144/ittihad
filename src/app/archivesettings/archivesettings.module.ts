@@ -22,6 +22,7 @@ import { PdfdownloadComponent } from './pdfdownload/pdfdownload.component'
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { CustomTemplateComponent } from './custom-template/custom-template.component';
 import { TemplatesComponent } from './templates/templates.component';
+import { GenerateBarcodeComponent } from './generate-barcode/generate-barcode.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { TemplatesComponent } from './templates/templates.component';
     MaptemplatetocabinetComponent,
     CustomTemplateComponent,
     TemplatesComponent,
-    PdfdownloadComponent
+    PdfdownloadComponent,
+    GenerateBarcodeComponent
 
   ],
   imports: [
