@@ -945,6 +945,7 @@
         "Datamodified": "Data modified"
     },
     "Menu" : {
+        "Dashboard" : "Dashboard",
         "Inbox" : "Inbox",
         "Streambox" : "Stream box",
         "WorkFlow" : "Work Flow",

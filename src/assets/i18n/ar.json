@@ -940,6 +940,7 @@
         "Datamodified": "تم تعديل البيانات"
     },
     "Menu" : {
+        "Dashboard" : "لوحة التحكم",
         "Inbox" : "التواصل",
         "Streambox" : "صندوق البث",
         "WorkFlow" : "سير العمل",
