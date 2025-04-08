@@ -127,7 +127,7 @@ LoginUserId:number
     this.AnnouncementList();
     this.UserName = this.currentUserValue.FirstName + ' ' + this.currentUserValue.LastName;
     this.DesignationName = this.currentUserValue.DesignationName;
-    console.log(this.DesignationName,"DesignationName");
+    // console.log(this.DesignationName,"DesignationName");
     this.UserProfile = this.currentUserValue.UserProfile;
     this.PolicyId = this.currentUserValue.PolicyId;
     if (this.PolicyId == 0)
