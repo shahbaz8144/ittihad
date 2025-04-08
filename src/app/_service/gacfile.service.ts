@@ -551,4 +551,10 @@ export class GACFileService {
     }).toPromise();
   }
 
+  BarcodeListAPI() {
+
+    this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
+
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/Barcodelist', this._ObjGac);
+  }
 }

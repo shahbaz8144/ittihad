@@ -302,9 +302,9 @@ export class LeftSectionComponent implements OnInit {
       .subscribe(data => {
         this._obj = data as MenuDTO;
         this._MenuCategoryList = JSON.parse(this._obj.MenuCategoryJson);
-        console.log(this._MenuCategoryList , "_MenuCategoryList");
+        // console.log(this._MenuCategoryList , "_MenuCategoryList");
         this._MenuList = JSON.parse(this._obj.MenusJson);
-        console.log(this._MenuList , "_MenuList");
+        // console.log(this._MenuList , "_MenuList");
         var dynamicScripts = [environment.assetsurl + "assets/js/scripts.bundle.js"];
         //  var dynamicScripts = ["../../../assets/js/scripts.bundle.js"];
         for (var i = 0; i < dynamicScripts.length; i++) {
