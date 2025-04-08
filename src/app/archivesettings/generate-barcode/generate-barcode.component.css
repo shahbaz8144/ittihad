@@ -95,11 +95,6 @@
     width: 80%;
 }
 
-.barcode-seq {
-    font-weight: 700;
-    color: #000000;
-    font-size: 18px;
-}
 
 .pre-flex {
     display: flex;
@@ -142,8 +137,138 @@
     gap: 16px;
     margin: 12px 0px;
 }
-.auto-incre-flex{
+
+.auto-incre-flex {
     display: flex;
     align-items: center;
     gap: 6px;
+}
+
+.barcode-seq {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.barcode-seq-item {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    position: relative;
+    color: #000;
+    padding: 0.5rem 0.75rem;
+    min-width: 80px;
+    min-height: 40px;
+    text-align: center;
+    transition: all 0.15s ease-in-out;
+}
+
+.barcode-seq-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e7e7e7;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 6px;
+    visibility: hidden;
+}
+
+.barcode-seq-item:hover .barcode-seq-action,
+.barcode-seq-item.active .barcode-seq-action {
+    visibility: visible;
+}
+
+.barcode-seq-action-item {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1a1717;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+}
+
+.barcode-seq-action-item:hover {
+    background-color: #f6f6f6;
+}
+
+.barcode-seq-action-item svg {
+    width: 20px;
+    height: 20px;
+}
+
+.barcode-seq-value {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.barcode-change-control {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-barcode-change svg {
+    width: 20px;
+    height: 20px;
+}
+
+.btn-barcode-change {
+    border: 1px solid #e2e5ec;
+    padding: 0px;
+    height: 38px;
+    width: 38px;
+}
+
+.btn-cncl {
+    margin-left: -1px;
+    color: #e70000;
+}
+
+.btn-chng {
+    color: #2786fb;
+}
+
+.barcode-seq-action .dropdown-menu {
+    min-width: 18rem;
+}
+
+.barcode-seq-complete {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+}
+
+.barcode-image-complete img {
+    width: 80%;
+}
+
+.barcode-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.barcode-image img {
+    width: 90px;
+}
+
+.barcode-seq-info-ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.barcode-seq-info-li {
+    border-right: 1px solid #e5e5e5;
+}
+
+.barcode-seq-info-li:last-child{
+    border: 0px;
 }
