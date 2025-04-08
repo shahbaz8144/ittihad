@@ -8,12 +8,14 @@ import { MaptemplatetocabinetComponent } from './maptemplatetocabinet/maptemplat
 import { PdfdownloadComponent } from './pdfdownload/pdfdownload.component';
 import { CustomTemplateComponent } from './custom-template/custom-template.component';
 import { TemplatesComponent } from './templates/templates.component';
+import { GenerateBarcodeComponent } from './generate-barcode/generate-barcode.component';
 
 const routes: Routes = [
   { path: 'cabinet', component: CabinetComponent, canActivate: [AuthGuard]},
   { path: 'Maptemplatetocabinet', component: MaptemplatetocabinetComponent, canActivate: [AuthGuard]},
   { path: 'template', component: TemplatesComponent, canActivate: [AuthGuard]},
   { path: 'customtemplate', component: CustomTemplateComponent, canActivate: [AuthGuard]},
+  { path: 'generatebarcode', component: GenerateBarcodeComponent, canActivate: [AuthGuard]},
   { path: 'edittemplate/:id', component: CustomTemplateComponent, canActivate: [AuthGuard]},
 
   //Dummy Url for testing

@@ -1,0 +1,218 @@
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid side_view px-4">
+    <div class="col-lg-12">
+        <div class="component-main-header">
+            <div class="component-main-header-title">
+                <div class="mb-0">Barcode Generate </div>
+            </div>
+        </div>
+        <!-- <h4 class="mb-3 pro-nm">{{"Masterform.MapTemplateToCabinet" | translate}}</h4> -->
+        <!-- Document View Component -->
+        <div class="card ribbon-box">
+            <div class="card-header align-items-center d-flex py-3">
+                <div class="flex-1">
+                    <div class="search-bar">
+                        <input type="text" class="form-control" placeholder="Search..." aria-controls="example">
+                        <!-- <a class="close close-icn">
+                            <i (click)="ClearSearch()" class="material-icons">close</i>
+                        </a> -->
+                    </div>
+                </div>
+                <div class="flex-shrink-0">
+                    <button class="btn btn-sm btn-info" style="display: block;" (click)="generate_barcode_open()">
+                        <i class="material-icons fs-4">add</i>
+                        Generate
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="card-body p-0">
+                <div class="mb-0 table-responsive">
+                    <table class="table b-table">
+                        <thead>
+                            <tr>
+                                <th>Barcode Name</th>
+                                <th>Barcode Sequence</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                                <tr>
+                                    <td>
+                                        barcode 1
+                                    </td>
+
+                                    <td>
+                                        2025-1-se-ak-1-1
+                                    </td>
+                                    <!-- [ngStyle]="{'color':item.Status=== true ? '#3f51b5' : 'red'}" -->
+                                    <td>
+                                        <div class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-success curser-pointer w-min-70">
+                                            Active
+                                        </div>
+                                        <!-- <div  class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-danger curser-pointer w-min-70">
+                                            In-Active
+                                        </div> -->
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <a class="btn btn-outline d-flex align-items-center fs-5 btn-sm text-info p-0 mr-3">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16px"
+                                                        height="16px" viewBox="0 0 24 24" fill="none" stroke="#2786fb"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-edit">
+                                                        <path
+                                                            d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
+                                                        </path>
+                                                        <path
+                                                            d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
+                                                        </path>
+                                                    </svg>
+                                              
+                                            </a>
+                                            <a class="btn btn-outline d-flex align-items-center fs-5 btn-sm text-danger p-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" width="18px" height="18px" viewBox="0 0 24 24"><path fill="currentColor" d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12M8 9h8v10H8V9m7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5Z"></path></svg>
+                                                    
+                                               
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        barcode 2
+                                    </td>
+
+                                    <td>
+                                        2025-1-bb-ak-2-1
+                                    </td>
+                                    <!-- [ngStyle]="{'color':item.Status=== true ? '#3f51b5' : 'red'}" -->
+                                    <td>
+                                        <!-- <div class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-success curser-pointer w-min-70">
+                                            Active
+                                        </div> -->
+                                        <div  class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-danger curser-pointer w-min-70">
+                                            In-Active
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <a class="btn btn-outline d-flex align-items-center fs-5 btn-sm text-info p-0 mr-3">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16px"
+                                                        height="16px" viewBox="0 0 24 24" fill="none" stroke="#2786fb"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-edit">
+                                                        <path
+                                                            d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
+                                                        </path>
+                                                        <path
+                                                            d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
+                                                        </path>
+                                                    </svg>
+                                              
+                                            </a>
+                                            <a class="btn btn-outline d-flex align-items-center fs-5 btn-sm text-danger p-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" width="18px" height="18px" viewBox="0 0 24 24"><path fill="currentColor" d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12M8 9h8v10H8V9m7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5Z"></path></svg>
+                                                    
+                                               
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="kt-aside-menu-overlay"></div>
+<div id="generate_barcode" class="wc-75 kt-quick-panel kt-quick-panel1 scroll-div">
+    <a id="kt_quick_panel_close_btn" class="kt-quick-panel__close" (click)="generate_barcode_close()">
+        <i class="flaticon2-delete"></i>
+    </a>
+    <div id="kt_chat_content" class="kt-grid__item kt-grid__item--fluid kt-app__content">
+        <div class="kt-chat">
+            <div class="kt-portlet kt-portlet--head-lg kt-portlet--last">
+                <div class="kt-portlet__head">
+                    <div class="kt-chat__head">
+                        <div>
+                            <div class="kt-chat__label">
+                                <h4 class="mb-0 text-dark"> Generate Barcode </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__body generate_barcode_body">
+                    <div class="form-group mb-4">
+                            <input type="text"  class="form-control" placeholder="Enter Barcode Name">
+                    </div>
+                    <div class="barcode-seq-con mb-4 mt-1">
+                        <div class="barcode-seq-legend">Barcode Sequence</div>
+                        <div class="radio-flex">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="barcodeOption" id="barcodeRadio1" (change)="togglebarcode('option1')"  [checked]="selectedOption === 'option1'"/>
+                                <label class="form-check-label" for="barcodeRadio1">
+                                    Prefix
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="barcodeOption" id="barcodeRadio2" (change)="togglebarcode('option2')"  [checked]="selectedOption === 'option2'"/>
+                                <label class="form-check-label" for="barcodeRadio2">
+                                    Auto Increment
+                                </label>
+                              </div>
+                        </div>
+                        <div class="form-group mb-3"  *ngIf="selectedOption === 'option1'">
+                            <label>Prefix</label>
+                                <input type="text"  class="form-control" placeholder="Enter prefix">
+                        </div>
+                       
+    
+                        <div class="form-group mb-0" *ngIf="selectedOption === 'option2'">
+                            <label>Auto Increment</label>
+                                    <div class="row">
+                                        <div class="form-group mb-3 col-md-4">
+                                            <input type="text" class="form-control" placeholder="Enter Seed" >
+                                    </div>
+                                    <div class="form-group mb-3 col-md-4">
+                                            <input type="number" class="form-control" placeholder="Enter Increment" >
+                                    </div>
+                                    <div class="form-group mb-3 col-md-4">
+                                            <ng-select placeholder="Increment Duration" class="TEST-CLASS">
+                                                <ng-option> Yearly </ng-option>
+                                                <ng-option> Monthly </ng-option>
+                                                <ng-option> Weekly </ng-option>
+                                                <ng-option> Document </ng-option>
+                                            </ng-select>
+                                    </div>
+                                    </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-sm btn-info">Add</button>
+                        </div>
+                    </div>
+                    <div class="barcode-seq-con mt-2">
+                        <div class="barcode-seq-legend">Barcode Preview</div>
+                        <div class="barcode-seq-info">
+                            <div class="barcode-image">
+                                <img src="../../../assets/media/Img/bar-code.PNG">
+                            </div>
+                            <div class="barcode-seq">
+                                2025-SF-1-3-KR
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__footer">
+                    <button type="submit" class="btn btn-sm btn-info px-3" >Generate</button>
+                    <button type="submit" class="btn btn-sm btn-secondary px-3" (click)="generate_barcode_close()">close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
