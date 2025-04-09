@@ -888,7 +888,17 @@
         "ReportingUserErrorlogMessage" : "حدد الإبلاغ عن المستخدم",
         "AddUserPersonalDetails" : "إضافة التفاصيل الشخصية للمستخدم",
         "AssignRoleposition" : "تعيين منصب الدور",
-        "EnterCategoryName" : "أدخل اسم الفئة"
+        "EnterCategoryName" : "أدخل اسم الفئة",
+        "BarcodeGenerate" : "توليد الباركود",
+        "Generate" : "يولد",
+        "BarcodeName" : "اسم الباركود",
+        "NotfoundBarcodeList": "لم يتم العثور على أي بيانات في قائمة الباركود.",
+        "GenerateBarcode" : "توليد الباركود",
+        "EnterBarcodeName" : "أدخل اسم الباركود",
+        "EnterSeed" : "أدخل البذور",
+        "EnterIncrement" : "أدخل الزيادة",
+        "IncrementDuration" : "مدة الزيادة",
+        "BarcodePreview" : "معاينة الباركود"
     },
     "Archive": {
         "Archive": "أرشيف",

@@ -557,4 +557,13 @@ export class GACFileService {
 
     return this.http.post(this.rootUrlII + 'ArchiveAPI/Barcodelist', this._ObjGac);
   }
+
+
+  InsertBarcodeAPI(ObjGac:GACFiledto) {
+    this._ObjGac.BarcodeName = ObjGac.BarcodeName;
+    this._ObjGac.CreatedBy = this.currentUserValue.createdby;
+    this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
+    this._ObjGac.PartsJson = ObjGac.PartsJson;
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/InsertBarcodeWithParts', this._ObjGac);
+  }
 }

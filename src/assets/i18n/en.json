@@ -893,7 +893,17 @@
         "ReportingUserErrorlogMessage" : "Select Reporting User",
         "AddUserPersonalDetails" : "Add User Personal Details",
         "AssignRoleposition" : "Assign Role, Position",
-        "EnterCategoryName" : "Enter Category Name"
+        "EnterCategoryName" : "Enter Category Name",
+        "BarcodeGenerate" : "Barcode Generate",
+        "Generate" : "Generate",
+        "BarcodeName" : "Barcode Name",
+        "NotfoundBarcodeList": "No data found in barcode list.",
+        "GenerateBarcode" : "Generate Barcode",
+        "EnterBarcodeName" : "Enter Barcode Name",
+        "EnterSeed" : "Enter Seed",
+        "EnterIncrement" : "Enter Increment",
+        "IncrementDuration" : "Increment Duration",
+        "BarcodePreview" : "Barcode Preview"
     },
     "Archive": {
         "Archive": "Archive",

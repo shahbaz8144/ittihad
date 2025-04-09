@@ -2,7 +2,7 @@
     <div class="col-lg-12">
         <div class="component-main-header">
             <div class="component-main-header-title">
-                <div class="mb-0">Barcode Generate </div>
+                <div class="mb-0">{{"Masterform.BarcodeGenerate" | translate }} </div>
             </div>
         </div>
         <!-- <h4 class="mb-3 pro-nm">{{"Masterform.MapTemplateToCabinet" | translate}}</h4> -->
@@ -11,7 +11,7 @@
             <div class="card-header align-items-center d-flex py-3">
                 <div class="flex-1">
                     <div class="search-bar">
-                        <input type="text" class="form-control" [(ngModel)]="BarcodeSearch" placeholder="Search..." aria-controls="example">
+                        <input type="text" class="form-control" [(ngModel)]="BarcodeSearch" [placeholder]="SearchBarcode" aria-controls="example">
                         <!-- <a class="close close-icn">
                             <i (click)="ClearSearch()" class="material-icons">close</i>
                         </a> -->
@@ -20,7 +20,7 @@
                 <div class="flex-shrink-0">
                     <button class="btn btn-sm btn-info" style="display: block;" (click)="generate_barcode_open()">
                         <i class="material-icons fs-4">add</i>
-                        Generate
+                        {{"Masterform.Generate" | translate }}
                     </button>
                 </div>
             </div>
@@ -29,14 +29,15 @@
                     <table class="table b-table">
                         <thead>
                             <tr>
-                                <th>Barcode Name</th>
-                                <th>Barcode Sequence</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>{{"Masterform.BarcodeName" | translate }}</th>
+                                <th>{{"Masterform.BarcodeSequence" | translate }}</th>
+                                <th>{{"Masterform.Status" | translate }}</th>
+                                <th>{{"Masterform.Action" | translate }}</th>
                             </tr>
                         </thead>
-                        <tbody>
-                                <tr *ngFor="let item of BarCodeListJson">
+                        <tbody class="position-relative">
+                            <ng-container *ngIf="(BarCodeListJson |filter:BarcodeSearch ) as BarCodeListJson">
+                                <tr *ngFor="let item of BarCodeListJson |filter: BarcodeSearch">
                                     <td>
                                       {{item.BarcodeName}}
                                     </td>
@@ -70,6 +71,18 @@
                                         </div>
                                     </td>
                                 </tr>
+                                <ng-container *ngIf="BarCodeListJson == 0" >
+                                  <tr class="position-relative" style="height: 350px;">
+                                    <div class="nobarcode">
+                                        <img src="assets/media/Img/no bar code.png">
+                                        <!-- <p>Noresult found.</p> -->
+                                        <h3 class="kt-blank-ttl"> {{ "Masterform.NoDataCompany" |translate }} </h3>
+                                        <p class="kt-blank-msg"> {{ "Masterform.NotfoundBarcodeList" | translate }} </p>
+                                      </div>
+                                  </tr>
+                                </ng-container>
+                            </ng-container>
+
                         </tbody>
                     </table>
                 </div>
@@ -89,73 +102,97 @@
                     <div class="kt-chat__head">
                         <div>
                             <div class="kt-chat__label">
-                                <h4 class="mb-0 text-dark"> Generate Barcode </h4>
+                                <h4 class="mb-0 text-dark"> {{"Masterform.GenerateBarcode" | translate }} </h4>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="kt-portlet__body generate_barcode_body">
                     <div class="form-group mb-4">
-                            <input type="text"  class="form-control" placeholder="Enter Barcode Name">
+                            <input type="text"  class="form-control" [(ngModel)]="_BarcodeName" [placeholder]="EnterBarcodeName">
+                            <div class="kt-error" *ngIf="BarcodeNameerrormessage && !_BarcodeName">
+                                <span class="kt-error-msg">
+                                    {{"Masterform.EnterBarcodeName" | translate }} </span>
+                            </div>
                     </div>
+                    
                     <div class="barcode-seq-con mb-4 mt-1">
-                        <div class="barcode-seq-legend">Barcode Sequence</div>
+                        <div class="barcode-seq-legend">{{"Masterform.BarcodeSequence" | translate }}</div>
                         <div class="radio-flex">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="barcodeOption" id="barcodeRadio1" (change)="togglebarcode('option1')"  [checked]="selectedOption === 'option1'"/>
+                                <input class="form-check-input" type="radio" name="barcodeOption" id="barcodeRadio1" (change)="togglebarcode('Prefix')"  [checked]="selectedOption === 'Prefix'"/>
                                 <label class="form-check-label" for="barcodeRadio1">
-                                    Prefix
+                                    {{"Masterform.Prefix" | translate }}
                                 </label>
                               </div>
                               <div class="form-check">
-                                <input class="form-check-input" type="radio" name="barcodeOption" id="barcodeRadio2" (change)="togglebarcode('option2')"  [checked]="selectedOption === 'option2'"/>
+                                <input class="form-check-input" type="radio" name="barcodeOption" id="barcodeRadio2" (change)="togglebarcode('Auto Increment')"  [checked]="selectedOption === 'Auto Increment'"/>
                                 <label class="form-check-label" for="barcodeRadio2">
-                                    Auto Increment
+                                    {{"Masterform.AutoIncrement" | translate }}
                                 </label>
                               </div>
                         </div>
-                        <div class="form-group mb-3"  *ngIf="selectedOption === 'option1'">
+                        <div class="form-group mb-3"  *ngIf="selectedOption === 'Prefix'">
                             <label>Prefix</label>
-                                <input type="text"  class="form-control" placeholder="Enter prefix">
+                                <input type="text" [(ngModel)]="Prefix_Value" class="form-control" [placeholder]="Enterprefix">
+                                <div class="kt-error" *ngIf="Prefixerrormessage && !Prefix_Value">
+                                    <span class="kt-error-msg">
+                                        {{"Masterform.Enterprefix" | translate }} </span>
+                                </div>
                         </div>
-                        <div class="form-group mb-0" *ngIf="selectedOption === 'option2'">
+
+                        <div class="form-group mb-0" *ngIf="selectedOption === 'Auto Increment'">
                             <label>Auto Increment</label>
                                     <div class="row">
                                         <div class="form-group mb-3 col-md-4">
-                                            <input type="text" class="form-control" placeholder="Enter Seed" >
+                                            <input type="number"   (keypress)="allowOnlyNumbers($event)" class="form-control" [(ngModel)]="Seed_Value" [placeholder]="EnterSeed" >
+                                            <div class="kt-error" *ngIf="Seederrormessage && !Seed_Value">
+                                                <span class="kt-error-msg">
+                                                    {{"Masterform.EnterSeed" | translate }} </span>
+                                            </div>
                                     </div>
                                     <div class="form-group mb-3 col-md-4">
-                                            <input type="number" class="form-control" placeholder="Enter Increment" >
+                                            <input type="number"   (keypress)="allowOnlyNumbers($event)" class="form-control" [(ngModel)]="Increment_Value" [placeholder]="EnterIncrement" >
+                                            <div class="kt-error" *ngIf="Incrementerrormessage && !Increment_Value">
+                                                <span class="kt-error-msg">
+                                                    {{"Masterform.EnterIncrement" | translate }} </span>
+                                            </div>
                                     </div>
                                     <div class="form-group mb-3 col-md-4">
-                                            <ng-select placeholder="Increment Duration" class="TEST-CLASS">
-                                                <ng-option> Yearly </ng-option>
-                                                <ng-option> Monthly </ng-option>
-                                                <ng-option> Weekly </ng-option>
-                                                <ng-option> Document </ng-option>
+                                            <ng-select placeholder="Increment Duration" [(ngModel)]="IncrementDuration_Value" class="TEST-CLASS">
+                                                <ng-option [value]="'Yearly'" > Yearly </ng-option>
+                                                <ng-option [value]="'Monthly'" > Monthly </ng-option>
+                                                <ng-option [value]="'Daily'" > Daily </ng-option>
+                                                <ng-option [value]="'Document'" > Document </ng-option>
                                             </ng-select>
+                                            <div class="kt-error" *ngIf="IIncrementDurationerrormessage && !IncrementDuration_Value">
+                                                <span class="kt-error-msg">
+                                                    {{"Masterform.IncrementDuration" | translate }} </span>
+                                            </div>
                                     </div>
                                     </div>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button class="btn btn-sm btn-info">Add</button>
+                            <button class="btn btn-sm btn-info" *ngIf="!ShownAddandhideAdd" (click)="AddBarcodeSequence()">{{"Masterform.Add" | translate }}</button>
+                            <button class="btn btn-sm btn-info" *ngIf="ShownAddandhideAdd" (click)="UpdateBarcodeSequence()">{{"Masterform.Update" | translate }}</button>
                         </div>
                     </div>
                     <div class="barcode-seq-con mt-2">
-                        <div class="barcode-seq-legend">Barcode Preview</div>
+                        <div class="barcode-seq-legend">{{"Masterform.BarcodePreview" | translate }}</div>
                         <div class="barcode-seq-info-ul">
-                            <div class="barcode-seq-info-li">
+                            <div class="barcode-seq-info-li" *ngFor="let item of BarcodeList"
+                            [ngClass]="{ 'bar-focus': item.OrderId === selectedOrderId }">
                                 <div class="barcode-image">
-                                    <img src="../../../assets/media/Img/pngwing.com.png">
+                                    <img src="assets/media/Img/pngwing.com.png">
                                 </div>
                                 <div class="barcode-seq">
                                      <div class="barcode-seq-item">
-                                        <div class="barcode-seq-value">2025</div>
+                                        <div class="barcode-seq-value">  {{ item.Type === 'Prefix' ? item.Seed : item.Seed }}</div>
                                         <div class="barcode-seq-action">
-                                            <div class="barcode-seq-action-item barcode-edit"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="barcode-seq-action-item barcode-edit" (click)="EditBarcodesequence(item.OrderId)" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M18.3785 8.44975L11.4637 15.3647C11.1845 15.6439 10.8289 15.8342 10.4417 15.9117L7.49994 16.5L8.08829 13.5582C8.16572 13.1711 8.35603 12.8155 8.63522 12.5363L15.5501 5.62132M18.3785 8.44975L19.7927 7.03553C20.1832 6.64501 20.1832 6.01184 19.7927 5.62132L18.3785 4.20711C17.988 3.81658 17.3548 3.81658 16.9643 4.20711L15.5501 5.62132M18.3785 8.44975L15.5501 5.62132" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M5 20H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                                             </div>
-                                            <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton">
+                                            <!-- <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton">
                                                 <div class="barcode-change-control">
                                                     <input type="text" class="form-control" placeholder="Enter Value" value="2025">
                                                     <div class="d-flex align-items-center">
@@ -167,8 +204,9 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                              </div>
-                                            <div class="barcode-seq-action-item barcode-delete">
+                                              </div> -->
+                                            <div  (click)="Deletebarcode(item.OrderId)"
+                                             class="barcode-seq-action-item barcode-delete">
                                                 <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M10 12V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M14 12V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6 10V18C6 19.6569 7.34315 21 9 21H15C16.6569 21 18 19.6569 18 18V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                                             </div>
                                         </div>
@@ -177,21 +215,34 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
-                        <div class="barcode-seq-info">
+                        <hr *ngIf="BarcodeList.length !=0">
+                        <div class="barcode-seq-info" *ngIf="BarcodeList.length !=0">
                             <div class="barcode-image-complete">
-                                <img src="../../../assets/media/Img/bar-code.PNG">
+                                <img src="assets/media/Img/bar-code.PNG">
                             </div>
-                            <div class="barcode-seq-complete">
-                                 2025-SF-1-KR-3 
-                            </div>
+                            <!-- <div class="barcode-seq-complete" *ngFor="let item of BarcodeList" >
+                                {{ item.Type === 'Prefix' ? item.Seed : item.Seed }}
+                            </div> -->
+                            <!-- <div class="barcode-seq-complete">
+                                <ng-container *ngFor="let item of BarcodeList">
+                                  <ng-container *ngIf="item.Type === 'Prefix' || item.Type === 'Auto Increment'">
+                                    {{ item.Seed }}
+                                  </ng-container>
+                                </ng-container>
+                              </div> -->
+                              <div class="barcode-seq-complete">
+                                {{ mergedBarcodeSeed }}
+                              </div>
+                              
                         </div>
-
+                            <div class="barcode-seq-info" *ngIf="BarcodeList.length ==0" >
+                                <img src="assets/media/Img/no bar code.png" >
+                            </div>
                     </div>
                 </div>
                 <div class="kt-portlet__footer">
-                    <button type="submit" class="btn btn-sm btn-info px-3" >Generate</button>
-                    <button type="submit" class="btn btn-sm btn-secondary px-3" (click)="generate_barcode_close()">close</button>
+                    <button type="submit" class="btn btn-sm btn-info px-3" [disabled]="BarcodeList.length === 0" (click)="AddBarcode()" >{{"Masterform.Generate" | translate }}</button>
+                    <button type="submit" class="btn btn-sm btn-secondary px-3" (click)="generate_barcode_close()">{{"Masterform.Close" | translate }}</button>
                 </div>
             </div>
         </div>

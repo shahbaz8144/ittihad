@@ -167,7 +167,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #e7e7e7;
+    background-color: #fff;
     position: absolute;
     top: 0;
     left: 0;
@@ -271,4 +271,43 @@
 
 .barcode-seq-info-li:last-child{
     border: 0px;
+}
+
+.kt-error-msg {
+    color: #ff5d5d;
+    font-weight: 400;
+    font-size: 13px;
+    text-transform: capitalize;
+    margin-top: 3px;
+    display: block;
+    padding-left: 1px;
+  
+}
+
+.barcode-seq-info-ul {
+    flex-wrap: wrap;
+}
+
+.barcode-seq-info-li {
+    margin-top: 8px;
+    padding: 6px 6px;
+    border-radius: 4px;
+}
+.bar-focus {
+    box-shadow: 0 0 0 0.2rem rgba(88, 103, 221, 0.25);
+}
+
+.nobarcode{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    min-height: 300px;
+    background-color: #fff;
+}
+.nobarcode p{
+    font-size: 18px;
+    font-weight: 600;
 }
