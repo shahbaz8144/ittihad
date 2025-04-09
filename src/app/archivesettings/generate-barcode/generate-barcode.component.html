@@ -241,29 +241,34 @@
                     </div>
                 </div>
                 <div class="kt-portlet__footer">
-                    <p *ngIf="allValidationsPassed == false" class="error-note" style="align-items: center;">
-                        <span>
-                            <svg fill="currentColor" width="64px" height="64px" viewBox="0 0 1024 1024"
-                                version="1" xmlns="http://www.w3.org/2000/svg">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                    stroke-linejoin="round"></g>
-                                <g id="SVGRepo_iconCarrier">
-                                    <path
-                                        d="M512 717a205 205 0 1 0 0-410 205 205 0 0 0 0 410zm0 51a256 256 0 1 1 0-512 256 256 0 0 1 0 512z">
-                                    </path>
-                                    <path
-                                        d="M485 364c7-7 16-11 27-11s20 4 27 11c8 8 11 17 11 28 0 10-3 19-11 27-7 7-16 11-27 11s-20-4-27-11c-8-8-11-17-11-27 0-11 3-20 11-28zM479 469h66v192h-66z">
-                                    </path>
-                                </g>
-                            </svg>
-                        </span>
-                        <span>
-                           {{"Masterform.Mandatoryfileds" | translate }}
-                        </span>
-                    </p>
-                    <button type="submit" class="btn btn-sm btn-info px-3" [disabled]="BarcodeList.length === 0" (click)="AddBarcode()" >{{"Masterform.Generate" | translate }}</button>
+                    
+                    <div>
+                        <button type="submit" class="btn btn-sm btn-info px-3 mr-2" [disabled]="BarcodeList.length === 0" (click)="AddBarcode()" >{{"Masterform.Generate" | translate }}</button>
                     <button type="submit" class="btn btn-sm btn-secondary px-3" (click)="generate_barcode_close()">{{"Masterform.Close" | translate }}</button>
+                    </div>
+                    <div>
+                        <p *ngIf="allValidationsPassed == false" class="error-note" style="align-items: center;">
+                            <span>
+                                <svg fill="currentColor" width="64px" height="64px" viewBox="0 0 1024 1024"
+                                    version="1" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                        stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path
+                                            d="M512 717a205 205 0 1 0 0-410 205 205 0 0 0 0 410zm0 51a256 256 0 1 1 0-512 256 256 0 0 1 0 512z">
+                                        </path>
+                                        <path
+                                            d="M485 364c7-7 16-11 27-11s20 4 27 11c8 8 11 17 11 28 0 10-3 19-11 27-7 7-16 11-27 11s-20-4-27-11c-8-8-11-17-11-27 0-11 3-20 11-28zM479 469h66v192h-66z">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </span>
+                            <span>
+                               {{"Masterform.Mandatoryfileds" | translate }}
+                            </span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

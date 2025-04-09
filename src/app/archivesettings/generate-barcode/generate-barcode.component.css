@@ -31,7 +31,7 @@
 
 
 .generate_barcode_body {
-    height: calc(100vh - 125px);
+    height: calc(100vh - 128px);
     overflow: auto;
 }
 
