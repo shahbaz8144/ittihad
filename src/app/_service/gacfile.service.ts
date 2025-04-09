@@ -477,8 +477,9 @@ export class GACFileService {
   AddMapTemplateAPI(ObjGac: GACFiledto) {
     this._ObjGac.TemplateId = ObjGac.TemplateId;
     this._ObjGac.CabinetId = ObjGac.CabinetId;
-    this._ObjGac.BarcodeSequence = ObjGac.BarcodeSequence;
-    this._ObjGac.Prefix = ObjGac.Prefix;
+    this._ObjGac.BarcodeId = ObjGac.BarcodeId;
+    // this._ObjGac.BarcodeSequence = ObjGac.BarcodeSequence;
+    // this._ObjGac.Prefix = ObjGac.Prefix;
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
     this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
     return this.http.post(this.rootUrlII + 'ArchiveAPI/NewAddMapTemplate', this._ObjGac);
@@ -565,5 +566,14 @@ export class GACFileService {
     this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
     this._ObjGac.PartsJson = ObjGac.PartsJson;
     return this.http.post(this.rootUrlII + 'ArchiveAPI/InsertBarcodeWithParts', this._ObjGac);
+  }
+
+
+  RemoveMappedDataAPI(ObjGac:GACFiledto) {
+
+    this._ObjGac.MapTemplateId  = ObjGac.MapTemplateId;
+    this._ObjGac.IsActive = ObjGac.IsActive
+
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/RemoveMappedData', this._ObjGac);
   }
 }

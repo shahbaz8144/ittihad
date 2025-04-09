@@ -49,7 +49,8 @@
                                         {{item.BarcodeSequence}}
                                     </td>
                                     <!-- [ngStyle]="{'color':item.Status=== true ? '#3f51b5' : 'red'}" -->
-                                    <td [ngStyle]="{'color':item.IsActive=== true ? '#3f51b5' : 'red'}">
+                                    <td [ngStyle]="{'color':item.IsActive=== true ? '#3f51b5' : 'red'}"
+                                    (click)="UpdateStatus(item)">
                                         <div *ngIf="item.IsActive" class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-success curser-pointer w-min-70">
                                             Active
                                         </div>
@@ -122,6 +123,17 @@
                                    {{"Masterform.Tempdropdownerror" | translate }}</span>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="form-label">{{"Masterform.Barcode" | translate }} </label>
+                        <span class="text-danger ml-1">*</span>
+                        <ng-select [(ngModel)]="BarcodeArray" [placeholder] ="SelectBarcode" class="TEST-CLASS">
+                            <ng-option *ngFor="let temp of BarcodeJson" [value]="temp.BarcodeId"> {{temp.BarcodeName}} </ng-option>
+                        </ng-select>
+                        <div class="kt-error" *ngIf="BarcodeArrayerrormessage && !BarcodeArray">
+                            <span class="kt-error-msg">
+                                   {{"Masterform.PleaseselectBarcode" | translate }}</span>
+                        </div>
+                    </div>
                     <!-- <div class="form-group">
                             <label class="form-label">Barcode sequence:</label>
                             <span class="text-danger ml-1">*</span>
@@ -131,7 +143,7 @@
                                Enter Barcode sequence</span>
                         </div>
                         </div> -->
-                    <div class="barcode-seq-con">
+                    <!-- <div class="barcode-seq-con">
                         <div class="barcode-seq-legend">{{"Masterform.BarcodeSequence" | translate}}</div>
                         <div class="form-group mb-3">
                             <label>{{"Masterform.Prefix" | translate }}:</label>
@@ -150,7 +162,7 @@
                             <span class="kt-error-msg">
                                    {{"Masterform.EnterautoIncrement" | translate }}</span>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="kt-portlet__footer">
                     <button type="submit" class="btn btn-sm btn-info px-3" (click)="AddMapTemplate()">{{"Masterform.Submit" | translate  }}</button>

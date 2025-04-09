@@ -903,7 +903,9 @@
         "EnterSeed" : "Enter Seed",
         "EnterIncrement" : "Enter Increment",
         "IncrementDuration" : "Increment Duration",
-        "BarcodePreview" : "Barcode Preview"
+        "BarcodePreview" : "Barcode Preview",
+        "Barcode" : "Barcode",
+        "PleaseselectBarcode" : "Please select barcode"
     },
     "Archive": {
         "Archive": "Archive",

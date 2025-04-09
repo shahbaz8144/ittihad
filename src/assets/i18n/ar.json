@@ -898,7 +898,9 @@
         "EnterSeed" : "أدخل البذور",
         "EnterIncrement" : "أدخل الزيادة",
         "IncrementDuration" : "مدة الزيادة",
-        "BarcodePreview" : "معاينة الباركود"
+        "BarcodePreview" : "معاينة الباركود",
+        "Barcode" : "الباركود",
+        "PleaseselectBarcode" : "الرجاء تحديد الباركود"
     },
     "Archive": {
         "Archive": "أرشيف",

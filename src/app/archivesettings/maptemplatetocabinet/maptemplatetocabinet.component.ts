@@ -5,6 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderComponent } from 'src/app/shared/header/header.component';
 import { DOCUMENT } from '@angular/common';
+import { ConfirmDialogComponent } from 'src/app/master-forms/confirmdialog/confirmdialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-maptemplatetocabinet',
@@ -16,12 +18,14 @@ export class MaptemplatetocabinetComponent implements OnInit {
   _CabinetArray:any;
   _CabinetJson:any;
   _TemplateJson:any;
+  BarcodeJson:any;
   _TemplateArray:any;
+  BarcodeArray:any;
   _MapJson:any [] = [];
   obj:GACFiledto;
   Cabineterrormessage:boolean=false;
   Templateerrormessage:boolean = false;
-  prefixerrormessage:boolean = false;
+  BarcodeArrayerrormessage:boolean = false;
   Barcodeerrormessage:boolean = false;
   autoIncrementerrormessage:boolean = false;
   Barcodesequence:string = "";
@@ -33,10 +37,12 @@ export class MaptemplatetocabinetComponent implements OnInit {
   SelectTemplate:string = "";
   Enterprefix:string = "";
   Enternumber:string = "";
+  SelectBarcode:string = "";
   constructor(private service:GACFileService,private _snackBar: MatSnackBar,
     private translate:TranslateService,
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
+    private dialog: MatDialog,
   ) {
     this.obj = new GACFiledto();
        HeaderComponent.languageChanged.subscribe((lang)=>{
@@ -49,6 +55,7 @@ export class MaptemplatetocabinetComponent implements OnInit {
           this.SelectTemplate = lang === 'en' ? 'Select Template' : 'حدد القالب';
            this.Enterprefix = lang === 'en' ? 'Enter prefix' : 'أدخل البادئة';
             this.Enternumber = lang === 'en' ? 'Enter number' : 'أدخل الرقم';
+            this.SelectBarcode  = lang === 'en' ? 'Select Barcode' : 'حدد الباركود';
         if(lang == 'ar'){
           this.renderer.addClass(document.body, 'kt-body-arabic');
         }else if (lang == 'en'){
@@ -69,6 +76,7 @@ export class MaptemplatetocabinetComponent implements OnInit {
       this.SelectTemplate = lang === 'en' ? 'Select Template' : 'حدد القالب';
        this.Enterprefix = lang === 'en' ? 'Enter prefix' : 'أدخل البادئة';
         this.Enternumber = lang === 'en' ? 'Enter number' : 'أدخل الرقم';
+        this.SelectBarcode  = lang === 'en' ? 'Select Barcode' : 'حدد الباركود';
     if(lang == 'ar'){
       this.renderer.addClass(document.body, 'kt-body-arabic');
     }else if (lang == 'en'){
@@ -84,6 +92,8 @@ export class MaptemplatetocabinetComponent implements OnInit {
       console.log(data , "Cabinet list");
       this._CabinetJson = data['Data'].CabinetJson;
       this._TemplateJson = data['Data'].TemplateJson;
+      this.BarcodeJson = data['Data'].BarcodeJson;
+      console.log(this.BarcodeJson ,"Barcode list");
     })
   }
 
@@ -130,25 +140,26 @@ export class MaptemplatetocabinetComponent implements OnInit {
    
   AddMapTemplate() {
     
-    if (!this._CabinetArray || !this._TemplateArray || !this.prefix || !this.autoIncrementValue) {
+    if (!this._CabinetArray || !this._TemplateArray || !this.BarcodeArray ) {
       this.Cabineterrormessage = !this._CabinetArray;
       this.Templateerrormessage = !this._TemplateArray;
-       this.prefixerrormessage = !this.prefix;
-       this.autoIncrementerrormessage = !this.autoIncrementValue;
+       this.BarcodeArrayerrormessage = !this.BarcodeArray;
+      
       return; // Stop execution if validation fails
     } 
   
     // Reset error messages
     this.Cabineterrormessage = false;
     this.Templateerrormessage = false;
-    this.prefixerrormessage = false;
+    this.BarcodeArrayerrormessage = false;
     this.autoIncrementerrormessage = false;
   
     // Prepare request object
     this.obj.TemplateId = this._TemplateArray.toString();
         this.obj.CabinetId = this._CabinetArray.toString();
-        this.obj.BarcodeSequence = this.autoIncrementValue;
-        this.obj.Prefix = this.prefix;
+        this.obj.BarcodeId = this.BarcodeArray.toString();
+        // this.obj.BarcodeSequence = this.autoIncrementValue;
+        // this.obj.Prefix = this.prefix;
   
     // Call API
     this.service.AddMapTemplateAPI(this.obj).subscribe(data => {
@@ -165,7 +176,7 @@ export class MaptemplatetocabinetComponent implements OnInit {
           this.GetMappedTemplatesList();
           break;
         case '2':
-          alert('Template is already mapped to the cabinet.');
+          alert('cabinet is already mapped.');
           break;
         case '3':
           alert('Barcode sequence already exists.');
@@ -204,16 +215,88 @@ export class MaptemplatetocabinetComponent implements OnInit {
   template_cabin_map_close() {
     this._TemplateArray = null;
     this._CabinetArray = null;
-    // this.Barcodesequence = "";
+    // this.Barcodesequence = "";\
+    this.BarcodeArray = null;
     this.prefix = "";
     this.autoIncrementValue = null;
     this.Cabineterrormessage = false;
     this.Templateerrormessage = false;
-    this.prefixerrormessage = false;
+    this.BarcodeArrayerrormessage = false;
     this.autoIncrementerrormessage = false;
     this.Barcodeerrormessage = false;
     document.getElementById("template_cabin_map").classList.remove("kt-quick-panel--on");
     document.getElementsByClassName("side_view")[0].classList.remove("position-fixed");
     document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");
   }
+
+  String_status: string;
+  InActive: false;
+
+  UpdateStatus(Obj_Status: GACFiledto) {
+    // const statusText = Obj_Status.IsActive ? "In-Active" : "Active";
+    if (Obj_Status.IsActive === true) {
+      this.String_status = "In-Active"
+    }
+    else {
+      this.String_status = "Active"
+    }
+  
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Confirm ',
+        message: this.String_status
+      }
+    });
+  
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result === true) {
+        Obj_Status.IsActive = !Obj_Status.IsActive;
+  
+        this.obj.MapTemplateId = Obj_Status.MapTemplateId;
+        this.obj.IsActive = Obj_Status.IsActive;
+        this.service.RemoveMappedDataAPI(this.obj).subscribe( data => {
+       if(data['Message'] == 2){
+        Obj_Status.IsActive = false;
+        this._snackBar.open('Barcode is already mapped', 'Close', {
+          duration: 5000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'right',
+        });
+      }
+        });
+      }
+    });
+  }
+  
+  // UpdateStatus(Obj_Status: GACFiledto) {
+  
+  //     if (Obj_Status.IsActive === true) {
+  //       this.String_status = "In-Active"
+  //     }
+  //     else {
+  //       this.String_status = "Active"
+  //     }
+  //     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+  //       data: {
+  //         title: 'Confirm ',
+  //         message: this.String_status
+  //       }
+  //     });
+  //     confirmDialog.afterClosed().subscribe(result => {
+  
+  //       if (result === true) {
+  //         if (Obj_Status.IsActive === true) {
+  //           Obj_Status.IsActive = false;
+  //           this.InActive;
+  //         }
+  //         else {
+  //           Obj_Status.IsActive = true;
+  //         }
+  //         this.obj.MapTemplateId = 
+  //         this.service.RemoveMappedDataAPI(Obj_Status).subscribe(data => {
+  
+  //         });
+  //       }
+  //     });
+  //   }
 }

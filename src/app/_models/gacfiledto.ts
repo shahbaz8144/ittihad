@@ -108,4 +108,6 @@ export class GACFiledto {
   CabinetNameArabic:string;
   BarcodeName:string;
   PartsJson:string;
+  BarcodeId:number;
+  MapTemplateId:number;
 }

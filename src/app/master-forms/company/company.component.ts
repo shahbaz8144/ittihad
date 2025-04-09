@@ -614,6 +614,7 @@ export class CompanyComponent implements OnInit {
     }
     this.isShow = false;
   }
+  
   UpdateStatus(Obj_Status: CompanyDTO) {
 
     if (Obj_Status.IsActive === true) {
