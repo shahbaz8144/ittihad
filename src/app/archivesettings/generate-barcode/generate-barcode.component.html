@@ -45,7 +45,7 @@
                                     <td>
                                        {{item.CombinedParts}}
                                     </td>
-                                    <td [ngStyle]="{'color':item.IsActive=== true ? '#3f51b5' : 'red'}" (click)="UpdateStatus(item)">
+                                    <td [ngStyle]="{'color':item.IsActive=== true ? '#3f51b5' : 'red'}" (click)="Workingon()">
                                         <div *ngIf="item.IsActive" class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-success curser-pointer w-min-70">
                                             Active
                                         </div>
@@ -55,7 +55,7 @@
                                     </td>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <a class="btn btn-outline d-flex align-items-center fs-5 btn-sm text-info p-0 mr-3">
+                                            <a (click)="Workingon()" class="btn btn-outline d-flex align-items-center fs-5 btn-sm text-info p-0 mr-3">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16px"
                                                         height="16px" viewBox="0 0 24 24" fill="none" stroke="#2786fb"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

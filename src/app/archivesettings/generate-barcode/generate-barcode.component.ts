@@ -465,6 +465,9 @@ Deletebarcode(orderIdToDelete: number) {
   console.log(this.BarcodeList ,"Delete after barcode list");
 }
 
+Workingon(){
+  alert("We are currently working on it and will keep you updated. Rest assured, we will let you know as soon as possible.");
+}
 //   AddBarcodeSequence(){
 //     const newBarcode = {
 //       OrderId: this.BarcodeList.length + 1,
