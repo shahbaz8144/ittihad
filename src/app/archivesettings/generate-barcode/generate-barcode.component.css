@@ -29,7 +29,6 @@
     background-position: 12px 48%;
 }
 
-
 .generate_barcode_body {
     height: calc(100vh - 128px);
     overflow: auto;
@@ -63,24 +62,19 @@
 }
 
 @media only screen and (max-width: 560px) {
-
     span.align-middle {
         font-size: 12px;
         font-weight: 300;
         word-wrap: unset;
         will-change: unset !important;
-
     }
-
     .b-table td,
     .b-table th {
         padding: 0.42rem 0.55rem !important;
     }
-
     a.btn {
         will-change: unset !important;
     }
-
 }
 
 #generate_barcode.kt-quick-panel--on {
@@ -94,7 +88,6 @@
 .barcode-image img {
     width: 80%;
 }
-
 
 .pre-flex {
     display: flex;
@@ -269,7 +262,7 @@
     border-right: 1px solid #e5e5e5;
 }
 
-.barcode-seq-info-li:last-child{
+.barcode-seq-info-li:last-child {
     border: 0px;
 }
 
@@ -281,7 +274,6 @@
     margin-top: 3px;
     display: block;
     padding-left: 1px;
-  
 }
 
 .barcode-seq-info-ul {
@@ -293,11 +285,12 @@
     padding: 6px 6px;
     border-radius: 4px;
 }
+
 .bar-focus {
     box-shadow: 0 0 0 0.2rem rgba(88, 103, 221, 0.25);
 }
 
-.nobarcode{
+.nobarcode {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -307,10 +300,12 @@
     min-height: 300px;
     background-color: #fff;
 }
-.nobarcode p{
+
+.nobarcode p {
     font-size: 18px;
     font-weight: 600;
 }
+
 p.error-note {
     background-color: #ccdffb;
     margin-bottom: 0px;
@@ -325,4 +320,8 @@ p.error-note {
 p.error-note svg {
     width: 30px;
     height: 30px;
+}
+
+::ng-deep .swal2-icon.swal2-error.swal2-icon-show {
+    margin: auto;
 }

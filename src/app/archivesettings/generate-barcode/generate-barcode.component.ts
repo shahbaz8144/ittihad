@@ -353,6 +353,7 @@ this.IncrementDurationp = lang === 'en' ? 'Increment Duration' : 'مدة الز�
   
   // Final submission to API
   AddBarcode() {
+    console.log(JSON.stringify(this.BarcodeList), "PartsJson");
     this.allValidationsPassed = true;
     if (!this._BarcodeName || this._BarcodeName.trim() === "") {
       this.BarcodeNameerrormessage = true;
@@ -362,19 +363,25 @@ this.IncrementDurationp = lang === 'en' ? 'Increment Duration' : 'مدة الز�
       this.BarcodeNameerrormessage = false;
       this.allValidationsPassed = true;
     }
+    const hasAutoIncrement = this.BarcodeList.some(item => item.Type === "Auto Increment");
      // 4. SweetAlert confirmation only for 'Prefix' type
-     if (this.selectedOption === 'Prefix') {
+     if (hasAutoIncrement === false) {
+      // Swal.fire({
+      //   title: "Are you sure?",
+      //   text: "Do you want to proceed without Auto-Increment?",
+      //   showCancelButton: true,
+      //   confirmButtonColor: "#3085d6",
+      //   cancelButtonColor: "#d33",
+      //   confirmButtonText: "Yes"
+      // }).then((result) => {
+      //   if (result.isConfirmed) {
+      //     this.createBarcode(); // Proceed to create barcode
+      //   }
+      // });
       Swal.fire({
-        title: "Are you sure?",
-        text: "Do you want to proceed without Auto-Increment?",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.createBarcode(); // Proceed to create barcode
-        }
+        icon: "error",
+        title: "No Auto Increment",
+        text: "Please add auto increment!"
       });
     } else {
       this.createBarcode(); // Directly add barcode for other types

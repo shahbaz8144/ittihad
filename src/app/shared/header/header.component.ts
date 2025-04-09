@@ -124,7 +124,7 @@ LoginUserId:number
       this.ChangelangTo('en'); // Set default language to English
     }
   }
-    this.AnnouncementList();
+    // this.AnnouncementList();
     this.UserName = this.currentUserValue.FirstName + ' ' + this.currentUserValue.LastName;
     this.DesignationName = this.currentUserValue.DesignationName;
     // console.log(this.DesignationName,"DesignationName");
