@@ -22,6 +22,7 @@ export class GenerateBarcodeComponent implements OnInit {
   Enterprefix:string = "";
   EnterSeed:string = "";
   EnterIncrement:string = "";
+  IncrementDurationp:string = "";
   constructor(public service: GACFileService,
     private translate: TranslateService,
         @Inject(DOCUMENT) private document: Document,
@@ -35,11 +36,11 @@ HeaderComponent.languageChanged.subscribe((lang) => {
   this.currentLang = lang ? lang : 'en';
   this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
   this.SearchBarcode = lang === 'en' ? 'Search...' : 'يبحث...';
-  this.EnterBarcodeName = lang === 'en' ? 'Enter Barcode Name' : 'أدخل اسم الرمز الشريطي'
-  this.Enterprefix = lang === 'en' ? 'Enter prefix' : 'أدخل البادئة'
-  this.EnterSeed = lang === 'en' ? 'Enter Seed' : 'أدخل البذور'
-  this.EnterIncrement = lang === 'en' ? 'Enter Increment' : 'أدخل الزيادة'
-
+  this.EnterBarcodeName = lang === 'en' ? 'Enter Barcode Name' : 'أدخل اسم الرمز الشريطي';
+  this.Enterprefix = lang === 'en' ? 'Enter prefix' : 'أدخل البادئة';
+  this.EnterSeed = lang === 'en' ? 'Enter Seed' : 'أدخل البذور';
+  this.EnterIncrement = lang === 'en' ? 'Enter Increment' : 'أدخل الزيادة';
+this.IncrementDurationp = lang === 'en' ? 'Increment Duration' : 'مدة الزيادة';
   if (lang == 'ar') {
     this.renderer.addClass(document.body, 'kt-body-arabic');
   } else if (lang == 'en') {
@@ -100,10 +101,11 @@ HeaderComponent.languageChanged.subscribe((lang) => {
         this.currentLang = lang ? lang : 'en';
         this.document.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
         this.SearchBarcode = lang === 'en' ? 'Search...' : 'يبحث...';
-        this.EnterBarcodeName = lang === 'en' ? 'Enter Barcode Name' : 'أدخل اسم الرمز الشريطي'
-        this.Enterprefix = lang === 'en' ? 'Enter prefix' : 'أدخل البادئة'
-        this.EnterSeed = lang === 'en' ? 'Enter Seed' : 'أدخل البذور'
-        this.EnterIncrement = lang === 'en' ? 'Enter Increment' : 'أدخل الزيادة'
+        this.EnterBarcodeName = lang === 'en' ? 'Enter Barcode Name' : 'أدخل اسم الرمز الشريطي';
+        this.Enterprefix = lang === 'en' ? 'Enter prefix' : 'أدخل البادئة';
+        this.EnterSeed = lang === 'en' ? 'Enter Seed' : 'أدخل البذور';
+        this.EnterIncrement = lang === 'en' ? 'Enter Increment' : 'أدخل الزيادة';
+this.IncrementDurationp = lang === 'en' ? 'Increment Duration' : 'مدة الزيادة';
         if (lang == 'ar') {
           this.renderer.addClass(document.body, 'kt-body-arabic');
         } else if (lang == 'en') {
@@ -162,6 +164,7 @@ HeaderComponent.languageChanged.subscribe((lang) => {
   Seederrormessage:boolean = false;
   Incrementerrormessage:boolean = false;
   IIncrementDurationerrormessage:boolean = false;
+  allValidationsPassed: boolean = true;
   AddBarcodeSequence() {
     // 1. Reset all error flags before validation
     this.Prefixerrormessage = false;
@@ -217,6 +220,7 @@ HeaderComponent.languageChanged.subscribe((lang) => {
   }
 
   createBarcode() {
+ 
     this.obj.BarcodeName = this._BarcodeName;
     this.obj.PartsJson = JSON.stringify(this.BarcodeList); // Use BarcodeList
   // alert("API Call")
@@ -349,12 +353,14 @@ HeaderComponent.languageChanged.subscribe((lang) => {
   
   // Final submission to API
   AddBarcode() {
-
+    this.allValidationsPassed = true;
     if (!this._BarcodeName || this._BarcodeName.trim() === "") {
       this.BarcodeNameerrormessage = true;
+      this.allValidationsPassed = false;
       return; // Prevent API call if invalid
     } else {
       this.BarcodeNameerrormessage = false;
+      this.allValidationsPassed = true;
     }
      // 4. SweetAlert confirmation only for 'Prefix' type
      if (this.selectedOption === 'Prefix') {

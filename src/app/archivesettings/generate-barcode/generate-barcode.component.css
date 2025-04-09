@@ -311,3 +311,18 @@
     font-size: 18px;
     font-weight: 600;
 }
+p.error-note {
+    background-color: #ccdffb;
+    margin-bottom: 0px;
+    padding: 2px 10px;
+    display: flex;
+    align-items: baseline;
+    border-radius: 4px;
+    color: #004aa3;
+    font-size: 13px;
+}
+
+p.error-note svg {
+    width: 30px;
+    height: 30px;
+}
