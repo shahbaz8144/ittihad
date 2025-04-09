@@ -897,12 +897,13 @@ export class ArchiveComponent implements OnInit {
       this._obj.ParentId = this._DocumentId;
     }
     this._obj.CabinetId = this.selectedCabinetId;
+
     console.log(WorkflowJson, "Workflow json");
     this.service.NewDocument(this._obj).subscribe(data => {
       console.log(data, "Add Document API Data");
       this.SubmitDocumentDocumentId = data["documentId"];
       this.DocumentBarcode = data['barcode'];
-      this.DocumentPrefix  = data['prefix'];
+      // this.DocumentPrefix  = data['prefix'];
       if (data["message"] == '1') {
         this._Previewshownandhide = true;
       } else {
