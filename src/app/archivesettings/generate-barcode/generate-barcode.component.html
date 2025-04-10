@@ -47,7 +47,7 @@
                                     </td>
                                     <td [ngStyle]="{'color':item.IsActive=== true ? '#3f51b5' : 'red'}"  (click)="DeletedBarcode(item)" >
                                         <div *ngIf="item.IsActive" class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-success curser-pointer w-min-70">
-                                            Delete
+                                            Active
                                         </div>
                                         <div *ngIf="!item.IsActive" class="kt-badge kt-badge--inline kt-badge--pill kt-badge--unified-danger curser-pointer w-min-70">
                                             Deleted

@@ -237,7 +237,7 @@ this.IncrementDurationp = lang === 'en' ? 'Increment Duration' : 'مدة الز�
       this.generate_barcode_close();
           break;
         case '2':
-          alert('Same Barcode.');
+          alert('Same Barcode name.');
           break;
         case '3':
           alert('Same parts.');
