@@ -576,4 +576,12 @@ export class GACFileService {
 
     return this.http.post(this.rootUrlII + 'ArchiveAPI/RemoveMappedData', this._ObjGac);
   }
+
+
+  RemoveBarcodeAPI(ObjGac:GACFiledto) {
+
+    this._ObjGac.BarcodeId  = ObjGac.BarcodeId;
+
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/DeleteBarcode', this._ObjGac);
+  }
 }
