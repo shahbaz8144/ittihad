@@ -895,7 +895,7 @@ export class GacDocumentDetailsComponent implements OnInit {
         this.prefix = this.DocumentList[0].Prefix;
 
         this.data = {
-          code: this.DocumentList[0].Prefix + "-" + this.DocumentList[0].Barcode,
+          code: this.DocumentList[0].Barcode,
           type: this.DocumentList[0].CabinetName,
           date: this.DocumentList[0].YYYYMMDD,
           hj_date: this.getIslamicDate(this.DocumentList[0].YYYYMMDD), // Convert date to Hijri
@@ -1227,13 +1227,13 @@ export class GacDocumentDetailsComponent implements OnInit {
       this._obj1.MailDocId = parseInt(this._documentId);
       this._obj1.CreatedBy = this.LoginUserId;
       this._obj1.AnnouncementDocId = 0;
-  
+
       // Step 1: Call API to get file details
-      const data = await this.newmemoService.DownloadAttachment(this._obj1).toPromise();  
-  
+      const data = await this.newmemoService.DownloadAttachment(this._obj1).toPromise();
+
       // Step 2: Download the actual document from the URL
       const modifiedPdfBlob = await this.service.DownloadDocument(this.mainCatalogUrl);
-  
+
       // Step 3: Create a downloadable link and trigger download
       const link = document.createElement('a');
       link.href = URL.createObjectURL(modifiedPdfBlob);
@@ -1245,28 +1245,28 @@ export class GacDocumentDetailsComponent implements OnInit {
       console.error("Error downloading file:", error);
     }
   }
-  
 
-//  async download(url, filename) {
 
-//     this._obj.MailId = 0;
-//     this._obj.MailDocId = parseInt(this._documentId);
-//     this._obj.CreatedBy = this.LoginUserId;
-//     this._obj.AnnouncementDocId = 0;
-//     this.newmemoService.DownloadAttachment(this._obj1).subscribe(
-//       data => {
-//         this._obj = data as GACFiledto;
-//         const modifiedPdfBlob = await this.service.DownloadDocument(
-//           this.mainCatalogUrl
-//         );
-    
-//         //  Download the modified PDF
-//         const link = document.createElement('a');
-//         link.href = URL.createObjectURL(modifiedPdfBlob);
-//         link.download = 'modified-pdf.pdf';
-//         link.click();
-//       })
-//   }
+  //  async download(url, filename) {
+
+  //     this._obj.MailId = 0;
+  //     this._obj.MailDocId = parseInt(this._documentId);
+  //     this._obj.CreatedBy = this.LoginUserId;
+  //     this._obj.AnnouncementDocId = 0;
+  //     this.newmemoService.DownloadAttachment(this._obj1).subscribe(
+  //       data => {
+  //         this._obj = data as GACFiledto;
+  //         const modifiedPdfBlob = await this.service.DownloadDocument(
+  //           this.mainCatalogUrl
+  //         );
+
+  //         //  Download the modified PDF
+  //         const link = document.createElement('a');
+  //         link.href = URL.createObjectURL(modifiedPdfBlob);
+  //         link.download = 'modified-pdf.pdf';
+  //         link.click();
+  //       })
+  //   }
 
   @ViewChild('pdfContainer') pdfContainer!: ElementRef;
   @ViewChild('workspaceContainer') workspaceContainer!: ElementRef;
@@ -1450,33 +1450,84 @@ export class GacDocumentDetailsComponent implements OnInit {
   //   }
   // }
 
+  // async generatePDF() {
+  //   try {
+  //     debugger
+  //     //  Fetch the existing PDF from URL
+  //     const existingPdf = await fetch(this.mainCatalogUrl);
+  //     const arrayBuffer = await existingPdf.arrayBuffer();
+  //     const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+
+  //     if (!pdfDoc) {
+  //       console.error('Failed to load PDF document.');
+  //       return;
+  //     }
+
+  //     //  Capture the image in Base64 format
+  //     const overlayImage = await this.captureOverlay();
+  //     if (!overlayImage) {
+  //       console.error("Error: No overlay image.");
+  //       return;
+  //     }
+
+  //     let overlayWidth = this.workspaceData.width * 0.75;
+  //     let overlayHeight = this.workspaceData.height * 0.75;
+  //     let posX = (this.position.x / this.pdfContainer.nativeElement.clientWidth) * pdfDoc.getPage(0).getWidth();
+  //     let posY = pdfDoc.getPage(0).getHeight() - (this.position.y / this.pdfContainer.nativeElement.clientHeight) * pdfDoc.getPage(0).getHeight();
+
+  //     posX = Math.max(5, Math.min(posX, pdfDoc.getPage(0).getWidth() - overlayWidth - 5));
+  //     posY = Math.max(5, Math.min(posY, pdfDoc.getPage(0).getHeight() - overlayHeight - 5));
+
+  //     //  Send request to API
+  //     const modifiedPdfBlob = await this.service.uploadPdfWithImage(
+  //       this.mainCatalogUrl, overlayImage, posX, posY, overlayWidth, overlayHeight,
+  //       this.pdfContainer.nativeElement.clientWidth,
+  //       this.pdfContainer.nativeElement.clientHeight,
+  //       this.workspaceData.width,
+  //       this.workspaceData.height
+  //     );
+
+  //     //  Download the modified PDF
+  //     const link = document.createElement('a');
+  //     link.href = URL.createObjectURL(modifiedPdfBlob);
+  //     link.download = 'modified-pdf.pdf';
+  //     link.click();
+
+  //   } catch (error) {
+  //     console.error("Error generating PDF:", error);
+  //   }
+  // }
+
   async generatePDF() {
     try {
+      debugger
       //  Fetch the existing PDF from URL
       const existingPdf = await fetch(this.mainCatalogUrl);
       const arrayBuffer = await existingPdf.arrayBuffer();
       const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
-  
+
       if (!pdfDoc) {
         console.error('Failed to load PDF document.');
         return;
       }
-  
+
       //  Capture the image in Base64 format
       const overlayImage = await this.captureOverlay();
       if (!overlayImage) {
         console.error("Error: No overlay image.");
         return;
       }
-  
+      console.log("this.workspaceData",this.workspaceData)
       let overlayWidth = this.workspaceData.width * 0.75;
       let overlayHeight = this.workspaceData.height * 0.75;
-      let posX = (this.position.x / this.pdfContainer.nativeElement.clientWidth) * pdfDoc.getPage(0).getWidth();
-      let posY = pdfDoc.getPage(0).getHeight() - (this.position.y / this.pdfContainer.nativeElement.clientHeight) * pdfDoc.getPage(0).getHeight();
-  
-      posX = Math.max(5, Math.min(posX, pdfDoc.getPage(0).getWidth() - overlayWidth - 5));
-      posY = Math.max(5, Math.min(posY, pdfDoc.getPage(0).getHeight() - overlayHeight - 5));
-  
+      // let posX = (this.position.x / this.pdfContainer.nativeElement.clientWidth) * pdfDoc.getPage(0).getWidth();
+      // let posY = pdfDoc.getPage(0).getHeight() - (this.position.y / this.pdfContainer.nativeElement.clientHeight) * pdfDoc.getPage(0).getHeight();
+      let posX= this.position.x;
+      let posY= this.position.y;
+
+      // posX = Math.max(5, Math.min(posX, pdfDoc.getPage(0).getWidth() - overlayWidth - 5));
+      // posY = Math.max(5, Math.min(posY, pdfDoc.getPage(0).getHeight() - overlayHeight - 5));
+
       //  Send request to API
       const modifiedPdfBlob = await this.service.uploadPdfWithImage(
         this.mainCatalogUrl, overlayImage, posX, posY, overlayWidth, overlayHeight,
@@ -1485,19 +1536,22 @@ export class GacDocumentDetailsComponent implements OnInit {
         this.workspaceData.width,
         this.workspaceData.height
       );
-  
+
       //  Download the modified PDF
       const link = document.createElement('a');
       link.href = URL.createObjectURL(modifiedPdfBlob);
       link.download = 'modified-pdf.pdf';
       link.click();
-  
+
     } catch (error) {
       console.error("Error generating PDF:", error);
     }
   }
-  
-  
+
+
+
+
+
 
 
   // private async captureOverlay(): Promise<string | null> {
