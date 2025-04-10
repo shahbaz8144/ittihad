@@ -225,19 +225,33 @@ this.IncrementDurationp = lang === 'en' ? 'Increment Duration' : 'مدة الز�
     this.obj.PartsJson = JSON.stringify(this.BarcodeList); // Use BarcodeList
   // alert("API Call")
     this.service.InsertBarcodeAPI(this.obj).subscribe(data => {
-      console.log('Insert Barcode API Data:', data);
-      this._snackBar.open(('Generate Barcode Successfully'), 'End now', {
-        duration: 5000,
-        verticalPosition: 'bottom',
-        horizontalPosition: 'right',
-      });
-      this.BarCodeList();
+
+      switch (data['Message']) {
+        case '1':
+          this._snackBar.open('Generate Barcode Successfully', 'Close', {
+            duration: 5000,
+            verticalPosition: 'bottom',
+            horizontalPosition: 'right',
+          });
+          this.BarCodeList();
       this.generate_barcode_close();
+          break;
+        case '2':
+          alert('Same Barcode.');
+          break;
+        case '3':
+          alert('Same parts.');
+          break;
+        default:
+          alert('An unknown error occurred.');
+      }
+      
+      
     });
 
-    document.getElementById("generate_barcode").classList.remove("kt-quick-panel--on");
-    document.getElementsByClassName("side_view")[0].classList.remove("position-fixed");
-    document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");
+    // document.getElementById("generate_barcode").classList.remove("kt-quick-panel--on");
+    // document.getElementsByClassName("side_view")[0].classList.remove("position-fixed");
+    // document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");
   
     // Optionally reset the selected option
     // this.selectedOption = "";
@@ -465,9 +479,68 @@ Deletebarcode(orderIdToDelete: number) {
   console.log(this.BarcodeList ,"Delete after barcode list");
 }
 
-Workingon(){
-  alert("We are currently working on it and will keep you updated. Rest assured, we will let you know as soon as possible.");
+EditGenerateBarcode(item){
+  this._BarcodeName = item.BarcodeName;
+
+  document.getElementById("generate_barcode").classList.add("kt-quick-panel--on");
+    document.getElementsByClassName("side_view")[0].classList.add("position-fixed");
+    document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.add("d-block");
 }
+
+DeletedBarcode(item: any): void {
+  Swal.fire({
+    title: 'Are you sure?',
+    html: `
+    <p>Do you want to delete this barcode?</p>
+    <p ><strong>Deleted barcode cannot be restored!</strong></p>
+  `,
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!',
+    cancelButtonText: 'Cancel'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // item.IsActive = !item.IsActive;  // Toggle the active state (or set to false if deletion)
+
+      this.obj.BarcodeId = item.BarcodeId;
+
+      this.service.RemoveBarcodeAPI(this.obj).subscribe({
+        next: (data) => {
+          console.log('Barcode removed:', data);
+        },
+        error: (err) => {
+          console.error('Error removing barcode:', err);
+        }
+      });
+    }
+  });
+}
+
+// DeletedBarcode(item){
+//  Swal.fire({
+//         title: "Are you sure?",
+//         text: "Do you want to proceed with out Restored",
+//         showCancelButton: true,
+//         confirmButtonColor: "#3085d6",
+//         cancelButtonColor: "#d33",
+//         confirmButtonText: "Yes, Not Restored it!"
+//       }).then((result) => {
+//         item.IsActive = !item.IsActive;
+  
+//         this.obj.BarcodeId = item.BarcodeId;
+//      this.service.RemoveBarcodeAPI(this.obj).subscribe(data =>{
+//       console.log(data);
+//      })
+        
+//       });
+// }
+
+
+
+// Workingon(){
+//   alert("We are currently working on it and will keep you updated. Rest assured, we will let you know as soon as possible.");
+// }
 //   AddBarcodeSequence(){
 //     const newBarcode = {
 //       OrderId: this.BarcodeList.length + 1,

@@ -7,7 +7,7 @@ import { HeaderComponent } from 'src/app/shared/header/header.component';
 import { DOCUMENT } from '@angular/common';
 import { ConfirmDialogComponent } from 'src/app/master-forms/confirmdialog/confirmdialog.component';
 import { MatDialog } from '@angular/material/dialog';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-maptemplatetocabinet',
   templateUrl: './maptemplatetocabinet.component.html',
@@ -257,11 +257,16 @@ export class MaptemplatetocabinetComponent implements OnInit {
         this.service.RemoveMappedDataAPI(this.obj).subscribe( data => {
        if(data['Message'] == 2){
         Obj_Status.IsActive = false;
-        this._snackBar.open('Barcode is already mapped', 'Close', {
-          duration: 5000,
-          verticalPosition: 'bottom',
-          horizontalPosition: 'right',
-        });
+        Swal.fire({
+                icon: "error",
+                text: "Cabinet cannot be mapped to barcode and template, because it is already mapped"
+              });
+        // alert("")
+        // this._snackBar.open('Barcode is already mapped', 'Close', {
+        //   duration: 5000,
+        //   verticalPosition: 'bottom',
+        //   horizontalPosition: 'right',
+        // });
       }
         });
       }
