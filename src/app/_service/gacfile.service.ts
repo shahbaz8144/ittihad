@@ -521,8 +521,8 @@ export class GACFileService {
       positionY: positionY,
       overlayWidth: width,
       overlayHeight: height,
-      pdfContainerWidth: pdfContainerWidth, 
-      pdfContainerHeight: pdfContainerHeight,
+      pdfContainerWidth: 600, 
+      pdfContainerHeight: 600,
       workspaceDataWidth: workspaceDataWidth, 
       workspaceDataHeight: workspaceDataHeight
     };
