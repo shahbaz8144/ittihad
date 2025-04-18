@@ -1500,16 +1500,16 @@ export class GacDocumentDetailsComponent implements OnInit {
 
   async generatePDF() {
     try {
-      debugger
-      //  Fetch the existing PDF from URL
-      const existingPdf = await fetch(this.mainCatalogUrl);
-      const arrayBuffer = await existingPdf.arrayBuffer();
-      const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
 
-      if (!pdfDoc) {
-        console.error('Failed to load PDF document.');
-        return;
-      }
+      // // Fetch the existing PDF from URL
+      // const existingPdf = await fetch(this.mainCatalogUrl);
+      // const arrayBuffer = await existingPdf.arrayBuffer();
+      // const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+
+      // if (!pdfDoc) {
+      //   console.error('Failed to load PDF document.');
+      //   return;
+      // }
 
       //  Capture the image in Base64 format
       const overlayImage = await this.captureOverlay();
@@ -1517,13 +1517,13 @@ export class GacDocumentDetailsComponent implements OnInit {
         console.error("Error: No overlay image.");
         return;
       }
-      console.log("this.workspaceData",this.workspaceData)
+      console.log("this.workspaceData", this.workspaceData)
       let overlayWidth = this.workspaceData.width * 0.75;
       let overlayHeight = this.workspaceData.height * 0.75;
       // let posX = (this.position.x / this.pdfContainer.nativeElement.clientWidth) * pdfDoc.getPage(0).getWidth();
       // let posY = pdfDoc.getPage(0).getHeight() - (this.position.y / this.pdfContainer.nativeElement.clientHeight) * pdfDoc.getPage(0).getHeight();
-      let posX= this.position.x;
-      let posY= this.position.y;
+      let posX = this.position.x;
+      let posY = this.position.y;
 
       // posX = Math.max(5, Math.min(posX, pdfDoc.getPage(0).getWidth() - overlayWidth - 5));
       // posY = Math.max(5, Math.min(posY, pdfDoc.getPage(0).getHeight() - overlayHeight - 5));
