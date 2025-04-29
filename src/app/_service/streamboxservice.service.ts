@@ -49,7 +49,7 @@ readonly rootUrlII = this.commonUrl.apiurlNew;
 
    StreamBoxDeletedCloudFiles(_ObjStream: StreamboxDTO) {
     this._ObjStream.EmployeeId = _ObjStream.EmployeeId
-     return this.http.post(this.rootUrlII + 'FileUploadAPI/StreamBoxDeletedCloudFiles', this._ObjStream);
+     return this.http.post(this.rootUrlII + 'FileUploadAPI/StreamBoxDeletedCloudFiles', this._ObjStream,{withCredentials:true});
    }
    
 }

@@ -51,7 +51,7 @@ export class GACFileService {
     this._ObjGac.IsShareDocument = ObjGac.IsShareDocument;
     this._ObjGac.ShareDocumentJson = ObjGac.ShareDocumentJson;
 
-    return this.http.post(this.rootUrlII + "Gac/DocumentSubmit_V2", this._ObjGac);
+    return this.http.post(this.rootUrlII + "Gac/DocumentSubmit_V2", this._ObjGac,{withCredentials:true});
   }
 
   NewDocument(ObjGac: GACFiledto) {
@@ -96,7 +96,7 @@ export class GACFileService {
     this._ObjGac.VersionName = ObjGac.VersionName;
     this._ObjGac.ParentId = ObjGac.ParentId;
 
-    return this.http.post(this.rootUrlII + "ArchiveAPI/NewArchiveStreamBox", this._ObjGac);
+    return this.http.post(this.rootUrlII + "ArchiveAPI/NewArchiveStreamBox", this._ObjGac,{withCredentials:true});
   }
 
   async NewReferenceDocument(ObjGac: GACFiledto) {
@@ -110,7 +110,7 @@ export class GACFileService {
       this._ObjGac.extractedValuesJson = ObjGac.extractedValuesJson;
 
       // Await the HTTP request
-      const response = await this.http.post(this.rootUrlII + "ArchiveAPI/NewReferenceDocument", this._ObjGac).toPromise();
+      const response = await this.http.post(this.rootUrlII + "ArchiveAPI/NewReferenceDocument", this._ObjGac,{withCredentials:true}).toPromise();
 
       // Optionally, you can log the response or process it further
       console.log('New reference document response:', response);
@@ -157,6 +157,7 @@ export class GACFileService {
     try {
       return this.http.post(this.rootUrlII + "FileUploadAPI/NewPostArchivingFiles", filedata
         , {
+          withCredentials:true,
           reportProgress: true,
           observe: 'events'
         }).pipe(
@@ -172,6 +173,7 @@ export class GACFileService {
     try {
       return this.http.post(this.rootUrlII + "FileUploadAPI/NewPostArchivingFilesTest", filedata
         , {
+          withCredentials:true,
           reportProgress: true,
           observe: 'events'
         }).pipe(
@@ -291,7 +293,7 @@ export class GACFileService {
   ListInUnread() {
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
     this._ObjGac.Organizationid = this.currentUserValue.organizationid;
-    return this.http.post(this.rootUrlII + 'Gac/ArchiveUnreadList_V2', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'Gac/ArchiveUnreadList_V2', this._ObjGac,{withCredentials:true});
   }
 
   ArchiveDocumentDetails(ObjGac: GACFiledto) {
@@ -331,7 +333,7 @@ export class GACFileService {
     this._ObjGac.ReferenceId = ObjGac.ReferenceId;
     this._ObjGac.ShareId = ObjGac.ShareId;
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
-    return this.http.post(this.rootUrl + "/DocumentsAPI/NewGetDocumentFullDetailsAng", this._ObjGac);
+    return this.http.post(this.rootUrl + "/DocumentsAPI/NewGetDocumentFullDetailsAng", this._ObjGac,{withCredentials:true});
   }
 
 
@@ -362,7 +364,7 @@ export class GACFileService {
     this._ObjGac.Name = Name;
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
     this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
-    return this.http.post(this.rootUrl + "/SourceAPI/NewAddDMDirectly", this._ObjGac);
+    return this.http.post(this.rootUrl + "/SourceAPI/NewAddDMDirectly", this._ObjGac,{withCredentials:true});
   }
 
   AddLabelDocuments(ObjGac: LabelDTO) {
@@ -371,7 +373,7 @@ export class GACFileService {
     this._ObjGac1.UserId = this.currentUserValue.createdby;
     this._ObjGac1.FlagId = ObjGac.FlagId;
     this._ObjGac1.IsActive = true;
-    return this.http.post(this.rootUrlII + "LabelsAPI/LabelsMasterDocuments", this._ObjGac1);
+    return this.http.post(this.rootUrlII + "LabelsAPI/LabelsMasterDocuments", this._ObjGac1,{withCredentials:true});
   }
 
   UserLabels(ObjGac: LabelDTO) {
@@ -382,7 +384,7 @@ export class GACFileService {
   DeleteUserLabels(ObjGac: LabelDTO) {
     this._ObjGac1.UserId = ObjGac.UserId; //this.currentUserValue.createdby;
     this._ObjGac1.labelId = ObjGac.labelId;
-    return this.http.post(this.rootUrlII + 'LabelsAPI/DeleteLabelDocuments', this._ObjGac1);
+    return this.http.post(this.rootUrlII + 'LabelsAPI/DeleteLabelDocuments', this._ObjGac1,{withCredentials:true});
   }
 
 
@@ -528,6 +530,7 @@ export class GACFileService {
     };
 
     return this.http.post(this.rootUrlII + 'ArchiveAPI/AddImageToSignedPdf', requestBody, {
+      withCredentials:true,
       responseType: 'blob'
     }).toPromise();
   }
@@ -548,6 +551,7 @@ export class GACFileService {
     };
     
     return this.http.post(this.rootUrlII + 'ArchiveAPI/Download', requestBody, {
+      withCredentials:true,
       responseType: 'blob'
     }).toPromise();
   }

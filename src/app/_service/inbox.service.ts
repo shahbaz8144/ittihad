@@ -91,7 +91,7 @@ export class InboxService {
     this._obj.OptionId = OptionId;
     this._obj.CreatedBy = CreatedBy;
     this._obj.FlagId = flagid;
-    return this.http.post(this.rootUrl + 'OrganizationAPI/NewUserPoll', this._obj);
+    return this.http.post(this.rootUrl + 'OrganizationAPI/NewUserPoll', this._obj,{withCredentials:true});
   }
   AnnouncementDetails(AnnouncementId: number, OrganizationId: number, UserId: number) {
     this._obj = new InboxDTO();
@@ -244,7 +244,7 @@ export class InboxService {
     //create in core
 
     // CommunicationAPI/GetSuggestion
-    return this.http.post(this.rootUrlII + 'LabelsAPI/GetLabelMemos', this._obj);
+    return this.http.post(this.rootUrlII + 'LabelsAPI/GetLabelMemos', this._obj,{withCredentials:true});
   }
   UserLabels(_values: InboxDTO) {
     //Using Stored Procedure
@@ -413,7 +413,7 @@ export class InboxService {
     // DeleteMemoDetailsAPI/DeleteMemoMemoDetails
 
 
-    return this.http.post(this.rootUrlII + 'MainMemoDetailsAPI/DeleteMemo', this._obj);
+    return this.http.post(this.rootUrlII + 'MainMemoDetailsAPI/DeleteMemo', this._obj,{withCredentials:true});
   }
   BookmarkAPI(replyid: number, _createdby: number, MailId: number) {
     this._obj = new InboxDTO();
@@ -579,7 +579,7 @@ export class InboxService {
     // '/LatestCommunicationAPI/NewGetReplyHistoryJSON'
     // MainReplyDetailsAPI/GetReplyHistoryJSON
     // MemoDetailsReplyHistoryAPI/GetReplyHistoryJSON
-    return this.http.post(this.rootUrlII + 'MainReplyDetailsAPI/GetReplyHistoryJSON', this._obj);
+    return this.http.post(this.rootUrlII + 'MainReplyDetailsAPI/GetReplyHistoryJSON', this._obj,{withCredentials:true});
   }
 
   async ReplyHistoryV2(_values: InboxDTO) {
@@ -618,7 +618,7 @@ export class InboxService {
 
     // MemoDetailsAPI/MemoDetails
 
-    return this.http.post(this.rootUrlII + 'MainMemoDetailsAPI/GetMemoDetailsJSON', this._obj);
+    return this.http.post(this.rootUrlII + 'MainMemoDetailsAPI/GetMemoDetailsJSON', this._obj,{withCredentials:true});
   }
   async ReplyListMemoDetailsV2(_values: InboxDTO) {
     //Using Stored Procedure
@@ -640,7 +640,7 @@ export class InboxService {
     this._obj.ReplyFilter_Bookmarks = _values.ReplyFilter_Bookmarks;
     this._obj.ReplyId = _values.ReplyId;
     // MemoDetailsAPI/MemoDetails
-    return this.http.post(this.rootUrlII + 'MainMemoDetailsAPI/ReplyListMemoDetailsV2', this._obj);
+    return this.http.post(this.rootUrlII + 'MainMemoDetailsAPI/ReplyListMemoDetailsV2', this._obj,{withCredentials:true});
   }
 
   async ReplyListLoadSignalR(_values: InboxDTO) {
@@ -664,7 +664,7 @@ export class InboxService {
     this._obj.TotalReplyRecords = _values.TotalReplyRecords;
     // this._obj.pageSize = _values.pageSize;
     // this._obj.pageNumber = _values.pageNumber;
-    return this.http.post(this.rootUrlII + 'MainMemoDetailsAPI/ReplyListLoadSignalR', this._obj);
+    return this.http.post(this.rootUrlII + 'MainMemoDetailsAPI/ReplyListLoadSignalR', this._obj,{withCredentials:true});
   }
 
   // PathExtention(url: string,uniqueid:number) {
@@ -677,7 +677,7 @@ export class InboxService {
     this._obj.url = url;
     // alert(url);
     // this._obj.uniqueid=uniqueid;
-    return this.http.post(this.rootUrlII + 'FileUploadAPI/NewFileDetails', this._obj);
+    return this.http.post(this.rootUrlII + 'FileUploadAPI/NewFileDetails', this._obj,{withCredentials:true});
   }
   AttachmentData(MailDocId: number) {
     this._obj = new InboxDTO();
@@ -686,7 +686,7 @@ export class InboxService {
     // MainReplyDetailsAPI/NewAttachmentData
     // old api
     // LatestCommunicationAPI/NewAttachmentData
-    return this.http.post(this.rootUrlII + 'MainReplyDetailsAPI/NewAttachmentData', this._obj);
+    return this.http.post(this.rootUrlII + 'MainReplyDetailsAPI/NewAttachmentData', this._obj,{withCredentials:true});
   }
   async ReplyDetailsV2(_replyid: number) {
     //Using Stored Procedure
@@ -707,7 +707,7 @@ export class InboxService {
     this._obj.ReplyId = _replyid;
     this._obj.MailId = MailId;
     this._obj.CreatedBy = this.currentUserValue.createdby;
-    return this.http.post(this.rootUrlII + 'MainMemoDetailsAPI/MemoInitialLoadv2', this._obj);
+    return this.http.post(this.rootUrlII + 'MainMemoDetailsAPI/MemoInitialLoadv2', this._obj,{withCredentials:true});
   }
   ReplyDetails(_replyid: number) {
     //Using Stored Procedure
@@ -721,7 +721,7 @@ export class InboxService {
     // /LatestCommunicationAPI/NewGetReplyDetailsJSON
     // ReplyDetailsAPI/ReplyDetails
     // /MainReplyDetailsAPI/ReplyDetails
-    return this.http.post(this.rootUrlII + 'MainReplyDetailsAPI/ReplyDetails', this._obj);
+    return this.http.post(this.rootUrlII + 'MainReplyDetailsAPI/ReplyDetails', this._obj,{withCredentials:true});
   }
   MergeService(_values: InboxDTO) {
     //Using Stored Procedure
@@ -803,7 +803,7 @@ export class InboxService {
     this._obj.CreatedBy = _values.CreatedBy;
     this._obj.organizationid = _values.organizationid;
 
-    return this.http.post(this.rootUrl + '/LatestCommunicationAPI/NewMemoDropdownsJSON', this._obj);
+    return this.http.post(this.rootUrl + '/LatestCommunicationAPI/NewMemoDropdownsJSON', this._obj,{withCredentials:true});
   }
   
   ShareUserList(_values: InboxDTO) {
@@ -831,7 +831,7 @@ export class InboxService {
     this.obj1.ReportingUserID = _values.ReportingUserID;
     this.obj1.IsArchiveApproval = _values.IsArchiveApproval;
 
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewShareUsersInArchive', this.obj1);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewShareUsersInArchive', this.obj1,{withCredentials:true});
   }
 
   GetWorkFlowMasterAPI(_EmployeeId:number,_organizationid:number){
@@ -857,7 +857,7 @@ export class InboxService {
     this._obj = new InboxDTO();
     this._obj.OrganizationId = _values.OrganizationId;
     this._obj.DocumentId = _values.DocumentId;
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewUserActionList', this._obj);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewUserActionList', this._obj,{withCredentials:true});
   }
 
   UserActionListArchiveDetailsAPI(_values: InboxDTO){
@@ -866,7 +866,7 @@ export class InboxService {
     this._obj.OrganizationId = _values.OrganizationId;
     this._obj.DocumentId = _values.DocumentId;
     this._obj.ShareId = _values.ShareId;
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewUserActionDetails', this._obj);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewUserActionDetails', this._obj,{withCredentials:true});
   }
 
   UserActionDetailsArchive(_values: InboxDTO){
@@ -874,13 +874,13 @@ export class InboxService {
     this._obj.OrganizationId = _values.OrganizationId;
     this._obj.DocumentId = _values.DocumentId;
     this._obj.UserId = _values.UserId;
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewUserActionDetails', this._obj);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewUserActionDetails', this._obj,{withCredentials:true});
   }
 
   MergeDocumentApI(_values: InboxDTO){
     this._obj = new InboxDTO();
     this._obj.Urls = _values.Urls;
-    return this.http.post(this.rootUrlII + 'CommunicationAPI/NewMergeDocuments', this._obj);
+    return this.http.post(this.rootUrlII + 'CommunicationAPI/NewMergeDocuments', this._obj,{withCredentials:true});
   }
   
 
@@ -904,7 +904,7 @@ export class InboxService {
     this._obj.ShareDocumentJson = _values.ShareDocumentJson;
     this._obj.DocumentId = _values.DocumentId;
 
-    return this.http.post(this.rootUrlII + 'Gac/ArchiveAddUsers_V2', this._obj);
+    return this.http.post(this.rootUrlII + 'Gac/ArchiveAddUsers_V2', this._obj,{withCredentials:true});
   }
 
   UsersListForAdd(MailId: number) {
@@ -929,7 +929,7 @@ export class InboxService {
 
     // "/LatestCommunicationAPI/NewUsersListForAddANG"
     // MemoDetailsNewUsersListForAddAPI/NewUsersListForAdd
-    return this.http.post(this.rootUrlII + "Users/NewUsersListForAdd", this._obj);
+    return this.http.post(this.rootUrlII + "Users/NewUsersListForAdd", this._obj,{withCredentials:true});
 
   }
   GetDraftMemos(userid: number) {
@@ -958,7 +958,7 @@ export class InboxService {
     this._obj = new InboxDTO();
     this._obj.CreatedBy = _values.UserId;
     this._obj.PopupId = _values.PopupId
-    return this.http.post(this.rootUrl + "/LatestCommunicationAPI/NewAddPopupCount", this._obj);
+    return this.http.post(this.rootUrl + "/LatestCommunicationAPI/NewAddPopupCount", this._obj,{withCredentials:true});
   }
   LabelsData(_values: InboxDTO) {
     this._obj = new InboxDTO();

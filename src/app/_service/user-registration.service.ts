@@ -129,7 +129,7 @@ export class UserRegistrationService {
     this._obj.CabinetIds = _values.CabinetIds;
     this._obj.CreatedBy = this.currentUserValue.createdby;
    
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewAssignCabite', this._obj);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewAssignCabite', this._obj,{withCredentials:true});
   }
 
 
