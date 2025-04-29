@@ -67,7 +67,7 @@ export class DashboardService {
       }
    })
   //  this._obj.UserId
-    return this.http.post(this.rootUrlII + "ArchiveAPI/NewDashboard", this._obj);
+    return this.http.post(this.rootUrlII + "ArchiveAPI/NewDashboard", this._obj, { withCredentials: true });
   }
    
 

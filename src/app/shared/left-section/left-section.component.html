@@ -141,14 +141,14 @@
                     <span class="kt-menu__link-text">Settings</span> -->
                     <!-- <img src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/31/672189_anounce1.jpg" class="left-sec-img"> -->
                     <img *ngIf="UserProfile =='NA'" class="left-sec-img" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png">
-                    <img *ngIf="UserProfile !='NA'" class="left-sec-img" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{UserProfile}}">
+                    <img *ngIf="UserProfile !='NA'" class="left-sec-img" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{UserProfile}}">
                     <span class="kt-menu__link-text">{{"Menu.AccountSettings" | translate }}</span>
                 </a>
                 <div class=" left-sec__submenu dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <div class="left-sec-profile-det">
                         <div class="left-sec-profile-det-img">
                             <img *ngIf="UserProfile =='NA'" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png">
-                            <img *ngIf="UserProfile !='NA'" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{UserProfile}}">
+                            <img *ngIf="UserProfile !='NA'" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{UserProfile}}">
                         </div>
                         <div class="left-sec-profile-det-control">
                             <div class="left-sec-username">{{UserName}} </div>

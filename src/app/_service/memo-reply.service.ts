@@ -45,7 +45,7 @@ export class MemoReplyService {
     // alert(this._objInb.CreatedBy);
     // LatestCommunicationAPI/AddNewMemoCustomAttachments
     // QuickUploadAPI/QuickUpload
-    return this.http.post(this.rootUrlII + "MainMemoDetailsAPI/QuickUpload", this._objInb);
+    return this.http.post(this.rootUrlII + "MainMemoDetailsAPI/QuickUpload", this._objInb,{withCredentials:true});
   }
   MemoReply(formData: MemoReply, MailId: number, ReplyId: number, myDate: any) {
     //Stored Procedure
@@ -93,7 +93,7 @@ export class MemoReplyService {
 
       // ReplyAPI/MemoReply
 
-    return this.http.post(this.rootUrlII + "MainReplyDetailsAPI/MemoReply", formData);
+    return this.http.post(this.rootUrlII + "MainReplyDetailsAPI/MemoReply", formData,{withCredentials:true});
   }
 
     MemoReplys(_values: InboxDTO) {
@@ -197,7 +197,7 @@ export class MemoReplyService {
       this._objInb.CCUserxml  = JSON.stringify([]);
     }
    
-    return this.http.post(this.rootUrlII + "MainReplyDetailsAPI/MemoReplyUpdate", this._objInb);
+    return this.http.post(this.rootUrlII + "MainReplyDetailsAPI/MemoReplyUpdate", this._objInb,{withCredentials:true});
   }
 
   Sendmessage(txt: string, MailId: number) {
@@ -228,7 +228,7 @@ export class MemoReplyService {
     // /LatestCommunicationAPI/MemoHistoryANG
     // MemoHistoryAPI/MemoHistory
     // /MainMemoDetailsAPI/MemoHistory
-    return this.http.post(this.rootUrlII + "MainMemoDetailsAPI/MemoHistory", this._objInb);
+    return this.http.post(this.rootUrlII + "MainMemoDetailsAPI/MemoHistory", this._objInb,{withCredentials:true});
   }
   AttachmentList(MailId: number,_values: InboxDTO) {
     
@@ -242,7 +242,7 @@ export class MemoReplyService {
     // "/LatestCommunicationAPI/NewGetMemoAttachments"
     // "MemoAttachmentListAPI/MemoAttachment"
     // MainMemoDetailsAPI/MemoAttachment
-    return this.http.post(this.rootUrlII + "MainMemoDetailsAPI/MemoAttachment", this._objInb);
+    return this.http.post(this.rootUrlII + "MainMemoDetailsAPI/MemoAttachment", this._objInb,{withCredentials:true});
   }
 
   SaveasDraft(_values: InboxDTO) {
@@ -257,13 +257,13 @@ export class MemoReplyService {
     this._objInb.DraftId=_values.DraftId;
     // "/LatestCommunicationAPI/NewSaveasDraftMemo"
     // MainReplyDetailsAPI/saveasdraft
-    return this.http.post(this.rootUrlII + "MainReplyDetailsAPI/saveasdraft", this._objInb);
+    return this.http.post(this.rootUrlII + "MainReplyDetailsAPI/saveasdraft", this._objInb,{withCredentials:true});
   }
 
   DeleteDraft(_values: InboxDTO) {
     this._objInb.DraftId=_values.DraftId;
     // "/LatestCommunicationAPI/NewSaveasDraftMemo"
     // MainReplyDetailsAPI/saveasdraft
-    return this.http.post(this.rootUrlII + "MainReplyDetailsAPI/Deletedraft", this._objInb);
+    return this.http.post(this.rootUrlII + "MainReplyDetailsAPI/Deletedraft", this._objInb,{withCredentials:true});
   }
 }

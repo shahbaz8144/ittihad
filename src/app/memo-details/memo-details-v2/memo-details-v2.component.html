@@ -800,7 +800,7 @@
                                                                     <div class="d-flex align-items-start me-5 me-xl-13">
                                                                         <div class="symbol symbol-30px symbol-circle mr-3">
                                                                             <img *ngIf="md.UserInboxThumbnail=='NA'" src="assets/media/icons/user2.png" class="" alt="">
-                                                                            <img *ngIf="md.UserInboxThumbnail!='NA'" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{md.UserInboxThumbnail}}" class="">
+                                                                            <img *ngIf="md.UserInboxThumbnail!='NA'" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{md.UserInboxThumbnail}}" class="">
                                                                             <div *ngIf="(_LoginUserId == md.FromUserId)" class="Administrator-icon-sm">
                                                                                 <svg _ngcontent-umx-c422="" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="bi bi-send">
                                                                                     <path _ngcontent-umx-c422=""
@@ -1381,7 +1381,7 @@
                                                         <div class="kt-user-card" *ngFor="let AddUsers of item.AddedUsersJson">
                                                             <div class="kt-user-image">
                                                                 <img *ngIf="AddUsers.UserInboxThumbnail=='NA'" src="assets/media/icons/user2.png" class="" alt="">
-                                                                <img *ngIf="AddUsers.UserInboxThumbnail!='NA'" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{AddUsers.UserInboxThumbnail}}" class="">
+                                                                <img *ngIf="AddUsers.UserInboxThumbnail!='NA'" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{AddUsers.UserInboxThumbnail}}" class="">
                                                             </div>
                                                             <div class="kt-user-info">
                                                                 <div class="kt-user-name"> {{AddUsers.DisplayName}}
@@ -1623,7 +1623,7 @@
                                                             <div class="kt-attach-user-card">
                                                                 <div class="kt-user-image">
                                                                     <img *ngIf="doc.UserInboxThumbnail==''" alt="img" src="assets/media/icons/user2.png" class="">
-                                                                    <img *ngIf="doc.UserInboxThumbnail!=''" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{doc.UserInboxThumbnail}}" class="">
+                                                                    <img *ngIf="doc.UserInboxThumbnail!=''" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{doc.UserInboxThumbnail}}" class="">
                                                                 </div>
                                                                 <div class="kt-user-info">
                                                                     <div class="kt-user-name"> {{doc.DisplayName}}
@@ -1868,7 +1868,7 @@
                                                             <div class="icon">
                                                                 <span class="d-none">A</span>
                                                                 <img *ngIf="_User.UserInboxThumbnail==''" src="assets/media/icons/user2.png" class="" alt="">
-                                                                <img *ngIf="_User.UserInboxThumbnail!=''" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{_User.UserInboxThumbnail}}" class="">
+                                                                <img *ngIf="_User.UserInboxThumbnail!=''" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{_User.UserInboxThumbnail}}" class="">
                                                             </div>
                                                             <div class="user-name-email">
                                                                 <p class="name">{{_User.DisplayName}}({{_User.DesignationName}})</p>
@@ -2636,7 +2636,7 @@
                                                                                 <div class="icon">
                                                                                     <span class="d-none">A</span>
                                                                                     <img *ngIf="item.UserInboxThumbnail=='NA'" src="assets/media/icons/user2.png" class="" alt="">
-                                                                        <img *ngIf="item.UserInboxThumbnail!='NA'" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{item.UserInboxThumbnail}}" class="">
+                                                                        <img *ngIf="item.UserInboxThumbnail!='NA'" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{item.UserInboxThumbnail}}" class="">
                                                                                 </div>
                                                                                 <div class="user-name-email">
                                                                                     <p class="name">{{item.DisplayName}}</p>
@@ -2723,7 +2723,7 @@
                                                                                     <div class="icon">
                                                                                         <span class="d-none">A</span>
                                                                                         <img *ngIf="cc.UserInboxThumbnail=='NA'" src="assets/media/icons/user2.png" class="" alt="">
-                                                                        <img *ngIf="cc.UserInboxThumbnail!='NA'" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{cc.UserInboxThumbnail}}" class="">
+                                                                        <img *ngIf="cc.UserInboxThumbnail!='NA'" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{cc.UserInboxThumbnail}}" class="">
                                                                                     </div>
                                                                                     <div class="user-name-email">
                                                                                         <p class="name">{{cc.DisplayName}}</p>
@@ -2880,7 +2880,7 @@
                                                                                 <div class="workflow-item-user-details">
                                                                                     <div class="workflow-item-user-img">
                                                                                         <img *ngIf="details.UserInboxThumbnail=='NA'" src="assets/media/icons/user2.png" class="" alt="">
-                                                                            <img *ngIf="details.UserInboxThumbnail!='NA'" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{details.UserInboxThumbnail}}" class="">
+                                                                            <img *ngIf="details.UserInboxThumbnail!='NA'" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{details.UserInboxThumbnail}}" class="">
                                                                                         <!-- <img src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/31/thumbs/298200_Thumbnail.jpeg"> -->
                                                                                     </div>
                                                                                     <div class="workflow-item-user-control">
@@ -3025,7 +3025,7 @@
                                                                                                     <div class="d-flex align-items-center flex-1">
                                                                                                         <div class="symbol symbol-circle symbol-25px pt-1">
                                                                                                             <img *ngIf="AC.UserInboxThumbnail==''" alt="img" src="assets/media/icons/user2.png" class="">
-                                                                                                            <img *ngIf="AC.UserInboxThumbnail!=''" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{AC.UserInboxThumbnail}}" class="">
+                                                                                                            <img *ngIf="AC.UserInboxThumbnail!=''" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{AC.UserInboxThumbnail}}" class="">
                                                                                                         </div>
                                                                                                         <div class="">
                                                                                                             <div class="text-dark ml-2 fs-7">
@@ -3198,7 +3198,7 @@
                                                                 src="assets/media/icons/user2.png"
                                                                 class="rounded-circle" alt="">
                                                             <img *ngIf="data.UserHeaderThumbnail!='NA'" alt="img"
-                                                                src="https://yrglobaldocuments.blob.core.windows.net/documents/{{data.UserHeaderThumbnail}}"
+                                                                src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{data.UserHeaderThumbnail}}"
                                                                 class="rounded-circle">
                                                         </span>
                                                     </div>
@@ -3586,8 +3586,8 @@
                                                         <div class="list-user-detail">
                                                             <div class="user-info">
                                                                 <div class="icon">
-                                                                    <img *ngIf="MemoCreatedUserProfile != 'NA'" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{MemoCreatedUserProfile}}">
-                                                                    <img *ngIf="MemoCreatedUserProfile == 'NA'" src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/blank-profile-picture.png" alt="img">
+                                                                    <img *ngIf="MemoCreatedUserProfile != 'NA'" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{MemoCreatedUserProfile}}">
+                                                                    <img *ngIf="MemoCreatedUserProfile == 'NA'" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/Users/blank-profile-picture.png" alt="img">
                                                                 </div>
                                                                 <div class="user-name-email">
                                                                     <p class="name"> {{MemoCreatedUserName}}</p>
@@ -3918,8 +3918,8 @@
                                                                         <div class="user-info">
                                                                             <div class="icon">
                                                                                 <span class="d-none">A</span>
-                                                                                <img *ngIf="item.UserProfile != 'NA'" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{item.UserProfile}}" alt="img">
-                                                                                <img *ngIf="item.UserProfile == 'NA'" src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/blank-profile-picture.png" alt="img">
+                                                                                <img *ngIf="item.UserProfile != 'NA'" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{item.UserProfile}}" alt="img">
+                                                                                <img *ngIf="item.UserProfile == 'NA'" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/Users/blank-profile-picture.png" alt="img">
                                                                             </div>
                                                                             <div class="user-name-email">
                                                                                 <p class="name">{{item.DisplayName}}</p>
@@ -4876,8 +4876,8 @@
                                             <div class="d-flex align-items-center mt-1 fs-6">
                                                 <div class="d-flex align-items-center flex-1">
                                                     <div class="symbol symbol-circle symbol-22px">
-                                                        <img *ngIf="_his.UserProfile != 'NA'" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{_his.UserProfile}}" alt="img">
-                                                        <img *ngIf="_his.UserProfile == 'NA'" src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/blank-profile-picture.png" alt="img">
+                                                        <img *ngIf="_his.UserProfile != 'NA'" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{_his.UserProfile}}" alt="img">
+                                                        <img *ngIf="_his.UserProfile == 'NA'" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/Users/blank-profile-picture.png" alt="img">
                                                     </div>
                                                     <div class="text-muted ml-2 fs-7">{{_his.FromUser}}</div>
                                                 </div>
@@ -5428,7 +5428,7 @@
                                                             <div class="d-flex align-items-center">
                                                                 <div data-toggle="tooltip" data-placement="top" title="Tooltip on top" title="" class="symbol symbol-circle symbol-22px">
                                                                     <img class="rounded-circle" *ngIf="ss.UserInboxThumbnail =='NA'" src="assets/media/icons/user2.png">
-                                                                    <img class="rounded-circle" *ngIf="ss.UserInboxThumbnail !='NA'" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{ss.UserInboxThumbnail}}">
+                                                                    <img class="rounded-circle" *ngIf="ss.UserInboxThumbnail !='NA'" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{ss.UserInboxThumbnail}}">
                                                                 </div>
                                                                 <div class="text-muted ml-2 fs-7">{{ss.DisplayName}}
                                                                 </div>
@@ -5866,7 +5866,7 @@
                                                                 </span>
                                                                 <span *ngIf="item.UserInboxThumbnail!='NA'" class="user-ic-vc">
                                                                     <img
-                                                                        src="https://yrglobaldocuments.blob.core.windows.net/documents/{{item.UserInboxThumbnail}}">
+                                                                        src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{item.UserInboxThumbnail}}">
                                                                 </span> {{item.DisplayName}} ({{item.DesignationName}}/{{item.CompanyName}})
                                                                 <button matChipRemove [attr.aria-label]="'remove ' + item.DisplayName">
                                                                     <mat-icon>cancel</mat-icon>
@@ -5951,7 +5951,7 @@
                                                                     <div class="workflow-item-user-details">
                                                                         <div class="workflow-item-user-img">
                                                                             <img *ngIf="details.UserInboxThumbnail==''" src="assets/media/icons/user2.png" class="" alt="">
-                                                                            <img *ngIf="details.UserInboxThumbnail!=''" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{details.UserInboxThumbnail}}" class="">
+                                                                            <img *ngIf="details.UserInboxThumbnail!=''" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{details.UserInboxThumbnail}}" class="">
                                                                         </div>
                                                                         <div class="workflow-item-user-control">
                                                                             <div class="workflow-item-user-stepname">{{details.StepName}}</div>
@@ -6033,7 +6033,7 @@
                                                             <div class="workflow-item-li d-none">
                                                                 <div class="workflow-item-user-details">
                                                                     <div class="workflow-item-user-img">
-                                                                        <img src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/31/thumbs/298200_Thumbnail.jpeg">
+                                                                        <img src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/Users/31/thumbs/298200_Thumbnail.jpeg">
                                                                     </div>
                                                                     <div class="workflow-item-user-control">
                                                                         <div class="workflow-item-name">Ramesh Kumar
@@ -6053,7 +6053,7 @@
                                                             <div class="workflow-item-li d-none">
                                                                 <div class="workflow-item-user-details">
                                                                     <div class="workflow-item-user-img">
-                                                                        <img alt="image" src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/38/thumbs/265846_premium_photo-1661726660137-61b182d93809.jpeg" class="ng-star-inserted">
+                                                                        <img alt="image" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/Users/38/thumbs/265846_premium_photo-1661726660137-61b182d93809.jpeg" class="ng-star-inserted">
                                                                     </div>
                                                                     <div class="workflow-item-user-control">
                                                                         <div class="workflow-item-name">Srujan Devbox
@@ -6073,7 +6073,7 @@
                                                             <div class="workflow-item-li reject-new-workflow d-none ">
                                                                 <div class="workflow-item-user-details">
                                                                     <div class="workflow-item-user-img">
-                                                                        <img alt="image" src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/1861/thumbs/263918_icons8-user-48.png" class="ng-star-inserted">
+                                                                        <img alt="image" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/Users/1861/thumbs/263918_icons8-user-48.png" class="ng-star-inserted">
                                                                     </div>
                                                                     <div class="workflow-item-user-control">
                                                                         <div class="workflow-item-name">Shiva Devbox
@@ -6103,7 +6103,7 @@
                                                             <div class="workflow-item-li d-none ">
                                                                 <div class="workflow-item-user-details">
                                                                     <div class="workflow-item-user-img">
-                                                                        <img src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/user2.png" alt="image" class="ng-star-inserted">
+                                                                        <img src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/Users/user2.png" alt="image" class="ng-star-inserted">
                                                                     </div>
                                                                     <div class="workflow-item-user-control">
                                                                         <div class="workflow-item-name">Vinod Devbox
@@ -6134,7 +6134,7 @@
                                                                     <div class="workflow-item-nodep-card">
                                                                         <div class="workflow-item-user-details">
                                                                             <div class="workflow-item-user-img">
-                                                                                <img src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/31/thumbs/298200_Thumbnail.jpeg">
+                                                                                <img src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/Users/31/thumbs/298200_Thumbnail.jpeg">
                                                                             </div>
                                                                             <div class="workflow-item-user-control">
                                                                                 <div class="workflow-item-name">
@@ -6153,7 +6153,7 @@
                                                                     <div class="workflow-item-nodep-card">
                                                                         <div class="workflow-item-user-details">
                                                                             <div class="workflow-item-user-img">
-                                                                                <img alt="image" src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/38/thumbs/265846_premium_photo-1661726660137-61b182d93809.jpeg" class="ng-star-inserted">
+                                                                                <img alt="image" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/Users/38/thumbs/265846_premium_photo-1661726660137-61b182d93809.jpeg" class="ng-star-inserted">
                                                                             </div>
                                                                             <div class="workflow-item-user-control">
                                                                                 <div class="workflow-item-name">
@@ -6172,7 +6172,7 @@
                                                                     <div class="workflow-item-nodep-card">
                                                                         <div class="workflow-item-user-details">
                                                                             <div class="workflow-item-user-img">
-                                                                                <img alt="image" src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/1861/thumbs/263918_icons8-user-48.png" class="ng-star-inserted">
+                                                                                <img alt="image" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/Users/1861/thumbs/263918_icons8-user-48.png" class="ng-star-inserted">
                                                                             </div>
                                                                             <div class="workflow-item-user-control">
                                                                                 <div class="workflow-item-name">
@@ -6191,7 +6191,7 @@
                                                                     <div class="workflow-item-nodep-card">
                                                                         <div class="workflow-item-user-details">
                                                                             <div class="workflow-item-user-img">
-                                                                                <img src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/user2.png" alt="image" class="ng-star-inserted">
+                                                                                <img src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/Users/user2.png" alt="image" class="ng-star-inserted">
                                                                             </div>
                                                                             <div class="workflow-item-user-control">
                                                                                 <div class="workflow-item-name">
@@ -6237,7 +6237,7 @@
                                                                 </span>
                                                                 <span *ngIf="item.UserInboxThumbnail!='NA'" class="user-ic-vc">
                                                                     <img
-                                                                        src="https://yrglobaldocuments.blob.core.windows.net/documents/{{item.UserInboxThumbnail}}">
+                                                                        src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{item.UserInboxThumbnail}}">
                                                                 </span> {{item.DisplayName}} ({{item.DesignationName}}/{{item.CompanyName}})
                                                                 <button matChipRemove [attr.aria-label]="'CCUserremove ' + item.DisplayName">
                                                                     <mat-icon>cancel</mat-icon>
@@ -7611,7 +7611,7 @@
                             <img *ngIf="data.UserHeaderThumbnail=='NA'" src="assets/media/icons/user2.png"
                                 class="rounded-circle" alt="">
                             <img *ngIf="data.UserHeaderThumbnail!='NA'" alt="img"
-                                src="https://yrglobaldocuments.blob.core.windows.net/documents/{{data.UserHeaderThumbnail}}"
+                                src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{data.UserHeaderThumbnail}}"
                                 class="rounded-circle">
                         </span>
                     </div>
@@ -7701,7 +7701,7 @@
                                 <div class="card-body">
                                     <div class="usage-user-info">
                                         <div class="usage-user-img">
-                                            <img id="imgUpload" alt="image" src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/31/672189_anounce1.jpg">
+                                            <img id="imgUpload" alt="image" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/Users/31/672189_anounce1.jpg">
                                         </div>
 
                                         <div class="usage-user-details">
@@ -8431,8 +8431,8 @@
                 <div class="share-option-main">
                     <div class="share-option-main-inner" *ngFor="let detail of _Details">
                         <div class="share-option-user-img">
-                            <img *ngIf="detail.UserInboxThumbnail != ''" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{detail.UserInboxThumbnail}}" alt="img">
-                            <img *ngIf="detail.UserInboxThumbnail == ''" src="https://yrglobaldocuments.blob.core.windows.net/documents/Users/blank-profile-picture.png" alt="img">
+                            <img *ngIf="detail.UserInboxThumbnail != ''" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{detail.UserInboxThumbnail}}" alt="img">
+                            <img *ngIf="detail.UserInboxThumbnail == ''" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/Users/blank-profile-picture.png" alt="img">
                         </div>
                         <div class="share-option-user-details">
                             <h5 class="share-option-user-name">{{detail.SentUser}}</h5>
@@ -9264,7 +9264,7 @@
                 <div class="wf-modal-user">
                     <div class="wf-modal-user-img">
                         <img *ngIf="details.UserInboxThumbnail==''" src="assets/media/icons/user2.png" class="" alt="">
-                        <img *ngIf="details.UserInboxThumbnail!=''" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{details.UserInboxThumbnail}}" class="">
+                        <img *ngIf="details.UserInboxThumbnail!=''" alt="img" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{details.UserInboxThumbnail}}" class="">
                     </div>
                     <div class="wf-modal-user-info">
                         <div class="wf-modal-user-name"> {{details.DisplayName}} </div>

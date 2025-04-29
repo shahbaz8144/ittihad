@@ -1804,7 +1804,7 @@
                     </span>
                 </p>
                 <div id="submitbutton_div" class="ml-2">
-                    <button type="button" [disabled]="UploadingFiles==true" (click)="OnSubmit()" class="btn btn-sm btn-info">
+                    <button type="button" [disabled]="UploadingFiles==true || IsSubmitting" (click)="OnSubmit()" class="btn btn-sm btn-info">
                         <span class="indicator-label">
                             {{ "Masterform.Submit" | translate }}
                         </span>

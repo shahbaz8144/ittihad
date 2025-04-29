@@ -29,7 +29,7 @@ export class GACFileService {
     return this.currentUserSubject.value[0];
   }
   GetDropdownList(ObjGac: GACFiledto) {
-    return this.http.post(this.rootUrl + "/DocumentsAPI/NewDropdownListForFileUpload", ObjGac);
+    return this.http.post(this.rootUrl + "/DocumentsAPI/NewDropdownListForFileUpload", ObjGac,{withCredentials:true});
   }
 
 
@@ -74,7 +74,7 @@ export class GACFileService {
     this._ObjGac.ParentId = ObjGac.ParentId;
     this._ObjGac.CabinetId = ObjGac.CabinetId;
 
-    return this.http.post(this.rootUrlII + "ArchiveAPI/NewDocument", this._ObjGac);
+    return this.http.post(this.rootUrlII + "ArchiveAPI/NewDocument", this._ObjGac,{withCredentials:true});
   }
 
   NewArchiveDocumentStreamBox(ObjGac: GACFiledto) {
@@ -186,7 +186,7 @@ export class GACFileService {
   GetSubCategory(organizationid: number) {
     this._ObjGac.OrganizationId = organizationid;
 
-    return this.http.post(this.rootUrlII + "ArchiveAPI/SubCategoryHierarchy", this._ObjGac);
+    return this.http.post(this.rootUrlII + "ArchiveAPI/SubCategoryHierarchy", this._ObjGac,{withCredentials:true});
 
   }
   getFileContentType(fileUrl: string): Observable<string | null> {
@@ -221,13 +221,13 @@ export class GACFileService {
     this._ObjGac.IsAll = ObjGac.IsAll;
     this._ObjGac.CabinetId = ObjGac.CabinetId;
 
-    return this.http.post(this.rootUrlII + "ArchiveAPI/ArchiveDocumentList", this._ObjGac);
+    return this.http.post(this.rootUrlII + "ArchiveAPI/ArchiveDocumentList", this._ObjGac , {withCredentials:true});
   }
 
   UnReadDocument(ObjGac: GACFiledto) {
 
     this._ObjGac.ReadUnreadjson = ObjGac.ReadUnreadjson;
-    return this.http.post(this.rootUrlII + 'Gac/ArchiveReadUnRead_V2', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'Gac/ArchiveReadUnRead_V2', this._ObjGac,{withCredentials:true});
   }
 
   PinArchiveDocuments(DocumentId: number, ShareId: number, IsPin: boolean) {
@@ -237,12 +237,12 @@ export class GACFileService {
     this._ObjGac.IsPin = IsPin;
     this._ObjGac.CreatedBy = this.currentUserValue.createdby
 
-    return this.http.post(this.rootUrlII + 'Gac/ArchiveIspin_V2', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'Gac/ArchiveIspin_V2', this._ObjGac , { withCredentials:true});
   }
 
   PinDocuments(ObjGac: GACFiledto) {
     this._ObjGac.Ispinjson = ObjGac.Ispinjson;
-    return this.http.post(this.rootUrlII + 'Gac/ArchiveIspin_V2', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'Gac/ArchiveIspin_V2', this._ObjGac,{withCredentials:true});
   }
 
   DocumentsArchiveFavorite(DocumentId: number, ShareId: number, isFavorite: boolean) {
@@ -250,26 +250,26 @@ export class GACFileService {
     this._ObjGac.ShareId = ShareId;
     this._ObjGac.isFavorite = isFavorite
     // this._ObjGac.favoritejson = ObjGac.favoritejson;
-    return this.http.post(this.rootUrlII + 'Gac/ArchiveFavorite_V2', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'Gac/ArchiveFavorite_V2', this._ObjGac,{withCredentials:true});
   }
 
   DocumentsFavorite(ObjGac: GACFiledto) {
     this._ObjGac.favoritejson = ObjGac.favoritejson;
-    return this.http.post(this.rootUrlII + 'Gac/ArchiveFavorite_V2', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'Gac/ArchiveFavorite_V2', this._ObjGac,{withCredentials:true});
   }
 
 
 
   DocumentsDelete(ObjGac: GACFiledto) {
     this._ObjGac.trashjson = ObjGac.trashjson;
-    return this.http.post(this.rootUrlII + 'Gac/ArchiveTrash_V2', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'Gac/ArchiveTrash_V2', this._ObjGac,{withCredentials:true});
   }
 
 
   ListInTrash() {
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
     this._ObjGac.Organizationid = this.currentUserValue.organizationid;
-    return this.http.post(this.rootUrlII + 'Gac/ArchiveTrashList_V2', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'Gac/ArchiveTrashList_V2', this._ObjGac,{withCredentials:true});
   }
 
   ListInLabel(LabelId: number) {
@@ -277,7 +277,7 @@ export class GACFileService {
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
     this._ObjGac.Organizationid = this.currentUserValue.organizationid;
 
-    return this.http.post(this.rootUrlII + 'LabelsAPI/GetLabelArchives_V2', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'LabelsAPI/GetLabelArchives_V2', this._ObjGac,{withCredentials:true});
   }
 
 
@@ -285,7 +285,7 @@ export class GACFileService {
   ListInFavorite() {
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
     this._ObjGac.Organizationid = this.currentUserValue.organizationid;
-    return this.http.post(this.rootUrlII + 'Gac/ArchiveFavoriteList_V2', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'Gac/ArchiveFavoriteList_V2', this._ObjGac,{withCredentials:true});
   }
 
   ListInUnread() {
@@ -300,7 +300,7 @@ export class GACFileService {
     this._ObjGac.ShareId = ObjGac.ShareId;
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
     this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
-    return this.http.post(this.rootUrlII + "ArchiveAPI/ArchiveDocumentDetails", this._ObjGac);
+    return this.http.post(this.rootUrlII + "ArchiveAPI/ArchiveDocumentDetails", this._ObjGac,{withCredentials:true});
   }
 
   async ArchiveStatusAPI(ObjGac: GACFiledto) {
@@ -339,18 +339,18 @@ export class GACFileService {
   GetSharedwithMeDocumentsList() {
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
     this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/ArchiveShareWithMeList', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/ArchiveShareWithMeList', this._ObjGac,{withCredentials:true});
   }
   GetSharebymeExpiredDocumentList() {
     this._ObjGac.FromUserId = this.currentUserValue.createdby;
     this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
-    return this.http.post(this.rootUrl + "/DocumentsAPI/NewGetSharedByMeExpiredPhysicalDocumentsListAng", this._ObjGac);
+    return this.http.post(this.rootUrl + "/DocumentsAPI/NewGetSharedByMeExpiredPhysicalDocumentsListAng", this._ObjGac,{withCredentials:true});
   }
   GetSharebymeList() {
 
     this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
-    return this.http.post(this.rootUrlII + "ArchiveAPI/ArchiveShareByMeList", this._ObjGac);
+    return this.http.post(this.rootUrlII + "ArchiveAPI/ArchiveShareByMeList", this._ObjGac,{withCredentials:true});
   }
   GetAddsource(SourceName: string) {
     this._ObjGac.SourceName = SourceName;
@@ -376,7 +376,7 @@ export class GACFileService {
 
   UserLabels(ObjGac: LabelDTO) {
     this._ObjGac1.UserId = ObjGac.UserId; //this.currentUserValue.createdby;
-    return this.http.post(this.rootUrlII + 'LabelsAPI/GetLabelsMasterDocuments', this._ObjGac1);
+    return this.http.post(this.rootUrlII + 'LabelsAPI/GetLabelsMasterDocuments', this._ObjGac1 , {withCredentials:true});
   }
 
   DeleteUserLabels(ObjGac: LabelDTO) {
@@ -390,7 +390,7 @@ export class GACFileService {
     this._ObjGac.DocumentInfoJson = ObjGac.DocumentInfoJson;
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
     this._ObjGac.DocumentId = ObjGac.DocumentId;
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewUpdateArchiveInfo', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewUpdateArchiveInfo', this._ObjGac,{withCredentials:true});
   }
 
   CabinetInsertAndUpdate(ObjGac: GACFiledto) {
@@ -402,19 +402,19 @@ export class GACFileService {
     this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
 
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewCabinetInsertAndUpdate', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewCabinetInsertAndUpdate', this._ObjGac,{withCredentials:true});
   }
 
   CabinetListAPI() {
 
     this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
 
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewCabinetList', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewCabinetList', this._ObjGac,{withCredentials:true});
   }
 
   AssignedCabinetAPI() {
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewGetAssignedCabinet', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewGetAssignedCabinet', this._ObjGac , {withCredentials : true});
   }
   // async AssignedCabinetAPI() {
   //   this._ObjGac.CreatedBy = this.currentUserValue.createdby;
@@ -435,7 +435,7 @@ export class GACFileService {
     this._ObjGac.TemplateData = ObjGac.TemplateData;
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
 
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewAddDynamicTemplate', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewAddDynamicTemplate', this._ObjGac,{withCredentials:true});
   }
 
   UpdateDynamicTemplateAPI(ObjGac: GACFiledto) {
@@ -443,7 +443,7 @@ export class GACFileService {
     this._ObjGac.TemplateData = ObjGac.TemplateData;
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
 
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewUpdateDynamicTemplate', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewUpdateDynamicTemplate', this._ObjGac,{withCredentials:true});
   }
 
 
@@ -451,27 +451,27 @@ export class GACFileService {
 
     this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
 
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewGetTemplates', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewGetTemplates', this._ObjGac,{withCredentials:true});
   }
 
   GetTemplateByIdAPI(ObjGac: GACFiledto) {
 
     this._ObjGac.TemplateId = ObjGac.TemplateId;
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewGetTemplateById', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewGetTemplateById', this._ObjGac,{withCredentials:true});
   }
 
   MapTemplatetoCabinetListAPI() {
 
     this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
 
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewMapTemplatetoCabinetList', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewMapTemplatetoCabinetList', this._ObjGac,{withCredentials:true});
   }
 
   GetMappedTemplatesListAPI() {
 
     this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
 
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewGetMappedTemplatesList', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewGetMappedTemplatesList', this._ObjGac , {withCredentials:true});
   }
 
   AddMapTemplateAPI(ObjGac: GACFiledto) {
@@ -482,7 +482,7 @@ export class GACFileService {
     // this._ObjGac.Prefix = ObjGac.Prefix;
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
     this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewAddMapTemplate', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewAddMapTemplate', this._ObjGac,{withCredentials:true});
   }
 
   NewAddTemplatePositionsAPI(ObjGac: GACFiledto) {
@@ -491,7 +491,7 @@ export class GACFileService {
     this._ObjGac.PositionY = ObjGac.PositionY;
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
 
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewAddTemplatePositions', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/NewAddTemplatePositions', this._ObjGac,{withCredentials:true});
   }
 
   // async uploadPdfWithImage(pdfFile: File, imageFile: File, positionX: number, positionY: number, width: number, height: number) {
@@ -556,7 +556,7 @@ export class GACFileService {
 
     this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
 
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/Barcodelist', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/Barcodelist', this._ObjGac,{withCredentials:true});
   }
 
 
@@ -565,7 +565,7 @@ export class GACFileService {
     this._ObjGac.CreatedBy = this.currentUserValue.createdby;
     this._ObjGac.OrganizationId = this.currentUserValue.organizationid;
     this._ObjGac.PartsJson = ObjGac.PartsJson;
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/InsertBarcodeWithParts', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/InsertBarcodeWithParts', this._ObjGac,{withCredentials:true});
   }
 
 
@@ -574,7 +574,7 @@ export class GACFileService {
     this._ObjGac.MapTemplateId  = ObjGac.MapTemplateId;
     this._ObjGac.IsActive = ObjGac.IsActive
 
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/RemoveMappedData', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/RemoveMappedData', this._ObjGac , {withCredentials:true});
   }
 
 
@@ -582,6 +582,6 @@ export class GACFileService {
 
     this._ObjGac.BarcodeId  = ObjGac.BarcodeId;
 
-    return this.http.post(this.rootUrlII + 'ArchiveAPI/DeleteBarcode', this._ObjGac);
+    return this.http.post(this.rootUrlII + 'ArchiveAPI/DeleteBarcode', this._ObjGac,{withCredentials:true});
   }
 }

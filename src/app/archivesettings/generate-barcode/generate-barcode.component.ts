@@ -228,19 +228,35 @@ this.IncrementDurationp = lang === 'en' ? 'Increment Duration' : 'مدة الز�
 
       switch (data['Message']) {
         case '1':
+          if(this.currentLang == 'en'){
           this._snackBar.open('Generate Barcode Successfully', 'Close', {
             duration: 5000,
             verticalPosition: 'bottom',
             horizontalPosition: 'right',
           });
+        }else if(this.currentLang == 'ar'){
+            this._snackBar.open('تم إنشاء الرمز الباركود بنجاح', 'إغلاق', {
+              duration: 5000,
+              verticalPosition: 'bottom',
+              horizontalPosition: 'right',
+            });
+        }
           this.BarCodeList();
       this.generate_barcode_close();
           break;
         case '2':
-          alert('Same Barcode name.');
+          if(this.currentLang == 'en'){
+            alert('Same Barcode name.');
+          }else if(this.currentLang == 'ar'){
+            alert('اسم الباركود نفسه.');
+          }
           break;
         case '3':
-          alert('Same parts.');
+          if(this.currentLang == 'en'){
+            alert('Same parts.');
+          }else if(this.currentLang == 'ar'){
+            alert('الأجزاء نفسها.');
+          }
           break;
         default:
           alert('An unknown error occurred.');
@@ -392,11 +408,20 @@ this.IncrementDurationp = lang === 'en' ? 'Increment Duration' : 'مدة الز�
       //     this.createBarcode(); // Proceed to create barcode
       //   }
       // });
-      Swal.fire({
-        icon: "error",
-        title: "No Auto Increment",
-        text: "Please add auto increment!"
-      });
+      if(this.currentLang == 'en'){
+        Swal.fire({
+          icon: "error",
+          title: "No Auto Increment",
+          text: "Please add auto increment!"
+        });
+      }else if(this.currentLang == 'ar'){
+        Swal.fire({
+          icon: "error",
+          title: "لا توجد زيادة تلقائية.",
+          text: "يرجى إضافة زيادة تلقائية."
+        });
+      }
+      
     } else {
       this.createBarcode(); // Directly add barcode for other types
     }
@@ -487,22 +512,75 @@ EditGenerateBarcode(item){
     document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.add("d-block");
 }
 
+// DeletedBarcode(item: any): void {
+//   if(this.currentLang == 'en'){
+
+//   }else if(this.currentLang == 'ar'){
+
+//   }
+//   Swal.fire({
+//     title: 'Are you sure?',
+//     html: `
+//     <p>Do you want to delete this barcode?</p>
+//     <p ><strong>Deleted barcode cannot be restored!</strong></p>
+//   `,
+//     showCancelButton: true,
+//     confirmButtonColor: '#3085d6',
+//     cancelButtonColor: '#d33',
+//     confirmButtonText: 'Yes, delete it!',
+//     cancelButtonText: 'Cancel'
+//   }).then((result) => {
+//     if (result.isConfirmed) {
+//       // item.IsActive = !item.IsActive;  // Toggle the active state (or set to false if deletion)
+
+//       this.obj.BarcodeId = item.BarcodeId;
+
+//       this.service.RemoveBarcodeAPI(this.obj).subscribe({
+//         next: (data) => {
+//           console.log('Barcode removed:', data);
+//         },
+//         error: (err) => {
+//           console.error('Error removing barcode:', err);
+//         }
+//       });
+//     }
+//   });
+// }
+
 DeletedBarcode(item: any): void {
+  let title = '';
+  let message1 = '';
+  let message2 = '';
+  let confirmButtonText = '';
+  let cancelButtonText = '';
+
+  if (this.currentLang === 'en') {
+    title = 'Are you sure?';
+    message1 = 'Do you want to delete this barcode?';
+    message2 = 'Deleted barcode cannot be restored!';
+    confirmButtonText = 'Yes, delete it!';
+    cancelButtonText = 'Cancel';
+  } else if (this.currentLang === 'ar') {
+    title = 'هل أنت متأكد؟'
+    message1 = 'هل تريد حذف هذا الباركود؟'
+    message2 = 'لا يمكن استعادة الباركود المحذوف.'
+    confirmButtonText = 'نعم، احذفه!';
+    cancelButtonText = 'إلغاء';
+  }
+
   Swal.fire({
-    title: 'Are you sure?',
+    title: title,
     html: `
-    <p>Do you want to delete this barcode?</p>
-    <p ><strong>Deleted barcode cannot be restored!</strong></p>
-  `,
+      <p>${message1}</p>
+      <p><strong>${message2}</strong></p>
+    `,
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!',
-    cancelButtonText: 'Cancel'
+    confirmButtonText: confirmButtonText,
+    cancelButtonText: cancelButtonText
   }).then((result) => {
     if (result.isConfirmed) {
-      // item.IsActive = !item.IsActive;  // Toggle the active state (or set to false if deletion)
-
       this.obj.BarcodeId = item.BarcodeId;
 
       this.service.RemoveBarcodeAPI(this.obj).subscribe({
@@ -517,6 +595,9 @@ DeletedBarcode(item: any): void {
   });
 }
 
+ClearSearch(){
+  this.BarcodeSearch = "";
+}
 // DeletedBarcode(item){
 //  Swal.fire({
 //         title: "Are you sure?",

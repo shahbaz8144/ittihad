@@ -53,7 +53,7 @@ export class AuthenticationService {
     //  return this.http.get<any>(this.rootUrl + '/AuthenticationAPI/GetLoginDetailsJSON?userId=' + username + "&password=" + password, {
 
     return this.http.post<any>(this.rootUrlII + "Login/StreamLoginAPI", this._userobj, {
-    })
+      withCredentials: true})
       .pipe(map(user => {
          
         var _json = JSON.parse(user["Data"]["UserId"]);
