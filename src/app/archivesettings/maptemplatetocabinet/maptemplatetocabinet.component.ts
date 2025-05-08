@@ -55,7 +55,7 @@ export class MaptemplatetocabinetComponent implements OnInit {
           this.SelectTemplate = lang === 'en' ? 'Select Template' : 'حدد القالب';
            this.Enterprefix = lang === 'en' ? 'Enter prefix' : 'أدخل البادئة';
             this.Enternumber = lang === 'en' ? 'Enter number' : 'أدخل الرقم';
-            this.SelectBarcode  = lang === 'en' ? 'Select Barcode' : 'حدد الباركود';
+            this.SelectBarcode  = lang === 'en' ? 'Select Barcode' : 'تحديد الباركود';
         if(lang == 'ar'){
           this.renderer.addClass(document.body, 'kt-body-arabic');
         }else if (lang == 'en'){
@@ -76,7 +76,7 @@ export class MaptemplatetocabinetComponent implements OnInit {
       this.SelectTemplate = lang === 'en' ? 'Select Template' : 'حدد القالب';
        this.Enterprefix = lang === 'en' ? 'Enter prefix' : 'أدخل البادئة';
         this.Enternumber = lang === 'en' ? 'Enter number' : 'أدخل الرقم';
-        this.SelectBarcode  = lang === 'en' ? 'Select Barcode' : 'حدد الباركود';
+        this.SelectBarcode  = lang === 'en' ? 'Select Barcode' : 'تحديد الباركود';
     if(lang == 'ar'){
       this.renderer.addClass(document.body, 'kt-body-arabic');
     }else if (lang == 'en'){
@@ -176,10 +176,19 @@ export class MaptemplatetocabinetComponent implements OnInit {
           this.GetMappedTemplatesList();
           break;
         case '2':
-          alert('cabinet is already mapped.');
+          if(this.currentLang == 'en'){
+            alert('cabinet is already mapped.');
+          }else if (this.currentLang == 'ar'){
+            alert('تم ربط الخزانة مسبقًا.')
+          }
           break;
         case '3':
-          alert('Barcode sequence already exists.');
+          if(this.currentLang == 'en'){
+            alert('Barcode sequence already exists.');
+          }else if(this.currentLang == 'ar'){
+            alert('تسلسل الباركود موجود بالفعل.');
+          }
+         
           break;
         default:
           alert('An unknown error occurred.');
@@ -257,10 +266,18 @@ export class MaptemplatetocabinetComponent implements OnInit {
         this.service.RemoveMappedDataAPI(this.obj).subscribe( data => {
        if(data['Message'] == 2){
         Obj_Status.IsActive = false;
-        Swal.fire({
-                icon: "error",
-                text: "Cabinet cannot be mapped to barcode and template, because it is already mapped"
-              });
+        if(this.currentLang == 'en'){
+          Swal.fire({
+            icon: "error",
+            text: "Cabinet cannot be mapped to barcode and template, because it is already mapped"
+          });
+        }else if(this.currentLang == 'ar'){
+          Swal.fire({
+            icon: "error",
+            text: "لا يمكن ربط الخزانة بالباركود والقالب، لأنه تم ربطها مسبقًا."
+          });
+        }
+       
         // alert("")
         // this._snackBar.open('Barcode is already mapped', 'Close', {
         //   duration: 5000,

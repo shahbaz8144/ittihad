@@ -172,7 +172,7 @@ export class NewMemoService {
 
     // formData.ApprovalType = 'S';
     // debugger
-    return this.http.post(this.rootUrlII + "CommunicationAPI/SendWorkFlow", this._objInb);
+    return this.http.post(this.rootUrlII + "CommunicationAPI/SendWorkFlow", this._objInb,{withCredentials:true});
   }
   uploadFile(fileData): Observable<any> {
     fileData.append("createdBy", this.currentUserValue.createdby.toString());
@@ -193,6 +193,7 @@ export class NewMemoService {
     try {
       return this.http.post(this.rootUrlII + "FileUploadAPI/NewPostCommunicationFiles", filedata
         , {
+          withCredentials:true,
           reportProgress: true,
           observe: 'events'
         }).pipe(
@@ -276,7 +277,7 @@ export class NewMemoService {
     if (formData.message == null) { formData.message = ""; }
     // "/LatestCommunicationAPI/NewAddExtraUsers"
     // MemoDetailsAddExtraUsersAPI/NewAddExtraUsers
-    return this.http.post(this.rootUrlII + "Users/NewAddExtraUsers", formData);
+    return this.http.post(this.rootUrlII + "Users/NewAddExtraUsers", formData,{withCredentials:true});
 
   }
   AddExtraUser(_obj: InboxDTO, ReplyIds: string) {
@@ -312,7 +313,7 @@ export class NewMemoService {
     // /LatestCommunicationAPI/NewDMSRequest
     // Core ApI
     // Users/DMSRequest
-    return this.http.post(this.rootUrlII + 'Users/DMSRequest', this._objInb);
+    return this.http.post(this.rootUrlII + 'Users/DMSRequest', this._objInb,{withCredentials:true});
 
   }
   DownloadAttachment(_obj: InboxDTO) {
@@ -352,7 +353,7 @@ export class NewMemoService {
     //  CommunicationAPI/AddAnnouncementANG
     // Old Api
     // /OrganizationAPI/NewAnnouncement
-    return this.http.post(this.rootUrlII + 'CommunicationAPI/AddAnnouncementV2', this._objInb);
+    return this.http.post(this.rootUrlII + 'CommunicationAPI/AddAnnouncementV2', this._objInb,{withCredentials:true});
   }
   UploadAnnouncemtAttachmenst(data) {
     data.append("CreatedBy", this.currentUserValue.createdby.toString());
@@ -386,7 +387,7 @@ export class NewMemoService {
     else if (_obj.FlagId == 1) {
       this._objInb.BannerId = 0;
     }
-    return this.http.post(this.rootUrlII + 'Users/AddUpdateBanner', this._objInb);
+    return this.http.post(this.rootUrlII + 'Users/AddUpdateBanner', this._objInb,{withCredentials : true});
   }
   UploadBannerAttachmenst(data) {
     data.append("CreatedBy", this.currentUserValue.createdby.toString());
@@ -422,7 +423,7 @@ export class NewMemoService {
   BannerList() {
     this._objInb.OrganizationId = this.currentUserValue.organizationid;
     this._objInb.CreatedBy = this.currentUserValue.createdby;
-    return this.http.post(this.rootUrlII + 'Users/GetBanner', this._objInb);
+    return this.http.post(this.rootUrlII + 'Users/GetBanner', this._objInb, {withCredentials:true});
   }
   SelectUser(_obj: InboxDTO) {
     this._objInb.OrganizationId = this.currentUserValue.organizationid;
@@ -435,7 +436,8 @@ export class NewMemoService {
   NewMemosTrigger(_NewMemosTrigger: string, _NewRepliesTrigger: string) {
     this._objInb.NewMemosTrigger = _NewMemosTrigger;
     this._objInb.NewRepliesTrigger = _NewRepliesTrigger;
-    return this.http.post(this.rootUrlII + 'SignalR_API/NewMemosTrigger', this._objInb);
+    return this.http.post(this.rootUrlII + 'SignalR_API/NewMemosTrigger', this._objInb,{withCredentials:true
+    });
   }
 
   NewMemosNotification(title, _userids: string, subject: string, MailId: number, ReplyId: number) {

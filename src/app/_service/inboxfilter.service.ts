@@ -23,6 +23,6 @@ export class InboxfilterService {
   inboxFilters(_CreatedBy: number) {
     this._obj.CreatedBy = _CreatedBy;
     // LatestCommunicationAPI/NewGetInboxFilters
-    return this.http.post(this.rootUrlII + 'CommunicationAPI/GetInboxFilters',this._obj);
+    return this.http.post(this.rootUrlII + 'CommunicationAPI/GetInboxFilters',this._obj,{withCredentials:true});
   }
 }

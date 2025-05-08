@@ -12,9 +12,9 @@
                 <div class="flex-1">
                     <div class="search-bar">
                         <input type="text" class="form-control" [(ngModel)]="BarcodeSearch" [placeholder]="SearchBarcode" aria-controls="example">
-                        <!-- <a class="close close-icn">
+                        <a class="close close-icn"  *ngIf="BarcodeSearch">
                             <i (click)="ClearSearch()" class="material-icons">close</i>
-                        </a> -->
+                        </a>
                     </div>
                 </div>
                 <div class="flex-shrink-0">
@@ -41,7 +41,6 @@
                                     <td>
                                       {{item.BarcodeName}}
                                     </td>
-
                                     <td>
                                        {{item.CombinedParts}}
                                     </td>
@@ -160,10 +159,14 @@
                                     </div>
                                     <div class="form-group mb-3 col-md-4">
                                             <ng-select [placeholder]="IncrementDurationp" [(ngModel)]="IncrementDuration_Value" class="TEST-CLASS">
-                                                <ng-option [value]="'Yearly'" > Yearly </ng-option>
-                                                <ng-option [value]="'Monthly'" > Monthly </ng-option>
-                                                <ng-option [value]="'Daily'" > Daily </ng-option>
-                                                <ng-option [value]="'Document'" > Document </ng-option>
+                                                <ng-option *ngIf="currentLang == 'en'" [value]="'Yearly'" > Yearly </ng-option>
+                                                <ng-option *ngIf="currentLang == 'ar'" [value]="'سنويًا'" > سنويًا  </ng-option>
+                                                <ng-option *ngIf="currentLang == 'en'" [value]="'Monthly'" > Monthly </ng-option>
+                                                <ng-option *ngIf="currentLang == 'ar'" [value]="'شهريًا'" > شهريًا   </ng-option>
+                                                <ng-option *ngIf="currentLang == 'en'" [value]="'Daily'" > Daily </ng-option>
+                                                <ng-option  *ngIf="currentLang == 'ar'" [value]="'يوميًا'" > يوميًا    </ng-option>
+                                                <ng-option *ngIf="currentLang == 'en'" [value]="'Document'" > Document </ng-option>
+                                                <ng-option *ngIf="currentLang == 'ar'" [value]="'مستند'" > مستند  </ng-option>
                                             </ng-select>
                                             <div class="kt-error" *ngIf="IIncrementDurationerrormessage && !IncrementDuration_Value">
                                                 <span class="kt-error-msg">

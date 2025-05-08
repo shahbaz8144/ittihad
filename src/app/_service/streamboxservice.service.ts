@@ -22,34 +22,34 @@ readonly rootUrlII = this.commonUrl.apiurlNew;
 
    Streamboxfile(_ObjStream: StreamboxDTO) {
     this._ObjStream.EmployeeId = _ObjStream.EmployeeId;
-     return this.http.post(this.rootUrlII + 'FileUploadAPI/NewStreamBoxCloudFilesLogListWeb', this._ObjStream);
+     return this.http.post(this.rootUrlII + 'FileUploadAPI/NewStreamBoxCloudFilesLogListWeb', this._ObjStream,{withCredentials:true});
    }
 
    ShareStreamboxfile(_ObjStream: StreamboxDTO) {
     this._ObjStream.json = _ObjStream.json;
-     return this.http.post(this.rootUrlII + 'FileUploadAPI/NewStreamBoxCloudFilesSharing', this._ObjStream);
+     return this.http.post(this.rootUrlII + 'FileUploadAPI/NewStreamBoxCloudFilesSharing', this._ObjStream,{withCredentials:true});
    }
 
    StreamboxPermalityDeletefilesApi(_ObjStream: StreamboxDTO) {
     
     this._ObjStream.json = _ObjStream.json
-     return this.http.post(this.rootUrlII + 'FileUploadAPI/NewDeleteAzureBlob', this._ObjStream);
+     return this.http.post(this.rootUrlII + 'FileUploadAPI/NewDeleteAzureBlob', this._ObjStream,{withCredentials:true});
    }
 
    RestoreFile(_ObjStream: StreamboxDTO) {
     this._ObjStream.json = _ObjStream.json;
     this._ObjStream.IsRestore = _ObjStream.IsRestore;
    
-     return this.http.post(this.rootUrlII + 'FileUploadAPI/RestoreFile', this._ObjStream);
+     return this.http.post(this.rootUrlII + 'FileUploadAPI/RestoreFile', this._ObjStream,{withCredentials:true});
    }
   StreamboxDeletefilesApi(_ObjStream: StreamboxDTO) {
     this._ObjStream.json = _ObjStream.json
-     return this.http.post(this.rootUrlII + 'FileUploadAPI/NewStreamBoxDeleteCloudFiles', this._ObjStream);
+     return this.http.post(this.rootUrlII + 'FileUploadAPI/NewStreamBoxDeleteCloudFiles', this._ObjStream,{withCredentials:true});
    }
 
    StreamBoxDeletedCloudFiles(_ObjStream: StreamboxDTO) {
     this._ObjStream.EmployeeId = _ObjStream.EmployeeId
-     return this.http.post(this.rootUrlII + 'FileUploadAPI/StreamBoxDeletedCloudFiles', this._ObjStream);
+     return this.http.post(this.rootUrlII + 'FileUploadAPI/StreamBoxDeletedCloudFiles', this._ObjStream,{withCredentials:true});
    }
    
 }

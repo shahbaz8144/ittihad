@@ -260,6 +260,7 @@ export class MyProfileComponent implements OnInit {
   }
   // MyProfileUpload functionality 
   MyProfileUpload(event) {
+    this._lstMultipleFiales = [];
     if (event.target.files.length > 0) {
       var length = event.target.files.length;
       for (let index = 0; index < length; index++) {
@@ -278,6 +279,7 @@ export class MyProfileComponent implements OnInit {
     for (var i = 0; i < this._lstMultipleFiales.length; i++) {
       frmData.append("imgUpload", this._lstMultipleFiales[i].Files);
     }
+    console.log(this._lstMultipleFiales , "Upload Images");
     frmData.append("UserId", this.currentUserValue.createdby.toString());
     this.userService.ProfileUpload(frmData).subscribe(data => {
       console.log(data, "imageurl")

@@ -26,7 +26,7 @@
                             <div class="mb-3">
                                 <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative image-input image-input-outline">
                                     <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png" id="imgUpload" alt="image" *ngIf="item.UserProfile== 'NA'">
-                                    <img src="https://yrglobaldocuments.blob.core.windows.net/documents/{{item.UserProfile}}" id="imgUpload" alt="image" *ngIf="item.UserProfile != 'NA'">
+                                    <img src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{item.UserProfile}}" id="imgUpload" alt="image" *ngIf="item.UserProfile != 'NA'">
                                     <!-- <img
                                         src="https://yrglobaldocuments.blob.core.windows.net/documents/{{item.Signature}}"  id="imgUpload"> -->
                                     <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow bg-white" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
@@ -468,7 +468,7 @@
                                         <div class="w-100 h-100 mt-5 ml-2">
                                             <!-- <img src="https://yrglobaldocuments.blob.core.windows.net/documents/{{item.Signature}}"> -->
                                             <img style="opacity: 0.3;" src="../../../assets/media/Img/add-sign.png" id="FileUpload" class="imgu" alt="image" *ngIf="Signature== 'NA'">
-                                            <img src="https://yrglobaldocuments.blob.core.windows.net/documents/{{Signature}}" id="FileUpload" alt="image" class="imgu" *ngIf="Signature != 'NA'">
+                                            <img src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{Signature}}" id="FileUpload" alt="image" class="imgu" *ngIf="Signature != 'NA'">
                                             <!-- <img src="Signature" id="FileUpload" alt="image" class="imgu" *ngIf="item.Signature != 'NA'"> -->
                                             <!-- <div class="col-8 col-xl-9">
                                                 <input type="file"id="file">
@@ -503,7 +503,7 @@
                                                     <div class="user-img">
 
                                                         <img *ngIf="item.UserProfile == 'NA'" src="assets/media/icons/user3.png">
-                                                        <img *ngIf="item.UserProfile != 'NA'" src="https://yrglobaldocuments.blob.core.windows.net/documents/{{item.UserProfile}}">
+                                                        <img *ngIf="item.UserProfile != 'NA'" src="https://yrglobaldocuments.blob.core.windows.net/userprofileimages/{{item.UserProfile}}">
                                                         <!-- https://yrglobaldocuments.blob.core.windows.net/documents/Users/71/194211_Sayeed.jpg -->
                                                     </div>
                                                 </div>

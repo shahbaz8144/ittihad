@@ -62,8 +62,7 @@ export class AuthenticationService {
     this._userobj.OldPassWord = password;
 
     return this.http.post<any>(this.rootUrlII + "Login/StreamLoginAPI", this._userobj, {
-      withCredentials: true
-    })
+      withCredentials: true})
       .pipe(map(user => {
         var _json = JSON.parse(user["Data"]["UserId"]);
         const token = user.token;

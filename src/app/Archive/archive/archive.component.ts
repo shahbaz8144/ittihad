@@ -748,7 +748,7 @@ export class ArchiveComponent implements OnInit {
       });
   }
 
-
+  IsSubmitting:boolean = false;
   OnSubmit() {
     this.allValidationsPassed = true;
 
@@ -899,6 +899,7 @@ export class ArchiveComponent implements OnInit {
     this._obj.CabinetId = this.selectedCabinetId;
 
     console.log(WorkflowJson, "Workflow json");
+    if(this.IsSubmitting = true){
     this.service.NewDocument(this._obj).subscribe(data => {
       console.log(data, "Add Document API Data");
       this.SubmitDocumentDocumentId = data["documentId"];
@@ -910,6 +911,7 @@ export class ArchiveComponent implements OnInit {
         this._Previewshownandhide = false;
       }
     });
+  }
 
     // this.AddDocumentclear();
 
@@ -1224,6 +1226,7 @@ export class ArchiveComponent implements OnInit {
   }
 
   DocumentDataClear() {
+    this.IsSubmitting = false;
     this.SelectedCategory = []
     this.FirstFileDocumentName = "";
     this.SelectedRequiredapprovalUsers = [];
