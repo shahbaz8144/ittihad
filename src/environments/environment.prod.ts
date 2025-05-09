@@ -1,8 +1,8 @@
 export const environment = {
   production: true
   ,baseUrl:'https://cswebapps.com/dmsapi/api/'
-  ,NewbaseUrl:'https://cswebapps.com/dmscoretestapi/api/'
-  ,SignalRUrl:'https://cswebapps.com/dmscoretestapi/'
+  ,NewbaseUrl:'https://cswebapps.com/ittihadclubapi/api/'
+  ,SignalRUrl:'https://cswebapps.com/ittihadclubapi/'
   // ,NewbaseUrl:'https://cswebapps.com/dmsapitest/api/'
   // ,SignalRUrl:'https://cswebapps.com/dmsapitest/'
   ,BrowserNotificationUrl:'https://cswebapps.com/dmscorenotification/api/'

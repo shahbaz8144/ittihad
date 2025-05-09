@@ -140,9 +140,10 @@ export class DocumentInboxComponent implements OnInit, AfterViewInit {
       this._CabinetList = data['Data'].CabinetJson;
       console.log(data['Data'], "CabinetList");
       this.AllDocumentsCount = data['Data'].DocumentsCount;
+      this.cabinetId = data['Data'].CabinetId;
       this.route.firstChild?.paramMap.subscribe(params => {
-        this.cabinetId = Number(params.get('cabinetid')); // Convert to number if needed
-
+        const _cab_Id = Number(params.get('cabinetid'));
+        this.cabinetId = _cab_Id == 0 ? this.cabinetId : _cab_Id; 
         if (this.cabinetId == 0) {
           this.selectedCabinet = "All Documents";
         }

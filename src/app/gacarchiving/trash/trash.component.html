@@ -63,13 +63,11 @@
                                     <span></span>
                                 </label>
                         </div>
-                        <div class="leftdiv">
+                        <!-- <div class="leftdiv">
                             <div class="img-divv">
-                                <!-- <img *ngIf="item.ThumbnailUrl==''" src="assets/media/Img/filethumb.png" class="" alt=""> -->
-                                <!-- <img  alt="img" [src]="item.Url" class=""> -->
                                 <img [src]="getImageSource(item)" class="">
                             </div>
-                        </div>
+                        </div> -->
                         <div class="w-100" (click)="sideviw('Gac/DocumentDetails',item.DocumentId,item.ReferenceId,item.ShareId)">
                             <div class="main-doc-name">
                                 <span class="doc-username">{{item.DocumentName}}</span>

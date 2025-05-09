@@ -431,7 +431,7 @@
         </div>
         <div class="doc-detls" *ngFor="let item of GACDocumentList">
             <div [ngClass]="item.IsRead ? 'docs-list' : 'docs-list doc-detls-unread'">
-                <div class="kt-inbox__info">
+                <div class="kt-inbox__info" *ngIf="item.IsSharedToUser == 'Receiver'">
                     <label class="kt-checkbox kt-checkbox--single kt-checkbox--tick kt-checkbox--brand">
                         <input type="checkbox" name="checkbox" [(ngModel)]="item.IsChecked"
                             (change)="Singleselectcheckbox(item.DocumentId,item.ShareId,item.IsChecked)"
@@ -460,15 +460,7 @@
                 </div>
                 <div class="left-click-side" (click)="sideviw('Gac/DocumentDetails',item.DocumentId,'0',item.ShareId)">
                     <div class="d-flex-center-start">
-                        <!-- <img *ngIf="contentType!== 'image/png' && contentType !== 'image/jpeg'" src="assets/media/Img/filethumb.png" class="" alt="">
-                                <img alt="img" *ngIf="contentType === 'image/png' || contentType === 'image/jpeg'"   [src]="item.Url" class=""> -->
-                        <!-- <div class="leftdiv">
-                            <div class="img-divv">
-                                
-                                <img [src]="getImageSource(item)" class="">
-
-                            </div>
-                        </div> -->
+                        <!-- IsSharedToUser -->
                         <div class="w-100">
                             <div class="main-doc-name">
                                 <div>{{ item.contentType }}</div>

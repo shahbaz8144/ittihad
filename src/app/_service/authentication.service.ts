@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { UserDTO } from '../_models/user-dto';
-import { BehaviorSubject, firstValueFrom, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { ApiurlService } from './apiurl.service';
-import { catchError, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import Localbase from 'localbase'
 import { AuthenticationDTO } from '../_models/authentication-dto';
 let users_db = new Localbase('pwa-database_users')
@@ -35,7 +35,7 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
   async getSasUrl(filePath: string, expiryTime: Date): Promise<string> {
-
+     
     const expiryTimeString = expiryTime.toISOString(); // Convert to UTC string
     const response = await this.http.get<{ sasUrl: string }>(
       `${this.rootUrlII}FileUploadAPI/NewGenerateSASTokenUrl?filePath=${encodeURIComponent(filePath)}&expiryTime=${expiryTimeString}`
@@ -62,11 +62,12 @@ export class AuthenticationService {
     this._userobj.OldPassWord = password;
 
     return this.http.post<any>(this.rootUrlII + "Login/StreamLoginAPI", this._userobj, {
-      withCredentials: true})
+      withCredentials:true
+    })
       .pipe(map(user => {
         var _json = JSON.parse(user["Data"]["UserId"]);
         const token = user.token;
-        console.log("Json Value", _json);
+        console.log("Json Value" , _json);
         let _obj1 = _json;
         if (user["Data"]["UserId"].length != 0) {
           users_db.collection('users').add({
@@ -89,19 +90,6 @@ export class AuthenticationService {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(this._userdto);
   }
-  async logoutAPICall() {
-    try {
-      const result = await firstValueFrom(
-        this.http.post(this.rootUrlII + 'Login/logout', {}, { withCredentials: true })
-      );
-      return result;
-      // console.log('Logout successful:', result);
-
-    } catch (error) {
-      console.error('Error during logout:', error);
-    }
-  }
-
   UpdatePassword(_userdto: UserDTO) {
     return this.http.post(this.rootUrl + '/AuthenticationAPI/NewUpdatePasswordANG', _userdto);
   }
@@ -113,21 +101,4 @@ export class AuthenticationService {
     return this.http.post(this.rootUrl + '/AuthenticationAPI/NewTourUpdateCount', this._userdto);
   }
 
-  refreshToken(): Observable<any> { // Observable here, NOT Promise
-
-    return this.http.post(`${this.rootUrlII}Login/refresh-token`, {}, { withCredentials: true }).pipe(
-      catchError(err => {
-        console.error('Refresh token failed', err);
-        this.logout();
-        return of(null);
-      })
-    );
-  }
-
-  async getProtectedResource() {
-    return await firstValueFrom(this.http.get(this.rootUrlII + 'Login/protected',
-      { withCredentials: true }
-    ));
-  }
 }
-

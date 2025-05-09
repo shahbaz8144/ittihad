@@ -10,6 +10,7 @@ import html2canvas from 'html2canvas';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import * as JsBarcode from 'jsbarcode';
 import { format } from 'date-fns';
+import { ApiurlService } from './apiurl.service';
 
 // import { Buffer } from 'buffer';
 // (window as any).Buffer = Buffer; // Make Buffer globally available
@@ -20,11 +21,11 @@ import { format } from 'date-fns';
 })
 export class AzureUploadService {
   private sasToken: string = ''; // Backend-provided SAS token
-  private apiUrl = 'https://cswebapps.com/dmscoretestapi/api/FileUploadAPI/NewGenerateSASToken'; // Backend endpoint
+  // private apiUrl = 'https://cswebapps.com/dmscoretestapi/api/FileUploadAPI/NewGenerateSASToken'; // Backend endpoint
   private expiryTime: number = 0;
   blobUrl: any;
-
-  constructor(private http: HttpClient) {
+  readonly rootUrlII = this.commonUrl.apiurlNew;
+  constructor(private http: HttpClient,private commonUrl: ApiurlService) {
     // Configure the worker source
     (pdfjsLib as any).GlobalWorkerOptions.workerSrc = './assets/js/pdf.worker.min.js';
   }
@@ -33,7 +34,7 @@ export class AzureUploadService {
   private async getSasToken(): Promise<string> {
     try {
       if (!this.sasToken || Date.now() > this.expiryTime) {
-        const response: any = await firstValueFrom(this.http.post(this.apiUrl, {}));
+        const response: any = await firstValueFrom(this.http.post(`${this.rootUrlII}FileUploadAPI/NewGenerateSASToken`, {}));
         this.sasToken = response.sasToken;
         this.expiryTime = new Date(response.expiryTime).getTime();
         this.blobUrl = response.blobUrl;
