@@ -25,7 +25,6 @@ import { ShelvesService } from 'src/app/_service/shelves.service';
 import * as moment from 'moment';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { ApiurlService } from 'src/app/_service/apiurl.service';
-import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AzureUploadService } from 'src/app/_service/azure-upload.service';
 declare var $: any;
@@ -56,8 +55,8 @@ export class ArchiveComponent implements OnInit {
   customObj: ShelvesDTO;
   selectedValues: string = '';
   SubmitDocumentDocumentId: number;
-  DocumentBarcode:any;
-  DocumentPrefix:any;
+  DocumentBarcode: any;
+  DocumentPrefix: any;
   _selectedValues: Array<{
     UserId: number;
     ContactName: string;
@@ -277,7 +276,6 @@ export class ArchiveComponent implements OnInit {
     private translate: TranslateService,
     private renderer: Renderer2,
     public inboxService: InboxService,
-    private cdr: ChangeDetectorRef,
     private commonUrl: ApiurlService,
     private router: Router,
     @Inject(DOCUMENT) private document: Document,
@@ -350,9 +348,9 @@ export class ArchiveComponent implements OnInit {
 
   selectedCabinet: string = "";
   selectedCabinetId: number = 0;
- 
+
   async ngOnInit(): Promise<void> {
-   
+
     const lang: any = localStorage.getItem('language')
     this.translate.use(lang);
     this.SelectCompany = lang === 'en' ? 'Company' : 'اختر الشركة';
@@ -434,7 +432,7 @@ export class ArchiveComponent implements OnInit {
 
   BackInbox() {
     this.router.navigate(['/backend/Archive/Documents', this.selectedCabinetId]);
-   
+
   }
   async SignalRMethods() {
     //Creation Connection of Progress bar for file upload
@@ -748,7 +746,7 @@ export class ArchiveComponent implements OnInit {
       });
   }
 
-  IsSubmitting:boolean = false;
+  IsSubmitting: boolean = false;
   OnSubmit() {
     this.allValidationsPassed = true;
 
@@ -899,19 +897,19 @@ export class ArchiveComponent implements OnInit {
     this._obj.CabinetId = this.selectedCabinetId;
 
     console.log(WorkflowJson, "Workflow json");
-    if(this.IsSubmitting = true){
-    this.service.NewDocument(this._obj).subscribe(data => {
-      console.log(data, "Add Document API Data");
-      this.SubmitDocumentDocumentId = data["documentId"];
-      this.DocumentBarcode = data['barcode'];
-      // this.DocumentPrefix  = data['prefix'];
-      if (data["message"] == '1') {
-        this._Previewshownandhide = true;
-      } else {
-        this._Previewshownandhide = false;
-      }
-    });
-  }
+    if (this.IsSubmitting = true) {
+      this.service.NewDocument(this._obj).subscribe(data => {
+        console.log(data, "Add Document API Data");
+        this.SubmitDocumentDocumentId = data["documentId"];
+        this.DocumentBarcode = data['barcode'];
+        // this.DocumentPrefix  = data['prefix'];
+        if (data["message"] == '1') {
+          this._Previewshownandhide = true;
+        } else {
+          this._Previewshownandhide = false;
+        }
+      });
+    }
 
     // this.AddDocumentclear();
 
@@ -2273,7 +2271,8 @@ export class ArchiveComponent implements OnInit {
     const files = Array.from(event.target.files) as File[]; // Convert FileList to File[]
     let folderPath = "Draft/" + this.currentUserValue.createdby;
     if (files.length > 0) {
-
+      // Generate a unique ID for the new file
+      const uniqueId_master = new Date().valueOf();
       for (let index = 0; index < files.length; index++) {
         const file = files[index];
         const fileSizeInKB = Math.round(file.size / 1024);
@@ -2317,18 +2316,47 @@ export class ArchiveComponent implements OnInit {
           // Create a progress tracker for this file
           const progressSubject = new BehaviorSubject<number>(0);
 
+
+
+
           // Call the Azure upload service to upload the file
           try {
             const _displayname = this.currentUserValue.FirstName + " " + this.currentUserValue.LastName;
-            const { fileUrl, thumbnailUrl } = await this.azureUploadService.uploadFile(file, progressSubject, folderPath, uniqueId, _displayname); // Upload file
-            const uploadedFile = this._GacAttachmentFileuplod.find(
-              (item) => item.UniqueId === uniqueId
-            );
-            if (uploadedFile) {
-              uploadedFile.Url = "https://yrglobaldocuments.blob.core.windows.net/documents/" + fileUrl; // Save the uploaded URL
-              uploadedFile.ThumbnailUrl = thumbnailUrl || '';
-              uploadedFile.CloudName = uniqueId + '_' + file.name;
-            }
+            this.azureUploadService.uploadFileToLocalApi(file, uniqueId, _displayname,uniqueId_master).subscribe({
+              next: (res) => {
+                const filePath = res.filePath;
+                const thumbnailUrl = res.thumbnailUrl;
+                const sanitizedFileName = res.sanitizedFileName;
+
+                console.log("File uploaded successfully:", filePath);
+                console.log("Thumbnail URL:", thumbnailUrl);
+                console.log("Sanitized File Name:", sanitizedFileName);
+
+                const uploadedFile = this._GacAttachmentFileuplod.find(
+                  (item) => item.UniqueId === uniqueId
+                );
+
+                if (uploadedFile) {
+                  uploadedFile.Url = filePath; // Save the uploaded URL
+                  uploadedFile.ThumbnailUrl = thumbnailUrl || '';
+                  uploadedFile.CloudName = uniqueId + '_' + sanitizedFileName;
+                }
+
+              },
+              error: (err) => {
+                console.error("❌ File upload failed", err);
+              }
+            });
+            // // const _displayname = this.currentUserValue.FirstName + " " + this.currentUserValue.LastName;
+            // const { fileUrl, thumbnailUrl } = await this.azureUploadService.uploadFile(file, progressSubject, folderPath, uniqueId, _displayname); // Upload file
+            // const uploadedFile = this._GacAttachmentFileuplod.find(
+            //   (item) => item.UniqueId === uniqueId
+            // );
+            // if (uploadedFile) {
+            //   uploadedFile.Url = "https://yrglobaldocuments.blob.core.windows.net/documents/" + fileUrl; // Save the uploaded URL
+            //   uploadedFile.ThumbnailUrl = thumbnailUrl || '';
+            //   uploadedFile.CloudName = uniqueId + '_' + file.name;
+            // }
           } catch (error) {
             console.error(`Error uploading file: ${file.name}`, error);
           } finally {
@@ -2357,6 +2385,9 @@ export class ArchiveComponent implements OnInit {
     }
     event.target.value = '';
   }
+
+
+
 
   // async selectFile(event: any): Promise<void> {
   //   const files = Array.from(event.target.files) as File[]; // Convert FileList to File[]

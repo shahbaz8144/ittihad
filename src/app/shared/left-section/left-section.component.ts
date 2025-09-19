@@ -37,6 +37,8 @@ export class LeftSectionComponent implements OnInit {
   _userdto: UserDTO;
   EmailId: string = "";
   cabinetid: number = 0;
+  _RoleId: number;
+
   private currentUserSubject: BehaviorSubject<UserDTO>;
   public currentUser: Observable<UserDTO>;
   public static ArabicSide: EventEmitter<any> = new EventEmitter();
@@ -55,6 +57,7 @@ export class LeftSectionComponent implements OnInit {
     this.currentUserSubject = new BehaviorSubject<UserDTO>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
     const lang: any = localStorage.getItem('language');
+    this._RoleId = this.currentUserValue.RoleId;
     this.translate.use(lang);
     DashboardComponent.ArabicSide.subscribe((lang: any) => {
       localStorage.setItem('language', lang);
@@ -345,5 +348,17 @@ export class LeftSectionComponent implements OnInit {
     localStorage.clear();
     location.reload();
     return this.router.navigate(['login']);
+  }
+  dmsfeaturesModal() {
+    document.getElementById("dmsfeaturesModal").style.display = "block";
+    document.getElementById("dmsfeaturesModal").classList.add("show");
+    document.getElementById("dmsfeaturesModalBackdrop").style.display = "block";
+    document.getElementById("dmsfeaturesModalBackdrop").classList.add("show");
+  }
+  dmsfeaturesModal_dismiss() {
+    document.getElementById("dmsfeaturesModal").style.display = "none";
+    document.getElementById("dmsfeaturesModal").classList.remove("show");
+    document.getElementById("dmsfeaturesModalBackdrop").style.display = "none";
+    document.getElementById("dmsfeaturesModalBackdrop").classList.remove("show");
   }
 }

@@ -972,7 +972,7 @@ export class GacDocumentDetailsComponent implements OnInit {
         });
         if (this.DocumentList && this.DocumentList.length > 0) {
           this.mainCatalogUrl = this.DocumentList[0].Url;
-          this.getTemporaryUrl(this.mainCatalogUrl);
+          //this.getTemporaryUrl(this.mainCatalogUrl);
         }
         let scontenttype = '';
 
@@ -1050,7 +1050,7 @@ export class GacDocumentDetailsComponent implements OnInit {
     this.RefDocumentName = DocumentName;
     this._ImageUrl = ImageUrl;
     this.mainCatalogUrl = ImageUrl;
-    this.getTemporaryUrl(this.mainCatalogUrl);
+    // this.getTemporaryUrl(this.mainCatalogUrl);
     let scontenttype = '';
     // Check if the ImageUrl contains a PDF
     this.Contenttype = ImageUrl.toLowerCase().endsWith('.pdf');
@@ -1111,7 +1111,7 @@ export class GacDocumentDetailsComponent implements OnInit {
 
     this._MainCatelogUrl = Url;
     this.mainCatalogUrl = Url;
-    this.getTemporaryUrl(this.mainCatalogUrl);
+    //this.getTemporaryUrl(this.mainCatalogUrl);
     this.ShowProgress = false;
     this.progress = 0;
     let scontenttype = '';
@@ -2667,6 +2667,7 @@ export class GacDocumentDetailsComponent implements OnInit {
   async onFileChange(event): Promise<void> {
     // alert(1);
     let folderPath = "Draft/" + this.currentUserValue.createdby;
+    const uniqueId_master = new Date().valueOf();
     if (event.target.files.length > 0) {
       var length = event.target.files.length;
       for (let index = 0; index < length; index++) {
@@ -2707,18 +2708,43 @@ export class GacDocumentDetailsComponent implements OnInit {
           const progressSubject = new BehaviorSubject<number>(0);
           try {
             const _displayname = this.currentUserValue.FirstName + " " + this.currentUserValue.LastName;
-            const { fileUrl, thumbnailUrl } = await this.azureUploadService.uploadFile(file, progressSubject, folderPath, uniqueId, _displayname); // Upload file
-            const uploadedFile = this._lstMultipleFiles.find(
-              (item) => item.UniqueId === uniqueId
-            );
+            this.azureUploadService.uploadFileToLocalApi(file, uniqueId, _displayname, uniqueId_master).subscribe({
+              next: (res) => {
+                const filePath = res.filePath;
+                const thumbnailUrl = res.thumbnailUrl;
+                const sanitizedFileName = res.sanitizedFileName;
 
-            if (uploadedFile) {
-              // uploadedFile.Url = "https://yrglobaldocuments.blob.core.windows.net/documents/" + uploadUrl; // Save the uploaded URL
-              // uploadedFile.CloudName = uniqueId + file.name;
-              uploadedFile.Url = "https://yrglobaldocuments.blob.core.windows.net/documents/" + fileUrl; // Save the uploaded URL
-              uploadedFile.ThumbnailUrl = thumbnailUrl || '';
-              uploadedFile.CloudName = uniqueId + '_' + file.name;
-            }
+                console.log("File uploaded successfully:", filePath);
+                console.log("Thumbnail URL:", thumbnailUrl);
+                console.log("Sanitized File Name:", sanitizedFileName);
+
+                const uploadedFile = this._lstMultipleFiles.find(
+                  (item) => item.UniqueId === uniqueId
+                );
+
+                if (uploadedFile) {
+                  uploadedFile.Url = filePath; // Save the uploaded URL
+                  uploadedFile.ThumbnailUrl = thumbnailUrl || '';
+                  uploadedFile.CloudName = uniqueId + '_' + sanitizedFileName;
+                }
+
+              },
+              error: (err) => {
+                console.error("❌ File upload failed", err);
+              }
+            });
+            // const { fileUrl, thumbnailUrl } = await this.azureUploadService.uploadFile(file, progressSubject, folderPath, uniqueId, _displayname); // Upload file
+            // const uploadedFile = this._lstMultipleFiles.find(
+            //   (item) => item.UniqueId === uniqueId
+            // );
+
+            // if (uploadedFile) {
+            //   // uploadedFile.Url = "https://yrglobaldocuments.blob.core.windows.net/documents/" + uploadUrl; // Save the uploaded URL
+            //   // uploadedFile.CloudName = uniqueId + file.name;
+            //   uploadedFile.Url = "https://yrglobaldocuments.blob.core.windows.net/documents/" + fileUrl; // Save the uploaded URL
+            //   uploadedFile.ThumbnailUrl = thumbnailUrl || '';
+            //   uploadedFile.CloudName = uniqueId + '_' + file.name;
+            // }
           } catch (error) {
             console.error(`Error uploading file: ${file.name}`, error);
           } finally {
@@ -2736,32 +2762,6 @@ export class GacDocumentDetailsComponent implements OnInit {
           this.UploadingFiles = element.Uploading;
           // console.log(this.UploadingFiles, "Uploading Files Test");
         });
-        // var contentType = file.type;
-        // if (contentType === "application/pdf") {
-        //   contentType = ".pdf";
-        // }
-        // else if (contentType === "image/png") {
-        //   contentType = ".png";
-        // }
-        // else if (contentType === "image/jpeg") {
-        //   contentType = ".jpeg";
-        // }
-        // else if (contentType === "image/jpg") {
-        //   contentType = ".jpg";
-        // }
-
-        // this.myFiles.push(event.target.files[index].name);
-
-        // var d = new Date().valueOf();
-        // this._lstMultipleFiles = [...this._lstMultipleFiles, {
-        //   UniqueId: d,
-        //   FileName: event.target.files[index].name,
-        //   Size: event.target.files[index].size,
-        //   Files: event.target.files[index],
-        //   Ismain: false,
-        //   Thumbnail: ''
-        //   // FileName: "1",
-        // }];
       }
     }
     (<HTMLInputElement>document.getElementById("customFile")).value = "";
@@ -2770,64 +2770,7 @@ export class GacDocumentDetailsComponent implements OnInit {
     var removeIndex = this._lstMultipleFiles.map(function (item) { return item.UniqueId; }).indexOf(_id);
     this._lstMultipleFiles.splice(removeIndex, 1);
   }
-  // jsonData: any[] = [];
 
-  // onFileChangeII(event: any): void {
-  //   const target: DataTransfer = <DataTransfer>event.target;
-  //   if (target.files.length !== 1) {
-  //     alert('Please select a single Excel file.');
-  //     return;
-  //   }
-
-  //   const file: File = target.files[0];
-  //   const reader: FileReader = new FileReader();
-
-  //   reader.onload = (e: any) => {
-  //     const binaryStr: string = e.target.result;
-  //     const workbook: XLSX.WorkBook = XLSX.read(binaryStr, { type: 'binary' });
-
-  //     const sheetName: string = workbook.SheetNames[0]; // Read first sheet
-  //     const worksheet: XLSX.WorkSheet = workbook.Sheets[sheetName];
-
-  //     // Convert the sheet data to JSON
-  //     const rawData: any[] = XLSX.utils.sheet_to_json(worksheet);
-
-  //     // Convert to key-value pair where ID is the key and Arabic is the value
-  //     this.jsonData = rawData.reduce((acc, row) => {
-  //       if (row.ID && row.Arabic) {
-  //         acc[row.ID] = row.Arabic;
-  //       }
-  //       return acc;
-  //     }, {} as { [key: string]: string });
-
-  //     console.log(this.jsonData); // Output formatted JSON data to console
-  //   };
-
-  //   reader.readAsBinaryString(file);
-
-  //   this.updateNestedJson(this.json1, this.json2);
-  //   console.log("Updated JSON1:", this.json1);
-  //   const jsonString = JSON.stringify(this.json1, null, 2); // Convert JSON to a formatted string
-  //   const blob = new Blob([jsonString], { type: 'application/json' });
-  //   const url = URL.createObjectURL(blob);
-  //   const a = document.createElement('a');
-  //   a.href = url;
-  //   a.download = 'updated_json1.json'; // File name
-  //   a.click();
-  //   URL.revokeObjectURL(url);
-  // }
-  // json1: any = {}
-  // json2: any = {};
-  // //  Recursive function to update JSON1 using JSON2
-  // private updateNestedJson(target: any, source: any): void {
-  //   Object.keys(target).forEach(key => {
-  //     if (target[key] instanceof Object) {
-  //       this.updateNestedJson(target[key], source); // Recursively update nested objects
-  //     } else if (source[key]) {
-  //       target[key] = source[key]; // Update value if key exists in JSON2
-  //     }
-  //   });
-  // }
   ClosefileErrorlog() {
     this.FileUploadErrorlogs = false;
   }
@@ -2946,7 +2889,7 @@ export class GacDocumentDetailsComponent implements OnInit {
     // document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");
   }
 
-  async AddReferenceDocument(DocumentId: number, VersionId: number) {
+ AddReferenceDocument(DocumentId: number, VersionId: number) {
     try {
       const extractedValues = this._lstMultipleFiles.map((file) => ({
         FileName: file.FileName,
@@ -2980,22 +2923,24 @@ export class GacDocumentDetailsComponent implements OnInit {
       this._obj.deletedJson = jsonString;
       this._obj.extractedValuesJson = extractedValuesJson;
 
-      const data = await this.service.NewReferenceDocument(this._obj);
-      // console.log(data, "Add Reference Document API Data");
+      this.service.NewReferenceDocument(this._obj).subscribe(data => {
+        console.log(data, "Add Reference Document API Data");
+        if (data["message"] === '1') {
+          this._snackBar.open('Document Uploaded Successfully', 'End now', {
+            duration: 5000,
+            horizontalPosition: "right",
+            verticalPosition: "bottom",
+            panelClass: ['blue-snackbar']
+          });
+        }
+        this.ArchiveDetailsInfo(this._documentId, this.ShareId);
+        document.getElementById("moredet").classList.remove("position-fixed");
+        document.getElementById("addref").classList.remove("kt-quick-panel--on");
+        document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");
+      });
 
-      if (data["message"] === '1') {
-        this._snackBar.open('Document Uploaded Successfully', 'End now', {
-          duration: 5000,
-          horizontalPosition: "right",
-          verticalPosition: "bottom",
-          panelClass: ['blue-snackbar']
-        });
-      }
-      // this.ReferenceView(this.mainCatalogUrl,this.RefDocumentName, this.selectedReferenceId);
-      this.ArchiveDetailsInfo(this._documentId, this.ShareId);
-      document.getElementById("moredet").classList.remove("position-fixed");
-      document.getElementById("addref").classList.remove("kt-quick-panel--on");
-      document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.remove("d-block");
+
+
       // Reset the list of files after the upload
     } catch (error) {
       console.error('Error uploading reference document:', error);

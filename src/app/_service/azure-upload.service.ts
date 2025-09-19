@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BlobServiceClient } from '@azure/storage-blob';
-import { firstValueFrom, BehaviorSubject } from 'rxjs';
+import { firstValueFrom, BehaviorSubject, Observable } from 'rxjs';
 import * as pdfjsLib from 'pdfjs-dist';
 import 'pdfjs-dist/build/pdf.worker.min';
 import * as XLSX from 'xlsx';
@@ -25,7 +25,7 @@ export class AzureUploadService {
   private expiryTime: number = 0;
   blobUrl: any;
   readonly rootUrlII = this.commonUrl.apiurlNew;
-  constructor(private http: HttpClient,private commonUrl: ApiurlService) {
+  constructor(private http: HttpClient, private commonUrl: ApiurlService) {
     // Configure the worker source
     (pdfjsLib as any).GlobalWorkerOptions.workerSrc = './assets/js/pdf.worker.min.js';
   }
@@ -45,6 +45,23 @@ export class AzureUploadService {
       throw new Error('Unable to fetch SAS token.');
     }
   }
+
+  // upload file to local API
+  uploadFileToLocalApi(file: File, uniqueId: number, originalFileName: string, uniqueId_master: number): Observable<{ filePath: string; thumbnailUrl: string; sanitizedFileName: string }> {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('uniqueId', uniqueId.toString());
+    formData.append('fileName', originalFileName);
+    formData.append('uniqueIdMaster', uniqueId_master.toString());
+    
+    return this.http.post<{ filePath: string; thumbnailUrl: string; sanitizedFileName: string }>(
+      this.rootUrlII + "FileUploadAPI/FileUploadServerFolder",
+      formData
+    );
+  }
+
+
+
 
   // Main upload function
   async uploadFile(file: File, progressSubject: BehaviorSubject<number>, folderPath: string, uniqueId: string | number,
@@ -571,7 +588,7 @@ export class AzureUploadService {
       reader.readAsArrayBuffer(file);
     });
   }
-  
+
 }
 
 

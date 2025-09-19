@@ -172,7 +172,7 @@ export class NewMemoService {
 
     // formData.ApprovalType = 'S';
     // debugger
-    return this.http.post(this.rootUrlII + "CommunicationAPI/SendWorkFlow", this._objInb,{withCredentials:true});
+    return this.http.post(this.rootUrlII + "CommunicationAPI/SendWorkFlow", this._objInb);
   }
   uploadFile(fileData): Observable<any> {
     fileData.append("createdBy", this.currentUserValue.createdby.toString());
@@ -277,7 +277,7 @@ export class NewMemoService {
     if (formData.message == null) { formData.message = ""; }
     // "/LatestCommunicationAPI/NewAddExtraUsers"
     // MemoDetailsAddExtraUsersAPI/NewAddExtraUsers
-    return this.http.post(this.rootUrlII + "Users/NewAddExtraUsers", formData,{withCredentials:true});
+    return this.http.post(this.rootUrlII + "Users/NewAddExtraUsers", formData);
 
   }
   AddExtraUser(_obj: InboxDTO, ReplyIds: string) {
@@ -313,7 +313,7 @@ export class NewMemoService {
     // /LatestCommunicationAPI/NewDMSRequest
     // Core ApI
     // Users/DMSRequest
-    return this.http.post(this.rootUrlII + 'Users/DMSRequest', this._objInb,{withCredentials:true});
+    return this.http.post(this.rootUrlII + 'Users/DMSRequest', this._objInb);
 
   }
   DownloadAttachment(_obj: InboxDTO) {
@@ -353,7 +353,7 @@ export class NewMemoService {
     //  CommunicationAPI/AddAnnouncementANG
     // Old Api
     // /OrganizationAPI/NewAnnouncement
-    return this.http.post(this.rootUrlII + 'CommunicationAPI/AddAnnouncementV2', this._objInb,{withCredentials:true});
+    return this.http.post(this.rootUrlII + 'CommunicationAPI/AddAnnouncementV2', this._objInb);
   }
   UploadAnnouncemtAttachmenst(data) {
     data.append("CreatedBy", this.currentUserValue.createdby.toString());

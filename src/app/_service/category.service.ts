@@ -43,7 +43,7 @@ export class CategoryService {
     return this.http.post(this.rootUrl + "/CategoryAPI/NewGetcategories", this._obj)
    }
    Category_add(_values: CategoryDTO) {
-    debugger
+     
     this.objCategoryDTO.CategoryName = _values.CategoryName;
     if (this._obj.IsActive == null) {
       this._obj.IsActive = true;

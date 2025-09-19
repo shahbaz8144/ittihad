@@ -68,7 +68,9 @@
                     </a>
                 </ng-container>
                 <ng-container *ngIf="menu.MenuCategoryId == 11">
-                    <a *ngIf="menu.HasChild==false" [routerLink]="[menu.SPARouteUrl]" class="kt-menu__link kt-menu__toggle">
+                    <div class="pro-badge">PRO</div>
+                    <!-- [routerLink]="[menu.SPARouteUrl]" -->
+                    <a (click)="dmsfeaturesModal()" *ngIf="menu.HasChild==false" class="kt-menu__link kt-menu__toggle">
                         <svg xmlns="http://www.w3.org/2000/svg" class="kt-menu__link-icon web" style="width: 24px!important; height: 24px !important" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M12.938 8.23596V22.7089C12.938 22.8627 13.0918 22.9587 13.2263 22.8819L18.781 19.8643C18.8387 19.8258 18.8771 19.7681 18.8771 19.6913V11.4842C18.8771 11.4073 18.8387 11.3496 18.781 11.3112L13.2456 8.06295C13.111 7.98608 12.938 8.08216 12.938 8.23596ZM12.15 22.7666V2.20074C12.15 2.0662 12.0155 1.9701 11.8809 2.00854L5.13458 4.50719C5.05771 4.54563 5 4.60329 5 4.69939V20.3448C5 20.4216 5.05771 20.4985 5.13458 20.537L11.8809 22.9587C12.0155 22.9972 12.15 22.9011 12.15 22.7666Z" fill="currentColor"/>
                             </svg>
@@ -82,12 +84,6 @@
                         <span class="kt-menu__link-text" *ngIf="currentLang == 'ar'">{{menu.MenuCategoryAr}}</span>
                     </a>
                 </ng-container>
-
-                <!-- <a *ngIf="!menu.HasChild" [routerLink]="[menu.SPARouteUrl, 0]" class="kt-menu__link kt-menu__toggle">
-                    <i class="material-icons kt-menu__link-icon">{{ menu.Icon }}</i>
-                    <span class="kt-menu__link-text">{{ menu.MenuCategory }}</span>
-                </a> -->
-                <!-- <ng-container *ngIf="menu.MenuCategoryId != 3"> </ng-container> -->
 
                 <a class="kt-menu__link kt-menu__toggleII" *ngIf="menu.HasChild==true" aria-haspopup="true" aria-expanded="false">
                     <i class="material-icons kt-menu__link-icon">{{menu.Icon}}</i>
@@ -114,8 +110,10 @@
                 </div>
             </li>
 
-            <li class="kt-menu__item" routerLinkActive="active">
-                <a routerLink="/backend/Inbox/Memos" class="kt-menu__link kt-menu__toggle">
+            <li class="kt-menu__item" routerLinkActive="active" (click)="dmsfeaturesModal()">
+                <div class=" pro-badge">PRO</div>
+                <!-- routerLink="/backend/Inbox/Memos" -->
+                <a class="kt-menu__link kt-menu__toggle">
                     <i class="material-icons kt-menu__link-icon">drafts</i>
                     <span class="kt-menu__link-text">{{"Menu.Inbox" | translate }}</span>
                 </a>
@@ -307,3 +305,27 @@
         </ul>
     </div>
 </div>
+<!-- DMS Features Modal Start -->
+<div class="modal-backdrop fade" id="dmsfeaturesModalBackdrop" style="display: none"></div>
+<div class="modal fade show" id="dmsfeaturesModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="dmsfeaturesModalTitle" aria-modal="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="dms-feature-card">
+                    <div class="dms-feature-content-hero">
+                        <div class="dms-feature-headline-parent">
+                            <h1 class="dms-feature-headline">Pro Feature Access Required</h1>
+                        </div>
+                    </div>
+                    <div class="dms-feature-card-head">
+                        <p>This is a Pro feature available with organizational access. Please contact your organization to enable it. Unlocking this feature gives your team the right tools. Empower your talent to perform at their best.</p>
+                        <a href="https://www.creative-sols.com/contact-us" target="_blank" class="btn contact-feature">Contact Now</a>
+                    </div>
+                    <div class="dms-feature-close" (click)="dmsfeaturesModal_dismiss()"><svg width="64px" height="64px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g stroke="currentColor" stroke-linecap="round" stroke-width="2"> <path d="M6 18L18 6"></path> <path d="M18 18L6 6"></path> </g> </g></svg></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- DMS Features Modal End -->

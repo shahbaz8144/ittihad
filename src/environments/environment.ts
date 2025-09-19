@@ -5,7 +5,7 @@
 export const environment = {
   production: false
   ,baseUrl:'http://localhost:9562/api/'
-  ,NewbaseUrl:'http://localhost:5049/api/'
+  ,NewbaseUrl:'http://localhost:5050/api/'
   // ,baseUrl:'https://cswebapps.com/dmsapi/api/'
   // ,NewbaseUrl:'https://cswebapps.com/dmscoretestapi/api/'
   // ,SignalRUrl:'http://localhost:5049/'

@@ -75,7 +75,7 @@ export class DashboardService {
 
       // Call the API and wait for response
       const response = await firstValueFrom(
-        this.http.post(`${this.rootUrlII}ArchiveAPI/NewDashboard`, this._obj, { withCredentials: true })
+        this.http.post(`${this.rootUrlII}ArchiveAPI/NewDashboard`, this._obj)
       );
 
       return response; // Return the API result
