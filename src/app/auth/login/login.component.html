@@ -9,8 +9,7 @@
             <!--begin::Aside-->
 
             <!--begin::Content-->
-            <div
-                class="kt-grid__item kt-grid__item--fluid  kt-grid__item--order-tablet-and-mobile-1  kt-login__wrapper">
+            <div class="kt-grid__item kt-grid__item--fluid  kt-grid__item--order-tablet-and-mobile-1  kt-login__wrapper">
                 <!--begin::Body-->
                 <div class="kt-login__body">
 
@@ -24,9 +23,7 @@
                             <div class="kt-grid__item kt-grid__item--middle">
                                 <h3 class="kt-login__title">Join Our Community!</h3>
                                 <h4 class="kt-login__subtitle">
-                                    A document management software is a system used to track, manage and store documents
-                                    and reduce paper. Most are capable of keeping a record of the various versions
-                                    created and modified by different users.</h4>
+                                    A document management software is a system used to track, manage and store documents and reduce paper. Most are capable of keeping a record of the various versions created and modified by different users.</h4>
                             </div>
                         </div>
                         <div class="kt-grid__item mt-5">
@@ -44,8 +41,8 @@
                     </div>
 
 
-                        
-                       
+
+
                     <!--begin::Signin-->
                     <div class="kt-login__form">
                         <div class="arabic-btn-div">
@@ -58,10 +55,10 @@
                                   <span id="ar-lan" *ngIf="currentLang==='ar'">Arabic</span>
                                 </button>
                                 <div class="dropdown-menu">
-                                  <button class="dropdown-item"  *ngIf="currentLang==='ar'" (click)="ChangelangTo('en')" >English</button>
-                                  <button class="dropdown-item"  *ngIf="currentLang==='en'"  (click)="ChangelangTo('ar')">Arabic</button>
+                                    <button class="dropdown-item" *ngIf="currentLang==='ar'" (click)="ChangelangTo('en')">English</button>
+                                    <button class="dropdown-item" *ngIf="currentLang==='en'" (click)="ChangelangTo('ar')">Arabic</button>
                                 </div>
-                              </div>
+                            </div>
                             <!-- <button *ngIf="currentLang==='en'"  (click)="ChangelangTo('ar')"  class="arabic-btn" >Arabic</button>
                             <button  *ngIf="currentLang==='ar'" (click)="ChangelangTo('en')" class="arabic-btn" >English</button> -->
                         </div>
@@ -76,7 +73,7 @@
                         </div>
 
                         <!--begin::Form-->
-                        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="kt-form" action=""
+                        <!-- <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="kt-form" action=""
                             novalidate="novalidate" id="kt_login_form">
                             <div class="form-group">
                                 <label class="form-label">{{ "Login.Username" | translate }}</label>
@@ -98,7 +95,7 @@
                                 <label class="form-label">{{ "Login.Password" | translate }}</label>
                                 <input class="form-control"  [type]="showPassword ? 'text' : 'password'"
                                     placeholder="Password" formControlName="password" name="password" autocomplete="off"/>
-                                     <!-- [ngClass]="{ 'is-invalid': submitted && f.password.errors }" input lo -->
+                                    
                                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                                     <div *ngIf="f.password.errors.required">{{ "Login.Passwordisrequired" | translate }}</div>
                                 </div>
@@ -106,6 +103,41 @@
                                 <p *ngIf="InValidUserName" class="text-danger">{{ "Login.InvalidUserName" | translate }}</p>
                                 </div>
                             </div>
+
+                            
+                            <div class="text-center mt-4">
+                                <button [disabled]="loginForm.invalid" id="kt_login_signin_submit"
+                                    class="btn btn-primary kt-btn px-5 w-100">
+                                    
+                                    {{ "Login.SignIn" | translate }}</button>
+                            </div>
+
+                         
+                        </form> -->
+                        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="kt-form" action="" novalidate="novalidate" id="kt_login_form">
+                            <div class="form-group">
+                                <label class="form-label">{{ "Login.Username" | translate }}</label>
+                                <input class="form-control" type="text" placeholder="Username" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" name="username" autocomplete="off" />
+                                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                                    <div *ngIf="f.username.errors.required">{{ "Login.Usernameisrequired" | translate }}</div>
+                                </div>
+                                <p *ngIf="InValidUserName" class="text-danger">{{ "Login.InvalidUserName" | translate }}</p>
+                            </div>
+                            <div class="form-group">
+                                <div style="position: relative;">
+                                    <i alt="show" class="far fa-eye eye-show custom-icon" (click)="togglePasswordVisibility(true)" [class.hide]="showPassword" style="position: absolute; top: 45px; right: 10px;"></i>
+                                    <i alt="hide" class="far fa-eye-slash eye-hide custom-icon" (click)="togglePasswordVisibility(false)" [class.hide]="!showPassword" style="position: absolute; top: 45px; right: 10px;"></i>
+                                    <label class="form-label">{{ "Login.Password" | translate }}</label>
+                                    <input class="form-control" [type]="showPassword ? 'text' : 'password'" placeholder="Password" formControlName="password" name="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" autocomplete="off" />
+                                    <!--  input lo -->
+                                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                        <div *ngIf="f.password.errors.required">{{ "Login.Passwordisrequired" | translate }}</div>
+                                    </div>
+                                    <p *ngIf="InValidPassword" class="text-danger">{{ "Login.InvalidPassword" | translate }}</p>
+
+                                </div>
+                            </div>
+
 
                             <!-- <div class="kt-login__options">
                                 <a href="#" class="btn btn-primary kt-btn">
@@ -120,23 +152,21 @@
                             </div> -->
 
                             <!--begin::Action-->
+                            <!-- [disabled]="loginForm.invalid" -->
                             <div class="text-center mt-4">
-                                <button [disabled]="loginForm.invalid" id="kt_login_signin_submit"
-                                    class="btn btn-primary kt-btn px-5 w-100">
+                                <button id="kt_login_signin_submit" class="btn btn-primary kt-btn px-5 w-100">
                                     <!-- <span *ngIf="loginForm" ></span>Invalid -->
                                     {{ "Login.SignIn" | translate }}</button>
                             </div>
 
                             <!--end::Action-->
                         </form>
-
                         <!--end::Form-->
                         <p class="text-center"> {{ "Login.DMSNote" | translate }} </p>
                         <div class="d-flex justify-content-between kt-login-footer">
-                            <a class="kt-login__copyright flex-1 text-center" (click)="openNewTab()" >
+                            <a class="kt-login__copyright flex-1 text-center" (click)="openNewTab()">
                                 {{Date| date:'yyyy'}} {{ "Login.DMSNote1" | translate }} </a>
-                            <div class="kt-login__menu d-none"><a href="#" class="kt-link mr-2">Privacy</a><a href="#"
-                                    class="kt-link">Legal</a></div>
+                            <div class="kt-login__menu d-none"><a href="#" class="kt-link mr-2">Privacy</a><a href="#" class="kt-link">Legal</a></div>
                         </div>
                     </div>
 

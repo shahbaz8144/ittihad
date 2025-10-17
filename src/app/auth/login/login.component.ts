@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     private alertService: AlertService
     , private cd: ChangeDetectorRef,
     private _snackBar: MatSnackBar,
-    private translate:TranslateService,
+    private translate: TranslateService,
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
   ) {
@@ -67,57 +67,126 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/backend/dashboard';
   }
   get f() { return this.loginForm.controls; }
+  // onSubmit() {
+  //   this.submitted = true;
+  //   // stop here if form is invalid
+  //   if (this.loginForm.invalid) {
+  //     return;
+  //   }
+  //   this.loading = true;
+  //   this.authenticationService.login(this.f.username.value, this.f.password.value)
+  //     .subscribe(data => {
+
+  //       // console.log(data, "LoginData");
+  //       if (data["Data"]["UserId"].length > 0) {
+  //         // this._lstUserDetails = data[0] as UserDTO[];
+  //         var _json = JSON.parse(data["Data"]["UserId"]);
+  //         let _obj1 = _json;
+  //         if (_obj1[0]["CredentialsIsValid"] == true) {
+  //           if (_obj1[0]["IsPolicy"] == 0) {
+  //             const returnUrlsa = this.route.snapshot.queryParams['returnUrl'] || '/backend/dashboard';
+  //             this.InValidPassword = false;
+  //             this.InValidUserName = false;
+  //             this.router.navigateByUrl('/backend/dashboard');
+  //             this.cd.detectChanges();
+  //           }
+  //           else if (_obj1[0]["IsPolicy"] == 1) {
+  //             const returnUrlsa = this.route.snapshot.queryParams['returnUrl'] || '/userpolicy';
+  //             this.router.navigateByUrl(returnUrlsa);
+  //             this.InValidPassword = false;
+  //             this.InValidUserName = false;
+  //             this.cd.detectChanges();
+  //           }
+  //         }
+  //         else {
+  //           this.authenticationService.logout();
+  //           this.alertService.error('Invalid Password');
+  //           this.loading = false;
+  //           this.InValidPassword = true;
+  //           this.InValidUserName = false;
+  //           this.cd.detectChanges();
+  //         }
+  //       }
+  //       else {
+  //         this.authenticationService.logout();
+  //         this.alertService.error('Invalid UserName');
+  //         this.loading = false;
+  //         this.InValidPassword = false;
+  //         this.InValidUserName = true;
+  //         this.cd.detectChanges();
+  //       }
+  //       // alert(this.currentUserValue.UserProfile);
+  //     }
+  //     );
+  // }
   onSubmit() {
     this.submitted = true;
-    // stop here if form is invalid
+    this.InValidPassword = false;
+    this.InValidUserName = false;
+
     if (this.loginForm.invalid) {
       return;
     }
+
     this.loading = true;
+
     this.authenticationService.login(this.f.username.value, this.f.password.value)
-      .subscribe(data => {
-         
-        // console.log(data, "LoginData");
-        if (data["Data"]["UserId"].length > 0) {
-          // this._lstUserDetails = data[0] as UserDTO[];
-          var _json = JSON.parse(data["Data"]["UserId"]);
-          let _obj1 = _json;
-          if (_obj1[0]["CredentialsIsValid"] == true) {
-            if (_obj1[0]["IsPolicy"] == 0) {
-              const returnUrlsa = this.route.snapshot.queryParams['returnUrl'] || '/backend/dashboard';
-              this.InValidPassword = false;
-              this.InValidUserName = false;
-              this.router.navigateByUrl('/backend/dashboard');
-              this.cd.detectChanges();
-            }
-            else if (_obj1[0]["IsPolicy"] == 1) {
-              const returnUrlsa = this.route.snapshot.queryParams['returnUrl'] || '/userpolicy';
-              this.router.navigateByUrl(returnUrlsa);
-              this.InValidPassword = false;
-              this.InValidUserName = false;
-              this.cd.detectChanges();
+      .subscribe({
+        next: (data: any) => {
+          console.log(data, "Login API Data");
+
+          const userIdRaw = data?.Data?.UserId;
+          let _obj1: any[] = [];
+
+          if (userIdRaw && typeof userIdRaw === 'string') {
+            try {
+              _obj1 = JSON.parse(userIdRaw);
+              console.log(JSON.parse(userIdRaw));
+            } catch (e) {
+              console.error('Failed to parse UserId JSON:', e);
+              this.alertService.error('Login response format is invalid.');
+              this.loading = false;
+              return;
             }
           }
-          else {
+
+          // ✅ Handle invalid username: if parsed array is empty
+          if (!_obj1 || _obj1.length === 0) {
+            this.authenticationService.logout();
+            this.alertService.error('Invalid Username');
+            this.InValidUserName = true;
+            this.InValidPassword = false;
+            this.loading = false;
+            this.cd.detectChanges();
+            return;
+          }
+
+          // ✅ Handle valid username, now check password
+          const user = _obj1[0];
+          if (user?.CredentialsIsValid === true) {
+            const isPolicy = user.IsPolicy;
+            const targetRoute = isPolicy === 1 ? '/userpolicy' : '/backend/dashboard';
+
+            this.router.navigateByUrl(targetRoute);
+            this.InValidPassword = false;
+            this.InValidUserName = false;
+          } else {
             this.authenticationService.logout();
             this.alertService.error('Invalid Password');
-            this.loading = false;
             this.InValidPassword = true;
             this.InValidUserName = false;
-            this.cd.detectChanges();
           }
-        }
-        else {
-          this.authenticationService.logout();
-          this.alertService.error('Invalid UserName');
+
           this.loading = false;
-          this.InValidPassword = false;
-          this.InValidUserName = true;
+          this.cd.detectChanges();
+        },
+        error: err => {
+          console.error('Login error:', err);
+          this.alertService.error('An error occurred during login.');
+          this.loading = false;
           this.cd.detectChanges();
         }
-        // alert(this.currentUserValue.UserProfile);
-      }
-      );
+      });
   }
   togglePasswordVisibility(show: boolean) {
     this.showPassword = show;
@@ -125,16 +194,16 @@ export class LoginComponent implements OnInit {
   openNewTab() {
     window.open('https://www.creative-sols.com', '_blank');
   }
-  currentLang:"ar"|"en"="ar";
-  ChangelangTo(lang:any){
-    this.currentLang=lang;
-    this.translate.use(lang); 
-    localStorage.setItem('language', lang); 
+  currentLang: "ar" | "en" = "ar";
+  ChangelangTo(lang: any) {
+    this.currentLang = lang;
+    this.translate.use(lang);
+    localStorage.setItem('language', lang);
     this.currentLang = lang ? lang : 'en';
     this.document.dir = lang === 'ar' ? 'rtl' : 'ltr'; // Set document direction
-    if(lang == 'ar'){
+    if (lang == 'ar') {
       this.renderer.addClass(document.body, 'kt-body-arabic');
-    }else if (lang == 'en'){
+    } else if (lang == 'en') {
       this.renderer.removeClass(document.body, 'kt-body-arabic');
     }
     // if (lang === 'ar') {
@@ -142,26 +211,26 @@ export class LoginComponent implements OnInit {
     // } else {
     //   this.removeArabicStyles();
     // }
-   
+
   }
 
   arabicLeftSection() {
     // Assuming you have the path to your Arabic CSS file
     const cssFilePath = 'assets/i18n/arabic.css';
-  
+
     // Create a link element for the CSS file
     const link = this.renderer.createElement('link');
     link.rel = 'stylesheet';
     link.type = 'text/css';
     link.href = cssFilePath;
-  
+
     // Set an id attribute to identify the link element
     link.id = 'arabicCssLink';
-  
+
     // Append the link element to the document head
     this.renderer.appendChild(document.head, link);
   }
-  
+
   removeArabicStyles() {
     // Remove the dynamically added link element
     const linkElement = document.getElementById('arabicCssLink');
