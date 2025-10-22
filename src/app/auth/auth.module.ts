@@ -7,7 +7,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from 'src/environments/environment';
-import { ResetpasswordComponent } from './Resetpassword/resetpassword/resetpassword.component';
+import { ResetpasswordComponent } from './Resetpassword/resetpassword.component';
+
 
 @NgModule({
   declarations: [LoginComponent, ResetpasswordComponent],

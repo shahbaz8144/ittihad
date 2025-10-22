@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   _lstUserDetails: UserDTO[];
-   _obj1:AuthenticationDTO
+  _obj1: AuthenticationDTO
   tokenFromUI: string = "0123456789123456";
   encrypted: any = "";
   decrypted: any = "";
@@ -52,6 +52,8 @@ export class LoginComponent implements OnInit {
     this.currentUser = this.currentUserSubject.asObservable();
 
     this._obj = new UserDTO;
+    this._obj1 = new AuthenticationDTO();
+
     if (this.currentUserSubject.value != null) {
       this.router.navigate(['backend/dashboard']);
     }
@@ -69,58 +71,7 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/backend/dashboard';
   }
   get f() { return this.loginForm.controls; }
-  // onSubmit() {
-  //   this.submitted = true;
-  //   // stop here if form is invalid
-  //   if (this.loginForm.invalid) {
-  //     return;
-  //   }
-  //   this.loading = true;
-  //   this.authenticationService.login(this.f.username.value, this.f.password.value)
-  //     .subscribe(data => {
-
-  //       // console.log(data, "LoginData");
-  //       if (data["Data"]["UserId"].length > 0) {
-  //         // this._lstUserDetails = data[0] as UserDTO[];
-  //         var _json = JSON.parse(data["Data"]["UserId"]);
-  //         let _obj1 = _json;
-  //         if (_obj1[0]["CredentialsIsValid"] == true) {
-  //           if (_obj1[0]["IsPolicy"] == 0) {
-  //             const returnUrlsa = this.route.snapshot.queryParams['returnUrl'] || '/backend/dashboard';
-  //             this.InValidPassword = false;
-  //             this.InValidUserName = false;
-  //             this.router.navigateByUrl('/backend/dashboard');
-  //             this.cd.detectChanges();
-  //           }
-  //           else if (_obj1[0]["IsPolicy"] == 1) {
-  //             const returnUrlsa = this.route.snapshot.queryParams['returnUrl'] || '/userpolicy';
-  //             this.router.navigateByUrl(returnUrlsa);
-  //             this.InValidPassword = false;
-  //             this.InValidUserName = false;
-  //             this.cd.detectChanges();
-  //           }
-  //         }
-  //         else {
-  //           this.authenticationService.logout();
-  //           this.alertService.error('Invalid Password');
-  //           this.loading = false;
-  //           this.InValidPassword = true;
-  //           this.InValidUserName = false;
-  //           this.cd.detectChanges();
-  //         }
-  //       }
-  //       else {
-  //         this.authenticationService.logout();
-  //         this.alertService.error('Invalid UserName');
-  //         this.loading = false;
-  //         this.InValidPassword = false;
-  //         this.InValidUserName = true;
-  //         this.cd.detectChanges();
-  //       }
-  //       // alert(this.currentUserValue.UserProfile);
-  //     }
-  //     );
-  // }
+   
   onSubmit() {
     this.submitted = true;
     this.InValidPassword = false;
@@ -243,115 +194,111 @@ export class LoginComponent implements OnInit {
       // console.log('Link element not found or already removed');
     }
   }
-SignIn:boolean = true;
-Forgetpassword:boolean = false;
-LoginUsername:string = "";
-LoginUserEMail:string = "";
-UserEmailverify:boolean = false;
-UserName:string = "";
-_LoginUserId:number;
-  ForgotPassword(){
-this.Forgetpassword = true;
-this.SignIn = false;
-}
-
-GetEmail(){
-   if (!this.LoginUsername || this.LoginUsername.trim() === '') {
-    alert("Please enter a username");
-    return;
+  SignIn: boolean = true;
+  Forgetpassword: boolean = false;
+  LoginUsername: string = "";
+  LoginUserEMail: string = "";
+  UserEmailverify: boolean = false;
+  UserName: string = "";
+  _LoginUserId: number;
+  ForgotPassword() {
+    this.Forgetpassword = true;
+    this.SignIn = false;
   }
- 
-  this._obj.UserName = this.LoginUsername
-  this.authenticationService.GetEmailAPI(this._obj).subscribe(data =>{
-    console.log(data,"API User Data");
-    this.LoginUserEMail = data["Data"].Email;
-    this.UserName = data["Data"].DisplayName;
-    this._LoginUserId = data["Data"].UserId;
-    if(data["Data"].Message == 1){
-      this.UserEmailverify = true;
-      this.Forgetpassword  = false;
-    }else if(data["Data"].Message == 2){
-      alert("Invalid UserName");
+
+  GetEmail() {
+    if (!this.LoginUsername || this.LoginUsername.trim() === '') {
+      alert("Please enter a username");
+      return;
     }
-  })
-  
-}
+
+    this._obj.UserName = this.LoginUsername
+    this.authenticationService.GetEmailAPI(this._obj).subscribe(data => {
+      console.log(data, "API User Data");
+      debugger
+      this.LoginUserEMail = data["Data"].Email;
+      this.UserName = data["Data"].DisplayName;
+      this._LoginUserId = data["Data"].UserId;
+      if (data["Data"].Message == 1) {
+        this.UserEmailverify = true;
+        this.Forgetpassword = false;
+      } else if (data["Data"].Message == 2) {
+        alert("Invalid UserName");
+      }
+    })
+
+  }
 
 
-   LoginUserEmailId: string = '';
+  LoginUserEmailId: string = '';
   loadings = false;
- message: string = '';
-Emailpopup:boolean = false;
-LinkID:number=0;
-ResetPasswordLink(){
- this._obj1.UserId  = this._LoginUserId;
-  this._obj1.Link = "http://localhost:4200/login/resetpassword"; 
-  this.authenticationService.ResetPasswordLinkAPI(this._obj1).subscribe(data =>{
-    // console.log(data,"API Data Link");
-     this.LinkID = data["Data"].LinkId;
-     this.sendEmail();
-  })
- }
+  message: string = '';
+  Emailpopup: boolean = false;
+  LinkID: number = 0;
+  ResetPasswordLink() {
+     
+    this._obj1.UserId = this._LoginUserId;
+    this._obj1.Link = "https://dms.ittihadclub.sa/ittihadclub/login/resetpassword";
+    this.authenticationService.ResetPasswordLinkAPI(this._obj1).subscribe(data => {
+      // console.log(data,"API Data Link");
+      this.LinkID = data["Data"].LinkId;
+      this.sendEmail();
+    })
+  }
 
 
-   sendEmail() {
+  sendEmail() {
     this._obj1.UserEmailId = this.LoginUserEMail;
     this._obj1.UserName = this.UserName;
     const now = new Date();
-// Format example: "Oct 17 2025 10:41 AM"
-const options: Intl.DateTimeFormatOptions = {
-  month: 'short',  // "Oct"
-  day: '2-digit',  // "17"
-  year: 'numeric', // "2025"
-  hour: '2-digit', // "10"
-  minute: '2-digit', // "41"
-  hour12: true,    // AM/PM format
-};
+    // Format example: "Oct 17 2025 10:41 AM"
+    const options: Intl.DateTimeFormatOptions = {
+      month: 'short',  // "Oct"
+      day: '2-digit',  // "17"
+      year: 'numeric', // "2025"
+      hour: '2-digit', // "10"
+      minute: '2-digit', // "41"
+      hour12: true,    // AM/PM format
+    };
 
-const formattedDate = now.toLocaleString('en-US', options).replace(',', '');
+    const formattedDate = now.toLocaleString('en-US', options).replace(',', '');
 
-// Example: "Oct 17 2025 10:41 AM"
+    // Example: "Oct 17 2025 10:41 AM"
 
-const resetUrl = `http://localhost:4200/resetpassword?UserEmailId=${encodeURIComponent(this.LoginUserEMail)}&UserName=${encodeURIComponent(this.UserName)}&UserId=${this._LoginUserId}&LinkID=${this.LinkID}&DateandTime=${encodeURIComponent(formattedDate)}`;
+    const resetUrl = `https://dms.ittihadclub.sa/ittihadclub/resetpassword?UserEmailId=${encodeURIComponent(this.LoginUserEMail)}&UserName=${encodeURIComponent(this.UserName)}&UserId=${this._LoginUserId}&LinkID=${this.LinkID}&DateandTime=${encodeURIComponent(formattedDate)}`;
 
-this._obj1.ResetLink = resetUrl;
-// console.log(resetUrl, "URL");
-//     const timestamp = new Date().toISOString();  // current date/time
-// const resetUrl = `http://localhost:4200/resetpassword?UserEmailId=${encodeURIComponent(this.LoginUserEMail)}&UserName=${encodeURIComponent(this.UserName)}&UserId=${this._LoginUserId}&LinkID=${this.LinkID}&DateandTime=${encodeURIComponent(timestamp)}`;
-
-
-//     this._obj1.ResetLink = resetUrl
-//     console.log(resetUrl , "URL");
+    this._obj1.ResetLink = resetUrl;
+     
     this.loading = true;
     this.loadings = true;
     this.authenticationService.sendResetPasswordEmail(this._obj1).subscribe({
       next: (res) => {
-        this.Emailpopup =true;
+        this.Emailpopup = true;
         this.loading = false;
-          this.loadings = false;
+        this.loadings = false;
         this.message = res.message || 'Email sent successfully!';
       },
       error: (err) => {
         this.loading = false;
-          this.loadings = false;
+        this.loadings = false;
         this.message = err.error?.error || 'Something went wrong!';
       }
     });
   }
 
 
-  Backtologin(){
-  this.UserEmailverify = false;
-this.SignIn = true;
-this.Emailpopup = false;
-this.LoginUsername = "";
-this.LoginUserEMail = "";
-}
+  Backtologin() {
+    this.UserEmailverify = false;
+    this.SignIn = true;
+    this.Emailpopup = false;
+    this.LoginUsername = "";
+    this.LoginUserEMail = "";
+  }
 
-Back(){
-this.Forgetpassword = false;
-this.SignIn = true;
-this.LoginUsername = "";
-}
+  Back() {
+    this.Forgetpassword = false;
+    this.SignIn = true;
+    this.LoginUsername = "";
+  }
 
 }
