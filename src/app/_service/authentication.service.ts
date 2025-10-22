@@ -35,7 +35,7 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
   async getSasUrl(filePath: string, expiryTime: Date): Promise<string> {
-     
+
     const expiryTimeString = expiryTime.toISOString(); // Convert to UTC string
     const response = await this.http.get<{ sasUrl: string }>(
       `${this.rootUrlII}FileUploadAPI/NewGenerateSASTokenUrl?filePath=${encodeURIComponent(filePath)}&expiryTime=${expiryTimeString}`
@@ -57,29 +57,62 @@ export class AuthenticationService {
   }
 
   //Login Service
+  // login(username: string, password: string) {
+  //   this._userobj.userId = username;
+  //   this._userobj.OldPassWord = password;
+
+  //   return this.http.post<any>(this.rootUrlII + "Login/StreamLoginAPI", this._userobj, {
+  //     withCredentials:true
+  //   })
+  //     .pipe(map(user => {
+  //       var _json = JSON.parse(user["Data"]["UserId"]);
+  //       const token = user.token;
+  //       console.log("Json Value" , _json);
+  //       let _obj1 = _json;
+  //       if (user["Data"]["UserId"].length != 0) {
+  //         users_db.collection('users').add({
+  //           username: _obj1[0].userId,
+  //           userid: _obj1[0].createdby
+  //         })
+  //         _obj1[0]["SharePopupCount"] = 0;
+  //         // login successful
+  //         if (_obj1 && _obj1[0].userId) {
+  //           localStorage.setItem('currentUser', JSON.stringify(_obj1));
+  //           this.currentUserSubject.next(_obj1);
+  //         }
+  //       }
+  //       return user;
+  //     }));
+  // }
   login(username: string, password: string) {
+
     this._userobj.userId = username;
     this._userobj.OldPassWord = password;
-
     return this.http.post<any>(this.rootUrlII + "Login/StreamLoginAPI", this._userobj, {
-      withCredentials:true
+      withCredentials: true
     })
       .pipe(map(user => {
         var _json = JSON.parse(user["Data"]["UserId"]);
         const token = user.token;
-        console.log("Json Value" , _json);
-        let _obj1 = _json;
-        if (user["Data"]["UserId"].length != 0) {
-          users_db.collection('users').add({
-            username: _obj1[0].userId,
-            userid: _obj1[0].createdby
-          })
-          _obj1[0]["SharePopupCount"] = 0;
-          // login successful
-          if (_obj1 && _obj1[0].userId) {
-            localStorage.setItem('currentUser', JSON.stringify(_obj1));
-            this.currentUserSubject.next(_obj1);
+
+        console.log("Json Value", _json);
+        if (_json.length > 0) {
+          let _obj1 = _json;
+          if (user["Data"]["UserId"].length != 0) {
+            users_db.collection('users').add({
+              username: _obj1[0].userId,
+              userid: _obj1[0].createdby
+            })
+            _obj1[0]["SharePopupCount"] = 0;
+            // login successful
+            if (_obj1 && _obj1[0].userId) {
+              localStorage.setItem('currentUser', JSON.stringify(_obj1));
+              this.currentUserSubject.next(_obj1);
+            }
           }
+        }
+        else {
+          // alert(0)
         }
         return user;
       }));
