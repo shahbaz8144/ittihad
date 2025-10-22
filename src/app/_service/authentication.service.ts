@@ -101,4 +101,29 @@ export class AuthenticationService {
     return this.http.post(this.rootUrl + '/AuthenticationAPI/NewTourUpdateCount', this._userdto);
   }
 
+   GetEmailAPI(_userobj:UserDTO){
+    this._userdto.UserName = _userobj.UserName;
+    return this.http.post(this.rootUrlII + "Login/GetUserEmail", _userobj);
+  }
+
+  sendResetPasswordEmail(_userobj:AuthenticationDTO): Observable<any> {
+    this._userobj.UserEmailId = _userobj.UserEmailId;
+    this._userobj.UserName = _userobj.UserName;
+     this._userobj.ResetLink = _userobj.ResetLink;;
+    return this.http.post(this.rootUrlII + "Login/send-reset-email",_userobj );
+  }
+
+  ResetPasswordLinkAPI(_userobj:AuthenticationDTO): Observable<any> {
+    this._userobj.UserId  = _userobj.UserId;
+    this._userobj.Link  = _userobj.Link ;
+    return this.http.post(this.rootUrlII + "Login/ResetPasswordLink",_userobj );
+  }
+
+
+   ResetPasswordAPI(_userobj:AuthenticationDTO): Observable<any> {
+    this._userobj.NewPassword   = _userobj.NewPassword ;
+    this._userobj.UserId   = _userobj.UserId  ;
+     this._userobj.LinkId   = _userobj.LinkId  ;
+    return this.http.post(this.rootUrlII + "Login/ResetPassword",_userobj );
+  }
 }

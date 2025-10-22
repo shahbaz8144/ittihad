@@ -448,7 +448,6 @@ export class InboxComponent implements OnInit {
   }
   parentValue = '';
   ViewReplyDiv1() {
-
     this.uuidValue = UUID.UUID();
     this.newmemoService._NewMemoobj.ReferenceNo = this.uuidValue;
     this.newmemoService._NewMemoobj.DraftId = "";
@@ -469,8 +468,6 @@ export class InboxComponent implements OnInit {
     (<HTMLInputElement>document.getElementById("Kt_reply_Memo_New")).classList.add("kt-quick-panel--on");
     document.getElementsByClassName("side_view")[0].classList.add("position-fixed");
     document.getElementsByClassName("kt-aside-menu-overlay")[0].classList.add("d-block");
-     
-
   }
   ViewNewMemoDiv(_htmlContent: string, draftid: number, Subject: string) {
     

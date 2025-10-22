@@ -4,4 +4,12 @@ export class AuthenticationDTO {
     message:string;
     userId:string;
     OldPassWord:string;
+     UserEmailId:string;
+    UserName:string
+    ResetLink:string;
+    UserId:number;
+    Link:string;
+    NewPassword:string;
+    userid :number;
+    LinkId:number;
 }
